@@ -1,0 +1,10 @@
+*.class
+*.war
+*.ear
+.gradle
+.classpath
+.project
+.settings
+.metadata
+bin
+build

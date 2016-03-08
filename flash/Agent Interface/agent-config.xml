@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<flex-config>
+    <compiler>
+        <define>
+            <name>CONFIG::air_mode</name>
+            <value>true</value>
+        </define>
+        <define>
+            <name>CONFIG::swf_mode</name>
+            <value>false</value>
+        </define>
+
+        <source-path>
+            <path-element>/source</path-element>
+            <path-element>/resources</path-element>
+            <path-element>../InQ Flex Commons/FlexSDK45/frameworks</path-element>
+            <path-element>../InQ Flex Commons/images</path-element>
+            <path-element>../InQ Flex Commons/locale/en_US</path-element>
+            <path-element>../InQ Flex Commons/source</path-element>
+            <path-element>../FlashMessagingFramework/source</path-element>
+        </source-path>
+
+        <include-libraries>
+            <library>../InQ Flex Commons/lib/automation.swc</library>
+            <library>../InQ Flex Commons/lib/automation_agent.swc</library>
+        </include-libraries>
+
+        <keep-as3-metadata>
+            <name>XmlClass</name>
+            <name>XmlAttribute</name>
+            <name>XmlElement</name>
+            <name>XmlArray</name>
+            <name>ConstructorArg</name>
+        </keep-as3-metadata>
+
+        <theme>
+            <filename>../InQ Flex Commons/FlexSDK45/frameworks/themes/Halo/halo.swc</filename>
+        </theme>
+
+    </compiler>
+</flex-config>

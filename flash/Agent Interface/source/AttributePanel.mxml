@@ -1,0 +1,921 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="480" height="0"
+                horizontalAlign="center" verticalAlign="middle" right="10" cornerRadius="5" layout="vertical"
+                color="#FFFFFF" title="{L10.n.getString('transfer.title')}"
+                roundedBottomCorners="true" borderAlpha="1" backgroundAlpha="1" alpha="1" borderColor="#A4C6EB"
+                titleStyleName="myTitleWindow" showCloseButton="true" close="closePanelHandler(event)"
+                creationComplete="initializePanel(event)" xmlns:local="*" horizontalScrollPolicy="off"
+                verticalScrollPolicy="off" hideEffect="{collapseEffect}" showEffect="{expandEffect}"
+                creationCompleteEffect="{expandEffect}">
+    <mx:Script>
+	<![CDATA[
+        import com.inq.flash.agent.control.AgentApplicationController;
+        import com.inq.flash.agent.control.ChatPanelController;
+        import com.inq.flash.agent.control.messagehandlers.ChatHandler;
+        import com.inq.flash.agent.control.messagehandlers.TransferInfoHandler;
+        import com.inq.flash.agent.transferconference.Agent;
+        import com.inq.flash.agent.transferconference.BUnitAttribute;
+        import com.inq.flash.agent.transferconference.QueueInfo;
+        import com.inq.flash.agent.transferconference.SelectedAttribute;
+        import com.inq.flash.agent.transferconference.TransferProperties;
+        import com.inq.flash.agent.utils.TCUtils;
+        import com.inq.flash.common.settings.ConferenceSetting;
+        import com.inq.flash.common.settings.SettingManager;
+        import com.inq.flash.common.settings.SiteParams;
+        import com.inq.flash.common.settings.TransferSetting;
+        import com.inq.flash.messagingframework.Participant;
+        import mx.collections.ArrayCollection;
+        import mx.containers.FormItem;
+        import mx.controls.Alert;
+        import mx.controls.ComboBox;
+        import mx.controls.Label;
+        import mx.events.CloseEvent;
+        import mx.events.ListEvent;
+
+        private static const EMPTY_AGENT:Agent = new Agent("", 0, 0);
+        private static const EMPTY_SELECTED_ATTRIBUTE:SelectedAttribute = new SelectedAttribute("", null);
+
+        private static const STYLE_NAME_ATTRIBUTE_LABEL:String = "attributeLabel";
+        private static const STYLE_NAME_ATTRIBUTE_COMBO_BOX:String = "attrbuteComboBox";
+        private static const STYLE_NAME_ATTRIBUTE_LABEL_WARNING:String = "attributeLabelWarning";
+        private static const STYLE_NAME_ATTRIBUTE_COMBO_BOX_WARNING:String = "attrbuteComboBoxWarning";
+
+        private var controller:ChatPanelController;
+        private var transferBUnits:ArrayCollection;
+        [Bindable]
+        private var queueKeyMap:Dictionary;
+        [Bindable]
+        private var targetBUIds:Array;
+        [Bindable]
+        private var targetAGIds:Array;
+        [Bindable]
+        private var isAllAgentsVisible:Boolean;
+        [Bindable]
+        private var allAgents:ArrayCollection = new ArrayCollection();
+        [Bindable]
+        private var chatSlotsAvailable:int;
+        [Bindable]
+        public var transferQueueChatsAvailable:Number;
+        [Bindable]
+        public var conferenceQueueChatsAvailable:Number;
+
+        private var transferChatProperties:TransferProperties;
+        private var selectedAttributes:ArrayCollection = new ArrayCollection();
+
+        private var agentsCollection:ArrayCollection = new ArrayCollection();
+        private var selectedBUnitId:String;
+        private var selectedAGId:String;
+        private var selectedAgent:Agent = EMPTY_AGENT;
+
+        private var invalidAttributes:ArrayCollection = new ArrayCollection();
+
+        private function initializePanel(event:Event):void {
+        }
+
+        public function init(controller:ChatPanelController):void {
+            this.initialize();
+            this.controller = controller;
+            resetAllFields();
+            var transferSetting:TransferSetting = SettingManager.getTransferSetting(controller.chat.getSettingIDs());
+            var conferenceSetting:ConferenceSetting = SettingManager.getConferenceSetting(controller.chat.getSettingIDs());
+            transferButton.enabled = transferSetting.getTransferense();
+            conferenceButton.enabled = conferenceSetting.getConference();
+            agentPrioritize.visible = transferSetting.getPrioritize();
+            isAllAgentsVisible = transferSetting.getAgentSelection();
+            selectedAttributes = new ArrayCollection();
+            bUnitAgentsComboBox.visible = true;
+        }
+
+        public function getTransferProperties():TransferProperties {
+            return transferChatProperties;
+        }
+
+        private function closePanelHandler(event:CloseEvent):void {
+            controller.hideAttributePanel();
+        }
+
+        //This method will be called for every new refresh of data
+        public function attributesModified(transferQueueKeys:Dictionary, targetBUnitIDs:Array, targetAgIDs:Array):void {
+            resetAllFields();
+            this.targetBUIds = targetBUnitIDs;
+            this.targetAGIds = targetAgIDs;
+
+            queueKeyMap = transferQueueKeys;
+            if (selectedBUnitId == null) {
+                selectedAttributes = new ArrayCollection();
+            }
+
+            if (selectedBUnitId != null) {
+                updateSelectedAttributes(getQueueInfo(selectedBUnitId, selectedAGId));
+            } else {
+                selectedAttributes = new ArrayCollection();
+            }
+            restoreBUnitSelection();
+            restoreAgentGroupSelection();
+        }
+
+        //Update EMPTY attribute for specifed bUnit
+        private function updateSelectedAttributes(queueKey:QueueInfo):void {
+            var selectedAttribute:SelectedAttribute;
+            if (queueKey == null) {
+                return;
+            }
+            var emptyTCAttribute:BUnitAttribute = TCUtils.getTransferBUnitAttributeByAttrName(queueKey.transferBUnitAttributes, TransferInfoHandler.EMPTY_ATTR);
+            if (emptyTCAttribute.attrValue2Agent == null) {
+                emptyTCAttribute.attrValue2Agent = new Dictionary();
+            }
+            //EMPTY_ATTR(logicaly always selected) in bUnit contains all agents. When we have no selection, EMPTY_ATTR selected by default.
+            emptyTCAttribute.attrValue2Agent[TransferInfoHandler.EMPTY_ATTR] = TCUtils.getBUnitAgents(queueKey);
+            if (selectedAttributes.length == 0) {
+                selectedAttributes.addItem(new SelectedAttribute(TransferInfoHandler.EMPTY_VALUE, emptyTCAttribute.name));
+            }
+            for (var i:int = 0; i < selectedAttributes.length; i++) {
+                selectedAttribute = SelectedAttribute(selectedAttributes[i]);
+                if (selectedAttribute.attrValue == TransferInfoHandler.EMPTY_VALUE) {
+                    selectedAttributes[i] = new SelectedAttribute(TransferInfoHandler.EMPTY_VALUE, emptyTCAttribute.name);
+                }
+            }
+        }
+
+        //Restore bUnit selection
+        private function restoreBUnitSelection():void {
+            if (targetBUIds.length == 1) {
+                //selecting auto if we have only one BU
+                bUnitListComboBox.selectedIndex = 0;
+                selectedBUnitId = targetBUIds[0];
+            } else if (selectedBUnitId == null) {
+                bUnitListComboBox.selectedIndex = -1;
+            } else {
+                for (var i:int = 0; i < targetBUIds.length; i++) {
+                    if (selectedBUnitId == targetBUIds[i]) {
+                        bUnitListComboBox.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            //Select bUnit
+            bUnitListComboBox.dispatchEvent(new ListEvent(ListEvent.CHANGE));
+        }
+
+        private function restoreAgentGroupSelection():void {
+            if (targetAGIds.length > 0) {
+                if (selectedBUnitId == null) {
+                    agListComboBox.enabled = false;
+                } else {
+                    agListComboBox.enabled = true;
+                    if (targetAGIds.length == 1) {
+                        agListComboBox.selectedIndex = 0;
+                        selectedAGId = targetAGIds[0];
+                    } else if (selectedAGId == null) {
+                        agListComboBox.selectedIndex = -1;
+                    } else {
+                        for (var i:int = 0; i < targetAGIds.length; i++) {
+                            if (selectedAGId == targetAGIds[i]) {
+                                agListComboBox.selectedIndex = i;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                agentGroupHBox.visible = true;
+                agListComboBox.dispatchEvent(new ListEvent(ListEvent.CHANGE));
+            } else {
+                agentGroupHBox.visible = false;
+            }
+        }
+
+        private var validToAattrComboBoxes:Dictionary;
+        private var attrName2AttrFormItem:Dictionary = new Dictionary();
+        private var attrName2AttrValues:Dictionary = new Dictionary();
+
+        private function handleSelectedQueueKey():void {
+            var queueKey:QueueInfo = getQueueInfo(selectedBUnitId, selectedAGId);
+            attrName2AttrFormItem = new Dictionary();
+            updateSelectedAttributes(queueKey);
+            transferQueueChatsAvailable = queueKey == null ? 0 : queueKey.transferQueueSlotsAvailable;
+            conferenceQueueChatsAvailable = queueKey == null ? 0 : queueKey.conferenceQueueSlotsAvailable;
+            selectedBUnitAttributesPanel.removeAllChildren();
+            validToAattrComboBoxes = new Dictionary();
+            selectBUnitLabel.visible = (queueKey == null);
+            var foundInvalid:Boolean;
+            //Create children FormItems : attribute -> values (combobox) or label
+            if (queueKey != null && queueKey.transferBUnitAttributes != null) {
+                for (var i:int = 0; i < ArrayCollection(queueKey.transferBUnitAttributes).length; i++) {
+                    var attribute:BUnitAttribute = queueKey.transferBUnitAttributes[i] as BUnitAttribute;
+                    if (attribute.name != TransferInfoHandler.EMPTY_ATTR) {
+                        var hBox:HBox = new HBox();
+                        hBox.percentWidth = 100;
+                        var formItem:FormItem = new FormItem();
+                        attrName2AttrFormItem[attribute.name] = formItem;
+                        formItem.label = attribute.name;
+                        formItem.styleName = STYLE_NAME_ATTRIBUTE_LABEL;
+                        formItem.direction = "horizontal";
+                        formItem.setStyle("horizontalAlign", "right");
+                        var attrValue2Agent:Dictionary = attribute.attrValue2Agent;
+                        var selectedAttribute:SelectedAttribute = TCUtils.getSelectedAttribute(attribute, selectedAttributes);
+                        var attributeValues:ArrayCollection = new ArrayCollection();
+                        for (var attrValue:String in attrValue2Agent) {
+                            attributeValues.addItem(new SelectedAttribute(attrValue, attribute.name));
+                        }
+                        if (selectedAttribute != null) {
+                            //Add invalid value
+                            if (!selectedAttribute.isValid) {
+                                attributeValues.addItemAt(selectedAttribute, 0);
+                            }
+                            for (var j:int = 0; j < selectedAttributes.length; j++) {
+                                if (SelectedAttribute(selectedAttributes[j]).attrValue == selectedAttribute.attrValue) {
+                                    selectedAttributes[j] = selectedAttribute;
+                                }
+                            }
+                        }
+                        //No attributes values
+                        if (attributeValues.length == 0) {
+                            formItem.addChild(createNoAgentsFoundLabel());
+                        } else {
+                            for (j = 0; j < selectedAttributes.length; j++) {
+                                if (selectedAttribute != null && selectedAttributes[j].attrValue == selectedAttribute.attrValue) {
+                                    selectedAttributes[j] = selectedAttribute;
+                                    break;
+                                }
+                            }
+                            attributeValues.addItemAt(EMPTY_SELECTED_ATTRIBUTE, 0);
+                            var comboBox:ComboBox = new ComboBox;
+                            comboBox.minWidth = 200;
+                            comboBox.width = 200;
+                            comboBox.dataProvider = attributeValues;
+                            attrName2AttrValues[attribute.name] = attributeValues;
+                            //Apply styles according attribute value state (invalid/valid)
+                            if (selectedAttribute == null || selectedAttribute.isValid) {
+                                comboBox.styleName = STYLE_NAME_ATTRIBUTE_COMBO_BOX;
+                                comboBox.selectedIndex = 0;
+                                validToAattrComboBoxes[comboBox] = "valid";
+                            } else {
+                                comboBox.styleName = STYLE_NAME_ATTRIBUTE_COMBO_BOX_WARNING;
+                                comboBox.selectedIndex = 1;
+                                validToAattrComboBoxes[comboBox] = "invalid";
+                                foundInvalid = true;
+                            }
+                            if (selectedAttribute != null) {
+                                if (selectedAttribute.isValid) {
+                                    for (j = 0; j < attributeValues.length; j++) {
+                                        if (SelectedAttribute(attributeValues[j]).attrValue == selectedAttribute.attrValue) {
+                                            comboBox.selectedIndex = j;
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    comboBox.selectedIndex = 1;
+                                }
+                            }
+                            comboBox.labelField = "attrValue";
+                            comboBox.addEventListener(ListEvent.CHANGE, attributeValueSelected);
+                            formItem.addChild(comboBox);
+                        }
+                        formItem.invalidateDisplayList();
+                        selectedBUnitAttributesPanel.addChild(hBox);
+                        var spacer:Spacer = new Spacer();
+                        hBox.addChild(spacer);
+                        hBox.addChild(formItem);
+                        spacer.percentWidth = 100;
+                        hBox.invalidateDisplayList();
+                    }
+                }
+            }
+            restoreAgentSelection();
+            refreshTCButtons();
+            var actualAttrValues:Dictionary = getActualAttrValues(selectedAttributes);
+            updateAttrValues(actualAttrValues);
+        }
+
+        private function agSelectedHandler(event:ListEvent):void {
+            if (agentGroupHBox.visible) {
+                if (selectedAGId != event.currentTarget.selectedItem) {
+                    selectedAttributes = new ArrayCollection();
+                }
+                selectedAGId = event.currentTarget.selectedItem;
+                handleSelectedQueueKey();
+            }
+        }
+
+        //Refresh all attribute comboboxes
+        private function bUnitSelectedHandler(event:ListEvent):void {
+            if (selectedBUnitId != event.currentTarget.selectedItem) {
+                selectedAttributes = new ArrayCollection();
+            }
+            selectedBUnitId = event.currentTarget.selectedItem;
+            agListComboBox.enabled = true;
+            handleSelectedQueueKey();
+        }
+
+        //Update agents combobox items, selection
+        private function restoreAgentSelection():void {
+            var queueKey:QueueInfo = getQueueInfo(selectedBUnitId, selectedAGId);
+            if (selectedAgent == null || queueKey == null) {
+                selectedAgent = EMPTY_AGENT;
+            }
+            var agents:ArrayCollection = TCUtils.getAgents(selectedAttributes, queueKey);
+            refreshChatSlotsInfo(agents);
+            allAgents.removeAll();
+            allAgents.addItem(EMPTY_AGENT);
+            if (isAllAgentsVisible) {
+                for (var i:int = 0; i < agents.length; i++) {
+                    if (controller.chat.getParticipant(agents[i].agentID) == null) {
+                        allAgents.addItem(agents[i]);
+                    }
+                }
+            }
+            for (i = 0; i < controller.chat.participants.length; i++) {
+                var participant:Participant = controller.chat.participants[i];
+                if (participant.getType() == "agent") {
+                    var newAgent:Agent = new Agent(participant.getID(), 0, 0, participant.getIsMember(), participant.getIsScreening());
+                    if (newAgent.agentID == selectedAgent.agentID) {
+                        selectedAgent = newAgent;
+                    }
+                    allAgents.addItem(newAgent);
+                }
+            }
+            bUnitAgentsComboBox.visible = (isAllAgentsVisible || allAgents.length > 1);
+            allAgents.refresh();
+            var found:Boolean;
+            for (i = 0; i < allAgents.length; i++) {
+                if (selectedAgent.agentID == Agent(allAgents[i]).agentID) {
+                    selectedAgent = Agent(allAgents[i]);
+                    bUnitAgentsComboBox.selectedIndex = i;
+                    bUnitAgentsComboBox.selectedItem = allAgents[i];
+                    found = true;
+                    break;
+                }
+            }
+            if (!found && selectedAgent != EMPTY_AGENT) {
+                allAgents.addItemAt(selectedAgent, 1);
+                allAgents.refresh();
+                bUnitAgentsComboBox.selectedIndex = 1;
+            }
+
+            agentWarning.text = L10.n.getString('agent.name.no.available', [selectedAgent.agentID]);
+            agentWarning.visible = !found;
+            bUnitAgentsComboBox.styleName = (found ? STYLE_NAME_ATTRIBUTE_COMBO_BOX : STYLE_NAME_ATTRIBUTE_COMBO_BOX_WARNING);
+            refreshTCButtons();
+        }
+
+        private function attributeValueSelected(event:ListEvent):void {
+            attributesContainer.invalidateDisplayList();
+            var selectedAttribute:SelectedAttribute = event.currentTarget.selectedItem;
+            var comboBox:ComboBox = ComboBox(event.currentTarget);
+            var formItem:FormItem = FormItem(comboBox.parent);
+            var foundSelectedAttr:Boolean;
+            if (selectedAttribute.attrValue != EMPTY_SELECTED_ATTRIBUTE.attrValue) {
+                for (var i:int = 0; i < selectedAttributes.length; i++) {
+                    if (SelectedAttribute(selectedAttributes.getItemAt(i)).attrName == selectedAttribute.attrName) {
+                        selectedAttributes.setItemAt(selectedAttribute, i);
+                        foundSelectedAttr = true;
+                        break;
+                    }
+                }
+                if (!foundSelectedAttr) {
+                    selectedAttributes.addItem(selectedAttribute);
+                }
+            } else {
+                for (i = 0; i < selectedAttributes.length; i++) {
+                    if (formItem.label == SelectedAttribute(selectedAttributes[i]).attrName) {
+                        selectedAttributes.removeItemAt(i);
+                        break;
+                    }
+                }
+            }
+            var items:ArrayCollection = ArrayCollection(comboBox.dataProvider);
+            for (i = items.length - 1; i > 0; i--) {
+                if (!SelectedAttribute(items[i]).isValid) {
+                    items.removeItemAt(i);
+                    items.refresh();
+                }
+            }
+            formItem.removeAllChildren();
+            if (items.length == 1) {
+                validToAattrComboBoxes[comboBox] = null;
+                var label:Label = new Label();
+                label.text = L10.n.getString('no.agents.found');
+                label.styleName = STYLE_NAME_ATTRIBUTE_LABEL;
+                label.minWidth = 200;
+                label.width = 200;
+                label.setStyle("textAlign", "center");
+                formItem.addChild(label);
+            } else {
+                validToAattrComboBoxes[comboBox] = "valid";
+                comboBox.styleName = STYLE_NAME_ATTRIBUTE_COMBO_BOX;
+                comboBox.minWidth = 200;
+                comboBox.width = 200;
+                formItem.addChild(comboBox);
+            }
+
+            var foundInvalidAttr:Boolean;
+            for (var combo:Object in validToAattrComboBoxes) {
+                if (validToAattrComboBoxes[combo] == "invalid") {
+                    foundInvalidAttr = true;
+                    break;
+                }
+            }
+            formItem.invalidateDisplayList();
+            selectedAgent = EMPTY_AGENT;
+            restoreAgentSelection();
+
+            var actualAttrValues:Dictionary = getActualAttrValues(selectedAttributes);
+            updateAttrValues(actualAttrValues);
+        }
+
+        private function createNoAgentsFoundLabel():Label {
+            var label:Label = new Label();
+            label.text = L10.n.getString('no.agents.found');
+            label.styleName = STYLE_NAME_ATTRIBUTE_LABEL;
+            label.minWidth = 250;
+            label.width = 250;
+            label.setStyle("textAlign", "center");
+            return label;
+        }
+
+        private function updateAttrValues(actualAttrName2Values:Dictionary):void {
+            var attrFormItem:FormItem;
+            var comboBox:ComboBox;
+            var actualAttrValues:ArrayCollection;
+            var foundInActual:Boolean = false;
+            var foundInvalidSelectedAttribute:Boolean = false;
+            var selectedAttribute:SelectedAttribute;
+            var saDataProvider:ArrayCollection;
+            for (var attrName:String in attrName2AttrFormItem) {
+                attrFormItem = attrName2AttrFormItem[attrName];
+                actualAttrValues = actualAttrName2Values[attrName];
+                var firstChild:Object = attrFormItem.getChildAt(0);
+                if (firstChild is Label && actualAttrName2Values[attrName] != null) {
+                    firstChild = new ComboBox();
+                    saDataProvider = ArrayCollection(cloneSACollection(attrName2AttrValues[attrName]));
+                    saDataProvider.addItemAt(EMPTY_SELECTED_ATTRIBUTE, 0);
+                    ComboBox(firstChild).labelField = "attrValue";
+                    ComboBox(firstChild).dataProvider = saDataProvider;
+                    ComboBox(firstChild).minWidth = 200;
+                    ComboBox(firstChild).width = 200;
+                    attrFormItem.removeChildAt(0);
+                    attrFormItem.addChildAt(ComboBox(firstChild), 0);
+                }
+                if (firstChild is ComboBox) {
+                    comboBox = ComboBox(firstChild);
+                    saDataProvider = ArrayCollection(cloneSACollection(attrName2AttrValues[attrName]));
+                    selectedAttribute = null;
+                    for (var i:int = 0; i < selectedAttributes.length; i++) {
+                        if (SelectedAttribute(selectedAttributes[i]).attrName == attrName) {
+                            selectedAttribute = selectedAttributes[i];
+                            break;
+                        }
+                    }
+                    var index:int = saDataProvider.length - 1;
+                    for (i = saDataProvider.length - 1; i > -1; i--) {
+                        var comboItem:SelectedAttribute = saDataProvider[i];
+                        foundInActual = false;
+                        if (comboItem.attrValue != "") {
+                            if (actualAttrValues != null) {
+                                for (var j:int = 0; j < actualAttrValues.length; j++) {
+                                    if (actualAttrValues[j] == comboItem.attrValue) {
+                                        if (selectedAttribute != null && actualAttrValues[j] == selectedAttribute.attrValue) {
+                                            index = i;
+                                        }
+                                        foundInActual = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (!foundInActual && (selectedAttribute == null || selectedAttribute != null && comboItem.attrValue != selectedAttribute.attrValue)) {
+                                index--;
+                                saDataProvider.removeItemAt(i);
+                            } else if (!foundInActual && selectedAttribute != null) {
+                                index = i;
+                                foundInvalidSelectedAttribute = true;
+                            }
+                        }
+                    }
+                    saDataProvider.refresh();
+                    comboBox.dataProvider = saDataProvider;
+                    if (selectedAttribute != null) {
+                        comboBox.selectedIndex = index;
+                    }
+                }
+            }
+            attributeWarning.visible = foundInvalidSelectedAttribute;
+            for (attrName in attrName2AttrFormItem) {
+                attrFormItem = attrName2AttrFormItem[attrName];
+                actualAttrValues = actualAttrName2Values[attrName];
+                firstChild = attrFormItem.getChildAt(0);
+                if (firstChild is ComboBox) {
+                    comboBox = ComboBox(firstChild);
+                    if (comboBox.dataProvider.length < 2) {
+                        attrFormItem.removeChildAt(0);
+                        attrFormItem.addChildAt(createNoAgentsFoundLabel(), 0);
+                    } else {
+                        comboBox.styleName = foundInvalidSelectedAttribute ? STYLE_NAME_ATTRIBUTE_COMBO_BOX_WARNING : STYLE_NAME_ATTRIBUTE_COMBO_BOX;
+                    }
+                }
+            }
+            attributesContainer.invalidateDisplayList();
+        }
+
+        private function cloneSACollection(sourceSACollection:ArrayCollection):ArrayCollection {
+            if (sourceSACollection == null) {
+                return null;
+            }
+            var newSACollection:ArrayCollection = new ArrayCollection();
+            for (var i:int = 0; i < sourceSACollection.length; i++) {
+                var oldSA:SelectedAttribute = SelectedAttribute(sourceSACollection[i]);
+                var newSA:SelectedAttribute = new SelectedAttribute(oldSA.attrValue, oldSA.attrName, oldSA.isValid);
+                newSACollection.addItem(newSA);
+            }
+            return newSACollection;
+        }
+
+        private function refreshChatSlotsInfo(agents:ArrayCollection):void {
+            var chatSlots:int = 0;
+            for (var i:int = 0; i < agents.length; i++) {
+                chatSlots += Agent(agents[i]).availableSlots;
+            }
+            chatSlotsAvailable = chatSlots;
+        }
+
+        private function resetAllFields(resetBUnit:Boolean = false):void {
+            selectedBUnitAttributesPanel.removeAllChildren();
+            selectBUnitLabel.visible = true;
+            bUnitListComboBox.selectedIndex = -1;
+            agListComboBox.selectedIndex = -1;
+            allAgents = new ArrayCollection();
+            if (resetBUnit) {
+                selectedBUnitId = null;
+                selectedAGId = null;
+                selectedAgent = EMPTY_AGENT;
+                selectedAttributes = new ArrayCollection();
+                bUnitListComboBox.dispatchEvent(new ListEvent(ListEvent.CHANGE));
+            }
+        }
+
+        private function saveSelectedData():void {
+            transferChatProperties = new TransferProperties();
+            if (selectedAgent != null && selectedAgent.agentID != EMPTY_AGENT.agentID) {
+                transferChatProperties.agent = selectedAgent;
+            }
+            transferChatProperties.bUnitID = bUnitListComboBox.selectedItem as String;
+            transferChatProperties.agID = agListComboBox.selectedItem as String;
+
+            if (selectedAttributes.length > 1) {
+                transferChatProperties.selectedAttributes = new ArrayCollection();
+                for (var i:int = 1; i < selectedAttributes.length; i++) {
+                    transferChatProperties.selectedAttributes.addItem(selectedAttributes[i]);
+                }
+            }
+        }
+
+
+        private function hideHandler(event:MouseEvent):void {
+            saveSelectedData();
+            controller.hideAttributePanel();
+        }
+
+        private function resetHandler(event:MouseEvent):void {
+            resetAllFields(true);
+        }
+
+        private function transferHandler(event:MouseEvent):void {
+            controller.hideAttributePanel();
+            if (controller.chat.isConference() && selectedAgent != null && selectedAgent.isMember) {
+                controller.sendOwnershipTransferRequest(selectedAgent.agentID);
+            } else {
+                saveSelectedData();
+                var transferNotes:String = agentNotes.text;
+                agentNotes.text = "";
+                controller.tcChat(transferNotes, transferChatProperties, agentPrioritize.selected, true);
+            }
+        }
+
+        private function conferenceHandler(event:MouseEvent):void {
+            controller.hideAttributePanel();
+            saveSelectedData();
+            var transferNotes:String = agentNotes.text;
+            agentNotes.text = "";
+            controller.tcChat(transferNotes, transferChatProperties, agentPrioritize.selected, false);
+        }
+
+        private function agentSelected(event:ListEvent):void {
+            if (bUnitAgentsComboBox.styleName == STYLE_NAME_ATTRIBUTE_COMBO_BOX_WARNING) {
+                for (var i:int = 0; i < allAgents.length; i++) {
+                    if (Agent(allAgents[i]).agentID == selectedAgent.agentID) {
+                        allAgents.removeItemAt(i);
+                        break;
+                    }
+                }
+            }
+            selectedAgent = Agent(event.currentTarget.selectedItem);
+            refresh();
+            agentWarning.visible = false;
+            bUnitAgentsComboBox.styleName = STYLE_NAME_ATTRIBUTE_COMBO_BOX;
+        }
+
+        public function refresh():void {
+            restoreAgentSelection();
+            refreshTCButtons();
+        }
+
+        private function getQueueInfo(buId:String, agId:String):QueueInfo {
+            return buId == null ? null : queueKeyMap[SiteParams.getCompoundKey(buId, agId)];
+        }
+
+        private function refreshTCButtons():void {
+            var hasInvalidAttributes:Boolean;
+            for (var i:int = 1; i < selectedAttributes.length; i++) {
+                if (!SelectedAttribute(selectedAttributes[i]).isValid) {
+                    hasInvalidAttributes = true;
+                    break;
+                }
+            }
+            if (hasInvalidAttributes || bUnitAgentsComboBox.styleName == STYLE_NAME_ATTRIBUTE_COMBO_BOX_WARNING || getQueueInfo(selectedBUnitId, selectedAGId) == null) {
+                transferButton.enabled = false;
+                conferenceButton.enabled = false;
+            } else {
+                var chatPanel:ChatPanel = ChatHandler.getChatPanel(AgentApplicationController(controller.getApplicationController()), controller.getChatID());
+                transferButton.enabled = !chatPanel.getTransferingOwnership() && (controller.chat.isConference() && (selectedAgent != null && selectedAgent.isMember) ||
+                        !controller.chat.isConference() && (transferQueueChatsAvailable > 0 || chatSlotsAvailable > 0)) &&
+                        SettingManager.getTransferSetting(controller.chat.getSettingIDs()).getTransferense();
+                conferenceButton.enabled = !selectedAgent.isMember && !selectedAgent.isScreening && (conferenceQueueChatsAvailable > 0 || chatSlotsAvailable > 0) &&
+                        SettingManager.getConferenceSetting(controller.chat.getSettingIDs()).getConference();
+            }
+        }
+
+        private function getActualAttrValues(selectedAttrs:ArrayCollection):Dictionary {
+            var actualAttrValues:Dictionary = new Dictionary();
+            var queueKey:QueueInfo = getQueueInfo(selectedBUnitId, selectedAGId);
+            if (queueKey != null && queueKey.transferBUnitAttributes != null) {
+                for (var i:int = 0; i < ArrayCollection(queueKey.transferBUnitAttributes).length; i++) {
+                    var attribute:BUnitAttribute = queueKey.transferBUnitAttributes[i] as BUnitAttribute;
+                    if (attribute.name == "EMPTY") {
+                        continue;
+                    }
+                    for (var attrValue:String in attribute.attrValue2Agent) {
+                        selectedAttrs.addItem(new SelectedAttribute(attrValue, attribute.name));
+                        var agents:ArrayCollection = getAvailableAgents(selectedAttrs, queueKey);
+                        if (!TCUtils.isEmpryCollection(agents)) {
+                            var attrValues:ArrayCollection = actualAttrValues[attribute.name];
+                            if (attrValues == null) {
+                                attrValues = new ArrayCollection();
+                                actualAttrValues[attribute.name] = attrValues;
+                            }
+                            attrValues.addItem(attrValue);
+                        }
+                        selectedAttrs.removeItemAt(selectedAttrs.length - 1);
+                    }
+                }
+            }
+            return actualAttrValues;
+        }
+
+        private function getAvailableAgents(selectedAttrs:ArrayCollection, bUnit:QueueInfo):ArrayCollection {
+            var availableAgents:ArrayCollection;
+            var selectedAttribute:SelectedAttribute;
+            for (var i:int = 0; i < selectedAttrs.length; i++) {
+                selectedAttribute = SelectedAttribute(selectedAttrs[i]);
+                if (selectedAttribute.attrName == L10.n.getString('empty')) {
+                    continue;
+                }
+                var attr:BUnitAttribute = TCUtils.getTransferBUnitAttributeByAttrName(bUnit.transferBUnitAttributes, selectedAttribute.attrName);
+                var agents:ArrayCollection = attr.attrValue2Agent[selectedAttribute.attrValue] == null ? new ArrayCollection() : attr.attrValue2Agent[selectedAttribute.attrValue];
+                if (availableAgents == null) {
+                    availableAgents = cloneAgentCollection(agents);
+                } else {
+                    TCUtils.intersectAgentCollection(availableAgents, agents);
+                }
+            }
+            return availableAgents;
+        }
+
+        private function cloneAgentCollection(sourceAgentCollection:ArrayCollection):ArrayCollection {
+            if (sourceAgentCollection == null) {
+                return null;
+            }
+            var newAgentCollection:ArrayCollection = new ArrayCollection();
+            for (var i:int = 0; i < sourceAgentCollection.length; i++) {
+                var oldAgent:Agent = Agent(sourceAgentCollection[i]);
+                var newAgent:Agent = new Agent(oldAgent.agentID, oldAgent.availableSlots, oldAgent.maxChatSlots);
+                newAgent.transferedChatSlots = oldAgent.transferedChatSlots;
+                newAgent.queuedChatSlots = oldAgent.queuedChatSlots;
+                newAgentCollection.addItem(newAgent);
+            }
+            return newAgentCollection;
+        }
+
+        public function getAgentLabel(item:Object):String {
+            if (item == null) {
+                return "";
+            }
+            var agent:Agent = Agent(item);
+            return agent.isScreening ? agent.agentID + L10.n.getString('screening') : agent.agentID;
+        }
+        ]]>
+</mx:Script>
+    <mx:Move id="slider"/>
+    <mx:HBox height="6%" verticalAlign="middle" horizontalScrollPolicy="off"
+             verticalScrollPolicy="off" width="100%">
+        <mx:Spacer width="100%"/>
+        <mx:FormItem horizontalAlign="right" label="{L10.n.getString('select.channel.form')}" styleName="attributeLabel" paddingTop="3"
+                     paddingBottom="1" paddingRight="10">
+            <mx:ComboBox id="bUnitListComboBox" dataProvider="{targetBUIds}" width="210" prompt="{L10.n.getString('select.bunit')}"
+                         change="bUnitSelectedHandler(event);" labelFunction="SiteParams.getBUnitName" styleName="attrbuteComboBox" selectedIndex="-1"/>
+        </mx:FormItem>
+    </mx:HBox>
+    <mx:HBox height="6%" verticalAlign="middle" horizontalScrollPolicy="off" id="agentGroupHBox"
+            verticalScrollPolicy="off" width="100%">
+        <mx:Spacer width="100%"/>
+        <mx:FormItem horizontalAlign="right" label="{L10.n.getString('select.ag.form')}" styleName="attributeLabel" paddingTop="3"
+                paddingBottom="1" paddingRight="10">
+            <mx:ComboBox id="agListComboBox" dataProvider="{targetAGIds}" width="210" prompt="{L10.n.getString('select.ag')}"
+                    change="agSelectedHandler(event);" labelFunction="SiteParams.getAgentGroupName" styleName="attrbuteComboBox" selectedIndex="-1"/>
+        </mx:FormItem>
+    </mx:HBox>
+    <mx:TextArea width="100%" height="20" styleName="myTextArea" text="{L10.n.getString('chat.slots.available'),[chatSlotsAvailable]}"
+                     editable="false"/>
+    <mx:TextArea width="100%" height="20" styleName="myTextArea"
+                     text="{transferQueueChatsAvailable}  {L10.n.getString('transfer.queue.slots')}       {conferenceQueueChatsAvailable} conference queue slots "
+                     editable="false"/>
+    <mx:Label text="{L10.n.getString('select.attributes')}" styleName="attributeLabel"/>
+	<mx:Label id="selectBUnitLabel" text="{L10.n.getString('select.bunit.label')}" styleName="attributeLabel"/>
+    <mx:VBox minHeight="0" id="attributesContainer" height="62%" width="100%">
+        <mx:Form id="selectedBUnitAttributesPanel" minHeight="0" height="100%" width="100%" paddingTop="2" paddingBottom="2" paddingRight="10">
+        </mx:Form>
+    </mx:VBox>
+    <mx:Label id="attributeWarning" styleName="attributeLabelWarning" textAlign="center" visible="false" width="100%"
+              fontSize="10" text="{L10.n.getString('attributes.no.available')}"/>
+    <mx:Button label="{L10.n.getString('reset')}" styleName="attributeLabel" id="resetButton" click="resetHandler(event)"/>
+    <mx:HRule width="100%" styleName="attributeHRule"/>
+    <mx:Label text="{L10.n.getString('may.select.agent')}" styleName="attributeLabel" id="agentSelectionInfo" visible="{isAllAgentsVisible}"/>
+    <mx:HBox width="100%">
+        <mx:Spacer width="100%"/>
+        <mx:FormItem horizontalAlign="right" id="agentsBox" label="{L10.n.getString('agents')}"
+                     styleName="attributeLabel" paddingRight="10" visible="{isAllAgentsVisible}">
+                <mx:ComboBox id="bUnitAgentsComboBox" itemRenderer="com.inq.flash.agent.view.AgentComboBoxItemRenderer"
+                         dataProvider="{allAgents}" labelFunction="getAgentLabel" styleName="attrbuteComboBox" width="200"
+                         change="agentSelected(event)"/>
+        </mx:FormItem>
+    </mx:HBox>
+    <mx:Label id="agentWarning" styleName="attributeLabelWarning" textAlign="center" visible="false" width="100%"
+              fontSize="10" text="{L10.n.getString('agent.no.available')}"/>
+    <mx:TextArea width="100%" height="20" styleName="myTextArea" text="{L10.n.getString('agent.notes')}" editable="false"/>
+    <mx:TextArea id="agentNotes" width="100%" height="90" enabled="true" color="#000000"/>
+    <mx:VBox width="100%">
+        <mx:FormItem horizontalAlign="center" verticalCenter="12" width="100%">
+            <mx:CheckBox right="5" id="agentPrioritize" label="{L10.n.getString('prioritize')}" labelPlacement="left" color="#213784"
+                         height="21" fontWeight="bold" width="200" includeInLayout="true" visible="true"/>
+            <mx:HBox horizontalAlign="right" verticalAlign="middle" height="41" width="100%">
+                <mx:Button label="{L10.n.getString('transfer')}" styleName="attributeLabel" id="transferButton"
+                           click="transferHandler(event)" horizontalCenter="right"/>
+                <mx:Button label="{L10.n.getString('conference')}" styleName="attributeLabel" id="conferenceButton"
+                           click="conferenceHandler(event)"/>
+            </mx:HBox>
+        </mx:FormItem>
+    </mx:VBox>
+
+    <mx:Resize id="expandEffect" duration="500" heightTo="600"/>
+    <mx:Resize id="collapseEffect" duration="500" heightTo="0"/>
+    <mx:Style>
+
+        .myTextArea {
+            fontFamily: Verdana;
+            color: #f7ea07;
+            fontWeight: bold;
+            letterSpacing: 0;
+            backgroundColor: #455a81;
+            textAlign: center;
+            borderThickness: 0;
+            cornerRadius: 5;
+            dropShadowEnabled: false;
+        }
+
+        .myTextArea1 {
+            fontFamily: Verdana;
+            color: #ffffff;
+            fontWeight: bold;
+            letterSpacing: 0;
+            backgroundColor: #802626;
+            textAlign: center;
+            borderThickness: 0;
+            cornerRadius: 5;
+            dropShadowEnabled: false;
+        }
+
+        .myTextArea2 {
+            fontFamily: Verdana;
+            color: #ffffff;
+            fontWeight: bold;
+            letterSpacing: 0;
+            backgroundColor: #0F8340;
+            textAlign: center;
+            borderThickness: 0;
+            cornerRadius: 5;
+            dropShadowEnabled: false;
+        }
+
+        .mypanelTitle {
+            letterSpacing: 3;
+            color: #213784;
+            fontFamily: Verdana;
+            fontWeight: bold;
+        }
+
+        .myTitleWindow {
+            letterSpacing: 3;
+            fontFamily: Verdana;
+            fontWeight: bold;
+        }
+
+        .attrbuteComboBox {
+            color: #3b4142;
+            borderColor: #05426c;
+            fillColors: #cccccc, #cccccc, #cccccc, #cccccc;
+            backgroundAlpha: 0.45;
+            selectionColor: #7fcdfe;
+            useRollOver: true;
+            themeColor: #dfedec;
+            alternatingItemColors: #FFd2d2, #FFeae9;
+            textAlign: center;
+            dropdownStyleName: "attributeComboBoxDropDowns";
+
+        }
+
+        .attributeComboBoxDropDowns {
+            cornerRadius: 4;
+            borderThickness: 4;
+            borderColor: #919495;
+            textAlign: center;
+            dropShadowColor: #0000cc;
+        }
+
+        .attributeHRule {
+            strokeColor: #003399;
+            shadowColor: #1c6b69;
+            strokeWidth: 4;
+        }
+
+        .attributeLabel {
+            color: #213784;
+            fontFamily: Verdana;
+            fontWeight: bold;
+        }
+
+        .attributeLabelWarning {
+            color: #E40B4E;
+            fontFamily: Verdana;
+            fontWeight: bold;
+        }
+
+        .attrbuteComboBoxWarning {
+            color: #3b4142;
+            borderColor: #E40B4E;
+            fillAlphas: 0.6, 0.4, 0.52, 0.18;
+            fillColors: #b07b7b, #714242, #b07089, #743232;
+            themeColor: #a94365;
+            backgroundAlpha: 0.45;
+            selectionColor: #7fcdfe;
+            useRollOver: true;
+            alternatingItemColors: #FFd2d2, #FFeae9;
+            textAlign: center;
+            dropdownStyleName: "attributeComboBoxDropDownsWarning";
+        }
+
+        .attributeComboBoxDropDownsWarning {
+            cornerRadius: 4;
+            borderThickness: 4;
+            borderColor: #E40B4E;
+            textAlign: center;
+            dropShadowColor: #E40B4E;
+        }
+
+        .myAccordion {
+            headerHeight: 19;
+            fillAlphas: 0.6, 0.55, 0.78, 0.65;
+            fillColors: #1d1663, #2d305d, #2d0f0f, #ad2e2e;
+            selectedFillColors: #0f5e83, #5293cc;
+            themeColor: #333333;
+            textRollOverColor: #f3f698;
+            textSelectedColor: #ffffff;
+            headerStyleName: "myaccordionHeader";
+        }
+
+        .myaccordionHeader {
+            color: #ffffff;
+        }
+
+        .myStatusBar {
+            fillColors: #740a0a, #6a0a0a;
+            backgroundColor: #6a0a0a;
+        }
+
+        .myLinkButton {
+            rollOverColor: #313c6a;
+            selectionColor: #395262;
+            color: #ffffff;
+            textRollOverColor: #ffffff;
+        }
+
+    </mx:Style>
+</mx:TitleWindow>

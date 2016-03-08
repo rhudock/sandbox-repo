@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<message>
+  <value>msg.type=chat.acknowledge</value>
+  <value>version=0.05a</value>
+  <value>cluster=development</value>
+  <value>msg.id=5714109419880766</value>
+  <value>chat.id=11343609156174254</value>
+  <value>chatroom.starttime=1291044396718</value>
+  <value>client.id=11343609155571779</value>
+  <value>client.name=You</value>
+  <value>client.host=192.168.0.20</value>
+  <value>agent.id=Agent2</value>
+  <value>msg.originalrequest.id=5714109419880763</value>
+  <value>config.script_id=200023</value>
+  <value>config.site_id=306</value>
+  <value>config.bunit_id=3061</value>
+  <value>agent.tabs=PR1|https://testXforms.inq.com/orbeon/inq/native?automatonId=1022</value>
+  <value>config.br_id=1</value>
+  <value>config.inc_assignment_id=11343608953113669</value>
+  <value>config.session_id=11343608953113667</value>
+  <value>config.customer_id=11343609155571779</value>
+  <value>config.channel_id=22</value>
+  <value>config.chat_title=C2C Std</value>
+  <value>config.agent_alias=C2C Agent</value>
+  <value>auto.transfer_ignored_chatroom=false</value>
+  <value><![CDATA[config.disposition=<disp site="306"><cat id="210" name="TC-ChatClosed" site="306"><reason id="200358" value="_Customer Exits Chat-customer initiated"/><reason id="200359" value="_No Customer Response-they do not respond to us"/><reason id="200360" value="_Refused-Price Point Issue/Too Expensive"/></cat></disp>]]></value>
+</message>

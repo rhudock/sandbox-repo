@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+         width="100%"
+         height="100%"
+         horizontalAlign="center">
+    <mx:HBox width="100%"
+             height="100%">
+        <mx:VideoDisplay id="ourWebCam"
+                         autoPlay="false">
+        </mx:VideoDisplay>
+    </mx:HBox>
+    <mx:VideoDisplay id="clientWebCam"
+                     height="0"
+                     autoPlay="false">
+    </mx:VideoDisplay>
+    <mx:HBox>
+        <mx:Button label="{L10.n.getString('start.video.chat')}"
+                   click="startWebCam()"
+                   enabled="{Camera.isSupported &amp;&amp; !videoStarted}">
+        </mx:Button>
+        <mx:Button label="{L10.n.getString('stop.video.chat')}"
+                   click="stopVideo()"
+                   enabled="{Camera.isSupported &amp;&amp; videoStarted}">
+        </mx:Button>
+        <mx:Button height="22"
+                   width="22"
+                   right="72"
+                   id="btnDock"
+                   color="0xFF0000"
+                   upSkin="@Embed(source='../images/dock.png')"
+                   overSkin="@Embed(source='../images/dockOver.png')"
+                   downSkin="@Embed(source='../images/dockDown.png')"
+                   toolTip="{L10.n.getString('dock')}"
+                   click="doDock();"
+                   visible="{undocked}"
+                   includeInLayout="{undocked}" />
+
+
+        <mx:Button height="22"
+                   width="22"
+                   right="72"
+                   id="btnUndock"
+                   color="0xFF0000"
+                   upSkin="@Embed(source='../images/undock.png')"
+                   overSkin="@Embed(source='../images/undockOver.png')"
+                   downSkin="@Embed(source='../images/undockDown.png')"
+                   toolTip="{L10.n.getString('undock')}"
+                   click="doDock();"
+                   visible="{!undocked}"
+                   includeInLayout="{!undocked}" />
+    </mx:HBox>
+    <mx:Script>
+        <![CDATA[
+            import com.inq.flash.agent.data.Chat;
+            import com.inq.flash.common.control.CommonApplicationController;
+            import com.inq.flash.common.settings.SettingManager;
+            import com.inq.flash.common.utils.SHA1;
+            import flash.events.Event;
+            import flash.events.NetStatusEvent;
+            import flash.media.Camera;
+            import flash.media.Microphone;
+            import flash.media.Video;
+            import flash.net.NetConnection;
+            import flash.net.NetStream;
+            import mx.containers.TitleWindow;
+            import mx.controls.Alert;
+            import mx.core.Container;
+            import mx.core.FlexGlobals;
+            import mx.core.Window;
+            import mx.events.CloseEvent;
+            import mx.managers.PopUpManager;
+
+            public static const VIDEO_PROTOCOL:String = "rtmps://";
+            public static const VIDEO_DEFAULT_PORT:String = "8443";
+            public static const VIDEO_APPLICATION_URL:String = "/oflaDemo";
+
+            private static var instance:VideoChat;
+            [Bindable]
+            private static var undocked:Boolean;
+            [Bindable]
+            public var chat:Chat;
+            private var camera:Camera;
+            private var microphone:Microphone;
+            [Bindable]
+            private var videoStarted:Boolean;
+
+            private var netConnection:NetConnection;
+            private var netStream:NetStream;
+            private var recvStream:NetStream;
+
+            private function startWebCam():void {
+                camera = Camera.getCamera();
+                microphone = Microphone.getMicrophone();
+                if (camera && microphone) {
+                    camera.setLoopback(false);
+                    camera.setMode(320, 240, 15);
+                    camera.setKeyFrameInterval(10);
+                    camera.setQuality(0, 80);
+                    ourWebCam.width = camera.width;
+                    ourWebCam.height = camera.height;
+                    videoStarted = true;
+                    ourWebCam.attachCamera(camera);
+                    netConnection = new NetConnection();
+                    netConnection.proxyType = "best";
+                    netConnection.client = this;
+                    var videoPort:String = FlexGlobals.topLevelApplication.parameters.videoPort as String;
+                    var red5URL:String = VIDEO_PROTOCOL + CommonApplicationController.getVideoDomain() + ":" + (videoPort ? videoPort : VIDEO_DEFAULT_PORT) + VIDEO_APPLICATION_URL;
+                    netConnection.connect(red5URL);
+                    netConnection.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler, false, 0, true);
+                    //TODO: This action will be removed in scope of RTDEV-5835 and instead of this Agent will send script with accept/decline
+                    chat.getController().sendScript("Sending link for Agent Video", false, true, false, null, null, null, null, null, "xform to grow.video|https://" + FlexGlobals.topLevelApplication.parameters.crHost + "/chatrouter/video-chat.swf?agentID=" + FlexGlobals.topLevelApplication.userField.text + "&chatID=" + chat.getChatID() + "&videoURL=" + encodeURIComponent(red5URL));
+                } else {
+                    Alert.show(L10.n.getString('alert.no.camera'));
+                }
+            }
+
+            private function startAgentCamera():void {
+                netStream = new NetStream(netConnection);
+                netStream.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler, false, 0, true);
+                netStream.attachCamera(camera);
+                netStream.attachAudio(microphone);
+                var decriptKey:String = chat.getChatID() + "a";
+                netStream.publish(decriptKey, "record");
+            }
+
+            private function startClientAudio():void {
+                recvStream = new NetStream(netConnection);
+                var decriptKey:String = chat.getChatID();
+                recvStream.play(decriptKey);
+                var audio:Video = new Video();
+                audio.attachNetStream(recvStream);
+                this.stage.addChild(audio);
+            }
+
+            private function netStatusHandler(event:NetStatusEvent):void {
+                switch (event.info.code) {
+                    case "NetConnection.Connect.Success":
+                        startAgentCamera();
+                        startClientAudio();
+                        break;
+                    case "NetConnection.Connect.Rejected":
+                    case "NetConnection.Connect.NetworkChange":
+                    case "NetConnection.Connect.InvalidApp":
+                    case "NetConnection.Connect.IdleTimeout":
+                    case "NetConnection.Connect.Failed":
+                    case "NetConnection.Connect.Closed":
+                    case "NetConnection.Connect.AppShutdown":
+                        if (videoStarted) {
+                            stopVideo();
+                            Alert.show("Video Server Connection problem: " + event.info.code);
+                        }
+                }
+            }
+
+            private function stopVideo():void {
+                videoStarted = false;
+                //ourWebCam.stop();
+                ourWebCam.close();
+                ourWebCam.attachCamera(null);
+                if (netStream) {
+                    netStream.close();
+                    netStream.attachCamera(null);
+                    netStream.attachAudio(null);
+                    netStream = null;
+                }
+                if (recvStream) {
+                    recvStream.close();
+                }
+                if (netConnection.connected) {
+                    netConnection.close();
+                }
+                chat.getController().sendScript("Stopping Video on Client", false, true, false, null, null, null, null, null, "xform to shrink.video");
+            }
+
+            public function closeConfirmed(event:CloseEvent = null):void {
+                if (event == null || event.detail != Alert.CANCEL) {
+                    stopVideo();
+                    deattachFromWindow();
+                    instance = null;
+                }
+            }
+
+            private function close(event:Event):void {
+                if (videoStarted) {
+                    if (event.cancelable) {
+                        event.preventDefault();
+                    }
+                    Alert.show(L10.n.getString('stop.video.chat'), L10.n.getString('stop.video.title'), Alert.YES | Alert.CANCEL, this, closeConfirmed, null, Alert.CANCEL);
+                } else {
+                    closeConfirmed();
+                }
+            }
+
+            public static function show(chat:Chat, autoStart:Boolean = false):void {
+                if (instance == null) {
+                    if (SettingManager.getAgentSetting(chat.getSettingIDs()).isEnableVideo()) {
+                        instance = new VideoChat();
+                        instance.chat = chat;
+                        attachToWindow();
+                        if (autoStart) {
+                            instance.startWebCam();
+                        }
+                    } else {
+                        Alert.show(L10.n.getString('alert.video.not.allowed'));
+                    }
+                } else if (instance.chat != chat) {
+                    if (instance.videoStarted) {
+                        Alert.show(L10.n.getString('alert.another.video'));
+                    } else {
+                        instance.chat = chat;
+                    }
+                }
+            }
+
+            public static function hide(chat:Chat):void {
+                if (instance && instance.chat == chat) {
+                    instance.closeConfirmed();
+                }
+            }
+
+            private function deattachFromWindow():void {
+                if (undocked) {
+                    (this.parent as Window).removeEventListener(Event.CLOSING, instance.close);
+                    (this.parent as Window).close();
+                } else {
+                    PopUpManager.removePopUp(this.parent as TitleWindow);
+                }
+            }
+
+            private static function attachToWindow():void {
+                try {
+                    if (undocked) {
+                        var window2:Window = new Window();
+                        window2.width = 360;
+                        window2.height = 330;
+                        window2.title = L10.n.getString('video.chat');
+                        window2.addEventListener(Event.CLOSING, instance.close);
+                        window2.open();
+                        window2.addChild(instance);
+                    } else {
+                        var titleWindow:TitleWindow = new TitleWindow();
+                        titleWindow.width = 360;
+                        titleWindow.height = 330;
+                        titleWindow.title = L10.n.getString('video.chat');
+                        titleWindow.showCloseButton = true;
+                        titleWindow.addEventListener(CloseEvent.CLOSE, instance.close);
+                        PopUpManager.addPopUp(titleWindow, Sprite(FlexGlobals.topLevelApplication));
+                        PopUpManager.centerPopUp(titleWindow);
+                        titleWindow.validateNow();
+                        titleWindow.validateDisplayList();
+                        titleWindow.addChild(instance);
+                    }
+
+                } catch (e:Error) {
+                    Alert.show(e.message);
+                }
+            }
+
+            protected function doDock():void {
+                deattachFromWindow();
+                undocked = !undocked;
+                attachToWindow();
+            }
+
+            /* Here below functions which are callbacks for NetConnection events
+             * which was subcribed by netConnection.client = this;
+             * required methods are onCuePoint(), onImageData(), onMetaData(), onPlayStatus(), onSeekPoint(), onTextData(), and onXMPData() */
+            public function onCuePoint(... rest):void {
+
+            }
+
+            public function onImageData(... rest):void {
+
+            }
+
+            public function onMetaData(... rest):void {
+
+            }
+
+            public function onPlayStatus(... rest):void {
+
+            }
+
+            public function onSeekPoint(... rest):void {
+
+            }
+
+            public function onTextData(... rest):void {
+
+            }
+
+            public function onXMPData(... rest):void {
+
+            }
+
+            public function onBWCheck(... rest):Number {
+                return 0;
+            }
+
+            public function onBWDone(... rest):void {
+                var p_bw:Number;
+                if (rest.length > 0) {
+                    p_bw = rest[0];
+                }
+                trace("bandwidth = " + p_bw + " Kbps.");
+            }
+        ]]>
+    </mx:Script>
+</mx:VBox>

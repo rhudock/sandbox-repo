@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<message>
+  <value>msg.type=transfer_info.response</value>
+  <value>version=0.05a</value>
+  <value>cluster=development</value>
+  <value>msg.id=8529198643093746</value>
+  <value>msg.originalrequest.id=5714448876000705</value>
+  <value>bu_source.3.site.id=1</value>
+  <value>bu_source.6.site.id=1</value>
+  <value>bu_source.10.site.id=7</value>
+  <value>bu_source.22.site.id=306</value>
+  <value>bu_source.22.target_ids=22,23</value>
+  <value>bu_target.22.agent.0.id=AAA</value>
+  <value>bu_target.22.agent.0.free_slots=8</value>
+  <value>bu_target.22.agent.0.max_slots=9</value>
+  <value>bu_target.22.agent.0.attrs=Department&eq;books,Language&eq;english,Attribute 1&eq;value 6,Department&eq;furniture,Department&eq;electromics</value>
+  <value>bu_target.22.chats_in_queue=0</value>
+  <value>bu_target.23.agent.0.id=AAA</value>
+  <value>bu_target.23.agent.0.free_slots=8</value>
+  <value>bu_target.23.agent.0.max_slots=9</value>
+  <value>bu_target.23.agent.0.attrs=Department&eq;books,Language&eq;english,Attribute 1&eq;value 6,Department&eq;furniture,Department&eq;electromics</value>
+  <value>bu_target.23.chats_in_queue=0</value>
+  <value>bu_source.23.site.id=306</value>
+  <value>bu_source.23.target_ids=23,22</value>
+</message>

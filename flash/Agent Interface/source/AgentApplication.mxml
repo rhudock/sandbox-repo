@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<core:BaseApplication xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:core="*">
+
+	<mx:Script>
+		<![CDATA[
+			import com.inq.flash.agent.control.AgentSIPController;
+            import flash.events.MouseEvent;
+            import mx.events.FlexEvent;
+			import com.inq.flash.common.control.CommonApplicationController;
+			import mx.utils.URLUtil;
+			import mx.states.State;
+			import mx.controls.Alert;
+			import com.inq.flash.messagingframework.FlashMessagingFramework;
+			import mx.managers.PopUpManager;
+			import mx.events.ListEvent;
+			import com.inq.flash.agent.control.AgentApplicationController;
+            import com.inq.flash.agent.view.CustomScriptEditor;
+
+			private var timeSinceTabbed:Number;
+			private var chatNavigator:ChatNavigator;
+
+
+			protected override function createApplicationController():CommonApplicationController {
+				return new AgentApplicationController();
+			}
+
+			public function registerChatNavigator():void {
+				AgentApplicationController(controller).setChatNavigator(chatNavigator);
+			}
+
+            protected override function registerGlobalKeyHandler():void {
+                super.registerGlobalKeyHandler();
+                stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseListener);
+            }
+
+            protected function mouseListener(event:MouseEvent):void {
+                AgentApplicationController.setAgentActive(true);
+            }
+
+			protected override function keyboardListener(event:KeyboardEvent):void {
+                AgentApplicationController.setAgentActive(true);
+				if (event.keyCode == Keyboard.ENTER && event.charCode == Keyboard.ENTER) {
+			 		if (currentState == 'connected')
+		           		AgentApplicationController(controller).loginAttempt();
+		           	else if (controller.isMainState()) {
+		           		AgentApplicationController(controller).enterPressed();
+		           	}
+		  		}
+		      	else if (controller.isMainState()) {
+		      		if (event.keyCode == Keyboard.TAB) { //tab is pressed, maybe with shift. This will 'cursor' to next or previous chat tab
+						event.stopImmediatePropagation();
+						event.stopPropagation();
+						// we should handle only TAB or SHIFT-TAB, not ALT-TAB
+						if (!event.altKey && !event.ctrlKey) {
+							if (event.type == KeyboardEvent.KEY_DOWN) {
+								//warning, strange hack here: this is needed because it seems pressing the tab key can result
+								//in double tab entries, seemingly because its so 'sensitive' or something. So just adding a small delay here
+								//Maybe this belongs inside ChatTabBar??
+								var now:Number = new Date().time;
+								if (now - timeSinceTabbed >= 1000) {
+									timeSinceTabbed = now;
+									event.shiftKey ? AgentApplicationController(controller).viewPreviousChat() : AgentApplicationController(controller).viewNextChat();
+								}
+							} else if (event.type == KeyboardEvent.KEY_UP) {
+								//mean that we released key and can press again next time without waiting 1 sec
+								timeSinceTabbed = 0;
+							}
+						}
+		      		} else AgentApplicationController(controller).typing(event);
+		      	}
+			}
+
+			protected override function createMainView():Object {
+				chatNavigator = new ChatNavigator();
+				AgentApplicationController(controller).setChatNavigator(chatNavigator);
+                return chatNavigator;
+			}
+
+			CONFIG::air_mode
+			protected override function onWindowClosing(event:Event):void {
+				if (controller.isMainState() && !controller.logout()) {
+					event.preventDefault();
+				}
+			}
+
+			CONFIG::air_mode
+			protected override function getUpdateURL():String {
+				return "/chatrouter/agents/update.xml";
+			}
+
+            override protected function editCustomScript():void {
+                CustomScriptEditor.show();
+            }
+
+		]]>
+	</mx:Script>
+
+	<mx:Style>
+
+		.scriptLink {
+			text-decoration:underline;
+			color:#0000FF;
+		}
+
+		.chatTabs {
+		   	font-size: 12;
+		   	font-weight:bold;
+		   	font-family:Arial;
+		   	color:#000000;
+		   	direction:vertical;
+		   	corner-radius: 20;
+		   	border-thickness: 2;
+		   	horizontal-gap: 4;
+		   	vertical-gap: 4;
+		}
+  </mx:Style>
+</core:BaseApplication>

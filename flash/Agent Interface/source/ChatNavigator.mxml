@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:inq="com.inq.flash.agent.view.*"
+           xmlns:mx="http://www.adobe.com/2006/mxml"
+           initialize="init()"
+           right="0"
+           left="0"
+           bottom="0"
+           top="0">
+
+    <mx:Script>
+        <![CDATA[
+            import com.inq.flash.agent.control.AgentApplicationController;
+            import com.inq.flash.agent.control.ChatPanelController;
+            import com.inq.flash.agent.data.Chat;
+            import com.inq.flash.agent.data.events.SIPEvent;
+            import com.inq.flash.common.settings.SettingManager;
+            import com.inq.flash.common.settings.SiteParams;
+            import com.inq.flash.common.settings.SupervisorSetting;
+            import flash.display.DisplayObject;
+            import flash.events.MouseEvent;
+            import mx.binding.utils.BindingUtils;
+            import mx.containers.Canvas;
+            import mx.containers.VBox;
+            import mx.containers.ViewStack;
+            import mx.controls.Alert;
+            import mx.controls.Button;
+            import mx.core.FlexGlobals;
+            import mx.events.DividerEvent;
+            import mx.events.IndexChangedEvent;
+            import mx.events.ItemClickEvent;
+
+            public var summaryPanel:ChatSummary;
+            public var trainingPanel:Training;
+
+            private function init():void {
+                summaryPanel = new ChatSummary();
+                summaryPanel.name = "summary";
+                chatStack.addChildAt(summaryPanel, 0);
+                for (var i:int = 1; i < AgentApplicationController.MAXIMUM_NUMBER_OF_CHATS; i++) {
+                    var chatPanel:ChatPanel = new ChatPanel();
+                    chatPanel.setIndex(i);
+                    chatPanel.name = "chat " + i;
+                    chatStack.addChildAt(chatPanel, i);
+                    callLater(chatTabs.disableTab, [i]);
+                }
+                trainingPanel = new Training();
+                chatStack.addChild(trainingPanel);
+            }
+
+            /* Detect the change in selected index in the chatStack
+             * When the change is detected, then let the controller know
+             * @see ChatPanelController method setCurrentChatPanel
+             */
+            public function chatStackChange(event:IndexChangedEvent):void {
+                var chatPanel:ChatPanel = event.relatedObject as ChatPanel; /* Get current chat panel */
+                if (chatPanel == null) {
+                    if (CobrowseUndocked.haveInstance()) {
+                        ChatPanelController.dockPrevious();
+                    }
+                } else {
+                    /* The change could be a deleted tab, if so, return */
+                    chatPanel.getController().setCurrentChatPanel();
+                    /* Let controller for chat panel know */
+                }
+                chatTabs.updateTabsDisplay(event.newIndex);
+            }
+
+            public function findAvailableChatPanel():int {
+                return chatTabs.findAvailableTab();
+            }
+
+            public function startNewChat(chat:Chat):void {
+                var chatPanel:ChatPanel = ChatPanel(chatStack.getChildAt(chat.getIndex()));
+                chatPanel.isScreeningMode = false;
+                chatPanel.joinButton.includeInLayout = chatPanel.joinButton.visible = false;
+                chatPanel.canTransferConference = true;
+                chatTabs.startedNewChat(chatPanel);
+                chatPanel.getController().setChat(chat);
+                chatPanel.changeScriptPanelState(true);
+                chatPanel.chatTextbox.text = "";
+                chat.setController(chatPanel.getController());
+                updateChatLabel(chat);
+                chatPanel.resetState();
+                chatPanel.markTextAccordingRiceiverType(false);
+                chatPanel.initVoiceStatus();
+                chatPanel.showSuggestion(false);
+                chatPanel.suggestionBoxName.text = "Automated Suggestion Script";
+                chatPanel.initFrames();
+                chatPanel.componentStack.selectedIndex = 0;
+            }
+
+            public function endChat(index:int):void {
+                var chatPanel:ChatPanel = ChatPanel(chatStack.getChildAt(index));
+                if (chatPanel.currentState == ChatPanel.STATE_VOICE) {
+                    chatPanel.disconnectButton.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+                }
+                //horizontal Tabs
+                chatPanel.removeTabs();
+                //vertical Tab
+                chatTabs.disableTab(index);
+                summaryPanel.chatEnded();
+            }
+
+            public function updateChatLabel(chat:Chat):void {
+                var currentTime:Number = new Date().time;
+                var chatDuration:int = (currentTime - chat.getTimeCreated()) / 1000;
+                var siteParams:SiteParams = SettingManager.getSiteParams(chat.getSiteID());
+                var supervisorSetting:SupervisorSetting = SettingManager.getSupervisorSetting(chat.getSettingIDs());
+                chatTabs.setName(chat.getIndex(), chat.getLaunchPage(), (currentTime - chat.getTimeLastUpdated()) / 1000, chat.isOnHold(), chatDuration, supervisorSetting.getDurationMid(), supervisorSetting.getDurationMax());
+            }
+
+            public function indicateActionRequired(chat:Chat):void {
+                var onlyChat:Boolean = !chatTabs.activeChatsExist(chat.getIndex());
+                var chatPanel:ChatPanel = ChatPanel(chatStack.getChildAt(chat.getIndex()));
+                chatPanel.indicateActionRequired();
+                if (onlyChat) {
+                    chatTabs.switchToChat(chat.getIndex());
+                }
+                chatTabs.indicateActionRequired(chat.getIndex());
+            }
+
+            public function clearActionRequired(chat:Chat):void {
+                var chatPanel:ChatPanel = ChatPanel(chatStack.getChildAt(chat.getIndex()));
+                chatPanel.clearActionRequired();
+                chatTabs.clearActionRequired(chat.getIndex());
+            }
+
+            public function indicateClientRejoined(chat:Chat):void {
+                var chatPanel:ChatPanel = ChatPanel(chatStack.getChildAt(chat.getIndex()));
+                chatPanel.changeScriptPanelState(true);
+                chatTabs.indicateMemberRejoined(chat.getIndex());
+            }
+
+            public function indicateMemberLost(chat:Chat, isClient:Boolean, textToDisplay:String = null):void {
+                var chatPanel:ChatPanel = ChatPanel(chatStack.getChildAt(chat.getIndex()));
+                chatPanel.indicateMemberLost(isClient, textToDisplay);
+                chatTabs.indicateMemberLost(chat.getIndex());
+            }
+
+            public function disconnected():void {
+                for (var i:int = 1; i < AgentApplicationController.MAXIMUM_NUMBER_OF_CHATS; i++) {
+                    var chatPanel:ChatPanel = ChatPanel(chatStack.getChildAt(i));
+                    if (chatPanel == null)
+                        continue;
+                    chatPanel.getController().pauseSendingMessagesDueToDisconnect();
+                }
+            }
+
+            public function script2ChatDividerRelease(originatingPanel:ChatPanel, event:DividerEvent):void {
+                for (var i:int = 1; i < AgentApplicationController.MAXIMUM_NUMBER_OF_CHATS; i++) {
+                    var chatPanel:ChatPanel = ChatPanel(chatStack.getChildAt(i));
+                    if (chatPanel == null || chatPanel == originatingPanel) {
+                        continue;
+                    }
+                    chatPanel.applyScript2ChatDividerRelease(event);
+                }
+            }
+
+            public function chatDividerRelease(originatingPanel:ChatPanel, event:DividerEvent):void {
+                for (var i:int = 1; i < AgentApplicationController.MAXIMUM_NUMBER_OF_CHATS; i++) {
+                    var chatPanel:ChatPanel = ChatPanel(chatStack.getChildAt(i));
+                    if (chatPanel == null || chatPanel == originatingPanel) {
+                        continue;
+                    }
+                    chatPanel.applyChatDividerRelease(event);
+                }
+            }
+
+            public function activeChatsExist(index:int):Boolean {
+                return chatTabs.activeChatsExist(index);
+            }
+
+            public function getActiveChatPanel():ChatPanel {
+                return chatTabs.getActiveChatPanel();
+            }
+
+            public function getSelectedIndex():int {
+                return chatTabs.selectedIndex;
+            }
+
+            public function getChatPanel(index:int):ChatPanel {
+                return chatTabs.getChatPanel(index);
+            }
+
+            public function showHomeTab(OnlyIfCurrentTab:Boolean, currentIndex:int):void {
+                if (!OnlyIfCurrentTab || (chatTabs.selectedIndex == currentIndex)) {
+                    chatTabs.selectedIndex = 0;
+                    chatTabs.callLater(chatTabs.updateTabsDisplay, [0]);
+                }
+            }
+
+            public function showTab(index:int):void {
+                chatTabs.selectedIndex = index;
+                chatTabs.callLater(chatTabs.updateTabsDisplay, [index]);
+            }
+
+            public function getChatSummary():ChatSummary {
+                return summaryPanel;
+            }
+
+            public function getTrainingPanel():Training {
+                return trainingPanel;
+            }
+
+            public function resetTrainingPanel(scriptCategories:XML):void {
+                var enabled:Boolean = (scriptCategories != null && scriptCategories.children().length() > 0);
+                chatTabs.disableTab(AgentApplicationController.MAXIMUM_NUMBER_OF_CHATS, enabled);
+                chatTabs.switchToChat(0);
+                trainingPanel.setScriptCategories(scriptCategories, enabled);
+            }
+
+            public function viewNextChat():void {
+                chatTabs.viewNextChat();
+            }
+
+            public function viewPreviousChat():void {
+                chatTabs.viewPreviousChat();
+            }
+
+            public function voiceStateChanged(event:SIPEvent):void {
+                var chatPanels:Array = chatStack.getChildren();
+                if (chatPanels != null) {
+                    for each (var child:DisplayObject in chatPanels) {
+                        if (child is ChatPanel && event.getConsumedPanel() != child) {
+                            (child as ChatPanel).voiceStateChanged(event);
+                        }
+                    }
+                }
+            }
+        ]]>
+
+    </mx:Script>
+
+    <inq:ChatTabBar tabEnabled="true"
+                    focusEnabled="true"
+                    width="165"
+                    id="chatTabs"
+                    styleName="chatTabs"
+                    dataProvider="{chatStack}"
+                    direction="vertical"
+                    bottom="0"
+                    top="0"
+                    left="0" />
+    <mx:ViewStack id="chatStack"
+                  left="155"
+                  bottom="0"
+                  top="0"
+                  right="5"
+                  borderStyle="none"
+                  borderThickness="0"
+                  change="chatStackChange(event)" />
+
+</mx:Canvas>

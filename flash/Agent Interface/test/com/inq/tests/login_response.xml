@@ -1,0 +1,34 @@
+<message>
+  <value>msg.type=login.response</value>
+  <value>cluster=development</value>
+  <value>msg.id=8528904160084032</value>
+  <value>agent.id=Agent2</value>
+  <value>authentication.valid=true</value>
+  <value>msg.originalrequest.id=5714154392977429</value>
+  <value>max.chats=10</value>
+  <value>user.type=agent</value>
+  <value>call.enabled=true</value>
+  <value>call.auto_dialing=false</value>
+  <value>call.customer_phone=true</value>
+  <value>call.max_agent_redials=2</value>
+  <value>cobrowse.enabled=false</value>
+  <value>call.server_config=sipServer&amp;eq;63.208.78.156&amp;nl;sipDomain&amp;eq;63.208.78.156&amp;nl;stunServer&amp;eq;stun.ekiga.net&amp;nl;dtfmMethod&amp;eq;rtp&amp;nl;license&amp;eq;KNV4C-VG6FF-V9DM1-FQDX8-GW8A5&amp;nl;register&amp;eq;1</value>
+  <value>site.0.id=306</value>
+  <value>site.0.transfer=true</value>
+  <value>site.0.conference=true</value>
+  <value>site.0.screening=true</value>
+  <value>site.0.join_transfer=true</value>
+  <value>site.0.agent_selection=true</value>
+  <value>site.0.prioritize=true</value>
+  <value>site.0.transfer_priority=1</value>
+  <value>site.0.auto_transfer_chat_ownership=true</value>
+  <value>site.1.id=307</value>
+  <value>site.1.transfer=true</value>
+  <value>site.1.conference=true</value>
+  <value>site.1.screening=true</value>
+  <value>site.1.join_transfer=true</value>
+  <value>site.1.agent_selection=true</value>
+  <value>site.1.prioritize=true</value>
+  <value>site.1.transfer_priority=1</value>
+  <value>site.1.auto_transfer_chat_ownership=true</value>
+</message>

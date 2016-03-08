@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+                width="650"
+                height="550"
+                xmlns:spelling="com.gskinner.spelling.*"
+                title="{L10.n.getString('configure')}"
+                xmlns:utils="com.inq.flash.common.views.utils.*"
+                showCloseButton="true"
+                close="close()">
+    <mx:VBox height="100%"
+             width="100%"
+             backgroundColor="#ffffff"
+             borderThickness="0">
+        <mx:Text width="100%"
+                 text="{L10.n.getString('custom.scripts.info')}" />
+        <mx:HBox>
+            <mx:Button id="createCustomScriptButton"
+                       height="34"
+                       label="{L10.n.getString('add')}"
+                       toolTip="{L10.n.getString('create.script.line')}"
+                       click="createNewScriptLine()" />
+            <mx:Button id="saveAllButton"
+                       height="34"
+                       label="{L10.n.getString('save')}"
+                       toolTip="{L10.n.getString('save.all.script.lines')}"
+                       click="saveAllScriptLines()"
+                       visible="{customScriptChanged}" 
+                       enabled="{!customScriptSaving}" />
+            <mx:Label text="{L10.n.getString('sending.message')}"
+                      visible="{customScriptSaving}" />
+        </mx:HBox>
+        <utils:KeylessList id="customScriptPageListEdit"
+                           selectable="true"
+                           themeColor="#ffffff"
+                           focusEnabled="true"
+                           width="100%"
+                           height="100%"
+                           horizontalScrollPolicy="off"
+                           dragEnabled="true"
+                           dropEnabled="true"
+                           dragMoveEnabled="true"
+                           wordWrap="true"
+                           variableRowHeight="true"
+                           dataProvider="{editedCustomScript.script}"
+                           change="indexChanged(event)"
+                           alternatingItemColors="[#FFD2D2, #FFEAE9]"
+                           itemEditEnd="changed(event)"
+                           dragComplete="changed(event)"
+                           fontSize="14"
+                           selectionColor="#0000CC">
+            <utils:itemRenderer>
+                <mx:Component>
+                    <mx:HBox>
+                        <mx:TextArea id="line"
+                                     maxChars="5000"
+                                     change="outerDocument.onEdit(line.text)"
+                                     focusIn="clearOnFocus(event);outerDocument.onTextFocusChanged(false)"
+                                     focusOut="outerDocument.onTextFocusChanged(true)"
+                                     width="90%" 
+                                     initialize="init()"/>
+                        <spelling:SPLTagFlex id="splTagHighlighter"
+                                             enabled="{outerDocument.spellCheckingEnabled}"
+                                             target="{line}"
+                                             creationComplete="addDictionary()"/>
+                        <mx:Button label="X"
+                                   click="outerDocument.onDelete()"
+                                   toolTip="{L10.n.getString('delete.selected.script.line')}"
+                                   color="#FF0000"
+                                   fontSize="16" />
+                        <mx:Script>
+                            <![CDATA[
+                                public static function clearOnFocus(event:FocusEvent):void {
+                                    var inputComponent:TextArea = TextArea(event.currentTarget);
+                                    if (inputComponent.text == L10.n.getString('new.script.line')) {
+                                        inputComponent.text = "";
+                                    }
+                                }
+
+                                override public function set data(value:Object):void {
+                                    super.data = value;
+                                    checkData(super.data);
+                                }
+
+                                private function checkData(value:Object):void {
+                                    if (value != null && value.toString().length > 0) {
+                                        line.text = value.toString();
+                                    } else {
+                                        line.text = L10.n.getString('new.script.line');
+                                    }
+                                }
+
+                                public function addDictionary():void {
+                                    splTagHighlighter.spellingHighlighter.spellingDictionary  = outerDocument.spellingDictionary;
+                                }
+
+                                public function init():void {
+                                    checkData(super.data);
+                                }
+                            ]]>
+                        </mx:Script>
+                    </mx:HBox>
+                </mx:Component>
+            </utils:itemRenderer>
+        </utils:KeylessList>
+    </mx:VBox>
+    <mx:Script>
+        <![CDATA[
+            import com.googlecode.flexxb.FlexXBEngine;
+            import com.gskinner.spelling.SpellingDictionary;
+            import com.inq.flash.agent.control.messagehandlers.ScriptHandler;
+            import com.inq.flash.common.beans.CustomScripts;
+            import com.inq.flash.common.control.CommonApplicationController;
+            import flash.display.Sprite;
+            import flash.events.TimerEvent;
+            import flash.net.URLRequest;
+            import flash.net.URLVariables;
+            import flash.utils.Timer;
+            import mx.controls.Alert;
+            import mx.core.FlexGlobals;
+            import mx.events.CloseEvent;
+            import mx.events.ListEvent;
+            import mx.managers.PopUpManager;
+
+            private static const REQUEST_DELAY_INTERVAL:int = 1000;
+
+            public var spellingDictionary:SpellingDictionary;
+
+            [Bindable]
+            private var customScriptChanged:Boolean;
+
+            [Bindable]
+            private var customScriptSaving:Boolean;
+
+            [Bindable]
+            private var editedCustomScript:XML;
+
+            [Bindable]
+            public var spellCheckingEnabled:Boolean;
+
+            public function leaveEditingTab(event:CloseEvent):void {
+                if (event.detail != Alert.CANCEL) {
+                    if (event.detail == Alert.YES) {
+                        saveAllScriptLines();
+                    }
+                    PopUpManager.removePopUp(this);
+                }
+            }
+
+            public function scriptNavCreated():void {
+                //scriptsTab.addEventListener(MouseEvent.CLICK, changingScriptTab, true);
+            }
+
+            private function createNewScriptLine():void {
+                var cs:XML = editedCustomScript;
+                var newLine:XML = new XML("<script type='text'></script>");
+                if (cs.script.length() > 0) {
+                    cs.insertChildBefore(cs.script[0], newLine);
+                } else {
+                    cs.appendChild(newLine);
+                }
+                customScriptChanged = true;
+            }
+
+            protected function saveAllScriptLines():void {
+                customScriptChanged = false;
+                customScriptSaving = true;
+                ScriptHandler.removeEmptyScriptLines(editedCustomScript);
+                FlexGlobals.topLevelApplication.controller.customScript = FlexXBEngine.instance.deserialize(editedCustomScript.normalize(), CustomScripts) as CustomScripts;
+                var agentID:String = FlexGlobals.topLevelApplication.userField.text;
+                var password:String = FlexGlobals.topLevelApplication.encryptedPasswordVal;
+                saveAllButton.visible = false;
+                var yourData:ByteArray = new ByteArray();
+                var req:URLRequest = new URLRequest(CommonApplicationController.getChangeCustomScriptURL());
+                req.method = URLRequestMethod.POST;
+                var postData:URLVariables = new URLVariables();
+                postData.scriptXML = editedCustomScript;
+                postData.login = agentID;
+                postData.password = password;
+                req.data = postData;
+                var loader:URLLoader = new URLLoader();
+                loader.dataFormat = URLLoaderDataFormat.BINARY;
+                loader.addEventListener(Event.COMPLETE, loaderComplete);
+                loader.addEventListener(IOErrorEvent.IO_ERROR, loaderError);
+                loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, loaderError);
+                loader.load(req);
+            }
+
+            private function loaderComplete(event:Event):void {
+                var delayTimer:Timer = new Timer(REQUEST_DELAY_INTERVAL, 1);
+                delayTimer.addEventListener(TimerEvent.TIMER, allowNextRequest);
+                delayTimer.start();
+            }
+
+            private  function allowNextRequest(event:TimerEvent):void {
+                customScriptSaving = false;
+            }
+
+            private function loaderError(event:TextEvent):void {
+                customScriptSaving = false;
+                Alert.show(event.text, L10.n.getString('cant.save.custom'), Alert.OK);
+            }
+
+            protected function undoChanges():void {
+                customScriptChanged = false;
+                editedCustomScript = FlexGlobals.topLevelApplication.controller.customScript.copy();
+                saveAllButton.visible = false;
+            }
+
+            public function onDelete():void {
+                Alert.yesLabel = L10.n.getString('delete');
+                var info:Alert = Alert.show(L10.n.getString('do.you.want.delete'), L10.n.getString('deleting.line'), Alert.YES | Alert.CANCEL, null, scriptLineDelete, null, Alert.CANCEL);
+                // Set the labels back to normal:
+                Alert.yesLabel = L10.n.getString('yes');
+            }
+
+            public function onEdit(text:String):void {
+                customScriptChanged = true;
+                var cs:XML = editedCustomScript;
+                var position:int = customScriptPageListEdit.selectedIndex;
+                if (position < 0) {
+                    position = 0;
+                }
+                cs.script[position].setChildren(text);
+            }
+
+            public function indexChanged(event:ListEvent):void {
+                event.itemRenderer.document.line.setFocus();
+            }
+
+            public function onTextFocusChanged(unfocused:Boolean):void {
+                customScriptPageListEdit.dragEnabled = unfocused;
+                customScriptPageListEdit.dropEnabled = unfocused;
+                customScriptPageListEdit.dragMoveEnabled = unfocused;
+            }
+
+            private function scriptLineDelete(eventObj:CloseEvent):void {
+                // Check to see if the YES button was pressed.
+                if (eventObj.detail == Alert.YES) {
+                    customScriptChanged = true;
+                    var cs:XML = editedCustomScript;
+                    var position:int = customScriptPageListEdit.selectedIndex;
+                    if (position < 0) {
+                        position = 0;
+                    }
+                    delete cs.script[position];
+                }
+            }
+
+            public function changed(event:Event):void {
+                customScriptChanged = true;
+            }
+
+            private function close():void {
+                if (customScriptChanged) {
+                    Alert.yesLabel = L10.n.getString('save');
+                    Alert.noLabel = L10.n.getString('dont.save');
+                    Alert.show(L10.n.getString('unsaved.changes.info'), L10.n.getString('unsaved.changes.title'), Alert.YES | Alert.NO | Alert.CANCEL, null, leaveEditingTab, null, Alert.CANCEL);
+                    Alert.yesLabel = L10.n.getString('yes');
+                    Alert.noLabel = L10.n.getString('no ');
+                } else {
+                    PopUpManager.removePopUp(this);
+                }
+            }
+
+            public static function show():void {
+                var customScriptEditor:CustomScriptEditor = new CustomScriptEditor();
+                customScriptEditor.editedCustomScript = FlexXBEngine.instance.serialize(FlexGlobals.topLevelApplication.controller.customScript);
+                customScriptEditor.spellCheckingEnabled = FlexGlobals.topLevelApplication.controller.spellCheckingEnabled;
+                customScriptEditor.spellingDictionary = FlexGlobals.topLevelApplication.controller.getDictionary();
+                PopUpManager.addPopUp(customScriptEditor, Sprite(FlexGlobals.topLevelApplication), true);
+                PopUpManager.centerPopUp(customScriptEditor);
+            }
+        ]]>
+    </mx:Script>
+</mx:TitleWindow>
+

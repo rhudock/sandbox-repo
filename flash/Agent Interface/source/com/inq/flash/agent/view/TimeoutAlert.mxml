@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" width="318" height="128" paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" roundedBottomCorners="true" headerHeight="10" >
+    <mx:VBox height="100%" width="100%" styleName="messageStyleName" backgroundColor="#c0c0c0">
+
+        <mx:Text id="messageField" styleName="messageStyleName" right="0" bottom="0" top="0" left="0" textAlign="center"
+                 fontWeight="bold" fontSize="12" height="100%" width="100%" text="{L10.n.getString('autotransfer.timeout.alert.text')}"/>
+		
+		<mx:HBox horizontalAlign="center" width="100%">
+			<mx:Button id="respondButton" label="{L10.n.getString('autotransfer.timeout.alert.button.label')}" click="click()" />
+  		</mx:HBox>
+        
+	</mx:VBox>
+
+    <mx:Script>
+        <![CDATA[
+        import com.inq.flash.agent.data.Chat;
+		import com.inq.flash.agent.control.AgentApplicationController;
+
+        public var counter:int = 0;
+        public var chat:Chat;
+		// There are 2 ChatNavigator classes and one is in global package, so import doesn't help
+        public var chatNavigator:ChatNavigator;
+
+		/* TODO: I don't understand why we need this class. Remove it and use simple Alert please. */
+		
+		private function click():void {
+			AgentApplicationController.setAgentActive(true);
+            if (chat != null) {
+                chatNavigator.showTab(chat.getIndex());
+            }
+            this.counter = 0;
+			this.visible = false;
+            chat = null;
+		}		
+
+        ]]>
+	</mx:Script>
+
+</mx:Panel>
+
+

@@ -1,0 +1,1 @@
+Please see the "SPL Specifications" document in the "docs" folder for information on word list types and support for languages other than English.

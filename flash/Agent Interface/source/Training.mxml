@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
+          xmlns:utils="com.inq.flash.common.views.utils.*"
+          xmlns:local="*"
+          xmlns:view="com.inq.flash.agent.view.*"
+          layout="vertical"
+          backgroundAlpha="1"
+          alpha="1"
+          borderAlpha="1"
+          fontFamily="Arial"
+          borderColor="#A5C6E6"
+          dropShadowEnabled="false"
+          label="{L10.n.getString('training')}">
+        <local:BreadcrumbMenu id="scriptBreadCrumb"
+                              scriptPageList="{scriptPageList}" />
+    <mx:List id="scriptPageList"
+             selectable="true"
+             themeColor="#ffffff"
+             width="100%"
+             height="100%"
+             horizontalScrollPolicy="off"
+             wordWrap="true"
+             variableRowHeight="true"
+             selectionColor="#ffffff"
+             textRollOverColor="#ffffff"
+             itemRenderer="com.inq.flash.agent.view.ScriptItemRenderer"
+             labelFunction="com.inq.flash.agent.view.ScriptItemRenderer.scriptItemLabel" />
+    <mx:Script>
+        <![CDATA[
+            public function setScriptCategories(scriptCategories:XML, hasAccess:Boolean):void {
+                scriptPageList.dataProvider = null;
+                scriptBreadCrumb.setScriptCategories(scriptCategories, hasAccess);
+            }
+        ]]>
+    </mx:Script>
+</mx:Panel>

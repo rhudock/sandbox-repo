@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				title="{L10.n.getString('please.fill.values')}"
+				initialize="ScriptLineUtils.renderScript(scriptLineText, components, useSpellChecker, spellingDictionary)"
+				horizontalScrollPolicy="off"
+                verticalScrollPolicy="off"
+				layout="vertical"
+				width="{components.width + 50}"
+				minHeight="80"
+                maxHeight="500"
+				horizontalAlign="center"
+				minWidth="360"
+                fontSize="16"
+				y="40"
+				borderAlpha="1"
+				backgroundAlpha="1"
+				alpha="1"
+				borderColor="#A4C6EB"
+				titleStyleName="scriptLineEditorTitle">
+	<mx:VBox paddingLeft="10"
+			 paddingRight="10"
+			 paddingBottom="20"
+             maxHeight="400"
+             maxWidth="800"
+             minWidth="700"
+			 id="components"
+			 horizontalScrollPolicy="auto"
+			 verticalScrollPolicy="auto"/>
+	<mx:HBox>
+		<mx:Button label="Cancel"
+				   click="removeFromParentAndSend(false)"/>
+		<mx:Button label="Submit"
+				   click="removeFromParentAndSend(true)"/>
+	</mx:HBox>
+	<mx:Script>
+		<![CDATA[
+            import com.gskinner.spelling.SpellingDictionary;
+            import com.inq.flash.agent.view.ScriptItemRenderer;
+
+            private var spellingDictionary:SpellingDictionary;
+			[Bindable]
+			public var scriptLineText:String;
+			public var notCopyFlag:Boolean;
+			public var scriptRenderer:ScriptItemRenderer;
+			public var useSpellChecker:Boolean;
+			/**
+			 * This function called on cancel or send button clicking.
+			 * It removes itself from its parent when cancel or send with filled data clicked.
+			 *
+			 * @param	shouldSend Boolean (reflects if SHIFT was pressed) when false we copy scriptLine to chatTextbox
+			 */
+			public function removeFromParentAndSend(shouldSend:Boolean):void {
+				if (!shouldSend || ScriptLineUtils.validateScriptInputs(components)){
+					var chatPanel:ChatPanel = ChatPanel(this.parentDocument)
+					chatPanel.getController().closeScriptLineEditor();
+					if (shouldSend){
+						var resultText:String = ScriptLineUtils.generateScript(components);
+						chatPanel.getController().sendOrCopyTextScript(resultText, scriptRenderer, false, notCopyFlag, scriptLineText);
+					}
+				}
+			}
+
+			public function init(script:String, itemRenderer:ScriptItemRenderer, shouldSend:Boolean, spellCheckingEnabled:Boolean, spellingDictionary:SpellingDictionary):void {
+					scriptLineText = script;
+					notCopyFlag = shouldSend;
+					scriptRenderer = itemRenderer;
+					useSpellChecker = spellCheckingEnabled;
+                    this.spellingDictionary = spellingDictionary;
+					this.initialize();
+			}
+		]]>
+	</mx:Script>
+	<mx:Style>
+		.scriptLineEditorTitle {
+			letterSpacing: 3;
+  			fontFamily: Verdana;
+			fontWeight: bold;
+			color: #FFFFFF;
+		}
+        .monochromeLabel {
+            fontFamily: "_typewriter";
+            fontSize: 14;
+            paddingLeft: 2;
+            paddingRight: 2;
+        }
+
+        .monochromeInput {
+            fontFamily: "_typewriter";
+            fontSize: 14;
+            paddingLeft: 0;
+            paddingRight: 0;
+        }
+
+        .scriptLineBox {
+            horizontalGap: 0;
+        }
+	</mx:Style>
+</mx:TitleWindow>

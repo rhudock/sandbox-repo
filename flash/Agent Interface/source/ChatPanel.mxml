@@ -1,0 +1,1419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:local="*"
+           xmlns:mx="http://www.adobe.com/2006/mxml"
+           initialize="initializeController()"
+           creationComplete="initPanel();"
+           height="100%"
+           width="100%"
+           backgroundColor="#A5C6E6"
+           creationPolicy="all"
+           verticalScrollPolicy="off"
+           horizontalScrollPolicy="off"
+           xmlns:view="com.inq.flash.agent.view.*"
+           xmlns:spelling="com.gskinner.spelling.*">
+	<mx:Binding destination="isInternalPossible"
+				source="controller != null &amp;&amp; controller.chat != null &amp;&amp; !isScreeningMode &amp;&amp; controller.chat.internalChat"/>
+	<mx:Binding destination="isPersistent"
+				source="controller != null &amp;&amp; controller.chat != null &amp;&amp; controller.chat.persistent"/>
+    <mx:Script>
+        <![CDATA[
+        import com.googlecode.flexxb.FlexXBEngine;
+        import com.gskinner.spelling.SpellingDictionary;
+        import com.inq.flash.agent.control.AgentApplicationController;
+        import com.inq.flash.agent.control.AgentSIPController;
+        import com.inq.flash.agent.control.ChatPanelController;
+        import com.inq.flash.agent.control.FrameManager;
+        import com.inq.flash.agent.data.CallDuration;
+        import com.inq.flash.agent.data.Chat;
+        import com.inq.flash.agent.data.Client;
+        import com.inq.flash.agent.data.events.SIPEvent;
+        import com.inq.flash.agent.view.IFrame;
+        import com.inq.flash.agent.view.ScriptItemRenderer;
+        import com.inq.flash.api.beans.Engagement;
+        import com.inq.flash.api.beans.Response;
+        import com.inq.flash.common.beans.ScriptLine;
+        import com.inq.flash.common.beans.TranscriptResponse;
+        import com.inq.flash.common.data.MessageFields;
+        import com.inq.flash.common.interfaces.IChat;
+        import com.inq.flash.common.settings.SettingManager;
+        import com.inq.flash.common.utils.DateUtils;
+        import com.inq.flash.messagingframework.Participant;
+        import com.inq.flash.messagingframework.StringUtils;
+        import com.inq.flash.messagingframework.TranscriptEntry;
+        import flash.display.InteractiveObject;
+        import flash.events.ContextMenuEvent;
+        import flash.events.Event;
+        import flash.events.IOErrorEvent;
+        import flash.events.SecurityErrorEvent;
+        import flash.ui.ContextMenu;
+        import flash.ui.ContextMenuItem;
+        import flash.utils.Dictionary;
+        import mx.collections.ArrayCollection;
+        import mx.controls.Alert;
+        import mx.controls.tabBarClasses.Tab;
+        import mx.controls.textClasses.TextRange;
+        import mx.core.ScrollPolicy;
+        import mx.core.UIComponent;
+        import mx.events.DividerEvent;
+        import mx.events.DropdownEvent;
+        import mx.events.FlexEvent;
+        import mx.events.ListEvent;
+        import mx.events.ResizeEvent;
+        import mx.logging.ILogger;
+        import mx.logging.Log;
+
+        public static const STATE_BASE:String = "default";
+        public static const STATE_VOICE:String = "voiceState";
+        public static const STATE_REQUEST_HT:String = "requestHistoricTranscriptsState";
+        public static const STATE_HIDE_HT:String = "hideHistoricTranscriptsState";
+        public static const STATE_SHOW_HT:String = "showHistoricTranscriptsState";
+        public static const STATE_REQUEST_HT_VOICE:String = "requestHistoricTranscriptsVoiceState";
+        public static const STATE_HIDE_HT_VOICE:String = "hideHistoricTranscriptsVoiceState";
+        public static const STATE_SHOW_HT_VOICE:String = "showHistoricTranscriptsVoiceState";
+
+        public const STATE_VERB_SET_VOICE:String = "setVoice";
+        public const STATE_VERB_CLEAN_VOICE:String = "cleanVoice";
+        public const STATE_VERB_REQUEST_HT:String = "requestHT";
+        public const STATE_VERB_HIDE_HT:String = "hideHT";
+        public const STATE_VERB_SHOW_HT:String = "showHT";
+
+        public static const AUTOMATON_ID_PARAM:String = "?dtid=";
+        public static const IS_AGENT_PARAM:String = "&agent=true";
+        public static const CUSTOMER_ID_PARAM:String = "&_customerID=";
+        public static const AGENT_ID_PARAM:String = "&_agentID=";
+        public static const CHAT_ID_PARAM:String = "&_chatID=";
+        public static const BUNIT_ID_PARAM:String = "&_businessUnitID=";
+        public static const SITE_ID_PARAM:String = "&_siteID=";
+        public static const SESSION_ID_PARAM:String = "&_sessionID=";
+        public static const INC_ASSIGNMENT_ID_PARAM:String = "&_incAssignmentID=";
+        public static const LOCATION_PARAM:String = "&~location=";
+        public static const INITIATOR_PARAM:String = "&~initiator=";
+        public static const AUTOMATON_DATA_MAP_PARAM:String = "&_automatonDataMap=";
+        public static const CLIENT_PAGE_URL_PARAM:String = "#_clientPageURL=";
+
+        private static const LOG:ILogger = LogUtils.getLogger(ChatPanel);
+
+        [Bindable]
+        public var historicTranscripts:ArrayCollection;
+
+        private function chatComboBoxChange(event:DropdownEvent, textArea:mx.controls.TextArea):void {
+            var currentChat:IChat = ComboBox(event.target).selectedItem as IChat;
+            if (event.currentTarget.selectedIndex == 0) {
+                setNewState(STATE_VERB_HIDE_HT);
+            } else {
+                textArea.htmlText = currentChat.chatHtml;
+                setNewState(STATE_VERB_SHOW_HT);
+            }
+            if (Log.isDebug()) {
+                LOG.debug("chatComboBoxChange switch to: " + currentChat.chatTitle);
+            }
+        }
+
+        private static var globalScriptWidth:int;
+            private static var globalTopTranscriptHeight:int;
+        private static var globalBottomTranscriptHeight:int;
+
+			[Bindable]
+			public var scrollingStarted:Boolean;
+
+            [Bindable]
+            public var controller:ChatPanelController;
+
+            [Bindable]
+			public var cobrowseCommands:Array;
+
+			[Bindable]
+			public var cobrowseStatusKey:String;
+
+			[Bindable]
+			private var cobrowseSuppressed:Boolean;
+
+			[Bindable]
+            public var position:int = 0;
+
+            private var index:int = -1;
+            private var hasBeenVertical:Boolean;
+            private var hasBeenHorizontal:Boolean;
+            public var tabsIFrames:Array = new Array();
+
+            [Bindable]
+            private var voiceStatus:String;
+
+            [Bindable]
+            private var chatBoxBindable:Boolean = true;
+
+            [Bindable]
+            private var isSuggestionVisible:Boolean = false;
+
+            [Bindable]
+            public var isTransferVisible:Boolean = false;
+
+            [Bindable]
+            private var callDurationTime:String;
+
+            public var phoneNumber:String;
+            private static var cd:CallDuration;
+            private static var agentHangUp:String = "1";
+			[Bindable]
+            public var isInternalPossible:Boolean;
+			[Bindable]
+            public var isPersistent:Boolean;
+            [Bindable]
+        public var isScreeningMode:Boolean;
+        public var isSuggestedScriptWaiting:Boolean;
+
+        [Bindable]
+        public var canTransferConference:Boolean;
+        private var transferingOwnership:Boolean;
+        [Bindable]
+        private var canUseSIP:Boolean;
+
+        public var previousStatus:String;
+
+        private var statesMap:Object;
+
+        public var deviceFlag:int;
+
+        public function initializeController():void {
+            canUseSIP = true;
+            controller = new ChatPanelController(this);
+            suggestedScriptList.addEventListener(ResizeEvent.RESIZE, suggestedScriptListSizeChanged);
+            scriptBreadCrumb.setController(controller);
+        }
+
+        public function setSpellingDictionaryLanguage(dictionary:SpellingDictionary):void {
+            splTagHighlighter.spellingHighlighter.spellingDictionary = dictionary;
+            controller.spellingDictionary = dictionary;
+        }
+
+        public function initVoiceStatus():void {
+            setCallDuration("00:00:00");
+            previousStatus = null;
+            if (controller.getApplicationController().sipController != null) {
+                controller.getApplicationController().sipController.updateVoiceStatus(this);
+            } else {
+                voiceStatus = L10.n.getString('voip.problem');
+            }
+        }
+
+        public function initFrames():void {
+            var tabs:String =  controller.chat.getTabs();
+            if (tabs != null && tabs.length > 0) {
+                var arr:Array = tabs.split("^");
+                for (var j:int = 0; j < arr.length; j++ ) {
+                    var frameNameUrl:Array = arr[j].split("|");
+                    // frameNameUrl[1] contains full endcoded url with automatonId f.e.
+                    // https://formsv3.inq.com/orbeon/inq/plain?automatonId&eq;12
+                    addTab(frameNameUrl[0], StringUtils.decodeStringFromMessage(frameNameUrl[1]) + IS_AGENT_PARAM +
+                            CUSTOMER_ID_PARAM + controller.chat.getClientID() +
+                            AGENT_ID_PARAM + controller.getApplicationController().getCurrentAgent().getID() +
+                            CHAT_ID_PARAM + controller.chat.getChatID() +
+                            BUNIT_ID_PARAM + controller.chat.getBUnitID() +
+                            SITE_ID_PARAM + controller.chat.getSiteID() +
+                            SESSION_ID_PARAM + controller.chat.getSessionID() +
+                            INC_ASSIGNMENT_ID_PARAM + controller.chat.getIncAssignmentID() +
+                            LOCATION_PARAM + escape("{type: 'ai', id:'" + controller.getApplicationController().getCurrentAgent().getID() + "'}") +
+                            INITIATOR_PARAM + escape("{type: 'agent', id:'" + controller.getApplicationController().getCurrentAgent().getID() + "'}") +
+                            (controller.chat.getAutomatonDataMap() ? AUTOMATON_DATA_MAP_PARAM + escape(controller.chat.getAutomatonDataMap()) : "") +
+                            CLIENT_PAGE_URL_PARAM + controller.chat.getClientPageURL()
+                    );
+                }
+            }
+        }
+
+        public function setCobrowseSuppressed(value:Boolean):void {
+            if (cobrowseSuppressed != value) {
+                cobrowseSuppressed = value;
+            }
+        }
+
+        public function voiceStateChanged(event:SIPEvent):void {
+            if (event.getStatus() == voiceStatus || !AgentApplicationController(controller.getApplicationController()).isSipComponentAvailable()) {
+                return;
+            }
+				if (holdButton != null){
+            holdButton.enabled = event.getCanDial() && (controller.maxCallRedials - controller.redialsSoFar) > 0;
+				}
+				if (dialButton != null){
+            dialButton.enabled = holdButton.enabled;
+				}
+				if (disconnectButton != null){
+            disconnectButton.enabled = event.getCanHangUp();
+				}
+            if (event.getStatus() == AgentSIPController.VOICE_STATUS_ANOTHER_CALL_IN_PROGRESS) {
+                previousStatus = voiceStatus;
+            } else if (event.getStatus() == AgentSIPController.VOICE_STATUS_HANG_UP_IN_PROGRESS) {
+                previousStatus = AgentSIPController.VOICE_STATUS_HANG_UP_IN_PROGRESS;
+            }
+            voiceStatus = event.getStatus();
+            if (closeButton != null) {
+                closeButton.enabled = true;
+            }
+            if (event.getStatus() == AgentSIPController.VOICE_STATUS_NEED_TO_CALL) {
+                if (previousStatus == AgentSIPController.VOICE_STATUS_CALL_COMPLETED) {
+                    voiceStatus = previousStatus;
+                }
+            } else if (event.getStatus() == AgentSIPController.VOICE_STATUS_DIALING) {
+                controller.clickStatusMessage("dialed");
+            } else if (event.getStatus() == AgentSIPController.VOICE_STATUS_CALL_IN_PROGRESS) {
+                if (cd != null) {
+                    cd.stopTimer();
+                    cd.killTimer();
+                }
+                cd = new CallDuration(this);
+                cd.registerTimer();
+                cd.startTimer();
+                if (controller != null) {
+                    controller.clickStatusMessage("connected");
+                }
+                closeButton.enabled = false;
+            } else if (event.getStatus() == AgentSIPController.VOICE_STATUS_CALL_COMPLETED) {
+                if(cd != null){
+                    cd.stopTimer();
+                }
+                controller.clickStatusMessage("completed",agentHangUp);
+            } else if (event.getStatus() == AgentSIPController.VOICE_STATUS_CALL_FAILED) {
+                if (cd != null) {
+                    cd.stopTimer();
+                }
+                controller.clickStatusMessage("Failed");
+            }
+            agentHangUp = "1";
+        }
+
+        public function startCallIfAutoDial():void {
+            if (controller.autoDial && dialButton.enabled) {
+                callLater(dialPhone);
+            }
+        }
+
+            public function setCallDuration(msg:String):void {
+                callDurationTime = msg;
+            }
+
+            public function getController():ChatPanelController {
+                return controller;
+            }
+
+            public function setIndex(index:int):void {
+                this.index = index;
+                setScreeningMode(false);
+            }
+
+            public function getIndex():int {
+                return index;
+            }
+
+            public function addTab(tabName:String, tabURL:String):void {
+
+                var frame:IFrame = FrameManager.createFrame(tabName, index, componentStack);
+                frame.loadFrame(tabURL);
+                for (var i:int; i < tabsIFrames.length; i++) {
+                    if (tabsIFrames[i] == frame)
+                        return;
+                }
+                tabsIFrames[tabsIFrames.length] = frame;
+            }
+
+			/**
+			 * This function removes previously dynamicly created tabs for componentStack
+			 */
+			public function removeTabs():void {
+				FrameManager.removeTabs(index, componentStack);
+			}
+
+            private function initPanel():void {
+                topTranscript.addEventListener(TextEvent.LINK, linkHandler);
+                bottomTranscript.addEventListener(TextEvent.LINK, linkHandler);
+                scriptPageList.addEventListener(MouseEvent.CLICK, controller.scriptItemClickedHandler);
+                customScriptPageList.addEventListener(MouseEvent.CLICK, controller.customScriptItemClickedHandler);
+                suggestedScriptList.addEventListener(MouseEvent.CLICK, controller.suggestedScriptItemClicked);
+                chatTextbox.addEventListener(Event.CHANGE, controller.inputTextHandler);
+                escalateButton.addEventListener(FlexEvent.BUTTON_DOWN, escalateButtonDown);
+                attributeButton.addEventListener(FlexEvent.BUTTON_DOWN, attributeButtonDown);
+				createTranscriptContextMenu(bottomTranscript);
+				//possible to easy delete
+				createTranscriptContextMenu(topTranscript);
+				chatIDLabel.automationName = "chatLabel_" + index;
+				closeButton.id = "closeButton_" + index;
+                initStatesMap()
+			}
+
+            private function initStatesMap():void {
+                statesMap = new Object();
+                statesMap[STATE_BASE] = {cleanVoice:STATE_BASE, setVoice:STATE_VOICE,
+                    requestHT:STATE_REQUEST_HT, hideHT:STATE_HIDE_HT, showHT:STATE_SHOW_HT};
+
+                statesMap[STATE_VOICE] = {cleanVoice:STATE_BASE, setVoice:STATE_VOICE,
+                    requestHT:STATE_REQUEST_HT_VOICE, hideHT:STATE_HIDE_HT_VOICE, showHT:STATE_SHOW_HT_VOICE};
+
+                statesMap[STATE_REQUEST_HT] = {cleanVoice:STATE_REQUEST_HT, setVoice:STATE_REQUEST_HT_VOICE,
+                    requestHT:STATE_REQUEST_HT, hideHT:STATE_HIDE_HT, showHT:STATE_SHOW_HT};
+
+                statesMap[STATE_HIDE_HT] = {cleanVoice:STATE_HIDE_HT, setVoice:STATE_HIDE_HT_VOICE,
+                    requestHT:STATE_REQUEST_HT, hideHT:STATE_HIDE_HT, showHT:STATE_SHOW_HT};
+
+                statesMap[STATE_SHOW_HT] = {cleanVoice:STATE_SHOW_HT, setVoice:STATE_SHOW_HT_VOICE,
+                    requestHT:STATE_REQUEST_HT, hideHT:STATE_HIDE_HT, showHT:STATE_SHOW_HT};
+
+                statesMap[STATE_REQUEST_HT_VOICE] = {cleanVoice:STATE_REQUEST_HT, setVoice:STATE_REQUEST_HT_VOICE,
+                    requestHT:STATE_REQUEST_HT_VOICE, hideHT:STATE_HIDE_HT_VOICE, showHT:STATE_SHOW_HT_VOICE};
+
+                statesMap[STATE_HIDE_HT_VOICE] = {cleanVoice:STATE_HIDE_HT, setVoice:STATE_HIDE_HT_VOICE,
+                    requestHT:STATE_REQUEST_HT_VOICE, hideHT:STATE_HIDE_HT_VOICE, showHT:STATE_SHOW_HT_VOICE};
+
+                statesMap[STATE_SHOW_HT_VOICE] = {cleanVoice:STATE_SHOW_HT, setVoice:STATE_SHOW_HT_VOICE,
+                    requestHT:STATE_REQUEST_HT_VOICE, hideHT:STATE_HIDE_HT_VOICE, showHT:STATE_SHOW_HT_VOICE};
+            }
+
+            private function setNewState(verb:String):void {
+                var oldState:String = currentState == null ? STATE_BASE : currentState;
+                if (statesMap[oldState] != null && statesMap[oldState][verb] != null) {
+                    currentState = statesMap[oldState][verb];
+                } else {
+                    currentState = STATE_BASE;
+                }
+                if (Log.isDebug()) LOG.debug("setNewState: oldState=" + oldState + " verb=" + verb + " newState=" + currentState);
+            }
+
+			private function enteringVoiceState():void {
+                dialButton.enabled = true;
+                disconnectButton.enabled = false;
+				holdButton.addEventListener(FlexEvent.BUTTON_DOWN, holdButtonDown);
+				holdButton.id = "holdButton_" + index;
+            }
+
+			private function createTranscriptContextMenu(transcriptTextArea:TextArea):void {
+				// There is a BUG in AIR 1.5 (see http://bugs.adobe.com/jira/browse/SDK-17684)
+				// The TextArea in AIR comes with its own contextual menu, so adding one does absolutely nothing but leave you wondering what the heck you are doing wrong.
+				// hack is to get TextField from TextArea.
+				var txt:TextField = transcriptTextArea.mx_internal::getTextField() as TextField;
+				txt.contextMenu.addEventListener(ContextMenuEvent.MENU_SELECT, menuSelected);
+                var menuItem:ContextMenuItem = new ContextMenuItem(L10.n.getString('mask.as.personal'));
+                menuItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, maskPersonalInformation);
+				txt.contextMenu.items.push(menuItem);
+            }
+
+            private function menuSelected(event:ContextMenuEvent):void {
+				var transcriptTextArea:InteractiveObject = event.contextMenuOwner.parent;
+				var visible:Boolean = ((transcriptTextArea == topTranscript) || (transcriptTextArea == bottomTranscript)) && isSelectedCustomerText(transcriptTextArea as TextArea);
+				var contextMenu:ContextMenu = event.target as ContextMenu;
+				for each(var menuItem:ContextMenuItem in contextMenu.items) {
+					if (menuItem.label == L10.n.getString('mask.as.personal')) {
+						menuItem.visible = visible;
+					}
+				}
+			}
+
+			/**
+			 * This function is called when Agent clicks on "Mask as Personal Information" in ContextMenu
+			 *
+			 * we should
+			 * 1) paint in gray color selected text
+			 * 2) replace filteredData in TranskrippEntry by adding new XXX
+			 * 3) pass data to function which send message to server
+			 * @param	event
+			 */
+            private function maskPersonalInformation(event:ContextMenuEvent):void {
+				var transcriptTextArea:TextArea = event.contextMenuOwner.parent as TextArea;
+				var selectedTranscriptTextRange:TextRange = new TextRange(transcriptTextArea, true);
+				var selectionPlainText:String = selectedTranscriptTextRange.text;
+				var selectionBeginIndex:int = selectedTranscriptTextRange.beginIndex;
+				var selectionEndIndex:int = selectedTranscriptTextRange.endIndex;
+				var text:String = transcriptTextArea.text;
+				var chat:Chat = getController().chat;
+				var transcripts:Array = chat.getTranscript();
+				var transcriptEntry:TranscriptEntry = findTranscriptByIndexAndMask(transcriptTextArea, text, selectionBeginIndex, selectionEndIndex, transcripts, true);
+				var masked:String = transcriptEntry.getFilteredData();
+				controller.sendChatMaskLineMessage(transcriptEntry.getData(), masked);
+
+                new TextRange(transcriptTextArea, true, selectionEndIndex, selectionEndIndex);
+            }
+
+            /**
+             * This function is called when another agent is in conference and masks text.
+             * It generate html for full transcript line where masked text colored as grey
+             *
+             * @param   originalText String with message data text or previous filtered data
+             * @param   maskedText String with the latest filteredData
+             */
+            public function findTranscriptByTextAndMask(originalText:String, maskedText:String):void {
+                var keyText:String = originalText.split(StringUtils.LINE_FEED).join(StringUtils.CARRIAGE_RETURN);
+                var transcripts:Array = controller.chat.getTranscript();
+                var wholeTranscriptText:String = bottomTranscript.text;
+                var indexToStartSearchFrom:int;
+                var selectedTranscriptTextRange:TextRange;
+                var foundEndPosition:int;
+                for each (var entry:TranscriptEntry in transcripts) {
+                    var plainTranscriptData:String =  entry.getData();
+                    var transcriptDataLength:int = plainTranscriptData.length;
+                    var transcriptBeginIndex:int = wholeTranscriptText.indexOf(plainTranscriptData, indexToStartSearchFrom);
+                    if (transcriptBeginIndex >= 0) {
+                        indexToStartSearchFrom = transcriptBeginIndex + transcriptDataLength;
+                        if (entry.getSenderType() == TranscriptEntry.TYPE_SENDER_CUSTOMER && plainTranscriptData == keyText) {
+                            entry.setFilteredData(maskedText);
+                            var htmlText:String = StringUtils.getCustomerMaskedText(originalText, maskedText);
+                            foundEndPosition = indexToStartSearchFrom;
+                            selectedTranscriptTextRange = new TextRange(bottomTranscript, true, transcriptBeginIndex, indexToStartSearchFrom);
+                            selectedTranscriptTextRange.htmlText = htmlText;
+                            topTranscript.htmlText = bottomTranscript.htmlText;
+                        }
+                    }
+                }
+                new TextRange(bottomTranscript, true, foundEndPosition, foundEndPosition);
+            }
+
+			/**
+			 * This function searching for TranscriptEntry which have start/end indexes in transcript text
+			 * for all messages outside interval of our selected word.
+			 *
+			 * @param	allMessages text representation of bottomTranscript component
+			 * @param	selectionStartIndex start position of selected word in allMessages
+			 * @param	selectionEndIndex finish position of selected word in allMessages
+			 * @param	transcripts Array with TranscriptEntry elements.
+             * @param   shouldMask Boolean distinquish whether we mask or not found transcript entry
+			 * @return TranscriptEntry wich was found or null
+			 */
+			public function findTranscriptByIndexAndMask(transcriptTextArea:TextArea, wholeTranscriptText:String, selectionBeginIndex:int, selectionEndIndex:int, transcripts:Array, shouldMask:Boolean = false):TranscriptEntry {
+				var result:TranscriptEntry = null;
+				var duplicateCandidates:Dictionary = new Dictionary();
+				var relativeBeginIndex:int;
+				var relativeEndIndex:int;
+				var senderLength:int;
+				var indexToStartSearchFrom:int;
+					for each (var transcript:TranscriptEntry in transcripts) {
+						var transcriptData:String =  transcript.getData();
+						var senderStarter:String = transcript.getSender();
+						transcriptData = senderStarter + transcriptData;
+						var plainTranscriptData:String = transcriptData;
+						var transcriptDataLength:int = plainTranscriptData.length;
+						var transcriptBeginIndex:int = wholeTranscriptText.indexOf(plainTranscriptData, indexToStartSearchFrom);
+						// TODO: will be strange if transcript will be not found add else and log/trace
+						// BUT Have found that for some Agent messages we have ":  " instead ": ", so indexOf returns -1
+						if (transcriptBeginIndex >= 0) {
+							indexToStartSearchFrom = transcriptBeginIndex + transcriptDataLength;
+							senderLength = transcript.getSenderLength();
+							var lineBeginIndex:int = transcriptBeginIndex;
+							transcriptBeginIndex += senderLength;
+							var transcriptEndIndex:int = transcriptBeginIndex + transcriptDataLength;
+							// we can select sender name too...
+							if (lineBeginIndex <= selectionBeginIndex && transcriptEndIndex >= selectionEndIndex) {
+								result = transcript;
+								if (shouldMask) {
+									relativeBeginIndex = selectionBeginIndex - transcriptBeginIndex;
+									//.. but we will mask only data
+									if (relativeBeginIndex < 0) {
+										relativeBeginIndex = 0;
+                     }
+									relativeEndIndex = selectionEndIndex - transcriptBeginIndex;
+									var filteredData:String = transcript.getFilteredData();
+									if (filteredData == null || filteredData.length == 0) {
+										filteredData = plainTranscriptData.substr(senderLength);
+                 }
+									var newMask:String = filteredData.substr(0, relativeBeginIndex);
+									newMask += StringUtils.generateXXXString(relativeEndIndex - relativeBeginIndex);
+									newMask += filteredData.substr(relativeEndIndex);
+									transcript.setFilteredData(newMask);
+									//selecting masking text as gray in bottomTranscript and topTranscript components
+									selectionBeginIndex = transcriptBeginIndex + relativeBeginIndex;
+                                    changeSelectedTextColor(transcriptTextArea, selectionBeginIndex, selectionEndIndex);
+             }
+							} else {
+								duplicateCandidates[transcriptBeginIndex] = transcript;
+                 }
+                 }
+                     }
+					if (result != null && shouldMask) {
+						//second loop to find duplicate lines
+						var selectedTranscriptTextRange:TextRange;
+						for (var duplicateBeginPosition:Object in duplicateCandidates) {
+							var duplicateCandidate:TranscriptEntry = duplicateCandidates[duplicateBeginPosition]
+							if (duplicateCandidate.getData() == result.getData() && duplicateCandidate.getSenderType() == result.getSenderType()) {
+								duplicateCandidate.setFilteredData(result.getFilteredData());
+								//var duplicateBeginPosition:int = duplicateCandidates[duplicateCandidate];
+								var selectionBeginIndex:int = duplicateBeginPosition + relativeBeginIndex;
+								var selectionEndIndex:int = duplicateBeginPosition + relativeEndIndex;
+                                changeSelectedTextColor(transcriptTextArea, selectionBeginIndex, selectionEndIndex);
+                 }
+                         }
+                     }
+				return result;
+                 }
+
+            private function changeSelectedTextColor(transcriptTextArea:TextArea, selectionBeginIndex:int, selectionEndIndex:int):void {
+                var selectedTranscriptTextRange:TextRange = new TextRange(transcriptTextArea, true, selectionBeginIndex, selectionEndIndex);
+                selectedTranscriptTextRange.color = "gray";
+                var transcriptArray:Array = [topTranscript, bottomTranscript];
+                var oppositeArea:TextArea = transcriptArray[1 - transcriptArray.indexOf(transcriptTextArea)];
+                oppositeArea.htmlText = transcriptTextArea.htmlText;
+            }
+
+			/**
+			 * This function is called from creating ContextMenu handler over bottomTranscript component
+			 * @return true when we selected customer words
+			 */
+			public function isSelectedCustomerText(transcriptTextArea:TextArea):Boolean {
+				// TODO: pass component to this function, so we can mask in topTranscript too
+				var text:String = transcriptTextArea.text;
+				var selectedTranscriptTextRange:TextRange = new TextRange(transcriptTextArea, true);
+				var selectionPlainText:String = selectedTranscriptTextRange.text;
+				var selectionBeginIndex:int = selectedTranscriptTextRange.beginIndex;
+				var selectionEndIndex:int = selectedTranscriptTextRange.endIndex;
+				//don't sow menu over not selected text
+				if (selectionPlainText == null || selectionPlainText.length == 0) {
+					return false;
+                         }
+				var lastSymbol:String = selectionPlainText.slice(selectionPlainText.length - 1);
+				if (lastSymbol == StringUtils.CARRIAGE_RETURN || lastSymbol == StringUtils.LINE_FEED) {
+					selectedTranscriptTextRange = new TextRange(transcriptTextArea, true, selectionBeginIndex, selectionEndIndex - 1);
+					//remove last symbol and repeat all check steps
+					return isSelectedCustomerText(transcriptTextArea); //recursion
+                     }
+				//we don't support masking for '\n' and '\r'
+				if (selectionPlainText.indexOf(StringUtils.CARRIAGE_RETURN) > 0 || selectionPlainText.indexOf(StringUtils.LINE_FEED) > 0){
+					return false;
+                 }
+				var chat:Chat = getController().chat;
+				var transcripts:Array = chat.getTranscript();
+				var transcriptEntry:TranscriptEntry = findTranscriptByIndexAndMask(transcriptTextArea, text, selectionBeginIndex, selectionEndIndex, transcripts);
+				if (transcriptEntry == null || transcriptEntry.getSenderType() != TranscriptEntry.TYPE_SENDER_CUSTOMER) {
+                 return false;
+             }
+				return true;
+			}
+
+            public function panelActivated():void {
+                if (chatLayout == null || topTranscript == null)
+                    return;
+                if (globalTopTranscriptHeight != 0)
+                    topTranscriptBox.height = globalTopTranscriptHeight;
+				if (!scriptBreadCrumb.showOpeners() && chatTextVBox.visible)
+                    chatTextbox.setFocus();
+             }
+
+             private function sendClicked(event:MouseEvent):void {
+                controller.sendTypedMessage();
+             }
+
+             public function linkHandler(event:TextEvent):void {
+                // It is unclear now why we handle links in transcripts...
+             }
+
+            public function indicateActionRequired():void {
+                controller.attentionNeeded = true;
+            }
+
+            public function clearActionRequired():void {
+                controller.attentionNeeded = false;
+            }
+
+			public static var EFFECT_BLUR:Array = [new BlurFilter(5, 5, 4)];
+
+            public function indicateMemberLost(isClient:Boolean, textToDisplay:String = null):void {
+				if (isClient) {
+					changeScriptPanelState(false);
+				}
+                controller.indicateMemberLost(textToDisplay);
+            }
+
+        public function suggestedScriptItemLabel(item:Object):String {
+            return StringUtils.getTextFromHTML(item.chatData);
+        }
+
+		public function changeScriptPanelState(chatEnabled:Boolean):void {
+			controller.chattingEnabled = chatEnabled;
+			scriptPageList.enabled = chatEnabled;
+			suggestedScriptList.enabled = chatEnabled;
+			chatTextVBox.visible = chatEnabled;
+			FrameManager.setFramesVisible(index, chatEnabled);
+			if (chatEnabled) {
+				cobrowseTab.filters = scriptPageList.filters = suggestedScriptList.filters = [];
+			} else {
+				if (controller.chat != null && !controller.chat.isCallEnabled()) {
+					cobrowseTab.filters = scriptPageList.filters = suggestedScriptList.filters = EFFECT_BLUR;
+				}
+			}
+		}
+
+        public function closeButtonDown(event:Event):void {
+            controller.cancelAttributePanel();
+            controller.cancelEscalateChat();
+            controller.cancelHoldPanel();
+            if (controller.chat.isConference() && controller.chat.getOwnerID() == null) {
+                Alert.show(null, L10.n.getString('conference.owner'), Alert.YES | Alert.NO, null, handleOwnerAlert, null, Alert.YES);
+            } else {
+                const isTransfered:Boolean = event == null;
+                if (controller.chat.isOnHold() && !isTransfered) {
+                    Alert.show(null, L10.n.getString('confirm.close.on.hold'), Alert.YES | Alert.NO, null, handleOnHoldAlert, null, Alert.NO);
+                } else {
+                    controller.endChat(isTransfered);
+                }
+            }
+        }
+
+        public function holdButtonDown(event:FlexEvent):void {
+            if (controller.chat.isOnHold()) {
+                controller.unholdChat();
+            } else {
+                controller.cancelAttributePanel();
+                controller.cancelEscalateChat();
+                if (ChatPanelController.getChatroomManager().countChats() < 10) {
+                    controller.showHoldPanel();
+                } else {
+                    Alert.show(L10.n.getString('cant.hold.chat'));
+                }
+            }
+        }
+
+        public function showSuggestion(visible:Boolean):void {
+            controller.suggestedScripts.removeAll();
+            controller.suggestedScripts.refresh();
+            isSuggestionVisible =  visible;
+        }
+
+        private function handleOwnerAlert(event:Object):void {
+            if (event.detail == Alert.YES) {
+                controller.endChat(event == null);
+            }
+        }
+
+        private function handleOnHoldAlert(event:Object):void {
+            if (event.detail == Alert.YES) {
+                controller.endChat(false);
+            }
+        }
+
+        public function escalateButtonDown(event:FlexEvent):void {
+            controller.showEscalatePanel();
+        }
+
+        public function attributeButtonDown(event:FlexEvent):void {
+            controller.showAttributePanel();
+        }
+
+        private function script2ChatDividerRelease(event:DividerEvent):void {
+            globalScriptWidth = componentStack.width;
+            controller.script2ChatDividerRelease(event);
+        }
+
+        private function chatDividerRelease(event:DividerEvent):void {
+            globalTopTranscriptHeight = topTranscriptBox.height;
+            globalBottomTranscriptHeight = bottomTranscriptBox.height;
+            controller.chatDividerRelease(event);
+        }
+
+        public function applyScript2ChatDividerRelease(event:DividerEvent):void {
+            componentStack.width = globalScriptWidth;
+        }
+
+        public function applyChatDividerRelease(event:DividerEvent):void {
+            if (topTranscriptBox.visible) {
+                //between transcript panels
+                topTranscriptBox.height = globalTopTranscriptHeight;
+                bottomTranscriptBox.height = globalBottomTranscriptHeight;
+            } else {
+                bottomTranscriptBox.height = globalBottomTranscriptHeight;
+                chatTextVBox.percentHeight = 100;
+            }
+        }
+
+        private function chatBoxCompleted(event:Event):void {
+            splTagHighlighter.spellingHighlighter.customDictionaryEditsEnabled=false;
+        }
+
+        private function dialPhone():void {
+            controller.chat.resetHandled();
+            if (controller.firstDial) {
+                controller.firstDial = false;
+            } else {
+                controller.redialsSoFar++;
+            }
+            controller.unholdChat();
+            controller.getApplicationController().sipController.dialPhone(phoneNumber, this);
+        }
+        private function showLogs():void {
+            controller.getApplicationController().sipController.showLogs();
+        }
+
+        private function disconnectPhone() : void {
+            if(cd != null) {
+                cd.stopTimer();
+                cd.killTimer();
+            }
+            cd = null;
+            agentHangUp = "0";
+            controller.getApplicationController().sipController.endCall();
+        }
+
+        public function resetState():void {
+            if (Log.isDebug()) LOG.debug("resetState");
+            if (globalBottomTranscriptHeight == 0) {
+                chatTextVBox.height = 150;
+                topTranscriptBox.percentHeight = 100;
+                bottomTranscriptBox.percentHeight = 100;
+            } else {
+                topTranscriptBox.height = globalTopTranscriptHeight;
+                bottomTranscriptBox.height = globalBottomTranscriptHeight;
+            }
+
+            currentState = STATE_BASE;
+
+            if (globalScriptWidth == 0) {
+                componentStack.percentWidth = 100;
+            } else {
+                componentStack.width = globalScriptWidth;
+            }
+        }
+
+        public function setHTRequestState():void {
+            setNewState(STATE_VERB_REQUEST_HT);
+        }
+
+        public function loadingTranscripComplete(data:String = null):void {
+            setNewState(STATE_VERB_HIDE_HT);
+            if (data) {
+                try {
+                    var result:XML = new XML(data.replace("http://www.touchcommerce.com/schema/apiservice/response-2.0", "")).normalize();
+                    var historicTranscripts:ArrayCollection = new ArrayCollection();
+                    historicTranscripts.addItemAt(this.controller.chat, 0); // add current chat
+                    try {
+                        var response:Response = FlexXBEngine.instance.deserialize(result, Response);
+                        historicTranscripts.addAll(response.engagements);
+                    } catch(error:Error) {
+                        LOG.error("Error deserialize TranscriptResponse: " + error.message, error);
+                        return;
+                    }
+                    if (Log.isDebug()) LOG.debug("Has " + historicTranscripts.length + " transcripts");
+                    this.historicTranscripts = historicTranscripts;
+                } catch(error:Error){
+                    LOG.error("loadingTranscripComplete: " + error.message, error);
+                }
+            }
+        }
+
+        public function setVoiceState(voice:Boolean):void {
+            if (voice) {
+                setNewState(STATE_VERB_SET_VOICE);
+                if (globalBottomTranscriptHeight == 0) {
+                    chatTextVBox.height = 150;
+                    bottomTranscriptBox.percentHeight = 100;
+                } else {
+                    bottomTranscriptBox.height = globalBottomTranscriptHeight;
+                    chatTextVBox.percentHeight = 100;
+                }
+            } else {
+                if (globalBottomTranscriptHeight == 0) {
+                    chatTextVBox.height = 150;
+                    topTranscriptBox.percentHeight = 100;
+                    bottomTranscriptBox.percentHeight = 100;
+                } else {
+                    topTranscriptBox.height = globalTopTranscriptHeight;
+                    bottomTranscriptBox.height = globalBottomTranscriptHeight;
+                }
+                setNewState(STATE_VERB_CLEAN_VOICE);
+            }
+            if (globalScriptWidth == 0) {
+                componentStack.percentWidth = 100;
+            } else {
+                componentStack.width = globalScriptWidth;
+            }
+        }
+
+        public function joinHandler(event:MouseEvent):void {
+            initiateJoin();
+        }
+
+        public function initiateJoin(isReassignMode:Boolean = false):void {
+            controller.sendJoinMessage(isReassignMode);
+            //controller.chat.setOwnerID(null);
+            setScreeningMode(false);
+        }
+
+        public function setScreeningMode(isScreening:Boolean):void {
+            if (joinButton != null) {
+                joinButton.visible = joinButton.includeInLayout = isScreening && SettingManager.getConferenceSetting(controller.chat.getSettingIDs()).getJoinTransfer();
+            }
+            isScreeningMode = isScreening;
+            if (controller != null) {
+                controller.updateScreeningMode();
+            }
+            setStyle("backgroundColor", isScreening ? "#F2C100" : "#A4C6EB");
+        }
+
+        public function getTransferingOwnership():Boolean {
+            return transferingOwnership;
+        }
+
+        public function setTransferingOwnership(value:Boolean):void {
+            transferingOwnership = value;
+            controller.refreshAttributePanel();
+        }
+
+        public function participantSelectedHandler(event:ListEvent):void {
+            markTextAccordingRiceiverType(event.currentTarget.selectedIndex == ChatPanelController.INDEX_INTERNAL);
+        }
+
+        public function markTextAccordingRiceiverType(isInternal:Boolean):void {
+            if (chatTextbox.text == null){
+                return;
+            }
+            var chatTextRange:TextRange = new TextRange(UIComponent(chatTextbox), false);
+            chatTextRange.beginIndex = 0;
+            chatTextRange.endIndex = chatTextbox.text.length;
+            if (isInternal) {
+                if (chatTextRange.beginIndex != chatTextRange.endIndex) {
+                    chatTextRange.fontStyle = "italic";
+                    chatTextRange.fontSize = 12;
+                }
+            } else {
+                if (chatTextRange.beginIndex != chatTextRange.endIndex) {
+                    chatTextRange.fontSize = 14;
+                    chatTextRange.fontStyle = "normal";
+                }
+            }
+        }
+
+        public function markTextAsNormal():void {
+        }
+
+        public function suggestedScriptListSizeChanged(event:ResizeEvent):void {
+            if (controller.suggestedScripts.length == 0) {
+                return;
+            }
+            var rowInfos:Array = suggestedScriptList.getRowInfo();
+            //todo max height of item
+            if (rowInfos != null && rowInfos.length > 0) {
+                suggestedScriptList.rowHeight = rowInfos[0].height / 2;
+            }
+        }
+
+        // saving the position of topTranscript TextArea after scrolling
+        private function topTranscriptScroll():void {
+            position = topTranscript.verticalScrollPosition;
+        }
+
+			public function setScrollDirection(dx:int, dy:int):void {
+				for each (var currentCobrowseWindow:CobrowseWindow in cobrowseWindows.getChildren()) {
+					currentCobrowseWindow.setScrollDirection(dx, dy);
+				}
+			}
+
+            public function setDeviceType(deviceType:String):void {
+                if (deviceType) {
+                    deviceType = deviceType.toUpperCase();
+                }
+                if (deviceType == "PHONE") {
+                    deviceFlag = ScriptLine.FLAG_PHONE;
+                    setStyle("backgroundColor", "#CC00CC");
+                } else if (deviceType == "TABLET") {
+                    deviceFlag = ScriptLine.FLAG_TABLET
+                    setStyle("backgroundColor", "#D7FF00");
+                } else {
+                    deviceFlag = ScriptLine.FLAG_PC;
+                }
+                deviceTypeLabel.text = deviceType;
+            }
+        ]]>
+    </mx:Script>
+    <mx:DividedBox direction="horizontal"
+                   paddingRight="0"
+                   paddingLeft="0"
+                   dividerThickness="5"
+                   left="10"
+                   right="10"
+                   bottom="10"
+                   top="2"
+                   id="chatLayout"
+                   liveDragging="true"
+                   verticalScrollPolicy="off"
+                   horizontalScrollPolicy="off"
+        dividerRelease="script2ChatDividerRelease(event);">
+        <mx:TabNavigator id="componentStack"
+						 paddingTop="0"
+                         height="100%"
+                         width="100%"
+                         themeColor="#ffffff"
+						 horizontalGap="-1"
+                         borderThickness="0">
+            <mx:VBox label="{L10.n.getString('scripts')}"
+                     height="100%"
+                     width="100%"
+                     backgroundColor="#ffffff"
+                     borderThickness="0">
+                    <local:BreadcrumbMenu id="scriptBreadCrumb"
+                                          scriptPageList="{scriptPageList}" />
+                <mx:Canvas focusEnabled="false"
+                           height="100%"
+                           width="100%">
+                    <mx:VBox left="0"
+                             right="0"
+                             bottom="0"
+                             top="0"
+                             verticalGap="0"
+                             width="100%">
+                        <mx:List id="scriptPageList"
+                                 selectable="true"
+                                 selectionColor="#ffffff"
+                                 textRollOverColor="#ffffff"
+                                 themeColor="#ffffff"
+                                 width="100%"
+                                 height="100%"
+                                 horizontalScrollPolicy="off"
+                                 wordWrap="true"
+                                                variableRowHeight="true"
+                                 itemRenderer="com.inq.flash.agent.view.ScriptItemRenderer"
+                                 labelFunction="com.inq.flash.agent.view.ScriptItemRenderer.scriptItemLabel"/>
+                        <mx:Label id="suggestionBoxName"
+                                  width="100%"
+                                  textAlign="center"
+                                  height="{controller.chat.ownerID == null &amp;&amp; isSuggestionVisible ? 23 : 0}"/>
+                        <mx:VBox height="{controller.chat.ownerID == null &amp;&amp; isSuggestionVisible ? 100 : 0}"
+                                 width="100%">
+                            <view:SuggestedList id="suggestedScriptList"
+                                                selectable="true"
+                                                themeColor="#ffffff"
+                                                width="100%"
+                                                height="100%"
+                                                horizontalScrollPolicy="{ScrollPolicy.OFF}"
+                                                wordWrap="true"
+                                                verticalScrollPolicy="{ScrollPolicy.OFF}"
+                                                variableRowHeight="true"
+                                                itemRenderer="com.inq.flash.agent.view.SuggestedScriptItemRenderer"
+                                                labelFunction="suggestedScriptItemLabel"/>
+                </mx:VBox>
+            </mx:VBox>
+        </mx:Canvas>
+            </mx:VBox>
+			<mx:Canvas id="cobrowseTab"
+					   visible="true"
+					   themeColor="#ffffff"
+					   borderThickness="0"
+					   width="100%"
+					   height="100%"
+					   label="{L10.n.getString(cobrowseSuppressed ? 'cobrowse.suppressed' : cobrowseStatusKey)}"
+					   enabled="false">
+				<mx:Canvas id="cobrowseWindows"
+						   visible="true"
+						   themeColor="#ffffff"
+						   borderThickness="0"
+						   width="100%"
+						   height="100%"
+                           horizontalScrollPolicy="off"
+                           verticalScrollPolicy="off"/>
+				<mx:Image id="left"
+						  visible="{scrollingStarted}"
+						  left="0"
+						  source="@Embed('../images/left.png')"
+						  verticalCenter="0"
+						  mouseOver="setScrollDirection(-20,0)"
+						  mouseOut="setScrollDirection(0,0)"/>
+				<mx:Image id="right"
+						  visible="{scrollingStarted}"
+						  right="10"
+						  source="@Embed('../images/right.png')"
+						  verticalCenter="0"
+						  mouseOver="setScrollDirection(20,0)"
+						  mouseOut="setScrollDirection(0,0)"/>
+				<mx:Image id="up"
+						  visible="{scrollingStarted}"
+						  top="20"
+						  source="@Embed('../images/up.png')"
+						  horizontalCenter="0"
+						  mouseOver="setScrollDirection(0,-20)"
+						  mouseOut="setScrollDirection(0,0)"/>
+				<mx:Image id="down"
+						  visible="{scrollingStarted}"
+						  bottom="10"
+						  source="@Embed('../images/down.png')"
+						  horizontalCenter="0"
+						  mouseOver="setScrollDirection(0,20)"
+						  mouseOut="setScrollDirection(0,0)"/>
+
+			</mx:Canvas>
+            <mx:VBox label="{L10.n.getString('custom.scripts')}"
+                     height="100%"
+                     width="100%"
+                     backgroundColor="#ffffff"
+					 borderThickness="0"
+					 id="customScriptTab"
+					 enabled="{BaseApplication.customScriptsEnabled}">
+                        <mx:List id="customScriptPageList"
+                                 themeColor="#ffffff"
+                                 width="100%"
+                                 height="100%"
+                                 horizontalScrollPolicy="off"
+                                 wordWrap="true"
+                                 variableRowHeight="true"
+                                 selectionColor="#ffffff"
+                                 textRollOverColor="#ffffff"
+                                 dataProvider="{controller.getApplicationController().customScript.scriptLines}"
+                                 itemRenderer="com.inq.flash.agent.view.ScriptItemRenderer"/>
+            </mx:VBox>
+        </mx:TabNavigator>
+        <mx:Canvas id="chatPanels"
+                   verticalScrollPolicy="off"
+                   horizontalScrollPolicy="off"
+                   height="100%"
+                   width="400">
+            <mx:VBox height="100%" top="115"
+                     width="100%">
+                <mx:DividedBox id="chatDivider"
+                               height="100%"
+                               width="100%"
+                               liveDragging="true"
+                               direction="vertical"
+                               dividerRelease="chatDividerRelease(event);"
+                               dividerThickness="0"
+                               dividerAffordance="0">
+                    <mx:VBox id="topTranscriptBox" width="100%" height="100%">
+                        <mx:TextArea focusEnabled="false"
+                             id="topTranscript"
+                             width="100%"
+                             height="100%"
+                             editable="false"
+                             wordWrap="true"
+                             liveScrolling="true"
+                             fontFamily="Arial"
+                             fontSize="13"
+                             scroll="topTranscriptScroll()"
+                             verticalScrollPosition="{position}"
+                        />
+                    </mx:VBox>
+
+                    <mx:VBox id="bottomTranscriptBox" width="100%" height="100%">
+                        <mx:TextArea focusEnabled="false"
+                                     id="bottomTranscript"
+                                     width="100%"
+                                     height="100%"
+                                     editable="false"
+                                     wordWrap="true"
+                                     liveScrolling="true"
+                                     fontFamily="Arial"
+                                     fontSize="13"
+                                     color="#0B333C"/>
+                    </mx:VBox>
+                    <mx:VBox id="chatTextVBox"
+                             verticalScrollPolicy="off"
+                             width="100%"
+                             height="150"
+                             fontSize="12"
+                             bottom="0"
+                             top="0"
+                             minHeight="150">
+                        <mx:TextArea id="chatTextbox"
+                                     fontFamily="Arial"
+                                     fontSize="13"
+                                     change="splTagHighlighter.spellingHighlighter.update()"
+                                     creationComplete="chatBoxCompleted(event)"
+                                     mouseOver="chatTextbox.setFocus()"
+                                     width="100%"
+                                     height="100%"
+                                     paddingBottom="30"/>
+                        <spelling:SPLTagFlex id="splTagHighlighter"
+                                             enabled="{controller.getApplicationController().spellCheckingEnabled}"
+                                             target="{chatTextbox}"/>
+                            <mx:HBox horizontalAlign="right"
+                                     width="100%">
+                            <mx:Button focusEnabled="false"
+                                       label="{L10.n.getString('send')}"
+                                       toolTip="{L10.n.getString('send.message')}"
+                                       id="sendButton"
+                                       fillColors="[#336699, #336699]"
+                                       fontFamily="Arial"
+                                       cornerRadius="10"
+                                       color="#ffffff"
+                                       textAlign="center"
+                                       paddingLeft="0"
+                                       paddingTop="2"
+                                       paddingRight="10"
+                                       fontWeight="normal"
+                                       click="sendClicked(event)"/>
+                            </mx:HBox>
+                        <mx:ComboBox includeInLayout="{isInternalPossible}"
+                                     visible="{isInternalPossible}"
+                                     id="participantSelectionComboBox"
+                                     x="0"
+                                     y="6"
+                                     width="100%"
+                                     change="participantSelectedHandler(event);"
+                                     dataProvider="{[L10.n.getString('customer.all'), L10.n.getString('internal')]}"/>
+                        <mx:Label includeInLayout="{isInternalPossible &amp;&amp; participantSelectionComboBox.selectedIndex == 0}"
+                                  visible="{isInternalPossible &amp;&amp; participantSelectionComboBox.selectedIndex == 0}"
+                                  text="{L10.n.getString('warning.customer')}"
+                                  color="#EE2C12"
+                                  fontWeight="bold"
+                                  bottom="30"
+                                  left="10"
+                                  right="10"
+                                  id="label1"/>
+                    </mx:VBox>
+                </mx:DividedBox>
+                </mx:VBox>
+            </mx:Canvas>
+    </mx:DividedBox>
+		<mx:Panel headerHeight="0" layout="vertical" borderAlpha="0.8"
+				 right="5"
+				 y="5"
+				 cornerRadius="10"
+				 roundedBottomCorners="true">
+				 <mx:ControlBar height="100">
+				<mx:VBox horizontalAlign="right">
+				<mx:HBox>
+						<mx:Label text="{L10.n.getString('chat.id')}"
+								  fontWeight="bold"
+								  fontSize="14"
+								  selectable="true"/>
+						<mx:Label id="chatIDLabel"
+								  fontWeight="bold"
+								  fontSize="14"
+								  selectable="true"/>
+				</mx:HBox>
+                <mx:HBox>
+						<mx:Label id="deviceTypeLabel"
+							  fontWeight="bold"
+							  fontSize="12"/>
+						<mx:Label id="launchTypeLabel"
+							  fontWeight="bold"
+							  fontSize="12"
+							  selectable="true"/>
+						<mx:Label fontWeight="bold"
+							  fontSize="12"
+							  selectable="true"
+							  visible="{isPersistent}"
+							  includeInLayout="{isPersistent}"
+							  text="PERSISTENT"/>
+						<mx:Label fontWeight="bold"
+							  fontSize="12"
+							  selectable="true"
+							  visible="{!isPersistent}"
+							  includeInLayout="{!isPersistent}"
+							  text="DIV"/>
+					</mx:HBox>		  
+					<mx:HBox>	
+                        <mx:Button label="{L10.n.getString('join')}"
+                                   id="joinButton"
+                                   styleName="tcButton"
+                                   fillColors="[#336699,#336699]"
+                                   click="joinHandler(event)"
+                                   visible="false"
+								   includeInLayout="false" />
+                        <mx:Button focusEnabled="false"
+                                               toolTip="{L10.n.getString('attribute.panel')}"
+                                               label="{L10.n.getString('transfer')}"
+                                               id="attributeButton"
+                                               enabled="{canTransferConference}"
+                                               styleName="tcButton"
+                                               fillColors="[#336699,#336699]"
+                                            visible="{isTransferVisible}"/>
+						<mx:Button focusEnabled="false"
+											   toolTip="{L10.n.getString('escalate.chat')}"
+											   label="{L10.n.getString('escalate')}"
+											   id="escalateButton"
+											   styleName="tcButton"
+											   fillColors="[#336699,#336699]"/>
+                        <mx:Button focusEnabled="false"
+                                               toolTip="{L10.n.getString('close.chat')}"
+                                               id="closeButton"
+                                               right="5"
+                                               y="2"
+                                               label="X"
+                                               height="25"
+                                               fontSize="15"
+                                               width="30"
+                                               fillColors="[#336699, #336699]"
+                                               fontFamily="Arial"
+                                               cornerRadius="10"
+                                               color="#ffffff"
+                                               textAlign="center"
+                                               paddingLeft="0"
+                                               paddingTop="2"
+                                               paddingRight="0"
+											   fontWeight="normal"
+											   click="closeButtonDown(event)"/>
+                    </mx:HBox>
+				</mx:VBox>
+			</mx:ControlBar>
+		</mx:Panel>
+    <!-- State for voice and historic transcript-->
+    <mx:states>
+        <mx:State name="{STATE_BASE}"/>
+
+        <mx:State name="{STATE_REQUEST_HT}">
+            <mx:AddChild relativeTo="{topTranscript}" position="before" creationPolicy="all">
+                <mx:ComboBox id="chatHistoryComboBox"
+                             width="100%"
+                             labelField="chatTitle"
+                             dataProvider="{historicTranscripts}"
+                             close="chatComboBoxChange(event, topHistoryTranscript)"
+                             enabled="false"
+                        />
+            </mx:AddChild>
+        </mx:State>
+
+        <mx:State name="{STATE_HIDE_HT}" basedOn="{STATE_REQUEST_HT}">
+            <mx:SetProperty target="{chatHistoryComboBox}" name="enabled" value="true"/>
+        </mx:State>
+
+        <mx:State name="{STATE_SHOW_HT}" basedOn="{STATE_HIDE_HT}"
+                  exitState="topHistoryTranscript.text = ''">
+            <mx:RemoveChild target="{topTranscript}" />
+            <mx:AddChild relativeTo="{chatHistoryComboBox}" position="after" creationPolicy="all">
+                <mx:TextArea focusEnabled="false"
+                             id="topHistoryTranscript"
+                             width="100%"
+                             height="100%"
+                             editable="false"
+                             wordWrap="true"
+                             liveScrolling="true"
+                             fontFamily="Arial"
+                             fontSize="13"
+                        />
+            </mx:AddChild>
+        </mx:State>
+
+        <mx:State name="{STATE_REQUEST_HT_VOICE}" basedOn="{STATE_VOICE}">
+            <mx:AddChild relativeTo="{bottomTranscript}" position="before" creationPolicy="all">
+                <mx:ComboBox id="chatHistoryComboBoxVoice"
+                             width="100%"
+                             labelField="chatTitle"
+                             dataProvider="{historicTranscripts}"
+                             close="chatComboBoxChange(event, bottomHistoryTranscript)"
+                             enabled="false"
+                        />
+            </mx:AddChild>
+        </mx:State>
+
+        <mx:State name="{STATE_HIDE_HT_VOICE}" basedOn="{STATE_REQUEST_HT_VOICE}">
+            <mx:SetProperty target="{chatHistoryComboBoxVoice}" name="enabled" value="true"/>
+        </mx:State>
+
+        <mx:State name="{STATE_SHOW_HT_VOICE}" basedOn="{STATE_HIDE_HT_VOICE}"
+                  exitState="bottomHistoryTranscript.text = ''">
+            <mx:RemoveChild target="{bottomTranscript}" />
+            <mx:AddChild relativeTo="{chatHistoryComboBoxVoice}" position="after" creationPolicy="all">
+                <mx:TextArea focusEnabled="false"
+                             id="bottomHistoryTranscript"
+                             width="100%"
+                             height="100%"
+                             editable="false"
+                             wordWrap="true"
+                             liveScrolling="true"
+                             fontFamily="Arial"
+                             fontSize="13"
+                        />
+            </mx:AddChild>
+        </mx:State>
+
+        <mx:State name="{STATE_VOICE}"
+				  basedOn="{STATE_BASE}"
+				  enterState="enteringVoiceState()">
+          <mx:RemoveChild target="{topTranscriptBox}" />
+            <mx:AddChild relativeTo="{bottomTranscript}"
+                position="after"
+                creationPolicy="all" >
+              <!-- Specific to voice -->
+                <mx:VBox id="voicePanel"
+                         height="110"
+                         width="100%"
+                         minHeight="110"
+                         maxHeight="110">
+                    <mx:VBox focusEnabled="false"
+                             id="voiceCallStatus"
+                             includeInLayout="true"
+                             visible="true">
+                            <mx:HBox id="callStats" >
+                            <mx:Label id="callStatus"
+                                      text="{L10.n.getString('call.status')}"
+                                      fontWeight="bold"
+                                      fontSize="12"
+                                      color="#EE2C12"/>
+                            <mx:Label id="callStatusValue"
+                                      text="{voiceStatus}"
+                                      fontSize="11"
+                                      fontWeight="bold"/>
+                            </mx:HBox>
+                            <mx:HBox id="callDurationStats" >
+                            <mx:Label id="callDurartionStatus"
+                                      text="{L10.n.getString('call.duration')}"
+                                      fontWeight="bold"
+                                      fontSize="12"
+                                      color="#EE2C12"/>
+                            <mx:Label id="callDurationStatusValue"
+                                      text="{callDurationTime}"
+                                      fontSize="11"
+                                      fontWeight="bold"/>
+                            </mx:HBox>
+                            <mx:HBox id="redialStats" >
+                            <mx:Label id="redialLabel"
+                                      visible="{controller.maxCallRedials > 0}"
+                                      text="{L10.n.getString('attempts')}"
+                                      fontWeight="bold"
+                                      fontSize="12"
+                                      color="#EE2C12"/>
+                            <mx:Label id="dialCount"
+                                      visible="{controller.maxCallRedials > 0}"
+                                      text="{controller.maxCallRedials - controller.redialsSoFar} of {controller.maxCallRedials}"
+                                      fontSize="11"
+                                      fontWeight="bold"/>
+                            </mx:HBox>
+                        </mx:VBox>
+                    <mx:HBox includeInLayout="true"
+                             visible="true">
+                        <mx:Button id="dialButton"
+                                   label="{L10.n.getString('dial')}"
+                                   click="dialPhone()"
+                                   fillColors="[#336699, #336699]"
+                                   fontFamily="Arial"
+                                   cornerRadius="10"
+                                   color="#ffffff"
+                                   right="50"
+                                   fontWeight="normal"
+                                   fontSize="12"/>
+                        <mx:Button id="disconnectButton"
+                                   label="{L10.n.getString('hang.up')}"
+                                   click="disconnectPhone()"
+                                   fillColors="[#336699, #336699]"
+                                   fontFamily="Arial"
+                                   cornerRadius="10"
+                                   color="#ffffff"
+                                   right="50"
+                                   fontWeight="normal"
+                                   fontSize="12"/>
+                        <mx:Button focusEnabled="false"
+                                   label="{L10.n.getString('hold')}"
+                                   toolTip="{L10.n.getString('hold.tooltip')}"
+                                   id="holdButton"
+                                   enabled="false"
+                                   styleName="tcButton"
+                                   fillColors="[#336699,#336699]"
+                                   visible="true"/>
+                        <mx:Button focusEnabled="false"
+                                   label="Logs"
+                                   click="showLogs()"
+                                   toolTip="Shows SIP client connection logs."
+                                   id="logsButton"
+                                   styleName="tcButton"
+                                   fillColors="[#336699,#336699]"/>
+                        </mx:HBox>
+                </mx:VBox>
+        </mx:AddChild>
+      </mx:State>
+    </mx:states>
+    <mx:Style>
+        .tcButton {
+            y: "2";
+            fontFamily: "Arial";
+            cornerRadius: "10";
+            color: #FFFFFF;
+            fontWeight: "normal";
+            fontSize: "12";
+            disabledColor: #888888;;
+        }
+
+        .tcLabel {
+            fontFamily: "Arial";
+            fontSize: "10";
+            font-weight: bold;
+        }
+    </mx:Style>
+</mx:Canvas>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   height="100%" automationName="iFrame"
+		   width="100%" >
+    <mx:HTML id="page"
+             height="100%"
+             width="100%"
+             htmlDOMInitialize="initPage()"/>
+	<mx:Script>
+		<![CDATA[
+			import com.inq.flash.agent.control.AgentApplicationController;
+			import mx.core.FlexGlobals;
+            import mx.controls.Alert;
+
+			private var _iFrameID:String;
+
+			private function initPage():void {
+				page.domWindow.childSandboxBridge = {"sendSyncMessage": sendSyncMessage, "navigateClient": navigateClient};
+			}
+
+            public function sendSyncMessage(dtID:String, cacheID:String, label:String, div:String = "divProductRecommendation", path:String = "/orbeon/inq/view?dtid="):void {
+                AgentApplicationController(FlexGlobals.topLevelApplication.controller).sendSyncMessage(dtID, cacheID, label, div, path);
+            }
+
+            public function navigateClient(div:String, dtID:String, cacheID:String, label:String):void {
+                sendSyncMessage(dtID, cacheID, label, div, "/orbeon/inq/native?dtid=");
+            }
+
+            public function set iFrameID(iFrameID:String):void {
+				_iFrameID = iFrameID;
+			}
+
+			public function get iFrameID():String {
+				return _iFrameID;
+			}
+
+			public function loadFrame(source:String):void {
+				page.location = source;
+				page.reload();
+				initPage();
+			}
+
+			public function setFrameVisible(frameVisible:Boolean):void {
+				page.enabled = frameVisible;
+				page.visible = frameVisible;
+				page.includeInLayout = frameVisible;
+			}
+
+            // RTDEV-1037 Provide functionality to work with html content (e.g. on tab AIUI TC) in Agent AIR application
+            public function eval(code:String):String {
+                return page.domWindow.eval("try{" + code + "}catch(e){e.message}");
+            }
+
+			public function sendClientPage(url:String):void {
+				if (page.domWindow["sendClientPage"]!=null)
+					page.domWindow.sendClientPage(url);
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

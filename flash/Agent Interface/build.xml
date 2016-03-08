@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Agent Interface" default="main" basedir=".">
+	<property name="title" value="TouchCommerce - Agent Console"/>
+	<property name="application" value="AgentApplication"/>
+	<property name="subpath" value="agents"/>
+	<property name="major.version" value="4"/>
+    <import file="${basedir}/../InQ Flex Commons/commontasks.xml"/>
+</project>

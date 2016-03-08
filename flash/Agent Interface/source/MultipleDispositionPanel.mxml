@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+                implements="com.inq.flash.agent.view.DispositionPanel"
+				y="50"
+				layout="absolute"
+				color="#FFFFFF"
+				title="{L10.n.getString('user.disposition')}"
+				width="466"
+				height="350"
+				roundedBottomCorners="true"
+				borderAlpha="1"
+				backgroundAlpha="1"
+				alpha="1"
+				borderColor="#A4C6EB">
+
+	<mx:Script>
+		<![CDATA[
+			import com.inq.flash.agent.view.CheckTreeRenderer;
+			import mx.controls.Button;
+			import mx.events.ListEvent;
+			import com.inq.flash.messagingframework.StringUtils;
+			import com.inq.flash.agent.control.ChatPanelController;
+			import com.inq.flash.agent.view.CheckTreeRenderer;
+
+			private var controller:ChatPanelController;
+			private var index:int;
+
+			[Bindable]
+			private var dispositionInfo:XMLList;
+
+			public function init(dispositionInfo:XMLList, controller: ChatPanelController, index:int):void {
+				this.initialize();
+				this.controller = controller;
+				this.dispositionInfo = dispositionInfo;
+				checkBoxClicked();
+				customText.enabled = true;
+				submitButton.id = "submitButton_" + index;
+				this.addEventListener(CheckTreeRenderer.CHECK_BOX_CLICKED_EVENT, checkBoxClicked, true);
+			}
+
+			private function closeDialog(send:Boolean):void {
+				if (send) {
+					var separator:String = "";
+					var categories:String = "";
+					var reasons:String = "";
+					for each (var cat:XML in dispositionInfo){
+						var selected:XMLList = cat.reason.(hasOwnProperty("@state") && @state == "checked");
+						if (selected.length() > 0){
+							for each (var reason:XML in selected){
+								categories += separator + reason.parent().@value;
+								reasons += separator + reason.@value;
+								separator = ",";
+							}
+						}
+					}
+					var dispositionAnswer:String = categories + ":" + reasons + ":" + StringUtils.encodeStringForMessage(customText.text)
+					controller.sendChatExitMessage(dispositionAnswer);
+				} else
+					controller.cancelCloseChat();
+			}
+
+			public function checkBoxClicked(event:Event = null):void {
+				submitButton.enabled = false;
+				for each (var cat:XML in dispositionInfo){
+					var selected:XMLList = cat.reason.(hasOwnProperty("@state") && @state == "checked");
+					if (selected.length() > 0){
+						submitButton.enabled = true;
+						break;
+					}
+				}
+			}
+
+            public function getCancelButton():Button {
+                return cancelButton;
+            }
+
+            public function asDisplayObject():DisplayObject {
+                return this;
+            }
+        ]]>
+	</mx:Script>
+	<mx:Label x="26"
+			  y="0"
+			  text="{L10.n.getString('choose.disposition.reasons')}"/>
+	<mx:Tree dataProvider="{dispositionInfo}"
+			 x="10"
+			 y="15"
+			 id="tree"
+			 itemRenderer="com.inq.flash.agent.view.CheckTreeRenderer"
+			 color="#000000"
+			 height="130"
+			 width="426"
+			 labelField="@label"
+			 defaultLeafIcon="{null}"
+			 folderClosedIcon="{null}"
+			 folderOpenIcon="{null}"/>
+	<mx:TextArea id="customText"
+				 x="10"
+				 y="185"
+				 width="426"
+				 height="85"
+				 enabled="true"
+				 color="#000000"/>
+	<mx:Button id="submitButton"
+			   x="250"
+			   y="278"
+			   label="{L10.n.getString('submit')}"
+			   width="191"
+			   height="27"
+			   click="closeDialog(true)"
+			   color="#000000"/>
+	<mx:Button x="5"
+			   y="278"
+			   id="cancelButton"
+			   label="{L10.n.getString('cancel')}"
+			   width="191"
+			   height="27"
+			   click="closeDialog(false)"
+			   color="#000000"/>
+</mx:TitleWindow>

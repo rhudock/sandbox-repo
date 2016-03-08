@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
+		  xmlns:utils="com.inq.flash.common.views.utils.*"
+		  layout="vertical"
+		  backgroundAlpha="1"
+		  alpha="1"
+		  borderAlpha="1"
+		  fontFamily="Arial"
+		  borderColor="#A5C6E6"
+		  dropShadowEnabled="false"
+		  label="{L10.n.getString('summary')}">
+		<mx:HBox>
+			<mx:Label text="{L10.n.getString('username')}"
+					  width="250"
+					  fontSize="15"
+					  height="32"
+					  fontWeight="bold"/>
+			<mx:Label fontSize="15"
+					  height="32"
+					  id="usernameLabel"/>
+		</mx:HBox>
+		<mx:HBox>
+			<mx:Label text="{L10.n.getString('logged.in.at')}"
+					  width="250"
+					  fontSize="15"
+					  height="32"
+					  fontWeight="bold"/>
+			<mx:Label fontSize="15"
+					  height="32"
+					  id="loggedInLabel"
+					  text="{L10.n.formatTime(loggedInTime)}" />
+		</mx:HBox>
+		<mx:HBox>
+			<mx:Label text="{L10.n.getString('number.of.completed')}"
+					  width="250"
+					  fontSize="15"
+					  height="32"
+					  fontWeight="bold"/>
+			<mx:Label text="{completedChatsCount}"
+					  fontSize="15"
+					  height="32"/>
+		</mx:HBox>
+		<mx:HRule y="90"
+				  height="23"
+				  width="100%"
+				  x="10"/>
+
+		<mx:Script>
+			<![CDATA[
+				import mx.controls.advancedDataGridClasses.AdvancedDataGridColumn;
+				import mx.collections.ArrayCollection;
+				[Bindable]
+				private var completedChatsCount:int;
+				[Bindable]
+				private var statuses:ArrayCollection;
+				[Bindable]
+				private var loggedInTime:Date;
+				
+				// DEMO DATA
+				//public function addData():void {
+				//	statuses = [{"BUnit": "businessUnit 4", "chatsInQueue": 0, "activeAgents": "Agent2:(available/0/1), Agent4:(available/1/4), Agent5:(available/1/4), Agent6:(available/1/4), Agent7:(available/1/4), Agent8:(available/1/4)"}, {"BUnit": "businessUnit 8", "chatsInQueue": 0, "activeAgents": "Agent2:(available/0/1), Agent3:(available/1/4)"}, {"BUnit": "businessUnit 11", "chatsInQueue": 1, "activeAgents": "Agent2:(available/1/1)"}];
+				//}
+				
+				public function displayAgentStats(newStatuses:ArrayCollection):void {
+					statuses = newStatuses;
+				}
+
+				public function chatEnded():void {
+					completedChatsCount++;
+				}
+
+				public function resetSummary(agentName:String = null):void {
+					if (usernameLabel.text != agentName) {
+						if (agentName != null) {
+							usernameLabel.text = agentName;
+							loggedInTime = new Date();
+						} else {
+							usernameLabel.text = L10.n.getString('not.logged.in');
+							loggedInLabel.text = L10.n.getString('not.logged.in');
+						}
+						completedChatsCount = 0;
+					}
+				}
+				
+				public function styleFunc(data:Object, col:AdvancedDataGridColumn):Object {
+					if (data["chatsInQueue"] > 0)
+						return {color: 0xFF0000};
+					return null;
+				}
+			]]>
+		</mx:Script>
+		<mx:Label x="7"
+				  y="137"
+				  text="{L10.n.getString('updated.message')}"
+				  fontSize="12"
+				  height="32"
+				  id="loggedInLabel0"/>
+		<mx:Canvas minWidth="600" width="100%" height="460" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		<utils:CustomDataGrid fontFamily="Arial"
+							 id="dataGrid"
+							 styleFunction="styleFunc"
+							 dataProvider="{statuses}"
+							 resizableColumns="true"
+							 variableRowHeight="true"
+							 top="10"
+							 left="10"
+							 right="10"
+							 bottom="10"
+							 fontSize="15"
+							 borderStyle="solid"
+							 borderThickness="1"
+							 headerRenderer="mx.controls.advancedDataGridClasses.AdvancedDataGridHeaderRenderer"
+							 themeColor="#000406"
+							 mainFieldName="BUnit">
+			<utils:columns>
+				<mx:AdvancedDataGridColumn dataField="BUnit"
+										   width="140"
+										   textAlign="center"
+										   headerText="{L10.n.getString('bunit.and.group.name')}"/>
+				<mx:AdvancedDataGridColumn dataField="chatsInQueue"
+										   headerText="{L10.n.getString('chats.in.queue')}"
+										   width="160"
+										   textAlign="center"/>
+				<mx:AdvancedDataGridColumn dataField="activeAgents"
+										   minWidth="400"
+										   headerText="{L10.n.getString('active.agents.status')}"
+										   wordWrap="true"
+										   labelFunction="L10.n.translatorForCell" />
+			</utils:columns>
+		</utils:CustomDataGrid>
+		</mx:Canvas>
+</mx:Panel>

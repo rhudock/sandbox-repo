@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- http://airexamples.com/2010/03/12/opening-a-new-window-in-adobe-air/ -->
+<mx:Window name="CobrowseUndocked"
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        layout="absolute"
+		transparent="false"
+		showStatusBar="false"
+		showTitleBar="true"	
+		title="Cobrowse"
+        width="800" height="600">
+	<mx:TabNavigator id="componentStackUndocked"
+						 paddingTop="0"
+						 height="100%"
+						 width="100%"						  
+						 themeColor="#ffffdd"
+						 horizontalGap="-1"
+						 borderThickness="0" />
+						 
+	<mx:Script>
+		<![CDATA[
+			import mx.containers.TabNavigator;
+			import mx.containers.Canvas;
+			public var index:int = -1;
+			public var dockedTabNav:TabNavigator = null;
+			public var myChild:Canvas = null
+			public var chatPanel:ChatPanel = null ;
+			private static var _instance:CobrowseUndocked = null ;
+			public static function getInstance():CobrowseUndocked {
+				try {
+					if (_instance != null && _instance.closed) _instance = null ;
+				} catch (e:Error) {
+					trace("Error: " + e.getStackTrace());
+				}
+				if (_instance!=null) return _instance ;
+				_instance = new CobrowseUndocked();
+				return _instance ;
+			}
+			public static function haveInstance():Boolean {
+				if (_instance == null) return false ;
+				return (_instance.closed) ? false : true ;
+			}
+
+		]]>
+	</mx:Script>
+</mx:Window>

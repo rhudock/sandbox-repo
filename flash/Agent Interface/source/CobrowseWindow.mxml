@@ -1,0 +1,1213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+		   horizontalScrollPolicy="off"
+		   verticalScrollPolicy="off"
+		   creationComplete="nowComplete();"
+		   initialize="runPushedCommands();"
+		   width="100%"
+		   height="100%">
+	<mx:Style>
+				.myStyle {
+					backgroundColor: white;
+					previewHeight:16;
+					previewWidth:45;
+					swatchGridBackgroundColor: white;
+					swatchGridBorderSize: 0;
+					paddingTop:2;
+					paddingBottom:0;
+					swatchBorderSize:1;
+					swatchWidth:14;
+					swatchHeight:14;
+					columnCount:8;
+					horizontalGap:1;
+					verticalGap:1;
+					textFieldWidth:0;
+				}
+			</mx:Style>
+	<mx:HBox width="100%"
+			   id="menuArea"
+			   horizontalScrollPolicy="off"
+			   verticalScrollPolicy="off">
+		<mx:HBox>
+			<mx:Button height="22"
+					   label="{L10.n.getString('hide.chat.outline')}"
+					   visible="{showChatWindow}"
+					   includeInLayout="{showChatWindow}"
+					   click="doToggleChatWindow();"/>
+			<mx:Button height="22"
+					   label="{L10.n.getString('show.chat.outline')}"
+					   visible="{!showChatWindow}"
+					   includeInLayout="{!showChatWindow}"
+					   click="doToggleChatWindow();"/>
+			<mx:Button height="22"
+					   label="{L10.n.getString('end.cobrowse')}"
+					   click="doEndCobrowse();"/>
+		</mx:HBox>
+        <mx:HBox width="100%" 
+                 horizontalAlign="right">
+		<mx:Button height="22"
+				   width="22"
+				   id="btnDock"
+				   color="0xFF0000"
+				   upSkin="@Embed(source='../images/dock.png')"
+				   overSkin="@Embed(source='../images/dockOver.png')"
+				   downSkin="@Embed(source='../images/dockDown.png')"
+				   toolTip="{L10.n.getString('dock')}"
+                   visible="{dockable}"
+                   includeInLayout="{dockable}"
+				   click="doDock();"/>
+
+
+		<mx:Button height="22"
+				   width="22"
+				   id="btnUndock"
+				   color="0xFF0000"
+				   upSkin="@Embed(source='../images/undock.png')"
+				   overSkin="@Embed(source='../images/undockOver.png')"
+				   downSkin="@Embed(source='../images/undockDown.png')"
+				   toolTip="{L10.n.getString('undock')}"
+                   visible="{!dockable}"
+                   includeInLayout="{!dockable}"
+				   click="doUndock();"/>
+		<mx:Button height="22"
+		           width="22"
+		           id="btnRefresh"
+		           color="0xFF0000"
+		           upSkin="@Embed(source='../images/refresh.png')"
+		           overSkin="@Embed(source='../images/refreshOver.png')"
+		           downSkin="@Embed(source='../images/refreshDown.png')"
+		           toolTip="{L10.n.getString('reload.page')}"
+		           click="doRefresh();"/>
+		<mx:Button height="22"
+				   width="22"
+                   id="btnUnhighlight"
+                   color="0xFF0000"
+                   upSkin="@Embed(source='../images/highlightErase.png')"
+                   overSkin="@Embed(source='../images/highlightEraseOver.png')"
+                   downSkin="@Embed(source='../images/highlightEraseDown.png')"
+                   toolTip="{L10.n.getString('unhighlight')}"
+                   click="doUnhighlight();"/>
+		<mx:Canvas id="sampleColor"
+				   borderThickness="0"
+				   backgroundColor="{cp.selectedColor}">
+        <!-- This container should be hidden and button shown instead -->
+		<mx:ColorPicker id="cp"
+						width="0"
+						height="0"
+                        top="12"
+                        left="16"
+						focusThickness="0"
+						focusAlpha="0.1"
+						showTextField="false"
+						swatchPanelStyleName="myStyle"
+						editable="false"
+                        includeInLayout="false"
+						change="selectHighlightColor(event);"
+                        selectedIndex="{colorIndex}"
+						dataProvider="{simpleDP}"/>
+			<mx:Button height="22"
+					   width="22"
+					   id="btnHighlightColor"
+					   color="0xFF0000"
+					   upSkin="@Embed(source='../images/highlighter.png')"
+					   overSkin="@Embed(source='../images/highlighterOver.png')"
+					   downSkin="@Embed(source='../images/highlighterDown.png')"
+					   toolTip="{L10.n.getString('select.highlight.color')}"
+					   click="selectColor(event);"/>
+		</mx:Canvas>
+		<mx:Button height="22"
+				   width="22"
+				   id="btnExit"
+				   color="0xFF0000"
+				   upSkin="@Embed(source='../images/exitUp.png')"
+				   overSkin="@Embed(source='../images/exitOver.png')"
+				   downSkin="@Embed(source='../images/exitDown.png')"
+				   toolTip="{L10.n.getString('end.cobrowse')}"
+				   click="doEndCobrowse();"/>
+        </mx:HBox>
+	</mx:HBox>
+	<mx:HBox width="100%"
+			   height="22"
+			   id="loading"
+			   visible="false"
+			   horizontalScrollPolicy="off"
+			   verticalScrollPolicy="off"
+			   backgroundColor="0xCCCCCC">
+		<mx:ProgressBar id="loadingNotification"
+						width="100%"
+						height="22"
+						visible="true"
+						labelPlacement="left"
+						barColor="red"
+						minimum="0"
+						maximum="100"
+						label="{L10.n.getString('loading')}"
+						direction="right"
+						mode="manual"/>
+	</mx:HBox>
+    <mx:HBox width="100%"
+             height="100%"
+             verticalScrollPolicy="off"
+             horizontalScrollPolicy="off">
+	<mx:Canvas id="holder"
+			   verticalScrollPolicy="off"
+			   width="100%"
+               height="100%"
+			   scroll="wasScrolledManually=true;">
+        <mx:Canvas id="blockTop" backgroundColor="blue" width="100%" top="0" height="20" visible="{!wasScrolledManually}" />
+        <mx:Canvas id="blockBottom" backgroundColor="blue" width="100%" top="40" bottom="0" visible="{!wasScrolledManually}"/>
+        <mx:Canvas id="blockLeft" backgroundColor="blue" height="100%" left="0" width="20" visible="{!wasScrolledManually}"/>
+        <mx:Canvas id="blockRight" backgroundColor="blue" height="100%" left="40" width="100%" visible="{!wasScrolledManually}"/>
+		<mx:HTML id="mainBrowser"
+				 height="100%"
+                 width="100%"
+				 horizontalScrollPolicy="off"
+				 complete="htmlComplete(event);"
+				 verticalScrollPolicy="off"
+				 visible="true">
+			<mx:htmlText>
+				<![CDATA[
+						<HTML><HEAD></HEAD><BODY></BODY></HTML>
+					]]>
+			</mx:htmlText>
+		</mx:HTML>
+
+		<mx:Image id="cursor"
+				  alpha="0.75"
+				  visible="true"
+				  top="0"
+				  left="0"
+				  source="@Embed('../images/cursor.png')"/>
+		<mx:Canvas alpha="0.85"
+				   id="blockMove"
+				   top="{yy}"
+				   left="{xx}"
+				   visible="{scrollingStarted}"
+				   includeInLayout="{scrollingStarted}"
+				   width="1"
+				   height="1"
+				   borderColor="black"
+				   borderSides="left top right bottom"
+				   borderThickness="1"
+				   borderStyle="solid"
+				   backgroundColor="gray"/>
+        </mx:Canvas>
+        <mx:VScrollBar id="vScroll"
+                       height="100%"
+                       scroll="scrollV(event)" />
+	</mx:HBox>
+	<mx:Script>
+		<![CDATA[
+			import com.inq.flash.agent.control.ChatPanelController;
+			import flash.display.Stage;
+			import flash.geom.Point;
+			import mx.controls.MenuBar;
+			import mx.controls.menuClasses.MenuBarItem;
+			import mx.events.MenuEvent;
+			import mx.events.ColorPickerEvent;
+            import mx.events.ScrollEvent;
+
+			import flash.events.Event;
+			import flash.events.HTMLUncaughtScriptExceptionEvent;
+			import flash.events.MouseEvent;
+			import flash.geom.Rectangle;
+			import flash.net.FileReference;
+			import mx.core.FlexGlobals;
+
+			import mx.controls.HTML;
+			import mx.managers.CursorManager;
+			import flash.events.KeyboardEvent;
+			import flash.ui.Keyboard;
+			import flash.display.DisplayObjectContainer;
+			import mx.core.UIComponent;
+			import mx.core.Container;
+			import mx.containers.Canvas;
+			import flash.ui.ContextMenu;
+			import flash.display.NativeMenu;
+			import flash.display.NativeMenuItem;
+
+			import flash.html.HTMLLoader;
+			import flash.net.Socket;
+			import flash.display.DisplayObject;
+			import mx.containers.TabNavigator;
+			import mx.logging.ILogger;
+
+			import com.inq.flash.messagingframework.StringUtils;
+			
+			public static const CMD_CURRENT_WINDOW:String = "CW";
+			public static const CMD_SUPPRESS:String = "SUPPRESS";
+			public static const CMD_HEAD:String = "HEAD";
+			public static const CMD_BODY:String = "BODY";
+			public static const CMD_BODYPART:String = "BODYPART";
+			public static const CMD_UPDATE:String = "UPD";
+			public static const CMD_INP:String = "INP";
+			public static const CMD_TA:String = "TA";
+			public static const CMD_SEL:String = "SEL";
+			public static const CMD_SWF:String = "SWF";		
+			public static const CMD_MOUSE_POSITION:String = "MP";
+			public static const CMD_STATUS:String = "ST";
+			
+			private static const LOG:ILogger = LogUtils.getLogger(CobrowseWindow);
+			private static const PARAM_MORE:String = "MORE";
+			private static const PARAM_MOUSE_X:String = "X";
+			private static const PARAM_MOUSE_Y:String = "Y";
+			private static const PARAM_SEQUENCE:String = "SEQ";
+			private static const PARAM_WINDOW_ID:String = "WID";
+			private static const PARAM_COMMAND:String = "CMD";
+			private static const PARAM_FRAME:String = "FRAME";		
+			private static const PARAM_BODY:String = "BODYDATA";
+			private static const PARAM_HEAD:String = "HEADDATA";
+			private static const PARAM_LOCATION:String = "LOC";
+			private static const PARAM_UPDATE_DATA:String = "UPDATE";
+			private static const PARAM_DOCUMENT_TYPE:String = "DT";
+			private static const PARAM_INDEX_BEGIN:String = "IB";
+			private static const PARAM_INDEX_END:String = "IE";
+			private static const PARAM_BRWSR_WIDTH:String = "BRWSR_WIDTH";
+			private static const PARAM_BRWSR_HEIGHT:String = "BRWSR_HEIGHT";
+			private static const PARAM_SCROLL_WIDTH:String = "SCRLL_WIDTH";
+			private static const PARAM_SCROLL_HEIGHT:String = "SCRLL_HEIGHT";
+			private static const PARAM_SCROLL_TOP:String = "SCRLL_TOP";
+			private static const PARAM_SCROLL_LEFT:String = "SCRLL_LEFT";
+			private static const PARAM_VALUE:String = "VALU";
+			private static const PARAM_OPTION:String = "OPTION";
+			private static const PARAM_TEXT:String = "TEXT";
+			private static const PARAM_INDEX:String = "IX";
+
+			private var commands:Array = [];
+			private var shiftKey:Boolean = false;
+			private var ctrlKey:Boolean = false;
+			private var scrollMover:UIComponent;
+            [Bindable]
+			private var wasScrolledManually:Boolean = false;
+
+			[Bindable]
+			public var simpleDP:Array = [0x00FF00, 0x00FFFF, 0xFF00FF, 0xFFBBBB, 0xBBFFBB, 0xBBBBFF, 0xBBFFFF, 0xFFBBFF, 0xFFFFBB, 0xFFFFFF];
+
+			[Bindable]
+			public static var colorIndex:Number = 0;
+
+			[Bindable]
+			public static var dockable:Boolean = false;
+
+			[Bindable]
+			private var xx:int;
+			[Bindable]
+			private var yy:int;
+
+            private const BLOCK_SIZE_MIN:int = 5;
+			private const ALPHA:Number = 0.75;
+			private var currentWindow:int = -1;
+			private var _initialized:Boolean = false;
+			protected var mouseDownX:int;
+			protected var mouseDownY:int;
+			public var cobrowseAccepted:Boolean;
+			public var cobrowseSharedAccepted:Boolean;
+
+			public var sendCommand:Function;
+			public var endCobrowse:Function;
+			public var wid:String;
+			private var cmdSeq:int = 1;
+			public var location:String;
+			public var headSource:String = "";
+			public var htmlSource:String = "";
+			public var headString:String;
+			public var bodyString:String;
+			public var rawHtmlSource:String = "";
+			public var inputFields:Array = [];
+			public var selections:Array = [];
+			public var textAreas:Array = [];
+			public var docType:String;
+			public var viewPort:Rectangle;
+			[Bindable]
+			public var showChatWindow:Boolean = true;
+			private static var baseJavascript:String = "function catchLink(element) {element.setAttribute('onclick', 'return window.whenClicked(this);');}function whenClicked(e) {window.airMain.whenAnchorClicked(e); return false ;}function updateSwfFrame(swfIx, frameIx) {" + "var swf = document.getElementsByTagName('EMBED')[swfIx];" + "\n" + "var movie = document.embeds[swf.name];" + "\n"
+				//	TODO Add code to change frame of the movie, this does not work yet
+				//	+	    "movie.GotoFrame(frameIx);" + "\n"
+				+ "} function whenSubmitForm(form) { window.airMain.whenSubmitted(form.action, form.target); return false ; }";
+
+			private static var baseCss:String = "#inqChatStage, .chatWindow {border:3px solid navy !important;} xselect { background: white; border: 1px solid #919085; " + "-webkit-appearance: none;" + "border-radius: 1px 1px 1px 1px; " + "-webkit-border-top-left-radius:1px;" + "-webkit-border-top-right-radius:1px;" + "-webkit-border-bottom-left-radius:1px;" + "-webkit-border-bottom-right-radius:1px;" +
+
+
+				//			"-webkit-appearance: none;"+
+				"color: black;}" +
+
+				"select {border-bottom-left-radius: 0px 0px;border-bottom-right-radius: 0px 0px;border-top-left-radius: 0px 0px;border-top-right-radius: 0px 0px;-webkit-appearance: menulist;-webkit-box-align: center;border: 1px inset gray;}" +
+				// 	 "select.styled { opacity: 0; }\n" +
+				//	 "option { background: white;}\n" +
+				".CHATSTAGE {border:3px solid navy !important;} body { opacity: 1.00; }";
+
+			private static var styleSheet:String = "<STYLE REL='stylesheet' type='text/css' ID='CBV'>\n" + "<!--\n" + baseCss + "\n-->\n" + "</STYLE>\n";
+			private static var styleSheet2:String = "<SCRIPT type='text/javascript'>\n" + "<!--\n" + baseJavascript + "\n-->\n" + "</SCRIPT>" + "\n";
+			private var selectedAnchor:Object = null, selectedSelect:Object = null, selectedForm:Object = null, selectedInput:Object = null;
+
+			private var prevScrollTime:int;
+			private var dx:int = 0;
+			private var dy:int = 0;
+			[Bindable]
+			private var scrollingStarted:Boolean;
+			private var scrollTimer:Timer = new Timer(200);
+
+			/**
+			 * This function is called from ChatPanel when we mouseover/mouseout to one of direction Images 
+			 */
+			public function setScrollDirection(dx1:int, dy1:int):void {
+				dx = dx1;
+				dy = dy1;
+			}
+
+			private function scrolling(event:TimerEvent):void {
+				var chatPanel:ChatPanel = this.parentDocument as ChatPanel;
+				if (chatPanel != null) {
+					holder.horizontalScrollPosition += dx; //Math.min(this.maxHorizontalScrollPosition, this.viewPort.left);
+					mainBrowser.verticalScrollPosition += dy; // Math.min(this.maxVerticalScrollPosition, this.viewPort.top);
+                    vScroll.scrollPosition = mainBrowser.verticalScrollPosition;
+				}
+			}
+
+			private function setCurrentWindow():void {
+				if (currentWindow != 1) {
+					render();
+					currentWindow = 1;
+					setInputFields();
+				}
+			}
+
+			/**
+			 * Called from CobrowseHandler.as
+			 */
+			private function setDocumentTypeInfo(docType:String):void {
+				this.docType = docType;
+			}
+
+			private function setInputField(inputIndex:int, inputValue:String):void {
+				if (this.location == null)
+					return;
+				var doc:Object = mainBrowser.domWindow.document;
+				var inputFields:Object = doc.getElementsByTagName("INPUT");
+				var input:Object = inputFields[inputIndex];
+				if (input == null)
+					return;
+				var type:String = input.type as String;
+				switch (type.toUpperCase()){
+					case "TEXT":
+					case "PASSWORD":
+						input.value = unescape(inputValue);
+						break;
+					case "RADIO":
+					case "CHECKBOX":
+						input.checked = (inputValue == "true") ? true : false;
+						LOG.debug("inputValue=" + inputValue);
+						break;
+				}
+				this.inputFields[inputIndex] = new InputField(input, inputValue);
+			}
+
+			/**
+			 * setMousePosition: set the graphic mouse to where the client has the cursor
+			 * @param	x
+			 * @param	y
+			 */
+			private function setMousePosition(x:int, y:int):void {
+				// @TODO set this in the context class to be performed when visible
+				// Now: we will just move the mouse position;
+				cursor.left = x ;
+				cursor.top = y - vScroll.scrollPosition;
+				cursor.visible = true;
+				return;
+			}
+
+			private function setTextArea(inputIndex:int, inputValue:String):void {
+				if (this.location == null)
+					return;
+				var doc:Object = mainBrowser.domWindow.document;
+				var inputFields:Object = doc.getElementsByTagName("TEXTAREA");
+				var input:Object = inputFields[inputIndex];
+				if (input == null)
+					return;
+				input.value = unescape(inputValue);
+				this.textAreas[inputIndex] = new InputField(input, inputValue);
+			}
+
+			private function setSelection(inputIndex:int, inputValue:String):void {
+				if (this.location == null)
+					return;
+				var doc:Object = mainBrowser.domWindow.document;
+				var inputFields:Object = doc.getElementsByTagName("SELECT");
+				var input:Object = inputFields[inputIndex];
+				if (input == null)
+					return;
+                var unescapedValue:String = unescape(inputValue);
+                input.innerHTML = "<option value='" + unescapedValue + "'>" + unescapedValue + "</option>";
+				this.selections[inputIndex] = new InputField(input, inputValue);
+			}
+
+			private function setSwfFrame(swfIndex:int, frameIndex:int):void {
+
+				var movie:Object = null;
+				if (this.location == null)
+					return;
+				var win:Object = mainBrowser.domWindow;
+				var doc:Object = mainBrowser.domWindow.document;
+				var swfs:Object = doc.getElementsByTagName("EMBED");
+				var swf:Object = swfs[swfIndex];
+				if (swf == null)
+					return;
+
+				if (doc.embeds && doc.embeds[swf.id])
+					movie = doc.embeds[swf.id];
+				else if (doc.embeds && doc.embeds[swfIndex])
+					movie = doc.embeds[swfIndex];
+				else
+					movie = swf;
+				/* Tell our browser javascript code to update the SWF's frame */
+				win.setTimeout("updateSwfFrame(" + swfIndex + ", " + frameIndex + ");", 20);
+			}
+
+			private function setInputFields():void {
+				var ix:int;
+				var inFld:InputField;
+				for (ix = 0; ix < this.inputFields.length; ix++){
+					inFld = this.inputFields[ix];
+					if (inFld == null)
+						continue;
+					setInputField(ix, inFld.value);
+				}
+				for (ix = 0; ix < this.selections.length; ix++){
+					inFld = this.selections[ix];
+					if (inFld == null)
+						continue;
+					setSelection(ix, inFld.value);
+				}
+				for (ix = 0; ix < this.textAreas.length; ix++){
+					inFld = this.textAreas[ix];
+					if (inFld == null)
+						continue;
+					setTextArea(ix, inFld.value);
+				}
+			}
+
+			private function runPushedCommands():void {
+				while (commands.length > 0) {
+					var cmd:XML = commands.shift();
+					var name:String = cmd.name().localName;
+					try {
+						switch (name) {
+							case CMD_CURRENT_WINDOW:
+								setCurrentWindow();
+								break;
+							case CMD_HEAD:
+								setDocumentTypeInfo(StringUtils.decodeStringFromMessage(cmd[PARAM_DOCUMENT_TYPE]));
+								processHeadMessage(StringUtils.decodeStringFromMessage(cmd[PARAM_HEAD]), StringUtils.decodeStringFromMessage(cmd[PARAM_LOCATION]));
+								break;
+							case CMD_BODY:
+								processBodyMessage(StringUtils.decodeStringFromMessage(cmd[PARAM_BODY]), StringUtils.decodeStringFromMessage(cmd[PARAM_LOCATION]), cmd[PARAM_BRWSR_WIDTH], cmd[PARAM_BRWSR_HEIGHT], cmd[PARAM_SCROLL_WIDTH], cmd[PARAM_SCROLL_HEIGHT], cmd[PARAM_SCROLL_LEFT], cmd[PARAM_SCROLL_TOP]);
+								break;
+							case CMD_BODYPART:
+								processBodyPartMessage(int(cmd[PARAM_MORE]), StringUtils.decodeStringFromMessage(cmd[PARAM_BODY]), StringUtils.decodeStringFromMessage(cmd[PARAM_LOCATION]), cmd[PARAM_BRWSR_WIDTH], cmd[PARAM_BRWSR_HEIGHT], cmd[PARAM_SCROLL_WIDTH], cmd[PARAM_SCROLL_HEIGHT], cmd[PARAM_SCROLL_LEFT], cmd[PARAM_SCROLL_TOP]);
+								break;
+							case CMD_UPDATE:
+								processUpdateMessage(StringUtils.decodeStringFromMessage(cmd[PARAM_UPDATE_DATA]), cmd[PARAM_INDEX_BEGIN], cmd[PARAM_INDEX_END], cmd[PARAM_BRWSR_WIDTH], cmd[PARAM_BRWSR_HEIGHT], cmd[PARAM_SCROLL_WIDTH], cmd[PARAM_SCROLL_HEIGHT], cmd[PARAM_SCROLL_LEFT], cmd[PARAM_SCROLL_TOP]);
+								break;
+							case CMD_INP:
+								setInputField(cmd[PARAM_INDEX], cmd[PARAM_VALUE]);
+								break;
+							case CMD_TA:
+								setTextArea(cmd[PARAM_INDEX], cmd[PARAM_TEXT]);
+								break;
+							case CMD_MOUSE_POSITION:
+								setMousePosition(int(cmd[PARAM_MOUSE_X]), int(cmd[PARAM_MOUSE_Y]));
+								setCurrentWindow();
+								break;
+							case CMD_STATUS:
+								break;
+							case CMD_SEL:
+								setSelection(cmd[PARAM_INDEX], cmd[PARAM_OPTION]);
+								break;
+							case CMD_SWF:
+								setSwfFrame(int(cmd[PARAM_INDEX]), int(cmd[PARAM_FRAME]));
+								break;
+							default:
+								LOG.error("Unknown command: " + name);
+						}
+					} catch (e:Error) {
+						LOG.error("Eror parsing CMD = " + name + e.message + e.getStackTrace());
+					}
+				}
+			}
+
+			public function parseCobrowseResponseMessage(command:XML):void {
+				commands.push(command);
+				if (this.initialized) {
+					runPushedCommands();
+				}
+			}
+
+			private function processUpdateMessage(update:String, ib:int, ie:int, brwsrWidth:int, brwsrHeight:int, width:int, height:int, left:int, top:int):void {
+				if (this.location == null)
+					return;
+				var prefix:String = this.rawHtmlSource.substr(0, ib);
+				var suffix:String = "";
+				//"ie" is position from the end of String, so when it is 0 than suffix is empty
+				//it is rare case but check is required 
+				if (ie != 0) {
+					suffix = this.rawHtmlSource.substr(-ie);
+				}
+				var newHtml:String = prefix + update + suffix;
+				var window:Object = mainBrowser.htmlLoader.window;
+				var document:Object = window.document;
+				var head:Object = document.getElementsByTagName("HEAD")[0];
+				this.setBrowserDimensions(brwsrWidth, brwsrHeight - holder.height);
+				if ((update != "") && (newHtml != this.rawHtmlSource)) {
+					if (head.innerHTML.length == 0) {
+						LOG.error("head has not been processed");
+						processHtmlMessage(newHtml, this.location, brwsrWidth, brwsrHeight, width, height, left, top);
+						return;
+					}
+					this.rawHtmlSource = newHtml;
+					var body:Object = window.document.body;
+					if (body != null){
+						body.innerHTML = newHtml;
+					}
+				}
+				this.setViewDimensions(width, height, left, top);
+				_renderViewPort();
+				setInputFields();
+			}
+			
+			[Bindable]
+			private static var maxCanvasHeight:int = 1000;
+			[Bindable]
+			private static var maxCanvasWidth:int = 500;
+			private static const SPACE_FOR_SCROLL:int = 20;
+            /**
+             * Referring to HTMLLoader {@link http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/html/HTMLLoader.html},
+             * we can't create an object to display HTML content more than 4096 pixels. But in our scenario, real limit is double of that.
+             * So an object bigger than the double max size (i.e. 8192px) will be created,
+             * but it will be wrapped into window of the double max size with scrolling.
+             */
+
+			/**
+			 * This function increase browser dimensions.
+			 * Mostly we need it to show bottom of the page for Agent
+			 * 
+			 * @param	width of client page in pixels
+			 * @param	height of client page in pixels
+			 */
+			private function setBrowserDimensions(width:int, height:int):void {
+				try {
+					/*if (maxCanvasHeight < height)
+						maxCanvasHeight = height + SPACE_FOR_SCROLL;
+					if (maxCanvasWidth < width)
+						maxCanvasWidth = width + SPACE_FOR_SCROLL;*/
+					this.mainBrowser.width = width;
+					vScroll.maxScrollPosition = height;
+				} catch (err:Error){
+					LOG.error("setBrowserDimensions FAILED:\n" + "...width   = " + width + "\n" + "...height  = " + height + "\n" + err.getStackTrace());
+				}
+			}
+
+			private function setViewDimensions(width:int, height:int, left:int, top:int):void {
+				//	public function Rectangle (x:Number = 0, y:Number = 0, width:Number = 0, height:Number = 0);
+				this.viewPort = new Rectangle(left, top, width, height);
+			}
+
+			public function whenAnchorClicked(anchor:Object):Boolean {
+				LOG.debug("click action: " + anchor.href + " target " + anchor.target);
+				return false;
+			}
+
+			public function whenSubmitted(action:String, target:String):Boolean {
+				LOG.debug("Submit has been intercepted");
+				return true;
+			}
+
+			private function processBodyPartMessage(more:int, html:String, loc:String, brwsrWidth:int, brwsrHeight:int, width:int, height:int, left:int, top:int):void {
+				this.rawHtmlSource += html;
+				var size:int = this.rawHtmlSource.length;
+				var ttl:int = size + more;
+				if (more == 0){
+					loading.visible = false;
+					processHtmlMessage(this.rawHtmlSource, loc, brwsrWidth, brwsrHeight, width, height, left, top);
+				} else {
+					loadingNotification.setProgress(size, ttl);
+				}
+			}
+
+			private function processBodyMessage(html:String, loc:String, brwsrWidth:int, brwsrHeight:int, width:int, height:int, left:int, top:int):void {
+				loading.visible = false;
+				this.rawHtmlSource = html;
+				processHtmlMessage(this.rawHtmlSource, loc, brwsrWidth, brwsrHeight, width, height, left, top);
+			}
+
+			public function processHtmlMessage(html:String, loc:String, brwsrWidth:int, brwsrHeight:int, width:int, height:int, left:int, top:int):void {
+				var window:Object = mainBrowser.domWindow;
+				this.location = loc;
+				this.setBrowserDimensions(brwsrWidth, brwsrHeight - holder.height);
+				this.setViewDimensions(width, height, left, top);
+				this.bodyString = html;
+				window = mainBrowser.domWindow;
+				render();
+			}
+
+            private function scrollV(evt:ScrollEvent):void {
+                mainBrowser.verticalScrollPosition = evt.currentTarget.scrollPosition;
+                wasScrolledManually = true;
+            }
+
+			private function _renderViewPort():void {
+				if (this.viewPort == null || scrollingStarted){
+					return;
+				}
+                // visible area on CI
+				blockMove.left = this.viewPort.left;
+				blockMove.top = this.viewPort.top;
+				blockMove.width = this.viewPort.width;
+				blockMove.height = this.viewPort.height;
+                if (vScroll.maxScrollPosition < this.viewPort.top) {  // Remark: holder.height = mainBrowser.height
+                    blockTop.height = this.viewPort.top - vScroll.maxScrollPosition;
+                    blockBottom.top = this.viewPort.top - vScroll.maxScrollPosition + this.viewPort.height;
+                } else {
+                    blockTop.height = BLOCK_SIZE_MIN;
+                    blockBottom.top = this.viewPort.height;
+                }
+                blockLeft.width = BLOCK_SIZE_MIN > blockLeft.width ? BLOCK_SIZE_MIN : this.viewPort.left;
+                blockTop.width = this.mainBrowser.width;
+                blockBottom.width = this.mainBrowser.width;
+                blockRight.width = this.mainBrowser.width - this.viewPort.width;
+                blockRight.left = this.viewPort.left + this.viewPort.width;
+                if (BLOCK_SIZE_MIN > blockRight.width) {
+                    blockRight.width = BLOCK_SIZE_MIN;
+                    blockRight.left = this.viewPort.left + this.viewPort.width - BLOCK_SIZE_MIN;
+                }
+                // scrolls of cobrowse window
+				if (!wasScrolledManually) {
+                    holder.horizontalScrollPosition = this.viewPort.left;
+                    mainBrowser.verticalScrollPosition = this.viewPort.top;
+                    vScroll.scrollPosition = this.viewPort.top;
+					//holder.horizontalScrollPosition = Math.min(holder.maxHorizontalScrollPosition, this.viewPort.left);
+					//holder.verticalScrollPosition = Math.min(holder.maxVerticalScrollPosition, this.viewPort.top);
+				}
+			}
+
+			public function render():void {
+				var window:Object = mainBrowser.domWindow;
+				if (this.bodyString != null && this.headString != null) {
+					var htmlSource:String = this.docType + "\n<HTML>" + this.headString + this.bodyString + "</HTML>";
+					var htmlLoader:HTMLLoader = mainBrowser.htmlLoader;
+					mainBrowser.alpha = 1.0;
+					/*
+					 * When the rendering has completed,
+					 * Then: establish the browser window variable "airMain"
+					 * airMain is a variable that points to this instance of CobrowseWindow (this class)
+					 * Through airMain, the browser can access any public function
+					 */
+					htmlLoader.addEventListener(Event.HTML_DOM_INITIALIZE, render_completed);
+					htmlLoader.addEventListener(Event.HTML_RENDER, rendering_now);
+					htmlLoader.loadString(htmlSource);
+					LOG.debug("RENDERING " + htmlSource);
+					_renderViewPort();
+				}
+			}
+
+			/**
+			 * render_completed: private
+			 * This function establishes "airMain" variable in the browser window
+			 * airMain is a varable that points to this instance of CobrowseWindow (this class)
+			 * Through airMain, the browser can access any public function
+			 *
+			 * @param	e is the Event class
+			 */
+			private function render_completed(e:Event):void {
+				var htmlLoader:HTMLLoader = e.target as HTMLLoader;
+				htmlLoader.window["airMain"] = this;
+				if (mainBrowser.alpha != ALPHA)
+					mainBrowser.alpha = ALPHA;
+			}
+
+			/**
+			 * rendering_now: private
+			 * This function establishes sets the alpha to 100% on every render request
+			 * This is so that the flash movie will paint
+			 * After the rendering and painting, the alpha is set back to semi-transparent via callLater
+			 * @param	e is the Event class
+			 * @see setAlpha below
+			 */
+			private function rendering_now(e:Event):void {
+				if (mainBrowser.alpha != 1.0)
+					mainBrowser.alpha = 1.0;
+				showHideChatWindow();
+				callLater(setAlphaAfterPaint);
+			}
+
+			/**
+			 * setAlphaAfterPaint: private
+			 * This function sets the alpha to semi-transparent following a screen update
+			 * @param	e is the Event class
+			 * @see rendering_now above
+			 */
+			private function setAlphaAfterPaint():void {
+				if (mainBrowser.alpha != ALPHA)
+					mainBrowser.alpha = ALPHA;
+			}
+
+			/**
+			 * doAnchor - perform push link
+			 * @param	anchorElement
+			 * @see createContextMenu
+			 */
+			protected function doAnchor(anchorElement:Object):void {
+				var tagId:String = StringUtilities.toJsString(this.makeTagId(anchorElement), "'");
+				var href:String = StringUtilities.toJsString(anchorElement.href, "'");
+				var target:String = StringUtilities.toJsString(anchorElement.target, "'");
+				dispatchAgentRequest("Cobrowse.pushLink(" + href + ", " + target + ");")
+			}
+
+			/**
+			 * doSetFocus - Ask client to set focus to supplied input element
+			 * @param	inputElement
+			 * @see createContextMenu
+			 */
+			protected function doSetFocus(inputElement:Object):void {
+				var tagId:String = StringUtilities.toJsString(this.makeTagId(inputElement), "'");
+				dispatchAgentRequest("Cobrowse.setFocusInputField(" + tagId + ");")
+			}
+
+			/**
+			 * doElementClick - Ask client to simulate click on the element
+			 * @param	inputElement
+			 * @see createContextMenu
+			 */
+			protected function doElementClick(element:Object):void {
+				var tagId:String = StringUtilities.toJsString(this.makeTagId(element), "'");
+				dispatchAgentRequest("Cobrowse.doElementClick(" + tagId + ");");
+			}
+
+			/**
+			 * doSetElementHilite - Ask client to hilight the supplied element
+			 * @param	inputElement
+			 * @see createContextMenu
+			 */
+			protected function doSetElementHilite(inputElement:Object):void {
+				var tagId:String = StringUtilities.toJsString(this.makeTagId(inputElement), "'");
+				var color:String = StringUtilities.toJsString(getSelectedColor(), "'");
+				dispatchAgentRequest("Cobrowse.highlightInputField(" + tagId + "," + color + ");");
+			}
+
+			/**
+			 * doUnhighlight - Ask client to unhilight all highlighted elements
+			 */
+			protected function doUnhighlight():void {
+				dispatchAgentRequest("Cobrowse.unhighlight();");
+			}
+
+			protected function doSaveSource():void {
+				var document:Object = mainBrowser.htmlLoader.window.document;
+				var body:Object = document.body;
+				var head:Object = document.getElementsByTagName("HEAD")[0];
+				var headHtml:String = head.innerHTML;
+				var bodyHtml:String = body.innerHTML;
+				var myFileReference:FileReference = new FileReference();
+				var docTypeNode:Object = body.parentNode.previousSibling;
+				var source:String = this.docType + "\n<HTML>" + this.headString + this.bodyString + "</HTML>";
+				myFileReference.save(source, document.title + ".html");
+			}
+
+			protected function doToggleAlphaOnOff(ev:Event):void {
+				var menuItem:NativeMenuItem = ev.target as NativeMenuItem;
+				menuItem.checked = !menuItem.checked;
+				if (menuItem.checked)
+					this.mainBrowser.alpha = ALPHA;
+				else
+					this.mainBrowser.alpha = 1.0;
+			}
+
+			protected function doToggleFastAlphaOffOn(ev:Event):void {
+				this.mainBrowser.alpha = 1.0;
+				this.mainBrowser.alpha = ALPHA;
+			}
+
+			protected function doShowFlashPlayerVersion(ev:Event):void {
+				new BrowserWindow().open();
+			}
+
+			/**
+			 * Queue the agent request (for client)
+			 * @param	cmd - String containing command
+			 * @see createContextMenu
+			 */
+			private function dispatchAgentRequest(cmd:String):void {
+				sendCommand(cmdSeq, wid, cmd);
+				cmdSeq++;
+			}
+
+			/**
+			 * doEndCobrowse
+			 * @param - none
+			 * @see createContextMenu
+			 */
+			private function doEndCobrowse():void {
+				dispatchAgentRequest("Cobrowse.endCobrowse();");
+				endCobrowse();
+			}
+
+			/**
+			 * doRefresh - ask client to resend document html
+			 * @see createContextMenu
+			 */
+			protected function doRefresh():void {
+                wasScrolledManually = false;
+				dispatchAgentRequest("Cobrowse.getHTML();");
+			}
+
+			/**
+			 * doUndock- ask for undocking of co-browse window
+			 */
+			protected function doUndock():void {
+				//Todo: Get the chat panel, controller, and navigator
+				var chatPanel:ChatPanel = this.parentDocument as ChatPanel;
+				var tabNav:TabNavigator = chatPanel.componentStack;
+				var controller:ChatPanelController = chatPanel.controller;
+                dockable = true;
+				controller.undock(tabNav);
+			}
+
+			public function nowDocked():void {
+                _renderViewPort();
+			}
+
+			public function nowUndocked():void {
+				CobrowseUndocked.getInstance().title = L10.n.getString("cobrowse");
+                _renderViewPort();
+			}
+
+			/**
+			 * doDock- ask for undocking of co-browse window
+			 * We do this by closing the undocked window
+			 * The undocked window is the parentDocument of this parent document.
+			 */
+			protected function doDock():void {
+                dockable = false;
+				var cobrowseUndocked:CobrowseUndocked = CobrowseUndocked.getInstance();
+				cobrowseUndocked.close();
+			}
+
+			/**
+			 * doScroll - scroll by dragging box
+			 * @see createContextMenu
+			 */
+			protected function doScroll():void {
+				var chatPanel:ChatPanel = this.parentDocument as ChatPanel;
+				chatPanel.scrollingStarted = true;
+				scrollingStarted = true;
+				blockMove.setFocus();
+				this.addEventListener(MouseEvent.MOUSE_MOVE, moveMe);
+				this.addEventListener(MouseEvent.MOUSE_DOWN, stopScrolling);
+				scrollTimer.start();
+				LOG.debug("do scroll");
+			}
+
+			public function moveMe(event:MouseEvent):void {
+				event.preventDefault();
+				var point:Point = new Point(stage.mouseX, stage.mouseY);
+				point = this.globalToLocal(point);
+				xx = Math.max(point.x - (viewPort.width >> 2) + holder.horizontalScrollPosition, 0);
+				yy = Math.max(point.y - (viewPort.height >> 2) + holder.verticalScrollPosition, 0);
+			}
+
+			public function stopScrolling(event:MouseEvent = null):void {
+				scrollTimer.stop();
+				this.removeEventListener(MouseEvent.MOUSE_MOVE, moveMe);
+				this.removeEventListener(MouseEvent.MOUSE_DOWN, stopScrolling);
+				if (event != null) {
+					event.preventDefault();
+					var command:String = "Cobrowse.scrollTo(" + (xx + holder.horizontalScrollPosition) + "," + (yy + vScroll.scrollPosition) + ");";
+					dispatchAgentRequest(command);
+				}
+				var chatPanel:ChatPanel = this.parentDocument as ChatPanel;
+				chatPanel.scrollingStarted = false;
+				scrollingStarted = false;
+				_renderViewPort();
+			}
+
+			protected function showHideChatWindow():void {
+				var window:Object = mainBrowser.domWindow;
+				var document:Object = window.document;
+				var el:Object = document.getElementById("inqTitleBar");
+				if (el)
+					el.style.display = (this.showChatWindow) ? "" : "none";
+				el = document.getElementById("inqDivResizeCorner");
+				if (el)
+					el.style.display = (this.showChatWindow) ? "" : "none";
+				el = document.getElementById("inqChatStage");
+				if (el)
+					el.style.display = (this.showChatWindow) ? "" : "none";
+			}
+
+			protected function doToggleChatWindow():void {
+				this.showChatWindow = !this.showChatWindow;
+				showHideChatWindow();
+			}
+
+			/**
+			 * doHilite - ask CBC (client) to hilite text given a unique identifier for start and end
+			 * @param	ev
+			 */
+			protected function doHilite(ev:Event = null):void {
+				var window:Object = mainBrowser.domWindow;
+				var sel:Object = window.getSelection();
+				if (sel.rangeCount > 0){
+					var range:Object = sel.getRangeAt(0);
+					var startEl:String = StringUtilities.toJsString(makeTagId(range.startContainer), "'");
+					var endEl:String = StringUtilities.toJsString(makeTagId(range.endContainer), "'");
+					dispatchAgentRequest("Cobrowse.highlightText(" + startEl + ", " + range.startOffset + ", " + endEl + ", " + range.endOffset + " , " + StringUtilities.toJsString(getSelectedColor(), "'") + ");");
+				}
+			}
+
+            /**
+             * Get selected color of color picker as String
+             * @return color
+             */
+            protected function getSelectedColor():String {
+                return "#" + (0x04000000 + (cp.selectedColor)).toString(16).substr(1);
+            }
+
+			/**
+			 * doHiliteOff - ask CBC (client) to turn off all highlighted items
+			 */
+			protected function doHiliteOff():void {
+				dispatchAgentRequest("Cobrowse.highlightOff();");
+			}
+
+			/**
+			 * makeTagId - creates unique id for a given object
+			 * @param	element
+			 * @return string containing id
+			 */
+			private function makeTagId(element:Object):String {
+				var window:Object = mainBrowser.domWindow;
+				var document:Object = window.document;
+				var ix:int;
+				var index:int = 0;
+				if (element.id != null && element.id != "")
+					return element.id
+				var tagname:String = element.nodeName;
+				if (tagname == "#text"){
+					var p:Object = element.parentElement;
+					var c:Object = p.childNodes;
+					for (ix = 0; ix < c.length; ix++){
+						if (c[ix] == element)
+							break;
+						if (c[ix].nodeName != "#text")
+							continue;
+						index++;
+					}
+					return makeTagId(p) + ":text:" + index;
+				}
+				index = 0;
+				var tags:Object = document.getElementsByTagName("*");
+				for (ix = 0; ix < tags.length; ix++){
+					if (element == tags[ix])
+						break;
+					if (tagname == tags[ix].nodeName)
+						++index;
+				}
+				trace("got index: ");
+				return element.id + ":" + tagname + ":" + index;
+			}
+
+			/**
+			 * Makes request to CBC (CoBrowse Client) to move the scroll position by x and y
+			 * It does not move to X,Y but moves by X,Y (a delta move)
+			 * @param	x - integer delta for moving the scroll position right or left
+			 * @param	y - integer delta for moving the scroll position up or down
+			 */
+			private function requestScroll(x:int, y:int):void {
+				dispatchAgentRequest("Cobrowse.scrollTo(" + x + ", " + y + ");");
+			}
+
+			/**
+			 * Called by the internal browser for creating a context menu
+			 *
+			 * @param	event - the browser's event object
+			 */
+			public function createContextMenu(event:Object):void {
+				event.preventDefault();
+				var menu:NativeMenu = new NativeMenu();
+				var stage:Stage = mainBrowser.stage.nativeWindow.stage;
+				var menuElementClick:NativeMenuItem = new NativeMenuItem(L10.n.getString("element.click"));
+				if (menuElementClick != null)
+					menu.addItem(menuElementClick).enabled = false;
+				var menuItemHilite:NativeMenuItem = new NativeMenuItem(L10.n.getString("hilight"));
+				if (menuItemHilite != null)
+					menu.addItem(menuItemHilite).enabled = false;
+				var menuItemScroll:NativeMenuItem = new NativeMenuItem(L10.n.getString("scroll"));
+				if (menuItemScroll != null)
+					menu.addItem(menuItemScroll).enabled = true;
+				var menuItemSetFocus:NativeMenuItem = new NativeMenuItem(L10.n.getString("focus"));
+				if (menuItemSetFocus != null)
+					menu.addItem(menuItemSetFocus).enabled = false;
+
+				var menuItemSaveSource:NativeMenuItem = new NativeMenuItem(L10.n.getString("save.source"));
+				if (menuItemSaveSource != null && shiftKey && ctrlKey){
+					menu.addItem(menuItemSaveSource).enabled = true;
+					menuItemSaveSource.addEventListener(Event.SELECT, function(e:Event):void {
+							doSaveSource();
+						});
+				}
+				var menuItemToggleAlphaOnOff:NativeMenuItem = new NativeMenuItem(L10.n.getString("toggle.alpha"));
+				if (menuItemToggleAlphaOnOff != null && shiftKey && ctrlKey){
+					menu.addItem(menuItemToggleAlphaOnOff).enabled = true;
+					menuItemToggleAlphaOnOff.checked = !(this.mainBrowser.alpha == 1)
+					menuItemToggleAlphaOnOff.addEventListener(Event.SELECT, this.doToggleAlphaOnOff);
+				}
+				var menuItemFastToggleAlphaOnOff:NativeMenuItem = new NativeMenuItem(L10.n.getString("fast.toggle.alpha"));
+				if (menuItemFastToggleAlphaOnOff != null && shiftKey && ctrlKey){
+					menuItemFastToggleAlphaOnOff.checked = !(this.mainBrowser.alpha == 1)
+					menuItemFastToggleAlphaOnOff.addEventListener(Event.SELECT, this.doToggleFastAlphaOffOn);
+				}
+				var menuItemFlashPlayerVersion:NativeMenuItem = new NativeMenuItem(L10.n.getString("flash.version"));
+				if (menuItemFlashPlayerVersion != null && shiftKey && ctrlKey){
+					menu.addItem(menuItemFlashPlayerVersion).enabled = true;
+					menuItemFlashPlayerVersion.addEventListener(Event.SELECT, this.doShowFlashPlayerVersion);
+				}
+				if (menuItemScroll != null)
+					menuItemScroll.addEventListener(Event.SELECT, function(e:Event):void {
+							doScroll();
+						});
+				var window:Object = mainBrowser.domWindow;
+				var sel:Object = window.getSelection();
+				if (sel.rangeCount > 0){
+					var range:Object = sel.getRangeAt(0);
+					if (range != null && (range.startContainer != range.endContainer || range.startOffset != range.endOffset)){
+						if (menuItemHilite != null){
+							menuItemHilite.enabled = true;
+							menuItemHilite.addEventListener(Event.SELECT, doHilite);
+						}
+					}
+				}
+				/* Check for anchor */
+				var p:Object = event.target;
+				var tagId:String;
+				while (p != null){
+					trace("nodename is " + p.nodeName);
+					switch (p.nodeName.toUpperCase()){
+						case "A":
+							this.selectedAnchor = p;
+							if (menuElementClick != null && cobrowseSharedAccepted) {
+								menuElementClick.enabled = true;
+								menuElementClick.addEventListener(Event.SELECT, function(e:Event):void {
+									doElementClick(selectedAnchor);
+								});
+							}
+							if (menuItemHilite != null && !menuItemHilite.enabled){
+								menuItemHilite.enabled = true;
+								menuItemHilite.addEventListener(Event.SELECT, function(e:Event):void {
+										doSetElementHilite(selectedAnchor)
+									});
+							}
+							break;
+						case "TEXTAREA":
+							this.selectedInput = p;
+							if (menuItemSetFocus != null){
+								menuItemSetFocus.enabled = true;
+								this.selectedInput = p;
+								menuItemSetFocus.addEventListener(Event.SELECT, function(e:Event):void {
+										doSetFocus(selectedInput);
+									});
+							}
+							if (menuItemHilite != null && !menuItemHilite.enabled){
+								menuItemHilite.enabled = true;
+								menuItemHilite.addEventListener(Event.SELECT, function(e:Event):void {
+										doSetElementHilite(selectedInput);
+									});
+							}
+							break;
+						case "INPUT":
+                        case "BUTTON":
+							this.selectedInput = p;
+							if (menuItemSetFocus != null){
+								menuItemSetFocus.enabled = true;
+								menuItemSetFocus.addEventListener(Event.SELECT, function(e:Event):void {
+										doSetFocus(selectedInput);
+									});
+							}
+							if (menuItemHilite != null && !menuItemHilite.enabled){
+								menuItemHilite.enabled = true;
+								menuItemHilite.addEventListener(Event.SELECT, function(e:Event):void {
+										doSetElementHilite(selectedInput);
+									});
+							}
+                            if (menuElementClick != null && cobrowseSharedAccepted) {
+                                menuElementClick.enabled = true;
+                                menuElementClick.addEventListener(Event.SELECT, function(e:Event):void {
+                                    doElementClick(selectedInput);
+                                });
+                            }
+							break;
+						case "SELECT":
+							this.selectedSelect = p;
+							if (menuItemHilite != null && !menuItemHilite.enabled){
+								menuItemHilite.enabled = true;
+								menuItemHilite.addEventListener(Event.SELECT, function(e:Event):void {
+										doSetElementHilite(selectedSelect);
+									});
+							}
+							break;
+					}
+					p = p.parentNode;
+				}
+				menu.display(stage, stage.mouseX, stage.mouseY);
+			}
+
+			private function processHeadMessage(html:String, loc:String):void {
+				loadingNotification.setProgress(0, 1000);
+				loading.visible = true;
+				this.rawHtmlSource = "";
+				this.headSource = html;
+				this.location = loc;
+				this.headString = "\n<head>\n<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>\n";
+				var contextMenuScript:String = "<SCRIPT type='text/javascript'>window.oncontextmenu=function(ev){ev.preventDefault();if (window['airMain']!=null)window.airMain.createContextMenu(ev); };</SCRIPT>";
+				/*
+				 * We need to inject a small script to establish the context menu code
+				 * This code is very simple:
+				 * Upon context menu event we:
+				 * 1) prevent the default context menu
+				 * 2) If there is an interface to this class (via airMain)
+				 *    we then call our "createContextMenu
+				 */
+				this.headString += contextMenuScript;
+				this.headString += html;
+				this.headString += styleSheet;
+				this.headString += styleSheet2;
+				this.headString += "\n</head>\n";
+			}
+
+			private function reportKeyUpDown(event:KeyboardEvent):void {
+				this.shiftKey = event.shiftKey;
+				this.ctrlKey = event.ctrlKey;
+			}
+
+			private function selectHighlightColor(e:ColorPickerEvent):void {
+                colorIndex = e.index;
+			}
+
+			private function selectColor(ev:Event):void {
+				cp.open();
+			}
+
+			public function htmlComplete(ev:Event):void {
+                _renderViewPort();
+				trace("EVENT" + ev.type);
+			}
+
+			private function nowComplete():void {
+				if (_initialized)
+					return;
+				_initialized = true;
+				scrollTimer.addEventListener(TimerEvent.TIMER, scrolling);
+				mainBrowser.addEventListener(KeyboardEvent.KEY_DOWN, reportKeyUpDown);
+				mainBrowser.addEventListener(KeyboardEvent.KEY_UP, reportKeyUpDown);
+			}
+		]]>
+	</mx:Script>
+</mx:VBox>

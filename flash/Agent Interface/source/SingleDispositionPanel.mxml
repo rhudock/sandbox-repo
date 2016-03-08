@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+                implements="com.inq.flash.agent.view.DispositionPanel"
+                y="50"
+                layout="absolute"
+                color="#FFFFFF"
+                title="{L10.n.getString('user.disposition')}"
+                width="466"
+                height="350"
+                roundedBottomCorners="true"
+                borderAlpha="1"
+                backgroundAlpha="1"
+                alpha="1"
+                borderColor="#A4C6EB">
+
+	<mx:Script>
+	       <![CDATA[
+            import mx.controls.Button;
+            import mx.events.ListEvent;
+	       	import com.inq.flash.messagingframework.StringUtils;
+	       	import com.inq.flash.agent.control.ChatPanelController;
+
+	       	private var controller:ChatPanelController;
+            private var index:int;
+
+	       	public function init(dispositionInfo:XMLList, controller: ChatPanelController, index:int):void {
+	       		this.initialize();
+	       		this.controller = controller;
+	       		categoryList.dataProvider = dispositionInfo;
+	       		submitButton.enabled = false;
+	       		customText.enabled = true;
+                submitButton.id = "submitButton_" + index;
+                categoryList.id = "categoryList_" + index;
+                reasonList.id = "reasonList_" + index;
+	       	}
+
+	       	private function categorySelected(event:ListEvent):void {
+	       		reasonList.dataProvider = categoryList.selectedItem.children();
+	       		reasonList.selectedIndex = -1;
+	       		submitButton.enabled = false;
+	       	}
+
+			private function reasonSelected(event:ListEvent):void {
+				submitButton.enabled = reasonList.selectedIndex >= 0;
+	       		submitButton.enabled = true;
+	       	}
+
+			private function closeDialog(send: Boolean) : void {
+				if (send) {
+					var dispositionAnswer:String = categoryList.selectedItem.@value +
+						":" + reasonList.selectedItem.@value + ":" +
+					StringUtils.encodeStringForMessage(customText.text);
+					controller.sendChatExitMessage(dispositionAnswer);
+				}
+				else controller.cancelCloseChat();
+			}
+
+            public function getCancelButton():Button {
+                return cancelButton;
+            }
+
+            public function asDisplayObject():DisplayObject {
+                return this;
+            }
+        ]]>
+	</mx:Script>
+
+	<mx:Label x="26" y="0" text="{L10.n.getString('choose.disposition.category')}"/>
+	<mx:ComboBox id="categoryList" x="18" y="20" width="410" change="categorySelected(null)" labelField="@label" prompt="(none)" color="#000000"></mx:ComboBox>
+	<mx:Label x="44" y="51" text="{L10.n.getString('choose.disposition.reason')}"/>
+	<mx:List id="reasonList"
+             x="10" y="70" width="426" height="107"
+             change="reasonSelected(null)"
+             allowMultipleSelection="false"
+             labelField="@label"
+             color="#000000"></mx:List>
+	<mx:TextArea id="customText" x="10" y="185" width="426" height="85" enabled="true" color="#000000"/>
+	<mx:Button id="submitButton" x="250" y="278" label="{L10.n.getString('submit')}" width="191" height="27" click="closeDialog(true)" color="#000000"/>
+	<mx:Button x="5" y="278" id="cancelButton" label="{L10.n.getString('cancel')}" width="191" height="27" click="closeDialog(false)" color="#000000"/>
+</mx:TitleWindow>

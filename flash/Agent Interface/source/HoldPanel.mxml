@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"  layout="absolute" color="#FFFFFF" title="{L10.n.getString('call.holding')}"
+	width="266" height="184" roundedBottomCorners="true" borderAlpha="1" backgroundAlpha="1" alpha="1" borderColor="#A4C6EB">
+
+	<mx:Script>
+	       <![CDATA[
+            import com.inq.flash.agent.control.ChatPanelController;
+            import com.inq.flash.common.settings.SettingManager;
+            import com.inq.flash.messagingframework.StringUtils;
+            import mx.events.CloseEvent;
+            import mx.events.ListEvent;
+
+			private static const DEFAULT_DELAYS:String = "5,10,15";
+			
+			[Bindable]
+			private var delays:Array;
+
+	       	private var controller:ChatPanelController;
+
+	       	public function init(controller: ChatPanelController):void {
+	       		this.initialize();
+	       		this.controller = controller;
+				var delayString:String = SettingManager.getCallSetting(controller.chat.getSettingIDs()).getHoldDelays();
+				if (delayString== null) {
+					delayString = DEFAULT_DELAYS;
+				}
+				delays = delayString.split(",");
+	       	}
+
+			private function closeDialog(send: Boolean) : void {
+				if (send) {
+					controller.holdChat(new Number(timerList.text));
+				} else {
+					controller.cancelHoldPanel();
+				}
+			}
+		]]>
+	</mx:Script>
+
+	<mx:Label x="20" y="20" text="{L10.n.getString('remind.me')}" color="#000000"/>
+	<mx:ComboBox id="timerList" y="20" x="115" dataProvider="{delays}"  color="#000000"/>
+	<mx:Label x="190" y="20" text="{L10.n.getString('minutes')}" color="#000000"/>	
+	<mx:Button id="submitButton" x="145" y="103" label="{L10.n.getString('submit')}" width="91" height="27" click="closeDialog(true)" color="#000000"/>
+	<mx:Button x="10" y="103" label="{L10.n.getString('cancel')}" width="91" height="27" click="closeDialog(false)" color="#000000"/>
+</mx:TitleWindow>

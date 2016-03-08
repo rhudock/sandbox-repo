@@ -1,0 +1,1663 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This file contains single illegal words and illegal RegExps
+     Data was moved from "sites.properties"
+     OlegM: @TODO since there can be problems with non-latin symbols using in 'words' section, please add such words into 'expression' section. There was created a corresponding bug N2H-886.
+     -->
+<illegal>
+    <!--common English words-->
+    <words>
+        <sites>
+            <site>139</site>
+            <site>141</site>
+            <site>146</site>
+            <site>149</site>
+            <site>312</site>
+            <site>313</site>
+            <site>321</site>
+            <site>322</site>
+            <site>324</site>
+            <site>328</site>
+            <site>344</site>
+            <site>345</site>
+            <site>351</site>
+            <site>357</site>
+            <site>306</site>
+            <site>319</site>
+            <site>320</site>
+            <site>346</site>
+            <site>154</site>
+            <site>355</site>
+            <site>359</site>
+            <site>343</site>
+            <site>10003729</site>
+            <site>10003715</site>
+        </sites>
+        <word>anus</word>
+        <word>arse</word>
+        <word>arsehole</word>
+        <word>ass</word>
+        <word>assbag</word>
+        <word>assbandit</word>
+        <word>assbanger</word>
+        <word>assbite</word>
+        <word>assclown</word>
+        <word>asscock</word>
+        <word>asscracker</word>
+        <word>asses</word>
+        <word>assgoblin</word>
+        <word>asshat</word>
+        <word>asshead</word>
+        <word>asshole</word>
+        <word>asshopper</word>
+        <word>assjacker</word>
+        <word>asslick</word>
+        <word>asslicker</word>
+        <word>assmonkey</word>
+        <word>assmunch</word>
+        <word>assmuncher</word>
+        <word>assnigger</word>
+        <word>asspirate</word>
+        <word>assshit</word>
+        <word>assshole</word>
+        <word>asssucker</word>
+        <word>asswad</word>
+        <word>asswipe</word>
+        <word>bampot</word>
+        <word>bastard</word>
+        <word>beaner</word>
+        <word>bitch</word>
+        <word>bitchass</word>
+        <word>bitches</word>
+        <word>bitchtits</word>
+        <word>bitchy</word>
+        <word>blowjob</word>
+        <word>bollocks</word>
+        <word>bollox</word>
+        <word>boner</word>
+        <word>bullshit</word>
+        <word>carpetmuncher</word>
+        <word>chinc</word>
+        <word>chink</word>
+        <word>choad</word>
+        <word>chode</word>
+        <word>clit</word>
+        <word>clitface</word>
+        <word>cock</word>
+        <word>cockass</word>
+        <word>cockbite</word>
+        <word>cockburger</word>
+        <word>cockface</word>
+        <word>cockhead</word>
+        <word>cockjockey</word>
+        <word>cockknoker</word>
+        <word>cockmaster</word>
+        <word>cockmongler</word>
+        <word>cockmongruel</word>
+        <word>cockmonkey</word>
+        <word>cockmuncher</word>
+        <word>cocknose</word>
+        <word>cocknugget</word>
+        <word>cockshit</word>
+        <word>cocksmith</word>
+        <word>cocksmoker</word>
+        <word>cocksniffer</word>
+        <word>cocksucker</word>
+        <word>cockwaffle</word>
+        <word>coochie</word>
+        <word>coochy</word>
+        <word>cooter</word>
+        <word>cracker</word>
+        <word>cum</word>
+        <word>cumbubble</word>
+        <word>cumdumpster</word>
+        <word>cumguzzler</word>
+        <word>cumjockey</word>
+        <word>cumslut</word>
+        <word>cumtart</word>
+        <word>cunnie</word>
+        <word>cunnilingus</word>
+        <word>cunt</word>
+        <word>cuntass</word>
+        <word>cuntface</word>
+        <word>cunthole</word>
+        <word>cuntlicker</word>
+        <word>cuntrag</word>
+        <word>cuntslut</word>
+        <word>dago</word>
+        <word>damn</word>
+        <word>damnit</word>
+        <word>deggo</word>
+        <word>dick</word>
+        <word>dickbag</word>
+        <word>dickbeaters</word>
+        <word>dickface</word>
+        <word>dickhead</word>
+        <word>dickhole</word>
+        <word>dickjuice</word>
+        <word>dickmilk</word>
+        <word>dickmonger</word>
+        <word>dicks</word>
+        <word>dickslap</word>
+        <word>dicksucker</word>
+        <word>dicksucking</word>
+        <word>dickwad</word>
+        <word>dickweasel</word>
+        <word>dickweed</word>
+        <word>dickwod</word>
+        <word>dike</word>
+        <word>dildo</word>
+        <word>dipshit</word>
+        <word>doochebag</word>
+        <word>dookie</word>
+        <word>douche</word>
+        <word>douchebag</word>
+        <word>douchewaffle</word>
+        <word>dumass</word>
+        <word>dumbass</word>
+        <word>dumbshit</word>
+        <word>dumshit</word>
+        <word>dyke</word>
+        <word>fag</word>
+        <word>fagbag</word>
+        <word>faggit</word>
+        <word>faggot</word>
+        <word>faggotcock</word>
+        <word>fagtard</word>
+        <word>fatass</word>
+        <word>fellatio</word>
+        <word>feltch</word>
+        <word>flamer</word>
+        <word>fu</word>
+        <word>fudgepacker</word>
+        <word>gay</word>
+        <word>gayass</word>
+        <word>gaybob</word>
+        <word>gaydo</word>
+        <word>gaytard</word>
+        <word>gaywad</word>
+        <word>goddamn</word>
+        <word>goddamnit</word>
+        <word>gooch</word>
+        <word>gook</word>
+        <word>gringo</word>
+        <word>guido</word>
+        <word>handjob</word>
+        <word>hardon</word>
+        <word>heeb</word>
+        <word>hell</word>
+        <word>ho</word>
+        <word>hoe</word>
+        <word>homo</word>
+        <word>homodumbshit</word>
+        <word>honkey</word>
+        <word>humping</word>
+        <word>idiot</word>
+        <word>jackass</word>
+        <word>jackoff</word>
+        <word>jap</word>
+        <word>jigaboo</word>
+        <word>jizz</word>
+        <word>junglebunny</word>
+        <word>kike</word>
+        <word>kooch</word>
+        <word>kootch</word>
+        <word>kraut</word>
+        <word>kunt</word>
+        <word>kyke</word>
+        <word>lameass</word>
+        <word>lesbian</word>
+        <word>lesbo</word>
+        <word>lezzie</word>
+        <word>mcfagget</word>
+        <word>minge</word>
+        <word>muff</word>
+        <word>muffdiver</word>
+        <word>munging</word>
+        <word>negro</word>
+        <word>nigaboo</word>
+        <word>nigga</word>
+        <word>nigger</word>
+        <word>niggers</word>
+        <word>niglet</word>
+        <word>numbnuts</word>
+        <word>nutsack</word>
+        <word>panooch</word>
+        <word>pecker</word>
+        <word>peckerhead</word>
+        <word>penis</word>
+        <word>penispuffer</word>
+        <word>piss</word>
+        <word>pissflaps</word>
+        <word>polesmoker</word>
+        <word>pollock</word>
+        <word>poon</word>
+        <word>poonani</word>
+        <word>poonany</word>
+        <word>poontang</word>
+        <word>porchmonkey</word>
+        <word>prick</word>
+        <word>punani</word>
+        <word>punanny</word>
+        <word>pussies</word>
+        <word>pussy</word>
+        <word>pussylicking</word>
+        <word>puto</word>
+        <word>queef</word>
+        <word>queer</word>
+        <word>queerbait</word>
+        <word>queerhole</word>
+        <word>renob</word>
+        <word>rimjob</word>
+        <word>ruski</word>
+        <word>sandnigger</word>
+        <word>schlong</word>
+        <word>scrote</word>
+        <word>shit</word>
+        <word>shitass</word>
+        <word>shitbag</word>
+        <word>shitbagger</word>
+        <word>shitbrains</word>
+        <word>shitbreath</word>
+        <word>shitcanned</word>
+        <word>shitcunt</word>
+        <word>shitdick</word>
+        <word>shitface</word>
+        <word>shitfaced</word>
+        <word>shithead</word>
+        <word>shithole</word>
+        <word>shithouse</word>
+        <word>shitspitter</word>
+        <word>shitstain</word>
+        <word>shitter</word>
+        <word>shittiest</word>
+        <word>shitting</word>
+        <word>shitty</word>
+        <word>shiz</word>
+        <word>shiznit</word>
+        <word>skank</word>
+        <word>skeet</word>
+        <word>slut</word>
+        <word>slutbag</word>
+        <word>smeg</word>
+        <word>spic</word>
+        <word>spick</word>
+        <word>splooge</word>
+        <word>stfu</word>
+        <word>suckass</word>
+        <word>tard</word>
+        <word>testicle</word>
+        <word>thundercunt</word>
+        <word>tit</word>
+        <word>tits</word>
+        <word>twat</word>
+        <word>twatlips</word>
+        <word>twats</word>
+        <word>twatwaffle</word>
+        <word>vag</word>
+        <word>vagina</word>
+        <word>vjayjay</word>
+        <word>wank</word>
+        <word>wetback</word>
+        <word>whore</word>
+        <word>whorebag</word>
+        <word>whoreface</word>
+        <word>wop</word>
+        <word>wtf</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>139</site>
+            <site>141</site>
+            <site>146</site>
+            <site>149</site>
+            <site>312</site>
+            <site>313</site>
+            <site>321</site>
+            <site>322</site>
+            <site>324</site>
+            <site>328</site>
+            <site>344</site>
+            <site>345</site>
+            <site>351</site>
+            <site>357</site>
+            <site>306</site>
+            <site>319</site>
+            <site>320</site>
+            <site>346</site>
+            <site>355</site>
+            <site>359</site>
+            <site>343</site>
+        </sites>
+        <word>punta</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>139</site>
+            <site>141</site>
+            <site>146</site>
+            <site>149</site>
+            <site>312</site>
+            <site>313</site>
+            <site>321</site>
+            <site>322</site>
+            <site>324</site>
+            <site>328</site>
+            <site>344</site>
+            <site>345</site>
+            <site>351</site>
+            <site>357</site>
+            <site>306</site>
+            <site>319</site>
+            <site>320</site>
+            <site>346</site>
+            <site>154</site>
+            <site>355</site>
+            <site>359</site>
+            <site>10003715</site>
+        </sites>
+        <word>crappy</word>
+        <word>dumb</word>
+        <word>lmao</word>
+        <word>paki</word>
+        <word>pissed</word>
+        <word>snatch</word>
+        <word>spook</word>
+        <word>stoopid</word>
+        <word>stupid</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>139</site>
+            <site>141</site>
+            <site>146</site>
+            <site>149</site>
+            <site>312</site>
+            <site>313</site>
+            <site>321</site>
+            <site>322</site>
+            <site>324</site>
+            <site>328</site>
+            <site>344</site>
+            <site>345</site>
+            <site>351</site>
+            <site>357</site>
+            <site>306</site>
+            <site>319</site>
+            <site>320</site>
+            <site>346</site>
+            <site>355</site>
+            <site>359</site>
+            <site>343</site>
+        </sites>
+        <word>coon</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>139</site>
+            <site>141</site>
+            <site>146</site>
+            <site>149</site>
+            <site>312</site>
+            <site>313</site>
+            <site>321</site>
+            <site>322</site>
+            <site>324</site>
+            <site>328</site>
+            <site>344</site>
+            <site>345</site>
+            <site>351</site>
+            <site>357</site>
+            <site>306</site>
+            <site>319</site>
+            <site>320</site>
+            <site>346</site>
+            <site>355</site>
+            <site>359</site>
+        </sites>
+        <word>gaylord</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>154</site>
+            <site>355</site>
+            <site>359</site>
+            <site>10003715</site>
+        </sites>
+        <word>BRB</word>
+        <word>BTW</word>
+        <word>LOL</word>
+        <word>allah</word>
+        <word>assface</word>
+        <word>blow</word>
+        <word>bunny</word>
+        <word>butt</word>
+        <word>camel</word>
+        <word>clitfucker</word>
+        <word>cockmonger</word>
+        <word>damit</word>
+        <word>dumfuck</word>
+        <word>fool</word>
+        <word>fucka</word>
+        <word>futs</word>
+        <word>god</word>
+        <word>homofuck</word>
+        <word>homoshit</word>
+        <word>homotard</word>
+        <word>jerk</word>
+        <word>jerkoff</word>
+        <word>lame</word>
+        <word>lamefuck</word>
+        <word>lameshit</word>
+        <word>lmfao</word>
+        <word>mcass</word>
+        <word>mcasshole</word>
+        <word>mcfuck</word>
+        <word>monkey</word>
+        <word>motha</word>
+        <word>muncher</word>
+        <word>niggas</word>
+        <word>nucking</word>
+        <word>nut</word>
+        <word>nuts</word>
+        <word>penises</word>
+        <word>sack</word>
+        <word>scank</word>
+        <word>testicles</word>
+        <word>titty</word>
+        <word>titty</word>
+        <word>wth</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>154</site>
+            <site>355</site>
+            <site>10003715</site>
+        </sites>
+        <word>FYI</word>
+        <word>TY</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>355</site>
+            <site>359</site>
+        </sites>
+        <word>porch</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>306</site>
+        </sites>
+        <word>&#58;-\\(</word>
+        <word>&#58;-\\)</word>
+        <word>&#58;\\(</word>
+        <word>&#58;\\)</word>
+        <word>;-\\)</word>
+        <word>;\\)</word>
+        <word>BRB</word>
+        <word>BTW</word>
+        <word>FYI</word>
+        <word>LOL</word>
+        <word>TY</word>
+        <word>assface</word>
+        <word>mick</word>
+    </words>
+    <words>
+        <sites>
+            <site>319</site>
+        </sites>
+        <word>blow +job</word>
+        <word>brocha</word>
+        <word>bumchod</word>
+        <word>chodela</word>
+        <word>chunni</word>
+        <word>chupa</word>
+        <word>cuntmama</word>
+        <word>dumb +ass</word>
+        <word>fuck +nuts</word>
+        <word>gaandfat</word>
+        <word>gaandmasti</word>
+        <word>gaandu</word>
+        <word>gago</word>
+        <word>ghondoo</word>
+        <word>inutil</word>
+        <word>lundoos</word>
+        <word>mick</word>
+        <word>parichod</word>
+        <word>pucchi</word>
+        <word>sand +nigger</word>
+        <word>tae</word>
+        <word>tanga</word>
+        <word>tarantado</word>
+        <word>tukmol</word>
+    </words>
+    <words>
+        <sites>
+            <site>320</site>
+        </sites>
+        <word>mick</word>
+    </words>
+    <words>
+        <sites>
+            <site>139</site>
+            <site>141</site>
+            <site>146</site>
+            <site>149</site>
+            <site>312</site>
+            <site>313</site>
+            <site>321</site>
+            <site>322</site>
+            <site>324</site>
+            <site>328</site>
+            <site>344</site>
+            <site>345</site>
+            <site>351</site>
+            <site>357</site>
+        </sites>
+        <word>mick</word>
+    </words>
+    <words>
+        <sites>
+            <site>139</site>
+        </sites>
+        <word>pimb</word>
+    </words>
+    <words>
+        <sites>
+            <site>346</site>
+        </sites>
+        <word>CO\u00D1O</word>
+        <word>JI\u00D1AR</word>
+        <word>MARIC\u00D3N</word>
+        <word>ang</word>
+        <word>aweonao!!</word>
+        <word>bak'la</word>
+        <word>balurde</word>
+        <word>bastardo</word>
+        <word>binibrocha</word>
+        <word>blow +job</word>
+        <word>boludo</word>
+        <word>bruha</word>
+        <word>burro</word>
+        <word>cabron</word>
+        <word>cachimba</word>
+        <word>cagar</word>
+        <word>cago</word>
+        <word>calientapollas</word>
+        <word>callate +osico</word>
+        <word>capullo</word>
+        <word>carajo</word>
+        <word>chapero</word>
+        <word>chichi</word>
+        <word>chichis</word>
+        <word>chichotas</word>
+        <word>chile +pelon</word>
+        <word>chilito</word>
+        <word>chimba</word>
+        <word>chinga</word>
+        <word>chingada</word>
+        <word>chingados</word>
+        <word>chingar</word>
+        <word>chingas</word>
+        <word>chingate</word>
+        <word>chocho</word>
+        <word>chorizo</word>
+        <word>chorra</word>
+        <word>chupa</word>
+        <word>chupalo</word>
+        <word>chupamela</word>
+        <word>chupar</word>
+        <word>cipote</word>
+        <word>co\u00F1o</word>
+        <word>cochina</word>
+        <word>cochino</word>
+        <word>coger</word>
+        <word>cojer</word>
+        <word>cojonazos</word>
+        <word>cojones</word>
+        <word>concha</word>
+        <word>conchetumare</word>
+        <word>cono!</word>
+        <word>culero</word>
+        <word>culo</word>
+        <word>culo</word>
+        <word>desgraciado</word>
+        <word>doblada</word>
+        <word>dona</word>
+        <word>dumb +ass</word>
+        <word>engot</word>
+        <word>estupida</word>
+        <word>estupido</word>
+        <word>follar</word>
+        <word>folle</word>
+        <word>follen</word>
+        <word>forra</word>
+        <word>forro</word>
+        <word>ganas</word>
+        <word>gi-atay'</word>
+        <word>gilipollas</word>
+        <word>gilipollas</word>
+        <word>guarra</word>
+        <word>hipon</word>
+        <word>hostia</word>
+        <word>huevo</word>
+        <word>huevos</word>
+        <word>ina</word>
+        <word>inamaw'</word>
+        <word>infierno</word>
+        <word>ingle</word>
+        <word>ingle</word>
+        <word>ji\u00F1ar</word>
+        <word>joder</word>
+        <word>joto</word>
+        <word>kantot</word>
+        <word>lela</word>
+        <word>malparida</word>
+        <word>mamahuevo</word>
+        <word>mamon</word>
+        <word>maric\u00F3n</word>
+        <word>marica</word>
+        <word>mariconazo</word>
+        <word>marihuana</word>
+        <word>mariposa</word>
+        <word>mariquita</word>
+        <word>mataria</word>
+        <word>mato</word>
+        <word>mick</word>
+        <word>mierda</word>
+        <word>mo</word>
+        <word>momada</word>
+        <word>nabo</word>
+        <word>nalgas</word>
+        <word>odio</word>
+        <word>ojete</word>
+        <word>orto</word>
+        <word>pajero</word>
+        <word>pakshet</word>
+        <word>panocha</word>
+        <word>payaso</word>
+        <word>pelotas</word>
+        <word>pelotudo</word>
+        <word>pendeja</word>
+        <word>pendejo</word>
+        <word>perra</word>
+        <word>peste'</word>
+        <word>peto</word>
+        <word>pichacorta</word>
+        <word>pija</word>
+        <word>pinche</word>
+        <word>pinga</word>
+        <word>pinnus</word>
+        <word>piruja</word>
+        <word>pokpok</word>
+        <word>polla</word>
+        <word>poronga</word>
+        <word>punetero</word>
+        <word>punyetero</word>
+        <word>pupila</word>
+        <word>puta</word>
+        <word>putanginamo</word>
+        <word>putas</word>
+        <word>putas</word>
+        <word>rabo</word>
+        <word>raja</word>
+        <word>skonka</word>
+        <word>soplanucas</word>
+        <word>sunog</word>
+        <word>tae</word>
+        <word>tanga</word>
+        <word>tetas</word>
+        <word>tonta</word>
+        <word>tontopollas</word>
+        <word>verga</word>
+        <word>vergo</word>
+        <word>verija</word>
+        <word>yabag'</word>
+        <word>yawa'</word>
+        <word>zopupla</word>
+        <word>zorra</word>
+        <word>zorra</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>10003716</site>
+            <site>10003718</site>
+        </sites>
+        <word>merde</word>
+        <word>ordure</word>
+        <word>baiser</word>
+        <word>pute</word>
+        <word>putain</word>
+        <word>cul</word>
+        <word>bite</word>
+        <word>Chienne</word>
+        <word>salope</word>
+        <word>putain</word>
+        <word>bouffon</word>
+        <word>salope</word>
+        <word>conasse</word>
+        <word>poufiasse</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>154</site>
+            <site>343</site>
+            <site>10003715</site>
+        </sites>
+        <word>BUKAKE</word>
+        <word>cameljockey</word>
+        <word>Cockswallower</word>
+        <word>Damit</word>
+        <word>Deepthroat</word>
+        <word>DFK</word>
+        <word>dillhole</word>
+        <word>Douchebaggery</word>
+        <word>douchey</word>
+        <word>douchie</word>
+        <word>Douchiness</word>
+        <word>Freaking</word>
+        <word>FUBar</word>
+        <word>gangbang</word>
+        <word>gangbanger</word>
+        <word>Gimp</word>
+        <word>gtfo</word>
+        <word>hooker</word>
+        <word>ID10T</word>
+        <word>Imbecile</word>
+        <word>Jerk</word>
+        <word>Jew</word>
+        <word>jizzle</word>
+        <word>LMFAO</word>
+        <word>meatcurtains</word>
+        <word>Moron</word>
+        <word>Nappy</word>
+        <word>OMFG</word>
+        <word>OMG</word>
+        <word>prostitute</word>
+        <word>Ratard</word>
+        <word>Retard</word>
+        <word>Retarded</word>
+        <word>ROTFLMAO</word>
+        <word>Semen</word>
+        <word>Shiteater</word>
+        <word>SMH</word>
+        <word>Spaz</word>
+        <word>Spearchucker</word>
+        <word>Sperm</word>
+        <word>Testicles</word>
+        <word>towelhead</word>
+        <word>wanker</word>
+        <word>weta</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>154</site>
+            <site>10003715</site>
+        </sites>
+        <word>balls</word>
+        <word>cameltoe</word>
+        <word>Hump</word>
+        <word>Lame</word>
+        <word>bifurcation</word>
+        <word>blessed</word>
+        <word>supportive</word>
+        <word>humbly</word>
+        <word>needful</word>
+        <word>til</word>
+        <word>till</word>
+        <word>bye</word>
+        <word>hence</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>154</site>
+            <site>10003715</site>
+        </sites>
+        <word>abismo</word>
+        <word>asno</word>
+        <word>asqueroso</word>
+        <word>asshole</word>
+        <word>bastardo</word>
+        <word>boba</word>
+        <word>bobo</word>
+        <word>bolas</word>
+        <word>bruja</word>
+        <word>burra</word>
+        <word>burro</word>
+        <word>cabron</word>
+        <word>caca</word>
+        <word>cagador</word>
+        <word>cajado</word>
+        <word>cajador</word>
+        <word>cajando</word>
+        <word>callate</word>
+        <word>carajo</word>
+        <word>chiche</word>
+        <word>chiches</word>
+        <word>chinga</word>
+        <word>chingad</word>
+        <word>chingada</word>
+        <word>chingado</word>
+        <word>chingador</word>
+        <word>chingar</word>
+        <word>chingon</word>
+        <word>chino</word>
+        <word>coje</word>
+        <word>cojedor</word>
+        <word>cojer</word>
+        <word>cojida</word>
+        <word>cojido</word>
+        <word>cojo</word>
+        <word>cojones</word>
+        <word>comedor</word>
+        <word>comedora</word>
+        <word>consolador</word>
+        <word>culero</word>
+        <word>culo</word>
+        <word>demonio</word>
+        <word>diablos</word>
+        <word>dios</word>
+        <word>dn</word>
+        <word>duro</word>
+        <word>enchufe</word>
+        <word>enojada</word>
+        <word>enojo</word>
+        <word>enojodo</word>
+        <word>escroto</word>
+        <word>estacada</word>
+        <word>estupido</word>
+        <word>extremo</word>
+        <word>fifar</word>
+        <word>frijolero</word>
+        <word>gord</word>
+        <word>gorda</word>
+        <word>gordo</word>
+        <word>grande</word>
+        <word>guerro</word>
+        <word>homosexual</word>
+        <word>huevon</word>
+        <word>huevos</word>
+        <word>idiota</word>
+        <word>infierno</word>
+        <word>japones</word>
+        <word>jesucristo</word>
+        <word>joder</word>
+        <word>joroba</word>
+        <word>joto</word>
+        <word>judio</word>
+        <word>jungla</word>
+        <word>leche</word>
+        <word>lesbiana</word>
+        <word>lisiado</word>
+        <word>loba</word>
+        <word>lobas</word>
+        <word>loca</word>
+        <word>loco</word>
+        <word>loma</word>
+        <word>macho</word>
+        <word>maldito</word>
+        <word>mamada</word>
+        <word>mamadas</word>
+        <word>mamador</word>
+        <word>mamar</word>
+        <word>mamon</word>
+        <word>mamona</word>
+        <word>mapache</word>
+        <word>maricon</word>
+        <word>metedura</word>
+        <word>miedera</word>
+        <word>mierda</word>
+        <word>mojada</word>
+        <word>mojado</word>
+        <word>morenito</word>
+        <word>muchacho</word>
+        <word>nalgon</word>
+        <word>nalgona</word>
+        <word>negro</word>
+        <word>orgia</word>
+        <word>paja</word>
+        <word>paja</word>
+        <word>pajo</word>
+        <word>panocha</word>
+        <word>panochas</word>
+        <word>pedo</word>
+        <word>pelotas</word>
+        <word>peluda</word>
+        <word>peludo</word>
+        <word>pendejo</word>
+        <word>pene</word>
+        <word>penes</word>
+        <word>perra</word>
+        <word>perras</word>
+        <word>pinche</word>
+        <word>pipi</word>
+        <word>polako</word>
+        <word>profunda</word>
+        <word>prostituta</word>
+        <word>puta</word>
+        <word>putas</word>
+        <word>putiar</word>
+        <word>puto</word>
+        <word>rencoroso</word>
+        <word>retardado</word>
+        <word>russio</word>
+        <word>seco</word>
+        <word>semen</word>
+        <word>tiron</word>
+        <word>tonta</word>
+        <word>tonto</word>
+        <word>vagina</word>
+        <word>verga</word>
+        <word>vergas</word>
+        <word>zorra</word>
+        <word>zorras</word>
+        <word>testículo</word>
+        <word>tonterías</word>
+        <word>imbécil</word>
+        <word>clítoris</word>
+        <word>coño</word>
+        <word>cabrón</word>
+        <word>alá</word>
+        <word>alemán</word>
+        <word>malévolo</word>
+        <word>masturbación</word>
+        <word>paquistaní</word>
+        <word>porquería</word>
+    </words>
+
+    <words>
+        <sites>
+            <site>343</site>
+        </sites>
+        <word>allah</word>
+        <word>anal</word>
+        <word>assface</word>
+        <word>assrape</word>
+        <word>ballbag</word>
+        <word>ballchin</word>
+        <word>ballsack</word>
+        <word>bish</word>
+        <word>biatch</word>
+        <word>bitcher</word>
+        <word>bitchers</word>
+        <word>bitchin</word>
+        <word>bitching</word>
+        <word>biotch</word>
+        <word>biotchy</word>
+        <word>blumpkin</word>
+        <word>bucketcunt</word>
+        <word>butthole</word>
+        <word>buttplug</word>
+        <word>buttrape</word>
+        <word>b1tch</word>
+        <word>clitfucker</word>
+        <word>cocaine</word>
+        <word>cockhound</word>
+        <word>cockmonger</word>
+        <word>cumcatcher</word>
+        <word>cumdump</word>
+        <word>communist</word>
+        <word>cumshot</word>
+        <word>cunty</word>
+        <word>c0ck</word>
+        <word>cyberfuck</word>
+        <word>cyberfucked</word>
+        <word>cyberfucker</word>
+        <word>cyberfucking</word>
+        <word>dammit</word>
+        <word>dumfuck</word>
+        <word>ejackulate</word>
+        <word>ejaculate</word>
+        <word>ejaculated</word>
+        <word>ejaculates</word>
+        <word>ejaculation</word>
+        <word>felch</word>
+        <word>felcher</word>
+        <word>felching</word>
+        <word>felches</word>
+        <word>fellate</word>
+        <word>fingerfuck</word>
+        <word>fingerfucker</word>
+        <word>fingerfucking</word>
+        <word>fistfuck</word>
+        <word>fistfickers</word>
+        <word>fistfucking</word>
+        <word>FML</word>
+        <word>fuckme</word>
+        <word>fuckmylife</word>
+        <word>fuckyourlife</word>
+        <word>fucka</word>
+        <word>fuckable</word>
+        <word>fuckity</word>
+        <word>fugly</word>
+        <word>fupa</word>
+        <word>fux0r</word>
+        <word>fvck</word>
+        <word>gaysex</word>
+        <word>god</word>
+        <word>goddammit</word>
+        <word>gonads</word>
+        <word>gwat</word>
+        <word>hamwallett</word>
+        <word>hardcoresex</word>
+        <word>homofuck</word>
+        <word>homoshit</word>
+        <word>homotard</word>
+        <word>hoochie</word>
+        <word>horniest</word>
+        <word>horny</word>
+        <word>hotsex</word>
+        <word>injun</word>
+        <word>jerkoff</word>
+        <word>jism</word>
+        <word>jizm</word>
+        <word>KMA</word>
+        <word>lamefuck</word>
+        <word>lameshit</word>
+        <word>LSD</word>
+        <word>mafugly</word>
+        <word>marijuana</word>
+        <word>masturbate</word>
+        <word>mcass</word>
+        <word>mcasshole</word>
+        <word>mcbitch</word>
+        <word>mcfuck</word>
+        <word>mcfupa</word>
+        <word>mcshit</word>
+        <word>meth</word>
+        <word>methamphetamine</word>
+        <word>motha</word>
+        <word>mothafucker</word>
+        <word>mothafucking</word>
+        <word>motherfucka</word>
+        <word>mothafuckaz</word>
+        <word>mothafucked</word>
+        <word>mothafucking</word>
+        <word>mouliewop</word>
+        <word>muncher</word>
+        <word>muslim</word>
+        <word>nazi</word>
+        <word>niggas</word>
+        <word>orgasm</word>
+        <word>penises</word>
+        <word>phonesex</word>
+        <word>poof</word>
+        <word>poop</word>
+        <word>pooper</word>
+        <word>poopface</word>
+        <word>poopie</word>
+        <word>poopy</word>
+        <word>qweef</word>
+        <word>scank</word>
+        <word>schmuck</word>
+        <word>Sexy</word>
+        <word>smegma</word>
+        <word>smut</word>
+        <word>spooge</word>
+        <word>titties</word>
+        <word>titty</word>
+        <word>wth</word>
+    </words>
+
+    <expressions>
+        <sites>
+            <site>139</site>
+            <site>141</site>
+            <site>146</site>
+            <site>149</site>
+            <site>312</site>
+            <site>313</site>
+            <site>321</site>
+            <site>322</site>
+            <site>324</site>
+            <site>328</site>
+            <site>344</site>
+            <site>345</site>
+            <site>351</site>
+            <site>357</site>
+            <site>306</site>
+            <site>319</site>
+            <site>320</site>
+            <site>346</site>
+            <site>154</site>
+            <site>355</site>
+            <site>359</site>
+            <site>343</site>
+            <site>10003715</site>
+        </sites>
+        <expression>fuck</expression>
+    </expressions>
+
+    <expressions>
+        <sites>
+            <site>343</site>
+        </sites>
+        <expression>ass-</expression>
+        <expression>butt-</expression>
+        <expression>,,\!,,</expression>
+        <expression>,,\|,,</expression>
+        <expression>a\$\$</expression>
+        <expression>\$hit</expression>
+        <expression>b\!tch</expression>
+        <expression>pu\$\$y</expression>
+        <expression>blow +job</expression>
+        <expression>butt </expression>
+        <expression>camel +toe</expression>
+        <expression>camel-jockey</expression>
+        <expression>dam-it</expression>
+        <expression>dry +hump</expression>
+        <expression>dumb +ass</expression>
+        <expression> +f +u </expression>
+        <expression>f\*ck</expression>
+        <expression>Freakin'</expression>
+        <expression>Hell +ya</expression>
+        <expression>Hells +ya</expression>
+        <expression>jack +off</expression>
+        <expression>jerk +off</expression>
+        <expression>Jesus +Christ</expression>
+        <expression>Jesus +freak</expression>
+        <expression>Jew +bag</expression>
+        <expression>jungle +bunny</expression>
+        <expression>nucking +futs</expression>
+        <expression>nut +sack</expression>
+        <expression>porch +monkey</expression>
+        <expression>sand +nigger</expression>
+        <expression>Shut +up</expression>
+        <expression>Spear-chucker</expression>
+        <expression>Tar +baby</expression>
+        <expression>towel-head</expression>
+        <expression>Yo +mama</expression>
+    </expressions>
+
+    <expressions>
+        <sites>
+            <site>306</site>
+        </sites>
+        <expression>nucking +futz</expression>
+    </expressions>
+
+    <expressions>
+        <sites>
+            <site>306</site>
+        </sites>
+        <expression>camel +toe</expression>
+        <expression>butt +plug</expression>
+        <expression>blow +job</expression>
+        <expression>dumb +ass</expression>
+        <expression>fuck +nuts</expression>
+        <expression>jack +off</expression>
+        <expression>jerk +off</expression>
+        <expression>jungle +bunny</expression>
+        <expression>nucking +futs</expression>
+        <expression>nut +sack</expression>
+        <expression>pissed +off</expression>
+        <expression>porch +monkey</expression>
+        <expression>sand +nigger</expression>
+    </expressions>
+
+    <expressions>
+        <sites>
+            <site>319</site>
+        </sites>
+        <expression>camel +toe</expression>
+        <expression>butt +plug</expression>
+        <expression>jack +off</expression>
+        <expression>jerk +off</expression>
+        <expression>jungle +bunny</expression>
+        <expression>nucking +futs</expression>
+        <expression>nut +sack</expression>
+        <expression>pissed +off</expression>
+        <expression>porch +monkey</expression>
+        <expression>anak +ka +nang +puta</expression>
+        <expression>apna +land +choos</expression>
+        <expression>apni +gaand +mein +muthi +daal</expression>
+        <expression>apni +ma +ko +ja +choos</expression>
+        <expression>backar +chodu</expression>
+        <expression>bhand +khau</expression>
+        <expression>bhandwe +ki +aulad</expression>
+        <expression>bhosad +chod</expression>
+        <expression>bur +ki +chatani</expression>
+        <expression>chhola +phudakna</expression>
+        <expression>chinaal +ke +gadde +ke +nipple +ke +baal +ke +joon</expression>
+        <expression>chipkali +ke +chut +ke +pasine</expression>
+        <expression>chipkali +ke +gaand +ke +pasine</expression>
+        <expression>chipkali +ke +jhaat +ke +baal</expression>
+        <expression>chippkali +ke +jhaant +ke +paseene</expression>
+        <expression>chodu +bhagat</expression>
+        <expression>choot +ka +baal</expression>
+        <expression>choot +ke +bhoot</expression>
+        <expression>choot +marani +ka</expression>
+        <expression>chudai +khana</expression>
+        <expression>chudan +chudai</expression>
+        <expression>chullu +bhar +muth +mein +doob +mar</expression>
+        <expression>chup +ke +chut +hai</expression>
+        <expression>chut +ke +dhakkan</expression>
+        <expression>chut +ke +pasine +mein +talay +huye +bhajiye</expression>
+        <expression>chut +mari +ke</expression>
+        <expression>didilain +ko +ang +tingil</expression>
+        <expression>fatay +huay +lundtopi +ka +result</expression>
+        <expression>fatey +condom +kay +natije</expression>
+        <expression>gaand +ka +makhan</expression>
+        <expression>gaand +main +danda</expression>
+        <expression>gaand +main +keera</expression>
+        <expression>gaand +main +lassan</expression>
+        <expression>gaand +marau</expression>
+        <expression>gaand +mein +bambu</expression>
+        <expression>gand +ka +khatmal</expression>
+        <expression>gandkate +kutte</expression>
+        <expression>jaa +apni +bajaa</expression>
+        <expression>jhaat +ka +bhaaji</expression>
+        <expression>jhant +chaatu</expression>
+        <expression>kali +choot +ke +safaid +jhaat</expression>
+        <expression>kutte +ka +beej</expression>
+        <expression>kutte +ke +poot, teri +maa +ki +choot</expression>
+        <expression>land +ka +bheja</expression>
+        <expression>lavde +ke +baal</expression>
+        <expression>lund +choosu</expression>
+        <expression>lund +chus</expression>
+        <expression>lund +fakeer</expression>
+        <expression>lund +ka +shorba</expression>
+        <expression>lund +ke +pasine</expression>
+        <expression>lund +pe +chad +ja</expression>
+        <expression>lund +pe +thand +hai</expression>
+        <expression>lunukin +mo +ang +tamod +ko</expression>
+        <expression>ma +chudi</expression>
+        <expression>maa +ke +bhadwe</expression>
+        <expression>mabaho +ang +kiki +mo!</expression>
+        <expression>magkantutan +tayo</expression>
+        <expression>malaki +ang +susu +mo</expression>
+        <expression>maliit +ang +titi +mo</expression>
+        <expression>mera +chunni +choos</expression>
+        <expression>mere +chuus +maro</expression>
+        <expression>meri +lund +choos</expression>
+        <expression>muth +maar</expression>
+        <expression>na +choot</expression>
+        <expression>naninigas +ang +titi +ko</expression>
+        <expression>phatele +nirodh +ke +natije</expression>
+        <expression>puke +ng +ina +mo</expression>
+        <expression>putang +ina +mo</expression>
+        <expression>raand +ka +pati</expression>
+        <expression>raandi +baajer</expression>
+        <expression>rubber +bhosda</expression>
+        <expression>rundi +ke +tatti +pe +biathne +wala +makhi</expression>
+        <expression>rundi +ki +tatti +pe +baithnewaali +makkhi</expression>
+        <expression>rundi +ko +chod</expression>
+        <expression>rundi +ko +choud</expression>
+        <expression>sadi +hui +gand</expression>
+        <expression>sipsipin +mo +ang +titi +ko</expression>
+        <expression>tera +adha +nirodh +mein +rah +gaya</expression>
+        <expression>tere +gaand +mein +keede +paday</expression>
+        <expression>tere +mai +ki +chut +tere +baap +ka</expression>
+        <expression>teri +gaand +main +kute +ka +lund</expression>
+        <expression>teri +gand +mein +haathi +ka +lund</expression>
+        <expression>teri +ma +gadha +ka +lund +choosay</expression>
+        <expression>teri +ma +gandi +rundi</expression>
+        <expression>teri +ma +ki +choot +me +hathi +ka +dum</expression>
+        <expression>teri +ma +ki +chut +mai +sabka +lund</expression>
+        <expression>teri +maa +ka +bhosda</expression>
+        <expression>teri +maa +ki +bimaar +badboodar +choot</expression>
+        <expression>teri +maa +ki +chute</expression>
+        <expression>teri +maa +ki +phudi +guy +ki +hai</expression>
+        <expression>tor +mai +ke +chodho</expression>
+        <expression>wala +kang +puwet</expression>
+        <expression>wala +kang +titi</expression>
+    </expressions>
+    <expressions>
+        <sites>
+            <site>320</site>
+        </sites>
+        <expression>blow +job</expression>
+        <expression>butt +plug</expression>
+        <expression>camel +toe</expression>
+        <expression>dumb +ass</expression>
+        <expression>fuck +nuts</expression>
+        <expression>jack +off</expression>
+        <expression>jerk +off</expression>
+        <expression>jungle +bunny</expression>
+        <expression>nucking +futs</expression>
+        <expression>nut +sack</expression>
+        <expression>pissed +off</expression>
+        <expression>porch +monkey</expression>
+        <expression>sand +nigger</expression>
+    </expressions>
+    <expressions>
+        <sites>
+            <site>139</site>
+            <site>141</site>
+            <site>146</site>
+            <site>149</site>
+            <site>154</site>
+            <site>306</site>
+            <site>312</site>
+            <site>313</site>
+            <site>320</site>
+            <site>321</site>
+            <site>322</site>
+            <site>324</site>
+            <site>328</site>
+            <site>343</site>
+            <site>344</site>
+            <site>345</site>
+            <site>346</site>
+            <site>351</site>
+            <site>357</site>
+            <site>10003715</site>
+        </sites>
+        <expression>\bhard +on\b</expression>
+    </expressions>
+    <expressions>
+        <sites>
+            <site>141</site>
+            <site>146</site>
+            <site>149</site>
+            <site>139</site>
+            <site>312</site>
+            <site>313</site>
+            <site>321</site>
+            <site>322</site>
+            <site>324</site>
+            <site>328</site>
+            <site>344</site>
+            <site>345</site>
+            <site>351</site>
+            <site>357</site>
+        </sites>
+        <expression>blow +job</expression>
+        <expression>butt +plug</expression>
+        <expression>camel +toe</expression>
+        <expression>jack +off</expression>
+        <expression>jerk +off</expression>
+        <expression>jungle +bunny</expression>
+        <expression>nucking +futs</expression>
+        <expression>nut +sack</expression>
+        <expression>pissed +off</expression>
+        <expression>porch +monkey</expression>
+        <expression>sand +nigger</expression>
+    </expressions>
+    <expressions>
+        <sites>
+            <site>346</site>
+        </sites>
+        <expression>butt +plug</expression>
+        <expression>camel +toe</expression>
+        <expression>jack +off</expression>
+        <expression>jerk +off</expression>
+        <expression>jungle +bunny</expression>
+        <expression>nucking +futs</expression>
+        <expression>nut +sack</expression>
+        <expression>pissed +off</expression>
+        <expression>porch +monkey</expression>
+        <expression>sand +nigger</expression>
+        <expression>anak +ka +nang +puta</expression>
+        <expression>bati +ka +ug +nawong</expression>
+        <expression>bogo +ka '</expression>
+        <expression>buang +ka'</expression>
+        <expression>di +kasabot</expression>
+        <expression>didilain +ko +ang +tingil +mo</expression>
+        <expression>gahi +ka +ug +ulo</expression>
+        <expression>kainin +mo +tae +ko!</expression>
+        <expression>lunukin +mo +ang +tamod +ko</expression>
+        <expression>magkantutan +tayo</expression>
+        <expression>malaki +ang +susu +mo</expression>
+        <expression>maliit +ang +titi +mo</expression>
+        <expression>naninigas +ang +titi +ko</expression>
+        <expression>puke +nang +ina +mo</expression>
+        <expression>pu'keng +ina +mo</expression>
+        <expression>puki +ng +ina +mo</expression>
+        <expression>puta +ka</expression>
+        <expression>putang +ina +nyo</expression>
+        <expression>putangina +mo!</expression>
+        <expression>sipsipin +mo +ang +titi +ko</expression>
+        <expression>follada +madre</expression>
+        <expression>mamo +el +culo</expression>
+        <expression>a +que +chirlo</expression>
+        <expression>besa +culo +puto</expression>
+        <expression>besa +puto</expression>
+        <expression>besame +culo</expression>
+        <expression>boludo (argentina)</expression>
+        <expression>cabeza +guebo</expression>
+        <expression>cagaste +caca</expression>
+        <expression>cara +cona</expression>
+        <expression>cara +culo</expression>
+        <expression>cara +verga</expression>
+        <expression>chinga +madre +puta</expression>
+        <expression>chinga +madre +y +muerte +puto</expression>
+        <expression>chinga +madre +y +muerte +puta</expression>
+        <expression>chinga +tu +madre</expression>
+        <expression>chinko +dinga</expression>
+        <expression>chupa +lluevos</expression>
+        <expression>chupa +me +peha</expression>
+        <expression>chupa +pito</expression>
+        <expression>chupa +verga</expression>
+        <expression>chupame +pija</expression>
+        <expression>chupame +la +polla</expression>
+        <expression>chupame +turca</expression>
+        <expression>chupar +pene</expression>
+        <expression>chupas +huevos</expression>
+        <expression>coja +burro</expression>
+        <expression>come +mierda</expression>
+        <expression>cono +huele +mierda</expression>
+        <expression>con-yo +sue-see-yo</expression>
+        <expression>conyo +sucio</expression>
+        <expression>conyo +sucio (con-yo +sue-see-yo)</expression>
+        <expression>el +orto</expression>
+        <expression>estas +fumando +la +pasta +base</expression>
+        <expression>ghiata +puto</expression>
+        <expression>gorda +fea</expression>
+        <expression>hacete +cojer</expression>
+        <expression>hazte +cojer</expression>
+        <expression>hijo +de +mil +cojeros</expression>
+        <expression>hijo +de +puta</expression>
+        <expression>hueles +mierda</expression>
+        <expression>jode +madre</expression>
+        <expression>kaka +deltaro</expression>
+        <expression>la +chichi</expression>
+        <expression>la +pija</expression>
+        <expression>la +reputisima +madre +remil +pario</expression>
+        <expression>ladron +de +mierda</expression>
+        <expression>lameme +el +orto</expression>
+        <expression>las +tetas</expression>
+        <expression>mama +guebo</expression>
+        <expression>mamame +verga</expression>
+        <expression>mamo +verga</expression>
+        <expression>mamo +la +panocha</expression>
+        <expression>manda +huevos</expression>
+        <expression>me +cago +hostia</expression>
+        <expression>me +cago +leche!</expression>
+        <expression>me +cago +en +ti</expression>
+        <expression>me +cagoputa +madre</expression>
+        <expression>me +valle +verga</expression>
+        <expression>metete +palo +por +culo</expression>
+        <expression>metetelo +por +el +culo</expression>
+        <expression>no +me +jodas</expression>
+        <expression>ojala +mueras</expression>
+        <expression>pequeno +pito</expression>
+        <expression>pinche +cabron</expression>
+        <expression>pinche +pendejo</expression>
+        <expression>pinche +puta</expression>
+        <expression>pongalo +boca, puta!</expression>
+        <expression>pudrete +infierno</expression>
+        <expression>pudrete, pinche +cerda +asquerosa</expression>
+        <expression>puta +fea</expression>
+        <expression>puta +madre</expression>
+        <expression>que +te +den +por +culo</expression>
+        <expression>que +te +jodan</expression>
+        <expression>rata +inmunda</expression>
+        <expression>seas +mamon</expression>
+        <expression>sopletiamela +la +verga</expression>
+        <expression>te +voy +a +romper +el +orto.</expression>
+        <expression>va +chingate!</expression>
+        <expression>vamos +borrachar +esta +noche</expression>
+        <expression>vete +al +infierno!</expression>
+        <expression>vete +para +verga</expression>
+        <expression>voy +matarte</expression>
+    </expressions>
+    <expressions>
+        <sites>
+            <site>359</site>
+        </sites>
+        <expression>sand +nigger</expression>
+        <expression>nut +sack</expression>
+        <expression>nucking +futs</expression>
+        <expression>porch +monkey</expression>
+        <expression>jungle +bunny</expression>
+        <expression>jerk +off</expression>
+        <expression>jack +off</expression>
+        <expression>camel +toe</expression>
+        <expression>butt +plug</expression>
+        <expression>blow +job</expression>
+        <expression>jesus +freak</expression>
+        <expression>jew +bag</expression>
+        <expression>shut +up</expression>
+        <expression>tar +baby</expression>
+        <expression>yo +mama</expression>
+    </expressions>
+    <expressions>
+        <sites>
+            <site>154</site>
+            <site>355</site>
+            <site>359</site>
+            <site>10003715</site>
+        </sites>
+        <expression>blow +job</expression>
+        <expression> +f +u </expression>
+        <expression>jack +off</expression>
+    </expressions>
+
+    <expressions>
+        <sites>
+            <site>154</site>
+            <site>10003715</site>
+        </sites>
+        <expression>butt +plug</expression>
+        <expression>camel +toe</expression>
+        <expression>dry +hump</expression>
+        <expression>dumb +ass</expression>
+        <expression>fuck +nuts</expression>
+        <expression>hell +ya</expression>
+        <expression>hells +ya</expression>
+        <expression>Jesus +freak</expression>
+        <expression>pissed +off</expression>
+        <expression>nucking +futs</expression>
+        <expression>jungle +bunny</expression>
+        <expression>nut +sack</expression>
+        <expression>tar +baby</expression>
+        <expression>sand +nigger</expression>
+        <expression>shut +up</expression>
+        <expression>porch +monkey</expression>
+        <expression>jew +bag</expression>
+        <expression>yo +mama</expression>
+        <expression><![CDATA[<3]]></expression>
+        <expression>freakin'</expression>
+        <expression>camel-jockey</expression>
+        <expression>\:\)</expression>
+        <expression>\;\)</expression>
+        <expression>spear-chucker</expression>
+        <expression>towel-head</expression>
+        <expression>camel-jockey</expression>
+        <expression>hijo +de</expression>
+        <expression>ja +ja</expression>
+        <expression>purto +rican +person</expression>
+        <expression>ha +ha</expression>
+        <expression>(?&lt;=^|[^-a-z0-9_])facing\b</expression>
+    </expressions>
+
+    <expressions>
+        <sites>
+            <site>139</site>
+            <site>141</site>
+            <site>146</site>
+            <site>149</site>
+            <site>312</site>
+            <site>313</site>
+            <site>321</site>
+            <site>322</site>
+            <site>324</site>
+            <site>328</site>
+            <site>344</site>
+            <site>345</site>
+            <site>351</site>
+            <site>357</site>
+            <site>306</site>
+            <site>319</site>
+            <site>320</site>
+            <site>346</site>
+            <site>154</site>
+            <site>355</site>
+            <site>359</site>
+            <site>343</site>
+            <site>10003729</site>
+            <site>10003715</site>
+        </sites>
+        <expression>ass-hat</expression>
+        <expression>ass-jabber</expression>
+        <expression>ass-pirate</expression>
+        <expression>butt-pirate</expression>
+        <expression>douche-fag</expression>
+        <expression>va-j-j</expression>
+    </expressions>
+
+    <expressions>
+        <sites>
+            <site>10003716</site>
+            <site>10003718</site>
+        </sites>
+        <expression>enculé</expression>
+        <expression>va +bouffer +ta +merde</expression>
+        <expression>tu +m'emmerdes</expression>
+        <expression>tu +me +fais +chier</expression>
+        <expression>Va +te +faire +enculer</expression>
+        <expression>va +te +faire +voir</expression>
+        <expression>va +au +diable</expression>
+        <expression>fous +le +camp</expression>
+        <expression>va +te +faire +cuire +un +oeuf</expression>
+        <expression>va +chier</expression>
+        <expression>te +faire +voir +chez +lez +Grecs</expression>
+        <expression>vas +te +faire +foutre</expression>
+        <expression>vas +te +faire +enculé</expression>
+        <expression>fils +de +pute</expression>
+        <expression>vas +te +branler</expression>
+        <expression>vieille +bique</expression>
+        <expression>un +con, +une +conasse</expression>
+        <expression>trou +du +cul</expression>
+        <expression>le +con, +la +chatte</expression>
+        <expression>con +comme +une +bite</expression>
+        <expression>ce +sont +des +conneries</expression>
+        <expression>léche +moi +et +fait +moi +jouir</expression>
+        <expression>suces +moi +la +bite, +enculé</expression>
+        <expression>un +pédé, +une +tantouze</expression>
+        <expression>mes +couilles +sur +ton +nez</expression>
+        <expression>pauvre +con</expression>
+        <expression>vas +pisser +dans</expression>
+        <expression>Va +te +faire +enculer</expression>
+        <expression>de +la +merde</expression>
+        <expression>va +chier</expression>
+        <expression>fils +de +pute</expression>
+        <expression>ta +mère +est +une +salope</expression>
+        <expression>lèche +mon +cul</expression>
+        <expression>Va +te +branler</expression>
+        <expression>Va +te +tripoter</expression>
+        <expression>Ta +gueule, +toi</expression>
+        <expression>Ferme +ta +gueule</expression>
+        <expression>Tu +te +ferme +la +gueule, +oui +ou +non?</expression>
+        <expression>Tu +vas +la +fermer, +oui?</expression>
+        <expression>Va +te +faire +enculer</expression>
+        <expression>nique +ta +mère</expression>
+        <expression>Tête +de +bite</expression>
+        <expression>Pauvre +conne</expression>
+        <expression>Tapette, +Pedale</expression>
+        <expression>va +te +faire +mettre, +connard</expression>
+        <expression>va +te +faire +mettre, +salope</expression>
+    </expressions>
+</illegal>

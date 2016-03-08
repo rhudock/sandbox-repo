@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" right="20" y="90" layout="absolute" color="#FFFFFF" title="{L10.n.getString('chat.escalation')}"
+	width="266" height="184" roundedBottomCorners="true" borderAlpha="1" backgroundAlpha="1" alpha="1" borderColor="#A4C6EB">
+
+	<mx:Script>
+	       <![CDATA[
+	       	import mx.events.ListEvent;
+	       	import com.inq.flash.messagingframework.StringUtils;
+	       	import com.inq.flash.agent.control.ChatPanelController;
+			import mx.events.CloseEvent;
+
+	       	private var controller:ChatPanelController;
+
+	       	public function init(controller: ChatPanelController):void {
+	       		this.initialize();
+	       		this.controller = controller;
+	       		customText.enabled = true;
+	       		customText.getFocus();
+	       	}
+
+			private function closeDialog(send: Boolean) : void {
+				if (send)
+					controller.escalateChat(StringUtils.encodeStringForMessage(customText.text));
+				else controller.cancelEscalateChat();
+			}
+		]]>
+	</mx:Script>
+
+	<mx:Label x="44" y="51" text="{L10.n.getString('escalation.reason')}"/>
+	<mx:TextArea id="customText" x="10" width="226" height="85" enabled="true" color="#000000" top="10"/>
+	<mx:Button id="submitButton" x="145" y="103" label="{L10.n.getString('submit')}" width="91" height="27" click="closeDialog(true)" color="#000000"/>
+	<mx:Button x="10" y="103" label="{L10.n.getString('cancel')}" width="91" height="27" click="closeDialog(false)" color="#000000"/>
+</mx:TitleWindow>

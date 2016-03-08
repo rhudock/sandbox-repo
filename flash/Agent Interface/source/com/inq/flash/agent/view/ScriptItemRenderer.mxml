@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Text xmlns:mx="http://www.adobe.com/2006/mxml"
+         selectable="false">
+    <mx:Script>
+        <![CDATA[
+            import com.inq.flash.common.beans.ScriptLine;
+            import com.inq.flash.common.data.MessageFields;
+            private static const FLAG_INACTIVE:int = 1;
+            private static const FLAG_SENT:int = 2;
+
+            protected override function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
+                super.updateDisplayList(unscaledWidth, unscaledHeight);
+                var color:uint = 0xffffff;
+                var scriptLine:ScriptLine = data as ScriptLine;
+                if (scriptLine) {
+                    if (scriptLine.type == 'header') {
+                        color = 0xE5E5E5;
+                    }
+                }
+                graphics.clear();
+                graphics.beginFill(color, getStyle("backgroundAlpha"));
+                graphics.drawRect(0, 0, width, height);
+                graphics.endFill();
+            }
+
+            private function requireSpecialRendering(scriptLine:ScriptLine):int {
+                if (this.parentDocument is ChatPanel) {
+                    var chatPanel:ChatPanel = ChatPanel(this.parentDocument);
+                    //note BIT AND operation
+                    if (0 == (chatPanel.deviceFlag & scriptLine.getDeviceFlags())) {
+                        return FLAG_INACTIVE;
+                    }
+                    if ((chatPanel.getController() != null && chatPanel.getController().hasScriptBeenSent(scriptLine.value))) {
+                        return FLAG_SENT;
+                    }
+                }
+                return 0;
+            }
+
+            override public function invalidateProperties():void {
+                var scriptLine:ScriptLine = data as ScriptLine;
+                var color:String = "#000000";
+                var fontWeight:String = "";
+                var fontSize:String = "13";
+                if (scriptLine != null) {
+                    if (scriptLine.type == "header" || scriptLine.type.toLowerCase() == MessageFields.TYPE_SCRIPT_COMMAND) {
+                        fontWeight = "bold";
+                    }
+                    var flags:int = requireSpecialRendering(scriptLine);
+                    if (flags & FLAG_INACTIVE) {
+                        fontSize = "10";
+                        color = "#CCCC99";
+                    } else if (flags & FLAG_SENT) {
+                        color = "#CCCCCC";
+                    } else {
+                        if (scriptLine.type == 'command') {
+                            color = "#4C459E";
+                        } else if (scriptLine.type == 'header') {
+                            color = "#000000";
+                        } else if (scriptLine.type == 'servercommand') {
+                            color = "#400080";
+                        }
+                    }
+                }
+                setStyle("color", color);
+                setStyle("fontWeight", fontWeight);
+                setStyle("fontSize", fontSize);
+                super.invalidateProperties();
+            }
+
+            public static function scriptItemLabel(item:Object):String {
+                var scriptLine:ScriptLine = item as ScriptLine;
+                var text:String = scriptLine.value;
+                if (scriptLine.hotkey) {
+                    text += "\n(" + scriptLine.hotkey + ")";
+                }
+                return text;
+            }
+        ]]>
+    </mx:Script>
+</mx:Text>
