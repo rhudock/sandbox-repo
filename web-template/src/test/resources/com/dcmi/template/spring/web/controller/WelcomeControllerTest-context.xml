@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	- DispatcherServlet application context for the IBIS Manager UI tier.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+   <import resource="classpath:applicationContext.xml"/>
+
+   <!--
+       The controllers are autodetected POJOs labeled with the @Controller annotation.
+    -->
+   <context:component-scan base-package="com.dcmi.template.spring.web">
+      <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+   </context:component-scan>
+
+   <!--
+       The services are autodetected POJOs labeled with the @Service annotation.
+    -->
+   <context:component-scan base-package="com.dcmi.template.spring.service">
+      <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+   </context:component-scan>
+
+   <!--
+      Resolves message strings from messages.properties, and messages_<language ID>.properties if applicable
+   -->
+
+   <!--<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">-->
+   <!--<property name="basenames" value="messages"/>-->
+   <!--</bean>-->
+
+   <!--<bean id="localChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">-->
+   <!--<property name="paramName" value="locale"/>-->
+   <!--</bean>-->
+
+   <!--
+      Locale Resolver
+   -->
+   <!--<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>-->
+
+
+</beans>

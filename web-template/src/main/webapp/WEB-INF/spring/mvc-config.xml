@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+   <!-- Configures the @Controller programming model -->
+   <mvc:annotation-driven/>
+
+   <!-- Forwards requests to the "/" resource to the "welcome" view -->
+   <mvc:view-controller path="/" view-name="welcome"/>
+
+
+   <!-- Maps request paths to @Controller classes; e.g. a path of /hotels looks for a controller named HotelsController -->
+   <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+      <property name="order" value="1"/>
+      <property name="defaultHandler">
+          <!--If no @Controller match, map path to a view to render; e.g. the "/intro" path would map to the view named "intro" -->
+         <bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
+      </property>
+   </bean>
+
+   <!-- Resolves logical view names returned by Controllers to Tiles; a view name to resolve is treated as the name of a tiles definition -->
+   <!--<bean id="tilesViewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">-->
+      <!--<property name="viewClass" value="org.springframework.webflow.mvc.view.FlowAjaxTilesView"/>-->
+   <!--</bean>-->
+
+
+
+
+
+   <!-- Configures Handler Interceptors -->
+   <mvc:interceptors>
+      <!--Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->
+      <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+   </mvc:interceptors>
+
+   <!-- Saves a locale change using a cookie -->
+   <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+   </bean>
+
+
+   <!--
+      Fixed Theme Resolver
+   -->
+   <!--<bean id="themeResolver" class="org.springframework.web.servlet.theme.FixedThemeResolver">-->
+   <!--<property name="defaultThemeName" value="ibisx"/>-->
+   <!--</bean>-->
+
+   <!--
+      Tiles View Resolver
+
+   <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+      <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/> </bean>
+   -->
+   <bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" p:order="1"/>
+
+   <!-- Resolves logical view names returned by Controllers to Tiles; a view name to resolve is treated as the name of a tiles definition -->
+   <!--<bean id="tilesViewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">-->
+   <!--<property name="viewClass" value="org.springframework.webflow.mvc.view.FlowAjaxTilesView"/>-->
+   <!--</bean>-->
+
+   <!-- Configures the Tiles layout system -->
+   <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+      <property name="definitions">
+         <list>
+            <value>/WEB-INF/tiles/layoutdefault.xml</value>
+            <value>/WEB-INF/tiles/views.xml</value>
+         </list>
+      </property>
+   </bean>
+
+   <!-- Dispatches requests mapped to POJO @Controllers implementations -->
+   <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />-->
+
+   <!-- Dispatches requests mapped to org.springframework.web.servlet.mvc.Controller implementations -->
+   <!--<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />-->
+
+
+   <!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->
+   <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+   <!--<property name="prefix" value="/WEB-INF/views/"/>-->
+   <!--<property name="suffix" value=".jsp"/>-->
+   <!--</bean>-->
+
+
+</beans>

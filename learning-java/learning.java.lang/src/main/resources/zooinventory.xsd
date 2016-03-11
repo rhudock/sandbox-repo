@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="Inventory">
+  <xs:complexType>
+    <xs:sequence>
+       <xs:element maxOccurs="unbounded" ref="Animal"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="Name" type="xs:string"/>
+
+<xs:element name="Animal">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="Name"/>
+      <xs:element name="Species" type="xs:string"/>
+      <xs:element name="Habitat" type="xs:string"/>
+      <xs:choice>
+         <xs:element name="Food" type="xs:string"/>
+         <xs:element ref="FoodRecipe"/>
+	  </xs:choice>
+      <xs:element name="Temperament" type="xs:string"/>
+      <xs:element name="Weight" type="xs:double"/>
+    </xs:sequence>
+    <xs:attribute name="animalClass" default="unknown">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="unknown"/>
+          <xs:enumeration value="mammal"/>
+          <xs:enumeration value="reptile"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="FoodRecipe">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="Name"/>
+      <xs:element maxOccurs="unbounded" name="Ingredient" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>

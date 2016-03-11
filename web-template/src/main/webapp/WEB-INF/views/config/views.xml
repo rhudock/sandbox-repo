@@ -1,0 +1,205 @@
+<!DOCTYPE tiles-definitions PUBLIC
+      "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+      "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+   <!-- Home -->
+
+   <definition name="gpdesigner" extends="manager.master">
+      <put-attribute name="title" value="IBIS Manager - Guest Portal Design"/>
+      <put-attribute name="content" value="gpdesigner.content"/>
+   </definition>
+
+   <definition name="gpdesigner.content" template="/WEB-INF/jsp/templates/gptemp.jsp">
+      <put-attribute name="landing-title" value="IBIS Manager"/>
+      <!--     <put-attribute name="landing-intro" value="/WEB-INF/jsp/welcome-intro.jsp"/>		-->
+      <put-attribute name="landing-content" value="/WEB-INF/jsp/config/guestportal/gpdesign.jsp"/>
+   </definition>
+
+
+   <!-- Configuration -->
+
+   <definition name="config.billing" extends="manager.master">
+      <put-attribute name="title" value="IBIS Manager - Configuration"/>
+      <put-attribute name="bodyId" value="config"/>
+      <put-attribute name="content" value="config.billing.content"/>
+
+      <put-list-attribute name="cssList">
+         <add-attribute value="/css/config-billing.css"/>
+      </put-list-attribute>
+
+      <put-list-attribute name="jsList">
+         <add-attribute value="/js/config-billing.js"/>
+      </put-list-attribute>
+   </definition>
+
+   <definition name="config.billing.content" template="/WEB-INF/jsp/templates/configuration.jsp">
+      <put-attribute name="config-section" value="Billing"/>
+      <put-attribute name="config-title" value="Billing Plans"/>
+      <put-attribute name="config-content" value="/WEB-INF/jsp/config/billing/billingplans.jsp"/>
+   </definition>
+
+
+   <!-- Zone Added by Dlee -->
+   <definition name="config.billing.zone" extends="manager.master">
+      <put-attribute name="title" value="IBIS Manager - Configuration"/>
+      <put-attribute name="bodyId" value="Billing"/>
+      <put-attribute name="content" value="config.billing.zone.content"/>
+
+      <put-list-attribute name="cssList">
+         <add-attribute value="/css/config.css"/>
+         <add-attribute value="/css/ibisform.css"/>
+      </put-list-attribute>
+
+      <put-list-attribute name="jsList">
+         <add-attribute value="/js/plugins/jquery.dataTables.min.js"/>
+         <add-attribute value="/js/common/messageDialog.js"/>
+         <add-attribute value="/js/common/optionList.js"/>
+         <add-attribute value="/js/config/jquery.dcmi.js"/>
+         <add-attribute value="/js/config/billing/zone.js"/>
+      </put-list-attribute>
+   </definition>
+
+   <definition name="config.billing.zone.content" template="/WEB-INF/jsp/templates/configuration.jsp">
+      <put-attribute name="config-section" value="Billing"/>
+      <put-attribute name="config-title" value="Zone"/>
+      <put-attribute name="config-content" value="/WEB-INF/jsp/config/billing/zone.jsp"/>
+   </definition>
+
+
+   <definition name="config.guestportal.layout" extends="manager.master">
+      <put-attribute name="title" value="IBIS Manager - Configuration"/>
+      <put-attribute name="bodyId" value="config"/>
+      <put-attribute name="content" value="config.guestportal.layout.content"/>
+
+      <put-list-attribute name="cssList">
+         <add-attribute value="/css/config-billing.css"/>
+      </put-list-attribute>
+
+      <put-list-attribute name="jsList">
+         <add-attribute value="/js/config/jquery.dcmi.js"/>
+         <add-attribute value="/js/config/guestportal/layout.js"/>
+      </put-list-attribute>
+   </definition>
+
+   <definition name="config.guestportal.layout.content" template="/WEB-INF/jsp/templates/configuration.jsp">
+      <put-attribute name="config-section" value="Guest Portal"/>
+      <put-attribute name="config-title" value="Guest Portal Layouts"/>
+      <put-attribute name="config-content" value="/WEB-INF/jsp/config/guestportal/guestportallayouts.jsp"/>
+   </definition>
+
+   <definition name="config.guestportal.preview" template="/WEB-INF/jsp/config/guestportal/guestportal.jsp">
+   </definition>
+
+   <!-- Device Added by Dlee -->
+
+   <definition name="config.facilities.device" extends="manager.master">
+      <put-attribute name="title" value="IBIS Manager - Configuration"/>
+      <put-attribute name="bodyId" value="config"/>
+      <put-attribute name="content" value="config.facilities.device.content"/>
+
+      <put-list-attribute name="cssList">
+         <add-attribute value="/css/config.css"/>
+         <add-attribute value="/css/ibisform.css"/>
+      </put-list-attribute>
+
+      <put-list-attribute name="jsList">
+         <add-attribute value="/js/plugins/jquery.dataTables.min.js"/>
+         <add-attribute value="/js/common/messageDialog.js"/>
+         <add-attribute value="/js/common/optionList.js"/>
+         <add-attribute value="/js/config/jquery.dcmi.js"/>
+         <add-attribute value="/js/config/facilities/device.js"/>
+      </put-list-attribute>
+   </definition>
+
+   <definition name="config.facilities.device.content" template="/WEB-INF/jsp/templates/configuration.jsp">
+      <put-attribute name="config-section" value="Facilities"/>
+      <put-attribute name="config-title" value="Device"/>
+      <put-attribute name="config-content" value="/WEB-INF/jsp/config/facilities/device.jsp"/>
+   </definition>
+
+   <!-- Port Configuration Views -->
+
+   <definition name="config.facilities.ports" extends="manager.master">
+      <put-attribute name="title" value="IBIS Manager - Configuration"/>
+      <put-attribute name="bodyId" value="config"/>
+      <put-attribute name="content" value="config.facilities.ports.content"/>
+
+      <put-list-attribute name="cssList">
+         <add-attribute value="/css/config.css"/>
+      </put-list-attribute>
+
+      <put-list-attribute name="jsList">
+         <add-attribute value="/js/plugins/jquery.dataTables.min.js"/>
+         <add-attribute value="/js/common/messageDialog.js"/>
+         <add-attribute value="/js/common/optionList.js"/>
+         <add-attribute value="/js/config/jquery.dcmi.js"/>
+         <add-attribute value="/js/config/facilities/ports.js"/>
+      </put-list-attribute>
+   </definition>
+
+   <definition name="config.facilities.ports.content" template="/WEB-INF/jsp/templates/configuration.jsp">
+      <put-attribute name="config-section" value="Facilities"/>
+      <put-attribute name="config-title" value="Ports"/>
+      <put-attribute name="config-content" value="/WEB-INF/jsp/config/facilities/ports.jsp"/>
+   </definition>
+
+
+   <!-- Room Added by Dlee -->
+
+   <definition name="config.facilities.room" extends="manager.master">
+      <put-attribute name="title" value="IBIS Manager - Configuration"/>
+      <put-attribute name="bodyId" value="config"/>
+      <put-attribute name="content" value="config.facilities.room.content"/>
+
+      <put-list-attribute name="cssList">
+         <add-attribute value="/css/config.css"/>
+         <add-attribute value="/css/ibisform.css"/>
+      </put-list-attribute>
+
+      <put-list-attribute name="jsList">
+         <add-attribute value="/js/plugins/jquery.dataTables.min.js"/>
+         <add-attribute value="/js/common/messageDialog.js"/>
+         <add-attribute value="/js/common/optionList.js"/>
+         <add-attribute value="/js/config/jquery.dcmi.js"/>
+         <add-attribute value="/js/config/facilities/room.js"/>
+      </put-list-attribute>
+   </definition>
+
+   <definition name="config.facilities.room.content" template="/WEB-INF/jsp/templates/configuration.jsp">
+      <put-attribute name="config-section" value="Facilities"/>
+      <put-attribute name="config-title" value="Room"/>
+      <put-attribute name="config-content" value="/WEB-INF/jsp/config/facilities/room.jsp"/>
+   </definition>
+
+
+   <!-- Vroom Added by Dlee -->
+
+   <definition name="config.facilities.vroom" extends="manager.master">
+      <put-attribute name="title" value="IBIS Manager - Configuration"/>
+      <put-attribute name="bodyId" value="config"/>
+      <put-attribute name="content" value="config.facilities.vroom.content"/>
+
+      <put-list-attribute name="cssList">
+         <add-attribute value="/css/config.css"/>
+         <add-attribute value="/css/ibisform.css"/>
+      </put-list-attribute>
+
+      <put-list-attribute name="jsList">
+         <add-attribute value="/js/plugins/jquery.dataTables.min.js"/>
+         <add-attribute value="/js/common/messageDialog.js"/>
+         <add-attribute value="/js/common/optionList.js"/>
+         <add-attribute value="/js/config/jquery.dcmi.js"/>
+         <add-attribute value="/js/config/facilities/vroom.js"/>
+      </put-list-attribute>
+   </definition>
+
+   <definition name="config.facilities.vroom.content" template="/WEB-INF/jsp/templates/configuration.jsp">
+      <put-attribute name="config-section" value="Facilities"/>
+      <put-attribute name="config-title" value="Virtual Room"/>
+      <put-attribute name="config-content" value="/WEB-INF/jsp/config/facilities/vroom.jsp"/>
+   </definition>
+
+
+</tiles-definitions>

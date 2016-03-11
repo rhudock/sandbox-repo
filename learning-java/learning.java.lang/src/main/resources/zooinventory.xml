@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml-stylesheet type="text/xsl" href="zooinventory.xsl"?>-->
+<!--<!DOCTYPE Inventory SYSTEM "zooinventory.dtd"> -->
+<!--
+<Inventory
+	xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="zooinventory.xsd"
+>
+-->
+<Inventory>
+	<Animal animalClass="mammal">
+		<Name>Song Fang</Name>
+		<Species>Giant Panda</Species>
+		<Habitat>China</Habitat>
+		<Food>Bamboo</Food>
+		<Temperament>Friendly</Temperament>
+		<Weight>101.5</Weight>
+	</Animal>
+	<Animal animalClass="mammal">
+		<Name>Cocoa</Name>
+		<Species>Gorilla</Species>
+		<Habitat>Central Africa</Habitat>
+		<FoodRecipe>
+			<Name>Gorilla Chow</Name>
+			<Ingredient>Fruit</Ingredient>
+			<Ingredient>Shoots</Ingredient>
+			<Ingredient>Leaves</Ingredient>
+		</FoodRecipe>
+		<Temperament>Know-it-all</Temperament>
+		<Weight>400.1</Weight>
+	</Animal>
+</Inventory>

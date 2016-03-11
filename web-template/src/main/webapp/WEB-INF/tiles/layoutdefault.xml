@@ -1,0 +1,28 @@
+<!DOCTYPE tiles-definitions PUBLIC
+      "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+      "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+   <definition name="standardLayout" template="/WEB-INF/tiles/standard.jsp"/>
+
+   <definition name="manager.master" template="/WEB-INF/tiles/default/master.jsp">
+
+      <put-attribute name="title" value="[Default Title]" type="string"/>
+      <put-attribute name="meta" value="" type="string"/>
+      <put-attribute name="bodyId" value="home" type="string"/>
+      <put-attribute name="header" value="/WEB-INF/tiles/default/header.jsp"/>
+      <put-attribute name="navigation" value="/WEB-INF/tiles/default/navigation.jsp"/>
+      <put-attribute name="content" value="/WEB-INF/tiles/default/blank.jsp"/>
+      <put-attribute name="footer" value="/WEB-INF/tiles/default/footer.jsp"/>
+
+      <put-list-attribute name="cssList"/>
+      <put-list-attribute name="jsList"/>
+
+   </definition>
+
+
+   <definition name="config.guestportal.layout.editor" template="/WEB-INF/views/config/guestportal/gpdesign.jsp">
+   </definition>
+
+</tiles-definitions>

@@ -1,0 +1,9 @@
+#divBillPlan {
+  height: 200px;
+  width: 90%;
+  padding: 5px;
+  border: 3px dashed #999999;
+  background-color: #DDD;
+}
+#divBillPlan h3 { padding-left: 5px; }
+

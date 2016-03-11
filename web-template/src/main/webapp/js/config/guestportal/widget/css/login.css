@@ -1,0 +1,93 @@
+/* CSS Document */
+
+.navigation {
+  width:211px;
+/*   background:url(images/vert_line.jpg) repeat-y left; */
+  padding:0 0 0 0;
+  border:#CCCCCC thin solid;
+  margin: auto;
+}
+.navigation h3 {
+  background:#d9dbd3 url(images/nav_title_im.gif) no-repeat 15px 14px;
+  margin:0;
+  line-height:20px;
+  font:normal 18px Arial, Helvetica, sans-serif;
+  color:#484747;
+  padding:9px 0 9px 40px;
+}
+.member_login_form {
+  padding:10px 10px 10px 20px;
+  margin:0;
+  color:#27261a;
+  font:11px Arial, Helvetica, sans-serif;
+/*   background:url(images/hor_line.jpg) repeat-x top; */
+}
+.member_login_form td {
+  color:#000000;
+  font:normal 11px Verdana, Arial, Helvetica, sans-serif;
+}
+.member_login_form a {
+  color:#186aba;
+  font:12px Arial, Helvetica, sans-serif;
+}
+.member_login_form a:hover { color:#e67001; }
+form {
+  margin:0;
+  padding:0;
+}
+/* input[type=button], input[type=reset], input[type=submit] { color:#141414; font:normal 14px Arial, Helvetica, sans-serif; background:#eeeeee; border:1px solid #d9dbd3; padding:2px 5px;} */
+
+input.ibis-login-button {
+  background:#eeeeee url(images/button_background.gif) top left repeat-x;
+  color:#FFF;
+  font-size:11px;
+  text-decoration:none;
+  padding:3px 15px 5px 15px;
+  margin:0px 5px 5px 0;
+  border:1px solid #eeeeee;
+}
+input.ibis-login-button:hover {
+  cursor:pointer;
+  background:#eeeeee url(images/button_background_on.gif) top left repeat-x;
+}
+input[type=text],
+input[type=password],
+input[type=input],
+textarea {
+  background-image:url(images/form_bg.jpg);
+  background-repeat:repeat-x;
+  border:1px solid #ccc;
+  color:#333333;
+  font:normal 14px Arial, Helvetica, sans-serif;
+  margin-right:4px;
+  padding:3px;
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+input[type=radio] {
+  background:#ffffff;
+  border:0px solid #d9dbd3;
+  height:14px;
+  width:14px;
+}
+input[type=checkbox] {
+  background:#ffffff;
+  border:0px solid #d9dbd3;
+  height:14px;
+  width:14px;
+}
+input.red_but {
+  background:#b30716;
+  border:1px solid #800000;
+  color:#FFFFFF;
+}
+input.blue_but {
+  background:#076db3;
+  border:1px solid #000b80;
+  color:#FFFFFF;
+}
+input.green_but {
+  background:#546354;
+  border:1px solid #374637;
+  color:#FFFFFF;
+}

@@ -1,0 +1,45 @@
+
+
+- Create a runnable Class
+-------------------------------------
+    class Animation implements Runnable {
+        boolean animate = true;
+
+        public void run(  ) {
+            while ( animate ) {
+                // draw Frames
+                ...
+            }
+        }
+    }
+
+- Then Start it.
+-------------------------------------
+    Animation happy = new Animation("Mr. Happy");
+    Thread myThread = new Thread( happy );
+    myThread.start(  );
+
+- Run itself
+-------------------------------------
+    class Animation implements Runnable {
+         Thread myThread;
+         Animation (String name) {
+             myThread = new Thread( this );
+             myThread.start(  );
+         }
+         ...
+    }
+
+- A natural-born thread
+-------------------------------------
+    class Animation extends Thread {
+        boolean animate = true;
+
+        public void run(  ) {
+            while ( animate ) {
+                // draw Frames
+                ...
+            }
+        }
+    }
+    

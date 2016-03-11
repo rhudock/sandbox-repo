@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id="dataSource"
+         class="org.springbyexample.jdbc.datasource.HsqldbInitializingDriverManagerDataSource">
+      <property name="sqlScriptProcessor">
+         <bean class="org.springbyexample.jdbc.core.SqlScriptProcessor"
+               p:sqlScripts="classpath:/schema.sql"/>
+      </property>
+   </bean>
+   <!--class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"-->
+   <bean id="sessionFactory"
+
+         class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+         p:dataSource-ref="dataSource">
+
+      <property name="annotatedClasses">
+         <list>
+            <value>com.dcmi.template.spring.model.User</value>
+            <!--<value>org.springbyexample.orm.hibernate3.annotation.bean.Address</value>-->
+         </list>
+      </property>
+
+      <!--<property name="mappingLocations">-->
+      <!--<list>-->
+      <!--<value>classpath:org/springbyexample/orm/hibernate3/bean/Address.hbm.xml</value>-->
+      <!--<value>classpath:org/springbyexample/orm/hibernate3/bean/Person.hbm.xml</value>-->
+      <!--</list>-->
+      <!--</property>-->
+      <property name="hibernateProperties">
+         <value>
+            hibernate.format_sql=true
+            hibernate.dialect=org.hibernate.dialect.HSQLDialect
+         </value>
+      </property>
+   </bean>
+
+   <bean id="userDAO" class="com.dcmi.template.spring.dao.UserDao">
+      <property name="sessionFactory" ref="sessionFactory"/>
+   </bean>
+
+
+   <!--<bean id="personDao"-->
+   <!--class="org.springbyexample.orm.hibernate3.annotation.dao.PersonDaoImpl"-->
+   <!--p:sessionFactory-ref="sessionFactory"/>-->
+
+   <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+      <property name="sessionFactory" ref="sessionFactory"/>
+   </bean>
+
+   <bean id="txProxyTemplate" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+         abstract="true">
+      <property name="transactionManager" ref="transactionManager"/>
+      <property name="transactionAttributes">
+         <props>
+            <prop key="add*">PROPAGATION_REQUIRED</prop>
+            <prop key="update*">PROPAGATION_REQUIRED</prop>
+            <prop key="delete*">PROPAGATION_REQUIRED</prop>
+            <prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+         </props>
+      </property>
+   </bean>
+
+   <bean id="userService" parent="txProxyTemplate">
+      <property name="target">
+         <bean class="com.dcmi.template.spring.service.impl.UserServiceImpl">
+            <property name="userDao" ref="userDAO"/>
+         </bean>
+      </property>
+      <property name="proxyInterfaces" value="com.dcmi.template.spring.service.UserService"/>
+   </bean>
+
+
+</beans>
