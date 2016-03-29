@@ -21,10 +21,10 @@ public class ResourceBundleTest extends Application {
 	public void start(Stage stage) throws IOException {
 		URL fxmlUrl = this.getClass()
 		                  .getClassLoader()
-		                  .getResource("resources/fxml/greetings.fxml");
+		                  .getResource("fxml/greetings.fxml");
 
 		// Create a ResourceBundle to use in FXMLLoader
-		String resourcePath = "resources/resourcebundles/greetings";
+		String resourcePath = "resourcebundles/greetings";
 		ResourceBundle resourceBundle = ResourceBundle.getBundle(resourcePath);
 
 		// Load teh Label for default Locale
@@ -42,7 +42,7 @@ public class ResourceBundleTest extends Application {
 		VBox root = new VBox(5, defaultGreetingLbl, indianGreetingLbl);		
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		stage.setTitle("Using a ResourceBundle in FXML");
+		stage.setTitle("My Using a ResourceBundle in FXML");
 		stage.show();
 	}
 }
