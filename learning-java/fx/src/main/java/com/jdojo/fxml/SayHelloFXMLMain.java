@@ -17,10 +17,9 @@ public class SayHelloFXMLMain extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		// Construct a URL for the FXML document
-		String stringUrl = "/fxml/sayhellowithcontroller.fxml";
+		String stringUrl = "fxml/sayhellowithcontroller.fxml";
 		URL fxmlUrl = this.getClass()
 		                  .getClassLoader()
-		                  
 		                  .getResource(stringUrl);
 				
 		VBox root = FXMLLoader.<VBox>load(fxmlUrl);		

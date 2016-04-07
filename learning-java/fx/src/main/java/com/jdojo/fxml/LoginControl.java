@@ -20,7 +20,7 @@ public class LoginControl extends GridPane {
 		// Load the FXML
 		URL fxmlUrl = this.getClass()
 		                  .getClassLoader()
-		                  .getResource("resources/fxml/login.fxml");     
+		                  .getResource("fxml/login.fxml");     
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(fxmlUrl);
 		loader.setRoot(this);
