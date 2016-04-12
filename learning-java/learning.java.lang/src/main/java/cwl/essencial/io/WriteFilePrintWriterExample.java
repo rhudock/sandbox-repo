@@ -9,8 +9,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class BuildPrintWriter {
-	
+public class WriteFilePrintWriterExample {
+
 	public static PrintWriter createPrintWriter(String fileNameStr) {
 		PrintWriter printWriter = null;
 		DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
@@ -34,5 +34,13 @@ public class BuildPrintWriter {
 		}
 		return printWriter;
 	}
-	
+
+	public static void main(String[] args) {
+
+		PrintWriter pw = createPrintWriter("C:\\test");
+		pw.println("test");
+		pw.close();
+
+	}
+
 }

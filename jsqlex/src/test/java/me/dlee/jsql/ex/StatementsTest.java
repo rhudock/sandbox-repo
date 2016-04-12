@@ -67,7 +67,7 @@ public class StatementsTest {
 
 		assertTrue(parseStatements.getStatements().get(0) instanceof Delete);
 	}
-	
+
 	@Test
 	public void testStatementsInsert() throws JSQLParserException {
 		String sqls = "insert into configuration.role_privileges (privID, roleID) values (5, 1);";
@@ -75,67 +75,89 @@ public class StatementsTest {
 
 		assertTrue(parseStatements.getStatements().get(0) instanceof Insert);
 	}
-	
+
 	@Test
 	public void testStatementsProblem02() throws JSQLParserException {
 		try {
-			List<String> sqlFileNames = getFileList();
+			List<File> sqlFileNames = getFileList();
 			assertTrue(sqlFileNames.size() > 0);
-			
-			for(String sqlFileName: sqlFileNames) {
-				List<String> statements = readFileLineByLine(sqlFileName);
+
+			for (File sqlFile : sqlFileNames) {
+				List<String> statements = readFileLineByLine(sqlFile);
+				// assertTrue(statements.size() > 0);
+				
+				for(String s: statements) {
+					testStatements(s);
+				}
 			}
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	public String testStatements(String sqls) throws JSQLParserException {
+		System.out.println("testing " + sqls);
+		Statements parseStatements = CCJSqlParserUtil.parseStatements(sqls);
 
-	public List<String> getFileList() throws IOException {
-		List<String> sqlFileNames = new LinkedList<>();
-		
+		return parseStatements.toString();
+	}	
+
+	public List<File> getFileList() throws IOException {
 		File dir = new File("src/branch/sql");
 
 		System.out.println("Getting all files in " + dir.getCanonicalPath() + " including those in subdirectories");
 		List<File> files = (List<File>) FileUtils.listFiles(dir, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
 		for (File file : files) {
+			
 			System.out.println("file: " + file.getCanonicalPath());
 		}
-		return sqlFileNames;
+		return files;
 	}
 
-	public List<String> readFileLineByLine(String fileName) {
-		/* try {
-			File file = new File("test.txt");
-			FileReader fileReader = new FileReader(file);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			StringBuffer stringBuffer = new StringBuffer();
-			String line;
-			while ((line = bufferedReader.readLine()) != null) {
-				stringBuffer.append(line);
-				stringBuffer.append("\n");
+	private static final String[] STATEMENT_TYPES = { "select", "insert", "update" };
+
+	public List<String> readFileLineByLine(File file) {
+
+		List<String> statements = new LinkedList<>();
+
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			String sCurrentLine;
+			StringBuffer statementBuf = new StringBuffer();
+
+			boolean isNew;
+			while ((sCurrentLine = br.readLine()) != null) {
+				sCurrentLine = sCurrentLine.trim();
+			//	System.out.println("    : " + sCurrentLine);
+				isNew = false;
+				if (statementBuf.length() == 0) {
+					for (int i = 0; i < STATEMENT_TYPES.length; i++) {
+						if (sCurrentLine.toLowerCase().startsWith(STATEMENT_TYPES[i])) {
+							statementBuf.append(sCurrentLine);
+							isNew = true;
+							break;
+						}
+					}
+				}
+
+				if (statementBuf.length() > 0) {
+					if(!isNew) {
+						statementBuf.append(sCurrentLine);
+					}
+					if(sCurrentLine.contains(";")) {
+					//	System.out.println("         add> " + statementBuf.toString() );
+						statements.add(statementBuf.toString());
+						statementBuf = new StringBuffer(); 
+					}
+				}
+
 			}
-			fileReader.close();
-			System.out.println("Contents of file:");
-			System.out.println(stringBuffer.toString());
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		*/
-		
-		List<String> statements = new LinkedList<>();
-		
-		try (BufferedReader br = new BufferedReader(new FileReader(fileName)) )
-		{
-			String sCurrentLine;
 
-			while ((sCurrentLine = br.readLine()) != null) {
-				System.out.println(sCurrentLine);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
 		return statements;
 	}
 }
