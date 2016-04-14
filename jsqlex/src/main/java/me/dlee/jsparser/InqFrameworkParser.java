@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 public class InqFrameworkParser {
 
 	private static Logger s_logger = LoggerFactory.getLogger(InqFrameworkParser.class);
+	
+	private static Pattern l_pattern = Pattern.compile("(com.inq.flash.client.chatskins.ScrollMonitor.*)=.*function.*");
 
 	public static void main(String[] args) {
 		// Read File
@@ -26,8 +28,6 @@ public class InqFrameworkParser {
 		// Process - Should be in a different class.
 		int countSetTimeout = 0;
 		int countFunction = 0;
-		
-		Pattern l_pattern = Pattern.compile("(com.inq.flash.client.chatskins.ScrollMonitor.*)=.*function.*");
 				
 		String jsThis = "";
 		for (String s : inqjs) {
@@ -58,7 +58,6 @@ public class InqFrameworkParser {
 				System.out.println(s + "      found " + subs);
 			}
 			
-
 		//	System.out.println(s);
 		}
 		System.out.println("annonymous timeout count:" + countSetTimeout);
