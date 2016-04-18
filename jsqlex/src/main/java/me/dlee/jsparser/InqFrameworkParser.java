@@ -26,19 +26,20 @@ public class InqFrameworkParser {
 		List<String> inqjs = readFile(file);
 
 		// Process - Should be in a different class.
+		System.out.println("annonymous timeout count:" + countSetTimeout);
 		int countSetTimeout = 0;
 		int countFunction = 0;
-				
+
 		String jsThis = "";
 		for (String s : inqjs) {
 			if(s.startsWith("function ") || s.contains("= function(")){
-			//	s = s + "             console.warn('function');";
+				//	s = s + "             console.warn('function');";
 				jsThis = s;
 				countFunction++;
 			}
-			
+
 			if (s.contains("setTimeout")) {
-			//	s = s + "             console.warn('annonymous timeout');";
+				//	s = s + "             console.warn('annonymous timeout');";
 				countSetTimeout++;
 			}
 
@@ -57,10 +58,9 @@ public class InqFrameworkParser {
 				String subs = matcher.group(1);
 				System.out.println(s + "      found " + subs);
 			}
-			
-		//	System.out.println(s);
+
+			//	System.out.println(s);
 		}
-		System.out.println("annonymous timeout count:" + countSetTimeout);
 		System.out.println("function count:" + countFunction);
 		System.out.println("Line count:" + inqjs.size());
 
