@@ -1,6 +1,7 @@
 package cwl.essencial.io;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -44,4 +45,23 @@ public class ReadReadAllLinesExample {
 		}
 
 	}
+
+	public static void readAllLines() {
+        String fileName = "/data.txt";
+
+        try {
+            URI uri = ReadReadAllLinesExample.class.getResource(fileName).toURI();
+            List<String> lines = Files.readAllLines(Paths.get(uri),
+                    Charset.defaultCharset());
+
+            for (String line : lines) {
+                System.out.println(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		
+	}
+	
+	
 }

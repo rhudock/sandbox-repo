@@ -57,5 +57,19 @@ public class StringClassTest {
 
 		assertEquals(2, prds.length);
 	}
+	
+	@Test
+	public void replaceFirstTest() {
+
+		String str = "3sSDFASDFASDGFASDFASDFASDFASDF";
+		String expected = "_sSDFASDFASDGFASDFASDFASDFASDF";
+		String actual = str.replaceFirst(".", "_");
+
+		assertTrue(actual.equals(actual));
+		// Not working why?
+		// 
+		assertEquals("expected:" + expected + ", actual:" + actual, expected, actual);
+		assertEquals(expected, actual);
+	}
 
 }
