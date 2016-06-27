@@ -45,16 +45,18 @@ public class Matrix<T> {
 
     @SuppressWarnings("unchecked")
     public void rotateMatrix(int direction) {
-        // like to create a temporary
+        // like to create a temporary matrix
         Matrix<Object> mat = new Matrix<>();
         int sz = this.getSize();
         mat.buildMatrix(new Object[sz][sz], sz);
 
+        // Copy values to the temp matrix
         for(int i=0; i<sz; i++)
             for(int j=0; j<sz; j++){
                 mat.fillMatrix(this.getValue(i, j), i, j);
             }
 
+        // copy back from temp matrix to rotated position.
         if (direction > 0) {
             for (int i = 0; i < sz; i++)
                 for (int j = 0; j < sz; j++) {
