@@ -1,0 +1,8 @@
+<aspectj>
+   <aspects>
+      <aspect name="cwl.learn.MethodExecutionAspect"/>
+   </aspects>
+   <weaver>
+      <include within="cwl.learn.conversion.*"/>
+   </weaver>
+</aspectj>

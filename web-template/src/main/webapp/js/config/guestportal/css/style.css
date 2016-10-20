@@ -1,0 +1,36 @@
+.test { cursor:pointer }
+
+.sub-box-selected  {
+	border:#FF0000 thin solid !important;
+}
+
+#divControl {
+  width: 900px;
+  padding: 0px; 
+}
+
+#msgMain {
+	padding-left: 3px;
+	margin: 3px;
+  border:#999999 thin solid;
+  background:#CCCCCC;
+}
+
+#divControl #widgetContainer {
+  padding: 0px;
+  height: 45px;
+}
+#divControl #widgetContainer .widget-box {
+  border: 2px solid #CCCCCC;
+  height: 32px;
+  width: 32px;
+  z-index: 9;
+  margin: 0px;
+  padding: 0px;
+  float: left !important;
+}
+
+.hidden {
+	display:none;
+}
+

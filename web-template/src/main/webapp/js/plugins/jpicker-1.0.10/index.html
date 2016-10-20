@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+
+  <link rel="Stylesheet" type="text/css" href="../Digital_files/jpicker-1.css">
+  <link rel="Stylesheet" type="text/css" href="../Digital_files/jPicker.css">
+<script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="jpicker-1.0.10.min.js"></script>
+
+
+
+</head>
+
+<body>
+<script type="text/javascript">
+  $(document).ready(
+    function()
+    {
+      $('#Expandable').jPicker(
+        {
+          window:
+          {
+            expandable: true
+          },
+					position:
+						{
+							x: 'right', // acceptable values "left", "center", "right",
+																 // "screenCenter", or relative px value
+							y: 'bottom', // acceptable values "top", "bottom", "center", or relative px value
+						}
+        });
+    });
+</script>
+<span id="Expandable"></span>
+
+<script type="text/javascript">        
+  $(document).ready(
+    function()
+    {
+      $('#Inline').jPicker();
+    });
+</script>
+<div id="Inline"></div>
+</body>
+</html>

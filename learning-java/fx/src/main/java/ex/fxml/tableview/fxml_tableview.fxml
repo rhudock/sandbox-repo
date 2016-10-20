@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/*
+ * Copyright (c) 2012 Oracle and/or its affiliates.
+ * All rights reserved. Use is subject to license terms.
+ *
+ * This file is available and licensed under the following license:
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *  - Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *  - Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the distribution.
+ *  - Neither the name of Oracle nor the names of its
+ *    contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+-->
+
+<?import javafx.collections.*?> 
+<?import javafx.geometry.Insets?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import ex.fxml.tableview.*?> 
+
+<Scene width="550" height="550" fx:controller="ex.fxml.tableview.FXMLTableViewController" 
+       xmlns:fx="http://javafx.com/fxml">
+        
+    <GridPane alignment="center" hgap="10" vgap="10">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+        
+        <Label text="Address Book" GridPane.columnIndex="0" GridPane.rowIndex="0" 
+               style="-fx-font: NORMAL 20 Tahoma;"/>
+ 
+        <TableView fx:id="tableView" GridPane.columnIndex="0" 
+                   GridPane.rowIndex="1">
+            <columns>
+                <TableColumn fx:id="firstNameColumn" text="First Name" prefWidth="100">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="firstName" />
+                    </cellValueFactory>
+                    <cellFactory>
+                        <FormattedTableCellFactory alignment="center">
+                        </FormattedTableCellFactory>
+                    </cellFactory>
+                </TableColumn>
+                <TableColumn text="Last Name" prefWidth="100">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="lastName" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Email Address" prefWidth="200">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="email" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>    
+<!--             <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <Person firstName="Jacob" lastName="Smith"  
+                            email="jacob.smith@example.com"/>
+                    <Person firstName="Isabella" lastName="Johnson" 
+                            email="isabella.johnson@example.com"/>
+                    <Person firstName="Ethan" lastName="Williams" 
+                            email="ethan.williams@example.com"/>
+                    <Person firstName="Emma" lastName="Jones" 
+                            email="emma.jones@example.com"/>
+                    <Person firstName="Michael" lastName="Brown" 
+                            email="michael.brown@example.com"/>
+                </FXCollections>
+            </items> -->
+            <sortOrder>
+                <fx:reference source="firstNameColumn"/>
+            </sortOrder> 
+        </TableView>
+         
+        <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0" 
+              GridPane.rowIndex="2">
+            <TextField fx:id="firstNameField" promptText="First Name"
+                       prefWidth="90"/>
+            <TextField fx:id="lastNameField" promptText="Last Name"
+                       prefWidth="90"/>
+            <TextField fx:id="emailField" promptText="Email"
+                       prefWidth="150"/>
+            <Button text="Add" onAction="#addPerson"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0" 
+              GridPane.rowIndex="3">
+            <Button text="Load All Data" onAction="#loadPersonList" prefWidth="200" alignment="CENTER"/>
+        </HBox>
+        
+    </GridPane>
+
+</Scene>
+  

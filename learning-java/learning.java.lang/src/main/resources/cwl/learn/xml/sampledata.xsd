@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.cwl.com/xml/learn" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Hotel" type="lear:HotelType" xmlns:lear="http://www.cwl.com/xml/learn"/>
+  <xs:complexType name="HotelType">
+    <xs:sequence>
+      <xs:element type="lear:DeviceType" name="Device" xmlns:lear="http://www.cwl.com/xml/learn"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="name"/>
+  </xs:complexType>
+  <xs:complexType name="PortType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="portNumber" use="optional"/>
+        <xs:attribute type="xs:string" name="roomRef" use="optional"/>
+        <xs:attribute type="xs:string" name="zoneRef" use="optional"/>
+        <xs:attribute type="xs:string" name="portTypeRef" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DeviceType">
+    <xs:sequence>
+      <xs:element type="lear:PortType" name="Port" maxOccurs="unbounded" minOccurs="0" xmlns:lear="http://www.cwl.com/xml/learn"/>
+      <xs:element type="lear:DeviceAttrType" name="DeviceAttr" maxOccurs="unbounded" minOccurs="0" xmlns:lear="http://www.cwl.com/xml/learn"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="name"/>
+    <xs:attribute type="xs:string" name="managementURI"/>
+    <xs:attribute type="xs:string" name="deviceClass"/>
+  </xs:complexType>
+  <xs:complexType name="DeviceAttrType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+        <xs:attribute type="xs:string" name="value" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

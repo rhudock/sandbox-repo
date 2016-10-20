@@ -1,0 +1,100 @@
+/* CSS style for ibisj form elements */
+
+.detail-box {
+margin-top: 20px;
+}
+
+.ibis-form-container {
+  border: #CCCCCC 2px solid;
+	margin: auto;
+}
+
+.ibis-form {
+  width: 90%;
+  padding: 5px;
+}
+
+.ibis-form p{
+width: 300px;
+clear: left;
+margin: 5px;
+padding: 10px 0 8px 0;
+padding-left: 155px; /*width of left column containing the label elements*/
+border-top: 1px dashed gray;
+height: 1%;
+}
+
+.ibis-form label{
+font-weight: bold;
+float: left;
+margin-left: -155px; /*width of left column*/
+width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+
+#select-template{
+	size: 300px;
+} 
+
+.ibis-form input[type="text"]{ /*width of text boxes. IE6 does not understand this attribute*/
+width: 180px;
+}
+
+.ibis-form textarea{
+width: 250px;
+height: 150px;
+}
+
+.ibis-form  a {
+   display: block;
+   border: 1px solid #aaa;
+   text-decoration: none;
+   background-color: #fafafa;
+   color: #123456;
+   margin: 2px;
+   clear:both;
+  }
+  
+.ibis-form  div.multi-select {
+   float:left;
+   text-align: center;
+   margin: 10px;
+  }
+  
+  
+.ibis-form  select.port-selector {
+   width: 100px;
+   height: 150px;
+  }
+
+/*.threepxfix class below:
+Targets IE6- ONLY. Adds 3 pixel indent for multi-line form contents.
+to account for 3 pixel bug: http://www.positioniseverything.net/explorer/threepxtest.html
+*/
+
+* html .threepxfix{
+margin-left: 3px;
+}
+
+
+.ibis-record-hover {
+	background-color:#CCCCCC;
+}
+
+.ibis-ui-icon {
+margin-left: 2px;
+float:right;
+width:16px;
+height:16px;
+}
+
+/* ************************* GENERAL CLASSES ***************************** */
+.ibis-hidden {
+	display:none;
+}
+
+.currentRecord {
+	background-color: #B0E0E6;
+}
+
+span.ibisj-required
+{color: #FF0000}

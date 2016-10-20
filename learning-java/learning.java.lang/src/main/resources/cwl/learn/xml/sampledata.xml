@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Hotel name="Hiatt"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.cwl.com/xml/learn"
+       xsi:schemaLocation="http://www.cwl.com/xml/learn /cwl/learn/xml/sampledata.xsd">
+
+   <Device name="Device1" managementURI="10.1.100.4" deviceClass="Gateway">
+      <Port portNumber="1" roomRef="Room1" zoneRef="Zone1" portTypeRef="PortType1"/>
+      <Port portNumber="2" roomRef="Room2" zoneRef="Zone1" portTypeRef="PortType1"/>
+      <Port portNumber="3" roomRef="Room3" zoneRef="Zone1" portTypeRef="PortType1"/>
+      <Port portNumber="4" roomRef="Room4" zoneRef="Zone1" portTypeRef="PortType1"/>
+      <Port portNumber="5" roomRef="Room5" zoneRef="Zone1" portTypeRef="PortType1"/>
+      <Port portNumber="6" roomRef="Room6" zoneRef="Zone1" portTypeRef="PortType1"/>
+      <Port portNumber="7" roomRef="Room7" zoneRef="Zone1" portTypeRef="PortType1"/>
+      <Port portNumber="8" roomRef="Room8" zoneRef="Zone1" portTypeRef="PortType1"/>
+      <Port portNumber="9" roomRef="Room9" zoneRef="Zone1" portTypeRef="PortType1"/>
+      <Port portNumber="10" roomRef="Room10" zoneRef="Zone1" portTypeRef="PortType1"/>
+      <DeviceAttr name="manufacturer" value="Nomadix"/>
+      <DeviceAttr name="deviceType" value="NSE"/>
+   </Device>
+
+</Hotel>

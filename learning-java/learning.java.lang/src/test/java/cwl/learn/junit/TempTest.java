@@ -1,0 +1,34 @@
+/**
+ * $\Id$
+ * User: chealwoo
+ * Date: Apr 7, 2010
+ * Time: 6:58:25 PM
+ * Copyright (c) Chealwoo Lee (Daniel) 2010, All rights reservedrved.
+ *
+ * REF
+ * Source
+ */
+package cwl.learn.junit;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class TempTest extends Assert {
+
+   protected static String s_baseVersion;
+
+   @BeforeClass
+   public static void setTestClass() {
+      s_baseVersion = "1.0.0";
+   }
+
+   /*
+   http://
+    */
+   @Test
+   public void myTest() {
+      String expected = "1.0.0";
+      assertEquals("Can Not access the base class static value", expected, s_baseVersion);
+   }
+}

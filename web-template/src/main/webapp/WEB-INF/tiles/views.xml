@@ -1,0 +1,44 @@
+<!DOCTYPE tiles-definitions PUBLIC
+      "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+      "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+   <definition name="welcome" extends="manager.master">
+      <put-attribute name="title" value="IBIS Manager - Home"/>
+      <put-attribute name="content" value="welcome.content"/>
+   </definition>
+
+   <definition name="welcome.content" template="/WEB-INF/tiles/default/landing.jsp">
+      <put-attribute name="landing-title" value="Spring 3 Template"/>
+      <put-attribute name="landing-intro" value="/WEB-INF/views/welcome-intro.jsp"/>
+      <put-attribute name="landing-content" value="/WEB-INF/views/welcome.jsp"/>
+   </definition>
+
+
+
+
+   
+	<definition name="login" extends="manager.master">
+		<put-attribute name="content" value="/WEB-INF/login.jsp" />
+	</definition>
+
+	<definition name="logoutSuccess" extends="manager.master">
+		<put-attribute name="content" value="/WEB-INF/logoutSuccess.jsp" />
+	</definition>
+
+
+
+
+   <definition name="gpdesigner" extends="manager.master">
+      <put-attribute name="title" value="IBIS Manager - Guest Portal Design"/>
+      <put-attribute name="content" value="gpdesigner.content"/>
+   </definition>
+
+   <definition name="gpdesigner.content" template="/WEB-INF/tiles/defaults/gptemp.jsp">
+      <put-attribute name="landing-title" value="IBIS Manager"/>
+      <put-attribute name="landing-intro" value="/WEB-INF/jsp/home-intro.jsp"/>
+      <put-attribute name="landing-content" value="/WEB-INF/views/config/guestportal/gpdesign.jsp"/>
+   </definition>
+
+</tiles-definitions>

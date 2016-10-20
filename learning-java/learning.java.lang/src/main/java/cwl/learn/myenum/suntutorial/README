@@ -1,0 +1,27 @@
+
+Testing Java enum
+
+2009.3.6.
+- Study enum tutorial from http://java.sun.com/j2se/1.5.0/docs/guide/language/enums.html
+
+Classes
+    Card
+    Deal
+
+    Planet
+    PlanetTester -
+
+
+
+---
+Old Studys
+
+Classes
+    DaysEnum
+    DaysEnumException
+    WeekDaysEnum
+
+
+
+Other Links
+http://mindprod.com/jgloss/enum.html
