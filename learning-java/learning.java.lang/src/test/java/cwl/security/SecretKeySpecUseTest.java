@@ -23,13 +23,13 @@ public class SecretKeySpecUseTest {
     @Test
     public void decrypt() throws Exception {
         String hello = SecretKeySpecUse.encrypt("hello", myKey);
-//        assertEquals("hello", SecretKeySpecUse.decrypt(hello, myKey));
+        assertEquals("hello", SecretKeySpecUse.decrypt(hello, myKey));
 
     encrypt("edwin","password");
     decrypt("6VsVtA/nhHKUZuWWmod/BQ==");
 
-    String en = encrypt1("edwin");
-    decrypt1(en, "edwin" + "MY KEY");
+//    String en = encrypt1("edwin");
+//    decrypt1(en, "edwin" + "MY KEY");
 }
 
     private static void encrypt(String username, String password) throws Exception {
