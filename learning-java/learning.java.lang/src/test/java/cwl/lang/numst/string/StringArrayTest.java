@@ -17,6 +17,18 @@ import org.junit.Test;
 public class StringArrayTest {
 
 	@Test
+	public void simpleSubStrTest() {
+		String userStr = "user=_S_23/G5XFuSMSLtbYk2iKvjw==";
+		int idx = userStr.indexOf("=");
+
+		String name = userStr.substring(0, idx);
+		String value = userStr.substring(idx +1, userStr.length());
+
+		assertEquals(name, "user");
+		assertEquals(value, "_S_23/G5XFuSMSLtbYk2iKvjw==");
+	}
+
+	@Test
 	public void simpleArrayTest() {
         
 		String[] productIDs = {"NAM:WalkFit 1st pair~ID:5198~CAT:Walkfit~TYP:Core Product~TERM:N/A~IPP:19.95~TPP:19.95%2CNAM:Large size Slippers~ID:5360~CAT:Walkfit~TYP:Up Sell~TERM:N/A~IPP:0~TPP:0%2CNAM:Foot Care System~ID:5405~CAT:Walkfit~TYP:Up Sell~TERM:N/A~IPP:0~TPP:0%2CNAM:Shipping~ID:0~CAT:Walkfit~TYP:S&P~TERM:N/A~IPP:27.85~TPP:27.85","missing","missing","missing"};
