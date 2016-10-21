@@ -8,3 +8,4 @@ target/
 jsqlex/src/test/resources/*debug.js
 .idea/
 *.iml
+out/
