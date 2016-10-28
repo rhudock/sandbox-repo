@@ -8,25 +8,28 @@
  * See LICENSE.txt for full license information.
  */
 package com.hurlant.crypto.cert {
-	import com.hurlant.crypto.hash.IHash;
-	import com.hurlant.crypto.hash.MD2;
-	import com.hurlant.crypto.hash.MD5;
-	import com.hurlant.crypto.hash.SHA1;
-	import com.hurlant.crypto.rsa.RSAKey;
-	import com.hurlant.util.ArrayUtil;
-	import com.hurlant.util.Base64;
-	import com.hurlant.util.der.ByteString;
-	import com.hurlant.util.der.DER;
-	import com.hurlant.util.der.OID;
-	import com.hurlant.util.der.ObjectIdentifier;
-	import com.hurlant.util.der.PEM;
-	import com.hurlant.util.der.PrintableString;
-	import com.hurlant.util.der.Sequence;
-	import com.hurlant.util.der.Type;
-	
-	import flash.utils.ByteArray;
-	
-	public class X509Certificate {
+
+import com.hurlant.crypto.hash.IHash;
+import com.hurlant.crypto.hash.MD2;
+import com.hurlant.crypto.hash.MD5;
+import com.hurlant.crypto.hash.SHA1;
+import com.hurlant.crypto.rsa.RSAKey;
+import com.hurlant.util.ArrayUtil;
+import com.hurlant.util.Base64;
+import com.hurlant.util.der.ByteString;
+import com.hurlant.util.der.DER;
+import com.hurlant.util.der.OID;
+import com.hurlant.util.der.ObjectIdentifier;
+import com.hurlant.util.der.PEM;
+import com.hurlant.util.der.PrintableString;
+import com.hurlant.util.der.Sequence;
+import com.hurlant.util.der.Type;
+
+import flash.utils.ByteArray;
+
+import mx.utils.ObjectUtil;
+
+public class X509Certificate {
 		private var _loaded:Boolean;
 		private var _param:*;
 		private var _obj:Object;
@@ -203,6 +206,9 @@ package com.hurlant.crypto.cert {
 		public function getAlgorithmIdentifier():String {
 			return _obj.algorithmIdentifier.algorithmId.toString();
 		}
+        public function getSignatureAlgorithmIdentifier():String {
+            return _obj.signedCertificate.signature.algorithmId.toString();
+        }
 		public function getNotBefore():Date {
 			return _obj.signedCertificate.validity.notBefore.date;
 		}
@@ -214,5 +220,13 @@ package com.hurlant.crypto.cert {
 			var subject:Sequence = _obj.signedCertificate.subject;
 			return (subject.findAttributeValue(OID.COMMON_NAME) as PrintableString).getString();
 		}
+
+        public function derEquals(certificate: X509Certificate):Boolean {
+            if (_param is ByteArray && certificate._param is ByteArray) {
+                return ObjectUtil.compare(_param, certificate._param) == 0;
+            } else {
+                return false;
+            }
+        }
 	}
 }

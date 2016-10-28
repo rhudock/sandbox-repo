@@ -12,7 +12,9 @@
  * See LICENSE.txt for full license information.
  */
 package com.hurlant.crypto.tls {
-	import flash.events.EventDispatcher;
+import com.inq.flash.messagingframework.connectionhandling.ApplicationConnectionEventHandler;
+
+import flash.events.EventDispatcher;
 	import flash.utils.IDataInput;
 	import flash.utils.IDataOutput;
 	import flash.utils.Endian;
@@ -51,13 +53,13 @@ package com.hurlant.crypto.tls {
 		private var _socket:Socket;
 		
 		private var _engine:TLSEngine;
-		
+
 		public function TLSSocket(host:String = null, port:int = 0, config:TLSConfig = null) {
 			if (host!=null && port!=0) {
 				connect(host, port, config);
 			}
 		}
-		
+
 		public function get bytesAvailable():uint {
 			return _iStream.bytesAvailable;
 		}
@@ -99,13 +101,14 @@ package com.hurlant.crypto.tls {
 		private function onTLSReady(event:TLSEvent):void {
 			_ready = true;
 			scheduleWrite();
+            dispatchEvent(new TLSEvent(TLSEvent.READY, event.data));
 		}
 		
 		private function onTLSClose(event:Event):void {
 			dispatchEvent(event);
 			close();
 		}
-		
+
 		private var _ready:Boolean;
 		private var _writeScheduler:uint;
 		private function scheduleWrite():void {
@@ -125,8 +128,10 @@ package com.hurlant.crypto.tls {
 		public function close():void {
 			_ready = false;
 			_engine.close();
-			_socket.flush();
-			_socket.close();
+            if (_socket.connected) {
+			    _socket.flush();
+			    _socket.close();
+            }
 		}
 		
 		public function connect(host:String, port:int, config:TLSConfig = null):void {

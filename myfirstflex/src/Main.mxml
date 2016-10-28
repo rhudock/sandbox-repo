@@ -44,7 +44,6 @@
         <ns1:HashTab/>
         <ns1:HmacTab/>
         <ns1:BenchmarkTab/>
-        <ns1:UnitTestTab/>
         <ns1:MonkeyTab/>
         <ns1:TLSDemo/>
     </mx:TabNavigator>

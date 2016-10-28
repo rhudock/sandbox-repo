@@ -8,7 +8,7 @@
  * See LICENSE.txt for full license information.
  */
 package com.hurlant.crypto.tls {
-	import com.hurlant.crypto.cert.X509Certificate;
+import com.hurlant.crypto.cert.X509Certificate;
 	import com.hurlant.crypto.cert.X509CertificateCollection;
 	import com.hurlant.crypto.prng.Random;
 	import com.hurlant.util.ArrayUtil;
@@ -16,7 +16,7 @@ package com.hurlant.crypto.tls {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.ProgressEvent;
-	import flash.utils.ByteArray;
+    import flash.utils.ByteArray;
 	import flash.utils.IDataInput;
 	import flash.utils.IDataOutput;
 	import flash.utils.clearTimeout;
@@ -88,7 +88,7 @@ package com.hurlant.crypto.tls {
 		private var _otherCertificate:X509Certificate;
 		// If this isn't null, we expect this identity to be found in the Cert's Subject CN.
 		private var _otherIdentity:String;
-		
+
 		/**
 		 * 
 		 * @param config		A TLSConfig instance describing how we're supposed to work
@@ -115,7 +115,7 @@ package com.hurlant.crypto.tls {
 			
 			_store = new X509CertificateCollection;
 		}
-		
+
 		/**
 		 * This starts the TLS negotiation for a TLS Client.
 		 * 
@@ -162,8 +162,8 @@ package com.hurlant.crypto.tls {
 			sendRecord(PROTOCOL_ALERT, rec);
 
 			_state = STATE_CLOSED;
-			dispatchEvent(new Event(Event.CLOSE));
-		}
+            dispatchEvent(new Event(Event.CLOSE));
+        }
 		
 		private var _packetQueue:Array = [];
 		private function parseRecord(stream:IDataInput):void {
@@ -614,6 +614,9 @@ package com.hurlant.crypto.tls {
 		public function sendApplicationData(data:ByteArray, offset:uint=0, length:uint=0):void {
 			var rec:ByteArray = new ByteArray;
 			var len:uint = length;
+			// BIG FAT WARNING: Patch from Arlen Cuss ALA As3crypto group on Google code. 
+			// This addresses data overflow issues when the packet size hits the max length boundary.
+			if (len == 0) len = data.length;  
 			while (len>16384) {
 				rec.position = 0;
 				rec.writeBytes(data, offset, 16384);
@@ -667,7 +670,7 @@ package com.hurlant.crypto.tls {
 		 * 
 		 * As long as that certificate looks just the way we expect it to.
 		 * 
-		 * @param cert: A bytearray that contains some DER-encoded goodness.
+		 * @param certs A bytearray that contains some DER-encoded goodness.
 		 * 
 		 */
 		private function loadCertificates(certs:Array):void {
@@ -680,15 +683,18 @@ package com.hurlant.crypto.tls {
 					firstCert = x509;
 				}
 			}
-			
-			if (firstCert.isSigned(_store, _config.CAStore)) {
+
+            var publicKey: X509Certificate = _config.predefinedCertificates == null ? null :_config.predefinedCertificates.getCertificate(firstCert.getSubjectPrincipal());
+            if (publicKey != null && publicKey.derEquals(firstCert)) {
+				_otherCertificate = firstCert;
+			} else if (firstCert.isSigned(_store, _config.CAStore)) {
 				// ok, that's encouraging. now for the hostname match.
 				if (_otherIdentity==null) {
 					// we don't care who we're talking with. groovy.
 					trace("TLS WARNING: No check made on the certificate's identity.");
 					_otherCertificate = firstCert;
 				} else {
-					if (firstCert.getCommonName()==_otherIdentity) {
+					if (!_config.checkCN || firstCert.getCommonName()==_otherIdentity) {
 						_otherCertificate = firstCert;
 					} else {
 						throw new TLSError("Invalid common name: "+firstCert.getCommonName()+", expected "+_otherIdentity, TLSError.bad_certificate);

@@ -26,8 +26,12 @@ package com.hurlant.crypto.tls {
 		public var compressions:Array;
 		
 		public var CAStore:X509CertificateCollection;
-		
-		public function TLSConfig(	entity:uint, cipherSuites:Array = null, compressions:Array = null, 
+        // Storage for predefined public keys that could be used to skip standard verification
+        public var predefinedCertificates:X509CertificateCollection = null;
+        // Determines if we need to check CommonName during certificate verification
+        private var _checkCN: Boolean = true;
+
+		public function TLSConfig(	entity:uint, cipherSuites:Array = null, compressions:Array = null,
 									certificate:ByteArray = null, privateKey:RSAKey = null, CAStore:X509CertificateCollection = null) {
 			this.entity = entity;
 			this.cipherSuites = cipherSuites;
@@ -48,7 +52,15 @@ package com.hurlant.crypto.tls {
 				this.CAStore = new MozillaRootCertificates;
 			}
 		}
-		
+
+        public function get checkCN(): Boolean {
+            return _checkCN;
+        }
+
+        public function set checkCN(value: Boolean): void{
+            _checkCN = value;
+        }
+
 		public function setPEMCertificate(cert:String, key:String = null):void {
 			if (key == null) {
 				key = cert; // for folks who like to concat those two in one file.
