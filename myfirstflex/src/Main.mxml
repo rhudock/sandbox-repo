@@ -33,20 +33,10 @@
 //            input2.text = dataBytes.toString();
         }
         ]]></fx:Script>
-    <!--<s:Button click="mytest();" label="Say Hello"/>-->
-    <!--<s:TextInput id="input1" x="100" y="100"></s:TextInput>-->
-    <!--<s:TextInput id="input2" x="100" y="130"></s:TextInput>-->
+    <s:Button click="mytest();" label="Say Hello"/>
+    <s:TextInput id="input1" x="100" y="100"></s:TextInput>
+    <s:TextInput id="input2" x="100" y="130"></s:TextInput>
 
-    <mx:Label text="AS3 Crypto Demo page" left="10" top="10"/>
-    <mx:TabNavigator left="10" top="36" bottom="10" right="10">
-        <ns1:PublicTab/>
-        <ns1:SecretTab/>
-        <ns1:HashTab/>
-        <ns1:HmacTab/>
-        <ns1:BenchmarkTab/>
-        <ns1:MonkeyTab/>
-        <ns1:TLSDemo/>
-    </mx:TabNavigator>
-    <mx:LinkButton label="Crypto.hurlant.com" right="10" top="8" click="navigateToURL(new URLRequest('http://crypto.hurlant.com/'))"/>
+
 
 </s:WindowedApplication>
