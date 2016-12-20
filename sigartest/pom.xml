@@ -14,7 +14,7 @@
         <spring-security.version>3.0.2.RELEASE</spring-security.version>
         <webflow.version>2.0.8.RELEASE</webflow.version>
         <aspectj.version>1.6.5.RELEASE</aspectj.version>
-        <org.slf4j.version>1.5.10</org.slf4j.version>
+        <org.slf4j.version>1.7.21</org.slf4j.version>
         <jstl.version>1.2</jstl.version>
         <logback.version>0.9.15</logback.version>
         <springsource.junit.version>4.7.0</springsource.junit.version>
@@ -23,48 +23,35 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>com.springsource.slf4j.api</artifactId>
-            <version>${org.slf4j.version}</version>
-            <scope>compile</scope>
-        </dependency>
 
+          <dependency>
+            <groupId>org.kurento</groupId>
+            <artifactId>kurento-jsonrpc-client</artifactId>
+            <version>6.6.0</version>
+        </dependency>
+          <dependency>
+            <groupId>org.kurento</groupId>
+            <artifactId>kurento-client</artifactId>
+            <version>6.6.0</version>
+        </dependency>
+        <!-- Testing -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${org.slf4j.version}</version>
             <scope>compile</scope>
         </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.5.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.5.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.8</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
+            <version>${org.slf4j.version}</version>
         </dependency>
 
-        <!--<dependency> -->
-        <!--<groupId>org.slf4j</groupId> -->
-        <!--<artifactId>com.springsource.slf4j.jcl</artifactId> -->
-        <!--<version>${org.slf4j.version}</version> -->
-        <!--</dependency> -->
-
-        <!-- Testing -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.2.0</version>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -95,11 +82,28 @@
         </dependency>
 
             <!-- https://mvnrepository.com/artifact/org.hyperic/sigar -->
-            <dependency>
-                <groupId>org.hyperic</groupId>
-                <artifactId>sigar</artifactId>
-                <version>1.6.5.132-6</version>
-            </dependency>
+        <dependency>
+            <groupId>org.fusesource</groupId>
+            <artifactId>sigar</artifactId>
+            <version>1.6.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4-beta1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.4-beta1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20141113</version>
+        </dependency>
 
     </dependencies>
 
@@ -145,6 +149,19 @@
                     </configuration>
                 </plugin>
 
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <mainClass>com.tc.cob.monitor.CobMonitor</mainClass>
+                            </manifest>
+                        </archive>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
 
