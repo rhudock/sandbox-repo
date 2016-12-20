@@ -14,9 +14,10 @@ Layout Tutorial
 Working With Layouts in JavaFX https://docs.oracle.com/javafx/2/layout/jfxpub-layout.htm
 
 
-Multi page example.
-https://blogs.oracle.com/acaicedo/entry/managing_multiple_screens_in_javafx1
+Multi page example  https://blogs.oracle.com/acaicedo/entry/managing_multiple_screens_in_javafx1
 
+All together
+fx experience  http://fxexperience.com/
 
 
 
