@@ -26,9 +26,9 @@ public class InqFrameworkParser {
 		List<String> inqjs = readFile(file);
 
 		// Process - Should be in a different class.
-		System.out.println("annonymous timeout count:" + countSetTimeout);
 		int countSetTimeout = 0;
 		int countFunction = 0;
+		System.out.println("annonymous timeout count:" + countSetTimeout);
 
 		String jsThis = "";
 		for (String s : inqjs) {

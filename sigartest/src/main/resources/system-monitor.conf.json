@@ -1,0 +1,11 @@
+{
+   "system": {
+      "name": "ChangeMe",
+      "ip" : "0.0.0.0",
+      "role" : "KMS"
+   },
+   "mongodb": {
+      "uris": [ "mongo-pri.inq.com" ],
+      "dbname": "kmslog"
+   }
+}

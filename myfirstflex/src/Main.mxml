@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+                       xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:ns1="*">
+    <fx:Script><![CDATA[
+        import mx.controls.Alert;
+
+        import com.hurlant.crypto.symmetric.BlowFishKey;
+        import com.hurlant.util.Hex;
+
+        import flash.utils.ByteArray;
+
+        public static const LOCAL_KEY:String = "nuanceTC";
+        public static const SAML_PREFIX:String = "_S_";
+
+        public function mytest():void {
+
+//            input1.text = "hello";
+            Alert.show("faild");
+            // Blowfish  mode-ECB   padding-PKCS#5
+// _S_23/G5XFuSMSLtbYk2iKvjw==
+            var txt:String = "fpinn@att.com";
+            var key:ByteArray = Hex.toArray(Hex.fromString(LOCAL_KEY));
+            //key = new ByteArray(LOCAL_KEY)
+            var blowfish:BlowFishKey = new BlowFishKey(key);
+            var dataBytes:ByteArray = new ByteArray();
+
+            dataBytes = Hex.toArray(Hex.fromString(txt));
+            blowfish.encrypt(dataBytes);
+//            input1.text = Hex.fromArray(dataBytes).toString();  // db7fc6e5716e48c4742e636f6d
+//            input1.text = Hex.fromArray(dataBytes);
+//            input1.text = dataBytes.toString();
+//            blowfish.decrypt(dataBytes);
+//            input2.text = dataBytes.toString();
+        }
+        ]]></fx:Script>
+    <s:Button click="mytest();" label="Say Hello"/>
+    <s:TextInput id="input1" x="100" y="100"></s:TextInput>
+    <s:TextInput id="input2" x="100" y="130"></s:TextInput>
+
+
+
+</s:WindowedApplication>

@@ -10,6 +10,13 @@
 	<name>learning.java.lang</name>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>my.learning.java</groupId>
 			<artifactId>learning.java.model</artifactId>
