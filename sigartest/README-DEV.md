@@ -10,3 +10,9 @@ sigar maven; http://stackoverflow.com/questions/27065270/how-to-configur-sigar-w
 
 How do I build a jar file that contains its dependencies?:
 http://www.avajava.com/tutorials/lessons/how-do-i-build-a-jar-file-that-contains-its-dependencies.html?page=1
+
+
+### Using java.library.path
+java -Djava.library.path=C:\code\Sandbox\sandbox-repo\sigartest\lib -jar target/standalone-Sigartest.jar
+java -Djava.library.path=lib -jar target/standalone-Sigartest.jar
+System.setProperty(“java.library.path”, “/path/to/library”);

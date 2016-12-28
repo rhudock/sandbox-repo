@@ -48,19 +48,19 @@
             <version>3.2.0</version>
         </dependency>
 
-<!--        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.7</version>
-            <scope>test</scope>
-        </dependency>-->
+        <!--        <dependency>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                    <version>4.7</version>
+                    <scope>test</scope>
+                </dependency>-->
 
-<!--        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>com.springsource.org.easymock</artifactId>
-            <version>2.3.0</version>
-            <scope>test</scope>
-        </dependency>-->
+        <!--        <dependency>
+                    <groupId>org.easymock</groupId>
+                    <artifactId>com.springsource.org.easymock</artifactId>
+                    <version>2.3.0</version>
+                    <scope>test</scope>
+                </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.hyperic/sigar -->
         <dependency>
@@ -89,156 +89,39 @@
     </dependencies>
 
     <build>
-      <!--  <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.java</include>
-                    <include>**/*.properties</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-                <targetPath>META-INF/</targetPath>
-            </resource>
-            <resource>
-                <directory>${project.build.directory}/dependency/</directory>
-                <includes>
-                    <include>*.jar</include>
-                </includes>
-                <targetPath>lib/</targetPath>
-            </resource>
-        </resources>-->
-
-
-
-            <plugins>
-<!--                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>copy-dependencies</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>copy-dependencies</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>-->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>shade</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <finalName>standalone-${project.artifactId}</finalName>
-                        <transformers>
-                            <transformer
-                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>${project.mainClass}</mainClass>
-                            </transformer>
-                        </transformers>
-                        <shadedArtifactAttached>true</shadedArtifactAttached>
-                        <!--<shadedClassifierName>jackofall</shadedClassifierName>  Any name that makes sense -->
-                    </configuration>
-                </plugin>
-<!--                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <configuration>
-                        <archive>
-                            <manifest>
-                                <addClasspath>true</addClasspath>
-                                <mainClass>${project.mainClass}</mainClass>
-                                <classpathPrefix>lib/</classpathPrefix>
-                            </manifest>
-
-                            <manifestEntries>
-                                <Rsrc-Main-Class>${project.realMainClass}</Rsrc-Main-Class>
-                                <Class-Path>./</Class-Path>
-                            </manifestEntries>
-
-                        </archive>
-                    </configuration>
-                </plugin>-->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>native-dep</id>
-                            <phase>compile</phase>
-                            <goals>
-                                <goal>copy-dependencies</goal>
-                            </goals>
-                            <configuration>
-                                <stripVersion>true</stripVersion>
-                                <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                                <includeGroupIds>org.hyperic</includeGroupIds>
-                                <includeTypes>dll,so</includeTypes>
-                            </configuration>
-                        </execution>
-
-                        <execution>
-                            <id>copy-dependencies</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>copy-dependencies</goal>
-                            </goals>
-                            <configuration>
-                                <outputDirectory>${project.build.directory}/dependency</outputDirectory>
-                                <overWriteReleases>false</overWriteReleases>
-                                <overWriteSnapshots>false</overWriteSnapshots>
-                                <overWriteIfNewer>true</overWriteIfNewer>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.0</version>
-                    <configuration>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
-                    </configuration>
-                </plugin>
-            </plugins>
-
-
-        <!--<finalName>${project.name}</finalName>-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <finalName>standalone-${project.artifactId}</finalName>
+                    <transformers>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>${project.mainClass}</mainClass>
+                        </transformer>
+                    </transformers>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <finalName>${project.name}</finalName>
     </build>
-
- <!--   <repositories>
-        <repository>
-            <id>spring-maven-milestone</id>
-            <name>Springframework Maven Repository</name>
-            <url>http://maven.springframework.org/milestone</url>
-        </repository>
-
-        <repository>
-            <id>SpringSource Enterprise Bundle Repository - External Bundle Snapshots</id>
-            <url>http://repository.springsource.com/maven/bundles/snapshot</url>
-        </repository>
-        <repository>
-            <id>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</id>
-            <url>http://repository.springsource.com/maven/bundles/release</url>
-        </repository>
-        <repository>
-            <id>SpringSource Enterprise Bundle Repository - External Bundle Releases</id>
-            <url>http://repository.springsource.com/maven/bundles/external</url>
-        </repository>
-
-    </repositories>-->
 </project>
