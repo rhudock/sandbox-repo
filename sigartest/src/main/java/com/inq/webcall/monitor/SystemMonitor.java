@@ -1,4 +1,4 @@
-package com.inq.webcall;
+package com.inq.webcall.monitor;
 
 import com.inq.webcall.dao.SystemStatDao;
 import com.inq.webcall.monitor.systemmonitor.NetworkData;
@@ -122,7 +122,7 @@ public class SystemMonitor {
     public static void startWebRtcEndPointChecker() {
         Timer time = new Timer(); // Instantiate Timer Object
         SystemMonitorChecker systemMonitorChecker = new SystemMonitorChecker(new SystemMonitor());
-        time.schedule(systemMonitorChecker, 0, 1000); // Create Repetitively task for every 1 secs
+        time.schedule(systemMonitorChecker, 0, 200000); // Create Repetitively task for every 1 secs
     }
 
     public static void main(String[] args) throws Exception {

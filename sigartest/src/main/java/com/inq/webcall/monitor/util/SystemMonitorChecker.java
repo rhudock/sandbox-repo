@@ -1,6 +1,6 @@
 package com.inq.webcall.monitor.util;
 
-import com.inq.webcall.SystemMonitor;
+import com.inq.webcall.monitor.SystemMonitor;
 
 import java.util.TimerTask;
 

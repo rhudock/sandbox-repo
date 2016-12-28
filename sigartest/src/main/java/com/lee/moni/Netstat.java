@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package org.hyperic.sigar.cmd;
+package com.lee.moni;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -24,6 +24,8 @@ import org.hyperic.sigar.SigarException;
 import org.hyperic.sigar.NetConnection;
 import org.hyperic.sigar.NetFlags;
 import org.hyperic.sigar.Tcp;
+import org.hyperic.sigar.cmd.Shell;
+import org.hyperic.sigar.cmd.SigarCommandBase;
 
 /**
  * Display network connections. 

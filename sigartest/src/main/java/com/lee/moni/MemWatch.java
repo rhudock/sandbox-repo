@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.hyperic.sigar.cmd;
+package com.lee.moni;
 
 import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.ProcMem;

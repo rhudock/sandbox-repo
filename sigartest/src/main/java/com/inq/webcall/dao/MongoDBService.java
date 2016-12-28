@@ -1,7 +1,7 @@
 package com.inq.webcall.dao;
 
 import com.google.gson.JsonArray;
-import com.inq.webcall.SystemMonitor;
+import com.inq.webcall.monitor.SystemMonitor;
 import com.inq.webcall.monitor.util.SystemMonitorChecker;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;

@@ -14,11 +14,12 @@
  * limitations under the License. 
  */
 
-package org.hyperic.sigar.cmd;
+package com.lee.moni;
 
 import java.util.Arrays;
 
 import org.hyperic.sigar.SigarException;
+import org.hyperic.sigar.cmd.*;
 
 /**
  * Display System Information 
@@ -39,7 +40,7 @@ public class SysInfo extends SigarCommandBase {
 
     public void output(String[] args) throws SigarException {
         //sigar/os info 
-        Version.printInfo(this.out);
+        org.hyperic.sigar.cmd.Version.printInfo(this.out);
         println("");
 
         //uptime 

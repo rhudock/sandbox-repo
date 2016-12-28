@@ -1,6 +1,6 @@
 package com.inq.webcall.monitor.systemmonitor;
 
-import com.inq.webcall.SystemMonitor;
+import com.inq.webcall.monitor.SystemMonitor;
 import org.bson.Document;
 import org.hyperic.sigar.*;
 import org.slf4j.Logger;
