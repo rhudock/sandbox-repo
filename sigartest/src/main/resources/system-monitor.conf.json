@@ -1,6 +1,7 @@
 {
+   "checkEverySec": 20,
    "system": {
-      "name": "ChangeMe",
+      "name": "KMS01",
       "ip" : "0.0.0.0",
       "role" : "KMS"
    },
