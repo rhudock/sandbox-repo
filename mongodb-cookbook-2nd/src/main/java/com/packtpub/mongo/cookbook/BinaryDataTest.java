@@ -77,7 +77,7 @@ public class BinaryDataTest {
 	public static boolean isMongoAvailable(MongoClient client) {
 		try {
 			client.getDatabaseNames();
-		} catch (MongoException.Network e) {
+		} catch (MongoException e) {
 			return false;
 		}
 		return true;
