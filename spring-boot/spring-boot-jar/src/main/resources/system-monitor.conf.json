@@ -1,0 +1,12 @@
+{
+   "checkEverySec": 20,
+   "system": {
+      "name": "KMS01",
+      "ip" : "0.0.0.0",
+      "role" : "KMS"
+   },
+   "mongodb": {
+      "uris": [ "mongo-pri.inq.com" ],
+      "dbname": "kmslog"
+   }
+}
