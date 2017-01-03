@@ -3,18 +3,12 @@ package com.lee.mongod.qna;
 import com.lee.mongod.qna.service.IMongoDBService;
 import com.lee.mongod.qna.service.MongoDBService;
 import com.mongodb.BasicDBObject;
-import com.mongodb.client.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static com.mongodb.client.model.Accumulators.avg;
-import static com.mongodb.client.model.Accumulators.sum;
-import static com.mongodb.client.model.Aggregates.group;
-import static com.mongodb.client.model.Aggregates.match;
-import static com.mongodb.client.model.Aggregates.out;
-import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Sorts.descending;
 
 /**
@@ -24,8 +18,32 @@ public class DistinctEx {
     private static MongoDatabase db = MongoDBService.getInstance().getDBInstance();
 
 
+    public static FindIterable<Document> readWebCallEndpointByCall(String callId) {
+        MongoCollection<Document> collection = db.getCollection(IMongoDBService.TBL_WEBRTCENDPOINT);
 
-    public static MongoCursor<String> readCallEndpoints(String callId) {
+        BasicDBObject searchQuery = new BasicDBObject();
+        searchQuery.put("room", callId);
+
+        FindIterable<Document> cursor = collection.find(searchQuery);
+
+        BasicDBObject projection = new BasicDBObject();
+        projection.put("_id", 0);
+
+        for (Document d : cursor) {
+            System.out.println(d);
+        }
+
+        System.out.println("=== distinct ===");
+        MongoCursor<String> ids = collection.distinct("Id", String.class).iterator();
+
+        while (ids.hasNext()) {
+            System.out.println(ids.next());
+        }
+
+        return cursor;
+    }
+
+    public static MongoCursor<String> readEndpointsInCall(String callId) {
         MongoCollection<Document> collection = db.getCollection(IMongoDBService.TBL_WEBRTCENDPOINT);
 
         BasicDBObject searchQuery = new BasicDBObject();
@@ -35,15 +53,9 @@ public class DistinctEx {
 
         MongoCursor<String> ids = collection.distinct("participant", String.class).iterator();
 
-
-/*        while (ids.hasNext()) {
-            BasicDBObject searchQuery = new BasicDBObject();
-            searchQuery.put("participant", ids.next());
-
-            FindIterable<Document> cursor = collection.find(searchQuery).sort(descending("participant"))
-
+        while (ids.hasNext()) {
             System.out.println(ids.next());
-        }*/
+        }
 
         return ids;
     }
