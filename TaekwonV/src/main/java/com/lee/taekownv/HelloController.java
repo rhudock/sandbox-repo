@@ -1,4 +1,4 @@
-package com.zenjava.examples.hellojfxmaven;
+package com.lee.taekownv;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

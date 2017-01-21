@@ -2,13 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+    <modelVersion>1.0.0</modelVersion>
 
     <groupId>com.zenjava</groupId>
-    <artifactId>hello-javafx-maven-example</artifactId>
-    <name>JavaFX Example Maven Project</name>
+    <artifactId>TaekwonV</artifactId>
+    <name>TaekwonV</name>
     <organization>
-        <name>Zen Java</name>
+        <name>Chealwoo Lee</name>
     </organization>
 
     <packaging>jar</packaging>
@@ -28,7 +28,7 @@
                 <configuration>
 
                     <!-- executable JAR file is built by default (not optional at this stage) -->
-                    <mainClass>com.zenjava.examples.hellojfxmaven.HelloJavaFxAndMavenApp</mainClass>
+                    <mainClass>com.lee.taekownv.HelloJavaFxAndMavenApp</mainClass>
 
                     <!-- optionally override settings (such as jar file name, html file, etc) -->
                     <jarFileName>my-example-app.jar</jarFileName>
