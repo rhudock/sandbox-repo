@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?language javascript?>
+<?import javafx.collections.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.collections.FXCollections?>
+
+<VBox prefHeight="356.0" prefWidth="454.0" spacing="0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lee.taekownv.SayHelloController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <VBox prefHeight="286.0" prefWidth="420.0" spacing="10">
+         <children>
+            <HBox prefHeight="24.0" prefWidth="420.0">
+               <children>
+               	<Label fx:id="msgLbl" prefWidth="150" text="FXML is cool!" />
+               	<Button fx:id="sayHelloBtn" onAction="#sayHello" text="Say Hello" />
+               </children>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="382.0" spacing="5">
+               <children>
+                  <ChoiceBox fx:id="url2open" prefHeight="25.0" prefWidth="328.0" value="http://wpdev.chealwoo.com/">
+      				<items>
+      					<FXCollections fx:factory="observableArrayList">
+      						<String fx:value="http://wpdev.chealwoo.com/" />
+      						<String fx:value="5 minutes" />
+      						<String fx:value="15 minutes" />
+      					</FXCollections>
+      				</items>
+      			</ChoiceBox>
+               	<Button fx:id="startChrome" onAction="#startChrome" text="Start Chrome" />
+               </children>
+            </HBox>
+            <Button fx:id="startEditPlus" onAction="#startEditPlus" text="Start EditPlus" />
+            <ImageView fx:id="tvImg" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#startYoutube" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="http://cfile229.uf.daum.net/image/150F2F434D8245B705737E" />
+               </image>
+            </ImageView>
+         </children>
+		  <style>
+			  -fx-padding: 10;
+			  -fx-border-style: solid inside;
+			  -fx-border-width: 2;
+			  -fx-border-insets: 5;
+			  -fx-border-radius: 5;
+			  -fx-border-color: blue;
+		  </style>
+      </VBox>
+   </children>
+</VBox>
