@@ -72,4 +72,5 @@
 		  </style>
       </VBox>
    </children>
+    <children><fx:include source="./child.fxml" fx:id="childIn"/></children>
 </VBox>

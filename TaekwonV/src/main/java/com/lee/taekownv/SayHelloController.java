@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -51,6 +52,7 @@ public class SayHelloController {
 
     @FXML
     private void startEditPlus() {
+        // childVBox.setVisible( true );
         startProcess("C:\\Program Files\\EditPlus 3\\editplus.exe", "E:\\code\\tc\\jira\\jiraNote\\EditPlusShortCut");
     }
 
