@@ -32,6 +32,5 @@ public class ChildController {
     @FXML
     private void initialize() {
         System.out.println("Initializing ChildController...");
-         childVBox.setVisible( true );
     }
 }
