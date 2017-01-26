@@ -1,4 +1,4 @@
-package com.lee.taekownv;
+package com.lee.taekownv.hello;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
