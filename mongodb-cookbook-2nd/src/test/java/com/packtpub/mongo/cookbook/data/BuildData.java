@@ -32,10 +32,11 @@ public class BuildData {
 
     public static void main (String[] args) {
         StudentTBLService.displayTabel();
+//        buildData();
     }
 
 
-    private void buildData(){
+    private static void buildData(){
         StudentTBLService.deleteStudentTabel();
         Random r = new Random();
         for(int i=0; i < students.length; i++){

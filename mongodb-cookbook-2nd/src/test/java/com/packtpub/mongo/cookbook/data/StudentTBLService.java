@@ -41,12 +41,29 @@ public class StudentTBLService {
 
     public static void main (String[] argv) {
         MongoCollection<Document> collection = SchoolDBService.db.getCollection(STUDENT_TBL_NAME);
+
+        // Display Ace's total and avg per each teacher
         AggregateIterable<Document> cursor = collection.aggregate(Arrays.asList(match(eq("student", "Ace"))  // ));
-                ,group("$Steacher"
+                ,group("$teacher"
                         , sum("totalscore", "$score")
                         , avg("Avgscore", "$score")
                 )
-//                ,out("Student")
+//                ,out("Student")   // This creates a new MongoCollection
+                )
+        );
+
+        for (Document d : cursor) {
+            System.out.println(d);
+        }
+
+        // Display Student Name
+        cursor = collection.aggregate(Arrays.asList(
+//                match(eq("student", "Ace"))
+                group("$student"
+//                        , sum("totalscore", "$score")
+//                        , avg("Avgscore", "$score")
+                )
+//                ,out("Student")   // This creates a new MongoCollection
                 )
         );
 
