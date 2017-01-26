@@ -21,11 +21,9 @@ import static com.mongodb.client.model.Sorts.descending;
 public class AggregateEx {
     private static MongoDatabase db = MongoDBService.getInstance().getDBInstance();
 
-
-
-/*
-http://stackoverflow.com/questions/38202897/mongo-aggregation-in-java-group-with-multiple-fields
- */
+    /*
+    http://stackoverflow.com/questions/38202897/mongo-aggregation-in-java-group-with-multiple-fields
+     */
     public static void testing(String roomId) {
         Document matches = new Document("$match",
                 new Document("gi", new Document("$ne", null))
@@ -52,22 +50,22 @@ http://stackoverflow.com/questions/38202897/mongo-aggregation-in-java-group-with
         List<Document> pipeline = Arrays.asList(matches, firstGroup, secondGroup, sort);
         AggregateIterable<Document> cursor = db.getCollection(IMongoDBService.TBL_WEBRTCENDPOINT).aggregate(pipeline);
 
-        for(Document doc : cursor) { // do stuff with doc }
-    }
-    }
-
-   public static void testing2(String roomId) {
-       MongoCollection<Document> collection = db.getCollection(IMongoDBService.TBL_WEBRTCENDPOINT_STAT);
-       AggregateIterable<Document> cursor = collection.aggregate(Arrays.asList(match(eq("room", roomId)),
-               group("$Ssrc", sum("totalRoundTripTime", "$RoundTripTime"),
-                       avg("averageRoundTripTime", "$RoundTripTime")),
-               out("ssrc")));
-
-       for (Document d : cursor) {
-           System.out.println(d);
-       }
+        for (Document doc : cursor) {
+            // do stuff with doc
+        }
     }
 
+    public static void testing2(String roomId) {
+        MongoCollection<Document> collection = db.getCollection(IMongoDBService.TBL_WEBRTCENDPOINT_STAT);
+        AggregateIterable<Document> cursor = collection.aggregate(Arrays.asList(match(eq("room", roomId)),
+                group("$Ssrc", sum("totalRoundTripTime", "$RoundTripTime"),
+                        avg("averageRoundTripTime", "$RoundTripTime")),
+                out("ssrc")));
+
+        for (Document d : cursor) {
+            System.out.println(d);
+        }
+    }
 
     public static void main(String[] args) {
         testing2("ltttest0010");
