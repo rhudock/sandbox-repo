@@ -12,7 +12,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.collections.FXCollections?>
 
-<VBox prefHeight="350.0" prefWidth="650.0"  spacing="0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lee.taekownv.SayHelloController">
+<VBox prefHeight="350.0" prefWidth="650.0" spacing="0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lee.taekownv.SayHelloController">
    <children>
        <VBox prefHeight="286.0" prefWidth="420.0" spacing="10">
          <children>
@@ -22,6 +22,9 @@
                	<Button fx:id="sayHelloBtn" onAction="#sayHello" text="Say Hello" />
                </children>
             </HBox>
+            <Slider fx:id="timeSlider" />
+            <ProgressBar fx:id="timeProgressbar" prefHeight="18.0" prefWidth="613.0" progress="0.0" />
+            <Separator prefWidth="200.0" />
             <HBox prefHeight="25.0" prefWidth="382.0" spacing="5">
                <children>
                   <ChoiceBox fx:id="url2open" prefHeight="25.0" prefWidth="328.0" value="http://wpdev.chealwoo.com/">

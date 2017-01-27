@@ -2,7 +2,13 @@
 package com.lee.taekownv;
 
 import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -12,9 +18,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class TaekwonVMainApp extends Application {
 	public static void main(String[] args) {
@@ -57,6 +65,9 @@ public class TaekwonVMainApp extends Application {
 		stage.setScene(scene);
 		stage.setTitle("Hello FXML");
 		stage.show();
+
+
+
 	}
 
 	public VBox getRoot() {
@@ -79,4 +90,6 @@ public class TaekwonVMainApp extends Application {
 			}
 		}
 	}
+
+
 }
