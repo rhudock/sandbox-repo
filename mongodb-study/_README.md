@@ -1,5 +1,9 @@
-No code files for Chapter 6 and 7
+# My Mongodb java driver study project based on mongodb cookbook 2nd Edition.
 
+### How to Build Filter on Collection
+1. BasicDBObject can be used
+2. QueryBuilder can be used to build Query
+3. Aggregate is another way to build it
 
 ## Learning point
 Q How to filter

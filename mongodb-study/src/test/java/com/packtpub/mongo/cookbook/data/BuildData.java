@@ -2,7 +2,6 @@ package com.packtpub.mongo.cookbook.data;
 
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
@@ -31,13 +30,13 @@ public class BuildData {
     };
 
     public static void main (String[] args) {
-        StudentTBLService.displayTabel();
+        StudentTBLService.displayTable();
 //        buildData();
     }
 
 
     private static void buildData(){
-        StudentTBLService.deleteStudentTabel();
+        StudentTBLService.deleteStudentTable();
         Random r = new Random();
         for(int i=0; i < students.length; i++){
             for(int j=0; j < teacher.length; j++) {
