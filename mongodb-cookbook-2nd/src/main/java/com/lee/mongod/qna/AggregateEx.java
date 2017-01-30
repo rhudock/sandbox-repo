@@ -17,6 +17,9 @@ import static com.mongodb.client.model.Sorts.descending;
 
 /**
  * Created by chealwoo on 12/29/2016.
+ *
+ * multiple group by
+ * http://stackoverflow.com/questions/15564562/how-to-write-multiple-group-by-id-fields-in-mongodb-java-driver
  */
 public class AggregateEx {
     private static MongoDatabase db = MongoDBService.getInstance().getDBInstance();
