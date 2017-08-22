@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" viewSourceURL="srcview"
+                       xmlns:ns1="com.lee.ui.view.*">
+
+    <mx:Label text="UI Demo" left="10" top="10"/>
+    <mx:TabNavigator left="10" top="36" bottom="10" right="10">
+        <ns1:Html/>
+        <ns1:ComboBox/>
+        <ns1:Button/>
+    </mx:TabNavigator>
+
+</mx:WindowedApplication>
