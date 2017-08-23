@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="library://ns.adobe.com/flex/mx"
+		   xmlns:fx="http://ns.adobe.com/mxml/2009"
+		   xmlns:s="library://ns.adobe.com/flex/spark"
+		   label="ArrayCollection"
+		   width="100%"
+		   height="100%"
+			initialize="sortAC();">
+
+	<fx:Script>
+        <![CDATA[
+		import mx.collections.ArrayCollection;
+		import spark.collections.Sort;
+		import spark.collections.SortField;
+
+		// Function to sort the ArrayCollection in descending order.
+		public function sortAC():void {
+			var sortA:Sort = new Sort();
+			sortA.fields=[new SortField("label")];
+			myAC.sort=sortA;
+			//Refresh the collection view to show the sort.
+			myAC.refresh();
+		}
+		// Function to add an item in the ArrayCollection.
+		// Data added to the view is also added to the underlying Array.
+		// The ArrayCollection must be sorted for this to work.
+		public function addItemToMyAC():void {
+			myAC.addItem({label:"MD", data:"Annapolis"});
+		}
+		// Function to add an item in the ArrayCollection.
+		// Data added to the view is also added to the underlying Array.
+		// The ArrayCollection must be sorted for this to work.
+		public function removeItemFromMyAC(name:String):void {
+			for each( var item in myAC.source ) {
+				if(item.label == name) {
+					myAC.removeItemAt(item);
+				}
+			}
+			myAC.refresh();
+		}
+		]]>
+    </fx:Script>
+
+	<fx:Declarations>
+		<!-- An ArrayCollection with an array of objects -->
+		<mx:ArrayCollection id="myAC">
+			<!-- Use an fx:Array tag to associate an id with the array. -->
+			<fx:Array id="myArray">
+				<fx:Object label="MI" data="Lansing"/>
+				<fx:Object label="MO" data="Jefferson City"/>
+				<fx:Object label="MA" data="Boston"/>
+				<fx:Object label="MT" data="Helena"/>
+				<fx:Object label="ME" data="Augusta"/>
+				<fx:Object label="MS" data="Jackson"/>
+				<fx:Object label="MN" data="Saint Paul"/>
+			</fx:Array>
+		</mx:ArrayCollection>
+	</fx:Declarations>
+
+	<s:HGroup width="100%">
+		<!-- A ComboBox populated by the collection view of the Array. -->
+		<s:ComboBox id="cb1" dataProvider="{myAC}"/>
+		<s:Button id="b1" label="Add MD" click="addItemToMyAC();"/>
+	</s:HGroup>
+
+	<s:HGroup width="100%" top="40">
+		<!-- A ComboBox populated by the collection view of the Array. -->
+		<s:TextInput id="text1" width="100"/>
+		<s:Button id="removeBtn" label="Remove" click="removeItemFromMyAC(text1.text);"/>
+	</s:HGroup>
+
+</mx:Canvas>
