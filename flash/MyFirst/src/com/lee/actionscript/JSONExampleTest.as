@@ -19,6 +19,22 @@ public class JSONExampleTest  extends Sprite {
         var obj:Object = {a:tf1, b:nt, c:tf2};
         var revivable_objects:Array = new Array();
 
+
+        /**
+         * my JSON.parse test
+         */
+        var jsonObj:Object = JSON.parse("{\"title\":\"mytitle\", \"name\":\"hello\"}");
+        trace("my json object.title=" + jsonObj.title);
+
+
+        jsonObj = JSON.parse("{\"title\":\"mytitle\", \"name\":[\"hello\",\"hello2\"]}");
+        trace("my json object.name=" + jsonObj.name);
+        trace("my json object.name=" + jsonObj.name[0]);
+
+        jsonObj = JSON.parse("{\"title\":\"mytitle\", \"name\":[\"hello\",\"hello2\"], \"child\":{\"title\":\"childtitle\"}}");
+        trace("my json object.child.title=" + jsonObj.child.title);
+
+
         var json_out = JSON.stringify(obj, function(k,v){
                     if (v is JSONExample)
                     {

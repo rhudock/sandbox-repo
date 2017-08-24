@@ -10,6 +10,7 @@ public class JSONExample extends TextField
         super.text = s;
         id = ++nextId;
     }
+
     public function toJSON(k):*
     {
         // To be called internally by the JSON.stringify() method.
