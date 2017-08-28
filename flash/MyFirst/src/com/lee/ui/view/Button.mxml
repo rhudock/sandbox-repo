@@ -21,4 +21,30 @@
 			  label="Hello World!"
 			  click="myBtn_clickHandler(event)"/>
 
+	<fx:Script>
+        <![CDATA[
+		import flash.net.navigateToURL;
+
+		private function newWin(url:String):void {
+			var urlRequest:URLRequest = new URLRequest(url);
+//			navigateToURL(urlRequest, String(comboBox.selectedItem));
+			navigateToURL(urlRequest, "_blank");
+		}
+		]]>
+    </fx:Script>
+
+	<mx:ApplicationControlBar dock="true">
+		<mx:Label text="window:" />
+		<mx:ComboBox id="comboBox">
+			<mx:dataProvider>
+				<fx:String>_blank</fx:String>
+				<fx:String>_top</fx:String>
+				<fx:String>CustomName</fx:String>
+			</mx:dataProvider>
+		</mx:ComboBox>
+	</mx:ApplicationControlBar>
+
+	<mx:LinkButton label="Go to adobe.com"
+				   click="newWin('http://www.adobe.com/')" />
+
 </mx:Canvas>
