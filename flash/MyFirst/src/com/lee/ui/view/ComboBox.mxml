@@ -30,6 +30,22 @@
 		import flash.events.Event;
 		import mx.events.DropdownEvent;
 
+		// http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/fl/controls/ComboBox.html
+		protected function addComBo1Btn_clickHandler(event:MouseEvent):void {
+			var newSel:Object = {label:"CL", data:"My Test"};
+//			addComBo1.dataProvider.push({label:"CL", data:"My Test"});
+			addComBo1.dataProvider.addItem(newSel);
+		}
+		]]>
+    </fx:Script>
+
+
+
+
+
+	<fx:Script>
+        <![CDATA[
+
 		// Display the type of event for open and close events.
 		private function dropEvt(event:DropdownEvent):void {
 			forChange.text+=event.type + "\n";
@@ -41,14 +57,9 @@
 					event.currentTarget.selectedIndex + "\n";
 		}
 
-		// http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/fl/controls/ComboBox.html
-		protected function addComBo1Btn_clickHandler(event:MouseEvent):void {
-			var newSel:Object = {label:"CL", data:"My Test"};
-//			addComBo1.dataProvider.push({label:"CL", data:"My Test"});
-			addComBo1.dataProvider.addItem(newSel);
-		}
 		]]>
     </fx:Script>
+
 
 	<mx:ComboBox open="dropEvt(event)" close="dropEvt(event)"
 				 change="changeEvt(event)" top="35" height="30">
@@ -59,6 +70,11 @@
 		</mx:ArrayList>
 	</mx:ComboBox>
 	<mx:TextArea id="forChange" width="150" height="150" top="70"/>
+
+
+
+
+
 
 	<fx:Script>
         <![CDATA[
