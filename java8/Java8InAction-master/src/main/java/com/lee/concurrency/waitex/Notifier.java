@@ -25,6 +25,8 @@ public class Notifier implements Runnable {
                     }
                     isRun = false;
                     // msg.notifyAll();
+                } else {
+                    System.out.println(name + " Cannot find message with "+ id );
                 }
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();

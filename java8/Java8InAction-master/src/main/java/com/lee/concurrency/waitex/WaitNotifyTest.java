@@ -6,6 +6,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
+import com.lee.concurrency.MyThreadUtil;
+
 /**
  * @see com.lee.concurrency.exmessage.basic.WaitNotifyTest
  */
@@ -49,24 +51,9 @@ public class WaitNotifyTest {
         System.out.println("I am interrupted.");
         }
 
-        stop(executor);
+        MyThreadUtil.stop(executor);
         System.out.println("Job done.");
 
     }
 
-    private static void stop(ExecutorService executor) {
-        try {
-            System.out.println("attempt to shutdown executor");
-            executor.shutdown();
-            executor.awaitTermination(10, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            System.err.println("tasks interrupted");
-        } finally {
-            if (!executor.isTerminated()) {
-                System.err.println("cancel non-finished tasks");
-            }
-            executor.shutdownNow();
-            System.out.println("shutdown finished");
-        }
-    }
-}
+ }

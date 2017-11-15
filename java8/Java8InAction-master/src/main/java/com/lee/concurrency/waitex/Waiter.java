@@ -20,7 +20,7 @@ public class Waiter implements Runnable {
             try {
                 System.out.println(id + " Waiter-" + name + " waiting to get notified at time:" + System.currentTimeMillis());
                 synchronized(msg) {
-                    msg.wait(10000);
+                    msg.wait(150000);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -29,12 +29,11 @@ public class Waiter implements Runnable {
 
             }
 
+            msg = MessageBox.getInstance().takeMessage(id);
             if(msg != null) {
                 System.out.println(id + " waiter processed: " + msg.getMsg());
                 isRun = false;
             }
         }
-
-
     }
 }

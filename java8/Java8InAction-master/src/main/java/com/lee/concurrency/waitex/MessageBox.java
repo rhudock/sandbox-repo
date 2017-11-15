@@ -1,6 +1,7 @@
 package com.lee.concurrency.waitex;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 public class MessageBox {
@@ -13,7 +14,7 @@ public class MessageBox {
     }
 
     private MessageBox() {
-        messageMap = new HashMap<String, Message>();
+        messageMap = new Hashtable<>();
     }
 
     public Message getNewEmptyMessage(String key){
@@ -23,6 +24,9 @@ public class MessageBox {
     }
     public Message findMessage(String key){
         return messageMap.get(key);
+    }
+    public Message takeMessage(String key){
+        return messageMap.remove(key);
     }
 
     public class Message {
@@ -39,5 +43,9 @@ public class MessageBox {
         public void setMsg(String str) {
             this.msg=str;
         }
+    }
+
+    public int getMessageCnt() {
+        return messageMap.size();
     }
 }
