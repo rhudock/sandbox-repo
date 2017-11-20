@@ -15,7 +15,8 @@
 		<module>learning.java.service.impl.memory</module>
 		<module>learning.java.tij</module>
 		<module>fx</module>
-	</modules>
+        <module>learning.java8</module>
+    </modules>
 
 	<properties>
 		<java.version>1.8</java.version>
