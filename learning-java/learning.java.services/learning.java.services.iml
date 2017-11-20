@@ -15,7 +15,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="learning.java.model" />
-    <orderEntry type="module" module-name="learning.java.model" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:3.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:3.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />

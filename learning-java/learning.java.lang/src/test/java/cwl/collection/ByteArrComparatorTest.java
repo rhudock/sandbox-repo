@@ -6,42 +6,37 @@
  */
 package cwl.collection;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * @author dlee
- *
  */
 public class ByteArrComparatorTest {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
+    /**
+     * @throws java.lang.Exception
+     */
+    @Before
+    public void setUp() throws Exception {
+    }
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
+    /**
+     * @throws java.lang.Exception
+     */
+    @After
+    public void tearDown() throws Exception {
+    }
 
-	@Test
-	public void test() {
+    @Test
+    public void test() {
+        ByteArrComparator arrComparator = new ByteArrComparator();
+        byte[] o1, o2 = "test".getBytes();
 
-		ByteArrComparator arrComparator = new ByteArrComparator();
-		
-		byte[] o1, o2 = "test".getBytes();
-		
-		assertEquals( -1, arrComparator.compare(null, o2));
-		
-		
-	}
+        assertEquals(-1, arrComparator.compare(null, o2));
+    }
 
 }
