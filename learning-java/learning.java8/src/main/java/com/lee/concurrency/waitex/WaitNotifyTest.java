@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-//import com.lee.concurrency.MyThreadUtil;
+import com.lee.concurrency.MyThreadUtil;
 
 /**
  * @see com.lee.concurrency.exmessage.basic.WaitNotifyTest
@@ -51,7 +51,7 @@ public class WaitNotifyTest {
         System.out.println("I am interrupted.");
         }
 
-//        MyThreadUtil.stop(executor);
+        MyThreadUtil.stop(executor);
         System.out.println("Job done.");
 
     }

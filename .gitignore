@@ -12,3 +12,4 @@ jsqlex/src/test/resources/*debug.js
 *.iws
 out/
 *.log
+node_modules/
