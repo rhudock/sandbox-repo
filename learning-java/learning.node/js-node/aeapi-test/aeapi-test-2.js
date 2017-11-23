@@ -145,8 +145,8 @@ request(options, function (error, response, body) {
                                     method: 'POST',
                                     headers: headersLogin,
                                     // body: `{  \"agentId\": \"a1\",  \"chatLineReceiverType\": \"external\",  \"engagementId\": \"${engagementId}\",  \"messageText\": \"message1\",  \"messageType\": \"chatLine\"}`
-                                    body: `{  \"agentId\": \"a1\",  \"chatLineReceiverType\": \"external\",  \"engagementId\": \"${engagementId}\",  \"messageText\": \"${jsonMsg}\",  \"messageType\": \"dynamicForm\"}`
-                                }
+                                    body: `{  \"agentId\": \"a1\",  \"chatLineReceiverType\": \"external\",  \"engagementId\": \"${engagementId}\",  \"messageText\": \"${jsonMsg}\",  \"description\": \"This is test message 2\",  \"messageType\": \"agentDataPass\"}`
+                                };
 
                                 // -- call POST a message to CI
                                 console.log(`$ Post a message to Chat: ${engagementId}`);

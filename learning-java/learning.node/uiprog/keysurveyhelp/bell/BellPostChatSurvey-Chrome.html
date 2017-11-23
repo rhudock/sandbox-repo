@@ -1335,7 +1335,7 @@ hideURLParams();</script><script type="text/javascript" language="javascript" sr
                 <td id="AnswerElementTd29395099" class="H3">
                     <select name="R29395099" id="selectR29395099" class="H3 selectDropDown" size="1"
                             aria-required="true">
-                        <option id="test111" value="" aria-labelledby="h10title test111" aria-label="Please select one ...">Please select one ...</option>
+                        <option id="test111" value="" aria-labelledby="h10title QuestionLabel29395099 test111" aria-label="Please select one ...">Please select one ...</option>
                         <!--<option id="test111" value="" aria-labelledby="h10title QuestionLabelTd29395099 test111" aria-label="Please select one ...">Please select one ...</option>-->
                         <option id="AnswerOption29395099_150094343" value="150094343" class="ODD">Completely
                         </option>
@@ -1568,6 +1568,9 @@ function updatePageSelectorPosition(){var rgid = /^DivPage[0-9]+/;var m = docume
 //    alert('hello2');
         $('.H10')[0].id = 'h10title';
         $('#selectR29395099').blur(function(){
+            $('#selectR29395099 option')[0].removeAttribute('aria-labelledby');
+        });
+        $('#selectR29395099').change(function(){
             $('#selectR29395099 option')[0].removeAttribute('aria-labelledby');
         });
         $('#selectR29395099').focus();
