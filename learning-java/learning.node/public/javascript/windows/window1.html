@@ -1,0 +1,67 @@
+<html>
+
+<head>
+
+<title>host window</title>
+
+
+<script type="text/javascript">
+
+var mobInq = {};
+window.mobInq = mobInq;
+
+var msgBox;
+var iFrameWin;
+
+
+function open_win()
+{
+    mobInq.popupWin = window.open("pwindow.htm")
+}
+
+function sendClosingMsg() {
+    if (mobInq.popupWin) {
+        mobInq.msgBox = popupWin.document.getElementById("hostMessage");
+        mobInq.msgBox.innerHTML= "<p>window is closing</>";
+    }
+}
+
+
+
+</script>
+
+</head>
+
+<body onload="myAddIframe()">
+
+<input type="button" value="Open Window" onclick="open_win()" />
+
+<a href="http://www.touchcommerce.com/Industries/newindex.php" title="different domain">different domain</a>
+
+</body>
+
+<script type="text/javascript">
+function addIFrame(data, clientHtml, id) {
+    // initial origin: http://home.inq.com
+    // active origin:  http://inq.com (set via document.domain)
+    // needed origin:  http://www.touchcommerce.com
+    var divsub = window.document.createElement("DIV");
+    var frameSrc = clientHtml+"?PRXY" ;
+    var iframe  = "<IFRAME id='iInq' "
+             + "STYLE=\"overflow: hidden; display: block; border: none; top:0px;left:0px;width: 1px; height: 1px;\" "
+             + "NAME=\"" + (id + "||" + data) + "\" "
+             + "SRC=" + frameSrc + ">\n</IFRAME>";
+    divsub.innerHTML = iframe ;
+    document.body.appendChild(divsub);
+};
+
+function myAddIframe() {
+
+addIFrame('iInq', 'http://www.touchcommerce.com/Industries/ifindex.php', 'iInq')
+mobInq.iFrameWin = window.document.getElementById("iInq");
+
+}
+</script>
+
+</html>
+

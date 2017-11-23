@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+</head>
+<body>
+
+	<h1 id="qunit-header">jQuery Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+<script type="text/javascript" src="MixIns.js"></script>	
+<script type="text/javascript">
+/**
+ * $Id$
+ * 
+ * 
+ */
+$(function() {
+	
+	/**
+	 * Module of Array Qunit tests
+	 */
+	module("MixIns JSON test");
+
+	test("Testing qunit", function() {
+		ok ( true );
+		equal ( 1, 1 );
+	});
+
+	test("Testing qunit", function() {
+		var testStr = "{asdf:[\"asdf\"],geograpy:\"usa\",geography:[\"usa\"],agentvalue:[\"high\"],language:[\"english\"],department:[\"electronics\"]}";
+		ok ( testStr );
+		ok ( typeof MixIns.JSON.stringify == "function" );
+		ok ( typeof MixIns.JSON.parse == "function" );
+
+		var testObj = MixIns.JSON.parse(testStr);
+		ok (testObj);
+
+		var testStrJson = MixIns.JSON.stringify(testObj);
+		ok ( testStrJson, testStrJson );
+
+		testStrJson = testStrJson.replace(/(,|{)\s*([^(\")"]+)\s*:/g,"$1\"$2\":");  //This will all quotes to name;  
+		ok ( testStrJson, testStrJson );
+
+		ok (JSON);
+		var testStrJson = JSON.stringify(testObj);
+		ok ( testStrJson, testStrJson );
+
+		testStrJson = testStrJson.replace(/\"([^(\")"]+)\":/g,"$1:");  //This will remove all the quotes json;  
+		ok ( testStrJson, testStrJson );
+
+	});
+
+	test("Testing", function() {
+		var testStr = "{a: 1, b: 2}";
+		ok ( testStr );
+		var testStrJson = testStr.replace(/(,|{)([^(\")"]*):/g,"$1\"$2\":");  //This will all quotes to name;  
+		ok ( testStrJson, testStrJson );
+	});
+
+	test("Testing JSON", function() {
+		var testStr = "{abcdef :1, b: 2,test: [\"value\",\"value2\" ],test2 :\"value2\"}";
+		ok ( testStr );
+		var testObj = MixIns.JSON.parse(testStr);
+		ok (testObj, testObj);
+		var testStrJson = MixIns.JSON.stringify(testObj);
+		testStrJson = testStrJson.replace(/({|,)([^()\":]*):/g,"$1\"$2\":");
+		ok ( testStrJson, testStrJson );
+	});
+
+	test("Testing JSON2", function() {
+		var testStr = "{abcdef:1,b e:2,test:\"value\",test2:\"value2\"}";
+		ok ( testStr );
+		var testObj = MixIns.JSON.parse(testStr);
+		ok (testObj, testObj);
+		var testStrJson = MixIns.JSON.stringify(testObj);
+		testStrJson = testStrJson.replace(/({|,)([^()\":]*):/g,"$1\"$2\":");
+		ok ( testStrJson, testStrJson );
+	});
+
+// [a-zA-Z_$][a-zA-Z0-9_$]*
+
+});
+</script>	
+
+
+
+</body>
+</html>

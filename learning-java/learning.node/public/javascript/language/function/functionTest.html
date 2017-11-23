@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="/lib/qunit/qunit-1.15.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+   <!-- script type="text/javascript" src="../../lib/log4js.js"></script -->
+
+</head>
+<body>
+	<h1 id="qunit-header">Function (Advanced, Foundational)</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<div id="box-summary">
+	<p>
+	Generally speaking, a function is a "subprogram" that can be called by code external (or internal in the case of recursion) to the function. Like the program itself, a function is composed of a sequence of statements called the function body. Values can be passed to a function, and the function can return a value.
+	<br />In JavaScript, functions are first-class objects, i.e. they are objects and can be manipulated and passed around just like any other object. Specifically, they are Function objects
+	</p>
+	<h4>Reference;</h4>	
+	<ul>		
+    	<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions">MDN: Functions and function scope</a>
+    	</li>
+    	<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript">MDN: Introduction to Object-Oriented JavaScript</a>
+    	</li>
+    	<li><a href="http://www.phpied.com/3-ways-to-define-a-javascript-class/">3 ways to define a JavaScript class</a></li>
+    </ul>
+    
+	</div> <!-- End of box-summary -->
+	<ol id="qunit-tests"></ol>
+
+	<script type="text/javascript"> 
+	
+logger = { 
+	error: function(msg) {
+		console.log(msg);
+	}
+}
+
+module("Function in Javascript", {
+	setup : function() {
+		try	{
+
+		} catch (e){
+			logger.error("ERROR():" + e.message, e); 
+			ok(false);
+		}
+	},
+
+	tearDown: function () {
+		try	{
+
+		} catch (e){
+			logger.error("ERROR():" + e.message, e); 
+			ok(false);
+		}
+    }
+});
+
+	test("Function overloading", function() {
+		
+		var myLogger = function(name) {
+		};
+
+		myLogger.prototype = {
+
+			fatal: function(message) {
+				if(window.console) 
+				window.console.log("fatal: function(message) Not ");
+			},
+			fatal: function(message, throwable) {
+				if(window.console) 
+				window.console.log("fatal: function(message, mytest) ");
+			},
+
+			avar: "first",
+			avar: "second"
+		};
+
+		var alogger = new myLogger("test");
+
+		alogger.fatal("test");
+		alogger.fatal("test", "test");
+
+		ok(true);
+
+		equal ( alogger.avar, "second" );
+
+	});
+
+
+	/**
+	 *
+	 *
+	 */
+	test("Function scope test", function() {
+		
+		var Person = function(name) {
+			this.name = name
+			this.getName = function() {
+				return this.name;
+			}
+			this.afunction = function() {
+				return "hello";
+			}
+		};
+
+		Person.prototype.bfunc = function() {			
+			return "hello";
+		}
+
+		ok(Person);
+
+		// Why this is not a function what is it then?
+		// Person.afunction is not a function
+		try{
+			equal ( Person.afunction(), "hello" );
+		}
+		catch (e){
+			ok( false, e.message + " Person.afunction is " + typeof Person.afunction );
+		}
+
+		try{
+			equal ( Person.prototype.bfunc(), "hello" );
+		}
+		catch (e){
+			ok( false, e.message );
+		}
+
+		var person = new Person("yuna");
+
+		// Then this is working okay.
+		try{
+			equal ( person.afunction(), "hello" );
+		}
+		catch (e){
+			ok( false, e.message );
+		}
+
+		equal ( person.getName(), "yuna"); 
+		equal ( person.afunction(), "hello" );
+
+	});
+	
+	</script>	
+
+	<script type="text/javascript" src="functiontest.js"> </script>	
+	<!-- 
+	<script type="text/javascript" src="advancedfunctiontest.js"> </script>	
+ -->
+</body>
+</html>

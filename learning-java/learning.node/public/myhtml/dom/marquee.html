@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> New Document </title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+
+<style>
+iframe#inqChatStage {
+    box-shadow: 5px 5px 5px #999999;
+}
+global.tcChat {
+    border-color: #92A0AD;
+    font-family: "Arial";
+}
+A.tcChat:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}
+A.tcChat {
+    color: #0000FF;
+    text-decoration: underline;
+}
+Body.tcChat {
+    margin: 0;
+}
+.inqTitleBar {
+    cursor: move;
+}
+.inqDivResizeCorner {
+    cursor: se-resize;
+}
+TextInput.tcChat {
+    font-family: Verdana,Arial,Helvetica;
+    font-size: 9pt;
+}
+input.tcChat[type="text"] {
+    background-color: #FAF0E6;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 1px;
+}
+TextArea.tcChat {
+    background-color: #FFFFFF;
+    border-style: none;
+    border-width: 0;
+    font-family: Verdana,Arial,Helvetica;
+    font-size: 9pt;
+    margin: 0;
+    overflow: hidden;
+}
+Table.tcChat {
+    background-color: rgba(0, 0, 0, 0);
+}
+Div.tcChat {
+    border-style: none;
+    border-width: 0;
+    margin: 0;
+}
+.customerId {
+    color: #727272;
+    font-family: Verdana,Arial,Helvetica;
+    font-size: 9pt;
+    font-weight: bold;
+}
+.agentId {
+    color: #000000;
+    font-family: Verdana,Arial,Helvetica;
+    font-size: 9pt;
+    font-weight: bold;
+}
+.agentMsg {
+    color: #000000;
+    font-family: Verdana,Arial,Helvetica;
+    font-size: 9pt;
+    font-weight: normal;
+}
+.customerMsg {
+    color: #727272;
+    font-family: Verdana,Arial,Helvetica;
+    font-size: 9pt;
+    font-weight: normal;
+}
+.systemMsg {
+    color: #606060;
+    font-family: Verdana,Arial,Helvetica;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+.systemStatMsg {
+    color: #999999;
+    font-family: Verdana,Arial,Helvetica;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+Button.tcChat {
+}
+Application.tcChat {
+    border-style: none;
+}
+HScrollBar.tcChat {
+    border-color: #B7BABC;
+}
+ScrollBar.tcChat {
+    border-color: #B7BABC;
+}
+VScrollBar.tcChat {
+    border-color: #B7BABC;
+}
+.windowStatus {
+    color: #BDE9FA;
+}
+.windowStyles {
+    font-weight: bold;
+}
+.PerApplication {
+}
+.PopApplication {
+    background-color: #E6E6E6;
+}
+Canvas.PerBackground {
+    background-color: #FFFFFF;
+    border-style: none;
+}
+Canvas.PopBackground {
+    border-style: none;
+}
+Canvas.PopBorderz {
+    border-style: none;
+}
+Canvas.PerBorderz {
+    border-style: none;
+}
+Canvas.PopTopMiddle {
+}
+Canvas.PerTopMiddle {
+}
+Canvas.PopBottomMiddle {
+}
+Canvas.PerBottomMiddle {
+}
+Canvas.PopRightMiddle {
+}
+Canvas.PerRightMiddle {
+}
+Canvas.PopLeftMiddle {
+}
+Canvas.PerLeftMiddle {
+}
+TextArea.PopTextArea {
+    border-style: none;
+}
+.PopWatermark {
+    border-style: none;
+}
+TextArea.PerTextArea {
+    border-style: none;
+}
+Button.PopBtnSend {
+}
+Button.PerBtnSend {
+}
+Button.Click2Persistent {
+    border: 0 none;
+    color: #FFFFFF;
+    font-family: Verdana;
+    text-indent: 0;
+}
+Canvas.tcChat {
+    color: #FFFFFF;
+}
+Input.tcChat {
+    color: #000080;
+    font-family: Verdana,Arial,Helvetica;
+    font-size: 9pt;
+    margin: 0;
+}
+#tcChat_Skin {
+    box-shadow: 5px 5px 5px #999999;
+}
+#txtInput_input.tcChat {
+    color: #000080;
+    font-family: Verdana,Arial,Helvetica;
+    font-size: 9pt;
+    margin: 0;
+}
+Marquee.tcChat {
+}
+#tcChat_btnRestore.tcChat {
+    box-shadow: 3px 3px 3px #999999;
+}
+</style>
+
+ </head>
+
+ <body>
+  
+  <marquee class="tcChat" style="z-index: 101; left: 12px; right: 30px; bottom: 45px; height: 16px; background-color: white; position: absolute; color: grey;" id="tcChat_agentText2" scrolldelay="100" scrollamount="3">I'm available to chat should you have any questions while browsing our great phones, plans, and accessories.</marquee>
+
+  </hr>
+  <marquee id="tcChat_agentText1" style="z-index: 101; left: 12px; right: 30px; bottom: 5px; height: 16px; background-color: white; position: absolute; color: grey;" scrolldelay="100" scrollamount="3" class="tcChat">So that we don't lose connection, please click on the "Move the chat" button below to make it a window of its own. That way, you'll still see this web page while we chat.</marquee>
+
+<div id="tcChat_Minimized" style="left: 6px; bottom: 8px; height: 45px; width: 300px; position: fixed; z-index: 1000;">
+<span id="tcChat_agentMsgCounter" class="tcChat" style="right: 8px; bottom: 6px; height: 14px; width: 14px; font-weight: bold; font-family: arial,helvetica,sans-serif; font-size: 9px; background-color: black; position: absolute; z-index: 102; text-align: center; color: white;">2</span>
+
+<div id="tcChat_Minimized" style="left: 6px; bottom: 8px; height: 45px; width: 300px; position: fixed; z-index: 1000;">
+<span id="tcChat_agentMsgCounter" class="tcChat" style="right: 8px; bottom: 6px; height: 14px; width: 14px; font-weight: bold; font-family: arial,helvetica,sans-serif; font-size: 9px; background-color: black; position: absolute; z-index: 102; text-align: center; color: white;">2</span>
+
+<marquee id="tcChat_agentText" class="tcChat" style="z-index: 101; left: 12px; right: 30px; bottom: 5px; position: absolute; height: 16px; background-color: white; color: grey;" scrollamount="3" scrolldelay="">So that we don't lose connection, please click on the "Move the chat" button below to make it a window of its own. That way, you'll still see this web page while we chat.</marquee>
+
+</div>
+</div>
+
+ </body>
+</html>

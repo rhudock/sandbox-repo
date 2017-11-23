@@ -1,0 +1,262 @@
+FILE
+
+  More Recent Files...          Ctrl+Alt+O            Shows list of more recent files
+  New Normal Text               Ctrl+N                Creates a new normal text document
+  New Browser Window            Ctrl+Shift+B          Creates a new Browser window
+  New HTML Page                 Ctrl+Shift+N          Creates a blank HTML page
+  Open                          Ctrl+O                Opens an existing document
+  Open Header                   Ctrl+Shift+H          Opens the header file of the C/C++ file
+  Print                         Ctrl+P                Prints the active document
+  Save                          Ctrl+S                Saves the active document
+  FTP Upload                    Ctrl+Shift+S          Uploads file to FTP server
+
+CURSOR
+
+  Back Tab                      Shift+Tab             Moves the cursor to the previous tab position
+  Char Left                     Left                  Moves the cursor one character to the left
+  Char Left Sel                 Shift+Left            Extends the selection one character to the left
+  Char Right                    Right                 Moves the cursor one character to the right
+  Char Right Sel                Shift+Right           Extends the selection one character to the right
+  End of File                   Ctrl+End              Moves to the end of the document
+  End of File Sel               Ctrl+Shift+End        Extends the selection to the end of the document
+  Begining of Doc               Ctrl+Home             Moves to the beginning of the document
+  Begining of Doc Sel           Ctrl+Shift+Home       Extends the selection to the beginning of the document
+  Down                          Down                  Moves the cursor down one line
+  Down Sel                      Shift+Down            Extends the selection down one line
+  End                           End                   Moves the cursor to the end of current line
+  End Sel                       Shift+End             Extends the selection to the end of current line
+  Home                          Home                  Moves the cursor to the beginning of current line
+  Home Sel                      Shift+Home            Extends the selection to the beginning of current line
+  Up                            Up                    Moves the cursor up one line
+  Up Sel                        Shift+Up              Extends the selection up one line
+  Page Down                     Page Down             Moves the cursor down one page
+  Page Down Sel                 Shift+Page Down       Extends the selection down one page
+  Page Up                       Page Up               Moves the cursor up one page
+  Page Up Sel                   Shift+Page Up         Extends the selection up one page
+  Scroll Down                   Ctrl+Down             Scrolls down one line
+  Scroll Left                   Ctrl+Alt+Left         Scrolls right one character
+  Scroll Right                  Ctrl+Alt+Right        Scrolls left one character
+  Scroll Up                     Ctrl+Up               Scrolls up one line
+  Bottom                        Ctrl+Page Down        Moves the cursor to the bottom of current screen
+  Bottom Sel                    Ctrl+Shift+Page Down  Extends the selection to the bottom of current screen
+  Top                           Ctrl+Page Up          Moves the cursor to the top of current screen
+  Top Sel                       Ctrl+Shift+Page Up    Extends the selection to the top of current screen
+  Word Left                     Ctrl+Left             Moves backward one word
+  Word Left Sel                 Ctrl+Shift+Left       Extends the selection backward one word
+  Word Right                    Ctrl+Right            Moves forward one word
+  Word Right Sel                Ctrl+Shift+Right      Extends the selection forward one word
+
+EDIT
+
+  Delete Back                   Backspace             Deletes one character back
+  Delete Word Back              Ctrl+Backspace        Deletes one word back
+  Capitalize                    Ctrl+Shift+U          Capitalizes the selected text
+  Delete                        Delete                Deletes the selection
+  Cliptext Item 1               Ctrl+Alt+1            Inserts cliptext item 1
+  Cliptext Item 2               Ctrl+Alt+2            Inserts cliptext item 2
+  Cliptext Item 3               Ctrl+Alt+3            Inserts cliptext item 3
+  Cliptext Item 4               Ctrl+Alt+4            Inserts cliptext item 4
+  Cliptext Item 5               Ctrl+Alt+5            Inserts cliptext item 5
+  Cliptext Item 6               Ctrl+Alt+6            Inserts cliptext item 6
+  Cliptext Item 7               Ctrl+Alt+7            Inserts cliptext item 7
+  Cliptext Item 8               Ctrl+Alt+8            Inserts cliptext item 8
+  Cliptext Item 9               Ctrl+Alt+9            Inserts cliptext item 9
+  Cliptext Item 10              Ctrl+Alt+0            Inserts cliptext item 10
+  Column Select                 Alt+C                 Starts the column selection
+  Copy                          Ctrl+C                Copies the selection and puts it on the Clipboard
+  Cut                           Ctrl+X                Cuts the selection and puts it on the Clipboard
+  Date                          Ctrl+D                Insert current date
+  Date Long                     Ctrl+Alt+D            Insert current date in long format
+  Decrease Indent               Ctrl+Shift+I          Decreases the indentation of current line or the selected block
+  Delete to EOL                 Ctrl+Shift+Delete     Deletes to the end of current line
+  Delete to EOW                 Ctrl+Delete           Deletes to the end of current word
+  Delete Line                   Alt+Shift+Delete      Deletes current line
+  Delete Word                   Alt+Delete            Deletes current word
+  Duplicate Char                Ctrl+-                Copies a character from previous line
+  Duplicate Line                Ctrl+J                Duplicates current line
+  Search Cliptext               F2                    Replaces current word with the corresponding cliptext
+  Increase Indent               Ctrl+I                Increases the indentation of current line or the selected block
+  Insert Mode                   Insert                Toggles insert mode and overwrite mode
+  Invert Case                   Ctrl+K                Inverts the case of the selected text
+  Join Lines                    Ctrl+Shift+J          Joins selected lines
+  Move Down                     Alt+Shift+Down        Moves down the selected lines
+  Move Up                       Alt+Shift+Up          Moves up the selected lines
+  Paste                         Ctrl+V                Inserts Clipboard contents
+  Paste as Column               Ctrl+Shift+V          Inserts Clipboard contents as column
+  Redo                          Ctrl+Y                Redoes the previously undone action
+  Reformat                      Ctrl+Shift+R          Reformats paragraph to the format column number
+  Search Document               Shift+F2              Replaces current partial word with an expanded word found in current document
+  Search All Open Files         Ctrl+F2               Replaces current partial word with an expanded word found in all open files
+  Begin/End Selection           Alt+Shift+B           Begins or Ends Selection
+  Select All                    Ctrl+A                Selects the entire document
+  Begin/End Column Selection    Alt+Shift+E           Begins or Ends Column Selection
+  Select Line                   Ctrl+R                Selects current line
+  Select Word                   Ctrl+W                Selects current word
+  Split lines                   Ctrl+Shift+K          Splits selected wrapped lines
+  Strip HTML tags               Ctrl+Shift+P          Strips html tags in current document or selection
+  Time                          Ctrl+M                Inserts current time
+  Time with Seconds             Ctrl+Shift+M          Insert current time with seconds
+  Lower Case                    Ctrl+L                Converts the selected text to lower case
+  Upper Case                    Ctrl+U                Converts the selected text to upper case
+  Transpose                     Ctrl+T                Transposes characters either side of cursor
+  Undo                          Ctrl+Z                Undoes the last action
+
+ZEN CODING
+
+  Toggle Comment                Ctrl+/                Toggles HTML and CSS comments depending on current caret context
+  Decrement Number by 1         Ctrl+Shift+Down       Decrements number under cursor by 1
+  Decrement Number by 10        Ctrl+Alt+Down         Decrements number under cursor by 10
+  Evaluate Math Expression      Ctrl+Shift+Y          Evaluates simple math expression under caret
+  Expand Abbreviation           Ctrl+E                Expands Zen Coding/Emmet abbreviation
+  Go to Matching Pair           Ctrl+Alt+L            Moves caret to matching opening or closing tag
+  Increment Number by 1         Ctrl+Shift+Up         Increments number under cursor by 1
+  Increment Number by 10        Ctrl+Alt+Up           Increments number under cursor by 10
+  Match Pair Tag (outward)      Ctrl+Shift+D          Finds and selects HTML tag pair outward
+  Match Pair Tag (inward)       Alt+Shift+D           Finds and selects HTML tag pair inward
+  Merge Lines                   Ctrl+Alt+M            Merges selected lines or lines between XHTML tag pairs
+  Next Edit Point               Ctrl+Alt+]            Moves caret to next edit point
+  Previous Edit Point           Ctrl+Alt+[            Moves caret to previous edit point
+  Reflect CSS Value             Ctrl+Alt+B            Takes rule's value under caret and pastes it for the same rules with vendor prefixes
+  Remove Tag                    Ctrl+Shift+'          Gracefully removes tag under cursor
+  Select Next Item              Ctrl+.                Finds and selects next HTML/CSS item
+  Select Previous Item          Ctrl+,                Finds and selects previous HTML/CSS item
+  Split/Join Tag                Ctrl+'                Splits or joins tag
+  Wrap with Abbreviation        Ctrl+Shift+A          Runs the Zen Coding wrap_with_abbreviation action
+
+VIEW
+
+  View in Browser               Ctrl+B                Loads the active document into the web browser
+  Collapse                      Ctrl+Num -            Collapses current part of the code
+  Collapse All                  Ctrl+Alt+Num -        Collapses all indented text
+  Collapse One Level            Ctrl+Shift+Num -      Collapses the entire code one level
+  Directory Window              Alt+Shift+3           Shows or hides the Directory Window
+  Goto Drive List               Alt+F6                Shows the list of disk drives and FTP servers
+  Expand                        Ctrl+Num +            Expands current folded line
+  Expand All                    Ctrl+Alt+Num +        Expands all folded text
+  Expand One Level              Ctrl+Shift+Num +      Expands the entire code one level
+  Goto Cliptext/Directory       Alt+F5                Switches the focus between the cliptext/directory window and the document
+  Use Code Folding              Ctrl+Shift+F          Turns on or off the code folding feature
+  Toggle Folding                Ctrl+Num *            Toggles the folding state of current line
+  Full Screen                   Alt+Shift+0           Toggles Full Screen mode on and off
+  Goto Output Window            Shift+F5              Switches the focus between the output window and the document
+  Tabs                          Alt+Shift+I           Shows or hides tab marks
+  All Whites Spaces             Alt+Shift+O           Shows or hides all white spaces
+  Line Number                   Ctrl+Shift+L          Shows or hides line numbers in the active document
+  Line Break                    Alt+Shift+L           Shows or hides line break marks
+  Output Window                 Alt+Shift+2           Shows or hides the output window
+  Ruler                         Alt+Shift+R           Shows or hides the ruler
+  Spaces                        Alt+Shift+K           Shows or hides space marks
+  Cliptext Window               Alt+Shift+1           Shows or hides the cliptext window
+  URL Highlighting              Alt+Shift+U           Highlights URLs and e-mail addresses
+  Larger Font Size              Alt+Shift+Num +       Selects larger font size
+  Smaller Font Size             Alt+Shift+Num -       Selects smaller font size
+
+SEARCH
+
+  Find                          Alt+F3                Finds the specified text
+  Find Next                     F3                    Finds the next matching text
+  Find Previous                 Shift+F3              Find the previous matching text
+  Replace                       Ctrl+H                Replaces specific text with different text
+  Match Brace                   Ctrl+]                Searches for a matching brace
+  Clear All Markers             Ctrl+Shift+F9         Clears all marker from the active document
+  Go to Definition              Shift+F9              Goes to the definition of current function or variable name
+  Function List                 Ctrl+F11              Shows the function list
+  Go to Line/Offset             Ctrl+G                Goes to specified line/offset in the active document
+  Go to Column                  Ctrl+Shift+G          Goes to specified column in current line
+  Go to File                    F7                    Opens selection or jumps to a file using output window pattern
+  Marker List                   Ctrl+Shift+F11        Shows the list of markers set in current document
+  Next Function                 Alt+F11               Goes to the next function
+  Next Marker                   F4                    Goes to next marker position
+  Find Next Word                Ctrl+F3               Finds the next occurrence of current word or the selected text
+  Prev Function                 Alt+Shift+F11         Goes to the previous function
+  Previous Marker               Shift+F4              Goes to previous marker position
+  Find Previous Word            Ctrl+Shift+F3         Finds the previous occurrence of current word or the selected text
+  Select Brace                  Ctrl+Shift+]          Searches for a matching brace and selects the text
+  Select Tag                    Ctrl+Shift+[          Searches for a matching tag and selects the included text
+  Toggle Marker                 F9                    Set and clear marker at current line
+  Suggest Tag                   Alt+F2                Replaces current partial word with an expanded word found in the tags file
+  Match Tag                     Ctrl+[                Searches for a matching HTML tag
+  Go to URL                     F8                    Goes to the highlighted URL
+  Search Web                    Shift+F8              Searches current text in the web browser
+
+DOCUMENT
+
+  Column Marker                 Alt+Shift+M           Shows or hides column markers
+  Word Wrap                     Ctrl+Shift+W          Toggles the word wrap feature of the active document
+  Next Column Marker            Alt+Right             Goes to the next column marker position
+  Prev Column Marker            Alt+Left              Goes to the previous column marker position
+
+HTML
+
+
+BROWSER
+
+  Edit Source                   Ctrl+Shift+E          Edits the source of current HTML page
+
+CLIPTEXT
+
+  Copy                          Ctrl+Shift+C          Copy the selected cliptext item
+
+DIRECTORY
+
+  Refresh                       F5                    Refreshes content of the Directory Window
+
+PROJECT
+
+  Load Project                  Ctrl+Shift+O          Load all files of current project
+  Next Project                  Ctrl+F8               Selects the next project
+  Prev Project                  Ctrl+Shift+F8         Selects the previous project
+
+TOOLS
+
+  Stop                          Ctrl+Break            Breaks the operation of current tool
+  Open Next                     Ctrl+F5               Opens next matching file
+  Open Prev                     Ctrl+Shift+F5         Opens previous matching file
+  Group 1                       Ctrl+Shift+1          User tool group 1
+  Group 2                       Ctrl+Shift+2          User tool group 2
+  Group 3                       Ctrl+Shift+3          User tool group 3
+  Group 4                       Ctrl+Shift+4          User tool group 4
+  Group 5                       Ctrl+Shift+5          User tool group 5
+  Group 6                       Ctrl+Shift+6          User tool group 6
+  Group 7                       Ctrl+Shift+7          User tool group 7
+  Group 8                       Ctrl+Shift+8          User tool group 8
+  Group 9                       Ctrl+Shift+9          User tool group 9
+  Group 10                      Ctrl+Shift+0          User tool group 10
+  Record Keystrokes             Ctrl+Q                Starts and stops keystroke recording
+  Playback Recording 1          Alt+1                 Plays back the keystroke recording 1
+  Playback Recording 2          Alt+2                 Plays back the keystroke recording 2
+  Playback Recording 3          Alt+3                 Plays back the keystroke recording 3
+  Playback Recording 4          Alt+4                 Plays back the keystroke recording 4
+  Playback Recording 5          Alt+5                 Plays back the keystroke recording 5
+  Playback Recording 6          Alt+6                 Plays back the keystroke recording 6
+  Playback Recording 7          Alt+7                 Plays back the keystroke recording 7
+  Playback Recording 8          Alt+8                 Plays back the keystroke recording 8
+  Playback Recording 9          Alt+9                 Plays back the keystroke recording 9
+  Playback Recording 10         Alt+0                 Plays back the keystroke recording 10
+  User Tool 1                   Ctrl+1                Runs this user-defined tool
+  User Tool 2                   Ctrl+2                Runs this user-defined tool
+  User Tool 3                   Ctrl+3                Runs this user-defined tool
+  User Tool 4                   Ctrl+4                Runs this user-defined tool
+  User Tool 5                   Ctrl+5                Runs this user-defined tool
+  User Tool 6                   Ctrl+6                Runs this user-defined tool
+  User Tool 7                   Ctrl+7                Runs this user-defined tool
+  User Tool 8                   Ctrl+8                Runs this user-defined tool
+  User Tool 9                   Ctrl+9                Runs this user-defined tool
+  User Tool 10                  Ctrl+0                Runs this user-defined tool
+
+WINDOW
+
+  Next Pane                     F6                    Switch to the next window pane
+  Previous Pane                 Shift+F6              Switch back to the previous window pane
+  Last Visited Window           Ctrl+F12              Switches to the last visited document window
+  Window List                   F11                   Shows list of all document windows
+  Next Window                   Ctrl+Tab              Switches to the next document window
+  Next Document Row             Alt+Page Down         Goes to next row in the Document Selector
+  Previous Window               Ctrl+Shift+Tab        Switches to the previous document window
+  Prev Document Row             Alt+Page Up           Goes to previous row in the Document Selector
+
+HELP
+
+  Help                          Shift+F1              Displays help for clicked on buttons, menus and windows
+  Help                          F1                    Display help for current task or command
+

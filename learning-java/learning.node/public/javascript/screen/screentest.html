@@ -1,0 +1,320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+
+   <style>
+/* Line 18 */
+body, p, td, table, tr, .bodytext, .stepfield
+{
+  font-size: 10pt;
+  line-height: 1.3;
+  color: #000000;
+  font-weight: normal;
+}
+
+/* Line 18 */
+table
+{
+  border-top-width: 0px;
+  border-right-width-value: 0px;
+  border-bottom-width: 0px;
+  border-left-width-value: 0px;
+  border-top-style: none;
+  border-right-style-value: none;
+  border-bottom-style: none;
+  border-left-style-value: none;
+  border-image-source: none;
+  border-image-slice: 100% 100% 100% 100%;
+  border-image-width: 1 1 1 1;
+  border-image-outset: 0 0 0 0;
+  border-image-repeat: stretch stretch;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  clear: left;
+}
+
+td, th
+{
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  text-align: left;
+  vertical-align: top;
+}
+
+table.confluenceTable th.confluenceTh, table.confluenceTable td.confluenceTd
+{
+  border-top-width: 1px;
+  border-right-width-value: 1px;
+  border-bottom-width: 1px;
+  border-left-width-value: 1px;
+  border-top-style: solid;
+  border-right-style-value: solid;
+  border-bottom-style: solid;
+  border-left-style-value: solid;
+  border-top-color: #dddddd;
+  border-right-color-value: #dddddd;
+  border-bottom-color: #dddddd;
+  border-left-color-value: #dddddd;
+  padding-top: 5px;
+  padding-right: 7px;
+  padding-bottom: 5px;
+  padding-left: 7px;
+  vertical-align: top;
+  min-width: 0.6em;
+  text-align: left;
+}
+
+table.confluenceTable th.confluenceTh, table.confluenceTable th.confluenceTh > p, table.confluenceTable td.confluenceTd.highlight, table.confluenceTable td.confluenceTd.highlight > p
+{
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+/* Line 19 */
+.wiki-content, .wiki-content p, .wiki-content table, .wiki-content tr, .wiki-content td, .wiki-content th, .wiki-content ol, .wiki-content ul, .wiki-content li
+{
+  font-size: 10pt;
+  line-height: 13pt;
+}
+
+/* Line 19 */
+.wiki-content p, .wiki-content table
+{
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+}
+
+/* Line 19 */
+.wiki-content p, .wiki-content pre, .wiki-content ul, .wiki-content ol, .wiki-content dl, table.confluenceTable
+{
+  margin-bottom: 10px;
+}
+
+/* Line 19 */
+.wiki-content table.confluenceTable
+{
+  border-collapse: collapse;
+}
+   </style>
+</head>
+<body>
+	<h1 id="qunit-header">Screen size and related events</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="my_message">No Message</br> 
+	</div>
+
+	<div class="wiki-content">
+		<h3>Events</h3>
+		The number of events happen and when it happen are quite different between iOS and Android.</br>
+		For example, scroll on iOS happen only once per each scroll movement while Android has more than one scroll events for same movement.</br>
+
+		<h4>Realtime events watch</h4>
+		<table  class="confluenceTable"><tbody>
+		<tr>
+			<th class="confluenceTh">Event</th>
+			<th class="confluenceTh">Number of times happened</th>
+			<th class="confluenceTh">Time Last happened</th>
+			<th class="confluenceTh">Detail</th>
+		</tr>
+		<tr id="evt-last">
+			<td class="confluenceTd">last event</td>
+			<td class="confluenceTd event">None</td>
+			<td class="confluenceTd time"></td>
+			<td class="confluenceTd">The last event captured</td>
+		</tr>
+		<tr id="evt-scroll">
+			<td class="confluenceTd">scroll</td>
+			<td class="confluenceTd count">0</td>
+			<td class="confluenceTd time"></td>
+			<td class="confluenceTd"></td>
+		</tr>
+		<tr id="evt-touchstart">
+			<td class="confluenceTd">touchstart</td>
+			<td class="confluenceTd count">0</td>
+			<td class="confluenceTd time"></td>
+			<td class="confluenceTd"></td>
+		</tr>
+		<tr id="evt-touchmove">
+			<td class="confluenceTd">touchmove</td>
+			<td class="confluenceTd count">0</td>
+			<td class="confluenceTd time"></td>
+			<td class="confluenceTd"></td>
+		</tr>
+		<tr id="evt-touchend">
+			<td class="confluenceTd">touchend</td>
+			<td class="confluenceTd count">0</td>
+			<td class="confluenceTd time"></td>
+			<td class="confluenceTd"></td>
+		</tr>
+		</tbody></table>
+	</div>
+
+	<div class="wiki-content">
+		<h3>Screen size value</h3>
+		<h4>Realtime screen size</h4>
+		<table  class="confluenceTable"><tbody>
+		<tr>
+			<th class="confluenceTh">Properties</th>
+			<th class="confluenceTh">Width/Value</th>
+			<th class="confluenceTh">Height</th>
+			<th class="confluenceTh">Detail</th>
+		</tr>
+		<tr>
+			<td class="confluenceTd">window.screen.width, window.screen.height</td>
+			<td id="window-screen-width"  class="confluenceTd"></td>
+			<td id="window-screen-height"  class="confluenceTd"></td>
+			<td class="confluenceTd">Device screen size, never changes</td>
+		</tr>
+		<tr>
+			<td class="confluenceTd">window.innerWidth, window.innerHeight</td>
+			<td id="window-innerWidth"  class="confluenceTd"></td>
+			<td id="window-innerHeight"  class="confluenceTd"></td>
+			<td class="confluenceTd"></td>
+		</tr>
+		<tr>
+			<td class="confluenceTd">document.body.offsetWidth, document.body.offsetHeight (IE)</td>
+			<td id="document-body-offsetWidth" class="confluenceTd"></td>
+			<td id="document-body-offsetHeight" class="confluenceTd"></td>
+			<td class="confluenceTd"></td>
+		</tr>
+		<tr>
+			<td class="confluenceTd">window.orientation</td>
+			<td id="window-orientation" class="confluenceTd"></td>
+			<td id="window-orientation-str" class="confluenceTd"></td>
+			<td class="confluenceTd">Mobile Only</td>
+		</tr>
+		<tr>
+			<td class="confluenceTd">window.outerWidth, window.outerHeight</td>
+			<td id="window-outerWidth" class="confluenceTd"></td>
+			<td id="window-outerHeight" class="confluenceTd"></td>
+			<td class="confluenceTd"></td>
+		</tr>
+		</tbody></table>
+	</div>
+
+<script type="text/javascript">
+<!--
+	/**
+ * $Id$
+ * 
+ * 
+ * Ref: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date#Example:_Several_ways_to_assign_dates
+ */
+
+$( document ).ready(function() {
+
+	displayMsg();
+
+	document.body.addEventListener('orientationchange', function(e) {
+		// Only works on iPhone
+		// alert("changed");
+		displayMsg();
+	}, false);
+
+	window.addEventListener('orientationchange', function(e) {
+		displayMsg();
+	}, false);
+
+	function displayMsg(evtName, evtDate) {
+		$("#window-screen-width").text( window.screen.width );
+		$("#window-screen-height").text(window.screen.height );
+
+		$("#window-innerWidth").text( window.innerWidth );
+		$("#window-innerHeight").text( window.innerHeight );
+		
+		$("#document-body-offsetWidth").text( document.body.offsetWidth );
+		$("#document-body-offsetHeight").text( document.body.offsetHeight );
+
+		$("#window-orientation").text( window.orientation );
+		if ( typeof window.orientation !== 'undefined' )	{
+			if (window.orientation == 0 || window.orientation == 180) {
+				$("#window-orientation-str").text( 'portrait' );
+			} else {
+				$("#window-orientation-str").text( 'landscape' );
+			}
+		}
+
+		$("#window-outerWidth").text( window.outerWidth );
+		$("#window-outerHeight").text( window.outerHeight  );
+
+		if (evtName)
+		{
+			$("#evt-last .event").text( evtName );
+			$("#evt-last .time").text( evtDate.toGMTString() + ":" + evtDate.getMilliseconds() );
+		}
+
+	}
+
+
+
+
+	$(window).scroll(function () {
+		$("#evt-scroll .count").text( parseInt($("#evt-scroll .count").text()) + 1 );
+		var date = new Date();
+		$("#evt-scroll .time").text( date.toGMTString() + ":" + date.getMilliseconds() );
+		displayMsg( 'scroll', date );
+	});
+
+	document.body.addEventListener('touchmove', function(e) {
+		$("#evt-touchmove .count").text( parseInt($("#evt-touchmove .count").text()) + 1 );
+		var date = new Date();
+		$("#evt-touchmove .time").text( date.toGMTString() + ":" + date.getMilliseconds() );
+		displayMsg( 'touchmove', date );
+	}, false);
+
+
+	document.body.addEventListener('touchstart', function(e) {
+		$("#evt-touchstart .count").text( parseInt($("#evt-touchstart .count").text()) + 1 );
+		var date = new Date();
+		$("#evt-touchstart .time").text( date.toGMTString() + ":" + date.getMilliseconds() );
+		displayMsg( 'touchstart', date );
+	}, false);
+
+	document.body.addEventListener('touchend', function(e) {
+		$("#evt-touchend .count").text( parseInt($("#evt-touchend .count").text()) + 1 );
+		var date = new Date();
+		$("#evt-touchend .time").text( date.toGMTString() + ":" + date.getMilliseconds() );
+		displayMsg( 'touchend', date );
+	}, false);
+
+	document.body.addEventListener('touchleave', function(e) {
+	  $("#qunit-tests").append('<li>touchleave event added.</li>');
+	}, false);
+
+	window.addEventListener('orientationchange', function(e) {
+		displayMsg();
+	}, false); 
+
+
+
+
+
+
+});
+
+//-->
+</script>
+
+</body>
+</html>

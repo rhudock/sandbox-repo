@@ -1,0 +1,83 @@
+<!-- REF: http://help.dottoro.com/ljgheukc.phphttp://help.dottoro.com/ljgheukc.phpgggg -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message handling example</title>
+    <meta charset="utf-8" />
+    <script type="text/javascript">
+        function Init () {
+            if (window.addEventListener) {  // all browsers except IE before version 9
+                window.addEventListener ("message", OnMessage, false);
+            }
+            else {
+                if (window.attachEvent) {   // IE before version 9
+                    window.attachEvent("onmessage", OnMessage);     // Internet Explorer from version 8
+                }
+            }
+        }
+
+        function OnMessage (event) {
+                // Check the location of the caller
+            
+                // Opera earlier than version 10
+            if ('domain' in event) {
+                if (event.domain != "help.dottoro.com") {
+//                    return;
+                }
+            }
+                // Firefox, Safari, Google Chrome, Internet Explorer from version 8 and Opera from version 10
+            if ('origin' in event) {
+                if (event.origin != "http://help.dottoro.com") {
+//                    return;
+                }
+            }
+            
+            DumpMessageInfo (event);
+            
+            if (event.data == "getstate") {
+                    // create the message
+                var checkBox = document.getElementById ("myCheck");
+                var select = document.getElementById ("mySelect");
+                var message = checkBox.checked + "," + select.selectedIndex;
+                
+                    // send back the response message
+                    
+                event.source.postMessage ( message, "*" );
+//                event.source.postMessage (message, event.origin);
+            }
+        }
+        
+        function DumpMessageInfo (event) {
+            var info =  document.getElementById ("info");
+            info.innerHTML = "message: " + event.data;
+                // Opera earlier than version 10
+            if ('domain' in event) {
+                info.innerHTML += "<br />domain: " + event.domain;
+            }
+                // Opera earlier than version 10
+            if ('uri' in event) {
+                info.innerHTML += "<br />url: " + event.uri;
+            }
+                // Firefox, Safari, Google Chrome, Internet Explorer from version 8 and Opera from version 10
+            if ('origin' in event) {
+                info.innerHTML += "<br />origin: " + event.origin;
+            }
+                // Firefox, Safari and Google Chrome
+            if ('lastEventId' in event) {
+                info.innerHTML += "<br />lastEventId: " + event.lastEventId;
+            }
+        }
+
+    </script>
+<body onload="Init ();" style=background-color:#e0b0a0;>
+    <input type="checkbox" id="myCheck" />Sample check box<br />
+    <select id="mySelect">
+        <option>First option</option>
+        <option>Second option</option>
+        <option>Third option</option>
+    </select>
+    <br /><br />
+    Information about the message:
+    <div id="info" style="background-color:#f0f0b0;"></div>
+</body>
+</html>

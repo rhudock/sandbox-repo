@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>window.open test</title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+ </head>
+
+ <body>
+
+<div id="box-top" class="">
+	<h1 id="qunit-header">window.open test</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests">
+	</ol>
+</div><!-- End of box-top -->
+
+<div id="box-content" class="">
+	
+
+<div id="box-col-left" class="">
+	
+</div><!-- End of box-col-left -->
+
+<div id="box-cod-center" class="">
+
+	<div class="">
+		<input type="text" id="test-url" name="test-url" value="https://app.keysurvey.com/votingmodule/VOTING2/f/1062789/10fe/"></ br>
+		<input type="button" value="open in a new window" onclick="openWindowInNewWindow('test-url')"></ br>
+	</div>
+
+	<p>
+	<a href="https://app.keysurvey.com/votingmodule/VOTING2/f/1062789/10fe/"> https://app.keysurvey.com/votingmodule/VOTING2/f/1062789/10fe/</a>
+	</p>
+
+
+
+<div id="box-msg" class="">
+	
+</div>
+ 
+</div><!-- End of box-cod-center -->
+</div><!-- End of box-content -->
+
+
+<div id="box-bottom" class="">
+	
+</div><!-- End of box-bottom -->
+
+
+
+<script type="text/javascript">
+
+function openWindowInNewWindow(localId) {
+	/* http://stackoverflow.com/questions/726761/javascript-open-in-a-new-window-not-tab
+	Works on Chrome
+	*/
+	window.open( $("#" + localId).val(), "mytestwin", "height=600,width=600"); 
+}
+
+</script>
+
+
+ </body>
+</html>

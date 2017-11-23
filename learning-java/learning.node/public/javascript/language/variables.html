@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+</head>
+<body>
+
+	<h1 id="qunit-header">jQuery Test Suite - userAgent related regexp</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+<!-- script type="text/javascript" src="regexpQunit.js"></script -->	
+<script type="text/javascript">
+/**
+ * $Id$
+ * 
+ * 
+ */
+myGloVar = { name: "Global" };
+
+$(function() {
+	
+	var myFucVar = { name: "Function" };
+
+	module("getBrowserTypeAndVersion", {
+		saveObj : {},
+		setup : function() {
+			try	{
+				
+			} catch (e){
+				console.error("ERROR():" + e.message, e); 
+				ok(false);
+			}
+		},
+		tearDown: function () {
+			try	{
+				this.saveObj.varTest = null;
+			} catch (e){
+				console.error("ERROR():" + e.message, e); 
+				ok(false);
+			}
+		}
+	});
+
+	test( "ok test", function() {
+	  this.saveObj.varTest = "hello";
+	  equal( this.saveObj.varTest, "hello" );
+	});
+
+	test( "ok test", function() {
+	  
+	  var myVar = myVar || { name:"Jeff" };
+	  equal( myVar.name, "Jeff" );
+	
+	});
+
+	test( "Variable Scope Test", function() {
+		myVar = { name: "Daniel" };
+		
+		var myVar = myVar || { name:"Jeff" };
+		equal( myVar.name, "Daniel" );
+	
+	});
+
+	test( "Variable Scope Test", function() {
+		
+		var myFucVarTmp = myFucVar;
+		var myFucVar = myFucVarTmp || { name:"Jeff" };
+		equal( myFucVar.name, "Function" );
+	
+	});
+
+	test( "Variable Scope Test", function() {
+		
+		var myGloVar2 = myGloVar;
+		var myGloVar = myGloVar2 || { name:"Jeff" };
+		equal( myGloVar.name, "Global" );
+	
+	});
+
+
+});
+</script>	
+<div id="box-ref">
+	<ul>
+		<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Values,_variables,_and_literals">Values, variables, and literals</a></li>
+	</ul>
+</div>
+</body>
+</html>
+

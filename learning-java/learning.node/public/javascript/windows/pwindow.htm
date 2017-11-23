@@ -1,0 +1,47 @@
+<html>
+
+<head>
+
+<title></title>
+
+<script type="text/javascript">
+
+
+function doCommandsInClientDomain(data, clientHtml, id) {
+  if (!bPostMessage) {
+    // initial origin: http://home.inq.com
+    // active origin:  http://inq.com (set via document.domain)
+    // needed origin:  http://www.touchcommerce.com
+    var divsub = window.document.createElement("DIV");
+    var frameSrc = clientHtml+"?PRXY" ;
+    var iframe  = "<IFRAME "
+             + "STYLE=\"overflow: hidden; display: block; border: none; top:0px;left:0px;width: 1px; height: 1px;\" "
+             + "NAME=\"" + (id + "||" + data) + "\" "
+             + "SRC=" + frameSrc + ">\n</IFRAME>";
+    divsub.innerHTML = iframe ;
+    document.body.appendChild(divsub);
+  } else {
+    parent.postMessage("" + id + "||" + data, "*");
+  }
+}
+    
+</script>
+
+
+</head>
+
+<body>
+
+This is child window (perwindow)
+<p>
+<input type="button" value="Open Window in same domain" onclick="" />
+</p>
+<p>
+<input type="button" value="Communicate with window in different domain." onclick="doCommandsInClientDomain()" />
+</p>
+
+<div  id="hostMessage">hostMessage comes here.</div>
+
+</body>
+
+</html>

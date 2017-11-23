@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> New Document </title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+ </head>
+
+ <body>
+<p>My study and understanding of regular expression.</p>
+
+<ul>
+	<li><A HREF="http://www.regular-expressions.info/tutorial.html">regular-expressions.info</A></li>
+	<li><A HREF="http://gskinner.com/RegExr/">RegExr</A></li>
+	<li><A HREF="http://msdn.microsoft.com/en-us/library/1400241x(v=VS.85).aspx">Regular Expression Syntax (Scripting)</A></li>
+	<li><A HREF="http://dev.mysql.com/doc/refman/5.1/en/regexp.html">Regular Expression in MySQL</A></li>
+</ul>
+
+<p>Today I learn that () creats another token; <br>
+(\.\d+)? means that (\.\d+) can happen 0 or 1 time.</p>
+
+<pre>
+<code>
+	var regStringLiteral : EReg = ~/^(["'])(?:(?=(\\?))\2.)*?\1/m;
+	var regNumber : EReg = ~/^([-+]?\d+(\.\d+)?)/m;
+	var regKeyword:EReg = ~/^\b(IF|THEN|ELSE|END|TRUE|FALSE|AND|OR|EQ|NE|NOT)\b/m;
+	var regOperators:EReg = ~/^([+]|[-])/m;
+	var regProperties:EReg = ~/^\b((\w*)((\.(\w*)\b))+)\b/m;
+	var regFuncs:EReg = ~/^(hide|show|hideLayer|showLayer|shrink|grow|fire|close|hideChat|send|call|minimize|restore|resizeChatWindow)\b/m;
+	var regTwoParam:EReg = ~/^\b((resizeChatWindow)\s*\(\s*(\d+)\s*,\s*(\d+)\s*\))\s*/m;
+	var regOneParam:EReg = ~/^\b((hide|show|hideLayer|showLayer|shrink|grow|fire)\s*\(\s*(\w+)\s*\))\s*/m;
+	var regNoParams:EReg = ~/^(\b(close|hideChat|send|call|minimize|restore)\(\s*\))\s*/m;
+	var token:String = null;
+</code>
+</pre>
+
+<p>Regexp used in javascript to find out OS</p>
+<pre>
+<code>
+ * Returns client operating system type
+ * @return Returns OS type as string.
+ */
+function getOSType() {
+    var os = "Unknown";
+    var platform = window.navigator.platform;
+    var ua = window.navigator.userAgent;
+
+    if (/Android/.test(ua)) {
+        os = "Android";
+    } else if (/iPhone/.test(ua) || /iPad/.test(ua) || /iPod/.test(ua)) {
+        os = "iOS";
+    } else if (/Win/.test(platform)) {
+        os = "Windows";
+    } else if (/Linux/.test(platform)) {
+        os = "Linux";
+    } else if (/Mac/.test(platform)) {
+        os = "Mac OS";
+    }
+
+    return os;
+}
+</code>
+</pre>
+
+ </body>
+</html>

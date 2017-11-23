@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+   <script type="text/javascript" src="http://dev.jquery.com/view/trunk/qunit/testrunner.js"></script>
+
+   <link rel="stylesheet" href="http://dev.jquery.com/view/trunk/qunit/testsuite.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="/webskills/wedeving/myjslib/lib.functions.js"></script>
+
+   <script type="text/javascript">
+
+      (function($) {
+
+         const number = [ 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K' ];
+
+         // Run when the document is ready.
+         $(function() {
+
+            test("a basic test example", function() {
+               ok(true, "this test is fine");
+               var value = "hello";
+               equals("hello", value, "We expect value to be hello");
+            });
+
+            module("Basic Array Test");
+
+            test("Card Test", function() {
+               var aArray = [ 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K' ], arrDroped = [], actual, expected, randomNum;
+
+               randomNum = Math.floor(Math.random() * aArray.length);
+               arrDroped.push(aArray[randomNum]);
+               aArray.remove(randomNum);
+
+               randomNum = Math.floor(Math.random() * aArray.length);
+               arrDroped.push(aArray[randomNum]);
+               aArray.remove(randomNum);
+
+               equals(actual, expected, "Expect value is " + expected);
+            });
+
+            test("Map", function() {
+               var aArray = [ 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K' ],
+                     longName = new Array(), arrDroped = [], actual, expected, randomNum;
+
+               expected = 'ace';
+
+               longName['A'] = expected;
+
+               equals(longName[aArray[0]], expected, "Expect value is " + expected);
+            });
+
+            test("More Map", function() {
+               var aArray = [ 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K' ],
+                     longName = { 'A':'ace' }, arrDroped = [], actual, expected, randomNum;
+
+               expected = 'ace';
+
+               longName['A'] = expected;
+
+               equals(longName[aArray[0]], expected, "Expect value is " + expected);
+            });
+
+            module("Array Functions Test");
+
+            // sample source: http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_concat2
+            test("concat", function() {
+               var actual, expected;
+               var parents = ["Jani", "Tove"];
+               var brothers = ["Stale", "Kai Jim", "Borge"];
+               var children = ["Cecilie", "Lone"];
+               var family = parents.concat(brothers, children), emptyArr = [];
+
+               expected = 7;
+               actual = family.length;
+
+               equals(actual, expected, "The length of concat() of three arrays is ");
+
+               // empty array can't concat?
+               expected = 7;
+               emptyArr.concat(family);
+               actual = emptyArr.length;
+
+               equals(actual, expected, "The length of concat() of empty array is ");
+
+            });
+
+         });
+
+      })(jQuery);
+
+   </script>
+
+</head>
+<body>
+
+<h1>QUnit Result</h1>
+
+<h2 id="banner"></h2>
+
+<h2 id="userAgent"></h2>http://docs.jquery.com/QUnit
+
+<ol id="tests"></ol>
+
+<div id="main"></div>
+
+<div id="testDiv"></div>
+
+
+</body>
+</html>

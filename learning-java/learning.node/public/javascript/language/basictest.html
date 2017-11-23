@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <title>Javascript Basic Test</title>
+</head>
+<body>
+	<h1 id="qunit-header">Event Tester</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="evt-last">Event Monitor: last occured: <span class="lastevent-val">No</span> Last occured: <span class="time-val">never</span>
+	</div>
+	<div id="evt-scroll">Scroll Event Monitor: count: <span class="count-val">0</span> Last occured: <span class="time-val">never</span>
+	</div>
+	<div id="evt_touchend">evt_touchend Event Monitor: count: <span class="count-val">0</span> Last occured: <span class="time-val">never</span>
+	</div>
+	
+
+	<div id="my_message">Measure Screen Size</br> 
+	       height: <span class="msg_height">No</span> </br>
+	       width : <span class="msg_width">No</span>
+	</div>
+
+	<div id="" class="">
+		<table>
+		<tr>
+			<td>Event</td>
+			<td>Android</td>
+			<td>IOS iPhone/iPad</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>orientationchange</td>
+			<td>window</td>
+			<td>window supported, body no</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>scroll</td>
+			<td>happens many times in one scroll</td>
+			<td>happens only once per one scroll</td>
+			<td></td>
+			<td></td>
+		</tr>
+		</table>
+	</div>
+	
+	<div style="height: 700px;" id="my-msg"></div>
+
+
+
+
+<script type="text/javascript">
+
+<!--
+	/**
+ * $Id$
+ * 
+ * 
+ * Ref: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date#Example:_Several_ways_to_assign_dates
+ */
+
+$( document ).ready(function() {
+
+	alert("this is a test");
+
+	$("#qunit-tests").append('<li>The page is loaded.</li>');
+
+	$(window).scroll(function () {
+		$("#evt-scroll .count-val").text( parseInt($("#evt-scroll .count-val").text()) + 1 );
+		var date = new Date();
+		$("#evt-scroll .time-val").text( date.toGMTString() + ":" + date.getMilliseconds() );
+		$("#evt-last .lastevent-val").text( "scroll event" );
+		$("#evt-last .time-val").text( date.toGMTString() + ":" + date.getMilliseconds() );
+	});
+
+	document.body.addEventListener('touchmove', function(e) {
+	}, false);
+
+
+	document.body.addEventListener('touchstart', function(e) {
+	}, false);
+
+	document.body.addEventListener('touchend', function(e) {
+		$("#evt_touchend .count-val").text( parseInt($("#evt_touchend .count-val").text()) + 1 );
+		var date = new Date();
+		$("#evt_touchend .time-val").text( date.toGMTString() + ":" + date.getMilliseconds() );
+		$("#evt-last .lastevent-val").text( "evt_touchend" );
+		$("#evt-last .time-val").text( date.toGMTString() + ":" + date.getMilliseconds() );
+	}, false);
+
+	document.body.addEventListener('touchleave', function(e) {
+	  $("#qunit-tests").append('<li>touchleave event added.</li>');
+	}, false);
+
+	document.body.addEventListener('orientationchange', function(e) {
+		displayMsg();
+	}, false); 
+
+	function displayMsg() {
+		$("#my_message .msg_height").text( window.innerHeight  );
+		$("#my_message .msg_width").text( window.innerWidth );
+	}
+
+});
+
+//-->
+</script>
+
+</body>
+</html>

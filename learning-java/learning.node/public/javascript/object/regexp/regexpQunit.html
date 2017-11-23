@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+</head>
+<body>
+
+	<h1 id="qunit-header">jQuery Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+<script type="text/javascript" src="regexpQunit.js"></script>	
+<script type="text/javascript">
+/**
+ * $Id$
+ * 
+ * 
+ */
+$(function() {
+	
+	/**
+	 * Module of Array Qunit tests
+	 */
+	module("RegExp Test - Basic/Simple/Function");
+
+	test("Testing regexp.prototype.test()", function() {
+		var result = (/http:/i).test('http://test');
+		ok (result, "The reg test is " + result);
+
+		result = (/http:/i).test('https://test');
+		ok ( !result, "The reg test is " + result);
+	});
+
+
+	test("Testing regexp.prototype.test()", function() {
+		var rxPattern = /^\s*function\s*(\([^)]*\))\s*[{]([\s\S]*)[}]\s*(\([\s\S]*\))[\t\n\r ;]*$/m ;
+		var functionCode = '(\
+									function(){\
+										return (screen.width <= 960) && (navigator.platform != "iPad");\
+									}\
+								)()';
+		var result = rxPattern.test(functionCode);
+
+		ok (result, "The reg test is " + result);
+	});
+
+
+	module("RegExp Test");
+
+
+	test("Complex regexp test", function() {
+		var rxPattern = /^\s*function\s*(\([^)]*\))\s*[{]([\s\S]*)[}]\s*(\([\s\S]*\))[\t\n\r ;]*$/m ;
+		var functionCode = '(\
+									function(){\
+										return (screen.width <= 960) && (navigator.platform != "iPad");\
+									}\
+								)()';
+		var matches = rxPattern.exec(functionCode);
+
+		equal(matches, null, "Matches is null");
+	});
+
+	test("Less Complex regexp test", function() {
+		var rxPattern = /^\s*function\s*(\([^)]*\))\s*[{]([\s\S]*)[}]\s*(\([\s\S]*\))[\t\n\r ;]*$/m ;
+		var functionCode = "function(){ alert('got here'); return false; }()";
+		var matches = rxPattern.exec(functionCode);
+		
+		ok(matches.length > 0, "matches should have more than zero");
+	});
+	
+	test("Test regexp replace function", function() {
+		var rxPattern = /\.*walkfitplatinum.com\/order_init.html\.*/m;
+		var functionCode, matches;
+
+		functionCode = "https://www.walkfitplatinum.com/order_init.html?freegift=yes";
+		functionCode = functionCode.toString().replace(new RegExp("\\?.*", "g"), "");
+
+		/* Other forms
+		var re = new RegExp("yes", "g");
+		functionCode.replace(re, "");
+		
+		functionCode.replace(/yes/i, "");
+		*/
+		
+		equal(functionCode, "https://www.walkfitplatinum.com/order_init.html");
+		matches = rxPattern.exec(functionCode);
+		
+		ok(matches.length > 0, "Error doesn't found any error");
+	});	
+
+	test("Test Direct regexp replace function", function() {
+		var functionCode;
+
+		functionCode = "k_visit=true; session_start_time=1395187453623; s_vi=[CS]v1|29946F87051D3A01-6000";
+		functionCode = functionCode.replace ( /k_visit=(\w*)/g.exec(functionCode)[1] , "false");
+
+		equal(functionCode, "k_visit=false; session_start_time=1395187453623; s_vi=[CS]v1|29946F87051D3A01-6000");
+	});	
+
+	test("Test regexp replace function", function() {
+		var rxPattern = /.*\/Advantage\/.*/m;
+		var pageURL, matches;
+		
+		pageURL = "http://www.touchcommerce.com/Advantage/?test=yes";
+		
+		var mat = rxPattern.exec(pageURL); // we need a precise match... the RegExp.test() method won't cut it.
+		if(mat && mat[0]==pageURL){ // the regexp "consumed" the WHOLE URL... this is an exact match.
+			matches = true;
+		} 
+
+		ok(matches, "Error " + pageURL + " doesn't match with ");
+		
+	});	
+
+	test("Test regexp replace function", function() {
+		
+		var rxPattern = /(.*)assistance\.sfr\.fr\/internet\/chatAlt\.do(.*)/;
+		var r = new RegExp("http:\/\/assistance\.sfr\.fr(.*)\/internet\/chatAlt\.do(.*)");
+		var pageURL, matches;
+		
+		pageURL = "http://assistance.sfr.fr/internet/chatAlt.do";
+		
+		var mat = r.exec(pageURL); // we need a precise match... the RegExp.test() method won't cut it.
+		if(mat && mat[0]==pageURL){ // the regexp "consumed" the WHOLE URL... this is an exact match.
+			matches = true;
+		} 
+		
+		ok(matches, "Error " + pageURL + " doesn't match with ");
+		
+	});	
+	
+	
+	// Real Case
+
+	test("Real Case Test - exec() then get the first match.", function() {
+		var rxPattern = /msg\.id%3D([0-9]*)%0A/m ;
+		var functionCode = "/chatrouter/chat/sendMsg?chatId=9047821239976289098&msg=version%3D0.05%0Amsg.id%3D1367012639817%0Amsg.type%3Dchat.communication%0Achat.id%3D9047821239976289098%0Achat.data%3D3%0Areturn.receipt%3D1%0Aclient.name%3DYou%0Aline.nr%3D3%0AfromV3%3DYou%0A%0A";
+		var matches = rxPattern.exec(functionCode);
+
+		ok(matches.length > 0);
+		equal(matches[1], '1367012639817', "First element is " + matches[1]);
+	});
+
+
+	// Real Case
+
+	test("test http to https", function() {
+		var httpUrl = 'http://cobrowse.inq.com' ;
+
+		equal( httpUrl.indexOf("https"), -1 );
+
+		if( httpUrl.indexOf("https") == -1 ) {
+			httpUrl = httpUrl.replace('http', 'https');
+		}
+
+		equal( httpUrl, 'https://cobrowse.inq.com' );
+
+	});
+
+
+});
+</script>	
+
+
+
+</body>
+</html>

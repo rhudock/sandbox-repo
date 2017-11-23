@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>HTML5 contenteditable example</title>
+
+<style type="text/css">
+#scribble-pad {
+       margin-left:auto;
+       margin-right:auto;  
+       height: 475px;
+       width: 475px;
+       background-image:url(https://www.ibm.com/developerworks/mydeveloperworks/blogs/bobleah/resource/stickynote.jpg);
+       background-repeat: no-repeat;
+}  
+
+#scribble {
+      white-space: pre-wrap;       /* css-3 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      max-width: 300px;
+      padding: 120px 100px 100px 75px;
+      color: #486891;
+      font-family:  Arial,sans-serif;
+      font-size: 140%;
+      font-style: italic; 
+      font-weight:bold; 
+      line-height: 1.5em;  
+}
+
+.c-link {
+      color: #486891;
+      font-family:  Arial,sans-serif;
+      font-size: 95%;
+      font-weight:bold; 
+      text-decoration: none;         
+}
+</style>
+
+
+
+<script type="text/javascript">
+function storeUserScribble(id) {
+  var scribble = document.getElementById('scribble').innerHTML;
+  localStorage.setItem('userScribble',scribble);
+}
+
+function getUserScribble() {
+  if ( localStorage.getItem('userScribble')) {
+    var scribble = localStorage.getItem('userScribble');
+  }
+  else {
+    var scribble = 'You can scribble directly on this sticky... and I will also remember your message the next time you visit my blog!';
+  }
+  document.getElementById('scribble').innerHTML = scribble;
+}
+
+function clearLocal() {
+  clear: localStorage.clear(); 
+  return false;
+}
+</script>
+
+</head>
+<body>
+
+<a class="c-link" href='' onclick='javascript:clearLocal();'>Clear local storage</a>
+
+<div id="scribble-pad"><pre id="scribble" contenteditable="true" onkeyup="storeUserScribble(this.id);"></pre></div>
+
+
+<script>
+  getUserScribble();
+</script>
+
+</body>
+</html>

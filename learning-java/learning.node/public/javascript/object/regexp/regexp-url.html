@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+</head>
+<body>
+
+	<h1 id="qunit-header">jQuery Test Suite - URL</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+<!-- script type="text/javascript" src="regexpQunit.js"></script -->	
+<script type="text/javascript">
+/**
+ * $Id$
+ * 
+ * 
+ */
+$(function() {
+	
+
+	/**
+	 * Module of Array Qunit tests
+	 */
+	module( "Basic URL Test", {
+	  setup: function() {
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	  }
+	});
+
+
+    function parseUrl (str) {
+        var m = str.match(/^(https?):\/\/([^\/:]+)(:?(\d*))/);
+        var host = m[2];
+		
+        var domain = (host.indexOf('.') >= 0			// Sanity check.
+					&& host.split('.').length >= 3)		// One dot domain name (e.g. tc.com) will be used as is 
+            ? host.split('.').slice(1).join('.')		// Strip the host name.
+            : host;										// Default.
+
+        return {
+            origin: m[1] + "://" + m[2],
+            href: str,
+            protocol: m[1],
+            domain: domain,
+            host: host,
+            port: (m[4] ? m[4] : 80)
+        };
+    }
+
+
+	test("Testing parseUrl with ", function() {
+		var awwwurl = "http://www.touchcommerce.com/";
+
+		var actual = parseUrl(awwwurl);
+
+		equal ( actual.host, "www.touchcommerce.com", "actual host is " + actual.host);
+		equal ( actual.domain, "touchcommerce.com", "actual doamin is " + actual.domain);
+	});
+	
+	test("Testing parseUrl", function() {
+		var awwwurl = "http://touchcommerce.com/";
+
+		var actual = parseUrl(awwwurl);
+
+		equal ( actual.host, "touchcommerce.com", "actual host is " + actual.host);
+		equal ( actual.domain, "touchcommerce.com", "actual doamin is " + actual.domain);
+	});
+	
+	test("Testing parseUrl", function() {
+		var awwwurl = "http://www.tc.touchcommerce.com/";
+
+		var actual = parseUrl(awwwurl);
+
+		equal ( actual.host, "www.tc.touchcommerce.com", "actual host is " + actual.host);
+		equal ( actual.domain, "tc.touchcommerce.com", "actual doamin is " + actual.domain);
+	});
+	
+});
+
+
+
+var r = /^(?=.*tablet)((?=.*MSIE [89]\.0)(?=.*IEMobile)|(?!.*MSIE [89]\.0))/i;
+
+var ls = [
+	"tablet", // tablet
+	"tablet MSIE 8.0", // Null
+	"MSIE 8.0 tablet", // Null
+    "tablet MSIE 9.0", // Null
+    "MSIE 9.0 tablet", // Null
+    "MSIE 8.0 tablet IEMobile",  // tablet
+    "MSIE 8.0 IEMobile tablet",  // tablet
+    "tablet MSIE 8.0 IEMobile",  // tablet
+    "tablet IEMobile MSIE 8.0",  // tablet 
+    "IEMobile tablet MSIE 8.0",  // tablet
+    "IEMobile MSIE 8.0 tablet",  // tablet
+    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 2.0.50727; SLCC2; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; Zune 4.0; Tablet PC 2.0; InfoPath.3; .NET4.0C; .NET4.0E)"    // Null
+];
+
+/*
+var daniel = function(myUserAgent) {
+    return /MSIE 9.0|MSIE 8.0/i.test(myUserAgent.toLowerCase()) && /table/i.test(myUserAgent.toLowerCase()) && !/IEMobile/i.test(myUserAgent.toLowerCase());
+};
+
+var test = function () {
+    for (var i in ls) {
+        var d = daniel(ls[i]);
+        var m = r.test(ls[i])
+        var w = (d != m);
+   //     console.log((w?"WARNING! ":"") + ls[i] + ":");
+     //   console.log("    daniel: " + d);
+       // console.log("    regex : " + m);
+    }
+};
+
+// test();
+*/
+
+</script>	
+</body>
+</html>
+

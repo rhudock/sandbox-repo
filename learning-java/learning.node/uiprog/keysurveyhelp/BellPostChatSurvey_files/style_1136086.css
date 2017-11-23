@@ -1,0 +1,396 @@
+form {margin: 0px;border: 0px}
+
+.Hand /* Cursor parameters  */
+{cursor: pointer;
+border-style: none}
+
+.H1 /* Survey name parameters */
+{font-family: Arial, Geneva, Helvetica, san-serif;
+font-size: 0px;
+font-weight: normal;
+color: #FFFFFF;
+text-align: center;
+text-decoration: none;
+padding: 0px;
+}
+
+.H2 /* Question text parameters */
+{font-family: Arial, Helvetica, san-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+text-align: left;
+padding: 5px;
+color: #000000;
+background-color: #FFFFFF}
+
+.H3 /* Answer text parameters */
+{font-family: Arial, Geneva, Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-align: left;
+vertical-align: middle;
+color: #000000;
+padding: 3px;
+text-decoration: none;
+}
+
+.H4 /* Answer text parameters for rank scale question type */
+{width: 350px;
+font-size: 12px;
+font-weight: normal;
+vertical-align: middle;
+text-align: left;
+color: #000000;
+text-decoration: none;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.H4LEFT /* Answer text parameters for rank scale question type left part*/
+{width: 175px;
+font-size: 12px;
+font-weight: normal;
+vertical-align: middle;
+color: #000000;
+text-decoration: none;
+font-family: Arial, Helvetica, sans-serif;
+text-align: right;
+}
+
+.H4RIGHT /* Answer text parameters for rank scale question type right part*/
+{width: 175px;
+font-size: 12px;
+font-weight: normal;
+vertical-align: middle;
+text-align: left;
+color: #000000;
+text-decoration: none;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.H5 /* Answer text parameters for left column of compare one agains another question type */
+{width: 40%;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+vertical-align: middle;
+color: #000000;
+text-decoration: none;
+text-align: right;
+}
+
+.H6 /* Answer text parameters for right column of compare one agains another question type */
+{font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+vertical-align: middle;
+color: #000000;
+text-decoration: none;
+text-align: left;
+}
+
+.H7 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000}
+
+.H8 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000}
+
+.H9 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000}
+
+.H10 /* Survey text description */
+{font-family: Arial, Calibri, Geneva, Helvetica, san-serif;
+font-size: 12px;
+font-weight: bold;
+color: #000000;
+text-decoration: none;
+text-align: left;
+padding: 5px;
+padding-bottom:	5px;
+background-color: #FFFFFF}
+
+.H11 /* Word "or" between left and right columns of Compare One Against Another question type */
+{font-family: Arial, Helvetica, san-serif;
+font-size: 12px;
+color: #000000;
+text-decoration: none;
+vertical-align: middle;
+text-align: center;
+}
+
+.H12 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000;
+}
+
+.H13 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000;
+}
+
+.H14 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000;
+}
+
+.H15 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000;
+}
+
+.H16 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000;
+}
+
+.H17 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000;
+}
+
+.H18 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000;
+}
+
+.H19 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000;
+}
+
+.H20 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000;
+}
+
+.H21 /* Title text parameters for rank scale question type */
+{text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+text-decoration: none;
+padding: 5px;
+color: #000000;
+}
+
+.H22 /* Text only (introduction and headings) parameters */
+{font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: bold;
+text-decoration: none;
+text-align: center;
+padding: 5px;
+color: #000000;
+background-color: #FFFFFF}
+
+.H23 /* Text "Page x of y" parameters */
+{font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+color: #000000;
+}
+
+.H24 /* Print Preview Mode: respondent text parameters */
+{font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: bold;
+text-align: left;
+color: #000000;
+}
+
+.H25 /* Total column in numeric allocation */
+{font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: bold;
+text-align: left;
+vertical-align: middle;
+color: #000000;
+}
+
+.HFooter /* Text "Survey footer" parameters */
+{font-family: Arial, Helvetica, sans-serif;
+font-size: 10px;
+font-weight: bold;
+color: #000000;
+}
+
+.background /* Button background */
+/* margin: 0px; padding: 0px;*/
+{background-color: #FFFFFF;
+background: #FFFFFF repeat;
+}
+
+.tablebckg /* Table background */  /* width: 780px;*/ 
+{background-color: #ffffff;  
+padding-left:	10px;
+padding-right:	10px; 
+border-top: 1px solid #CCC;
+margin-bottom: 5px;}
+
+.uptable /* Row of survey name */
+{border: #ffffff;
+background-color: #FFFFFF;
+text-align: center;
+}
+
+.ODD /* Background of odd lines of answer text parameters */
+{background-color:#FFFFFF;
+vertical-align: middle;
+}
+
+.EVEN /* Background of even lines of answer text parameters */
+{background-color: #FFFFFF;
+vertical-align: middle;
+}
+
+.ODD_BAR /* Background of completed part of progress bar */
+{background-color: #FFFFFF;
+vertical-align: top;
+}
+
+.EVEN_BAR /* Background of incompleted part of progress bar */
+{background-color: #FFFFFF;
+vertical-align: top;
+}
+
+.HEADING /* Background of heading answers text parameters */
+{background-color: #FFFFFF;
+vertical-align: top;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: normal;
+color: #000000;
+text-decoration: none;
+}
+
+.HQIMLeftFloat{
+width:1px;
+padding-right: 10px;
+}
+.HQIMRightFloat{
+width:1px;
+padding-left: 10px;
+}
+.ERROR_MESSAGE{
+text-align:left;
+color: #ff0000;
+font-style: italic;
+font-size: 9pt;
+font-family: Arial, Helvetica, sans-serif;
+}
+.HRG3D { padding:1px}
+.absrankAlert {background:pink; border: 1px red dashed; padding:0px}
+.HAnchor{display:none;}
+
+.advancedTextFC{
+font-size: 12px;
+font-family: Calibri, Geneva, Arial, Helvetica, sans-serif;
+font-weight: normal;
+text-decoration: none;
+text-align: left;
+}
+
+
+
+QuestionHeaderTableId21626098 .H2 {border-top: 1px solid #9C9A9C;}
+QuestionHeaderTableId21626099 .H2 {border-top: 1px solid #9C9A9C;}
+QuestionHeaderTableId21626100 .H2 {border-top: 1px solid #9C9A9C;}
+QuestionHeaderTableId21626101 .H2 {border-top: 1px solid #9C9A9C;}
+QuestionHeaderTableId21626102 .H2 {border-top: 1px solid #9C9A9C;}
+QuestionHeaderTableId21626103 .H2 {border-top: 1px solid #9C9A9C;}
+#QuestionHeaderTableId21626103 .H22 {font-weight: normal; }
+
+#QuestionAnswersTableId21626098 .H3 {text-align: left !Important;}
+#QuestionAnswersTableId21626099 .H3 {text-align: left !Important;}
+#QuestionAnswersTableId21626100 .H3 {text-align: left !Important;}
+#QuestionAnswersTableId21626101 .H3 {text-align: left !Important;}
+#QuestionAnswersTableId21626102 .H3 {text-align: left !Important;}
+#QuestionAnswersTableId21626103 .H3 {text-align: left !Important;}
+
+
+
+#AnswerLabelTd17033652 {width: 255px;}
+tablelogo 	/*      */ {width: 399px;}
+
+#inputtextother21626102_112910106 /*      */{height: 35px; width:255px;}
+
+
+#ColumnLabelTd7521210, #GMH432753726LEFT {display: none;} 
+/* Hide blank row label area to the left of the ratings in Q1 */
+#ColumnLabelTd17446739, #GMH483042982LEFT {display: none;}
+
+#QuestionAnswersTableId17446739 {padding-right: 150px;}
+
+body
+{
+background-image:url('/User/79/79326/media/70/70542.png');
+background-repeat:repeat;
+}
+
+
+.HBUTTONS {padding-bottom: 5px;}
+
+TYPtablebckg {width: 399px;}

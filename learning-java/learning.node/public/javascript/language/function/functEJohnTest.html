@@ -1,0 +1,742 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="/lib/qunit/qunit-1.15.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+   <!-- script type="text/javascript" src="../../lib/log4js.js"></script -->
+
+</head>
+<body>
+	<h1 id="qunit-header">Function (Advanced, Foundational)</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<div id="box-summary">
+	<p>
+Tests of Learning Advanced JavaScript by John Resig
+	<br />	<br />Generally speaking, a function is a "subprogram" that can be called by code external (or internal in the case of recursion) to the function. Like the program itself, a function is composed of a sequence of statements called the function body. Values can be passed to a function, and the function can return a value.
+	<br />In JavaScript, functions are first-class objects, i.e. they are objects and can be manipulated and passed around just like any other object. Specifically, they are Function objects
+	</p>
+	<h4>Reference;</h4>	
+	<ul>		
+    	<li><a href="http://ejohn.org/apps/learn/">Learning Advanced JavaScript by John Resig</a>
+    	<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions">MDN: Functions and function scope</a>
+    	</li>
+    	<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript">MDN: Introduction to Object-Oriented JavaScript</a>
+    	</li>
+    	<li><a href="http://www.phpied.com/3-ways-to-define-a-javascript-class/">3 ways to define a JavaScript class</a></li>
+    </ul>
+    
+	</div> <!-- End of box-summary -->
+	<ol id="qunit-tests"></ol>
+
+	<script type="text/javascript"> 
+/**
+ * $Id$
+ *   http://ejohn.org/apps/learn/
+ * 
+ */
+$(function() {
+	
+/**
+ *  Rewrite of John Resig's advanced javascript Web presentation. 
+ *  http://ejohn.org/apps/learn/
+ */
+module("Advanced Javascript", {
+	setup : function() {
+		try	{
+
+		} catch (e){
+			logger.error("ERROR():" + e.message, e); 
+			ok(false);
+		}
+	},
+
+	tearDown: function () {
+		try	{
+
+		} catch (e){
+			logger.error("ERROR():" + e.message, e); 
+			ok(false);
+		}
+    }
+});
+
+	// ** To understand this function
+	Function.prototype.bind = function(){ 
+	  var fn = this, args = Array.prototype.slice.call(arguments), object = args.shift(); 
+	  return function(){ 
+	    return fn.apply(object, 
+	      args.concat(Array.prototype.slice.call(arguments))); 
+	  }; 
+	};
+
+
+	/**
+	 *   http://ejohn.org/apps/learn/#5
+	 */
+	test("Testing Three ways to create a function", function() {
+		
+		var multiply = new Function("x", "y", "return x * y;");
+		function isNimble(){ return true; } 
+		var canFly = function(){ return true; }; 
+		window.isDeadly = function(){ return true; }; 
+
+		ok ( multiply(1,2) == 2, "multiply is a function kk");
+		ok (typeof isNimble == "function", "isNumble is a function. " + typeof isNimble);
+		ok (typeof canFly == "function", "isNumble is a function.");
+		ok (typeof isDeadly == "function", "isNumble is a function.");
+
+		window.isDeadly = null;
+
+	});
+
+	module("Defining Functions");
+
+	/*
+		http://ejohn.org/apps/learn/#7
+	*/
+	test("#7: Where can assignments be accessed?", function() {
+		
+		ok( typeof canFly == "undefined", "canFly doesn't get that benefit." ); 
+		ok( typeof isDeadly2 == "undefined", "Nor does isDeadly." ); 
+		var canFly = function(){ return true; }; 
+		window.isDeadly2 = function(){ return true; };
+
+		window.isDeadly2 = null;
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#8
+	*/
+	test("Function location test 2", function() {
+		
+		stealthCheck();
+
+		function stealthCheck(){ 
+		
+		  ok( stealth(), "We'll never get below the return, but that's OK!" ); 
+		 
+		  return stealth(); 
+		 
+		  function stealth() { return true; } 
+		} 
+
+	});
+
+	module("Named Functions");
+
+	/*
+		http://ejohn.org/apps/learn/#10
+	*/
+	test("#10: We can refer to a function, within itself, by its name.", function() {
+		
+		ok( yell(4) == "hiyaaaa", "Calling the function by itself comes naturally." );
+
+		function yell(n){ 
+		  return n > 0 ? yell(n-1) + "a" : "hiy"; 
+		} 
+
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#11
+	*/
+	test("#11: What is the name of a function?", function() {
+		
+		var ninja = function myNinja(){ 
+		  ok( ninja == myNinja, "This function is named two things - at once!" ); 
+		}; 
+
+		ninja(); 
+		
+		ok( typeof myNinja == "undefined", "But myNinja isn't defined outside of the function." ); 
+		console.log( ninja );
+
+	});
+
+
+	/*
+		http://ejohn.org/apps/learn/#12
+	*/
+	test("#12: We can even do it if we're an anonymous function that's an object property.", function() {
+		
+		var ninja = { 
+		  yell: function(n){ 
+		    return n > 0 ? ninja.yell(n-1) + "a" : "hiy"; 
+		  } 
+		}; 
+
+		ok( ninja.yell(4) == "hiyaaaa", "A single object isn't too bad, either." );
+
+	});
+
+
+	/*
+		http://ejohn.org/apps/learn/#13
+	*/
+	test("#13: But what happens when we remove the original object?", function() {
+		
+		var ninja = { 
+		  yell: function(n){ 
+		    return n > 0 ? ninja.yell(n-1) + "a" : "hiy"; 
+		  } 
+		}; 
+		ok( ninja.yell(4) == "hiyaaaa", "A single object isn't too bad, either." ); 
+		 
+		var samurai = { yell: ninja.yell }; 
+		var ninja = null; 
+		 
+		try { 
+		  samurai.yell(4); 
+		} catch(e){ 
+		  ok ( true, "Uh, this isn't good! Where'd ninja.yell go? - expecting exception." ); 
+		}
+
+	});
+
+
+	/*
+		http://ejohn.org/apps/learn/#14
+	*/
+	test("#14: Let's give the anonymous function a name!", function() {
+		
+		var ninja = { 
+		  yell: function yell(n){ 
+		    return n > 0 ? yell(n-1) + "a" : "hiy"; 
+		  } 
+		}; 
+		ok( ninja.yell(4) == "hiyaaaa", "Works as we would expect it to!" ); 
+		 
+		var samurai = { yell: ninja.yell }; 
+		var ninja = null; 
+		ok( samurai.yell(4) == "hiyaaaa", "The method correctly calls itself." );
+
+	});
+
+
+	/*
+		http://ejohn.org/apps/learn/#15
+	*/
+	test("#15: What if we don't want to give the function a name?", function() {
+		
+		var ninja = { 
+		  yell: function(n){ 
+		    return n > 0 ? arguments.callee(n-1) + "a" : "hiy"; 
+		  } 
+		}; 
+		ok( ninja.yell(4) == "hiyaaaa", "arguments.callee is the function itself." );
+	});
+
+
+	module("Functions as Objects");
+	/*
+		http://ejohn.org/apps/learn/#17
+	*/
+	test("#17: How similar are functions and objects?", function() {
+		
+		var obj = {}; 
+		var fn = function(){}; 
+		ok( obj && fn, "Both the object and function exist." );
+
+	});
+
+
+	/*
+		http://ejohn.org/apps/learn/#18
+	*/
+	test("#18: How similar are functions and objects?", function() {
+		
+		var obj = {}; 
+		var fn = function(){}; 
+		obj.prop = "some value"; 
+		fn.prop = "some value"; 
+		ok( obj.prop == fn.prop, "Both are objects, both have the property." );
+
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#19
+	*/
+	test("#19: Is it possible to cache the return results from a function?", function() {
+		
+		function getElements( name ) { 
+		  var results; 
+		 
+		  if ( getElements.cache[name] ) { 
+		    results = getElements.cache[name]; 
+		  } else { 
+		    results = document.getElementsByTagName(name); 
+		    getElements.cache[name] = results; 
+		  } 
+		 
+		  return results; 
+		} 
+		getElements.cache = {}; 
+		 
+		log( "Elements found: ", getElements("pre").length ); 
+		log( "Cache found: ", getElements.cache.pre.length );
+
+		ok (true);
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#20: QUIZ: Can you cache the results of this function?", function() {
+		
+		function isPrime( num ) { 
+		  var prime = num != 1; // Everything but 1 can be prime 
+		  for ( var i = 2; i < num; i++ ) { 
+		    if ( num % i == 0 ) { 
+		      prime = false; 
+		      break; 
+		    } 
+		  } 
+		  return prime; 
+		} 
+		 
+		ok( isPrime(5), "Make sure the function works, 5 is prime." ); 
+		try {
+			ok( isPrime.cache[5], "Is the answer cached?" );
+		} catch (e) {
+			ok (false, e.message );
+		}
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#21: One possible way to cache the results:", function() {
+		
+		function isPrime( num ) { 
+		  if ( isPrime.cache[ num ] != null ) 
+		    return isPrime.cache[ num ]; 
+		   
+		  var prime = num != 1; // Everything but 1 can be prime 
+		  for ( var i = 2; i < num; i++ ) { 
+		    if ( num % i == 0 ) { 
+		      prime = false; 
+		      break; 
+		    } 
+		  } 
+		  
+		  isPrime.cache[ num ] = prime 
+		  
+		  return prime; 
+		} 
+		 
+		isPrime.cache = {}; 
+		 
+		ok( isPrime(5), "Make sure the function works, 5 is prime." ); 
+		ok( isPrime.cache[5], "Make sure the answer is cached." );
+	});
+
+
+
+	module("Context");
+
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#23: What happens if a function is an object property?", function() {
+		
+		var katana = { 
+		  isSharp: true, 
+		  use: function(){ 
+		    this.isSharp = !this.isSharp; 
+		  } 
+		}; 
+		katana.use(); 
+		ok( !katana.isSharp, "Verify the value of isSharp has been changed." );
+
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#24: What exactly does context represent?", function() {
+		
+		function katana(){ 
+		  this.isSharp = true; 
+		} 
+		katana(); 
+		ok( isSharp === true, "A global object now exists with that name and value." ); 
+		 
+		var shuriken = { 
+		  toss: function(){ 
+		    this.isSharp = true; 
+		  } 
+		}; 
+		shuriken.toss(); 
+		ok( shuriken.isSharp === true, "When it's an object property, the value is set within the object." );
+
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#25: How can we change the context of a function?", function() {
+		
+		var object = {}; 
+
+		function fn(){ 
+		  return this; 
+		}
+
+		ok( fn() == this, "The context is the global object." ); 
+		ok( fn.call(object) == object, "The context is changed to a specific object." );
+
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#26: Different ways of changing the context:", function() {
+		
+		function add(a, b){ 
+		  return a + b; 
+		} 
+		ok( add.call(this, 1, 2) == 3, ".call() takes individual arguments" ); 
+		ok( add.apply(this, [1, 2]) == 3, ".apply() takes an array of arguments" );
+
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#27: QUIZ: How can we implement looping with a callback?", function() {
+		
+		function loop(array, fn){ 
+		  for ( var i = 0; i < array.length; i++ ) { 
+		    fn.call(array, array[i], i);
+		  } 
+		} 
+		var num = 0; 
+		loop([0, 1, 2], function(value){ 
+		  ok(value == num++, "Make sure the contents are as we expect it."); 
+		  ok(this instanceof Array, "The context should be the full array."); 
+		});
+
+		ok(true);
+
+	});
+
+	module("Instantiation");
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#30: What does the new operator do?", function() {
+		
+		function Ninja(){ 
+		  this.name = "Ninja"; 
+		} 
+		 
+		var ninjaA = Ninja(); 
+		ok( !ninjaA, "Is undefined, not an instance of Ninja." ); 
+		 
+		var ninjaB = new Ninja(); 
+		ok( ninjaB.name == "Ninja", "Property exists on the ninja instance." );
+
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#31: We have a 'this' context that is a Ninja object.", function() {
+		
+		function Ninja(){ 
+		  this.swung = false; 
+		   
+		  // Should return true 
+		  this.swingSword = function(){ 
+		    this.swung = !this.swung; 
+		    return this.swung; 
+		  }; 
+		} 
+		 
+		var ninja = new Ninja(); 
+		ok( ninja.swingSword(), "Calling the instance method." ); 
+		ok( ninja.swung, "The ninja has swung the sword." ); 
+		 
+		var ninjaB = new Ninja(); 
+		ok( !ninjaB.swung, "Make sure that the ninja has not swung his sword." );
+
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#32: QUIZ: Add a method that gives a name to the ninja.", function() {
+		
+		function Ninja(name){ 
+		  this.changeName = function(name) {
+		  	this.name = name;
+		  }
+		  
+		  this.changeName(name);
+		} 
+		 
+		var ninja = new Ninja("John"); 
+		ok( ninja.name == "John", "The name has been set on initialization" ); 
+		 
+		ninja.changeName("Bob"); 
+		ok( ninja.name == "Bob", "The name was successfully changed." );
+
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#34: What happens when we forget to use the new operator?", function() {
+		
+		function User(first, last){ 
+		  this.name = first + " " + last; 
+		} 
+		 
+		var user = User("John", "Resig"); 
+		ok( typeof user == "undefined", "Since new wasn't used, the instance is undefined." );
+
+	});
+
+
+
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#35: What happens when we forget to use the new operator? (cont.)", function() {
+		
+		function User(first, last){ 
+		  this.name = first + " " + last;          // this = window in this case
+		} 
+		 
+		window.name = "Resig"; 
+		var user = User("John", name); 
+		 
+		ok( name == "John Resig", "The name variable is accidentally overridden." );
+
+	});
+
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#36: We need to make sure that the new operator is always used.", function() {
+		
+		function User(first, last){ 
+		  if ( !(this instanceof User) ) 
+		    return new User(first, last); 
+		   
+		  this.name = first + " " + last; 
+		} 
+		 
+		var name = "Resig"; 
+		var user = User("John", name); 
+		 
+		ok( user, "This was defined correctly, even if it was by mistake." ); 
+		ok( name == "Resig", "The right name was maintained." );
+
+	});
+
+
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#37: QUIZ: Is there another, more generic, way of doing this?", function() {
+		
+		function User(first, last){ 
+		  if ( !(this instanceof arguments.callee) ) 
+		    return new User(first, last); 
+		   
+		  this.name = first + " " + last; 
+		} 
+		 
+		var name = "Resig"; 
+		var user = User("John", name); 
+		 
+		assert( user, "This was defined correctly, even if it was by mistake." ); 
+		assert( name == "Resig", "The right name was maintained." );
+
+	});
+
+
+
+	module("Flexible Arguments");
+
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#40: Using a variable number of arguments to our advantage.", function() {
+		
+		function merge(root){ 
+		  for ( var i = 1; i < arguments.length; i++ ) 
+		    for ( var key in arguments[i] ) 
+		      root[key] = arguments[i][key]; 
+		  return root; 
+		} 
+		 
+		var merged = merge({name: "John"}, {city: "Boston"}); 
+		ok( merged.name == "John", "The original name is intact." ); 
+		ok( merged.city == "Boston", "And the city has been copied over." );
+
+	});
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#41: How can we find the Min/Max number in an array?", function() {
+		
+		function smallest(array){ 
+		  return Math.min.apply( Math, array ); 
+		} 
+		function largest(array){ 
+		  return Math.max.apply( Math, array ); 
+		} 
+		ok(smallest([0, 1, 2, 3]) == 0, "Locate the smallest value."); 
+		ok(largest([0, 1, 2, 3]) == 3, "Locate the largest value.");
+
+	});
+
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#42: Another possible solution:", function() {
+		
+		function smallest(){ 
+		  return Math.min.apply( Math, arguments ); 
+		} 
+		function largest(){ 
+		  return Math.max.apply( Math, arguments ); 
+		} 
+		ok(smallest(0, 1, 2, 3) == 0, "Locate the smallest value."); 
+		ok(largest(0, 1, 2, 3) == 3, "Locate the largest value.");
+
+	});
+
+
+
+
+	/*
+		http://ejohn.org/apps/learn/#20
+	*/
+	test("#43: Uh oh, what's going wrong here?", function() {
+		
+		function highest(){ 
+		  return arguments.sort(function(a,b){ 
+		    return b - a; 
+		  }); 
+		} 
+		ok(highest(1, 1, 2, 3)[0] == 3, "Get the highest value."); 
+		ok(highest(3, 1, 2, 3, 4, 5)[1] == 4, "Verify the results.");
+
+	});
+
+
+
+
+
+
+
+
+
+
+
+	/**
+	 * Module of Array Qunit tests
+	 */
+	module("Function return anonymous function");
+
+	test("#1 each call should create a new function.", function() {
+		
+		var funA = createFunction(1);
+		var funB = createFunction(2);
+
+		notEqual(funA(), funB(), "New instances are created funA's id is " + funA() + " and funB's id is " + funB());
+
+		function createFunction(id) {
+
+			return function() {
+				var myId = id;
+				return myId;
+			}
+		}
+
+	});
+
+
+	/**
+	 * Important to understand anonymous function and it variable scope.
+	 *
+	 *
+	 *
+	 *
+	 *
+	 */
+	test("#1 each function should has its own closure", function() {
+		
+		var funA = createFunction("2-1");
+		var funB = createFunction("2-2");
+		// var funB = function () {} ;
+		var arrf = [];
+
+		ok(true);
+
+		for (var i = 0; i <= 10; i++) {
+			arrf.push(funA());
+		};
+
+		equal(arrf[0].id, arrf[arrf.length -1].id, "Objects from funA have same id");
+		notEqual(arrf[0].counter, arrf[arrf.length -1].counter, "Objects from funA have different counter");
+		equal(arrf[0].lcounter, arrf[arrf.length -1].lcounter, "Objects from funA have same lcounter");
+
+		var objB = funB();
+
+		notEqual(arrf[0].id, objB.id, "Objects from different function instan have different ids");
+
+
+		// notEqual(funA(), funB(), "New instances are created funA's id is " + funA() + " and funB's id is " + funB());
+
+
+		function createFunction(id) {
+
+			var counter;				// counter is created each time createFunction() is called.	
+
+			if (!counter) {
+				counter = 0;
+				console.log("counter has been created");
+			};
+
+
+			return function() {
+
+				var lcounter;           // lcounter is created every time this anonymous fuction is called. 
+				if (!lcounter) {
+					lcounter = 0;
+					console.log("lcounter has been created");
+				};
+
+				lcounter += 1;
+				counter += 1;
+				this.id = id;			// Each anonymous function owns its own id.
+				console.log("Hi id:" + this.id + ", counter:" + counter + ", lcounter:" + lcounter);
+				return {"id": this.id, "counter": counter, "lcounter": lcounter };
+			}
+		}
+
+	});
+
+});
+
+</script>	
+
+</body>
+</html>

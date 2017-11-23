@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <p>RTDEV-17899 Test</p>
+<hr>
+    <p>Standard div element in Chrome: not in tab order, not focusable</p>
+    <div class="o-logo"> <img src="//ss7.vzw.com/is/image/VerizonWireless/vzw-logo-156-130-c?$pngalpha$&amp;wid=156&amp;hei=35" srcset="//ss7.vzw.com/is/image/VerizonWireless/vzw-logo-156-130-c 2x" alt="Verizon Wireless Logo" width="156"> </div>
+<hr>
+    <p>A Screen reader makes div elements in tab order and div can be focused. Accessibility code adds tabindex=-1 on div elements to remove div elements from tab order: not in tab order, focusable</p>
+    <div class="o-logo" tabindex="-1"> <img src="//ss7.vzw.com/is/image/VerizonWireless/vzw-logo-156-130-c?$pngalpha$&amp;wid=156&amp;hei=35" srcset="//ss7.vzw.com/is/image/VerizonWireless/vzw-logo-156-130-c 2x" alt="Verizon Wireless Logo" width="156"> </div>
+<hr>
+    <p>All elements has focus on Chrome has blue outline because of Chrome's default CSS. this example has style to overwrite Chrome's default css</p>
+    <div class="o-logo" tabindex="-1" style="outline: none;"> <img src="//ss7.vzw.com/is/image/VerizonWireless/vzw-logo-156-130-c?$pngalpha$&amp;wid=156&amp;hei=35" srcset="//ss7.vzw.com/is/image/VerizonWireless/vzw-logo-156-130-c 2x" alt="Verizon Wireless Logo" width="156"> </div>
+</div>
+</body>
+</html>

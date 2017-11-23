@@ -1,0 +1,1 @@
+{"version":3,"sources":["loggerLoader.js"],"names":["logger","Logger","writeLine"],"mappings":";;AAAA,IAAIA,SAAS,IAAIC,MAAJ,CAAW,OAAX,CAAb;AACAD,OAAOE,SAAP,CAAiB,0BAAjB","file":"loggerLoader.js","sourcesContent":["var logger = new Logger('MyLog');\r\nlogger.writeLine('Logging via ES6 classes!');"]}

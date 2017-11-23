@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+   <title>Javascript Basic Test</title>
+</head>
+<body>
+	<h1 id="qunit-header">Event Tester</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	
+
+	<div style="height: 100px;" id="my-msg"></div>
+	<div style="height: 100px;" id="qunit-fixture"></div>
+
+
+<script type="text/javascript">
+
+<!--
+	/**
+ * $Id$
+ * 
+ * 
+ * Ref: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date#Example:_Several_ways_to_assign_dates
+ */
+
+// $( document ).ready(function() {
+
+$(function() {
+
+
+	module( "Page Condition Test");
+
+	test("Check div#test object is not in DOM", function() {
+		ok(true);
+
+		equal ($('div#test').length, 0,  "number of $('div#test').length is: " + $('div#test').length);
+
+		equal( $('div#test').attr("id"), undefined, "id is " + $('div#test').attr("id") );
+	});
+
+
+/**
+ *
+ *
+ */
+	module( "Test simpleCreateDiv", {
+	  setup: function() {
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	    $('div#test').remove();
+	  }
+	});
+
+
+
+	test("Create a tc chat div object", function() {
+		ok(true);
+
+		var newdiv = document.createElement('div'); 
+		newdiv.setAttribute('id', "tcTest");
+
+		var innerHtmlString = '<div id="tcChat_dragBar" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: none; height: 75px; width: 437px; left: 0px; top: 0px;"></div>            <div id="tcChat_background" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: block; background-color: rgb(255, 255, 255); height: 376px; width: 499px; left: 0px; top: 0px;"></div>             <div id="tcChat_chat" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: block; background-color: transparent; height: 275px; width: 499px; left: 0px; top: 101px;" aria-live="polite">            <div id="tcChat_topMiddle" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: block; height: 101px; width: 205px; left: 174px; top: 0px;">        <div id="tcChat_topRight" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: block; height: 101px; width: 120px; left: 379px; top: 0px;">          <div id="tcChat_topLeft" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: block; height: 101px; width: 174px; left: 0px; top: 0px;">         <div id="tcChat_email" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: none; background-color: white; height: 46px; width: 499px; left: 0px; top: 100px;">        <div id="tcChat_titleBar" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: block; height: 75px; width: 499px; left: 0px; top: 0px;">         <div id="tcChat_btnFontSize" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: block; height: 19px; width: 29px; left: 313px; top: 16px; cursor: pointer;">    <img style="width: 29px; height: 19px;" src="http://mediav3.inq.com/media/sites/10003715/flash/BestBrands/btnFontSizeUp.gif">        <img id="tcChat_btnFontSize_skin" class="tcChat" style="display:none;">      <table id="tcChat_btnFontSize_table" class="tcChat" style="position: absolute; left: 0px; top: 0px; height: 100%; width: 100%; margin: auto; cursor: pointer;" title="Font Size">       <input id="tcChat_btnFontSize_img" class="tcChat" type="image" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; background-color: transparent; cursor: pointer;" src="http://mediav3.inq.com/media/sites/10003715/flash/BestBrands/clear.gif" title="Font Size" alt="this is a test">     </div>     <div id="tcChat_btnPrint" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: block; height: 19px; width: 29px; left: 343px; top: 16px; cursor: pointer;">           <div id="tcChat_btnMuteOn" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: none; height: 19px; width: 29px; left: 371px; top: 16px; cursor: pointer;">      <div id="tcChat_btnMuteOff" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: block; height: 19px; width: 29px; left: 371px; top: 16px; cursor: pointer;">       <div id="tcChat_btnEmail" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: block; height: 19px; width: 30px; left: 402px; top: 16px; cursor: pointer;">     <div id="tcChat_btnMinimize" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: block; height: 20px; width: 22px; left: 433px; top: 16px; cursor: pointer;">    <div id="tcChat_btnCloseChat" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: block; height: 20px; width: 22px; left: 462px; top: 15px; cursor: pointer;">       </div>        <div id="tcChat_thankYou" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; display: none; background-color: white; height: 275px; width: 499px; left: 0px; top: 101px;">         <div id="tcChat_targetedOffer" class="yui-skin-sam tcBody" style="position: absolute; overflow: hidden; z-index: 101; left: 0px; top: 251px; background-color: rgb(247, 247, 247); border-color: black; border-style: solid; border-left: 5px solid black; border-right: 5px solid black; border-width: 0px 5px 5px; height: 0px; width: 0px; display: none; visibility: collapse;">       <div id="tcChat_videoFrame" class="tcChat" style="position: absolute; overflow: hidden; z-index: 101; left: 499px; top: 101px; background-color: black; height: 0px; width: 0px; display: none; visibility: collapse;">';
+
+		newdiv.style.height = "75px";
+		newdiv.style.width = "437px";
+		
+		// newdiv.innerHTML = innerHtmlString;
+
+		document.body.appendChild(newdiv);
+		
+		equal ($('div#tcTest').length, 1,  "number of $('div#test').length is: " + $('div#tcTest').length);
+
+		$("#tcTest").append(innerHtmlString);
+
+		equal ($('div#tcChat_topRight').length, 1,  "number of $('div#test').length is: " + $('div#tcChat_topRight').length);
+
+	});
+
+});
+//-->
+</script>
+
+</body>
+</html>

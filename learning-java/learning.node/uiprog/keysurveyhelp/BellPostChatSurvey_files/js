@@ -1,0 +1,52 @@
+window.survData = {"surveyId":1136086,"questionsMap":{"27725927":{"questionId":27725927,"name":"\u003cspan style\u003d\"font-size: 10pt;\"\u003eBased on your recent experience, how likely are you to recommend Bell?\u003c/span\u003e","nameOriginal":"\u003cspan style\u003d\"font-size: 10pt;\"\u003eBased on your recent experience, how likely are you to recommend Bell?\u003c/span\u003e","type":"PICK_ONE_NO_OTHER","answers":{"142961200":{"answerId":142961200,"name":"Not at all","nameOriginal":"Not at all","type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961197":{"answerId":142961197,"name":"Probably","nameOriginal":"Probably","type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961196":{"answerId":142961196,"name":"Definitely","nameOriginal":"Definitely","type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961199":{"answerId":142961199,"name":"Not likely","nameOriginal":"Not likely","type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961198":{"answerId":142961198,"name":"Maybe","nameOriginal":"Maybe","type":"ATYPE_RADIO","hasPiping":false,"total":false}},"answersSorted":[142961196,142961197,142961198,142961199,142961200],"hasPiping":false,"answerRequired":false,"pageNum":1},"27725926":{"questionId":27725926,"name":"\u003cspan style\u003d\"font-size: 10pt;\"\u003eWas the agent able to answer your question(s)?\u003c/span\u003e","nameOriginal":"\u003cspan style\u003d\"font-size: 10pt;\"\u003eWas the agent able to answer your question(s)?\u003c/span\u003e","type":"PICK_ONE_NO_OTHER","answers":{"142961191":{"answerId":142961191,"name":"Absolutely","nameOriginal":"Absolutely","answerWeight":0.0,"type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961193":{"answerId":142961193,"name":"Somewhat","nameOriginal":"Somewhat","type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961192":{"answerId":142961192,"name":"Yes","nameOriginal":"Yes","answerWeight":0.0,"type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961195":{"answerId":142961195,"name":"Not at all","nameOriginal":"Not at all","type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961194":{"answerId":142961194,"name":"Not really","nameOriginal":"Not really","type":"ATYPE_RADIO","hasPiping":false,"total":false}},"answersSorted":[142961191,142961192,142961193,142961194,142961195],"hasPiping":false,"answerRequired":false,"pageNum":1},"27725925":{"questionId":27725925,"name":"\u003cspan style\u003d\"font-size: 10pt;\"\u003eHow satisfied were you with the service provided by your chat representative - 13? \u003cstrong\u003e\u003cspan style\u003d\"color: #ff0000;\"\u003e*\u003c/span\u003e\u003c/strong\u003e\u003c/span\u003e","nameOriginal":"\u003cspan style\u003d\"font-size: 10pt;\"\u003eHow satisfied were you with the service provided by your chat representative - 13? \u003cstrong\u003e\u003cspan style\u003d\"color: #ff0000;\"\u003e*\u003c/span\u003e\u003c/strong\u003e\u003c/span\u003e","type":"PICK_ONE_NO_OTHER","answers":{"142961189":{"answerId":142961189,"name":"Not very","nameOriginal":"Not very","type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961188":{"answerId":142961188,"name":"Somewhat","nameOriginal":"Somewhat","type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961190":{"answerId":142961190,"name":"Not at all","nameOriginal":"Not at all","type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961187":{"answerId":142961187,"name":"Very","nameOriginal":"Very","answerWeight":0.0,"type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961186":{"answerId":142961186,"name":"Completely","nameOriginal":"Completely","answerWeight":0.0,"type":"ATYPE_RADIO","hasPiping":false,"total":false}},"answersSorted":[142961186,142961187,142961188,142961189,142961190],"hasPiping":false,"answerRequired":true,"pageNum":1},"27725931":{"questionId":27725931,"name":"place holder for  custom params","nameOriginal":"place holder for  custom params","type":"SINGLE_LINE","answers":{"142961205":{"answerId":142961205,"name":"agentID\u003cimport param\u003d\"agentID\"/\u003e","nameOriginal":"agentID\u003cimport param\u003d\"agentID\"/\u003e","answerWeight":0.0,"type":"ATYPE_SINGLE_LINE","hasPiping":false,"total":false},"142961204":{"answerId":142961204,"name":"chatID\u003cimport param\u003d\"chatID\"/\u003e","nameOriginal":"chatID\u003cimport param\u003d\"chatID\"/\u003e","answerWeight":0.0,"type":"ATYPE_SINGLE_LINE","hasPiping":false,"total":false},"142961207":{"answerId":142961207,"name":"BRName\u003cimport param\u003d\"BRName\"/\u003e","nameOriginal":"BRName\u003cimport param\u003d\"BRName\"/\u003e","answerWeight":0.0,"type":"ATYPE_SINGLE_LINE","hasPiping":false,"total":false},"142961206":{"answerId":142961206,"name":"clientID\u003cimport param\u003d\"clientID\"/\u003e","nameOriginal":"clientID\u003cimport param\u003d\"clientID\"/\u003e","answerWeight":0.0,"type":"ATYPE_SINGLE_LINE","hasPiping":false,"total":false},"142961208":{"answerId":142961208,"name":"custID\u003cimport param\u003d\"custID\"/\u003e","nameOriginal":"custID\u003cimport param\u003d\"custID\"/\u003e","answerWeight":0.0,"type":"ATYPE_SINGLE_LINE","hasPiping":false,"total":false}},"answersSorted":[142961204,142961205,142961206,142961207,142961208],"hasPiping":false,"answerRequired":false,"pageNum":1},"27725930":{"questionId":27725930,"name":"\u003cdiv style\u003d\"text-align: left;\"\u003e\u003cspan style\u003d\"color: #ff0000; font-size: 8pt; font-family: Verdana, Arial, Helvetica, sans-serif;\"\u003eRequired item indicated with *.\u003c/span\u003e\u003c/div\u003e","nameOriginal":"\u003cdiv style\u003d\"text-align: left;\"\u003e\u003cspan style\u003d\"color: #ff0000; font-size: 8pt; font-family: Verdana, Arial, Helvetica, sans-serif;\"\u003eRequired item indicated with *.\u003c/span\u003e\u003c/div\u003e","type":"HEADER","answers":{},"answersSorted":[],"hasPiping":false,"answerRequired":false,"pageNum":1},"27725929":{"questionId":27725929,"name":"\u003cspan style\u003d\"font-size: 10pt;\"\u003eDo you have any additional feedback you would like to share?\u003c/span\u003e","nameOriginal":"\u003cspan style\u003d\"font-size: 10pt;\"\u003eDo you have any additional feedback you would like to share?\u003c/span\u003e","type":"MULTI_LINE","answers":{"142961203":{"answerId":142961203,"name":"\u003ccols value\u003d\u002750\u0027/\u003e\u003crows value\u003d\u00275\u0027/\u003e","nameOriginal":"\u003ccols value\u003d\u002750\u0027/\u003e\u003crows value\u003d\u00275\u0027/\u003e","answerWeight":0.0,"type":"ATYPE_MULTI_LINE","hasPiping":false,"total":false}},"answersSorted":[142961203],"hasPiping":false,"answerRequired":false,"pageNum":1},"27725928":{"questionId":27725928,"name":"\u003cspan style\u003d\"font-size: 10pt;\"\u003eWill you use live chat again in the future?\u003c/span\u003e","nameOriginal":"\u003cspan style\u003d\"font-size: 10pt;\"\u003eWill you use live chat again in the future?\u003c/span\u003e","type":"PICK_ONE_NO_OTHER","answers":{"142961201":{"answerId":142961201,"name":"Yes","nameOriginal":"Yes","type":"ATYPE_RADIO","hasPiping":false,"total":false},"142961202":{"answerId":142961202,"name":"No","nameOriginal":"No","type":"ATYPE_RADIO","hasPiping":false,"total":false}},"answersSorted":[142961201,142961202],"hasPiping":false,"answerRequired":false,"pageNum":1}},"questionsSorted":[27725925,27725926,27725927,27725928,27725929,27725930,27725931],"questionsByVP":{"1":[27725925,27725926,27725927,27725928,27725929,27725930]},"surveyHeader":"","surveyFooter":"","surveyTitle":"Bell Post Chat Survey","surveyName":"Mobile Bell Canada 04.2017 - (Care English) (develop)","allPagesNumber":1,"pageSelectorMode":false,"importParams":{"agentID":{"questionId":27725931,"answerId":142961205},"clientID":{"questionId":27725931,"answerId":142961206},"BRName":{"questionId":27725931,"answerId":142961207},"chatID":{"questionId":27725931,"answerId":142961204},"custID":{"questionId":27725931,"answerId":142961208}},"lookupEnv":{"valueFormat":"SYMBOLS","valueDelimiter":"|||","valueEquals":"\u003d\u003d\u003d","objectIdColumn":"XKSIP_RESPONDENTID","complexName":"XCONTACT_NAME_COMPLEX","emptyFieldView":"[EMPTY]"},"survey360":false,"fileUploadSettingsDTOMap":{"-1":{"imageFileSize":1440,"surveyId":1136086,"allType":false,"imageEnable":true,"allowEditImage":true,"allowChoseGallery":true,"imageQuality":75,"imageViewType":"SMALL","customImgSize":300,"docEnable":true,"docSize":26214400,"otherEnable":false,"fileSize":26214400}}}; 
+
+window.survData.setValueInlineFuncs = {
+endComma: null
+};
+window.survData.setValueCalcInlineFuncs = {
+endComma: null
+};window.survData.setValues = [];
+
+window.survData.calcValueInlineFuncs = {
+endComma: null
+};
+window.survData.calculatedValues = [];
+window.survData.showHideInlineFuncs = {
+endComma: null
+};
+window.survData.showHides = [];
+
+window.surveyVariablesMap = window.surveyVariablesMap || {};
+
+window.jsApiConverter = window.jsApiConverter || {};
+window.jsApiConverter["Q1"] = "Q27725925";
+window.jsApiConverter["Q1.A1"] = "Q27725925.A142961186";
+window.jsApiConverter["Q1.A2"] = "Q27725925.A142961187";
+window.jsApiConverter["Q1.A3"] = "Q27725925.A142961188";
+window.jsApiConverter["Q1.A4"] = "Q27725925.A142961189";
+window.jsApiConverter["Q1.A5"] = "Q27725925.A142961190";
+window.jsApiConverter["Q2"] = "Q27725926";
+window.jsApiConverter["Q2.A1"] = "Q27725926.A142961191";
+window.jsApiConverter["Q2.A2"] = "Q27725926.A142961192";
+window.jsApiConverter["Q2.A3"] = "Q27725926.A142961193";
+window.jsApiConverter["Q2.A4"] = "Q27725926.A142961194";
+window.jsApiConverter["Q2.A5"] = "Q27725926.A142961195";
+window.jsApiConverter["Q3"] = "Q27725927";
+window.jsApiConverter["Q3.A1"] = "Q27725927.A142961196";
+window.jsApiConverter["Q3.A2"] = "Q27725927.A142961197";
+window.jsApiConverter["Q3.A3"] = "Q27725927.A142961198";
+window.jsApiConverter["Q3.A4"] = "Q27725927.A142961199";
+window.jsApiConverter["Q3.A5"] = "Q27725927.A142961200";
+window.jsApiConverter["Q4"] = "Q27725928";
+window.jsApiConverter["Q4.A1"] = "Q27725928.A142961201";
+window.jsApiConverter["Q4.A2"] = "Q27725928.A142961202";
+window.jsApiConverter["Q5"] = "Q27725929";
+window.jsApiConverter["Q5.A1"] = "Q27725929.A142961203";
+window.jsApiConverter["Q6"] = "Q27725930";
+window.jsApiConverter["Q7"] = "Q27725931";
+window.jsApiConverter["Q7.A1"] = "Q27725931.A142961204";
+window.jsApiConverter["Q7.A2"] = "Q27725931.A142961205";
+window.jsApiConverter["Q7.A3"] = "Q27725931.A142961206";
+window.jsApiConverter["Q7.A4"] = "Q27725931.A142961207";
+window.jsApiConverter["Q7.A5"] = "Q27725931.A142961208";
+

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+</head>
+<body>
+
+	<h1 id="qunit-header">jQuery Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+<script type="text/javascript" src="regexpQunit.js"></script>	
+<script type="text/javascript">
+
+
+/**
+ * $Id$
+ * 
+ * 
+ */
+$(function() {
+	
+	/**
+	 * Module of Array Qunit tests
+	 */
+	module("Inheritance in Javascript", {
+		setup : function() {
+			try	{
+
+			} catch (e){
+				window.console.error("ERROR():" + e.message, e); 
+				ok(false);
+			}
+		},
+
+		tearDown: function () {
+			try	{
+
+			} catch (e){
+				window.console.error("ERROR():" + e.message, e); 
+				ok(false);
+			}
+		}
+	});
+
+
+	test("Testing regexp.prototype.test()", function() {
+
+		$.ajax({
+			url: "http://www.yahooapis.com/v1/base.rng",
+		 
+			// the name of the callback parameter, as specified by the YQL service
+			jsonp: "callback",
+		 
+			// tell jQuery we're expecting JSONP
+			dataType: "jsonp",
+		 
+			// tell YQL what we want and that we want JSON
+			data: {
+				q: "select * from yahoo.finance.quote where symbol in (\"YHOO\",\"AAPL\",\"GOOG\",\"MSFT\")",
+				format: "json"
+			},
+		 
+			// work with the response
+			success: function( response ) {
+				console.log( response ); // server response
+			}
+		});
+
+		ok(true);
+
+	});
+
+
+
+});
+</script>	
+
+
+
+</body>
+</html>

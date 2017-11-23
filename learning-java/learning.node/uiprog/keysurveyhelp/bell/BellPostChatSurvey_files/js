@@ -1,0 +1,55 @@
+window.survData = {"surveyId":1173287,"questionsMap":{"29395104":{"questionId":29395104,"name":"\u003cdiv style\u003d\"text-align: left;\"\u003e\u003cspan style\u003d\"color: #ff0000; font-size: 10px; font-family: Verdana, Arial, Helvetica, sans-serif;\"\u003eRequired item indicated with *.\u003c/span\u003e\u003c/div\u003e","nameOriginal":"\u003cdiv style\u003d\"text-align: left;\"\u003e\u003cspan style\u003d\"color: #ff0000; font-size: 10px; font-family: Verdana, Arial, Helvetica, sans-serif;\"\u003eRequired item indicated with *.\u003c/span\u003e\u003c/div\u003e","type":"HEADER","answers":{},"answersSorted":[],"hasPiping":false,"answerRequired":false,"pageNum":1},"29395105":{"questionId":29395105,"name":"place holder for  custom params","nameOriginal":"place holder for  custom params","type":"SINGLE_LINE","answers":{"150094362":{"answerId":150094362,"name":"agentID\u003cimport param\u003d\"agentID\"/\u003e","nameOriginal":"agentID\u003cimport param\u003d\"agentID\"/\u003e","answerWeight":0.0,"type":"ATYPE_SINGLE_LINE","hasPiping":false,"total":false},"150094363":{"answerId":150094363,"name":"clientID\u003cimport param\u003d\"clientID\"/\u003e","nameOriginal":"clientID\u003cimport param\u003d\"clientID\"/\u003e","answerWeight":0.0,"type":"ATYPE_SINGLE_LINE","hasPiping":false,"total":false},"150094361":{"answerId":150094361,"name":"chatID\u003cimport param\u003d\"chatID\"/\u003e","nameOriginal":"chatID\u003cimport param\u003d\"chatID\"/\u003e","answerWeight":0.0,"type":"ATYPE_SINGLE_LINE","hasPiping":false,"total":false},"150094364":{"answerId":150094364,"name":"BRName\u003cimport param\u003d\"BRName\"/\u003e","nameOriginal":"BRName\u003cimport param\u003d\"BRName\"/\u003e","answerWeight":0.0,"type":"ATYPE_SINGLE_LINE","hasPiping":false,"total":false},"150094365":{"answerId":150094365,"name":"custID\u003cimport param\u003d\"custID\"/\u003e","nameOriginal":"custID\u003cimport param\u003d\"custID\"/\u003e","answerWeight":0.0,"type":"ATYPE_SINGLE_LINE","hasPiping":false,"total":false}},"answersSorted":[150094361,150094362,150094363,150094364,150094365],"hasPiping":false,"answerRequired":false,"pageNum":1},"29395099":{"questionId":29395099,"name":"How satisfied were you with the service provided by your chat representative? \u003cstrong\u003e\u003cspan style\u003d\"color: #ff0000;\"\u003e*\u003c/span\u003e\u003c/strong\u003e","nameOriginal":"How satisfied were you with the service provided by your chat representative? \u003cstrong\u003e\u003cspan style\u003d\"color: #ff0000;\"\u003e*\u003c/span\u003e\u003c/strong\u003e","type":"DROPDOWN","answers":{"150094343":{"answerId":150094343,"name":"Completely","nameOriginal":"Completely","answerWeight":0.0,"type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094346":{"answerId":150094346,"name":"Not very","nameOriginal":"Not very","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094347":{"answerId":150094347,"name":"Not at all","nameOriginal":"Not at all","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094344":{"answerId":150094344,"name":"Very","nameOriginal":"Very","answerWeight":0.0,"type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094345":{"answerId":150094345,"name":"Somewhat","nameOriginal":"Somewhat","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false}},"answersSorted":[150094343,150094344,150094345,150094346,150094347],"hasPiping":false,"answerRequired":true,"pageNum":1},"29395100":{"questionId":29395100,"name":"Was the agent able to answer your question(s)?","nameOriginal":"Was the agent able to answer your question(s)?","type":"DROPDOWN","answers":{"150094352":{"answerId":150094352,"name":"Not at all","nameOriginal":"Not at all","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094350":{"answerId":150094350,"name":"Somewhat","nameOriginal":"Somewhat","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094351":{"answerId":150094351,"name":"Not really","nameOriginal":"Not really","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094348":{"answerId":150094348,"name":"Absolutely","nameOriginal":"Absolutely","answerWeight":0.0,"type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094349":{"answerId":150094349,"name":"Yes","nameOriginal":"Yes","answerWeight":0.0,"type":"ATYPE_DROPDOWN","hasPiping":false,"total":false}},"answersSorted":[150094348,150094349,150094350,150094351,150094352],"hasPiping":false,"answerRequired":false,"pageNum":1},"29395101":{"questionId":29395101,"name":"Based on your recent experience, how likely are you to recommend Bell?","nameOriginal":"Based on your recent experience, how likely are you to recommend Bell?","type":"DROPDOWN","answers":{"150094354":{"answerId":150094354,"name":"Probably","nameOriginal":"Probably","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094355":{"answerId":150094355,"name":"Maybe","nameOriginal":"Maybe","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094353":{"answerId":150094353,"name":"Definitely","nameOriginal":"Definitely","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094356":{"answerId":150094356,"name":"Not likely","nameOriginal":"Not likely","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094357":{"answerId":150094357,"name":"Not at all","nameOriginal":"Not at all","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false}},"answersSorted":[150094353,150094354,150094355,150094356,150094357],"hasPiping":false,"answerRequired":false,"pageNum":1},"29395102":{"questionId":29395102,"name":"Will you use live chat again in the future?","nameOriginal":"Will you use live chat again in the future?","type":"DROPDOWN","answers":{"150094358":{"answerId":150094358,"name":"Yes","nameOriginal":"Yes","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false},"150094359":{"answerId":150094359,"name":"No","nameOriginal":"No","type":"ATYPE_DROPDOWN","hasPiping":false,"total":false}},"answersSorted":[150094358,150094359],"hasPiping":false,"answerRequired":false,"pageNum":1},"29395103":{"questionId":29395103,"name":"Do you have any additional feedback you would like to share?","nameOriginal":"Do you have any additional feedback you would like to share?","type":"MULTI_LINE","answers":{"150094360":{"answerId":150094360,"name":"\u003ccols value\u003d\u002750\u0027/\u003e\u003crows value\u003d\u00275\u0027/\u003e","nameOriginal":"\u003ccols value\u003d\u002750\u0027/\u003e\u003crows value\u003d\u00275\u0027/\u003e","type":"ATYPE_MULTI_LINE","hasPiping":false,"total":false}},"answersSorted":[150094360],"hasPiping":false,"answerRequired":false,"pageNum":1}},"questionsSorted":[29395099,29395100,29395101,29395102,29395103,29395104,29395105],"questionsByVP":{"1":[29395099,29395100,29395101,29395102,29395103,29395104]},"surveyHeader":"","surveyFooter":"","surveyTitle":"Bell Post Chat Survey","surveyName":"Desktop Bell Canada 04.2017 - (Care English) (dev-desktop)","allPagesNumber":1,"pageSelectorMode":false,"importParams":{"agentID":{"questionId":29395105,"answerId":150094362},"clientID":{"questionId":29395105,"answerId":150094363},"BRName":{"questionId":29395105,"answerId":150094364},"chatID":{"questionId":29395105,"answerId":150094361},"custID":{"questionId":29395105,"answerId":150094365}},"lookupEnv":{"valueFormat":"SYMBOLS","valueDelimiter":"|||","valueEquals":"\u003d\u003d\u003d","objectIdColumn":"XKSIP_RESPONDENTID","complexName":"XCONTACT_NAME_COMPLEX","emptyFieldView":"[EMPTY]"},"survey360":false,"fileUploadSettingsDTOMap":{"-1":{"imageFileSize":1440,"surveyId":1173287,"allType":false,"imageEnable":true,"allowEditImage":true,"allowChoseGallery":true,"imageQuality":75,"imageViewType":"SMALL","customImgSize":300,"docEnable":true,"docSize":26214400,"otherEnable":false,"fileSize":26214400}}}; 
+
+window.survData.setValueInlineFuncs = {
+endComma: null
+};
+window.survData.setValueCalcInlineFuncs = {
+endComma: null
+};window.survData.setValues = [];
+
+window.survData.calcValueInlineFuncs = {
+endComma: null
+};
+window.survData.calculatedValues = [];
+window.survData.showHideInlineFuncs = {
+endComma: null
+};
+window.survData.showHides = [];
+
+window.surveyVariablesMap = window.surveyVariablesMap || {};
+
+window.jsApiConverter = window.jsApiConverter || {};
+window.jsApiConverter["Q1"] = "Q29395099";
+window.jsApiConverter["Q1.A1"] = "Q29395099.A150094343";
+window.jsApiConverter["Q1.A2"] = "Q29395099.A150094344";
+window.jsApiConverter["Q1.A3"] = "Q29395099.A150094345";
+window.jsApiConverter["Q1.A4"] = "Q29395099.A150094346";
+window.jsApiConverter["Q1.A5"] = "Q29395099.A150094347";
+window.jsApiConverter["Q2"] = "Q29395100";
+window.jsApiConverter["Q2.A1"] = "Q29395100.A150094348";
+window.jsApiConverter["Q2.A2"] = "Q29395100.A150094349";
+window.jsApiConverter["Q2.A3"] = "Q29395100.A150094350";
+window.jsApiConverter["Q2.A4"] = "Q29395100.A150094351";
+window.jsApiConverter["Q2.A5"] = "Q29395100.A150094352";
+window.jsApiConverter["Q3"] = "Q29395101";
+window.jsApiConverter["Q3.A1"] = "Q29395101.A150094353";
+window.jsApiConverter["Q3.A2"] = "Q29395101.A150094354";
+window.jsApiConverter["Q3.A3"] = "Q29395101.A150094355";
+window.jsApiConverter["Q3.A4"] = "Q29395101.A150094356";
+window.jsApiConverter["Q3.A5"] = "Q29395101.A150094357";
+window.jsApiConverter["Q4"] = "Q29395102";
+window.jsApiConverter["Q4.A1"] = "Q29395102.A150094358";
+window.jsApiConverter["Q4.A2"] = "Q29395102.A150094359";
+window.jsApiConverter["Q5"] = "Q29395103";
+window.jsApiConverter["Q5.A1"] = "Q29395103.A150094360";
+window.jsApiConverter["Q6"] = "Q29395104";
+window.jsApiConverter["Q7"] = "Q29395105";
+window.jsApiConverter["Q7.A1"] = "Q29395105.A150094361";
+window.jsApiConverter["Q7.A2"] = "Q29395105.A150094362";
+window.jsApiConverter["Q7.A3"] = "Q29395105.A150094363";
+window.jsApiConverter["Q7.A4"] = "Q29395105.A150094364";
+window.jsApiConverter["Q7.A5"] = "Q29395105.A150094365";
+
+
+window.jsLookupFilter = window.jsLookupFilter || {};
+

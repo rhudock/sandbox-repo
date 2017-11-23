@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://meet.jit.si/external_api.js"></script>
+</head>
+<body>
+<script >
+    var domain = "webrtc-kms1";
+    var options = {
+        roomName: "JitsiMeetAPIExample",
+        width: 700,
+        height: 180,
+        parent: undefined,
+        configOverwrite: {},
+        interfaceConfigOverwrite: {
+            filmStripOnly: true
+        }
+    }
+    var api = new JitsiMeetExternalAPI(domain, options);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="Author" content="Daniel Chealwoo Lee">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+
+	<title>Looping Audio</title>
+	<script type="text/javascript">
+	var audio, audioSupport;
+
+	function playAudio2() {
+		if (audioSupport) {
+			audio.play();
+		} else {
+			alert("fail");
+			}
+	}
+	</script>
+</head>
+
+
+<body>
+
+<div id="box-content">
+<h2>Play sound using audio tag</h2>
+<p>    
+		&lt;audio&gt; tag is new in HTML 5 to play audio file on a browser.<br />
+		iOS 8 needs user event to play an audio tag play sound.<br />
+</p>
+<hr />
+
+<p>
+		<input type="button" id="play2" onclick="playAudio2()">play audio 2 (audio added by javascript without control</input>
+</p>
+</div> <!-- End "box-content" -->
+
+<hr />
+<div id="box-content">
+<h4>Ref</h4>
+<ul>
+	<li><a href="https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/Device-SpecificConsiderations/Device-SpecificConsiderations.html">Safari HTML5 Audio and Video Guide</a></li>
+	<li>But iOS has limitations; <a href="http://www.ibm.com/developerworks/library/wa-ioshtml5/">Overcoming iOS HTML5 audio limitations</a></li>
+	<li>At work, I used this tip to play sound on iOS <a href="http://codetheory.in/fixing-html5-audio-problems-in-ios-and-android-mobile-browsers-to-overcome-the-limitations/">Fixing HTML5 Audio Problems in iOS and Android Mobile Browsers to Overcome the Limitations</a>.</li>
+</ul>
+</div> <!-- End "box-content" -->
+
+
+
+		
+<script type="text/javascript">
+	audio = document.createElement("audio");
+	audioSupport = (audio.play)? true : false;
+	if (audioSupport)
+	{
+		audio.src="http://dleedesk.com/webui/html/html5/chimes2.mp3";
+//		audio.src="chimes.mp3";
+	}
+</script>
+
+
+</body>
+</html>

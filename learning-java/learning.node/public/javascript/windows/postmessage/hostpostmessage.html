@@ -1,0 +1,51 @@
+<!-- REF: http://help.dottoro.com/ljgheukc.phphttp://help.dottoro.com/ljgheukc.phpgggg -->
+<html>
+<head>
+<title></title>
+
+    <script type="text/javascript">
+        function Init () {
+            if (window.addEventListener) {  // all browsers except IE before version 9
+                window.addEventListener ("message", OnMessage, false);
+            }
+            else {
+                if (window.attachEvent) {   // IE before version 9
+                    window.attachEvent("onmessage", OnMessage);
+                }
+            }
+        }
+
+        function GetState () {
+            var frame = document.getElementById ("myFrame");
+                // send the 'getstate' message to the frame window
+            var message = "getstate";
+            if (frame.contentWindow.postMessage) {
+                frame.contentWindow.postMessage (message, "*");
+            }
+            else {
+                alert ("Your browser does not support the postMessage method!");
+            }
+        }
+
+        function OnMessage (event) {
+            var message = event.data;
+            var arr = message.split (",");
+            if (arr[0] == "true") {
+                alert ("The check box is checked.");
+            }
+            else {
+                alert ("The check box is not checked.");
+            }
+
+            var selIndex = Number (arr[1]);
+            alert ("The " + (selIndex + 1) + ". option is selected.");
+        }
+    </script>
+</head>
+<body onload="Init ();">
+    <iframe id="myFrame" src="message.htm" width="500" height="200px"></iframe>
+    <br /><br />
+    <button onclick="GetState ()">Get the state of the controls in the frame</button>
+</body>
+
+</html>

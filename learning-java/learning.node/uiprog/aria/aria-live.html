@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>C2C Button aria-live test</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+</head>
+<body>
+<!--<div id="ariaTestDiv" style="position: relative; font-size: 16px;"-->
+     <!--aria-live="assertive">-->
+    <!--This is a test.-->
+<!--</div>-->
+<!--<p>-->
+<!--<a href="http://www.freedomscientific.com/Training/Surfs-Up/AriaLiveRegions.htm">http://www.freedomscientific.com/Training/Surfs-Up/AriaLiveRegions.htm</a>-->
+<!--</p>-->
+<div id="inqTestDiv" style="position: fixed; right: 20px; z-index: 9999999; bottom: 0px; font-size: 16px;"
+     aria-live="polite">
+    <div onclick="inqFrame.Inq.C2CM.requestChat(0); return false;" onmouseover="this.style.cursor='pointer'"
+         style="cursor: pointer;" >
+        <button type="button" class="tc-large-chattab-bottom tc-primary button-chatTC-ava" >Chat available</button>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+window.setInterval(function() {
+    $('button').text("Chat available " + (new Date()));
+}, 5000);
+
+window.setInterval(function() {
+    $('#ariaTestDiv').text("This is a test " + (new Date()));
+}, 5000);
+</script>
+</body>
+</html>

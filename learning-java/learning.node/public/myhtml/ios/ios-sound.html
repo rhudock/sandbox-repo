@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="Author" content="Daniel Chealwoo Lee">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+
+	<title>Looping Audio</title>
+
+<script type="text/javascript">
+
+var SndMgr = {};
+
+function initIosAudio(sndPath) {
+	var audio = new Audio(sndPath);
+
+	SndMgr.ios = {};
+	SndMgr.ios.audio = audio;
+	var startAudio = function() {
+		alert("sound initiated");
+		SndMgr.ios.audio.play();
+		setInterval(myPlay, 10000);
+//		top.document.removeEventListener("touchstart", SndMgr.ios.startAudio, false)
+		top.document.removeEventListener("keydown", SndMgr.ios.startAudio, false)
+	};
+	SndMgr.ios.startAudio = startAudio;
+
+	var pauseAudio = function() {
+		SndMgr.ios.audio.pause();
+			alert("pauseAudio called");
+		SndMgr.ios.audio.removeEventListener("play", SndMgr.ios.pauseAudio, false);
+	};
+
+	SndMgr.ios.pauseAudio = pauseAudio;
+//	top.document.addEventListener("touchstart", SndMgr.ios.startAudio, false);
+	top.document.addEventListener("keydown", SndMgr.ios.startAudio, false);
+	SndMgr.ios.audio.addEventListener("play", SndMgr.ios.pauseAudio, false)
+}
+
+function myPlay() {
+	alert("play sound");
+	SndMgr.ios.audio.play();
+}
+
+
+
+</script>
+</head>
+
+
+<body onload="initIosAudio('chimes.wav')">
+
+<div id="box-content">
+<h2>Play sound using audio tag</h2>
+<p>    
+		&lt;audio&gt; tag is new in HTML 5 to play audio file on a browser.<br />
+		iOS 8 needs user event to play an audio tag play sound.<br />
+</p>
+<hr />
+<p>    
+		<audio id="audio" src="chimes.wav" controls></audio> <br />  
+</p>
+
+<p>
+		<input type="button" id="play2" onclick="myPlay()">play audio 2 (audio added by javascript without control</input>
+</p>
+</div> <!-- End "box-content" -->
+
+<p>
+		<input type="text"></input>
+</p>
+
+<hr />
+<div id="box-content">
+<h4>Play HTML 5 Audio on IOS devices</h4>
+<p> iOS devices requires user action to play HTML5 Audio sound. As the result agent message doesn't play sound in a chat. <br />
+Suggeted way around found in references is, pause audio at a user ation then play as needed.
+</p>
+
+<h4>Change Log</h4>
+<ul>
+	<li><a href="http://jira.touchcommerce.com/browse/RTDEV-10142">RTDEV-? iOS 9 no longer play Audio upon touchstart event.</a></li>
+	<li><a href="http://jira.touchcommerce.com/browse/RTDEV-10142">RTDEV-10142 Chime sound not played on iPhone6 & Nexus5</a></li>
+</ul>
+
+<h4>Ref</h4>
+<ul>
+	<li><a href="https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/Device-SpecificConsiderations/Device-SpecificConsiderations.html">Safari HTML5 Audio and Video Guide</a></li>
+	<li>But iOS has limitations; <a href="http://www.ibm.com/developerworks/library/wa-ioshtml5/">Overcoming iOS HTML5 audio limitations</a></li>
+	<li>At work, I used this tip to play sound on iOS <a href="http://codetheory.in/fixing-html5-audio-problems-in-ios-and-android-mobile-browsers-to-overcome-the-limitations/">Fixing HTML5 Audio Problems in iOS and Android Mobile Browsers to Overcome the Limitations</a>.</li>
+	<li>MAKING HTML5 AUDIO ACTUALLY WORK ON MOBILE <a href="http://pupunzi.open-lab.com/2013/03/13/making-html5-audio-actually-work-on-mobile/">MAKING HTML5 AUDIO ACTUALLY WORK ON MOBILE</a>.</li>
+</ul>
+</div> <!-- End "box-content" -->
+
+
+</body>
+</html>

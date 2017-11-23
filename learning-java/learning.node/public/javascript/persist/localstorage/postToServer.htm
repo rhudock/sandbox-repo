@@ -1,0 +1,807 @@
+<!-- DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" -->
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <script type="text/javascript" src="persistent-storage.js"></script>  
+  </head>
+  <body onload="whenLoaded()">
+    <script charset="utf-8" language="javascript" type="text/javascript">
+	
+	var ptStorage = PersistentStorage.getInstance();	    
+    
+    var bFirefox = (navigator.userAgent.indexOf("Firefox") >= 0);
+    var bChrome = navigator.userAgent.toLowerCase().indexOf('chrome') >= 0;
+    var sCommand = "unknown";
+    var bPostMessage = false;
+    var siteID = null;
+    function doCommandsInClientDomain(data, clientHtml, id) {
+      if (!bPostMessage) {
+        // initial origin: http://home.inq.com
+        // active origin:  http://inq.com (set via document.domain)
+        // needed origin:  http://www.touchcommerce.com
+        var divsub = window.document.createElement("DIV");
+        var frameSrc = clientHtml+"?PRXY" ;
+        var iframe  = "<IFRAME "
+                 + "STYLE=\"overflow: hidden; display: block; border: none; top:0px;left:0px;width: 1px; height: 1px;\" "
+                 + "NAME=\"" + (id + "||" + data) + "\" "
+                 + "SRC=" + frameSrc + ">\n</IFRAME>";
+        divsub.innerHTML = iframe ;
+        document.body.appendChild(divsub);
+      } else {
+        parent.postMessage("" + id + "||" + data, "*");
+      }
+    }
+
+	/**
+	 * Log with your best effort.
+	 */
+	function log(message, exception) {
+		if (message) {
+			if(window["console"] && console["log"]) {
+				if (exception) {
+					console.log(message, exception);
+				} else {
+					console.log(message);
+				}
+			}
+		}
+	}	
+	
+	/**
+	  *  toJsString - Stringifies the given string value.
+	  *     1) All special escape characters are escaped with back slash
+	  *     2) If the optional quote is given, then it is put at beginning and end of string
+	  *   called as:  toJsString(foo, "'");   
+	  *   or: toJsString(foo, '"');
+	  *   or: toJsString(foo);
+	  * 		Where foo is a string to be stringified (escaped and made into a JS String).
+	  * @param val {String} value to be escaped
+	  * @param quote {String} optional character (or string) to be used as a quote
+	  */
+	function toJsString(val, quote)	{
+	   try {
+		var value = val ;
+		value = value.split("\\").join("\\\\") ;
+		value = value.split("\"").join("\\\"") ;		
+		value = value.split("\'").join("\\\'") ;		
+		value = value.split("\n").join("\\n") ;
+		value = value.split("\r").join("\\r") ;
+		value = value.split("\t").join("\\t") ;
+		if (quote)
+			value = quote + value + quote ;
+		return value ;
+	  } catch(e){
+           if (window.console) window.console.log(e.message);
+       }
+	  return val;
+	}
+    
+    function formatArgument(arg) {
+        try {
+            var type = "[unknown]";
+            try {type = (typeof(arg) == "object")?((arg["constructor"]!=null)?arg.constructor.toString():""+arg):("("+typeof(arg)+")");}
+            catch (e){type=""+arg;}
+            if (type.indexOf("function")!=-1){                       
+                type = type.split("\n").join(" ").replace(/^\s*function (\w+)\s*\(\)[^\n]*/g , "[object $1]" );                        
+            }
+            if (type=="(boolean)" || type=="[object Boolean]") type = (arg)?"true":"false";
+            if (type=="(string)" || type=="[object String]") type = toJsString(arg,"\"");
+            if (type=="(array)" || type=="[object Array]") {
+               type = "";
+               for (var ix=0; ix<arg.length;ix++) {
+                    type += ((type.length!=0)?",":"")+formatArgument(arg[ix]);
+                    if (type.length > 128) break;
+               } 
+               if (type.length > 128) 
+                    type = type.substr(0,128-3)+"...";
+               return "["+type+"]";
+            }
+            return type;  
+        } catch(e){
+            return "[argument]";
+        }     
+    }
+    
+    function getStackTrace(err) {
+        try {        
+            var callstack = [];
+            try {
+                i.dont.exist+=0; //doesn't exist- that's the point
+            } catch(e) {
+                if (e.stack) { /*Firefox and Chrome*/  }
+                else if (window.opera && e.message) { //Opera
+                    var lines = e.message.split('\n');
+                    for (var i=0, len=lines.length; i<len; i++) {
+                        if (lines[i].match(/^\s*[A-Za-z0-9\-_\$]+\(/)) {
+                            var entry = lines[i];
+                            //Append next line also since it has the file info
+                            if (lines[i+1]) {
+                                entry += ' at ' + lines[i+1];
+                                i++;
+                            }
+                            callstack.push(entry);
+                        }
+                    }
+                    //Remove call to printStackTrace()
+                    callstack.shift(); callstack.shift();
+                    return callstack.join("\n\t\t") ;
+                }
+            }
+            //IE and Safari
+            // Need test to see if caller is defined
+            if (arguments && arguments.callee && arguments.callee.caller) {
+                var fnctn = arguments.callee.caller.caller;
+                while (fnctn) {
+                    var fn = ""+fnctn.toString();          
+                    var fnameIx = fn.indexOf("function ")+9;
+                    var fnameEnd = fn.indexOf('(', fnameIx);
+                    var fname = fn.substring(fnameIx, fnameEnd) || 'anonymous function';
+                    var args = "";
+                    if (fnctn.arguments.length) {
+                        for (var ix=0; ix < fnctn.arguments.length; ix++) {
+                            var arg = fnctn.arguments[ix];
+                            args += ((args.length!=0)?",":"")+formatArgument(arg);
+                        }
+                        
+                    }
+                    callstack.push(fname+"("+args+")");
+                    fnctn = fnctn.caller;
+                }        
+                return "stack trace:\n\t\t" + callstack.join("\n\t\t");
+            }
+            return "";
+        } catch (e) {
+            return "" ;
+        }
+    }
+ 
+    
+    function catchFormatter(err){
+        try {
+            var desc = "\tERROR while processing "+sCommand+": ";
+            for (var itm in err) {
+                desc += "\n\t" + itm + ": " + (""+err[itm]).split("\n").join("\n\t\t");
+            }
+            desc += "\n\t" + getStackTrace(err);
+            return desc ;
+        }
+        catch (e) {
+            return "";
+        }
+        
+    }
+
+    function getCookie(label) {
+			var ptrn=label+"=", valu="";    
+			if (document.cookie.length < 1) {
+				return valu ;
+			}
+			var cookies = document.cookie.split(";");
+			for (var ix=0; ix < cookies.length; ix++){	
+
+				var ck = cookies[ix] ;
+				while (ck.substr(0,1)==" ") ck = ck.substr(1);
+     							
+				if (ck.indexOf(ptrn)==0) {
+					ck = (ck.substr(ptrn.length)) ;
+					valu =  (ck.length>0)?ck:valu ;				 	
+					return valu ;
+				}				
+			}				
+			return valu ;
+    }
+    
+    function _addEventListener(object, eventName, handler, useCapture){
+    	if(!useCapture) { // default to false
+    		useCapture = false;
+    	}
+		if (window["addEventListener"])
+			object.addEventListener (eventName, handler, useCapture);
+		else if (window["attachEvent"]) 
+			object.attachEvent("on"+eventName, handler);
+		else  
+			object["on"+eventName] = handler ;	
+	}
+    
+    /** array that holds unload handlers for chrome */
+    var chromeUnloadArray = [];
+    
+    /**
+     *  Unload handler only called in chrome.  It cycles through
+     *  event handlers in the array and executes them.
+     */
+    function chromeUnloadHandler() {
+    	for(var i=0; i<chromeUnloadArray.length; i++) {
+    		chromeUnloadArray[i]();
+    	}
+    }
+    
+    if(bChrome) {
+    	_addEventListener(window, "beforeunload", chromeUnloadHandler);
+    }
+
+	/**
+     *  Method used to add unloadHandlers.
+     *
+     *  @param handler Unload event handler
+     *  @param useCapture @see window.addEventListener
+     */
+    function addUnloadHandler(handler, useCapture) {
+    	if(bChrome) {
+    		chromeUnloadArray.push(handler);
+    	} else {
+            _addEventListener(window, "unload", handler, useCapture);
+    	}
+    }
+
+    /**
+     * Sets document.domain to predefined value to allow cooperation of different HTML documents.
+     * "One document is allowed to access another if they have both set document.domain to the same value, indicating their intent to cooperate".
+     * @see https://developer.mozilla.org/en/DOM/document.domain
+     */
+    function setupSameOriginDomain() {
+        document.domain = "inq.com";
+    }
+
+    function _executeCommandFromItems(items) {
+        try {
+            try {
+                doCommands(items);
+            } catch (e) {
+                var clientHtml = items[3] ;
+                var id = items[1];
+                doCommandsInClientDomain(encodeURIComponent(""),clientHtml,id);
+            }
+        } catch(e) {
+            if (window.console) window.console.error(e.message);
+        }
+    }
+    
+    function whenLoaded(e) {
+        setupSameOriginDomain();
+        var data = decodeURIComponent(window.name) ;
+        if (window["postMessage"]){
+            try {
+                if (window["addEventListener"])
+                    window.addEventListener ("message", whenPosted, false);
+                else if (window["attachEvent"])
+                    window.attachEvent("onmessage", whenPosted);
+                else
+                    window.onmessage = whenPosted ;
+            } catch (e) {
+                if (window.console) window.console.log(e.message);
+            }
+        }
+        if (data.length > 0) {
+            var items = data.split("||");
+            _executeCommandFromItems(items);
+        }
+        return false ;
+    }
+    
+    /**
+     * Handles messages sent by window.postMessage API.
+     * @see https://developer.mozilla.org/en/DOM/window.postMessage
+     * @param {MessageEvent} e event
+     */
+    function whenPosted(e){
+        bPostMessage = true;
+        var ev = (e)?e:event;
+        var data = ev.data;
+
+        var items = decodeURIComponent(data).split("||"); 
+        _executeCommandFromItems(items);
+        return false;
+    }
+    
+    function cmdListen(items){
+        bPostMessage = true ;
+        doCommandsInClientDomain(encodeURIComponent(""),items[2],items[1]);
+    }
+    
+    function cmdDisplay(items) {
+        var cmd="";
+        var id = items[1];
+        siteID = items[2];
+        var clientHtml = items[3];
+        try {
+          var cookieName = items[4];
+          var div = window.document.createElement("DIV");
+          div.innerHTML = getCookie(cookieName+"_"+siteID) ;
+          window.document.body.appendChild(div);
+        } catch(e){
+            cmd = "if (inqFrame.Inq[\"proxyError\"]!=null)inqFrame.Inq.proxyError("+toJsString(catchFormatter(e), '"')+");" + cmd;
+        }
+        doCommandsInClientDomain(encodeURIComponent(cmd),clientHtml,id);    
+    }
+    
+	function getChatActiveFlag(){
+		try {
+			var chatActive = getCookie("inqCA_"+siteID);
+			if (chatActive == "") return 0 ;
+			else return parseInt(chatActive);
+		} catch (e) {
+			return 0 ;
+		}
+	}
+
+	/**
+	 *  Copy of getChatActiveFlag() for persistentStorage.
+	 *  
+	 *  @param siteID
+	 */
+	function getChatActiveFlagPS(siteID){
+		try {
+			var chatActive = ptStorage.getItem("inqCA_"+siteID);
+			if (chatActive) {
+				chatActive = parseInt(chatActive);
+				if ( isNaN(chatActive) ) {
+					chatActive = 0;	
+				}	
+			} else {
+				chatActive = 0;
+			}
+			
+			return chatActive;
+		} catch (e) {
+			return 0 ;
+		}
+	}
+
+	/**
+	 *  New numeric flag in sessesionStorage to indicate the current session has the active chat.
+	 *  This flag, currently supported only on XD mode on Safari, is saved in HTML5 sessionStorage object.
+	 *  While inqCA_ is flag for all open windows and tabs of same browser,
+	 *  this flag is only for one tab in a window. 
+	 *  
+	 *  @param chatActive - a number of 1 or 0.
+	 */
+	function setSessionChatActiveFlagPS(chatActive){
+		 
+		var sessionCA;
+		var SESSION_INQCA_STR = "sinqCA";
+		 
+		if (typeof chatActive === "undefined" || isNaN(chatActive)) {
+			 log("In setSessionChatActiveFlagPS(); requires one argument as a number");
+			 return;
+		}
+		
+		try {
+			if (PersistentStorage.isLocalStorageUsed()) {		
+				sessionStorage.setItem(SESSION_INQCA_STR, chatActive);
+			}
+		} catch (e) {
+			log("Error while set " + SESSION_INQCA_STR, e);
+		}
+	}
+
+    /**
+     * This match will prevent same origin violation exception.
+     * @param url
+     * @return {*}
+     */
+    function checkSameProtocolOrigin( url ){
+
+        if( url.indexOf( window.location.protocol ) === -1 ) {
+            return url.replace( /^http:/i, window.location.protocol );
+        } else {
+            return url;
+        }
+    }
+
+    function doCommands(items) {
+      var cmd = items[0];
+      sCommand = cmd;
+      switch(cmd) { //TODO extract "case" handlers as separate functions
+        case "LISTEN": cmdListen(items); break;
+        case "DISPLAY": cmdDisplay(items); break;
+
+
+        case "SCBR3_PM": // set cookie, BR3.0, using HTML5 window.postMessage API
+            bPostMessage = (window["postMessage"]!=null);
+        case "SCBR3": // set cookie, BR3.0
+            /*
+            Example value of "items": [
+                (cmd)         "SCBR3",
+                (id)          "box809646",
+                (siteID)      "306",
+                (clientHtml)  "http://www.touchcommerce.com/TouchCommercetop.html",
+                (cookieName)  "inqSession",
+                (cookieValue) "%7B_svMs%3A-1%2C_aTyp%3A-1%2CcTACC%3Afalse...",
+                (path)        "/",
+                (expiry)      ""
+            ]
+            */
+            var code = "";
+            var id = items[1];
+            var siteID = items[2];  
+            var clientHtml = items[3];
+            try { 
+                var cookieName = items[4];
+                var cookieValue = items[5];
+                var path = items[6];
+                var expiry = items[7];      
+                var objDelta = {};
+
+                setupSameOriginDomain();
+
+				ptStorage.setItem(cookieName + "_" + siteID, cookieValue, expiry) ;
+
+                code = "inqFrame.Inq.FlashPeer.set3rdPartyCookieFromQueue();\n" ;
+                // initial origin: http://home.inq.com
+                // active origin:  http://inq.com (set via document.domain)
+                // needed origin:  http://www.touchcommerce.com
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);
+            } catch(e) {             
+                code = "if (inqFrame.Inq[\"proxyError\"]!=null)inqFrame.Inq.proxyError(\""+toJsString(catchFormatter(e))+"\");"
+                     + "inqFrame.Inq.FlashPeer.set3rdPartyCookieFromQueue();\n";
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);
+            }
+            break;
+        case "GCBR3": // get cookie, BR3.0
+            var code = "";
+            bPostMessage = (window["postMessage"]!=null);                 
+            var id = items[1];
+            var siteID = items[2];  
+            var clientHtml = items[3];
+            try {
+				cookieValues = ptStorage.getAllCookies();
+
+				code =  ('inqFrame.Inq.IFrameProxyCallback("'+ encodeURIComponent(cookieValues) +'");');
+                
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);
+            } catch (e) {
+                code = "if (inqFrame.Inq[\"proxyError\"]!=null)inqFrame.Inq.proxyError(\""+toJsString(catchFormatter(e))+"\");"+code;
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);           
+            }            
+            break ;
+        case "COMMITPOINT":             // Call listener to execute callback.
+            var code = "";
+            var id = items[1];
+            var siteID = items[2];  
+            var clientHtml = items[3];
+            try {
+				cookieValues = unescape(ptStorage.getItem("inqVital_" + siteID));
+			
+				var vcntarr = /\bvcnt:([0-9]+)/.exec(cookieValues);
+				var vcnt = ( vcntarr.length == 2 ) ? vcntarr[1] : 0;
+
+                code =  ('inqFrame.Inq.FlashPeer.when3rdPartyCookieCommitted(' + vcnt + ');');
+                
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);
+            } catch (e) {
+                code = "if (inqFrame.Inq[\"proxyError\"]!=null)inqFrame.Inq.proxyError(\""+toJsString(catchFormatter(e))+"\");"+code;
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);           
+            }            
+            break ;
+        case "DUMP":
+            var code="";
+            var id = items[1];
+            var clientHtml = items[3];              
+            try {
+                var url = decodeURIComponent(items[4]);                             
+                var data = "_rand="+(Math.round(Math.random()*1000000000001)).toString(36)+"&level=info&line=document.cookie: "+encodeURIComponent(""+document.cookie);
+                var xHR = (window.XMLHttpRequest) 
+                    ?  new XMLHttpRequest
+                    : ((window.ActiveXObject) ? new ActiveXObject("Microsoft.XMLHTTP") : null) ;        
+                if (xHR) {
+                    xHR.open("POST", url, true) ;        
+                    xHR.onreadystatechange = function() {
+                        if (xHR.readyState != 4) return;                                  
+                        doCommandsInClientDomain("",clientHtml,id);
+                    };
+                    xHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    // xHR.setRequestHeader("Content-length", data.length);
+                    // xHR.setRequestHeader("Connection", "close");
+                    xHR.send(data); 
+                }                
+            }catch(e){
+                code = "if (inqFrame.Inq[\"proxyError\"]!=null)inqFrame.Inq.proxyError(\""+toJsString(catchFormatter(e))+"\");"+code;
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);                
+            }
+            break;  			
+		case "POST":
+			var xfrdata = decodeURIComponent(window.name);         
+			var qIx = xfrdata.indexOf("?");
+			var url = xfrdata.substring(0, qIx);
+
+			var id = items[1];
+			var clientHtml = items[2];
+			url = items[3];
+
+            url = checkSameProtocolOrigin( url );
+
+			var data = xfrdata.substring(qIx+1);
+
+			var xHR = (window.XMLHttpRequest) 
+			  ?  new XMLHttpRequest
+			  : ((window.ActiveXObject) ? new ActiveXObject("Microsoft.XMLHTTP") : null) ;        
+			if (xHR) {
+				xHR.open("POST", url, true) ;
+				xHR.onreadystatechange = function() {
+					if (xHR.readyState != 4) return;          
+					window.name="";
+					var contentType = xHR.getResponseHeader("Content-Type");
+					if (contentType==null)
+						contentType="";
+					var data =(contentType.indexOf("/javascript")!=-1)?encodeURIComponent(xHR.responseText):"";
+					doCommandsInClientDomain(data,clientHtml,id);
+				};
+				xHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                // xHR.setRequestHeader("Content-length", data.length);
+                // xHR.setRequestHeader("Connection", "close");
+				xHR.send(data); 
+			 }
+			break;		
+        case "POSTBR30":
+            var code="";
+            var id = items[1];
+            var clientHtml = items[3];              
+            try {
+                var xfrdata = decodeURIComponent(items[4]);        
+                var qIx = xfrdata.indexOf("?");
+                var url = xfrdata.substring(0, qIx);
+
+                url = checkSameProtocolOrigin( url );
+
+                var data = xfrdata.substring(qIx+1);
+                var xHR = (window.XMLHttpRequest)
+                    ?  new XMLHttpRequest
+                    : ((window.ActiveXObject) ? new ActiveXObject("Microsoft.XMLHTTP") : null) ;
+                if (xHR) {
+                    xHR.open("POST", url, true) ;
+                    xHR.onreadystatechange = function() {
+                        if (xHR.readyState != 4) return;
+                        var contentType = xHR.getResponseHeader("Content-Type");
+                        if (contentType==null)contentType="";
+                        var data =(contentType.indexOf("/javascript")!=-1)?encodeURIComponent(xHR.responseText):"";										
+                        doCommandsInClientDomain(data,clientHtml,id);                        
+                    };
+                    xHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    // xHR.setRequestHeader("Content-length", data.length);
+                    // xHR.setRequestHeader("Connection", "close");
+                    xHR.send(data);
+                }
+            }catch(e){
+                code = "if (inqFrame.Inq[\"proxyError\"]!=null)inqFrame.Inq.proxyError(\""+toJsString(catchFormatter(e))+"\");"+code;
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);
+            }
+            break;
+        case "COBROWSE":
+			bPostMessage = (window["postMessage"]!=null);
+            var code="";
+            var id = items[1];
+			var siteID = items[2];
+            var clientHtml = items[3];
+            var fullUrl = items[4];
+            var chatId = items[5];
+
+            try {
+				var xfrdata = decodeURIComponent(fullUrl);
+				var qIx = xfrdata.indexOf("?");
+				var url = xfrdata.substring(0, qIx) + "?chat.id=" + chatId;
+                url = checkSameProtocolOrigin( url );
+
+				var data = xfrdata.substring(qIx+1);
+                var xHR = (window.XMLHttpRequest) 
+                    ?  new XMLHttpRequest
+                    : ((window.ActiveXObject) ? new ActiveXObject("Microsoft.XMLHTTP") : null) ;        
+                if (xHR) {
+                    xHR.open("POST", url, true) ;        
+                    xHR.onreadystatechange = function() {
+						if (xHR.readyState != 4) return;
+						var data = "(window.Inq.CBC).ackReceived('" + encodeURIComponent(toJsString(xHR.responseText)) + "',\""+id+"\");\n" ;
+						doCommandsInClientDomain(data,clientHtml,id);                        
+                    };
+                    xHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    // xHR.setRequestHeader("Content-length", data.length);
+                    // xHR.setRequestHeader("Connection", "close");
+                    xHR.send(data); 
+                }                
+            }catch(e){
+                code = "if (inqFrame.Inq[\"proxyError\"]!=null)inqFrame.Inq.proxyError(\""+toJsString(catchFormatter(e))+"\");"+code;
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);                
+            }
+            break;
+        case "CBAUTH":
+            bPostMessage = (window["postMessage"]!=null);
+            var code = "";
+            var id = items[1];
+            var siteID = items[2];
+            var clientHtml = items[3];
+            try {
+                var cookieName = items[4];
+                var cookieValue = items[5];
+                var path = items[6];
+                var expiry = items[7];
+                var objDelta = {};
+
+                setupSameOriginDomain();
+                var isPersistentCookiesAllowed = !!getCookie("pc");
+
+                var cookieCrumb = cookieName+"_"+siteID+"="+(cookieValue)+ "; path="+path +"; ";
+                if (expiry!="")   cookieCrumb += "expires=" + expiry + "; "  ;
+                document.cookie = cookieCrumb ;
+				cookieValue = getCookie("cobrowse"+"_"+siteID);
+				code = "(window.Inq.CBC).callBackAuthorized(\""+toJsString((cookieValue))+"\",\""+id+"\");\n" ;
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);
+            } catch(e) {
+                code = "if (inqFrame.Inq[\"proxyError\"]!=null)inqFrame.Inq.proxyError(\""+toJsString(catchFormatter(e))+"\");"
+                     + "inqFrame.Inq.FlashPeer.set3rdPartyCookieFromQueue();\n";
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);
+            }
+            break;
+        case "CBCHECK":
+            var code = "";
+
+            bPostMessage = (window["postMessage"]!=null);
+            var id = items[1];
+            var siteID = items[2];
+            var clientHtml = items[3];
+            try {
+				var cookieCrumb =  getCookie("cobrowse"+"_"+siteID) ;
+				code = "(window.cobrowse).callBackAuthorized(\""+(toJsString(cookieCrumb))+"\",\""+id+"\");\n" ;
+				doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);
+            } catch (e) {
+                code = "if (inqFrame.Inq[\"proxyError\"]!=null)inqFrame.Inq.proxyError(\""+toJsString(catchFormatter(e))+"\");"+code;
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);
+            }
+            break ;
+
+		/*
+				authSet = "CLOSEWATCH"  + "||" +  	// item 0
+							boxID + "||" +  		// item 1
+							Inq.getSiteID() + "||" +// item 2
+							parentURL +  "||" + 	// item 3
+							cookieName + "||" + 	// item 4
+							authJson  + "||" + 		// item 5
+							"/cobrowse" + "||" +	// item 6
+							expiry + "||" +			// item 7
+							this.windowId ;  		//
+
+		*/
+        case "CLOSEWATCH":
+            var code = "";
+
+            bPostMessage = (window["postMessage"]!=null);
+            var id = items[1];
+            var siteID = items[2];
+            var clientHtml = items[3];
+
+  			window.whenUnloaded = {id: items[1], 			// Item #1
+								  siteID: items[2], 		// Item #2
+								  clientHtml: items[3],		// Item #3
+								  cookieName: items[4],		// Item #4
+								  cookiePath: items[5],
+								  cookieExpire: items[6],
+								  windowID: items[7]
+								  };
+			window.whenUnload = function (ev) {
+
+				try {
+					var cookieValue = "";
+					var cookieName=window.whenUnloaded.cookieName+"_"+window.whenUnloaded.siteID
+					var cookieCrumb =  getCookie(cookieName) ;
+					window.arrayOfWids = [] ;
+					var i;
+
+					if (cookieCrumb != "")
+						eval ("window.arrayOfWids = " + cookieCrumb + ";");
+
+					/* don't add the WID if it already exists in the array, just return */
+					for (i=0;i<window.arrayOfWids.length;i++){
+						if (window.arrayOfWids[i]==window.whenUnloaded.windowID)
+							return;
+					}
+					/* Add the WID into the array */
+					window.arrayOfWids.push(window.whenUnloaded.windowID);
+
+					/* Stringify the WID array */
+					cookieValue = "[";
+					for (i=0;i<window.arrayOfWids.length;i++){
+						if (i!=(window.arrayOfWids.length-1) && window.arrayOfWids[i]==window.whenUnloaded.windowID)
+							continue;
+						if (i!=0) cookieValue += ",";
+						cookieValue += window.arrayOfWids[i];
+					}
+					cookieValue += "]";
+
+					/* Put WID array into the cookie */
+					cookieCrumb = cookieName+"="+(cookieValue)+ "; path="+window.whenUnloaded.cookiePath +"; ";
+					if (window.whenUnloaded.cookieExpire!="")   cookieCrumb += "expires=" + window.whenUnloaded.cookieExpire + "; "  ;
+					document.cookie = cookieCrumb ;
+					return null;
+				} catch (e){
+					alert("ERROR: " + e) ;
+					return null;
+				}
+
+
+			};
+			
+			addUnloadHandler(window.whenUnload, true);
+            break ;
+        case "GETCLOSED":
+            var code = "";
+
+            bPostMessage = (window["postMessage"]!=null);
+
+  			var id = items[1], 			// Item #1
+				siteID = items[2], 		// Item #2
+				clientHtml = items[3],		// Item #3
+				cookieName = items[4];		// Item #4
+
+
+
+			cookieName=cookieName+"_"+siteID
+			var cookieCrumb =  getCookie(cookieName) ;
+               code = "(window.cobrowse).callBackClosed(\""+(toJsString(cookieCrumb))+"\",\""+id+"\");\n" ;
+			//    code = "(window.cobrowse).callBackAuthorized("+((cookieCrumb))+");\n" ;
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);
+
+
+
+
+            break ;
+		case "CHATACTIVE":
+			/* Add watch for close of window */
+			
+			try {
+				var action = items[1];
+				var siteID = items[2];  
+				
+				if (action === "CHATDEACTIVATE") {
+					setSessionChatActiveFlagPS(0);
+				} else {
+					var chatActive = getChatActiveFlagPS(siteID)+1;
+					ptStorage.setItem("inqCA_" + siteID, ""+chatActive);
+					// Set the session indicator which tells that Active Chat belongs to current session.
+					setSessionChatActiveFlagPS(1);
+					
+					/*
+					 * Safari Alert;
+					 * on Safari, onunload event handler could be executed after onload event handler
+					 * of the next page. As the result, a chat does not become ACTIVE (shown) mode,
+					 * then become ACTIVE on another following page. (Alternatively shown)
+					 */
+					addUnloadHandler(function(e) {
+						/* Regardless of inqCA value, there can be only one ACTIVE CHAT and 
+						 * when the active chat is cloased the flag should become 0. 
+						 * This also helps Safari and Chrome where onunload handler could be skipped. 
+						 */
+						ptStorage.setItem("inqCA_" + siteID, "" + 0);
+						var now = new Date().getTime();
+						/* For XD mode we can't save "lt" value quickly, so we should use this*/
+						ptStorage.setItem("inqLT_" + siteID, "" + now);
+						ptStorage.onUnload();
+						
+						if (!bChrome) { 
+							return true;
+						}
+					}, false);
+				}
+			} catch (e) {
+				// For this command, exceptions are not bubbled up. 
+			};
+			break;
+        default:
+            var id = items[1];
+            var clientHtml = items[3];  
+            var err = new Error("Undefined Request");
+            try {
+                err.name = "Syntax Error";
+                
+                throw(err);
+            }
+            catch(e) {
+                code = "if (inqFrame.Inq[\"proxyError\"]!=null)inqFrame.Inq.proxyError(\""+toJsString(catchFormatter(e))+"\");";
+                doCommandsInClientDomain(encodeURIComponent(code),clientHtml,id);                             
+            }           
+            break ;                  
+        }
+    }
+ </script>
+ <i>&nbsp;</i>
+  </body>
+</html>

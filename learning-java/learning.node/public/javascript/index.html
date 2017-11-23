@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="Author" content="Daniel Chealwoo Lee">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+
+  <title>WebUI Javascript Study</title>
+
+	<!-- Bootstrap -->
+	<link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../stylesheets/mybootstrap.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="../index.html">WebUI Study</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="/myhtml/index.html">HTML</a></li>
+				<li class="active"><a href="../css/index.html">CSS</a></li>
+				<li class="active"><a href="../javascript/index.html">Javascript</a></li>
+				<li class="active"><a href="../php/index.html">Php</a></li>
+				<li class="active"><a href="../appendix/index.html">Appendix</a></li>
+				<li class="active"><a href="../lib/index.html">Tools</a></li>
+				<li><a href="#about">About</a></li>
+			</ul>
+		</div><!-- /.nav-collapse -->
+	</div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+	<div class="row row-offcanvas row-offcanvas-right">
+		<div class="col-xs-12 col-sm-9">
+			<p class="pull-right visible-xs">
+				<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+			</p>
+
+			<!-- Main Title Section -->
+			<div id="cl-main-title" class="">
+				<h1>Javascript</h1>
+				<p>JavaScript is a cross-platform, object-oriented scripting language. JavaScript is a small, lightweight language; it is not useful as a standalone language, but is designed for easy embedding in other products and applications, such as web browsers. Inside a host environment, JavaScript can be connected to the objects of its environment to provide programmatic control over them. (<a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide">Core JavaScript 1.5 Guide</a>)</p>
+			</div>
+			<!-- End of Main Title Section -->
+
+			<div>
+				<hr />
+				<h4>Qunit Tests</h4>
+				<ul>
+				<li><strong>Function and Inheritance (Advanced)</strong>
+					<ul>
+						<li><a href="language/function/functionTest.html">Test Function object</a></li>
+						<li><a href="language/inheritance/inheritancetest.html">Test prototype inheritance</a></li>
+					</ul>	
+				</li>
+				<li><strong>Javascript Basic Language Foundation</strong>
+					<ul>
+						<li><a href="language/truefalse/truefalseQunit.html">What true means in javascript</a></li>
+						<li><a href="language/scopeTest/scopeTest.html">Scope</a></li>
+						<li><a href="language/type/typeQunit.html">Type</a></li>
+						<li><a href="language/operator/bitopQunit.html">bit operatior</a></li>
+						<li><a href="language/json/jsonQunit.html">jsonQunit</a></li>
+						<li><a href="language/basic/basictest.html">Basic Tests - Alert</a></li>
+					</ul>	
+				</li>
+				<li><strong>Objects</strong>
+					<ul>
+						<li><a href="object/array/arrayQunit.html">Test Array object</a></li>
+						<li><strong>Date and Timeout</strong>
+							<ul>
+								<li><a href="language/time/typeQunit.html">time</a></li>
+								<li><a href="language/time/timeouttest.html">Timeout test</a></li>
+								<li><a href="object/date/dateQunit.html">Test Date object and time in javascript</a></li>
+							</ul>	
+						</li>
+						<li>
+							<ul><strong>String and Regular Expression.</strong>
+								<li><a href="object/string/stringQunit.html">Test String object</a></li>
+								<li><a href="object/regexp/regexpQunit.html">Test Regexp object</a></li>
+							</ul>	
+						</li>
+					</ul>
+					</li>
+					<li><strong>DOM</strong> - I want to move this to under HTML section
+						<ul>
+							<li><a href="windows/window_open.html">window open test</a></li>
+							<li><a href="dom/create-div.html">Create elements</a></li>
+							<li><a href="dom/create-iframe.html">Testing iFrame</a></li>
+							<li><a href="dom/dom-referrer.html">Referer</a></li>
+							<li><a href="dom/width_height.html">Create elements</a></li>
+						</ul>	
+					</li>
+					<li><strong>Persistent</strong> - Cookie, Client Side Storage, ...
+						<ul>
+							<li><a href="persist/cookie/cookieSecureQunit.html">Basic Secure Cookie</a></li>
+							<li><a href="persist/cookie/cookieQunit.html">Basic Cookie</a></li>
+						</ul>	
+					</li>
+					<li><strong>Events</strong> To build test pages can be tested on different browsers and devices
+						<ul>
+							<li><a href="object/event/event-basic.html">Event - Basic</a> Simple qunit event test with jQuery</li>
+							<li><a href="object/event/eventtester.html">Touch/Scroll Event test page</a></li>
+							<li><a href="object/event/inputevents.html">Input event with background</a></li>
+						</ul>
+					</li>
+					<li>ViewPort
+					<ul>
+						<li><a class="cl-ref" href="http://www.quirksmode.org/mobile/viewports.html">A tale of two viewports � part one</a></li>
+							<li><a href="screen/screentest.html">Screen Size and mode Test</a></li>
+					</ul>	
+					</li>
+					<li><strong>Persist Value</strong>
+					<ul>
+							<li><a href="persist/pstest/index.html">Persistent Storage test</a></li>
+							<li><a href="persist/localstorage/lshow.html">Show all localstorage values</a></li>
+							<li><a href="persist/localstorage/localstorageQunit.html">localstorage test</a></li>
+							<li><a href="persist/localstorage/lshtmlbox.html">localstorage iframe</a></li>
+							<li><a href="persist/pstest/lstest.html">localstorage iframe</a></li>
+							<li><a href="persist/localstorage/lshtmlbox-dy.html">localstorage test with dynamic iframe</a></li>
+							<li><a href="http://www.myjs.com/cookie/cookiewrite.html">Cookie Test</a></li>		
+							<li><a href="persist/pstest/index.html">Persistent Storage test</a></li>
+					</ul>	
+					</li>
+				</ul><!-- End of ul-main -->	
+
+			</div>
+
+
+			<div>
+			<hr />
+				<h4>Standard/ Specification/ Main Reference/ Framework/ Tool/ </h4>
+				<ul>
+					<li><a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide">MDN Core JavaScript 1.5 Guide</a></li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">MDN Javascript</a></li>
+				</ul>
+				<ul>
+					<li><a href="http://www.youtube.com/watch?v=hQVTIJBZook&amp;feature=channel">Javascript The Good Parts video on youtube</a></li>
+					<li><a href="https://qunitjs.com/cookbook/">Qunit Cookbook</a></li>
+				</ul>
+				<ul>
+					<li><a href="http://processingjs.org/">Processing</a></li>
+					<li><a href="http://www.jslint.com/">jslint</a></li>
+					<li><a href="http://jsbin.com/">jsBin</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<h4>Tutorial/ Sample/ Additional Reference</h4>
+				<ul>
+					<li>For MDN tutorial, goto <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">MDN Javascript</a> and check the Tutorials section for more tutorial topics</li>
+					<li><a href="http://www.w3schools.com/js/default.asp">w3schools samples</a></li>
+					<li><a href="http://www.w3schools.com/JS/JS_examples.asp">http://www.w3schools.com/JS/JS_examples.asp</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<h4>Topic/ Tip</h4>
+				<ul>
+					<li><a href="http://msdn.microsoft.com/en-us/library/ie/h2ak8h2y(v=vs.94).aspx">Call() Method page by microsoft</a></li>
+					<li><a href="http://stackoverflow.com/questions/995914/catch-browsers-zoom-event-in-javascript">catch browsers zoom event in javascript</a></li>
+					<li><a href="http://stackoverflow.com/questions/3693281/maintain-div-size-relative-to-screen-despite-browser-zoom-level">Maintain div size (relative to screen) despite browser zoom level</a></li>
+					<li><a href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html">Safari Developer Library - Handling Events</a></li>
+					<li><a href="topics.html">MDN Core Javascript 1.5 Guide topic lists</a></li>
+				</ul>
+			</div>
+
+
+
+			<!-- *** CONTENT ENDS HERE *** -->
+		</div><!--/.col-xs-12.col-sm-9-->
+
+
+		<!-- sidebar-offcanvas -->
+		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+			<div class="list-group">
+				<a href="#" class="list-group-item active">Link</a>
+				<a href="#" class="list-group-item">Link</a>
+				<a href="#" class="list-group-item">Link</a>
+				<a href="#" class="list-group-item">Link</a>
+			</div>
+			<div>
+				<h4>/Main Link/ </h4>
+				<ul>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">MDN Javascript</a></li>
+					<li><a href="http://log4javascript.org/">log4javascript</a></li>
+					<li><a href="http://qunitjs.com/">QUnit</a></li>
+					<li><a href="http://js-testrunner.codehaus.org/">js-testrunner</a></li>
+					<li><a href="http://phantomjs.org/">phantomjs</a></li>
+				</ul>
+			</div>
+		</div>
+		<!--/.sidebar-offcanvas-->
+	</div><!--/row-->
+</div><!-- /.container -->
+
+
+<footer class="footer">
+	<div class="container">
+		<p class="text-muted">Place sticky footer content here.</p>
+	</div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+

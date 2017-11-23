@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <link rel="stylesheet" href="/lib/qunit/qunit-1.15.0.css" type="text/css" media="screen"/>
+
+    <script type="text/javascript" src="/lib/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="dateQunit.js"></script>
+<h1 id="qunit-header">number function test</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+
+<div id="my-msg"></div>
+
+
+<script type="text/javascript">
+    // equal( actual, expected, [message] )
+
+    $(function () {
+        module("Schedule Static Function test", {
+            setup: function () {
+                // prepare something for all following tests
+            },
+            teardown: function () {
+                // clean up after each test
+            }
+        });
+
+        test("Math.floor test 01", function () {
+            var num1 = 287;
+            num1 = num1 / 60;
+            var actual = Math.floor(num1);
+
+            var expected = 4;
+
+            equal(actual, expected, actual + " = " + expected);
+        });
+
+        test("Math.floor test", function () {
+
+            var num1 = 5;
+            var actual = Math.floor(num1);
+            var expected = 5;
+
+            equal(actual, expected, actual + " = " + expected);
+
+        });
+
+        test("parseInt test 01", function () {
+
+            var num1 = 287 / 60;
+            var actual = parseInt(num1);
+            var expected = 4;
+
+            equal(actual, expected, actual + " = " + expected);
+
+        });
+
+        test("parseInt test", function () {
+
+            var num1 = 5;
+            var actual = parseInt(num1);
+            var expected = 5;
+
+            equal(actual, expected, actual + " = " + expected);
+
+        });
+
+        test("Divide test", function () {
+
+            var num1 = 54;
+            var actual = parseInt(54 / 5);
+            var expected = 10;
+
+            equal(actual, expected, actual + " = " + expected);
+
+        });
+
+        test("Modular test", function () {
+            var num1 = 54;
+            var actual = 54 % 5;
+            var expected = 4;
+
+            equal(actual, expected, actual + " = " + expected);
+        });
+    });
+
+
+    $(function () {
+        module("Number compare test", {
+            setup: function () {
+                // prepare something for all following tests
+            },
+            teardown: function () {
+                // clean up after each test
+            }
+        });
+
+        test("Nan compare with a number test", function () {
+            var test;
+
+            ok(!(test > 0), "!(test > 0)");
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+</head>
+<body>
+
+	<h1 id="qunit-header">jQuery Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+
+<script type="text/javascript">
+
+$(function() {
+
+	/**
+	 * Module of Array Qunit tests
+	 */
+	module("Basic Test true or false");
+
+	test("Test True and False", function() {
+
+		ok(true);
+		ok(!false);
+		ok(!!true, "!!true is " + true);
+
+	});
+
+	/**
+	 *   Not a number is not true or false.
+	 */
+	test("Test all trues", function() {
+
+		equal(true,  true, "true is true");
+		equal(1,		 true,  "1 is true");
+		equal(!NaN,  true, "!NaN is true");
+		equal(!null, true, "!null is true");
+
+		ok(1,    "1 is true");
+		ok(!NaN, "!NaN is true");
+		ok(!null,"!null is true");
+
+	});
+
+	test("Test all falses", function() {
+		
+		equal(false, false, "false is false");
+		equal(0,     false, "0 is false");
+		equal(!!NaN, false, "!!NaN is false");
+		equal(!!null,false, "!null is false");
+		
+	});
+
+	test("Test null", function() {
+		
+		equal(false, (null == false), "NaN is not false");
+		equal(true, (!null == true), "But !NaN is true");
+		equal(false, !!null, "!!NaN is false");
+
+	});
+
+	/**
+	 * Module of Array Qunit tests
+	 */
+	module("Test true or false in Number");
+
+	test("Test 0", function() {
+		equal(true, !0, "!0 is true");
+	});
+
+
+	test("Test NaN", function() {
+		
+		equal(false, (NaN == false), "NaN is not false");
+		equal(true, (!NaN == true), "But !NaN is true");
+		equal(false, !!NaN, "!!NaN is false");
+
+	});
+
+	
+	test("Test isNaN()", function() {
+		
+		var a, v;
+
+		v = true;
+		equal(true, v, v + " is true");
+        		
+		var asd;
+		
+		ok(!isNaN(0), "0 is a number");
+		ok(isNaN(asd), "undefined variable asd is not a number" + asd);
+		
+	});
+	
+
+	/**
+	 * Module of Array Qunit tests
+	 */
+	module("Test true or false in String");
+
+	test("Test empty string", function() {
+		var expected = false;
+		equal( findTrueFalse(""), expected, "if(\"\") is false");
+	});
+
+	/**
+	 *
+	 */
+	test("Number and String compare", function() {
+
+		ok( "1" > 0, "\"1\" is bigger than 0");
+		ok( !("0" > 0), "\"0\" is NOT bigger than 0");
+		ok( "0" == 0, "\"0\" is equal to 0");
+	});
+
+	/**
+     *   variable
+	 *
+	 */
+
+	module("Test true or false in Variable");
+
+	test("Test undefined variable's true/false", function() {
+
+		var v;
+
+		equal(true, typeof v === "undefined", "typeof v === \"undefined\" is true");
+		equal(false, findTrueFalse(v), "if(v) is false when v is undefined");
+		equal(true, !v, "!v is true when v is undefined");
+		equal(false, !!v, "!!v is false when v is undefined");
+		equal(undefined, v, "v === undefined is true");
+		equal(true, v === undefined, "v === undefined is true");
+
+		ok( !v, "!v is true when v is undefined");
+	});
+
+
+	test("Test true/false of null", function() {
+
+		var v = null;
+
+		equal(!v, true, "!v is true when var v = null");
+		equal(typeof v == "null", false, "typeof v is " + typeof v + " when var v = null" );
+		ok( findTrueFalse(null === v), "if(null === v) is true when var v = null");
+		equal(!!v, false, "!!v is false  when var v = null");
+
+		ok( !v, "!v(undefined) is true");
+	});
+
+
+	test("compare to NaN always return false", function() {
+		
+		ok(!findTrueFalse((new Date()).getTime() < NaN));
+		ok(!findTrueFalse((new Date()).getTime() > NaN));
+
+	});	
+	
+
+	
+	/*************************************************************************
+	 * Local functions.
+	 *
+	 */
+	function findTrueFalse(a) {
+	   return a ? true : false ;
+    }
+
+});
+
+</script>	
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> New Document </title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+ </head>
+
+<body onload="onMyLoad()">
+  
+<script type="text/javascript">
+
+var mycookie = function (name, value) {
+  if (value !== undefined) {
+	// expire the cookie first
+		var expiry = (new Date( (new Date()).getTime() + (366*24*3600*1000) )).toGMTString();
+		document.cookie = "pc=1; path=/; expires="+expiry+";" ;
+		document.cookie = name + "=; expires=Mon, 20 Sep 2010 00:00:00 UTC; path=/;";
+		document.cookie = name + "=" + value + "; path=/; expires="+expiry+";" ;
+  } else {
+		return getFromStr(name, document.cookie);
+  }
+
+// get value from param-like string (eg, "x=y&name=VALUE")
+  function getFromStr(name, text) {
+	  if (typeof text !== "string") {
+		return;
+	  }
+	  var nameEQ = name + "=",
+		ca = text.split(/[;&]/),
+		i, c;
+	  for (i = 0; i < ca.length; i++) {
+		c = ca[i];
+		while (c.charAt(0) === " ") {
+		  c = c.substring(1, c.length);
+		}
+		if (c.indexOf(nameEQ) === 0) {
+		  return c.substring(nameEQ.length, c.length);
+		}
+	  }
+  }
+};
+
+function onMyLoad () {
+	document.getElementById("testvar").value = mycookie("testvar");
+	if( document.getElementById("testvar").value !== "undefined" ) {
+		document.getElementById("testvarinfo").innerHTML = " - Updated from Cookie";
+	} else {
+		document.getElementById("testvarinfo").innerHTML = " - The value is not in Cookie";
+	}
+}
+</script>
+<p>Test domain is 
+<script>
+	document.write("" + document.location + "");
+</script>
+</p> 
+
+<label for="testvar">Test variable for cookie </label><input id="testvar" type="text" name="testvar"/> <button id="btnsave" name="btnsave">Save value</button><label id="testvarinfo"></label><br />
+
+<script type="text/javascript">
+		var testInput = document.getElementById("testvar");
+		var btnsave = document.getElementById("btnsave");
+		btnsave.onclick = function (ev) {
+			mycookie( "testvar", testInput.value);
+			document.getElementById("testvarinfo").innerHTML = " - The value is saved to Cookie"
+		}
+</script>
+
+ </body>
+</html>

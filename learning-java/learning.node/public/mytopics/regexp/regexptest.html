@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Regular Expression Test</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/lib/qunit/qunit-1.15.0.css" type="text/css" media="screen"/>
+    <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+
+<!-- script type="text/javascript" src="regexpQunit.js"></script -->
+<script type="text/javascript">
+    /**
+     * $Id$
+     *
+     *
+     */
+    $(function () {
+        /**
+         * RTDEV-14892
+         */
+        module("Agent Message contains HTML elements");
+
+        test("Test Case with RegExp", function () {
+            var regexp = new RegExp('.*sendVALinkClicked\\(event\\);">(.*)</div></span>');
+
+            var testStr = '<span id="automation_1476820894816"><div onclick="window.inqFrame.Application.sendVALinkClicked(event);">Good Afternoon!</div></span>';
+            var expected = "Good Afternoon!";
+            var actual = "";
+            var resultArr;
+
+            if(testStr.indexOf('sendVALinkClicked(event)') >= 0) {
+                ok(regexp.test(testStr), 'RegExp.test failed on test string' );
+                resultArr = regexp.exec(testStr);
+                ok(resultArr.length === 2, "result array lenght is 2");
+                actual = resultArr[1];
+                equal(actual, expected, actual + " == " + expected);
+            } else {
+                ok(false, "test string doesn't have " + 'sendVALinkClicked(event)');
+            }
+        });
+
+        test("Test Case with / /", function () {
+            var regexp = /.*sendVALinkClicked\(event\);">(.*)<\/div><\/span>/;
+
+            var testStr = '<span id="automation_1476820894816"><div onclick="window.inqFrame.Application.sendVALinkClicked(event);">Good Afternoon!</div></span>';
+            var expected = "Good Afternoon!";
+            var actual = "";
+            var resultArr;
+
+            if(testStr.indexOf('sendVALinkClicked(event)') >= 0) {
+                ok(regexp.test(testStr), 'RegExp.test failed on test string' );
+                resultArr = regexp.exec(testStr);
+                ok(resultArr.length === 2, "result array lenght is 2");
+                actual = resultArr[1];
+                equal(actual, expected, actual + " == " + expected);
+            } else {
+                ok(false, "test string doesn't have " + 'sendVALinkClicked(event)');
+            }
+        });
+    });
+</script>
+</body>
+</html>

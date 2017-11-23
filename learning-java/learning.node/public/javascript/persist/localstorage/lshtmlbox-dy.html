@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> New Document </title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+ </head>
+
+ <body>
+
+<script type="text/javascript">
+	try
+	{
+		localStorage.setItem("autosave", "test");
+
+		if ( localStorage.getItem("autosave") )	{
+		   alert ("INFO Industries.html : processing localStorage is done " + localStorage.getItem("autosave"));
+		}
+	}
+	catch (e)
+	{
+		alert("EXCEPTION: childIndustrieshtml : while processing localStorage. " + e ); 
+	}
+
+	function addIFrame(data, clientHtml, id) {
+		// initial origin: http://home.inq.com
+		// active origin:  http://inq.com (set via document.domain)
+		// needed origin:  http://www.touchcommerce.com
+		var divsub = window.document.createElement("DIV");
+		var frameSrc = clientHtml ;
+		var iframe  = "<IFRAME id='iInq' "
+				 + "NAME=\"" + (id + "||" + data) + "\" "
+				 + "width=\"500\" height=\"200px\""
+				 + "SRC=" + frameSrc + ">\n</IFRAME>";
+		divsub.innerHTML = iframe ;
+		document.body.appendChild(divsub);
+	};
+</script>
+
+<p><a href="http://www.myjs.com/localstorage/localstorage.html" target="_new">open in a tab www.myjs.com</a></p>
+<script>
+	addIFrame("hello", "http://www.myjs.com/localstorage/localstorage.html", "box-subdomain");
+</script>
+
+<p><a href="http://tc.myjs.com/localstorage/localstorage.html" target="_new">open in a tab tc.myjs.com</a></p>
+<script>
+	addIFrame("hello", "http://tc.myjs.com/localstorage/localstorage.html", "box-samedomain");
+</script>
+
+<p><a href="http://people.w3.org/mike/localstorage.html" target="_new">open in a tab people.w3.org/mike/localstorage.html</a></p>
+<script>
+	addIFrame("hello", "http://people.w3.org/mike/localstorage.html", "box-diffdomain");
+</script>
+
+
+ </body>
+</html>

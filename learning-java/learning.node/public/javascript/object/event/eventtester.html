@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+</head>
+<body>
+	<h1 id="qunit-header">Event Tester</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="evt-last">Event Monitor: last occured: <span class="lastevent-val">No</span> Last occured: <span class="time-val">never</span>
+	</div>
+	<div id="evt-scroll">Scroll Event Monitor: count: <span class="count-val">0</span> Last occured: <span class="time-val">never</span>
+	</div>
+	<div id="evt_touchend">evt_touchend Event Monitor: count: <span class="count-val">0</span> Last occured: <span class="time-val">never</span>
+	</div>
+	
+
+	<div id="my_message">Measure Screen Size</br> 
+	       height: <span class="msg_height">No</span> </br>
+	       width : <span class="msg_width">No</span>
+	</div>
+
+	<div id="" class="">Event per device</br> 
+		<table>
+		<tr>
+			<td>Event</td>
+			<td>Android</td>
+			<td>IOS iPhone/iPad</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>orientationchange</td>
+			<td>window</td>
+			<td>window supported, body no</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>scroll</td>
+			<td>happens many times in one scroll</td>
+			<td>happens only once per one scroll</td>
+			<td></td>
+			<td></td>
+		</tr>
+		</table>
+	</div>
+
+	<div>
+
+
+		<div id="tcChat_minimize" class="tcChat"
+			 style="position: absolute; overflow: hidden; z-index: 101; display: block; left: 320px; top: 12px; height: 30px; width: 30px; cursor: pointer;">
+			<img style="width: 30px; height: 30px;"
+				 src="https://mediav3.inq.com/media/sites/10004119/flash//ATT-ACIF-mobile_v1b/btnMin.png"
+				 aria-hidden="true" tabindex="-1"><img aria-hidden="true" style="display:none;"
+													   id="tcChat_minimize_skin" class="tcChat">
+			<table aria-hidden="false"
+				   style="position: absolute; left: 0px; top: 0px; height: 100%; width: 100%; margin: auto; cursor: pointer;"
+				   id="tcChat_minimize_table" class="tcChat">
+				<tbody>
+				<tr>
+					<td id="tcChat_minimize_span" class="tcChat"
+						style="background-color: transparent; width: 100%; height: 100%; vertical-align: middle;">
+						<div aria-hidden="true"></div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			<div readonly="" role="button"
+				   style="background-image: url(&quot;https://mediav3.inq.com/media/sites/10004119/flash/ATT-ACIF-mobile_v1b/clear.gif&quot;); border: none; position: absolute; left: 0px; top: 0px; width: 30px; height: 30px; background-color: transparent; cursor: pointer;"
+				   id="tcChat_minimize_img" class="tcChat" title="test Minimize 3">
+			</div>
+		</div>
+	</div>
+
+	<input readonly="" role="button"
+		 style="background-image: url(&quot;https://mediav3.inq.com/media/sites/10004119/flash/ATT-ACIF-mobile_v1b/clear.gif&quot;); border: none; position: absolute; left: 0px; top: 0px; width: 30px; height: 30px; background-color: transparent; cursor: pointer;"
+		 id="tcChat_minimize_img_test" class="tcChat" title="test Minimize 3">
+	</input>
+
+	<div>
+		<div id="inqC2CMobDiv" aria-live="polite" style="position: fixed; bottom: 0px; width: 100%; z-index: 1000; background-color: rgb(255, 255, 255); opacity: 0.95; text-align: center; border-top: 1px solid rgb(179, 179, 179); box-shadow: rgba(141, 141, 141, 0.4) 0px -6px 15px 0px;">
+			<div onclick="alert('this is c2c'); return false;" onmouseover="this.style.cursor='pointer'"><a href="#" aria-labelledby="tc-label-ready-state" style="cursor: pointer;
+max-width: 100%;
+width: initial;
+border: 0px;
+border-radius: 0px;
+text-decoration: none;
+color: #0574ac;
+display: block" tabindex="0">
+
+			<img src="https://mediaeastv3.inq.com/media/sites/10004119/images/ic-chat-blue.png" tabindex="-1" style="width:25px; margin:8px; vertical-align: initial;">
+
+			<span id="tc-label-ready-state" style="
+    font-size: 19px;
+    font-family: Arial;
+    bottom: 12px;
+    position: relative;">
+    Chat available
+  </span>
+
+		</a></div></div>
+	</div>
+
+	<div style="height: 700px;" id="my-msg"></div>
+
+
+
+
+<script type="text/javascript">
+
+<!--
+	/**
+ * $Id$
+ * 
+ * 
+ * Ref: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date#Example:_Several_ways_to_assign_dates
+ */
+
+$( document ).ready(function() {
+
+	$("#qunit-tests").append('<li>The page is loaded.</li>');
+
+    $('#tcChat_minimize').click(function(evt){ alert('tcChat_minimize click'); });
+    $('#tcChat_minimize_table').click(function(evt){ alert('tcChat_minimize_table click'); });
+    $('#tcChat_minimize_span').click(function(evt){ alert('tcChat_minimize_span click'); });
+    $('#tcChat_minimize_img').click(function(evt){ alert('tcChat_minimize_img click'); });
+/*
+	$(window).scroll(function (e) {
+		$("#evt-scroll .count-val").text( parseInt($("#evt-scroll .count-val").text()) + 1 );
+		var date = new Date();
+		$("#evt-scroll .time-val").text( date.toGMTString() + ":" + date.getMilliseconds() );
+		$("#evt-last .lastevent-val").text( "scroll event" );
+		$("#evt-last .time-val").text( date.toGMTString() + ":" + date.getMilliseconds() );
+	});
+*/
+
+
+	window.addEventListener('scroll', scrollMonitor, false);
+
+
+	document.body.addEventListener('touchmove', function(e) {
+	}, false);
+
+
+	document.body.addEventListener('touchstart', function(e) {
+	}, false);
+
+	document.body.addEventListener('touchend', function(e) {
+		$("#evt_touchend .count-val").text( parseInt($("#evt_touchend .count-val").text()) + 1 );
+		var date = new Date();
+		$("#evt_touchend .time-val").text( date.toGMTString() + ":" + date.getMilliseconds() );
+		$("#evt-last .lastevent-val").text( "evt_touchend" );
+		$("#evt-last .time-val").text( date.toGMTString() + ":" + date.getMilliseconds() );
+	}, false);
+
+	document.body.addEventListener('touchleave', function(e) {
+	  $("#qunit-tests").append('<li>touchleave event added.</li>');
+	}, false);
+
+	window.addEventListener('orientationchange', function(e) {
+		alert(window.orientation);
+		displayMsg();
+	}, false); 
+
+
+
+	function displayMsg() {
+		$("#my_message .msg_height").text( window.innerHeight  );
+		$("#my_message .msg_width").text( window.innerWidth );
+	}
+
+});
+
+function scrollMonitor (e)  {
+		$("#evt-scroll .count-val").text( parseInt($("#evt-scroll .count-val").text()) + 1 );
+		var date = new Date();
+		$("#evt-scroll .time-val").text( date.toGMTString() + ":" + date.getMilliseconds() );
+		$("#evt-last .lastevent-val").text( "scroll event" );
+		$("#evt-last .time-val").text( date.toGMTString() + ":" + date.getMilliseconds() );
+	}
+
+	// window.removeEventListener('scroll', scrollMonitor);
+//-->
+</script>
+
+</body>
+</html>

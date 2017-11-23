@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+</head>
+<body>
+	<h1 id="qunit-header">jQuery Test Suite <a href="http://qunitjs.com/">(qunit)</a></h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	
+	<div id="my-msg"></div>
+
+
+<script type="text/javascript">
+$(function() {
+
+	module("Testing String - Basic/Functions");
+
+	/**
+	 * Returns the index within the calling String object of the first occurrence of the specified value, 
+     * or -1 if not found.
+	 *
+	 * Ref: https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/indexOf
+	 */
+	
+	test("String Object test - indexOF()", function() {
+
+        var str = "inqCA_306", str2check = "inqCA";
+        var actual = str.indexOf(str2check);
+        var expected = 0;
+	   
+		equal ( actual, expected, "str.indexOf(str2check) = " + actual  );
+		ok ( actual === expected );
+	});	
+
+	test("String Object test - typeof", function() {
+
+        var str = "inqCA_306"
+
+		equal (typeof str, "string", "typeof str should be string");
+		ok (typeof str !== "String", "typeof str should be string");
+	});	
+
+	test("Test String.prototype.replace()", function() {
+
+        var expected = "https://totalgym.inq.com";
+		var actual = "";
+		var strURL = "Http://totalgym.inq.com";
+        
+		actual = strURL.replace( /^http:/i, 'https:' );
+
+		equal ( actual, expected, "actual= " + actual + "\nexpected= " + expected );
+
+	});	
+
+    /*
+	 *  Returns a new string with some or all matches of a pattern replaced by a replacement.  
+	 *  The pattern can be a string or a RegExp, and the replacement can be a string or a function to be called for each match.
+	 *
+	 *  https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/replace
+	 */
+	test("Test String.prototype.replace()", function() {
+
+        var expected = "https://totalgym.inq.com", actual = "";
+		var strURL = "Http://totalgym.inq.com";
+        
+		actual = strURL.replace( /http:/i, 'https:' );
+
+		equal ( actual, expected, "actual= " + actual + "\nexpected= " + expected );
+
+	});	
+
+
+	test("Test String.prototype.replace()", function() {
+
+        var expected = "https://totalgym.inq.com", actual = "";
+		var strURL = "Http://totalgym.inq.com";
+        
+		actual = strURL.replace( /http:/i, function() { return 'https:'; } );
+
+		equal ( actual, expected, "actual= " + actual + "\nexpected= " + expected );
+
+	});	
+
+
+	test("Testing string.concat()", function() {
+
+        var expected = "abc";
+		var actual = "a";
+
+		actual = actual.concat( "b", "c" );
+	   
+		equal ( actual, expected, "This browser does not support string concat() function" );
+
+		var str1="Hello ";
+		var str2="world!";
+		var str3=" Have a nice day!";
+		var n = str1.concat(str2,str3);
+
+		equal ( n, "Hello world! Have a nice day!", "FAIL: concat does not support" );
+	});
+	
+
+	test("Testing string.split()", function() {
+
+		"COBROWSE||CW||338||http://www.laboutique.bouyguestelecom.fr/clickToChat/in"
+		"
+		request = request.split(pattern).join(replacement);
+
+	});	
+	
+
+	test("Testing string.split()", function() {
+
+		var str = 'com.inq.stage.ViewportMgrImplMobile';
+        var expected = ["com","inq","stage","ViewportMgrImplMobile"];
+		var actual;
+
+		actual = str.split( "." );
+	   
+		equal ( actual[0], expected[0], "split works ok, array[0] is " + actual[0]);
+		equal ( actual[1], expected[1], "split works ok, array[1] is " + actual[1]);
+		equal ( actual[2], expected[2], "split works ok, array[2] is " + actual[2]);
+		equal ( actual[3], expected[3], "split works ok, array[3] is " + actual[3]);
+
+	});	
+
+	test("Testing string.split() test 2", function() {
+
+		var str = '';
+        var expected = 0;
+		var actual;
+
+		actual = str.split( "." );
+	   
+		equal ( actual.length, 1, "empty string of split still returns array with length of 1");
+
+	});	
+
+});
+</script>	
+
+   <script type="text/javascript" src="stringQunit.js"></script> 
+
+
+</body>
+</html>

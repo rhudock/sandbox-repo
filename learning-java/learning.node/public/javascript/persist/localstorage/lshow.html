@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>localStorage information v1.0.0.000</title>
+</head>
+<body>
+
+<div id="example-msg">Browser Information should be displayed instead of this message.</div>
+
+<div id="div-buttons"><button id="cl-localStorage">Clean LocalStorage</button></div>
+
+<div id="div-buttons-msg">Message comes here.</div>
+
+<hr>
+<h1>localStorage Value</h1>
+<div id="div-localStorage"></div>
+
+<script type="text/javascript" src="http://mediav3.inq.com/flash/jquery-1.7.2.js"></script>
+
+<script type="text/javascript">
+
+var txt = "<p>Browser CodeName: " + navigator.appCodeName + "</br>";
+txt+= "Browser Name: " + navigator.appName + "</br>";
+txt+= "Browser Version: " + navigator.appVersion + "</br>";
+txt+= "Cookies Enabled: " + navigator.cookieEnabled + "</br>";
+txt+= "Platform: " + navigator.platform + "</br>";
+txt+= "User-agent header: " + navigator.userAgent + "</br></p>";
+
+// alert(txt);
+// document.write(txt);
+// jQuery("#example-msg").html(txt);
+$("#example-msg").html(txt);
+
+$(function() {
+	$( "#cl-localStorage" ).click(function() { 
+		var isYes = confirm("Would you like to clean all localStorage for the domain?");
+		if (isYes) {
+			localStorage.clear();
+			$("#div-buttons-msg").html("localStorage is cleaned");
+			$("#div-localStorage").html("");
+		} 
+	});
+});
+
+
+// Test v.0.0.1
+var i = 0;
+
+var keyNames=[];
+var values=[];
+// iterate through array
+var numKeys = localStorage.length;
+
+var lsString = "<table><tbody>";
+for(i=0;i<numKeys;i++) {
+    // get key name into an array
+    keyNames[i]=localStorage.key(i);
+    // use key name to retreive value and store in array
+    values[i]=localStorage.getItem(keyNames[i]);
+	lsString += "<tr>";
+	lsString += "<td>" + keyNames[i] + "</td><td>" + values[i] + "</td>";
+	lsString += "</tr>";
+}
+lsString += "</tbody></table>";
+
+$("#div-localStorage").html(lsString);
+
+
+
+
+</script>
+</body>
+</html>

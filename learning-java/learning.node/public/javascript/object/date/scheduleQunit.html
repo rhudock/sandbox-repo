@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+
+   <script type="text/javascript" src="tclib.js"></script>
+   <script type="text/javascript" src="schedule.js"></script>
+</head>
+<body>
+	<h1 id="qunit-header">jQuery Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	
+	<div id="my-msg"></div>
+	
+
+<script type="text/javascript">
+// equal( actual, expected, [message] )
+
+var scheduleTZs = {};
+
+var scheduleTest = function () {};
+scheduleTest.ONEHOUR = 60 * 60 * 1000;
+
+scheduleTest.getHourFromMil = function ( milSec ) {
+	return milSec / this.ONEHOUR;
+};
+
+scheduleTest.getMilSecFromHour = function ( hour ) {
+	return hour * this.ONEHOUR;
+};
+</script>	
+
+
+<!-- <script type="text/javascript" src="scheduleQTest.js"></script> -->
+
+
+<script type="text/javascript">
+// equal( actual, expected, [message] )
+
+$(function() {
+
+	/**
+	 * Module of Array Qunit tests
+	 */
+	module("Schedule object basic test");
+
+	test("Create schedule objects", function() {
+
+		var schedule;
+		
+		schedule = new Schedule("SprintCare_HOP_weekday", 
+				   60 * 60 * 1000 * 6, null, null, 
+				   60 * 60 * 1000 * 6, 60 * 60 * 1000 * 18, 
+				   [1, 2, 3, 4, 5]);
+
+		ok ( schedule, "schedule is created" );
+
+		equal ( 50400000 / scheduleTest.ONEHOUR, 13, "13 is 50400000" );
+		equal ( 64800000 / scheduleTest.ONEHOUR, 18, "18 is 64800000" );
+
+	});
+
+	
+	/**
+	 *
+	 *
+	 */
+	module("Schedule Static Function test");
+	test("Test getTimezoneOffsetMilli(); Compare local time and Schedule's time", function() {
+		var dat = new Date();
+		var schedule = new Schedule("SprintCare_HOP_weekday", 
+				   60 * 60 * 1000 * 7, null, null, 
+				   60 * 60 * 1000 * 6, 60 * 60 * 1000 * 18, 
+				   [1, 2, 3, 4, 5]);
+				   		
+		ok (dat, "Local Timezone Offset: " + Schedule.getTimezoneOffsetMilli(dat) + "/ Schedule Timezone Offset: " + schedule.tzOffset );
+		
+		var offset = schedule.tzOffset -  Schedule.getTimezoneOffsetMilli(dat);
+
+		ok ( dat, "Offset;" + offset);
+		
+		dat = dat.roll(offset);
+		
+		ok ( dat, "day;" + dat.getDay());
+		
+		ok ( dat, "time;" + dat.getMilliseconds() / 24 * 60 * 60 * 1000);
+
+		
+	});
+	
+	/**
+	 *
+	 *
+	 */
+	module("Schedule Static Function test");
+	test("Test getTimezoneOffsetMilli(); Compare local time and Schedule's time", function() {
+		var dat = new Date();
+		var schedule =new Schedule("SprintCare_HOP_weekday", 60 * 60 * 1000 * -7, null, null, 21600000, 86340000, [1, 2, 3, 4, 5]);
+				   		
+		ok (dat, "Local Timezone Offset: " + Schedule.getTimezoneOffsetMilli(dat) + "/ Schedule Timezone Offset: " + schedule.tzOffset );
+		
+		var offset = schedule.tzOffset -  Schedule.getTimezoneOffsetMilli(dat);
+		
+		ok ( dat, "Offset;" + offset);
+
+		dat = dat.roll(offset);
+		
+		ok ( dat, "day;" + dat.getDay());
+		
+		ok (dat, "time;" + dat.getMilliseconds() / 24 * 60 * 60 * 1000);
+		
+	});
+
+
+
+	/*
+	 *
+	 */
+	test("getTimezoneOffsetMilli() - setScheduleDate() test", function() {
+		var dat;
+		var schedule = new Schedule("SprintCare_HOP_weekday", null, null, 
+				   60 * 60 * 1000 * 6, 60 * 60 * 1000 * 18, 
+				   [1, 2, 3, 4, 5], "ABC");
+
+	scheduleTZs["ABC"] = 60 * 60 * 1000 * 7;
+	schedule.tzOffset = scheduleTZs[schedule.timezone];
+
+		dat = new Date();
+		ok (dat, dat + "; DT Local time " );
+
+		var offset = schedule.tzOffset - Schedule.getTimezoneOffsetMilli(dat);
+		
+		schedule.setScheduleDate(dat);
+		
+		ok (dat, dat + "; DT After change  " );
+
+		ok ( schedule.scheduleDate, schedule.scheduleDate + "; Schedule time; offset " + Schedule.getTimezoneOffsetMilli(dat) + "/ Schedule Timezone Offset: " + schedule.tzOffset );
+		
+		ok ( schedule.scheduleDate, "day;" + schedule.scheduleDate.getDay() + " " + schedule.scheduleDate.getHours() + ":" + schedule.scheduleDate.getHours() + ":" + schedule.scheduleDate.getMinutes() + " " + schedule.scheduleDate );
+		
+		ok ( schedule.scheduleDate, "time;" + schedule.scheduleDate.getMilliseconds() / 24 * 60 * 60 * 1000);
+		
+	});
+	
+
+	test("date test (Wed Feb 16 2011 23:30:00 GMT+0000) Get and Set", function() {
+		
+		var dat = new Date("Wed Feb 16 2011 23:30:00 GMT+0000");
+		var dat2 = new Date();
+		
+		dat2.setTime(dat.getTime());
+		
+		ok ( dat, "dat = " + dat + " = " + dat.toUTCString() );
+		ok ( dat2, "dat2 = " + dat2 + " = " + dat.toUTCString() );
+			
+		equal( dat.getTime(), dat2.getTime(), dat + " = " + dat2.getTime() );
+		
+	});
+	
+
+	/**
+	 *
+	 */
+	
+	module("Test Schedule.getOffsetDiff(offsetSchedule, offsetLocal)");
+
+	test("Testing offset diff 1, 1, 0", function() {
+		
+		var offsetLocal, offsetSchedule, expactied, actual;
+		
+		offsetLocal = 1;
+		offsetSchedule = 1;
+		expactied = 0;
+		actual = Schedule.getOffsetDiff(offsetLocal, offsetSchedule);
+
+		equal( expactied, actual, "expactied:" + expactied + "/ actual:" + actual); 
+		
+	});
+
+	test("Testing offset diff -1, 1, -2", function() {
+		
+		var offsetLocal, offsetSchedule, expactied, actual;
+		
+		offsetLocal = 1;
+		offsetSchedule = -1;
+		expactied = -2;
+		actual = Schedule.getOffsetDiff(offsetSchedule, offsetLocal);
+
+		equal( expactied, actual, "expactied:" + expactied + "/ actual:" + actual); 
+		
+	});
+
+
+	test("Testing offset diff -3, 1, -4", function() {
+		
+		var offsetLocal, offsetSchedule, expactied, actual;
+		
+		offsetLocal = 1;
+		offsetSchedule = -3;
+		expactied = -4;
+		actual = Schedule.getOffsetDiff(offsetSchedule, offsetLocal);
+
+		equal( expactied, actual, "expactied:" + expactied + "/ actual:" + actual); 
+		
+	});
+
+
+	test("Testing offset diff 1, -8, 9", function() {
+		
+		var offsetLocal, offsetSchedule, expactied, actual;
+		
+		offsetSchedule = 1;  // CET in DLT
+		offsetLocal = -8;    // PST in DLT
+		expactied = 9;
+		actual = Schedule.getOffsetDiff(offsetSchedule, offsetLocal);
+
+		equal( expactied, actual, "expactied:" + expactied + "/ actual:" + actual); 
+
+	});
+
+	test("Testing offset diff -3, -1, -2", function() {
+		
+		var offsetLocal, offsetSchedule, expactied, actual;
+		
+		offsetLocal = -1;
+		offsetSchedule = -3;
+		expactied = -2;
+		actual = Schedule.getOffsetDiff(offsetSchedule, offsetLocal);
+
+		equal( expactied, actual, "expactied:" + expactied + "/ actual:" + actual); 
+		
+	});
+		
+	test("Testing offset diff -1, -3, 2 ", function() {
+		
+		var offsetLocal, offsetSchedule, expactied, actual;
+		
+		offsetLocal = -3;
+		offsetSchedule = -1;
+		expactied = 2;
+		actual = Schedule.getOffsetDiff(offsetSchedule, offsetLocal);
+
+		equal( expactied, actual, "expactied:" + expactied + "/ actual:" + actual); 
+		
+	});		
+				
+	/**
+	 *
+	 */
+	
+	module("Test Schedule.prototype.setScheduleDate");
+
+	test("Testing PST -0800 against CET +0100", function() {
+		
+
+		var dat = new Date();
+
+		// 1. Check timezone offset for PST 
+		// during DayLight Savings 
+		equal (  Schedule.getTimezoneOffsetMilli(dat) ,- 8 * 60 * 60 * 1000 );
+
+		// 3600000 is + 1 hour ; CET
+		var schedule =  new Schedule("SprintCare_HOP_weekend", null, null, 21600000, 18* 60 * 60 * 1000, [1, 2, 3, 4, 5], "ABC");
+		scheduleTZs["ABC"] = 3600000;
+		schedule.tzOffset = scheduleTZs[schedule.timezone];
+
+		// 2. Check timezone offset for 
+		equal ( scheduleTest.getHourFromMil( schedule.tzOffset ), 1 );
+
+		// 3. Check the differences between two timezone.
+		equal ( scheduleTest.getHourFromMil ( Schedule.getOffsetDiff( schedule.tzOffset, Schedule.getTimezoneOffsetMilli(dat) ) ) , 9 ) ;
+
+		schedule.setScheduleDate(dat);
+
+		// 4. Check if the schedule.scheduleDate is set correctly. display time in two timezones. 
+		equal( schedule.scheduleDate - dat, Schedule.getOffsetDiff( schedule.tzOffset, Schedule.getTimezoneOffsetMilli(dat)  ) , 
+		       "CET +0100:" + schedule.scheduleDate + "  PST -0800:" + dat); 
+		
+	});
+
+	
+});
+
+
+
+
+</script>	
+
+
+	
+</body>
+</html>

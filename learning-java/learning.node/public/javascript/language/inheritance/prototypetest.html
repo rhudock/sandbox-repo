@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>prototype object test</title>
+   <link rel="stylesheet" href="/lib/qunit/qunit-1.15.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+   <!-- script type="text/javascript" src="../../tools/log4javascript/log4javascript.js"></script -->
+
+</head>
+<body>
+
+	<h1 id="qunit-header">prototype Unit Test </h1>
+	<h2 id="qunit-banner">
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+    <p><a href="https:///developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype" title="mdn prototype" target="_blank">mdn prototype</a></h2>
+    </p>
+<script type="text/javascript">
+
+
+
+module("Object.prototype", {
+	setup : function() {
+		try	{
+
+		} catch (e){
+			logger.error("ERROR():" + e.message, e); 
+			ok(false);
+		}
+	},
+
+	tearDown: function () {
+		try	{
+
+		} catch (e){
+			logger.error("ERROR():" + e.message, e); 
+			ok(false);
+		}
+    }
+});
+
+
+
+test("Testing Prototype Check", function() {
+	
+	var Person = function() {
+		var age = 3;
+		this.name = 'default name' + age;
+		this.getName = function() {
+			return this.name;
+		}
+		this.prototype.ptest = 'here';
+	};
+
+	ok ( Person.prototype, "Where is Person.prototype");
+	equal ( typeof Person.prototype.name, 'undefined', "Person.prototype.name is undefined");
+	ok ( ! Person.prototype.age,  "Person.prototype.age is undefined");
+
+	ok ( ! Person.prototype.ptest,  "Person.prototype.ptest is defined");
+
+
+	Person.prototype.name = 'prototype name';
+
+	ok ( Person.prototype.name, "Person.prototype.name is defined now");
+	equal ( Person.prototype.name, 'prototype name', "Person.prototype.name is " + 'prototype name');
+
+});
+
+
+	
+</script>	
+
+</body>
+</html>

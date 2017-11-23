@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<script language="JavaScript" type="text/javascript" src="../lib/jsunit/JsUtil.js"></script>
+<script language="JavaScript" type="text/javascript" src="../lib/jsunit/JsUnit.js"></script>
+<script language="JavaScript" type="text/javascript">
+
+/**
+ * A sample test case, testing <code>Array</code> object.
+ */
+function RegIntTest( name )
+{
+    TestCase.call( this, name );
+}
+function RegIntTest_setUp()
+{
+    this.fEmpty = new Array();
+    this.fFull = [1, 2, 3];
+}
+function RegIntTest_testCapacity() 
+{
+    var size = this.fFull.length; 
+    for( var i = 0; i < 100; i++ )
+        this.fFull[size + i] = i;
+    this.assertEquals( 100+size, this.fFull.length );
+//  assertFalse
+//  assertTure	
+}
+function RegIntTest_testConcat() 
+{
+    for( var i = 0; i < 3; i++ )
+        this.fEmpty[i] = i+4;
+    var all = this.fFull.concat( this.fEmpty );
+    this.assertEquals( "1,2,3,4,5,6", all );
+}
+function RegIntTest_testJoin() 
+{
+    this.assertEquals( "1-2-3", this.fFull.join( "-" ));
+}
+function RegIntTest_testReverse() 
+{
+    this.assertEquals( "3,2,1", this.fFull.reverse());
+}
+function RegIntTest_testSlice() 
+{
+    this.assertEquals( "2,3", this.fFull.slice( 1 ));
+    this.assertEquals( "2", this.fFull.slice( 1, 2 ));
+    this.assertEquals( "1,2", this.fFull.slice( 0, -1 ));
+}
+function RegIntTest_testSort() 
+{
+    for( var i = 0; i < 3; i++ )
+        this.fEmpty[i] = i+4;
+    var all = this.fEmpty.concat( this.fFull );
+    this.assertEquals( "1,2,3,4,5,6", all.sort());
+}
+RegIntTest.prototype = new TestCase();
+RegIntTest.prototype.setUp = RegIntTest_setUp;
+RegIntTest.prototype.testCapacity = RegIntTest_testCapacity;
+RegIntTest.prototype.testConcat = RegIntTest_testConcat;
+RegIntTest.prototype.testJoin = RegIntTest_testJoin;
+RegIntTest.prototype.testReverse = RegIntTest_testReverse;
+RegIntTest.prototype.testSlice = RegIntTest_testSlice;
+RegIntTest.prototype.testSort = RegIntTest_testSort;
+
+function RegIntTestSuite()
+{
+    TestSuite.call( this, "RegIntTestSuite" );
+    this.addTestSuite( RegIntTest );
+}
+RegIntTestSuite.prototype = new TestSuite();
+RegIntTestSuite.prototype.suite = function () { return new RegIntTestSuite(); }
+
+</script>
+
+</head>
+
+<body>
+<h1>JsUnit Test</h1>
+<p></p>
+<script language="JavaScript1.3">
+var writer = new HTMLWriterFilter( JsUtil.prototype.getSystemWriter());
+var printer = new ClassicResultPrinter( writer );
+var runner = new EmbeddedTextTestRunner( printer );
+var collector = new TestCaseCollector( this );
+runner.run( collector.collectTests());
+</script>
+</body>
+</html>

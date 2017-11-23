@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="/lib/qunit/qunit-1.15.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+   <!-- script type="text/javascript" src="../../tools/log4javascript/log4javascript.js"></script -->
+
+</head>
+<body>
+
+	<h1 id="qunit-header">Inheritance Unit Test </h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+<script type="text/javascript">
+
+logger = { 
+	error: function(msg) {
+		console.log(msg);
+	}
+}
+
+
+module("Inheritance in Javascript", {
+	setup : function() {
+		try	{
+
+		} catch (e){
+			logger.error("ERROR():" + e.message, e); 
+			ok(false);
+		}
+	},
+
+	tearDown: function () {
+		try	{
+
+		} catch (e){
+			logger.error("ERROR():" + e.message, e); 
+			ok(false);
+		}
+    }
+});
+
+/**
+ *
+ *
+ */
+function clone(object) {
+	function F() {}
+	F.prototype = object;
+	return new F;
+}
+
+test("Testing Prototype Inheritance", function() {
+	
+	var Person = {
+		name: 'default name',
+		getName: function() {
+			return this.name;
+		}
+	};
+
+	var reader = clone(Person);
+	equal(reader.getName(), 'default name'); 
+	equal(Person.getName(), 'default name'); 
+
+	reader.name = 'John Smith';
+	equal(reader.getName(), 'John Smith'); 
+
+	var Author = clone(Person);
+	Author.books = []; // Default value.
+	Author.name = "Author's default name";
+	Author.getBooks = function() {
+		return this.books;
+	}
+	Author.hi = function() {
+		return 'hi';
+	}
+
+
+	// Check new Auther object's default name
+	equal( Author.getName(), "Author's default name" );
+	// Check Person object's name is 'default name'.
+	equal( Person.getName(), 'default name' ); 
+
+	var author = [];
+	author[0] = clone(Author);
+	author[0].name = 'Dustin Diaz';
+	author[0].books = ['JavaScript Design Patterns'];
+	
+	// Checking author's name 
+	equal ( author[0].getName(), 'Dustin Diaz' );
+	
+	// Checking that Author's name has not been chagned
+	equal ( Author.getName(), "Author's default name" );
+	equal(Person.getName(), 'default name');
+
+	var AuthorChild = clone(Author);
+
+	equal (AuthorChild.hi(), 'hi');
+	equal (AuthorChild.name, "Author's default name");
+});
+
+
+test("Testing Prototype Inheritance Bad Example", function() {
+	
+	var CompoundObject = {
+		string1: 'default value',
+		childObject: {
+			bool: true,
+			num: 10
+		}
+	}
+
+	var compoundObjectClone = clone(CompoundObject);
+	// Bad! Changes the value of CompoundObject.childObject.num.
+	compoundObjectClone.childObject.num = 5;
+	equal ( CompoundObject.childObject.num, 5 );
+
+	// Set back to original value
+	compoundObjectClone.childObject.num = 10;
+	// Better. Creates a new object, but compoundObject must know the structure
+	// of that object, and the defaults. This makes CompoundObject and
+	// compoundObjectClone tightly coupled.
+	compoundObjectClone.childObject = {
+		bool: true,
+		num: 5
+	};
+
+	// CompoundObject.childObject.num has not been changed.
+	equal ( CompoundObject.childObject.num, 10 );
+
+});
+	
+/**
+ *  This test shows the correct way to change
+ *
+ */
+test("Testing Prototype Inheritance Example", function() {
+	
+	var CompoundObject = {
+		string1: 'default value',
+		createChildObject: function() {
+			return {
+				bool: true,
+				num: 10
+			}
+		}
+	}
+	CompoundObject.childObject = CompoundObject.createChildObject();
+
+	var compoundObjectClone = clone(CompoundObject);
+	compoundObjectClone.childObject = CompoundObject.createChildObject();
+	compoundObjectClone.childObject.num = 5;
+
+	// CompoundObject.childObject.num has not been changed.
+	equal ( CompoundObject.childObject.num, 10 );
+});
+	
+</script>	
+
+</body>
+</html>

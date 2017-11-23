@@ -1,0 +1,25 @@
+
+
+Issue: https://10.22.111.62:8443/Olympus returns JBWEB000124: The requested resource is not available.
+------------------------------------------------------------------------------------------------------
+Environment:
+Ubuntu: 16. (Upgraded from 14.)
+
+Restcomm: Restcomm-JBoss-AS7-8.0.0.1094
+Restcomm: Restcomm-JBoss-AS7-8.0.0.1096
+
+
+Issue Detail:
+-----------------------------------------------------
+JBWEB000065: HTTP Status 404 - /Olympus
+
+JBWEB000309: type JBWEB000067: Status report
+
+JBWEB000068: message /Olympus
+
+JBWEB000069: description JBWEB000124: The requested resource is not available.
+
+JBoss Web/7.2.0.Final
+------------------------------------------------------------------------------------------------------
+
+Tried both restcomm version and same result, both worked on Ubuntu 14

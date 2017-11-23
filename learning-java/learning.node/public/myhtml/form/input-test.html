@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>HTML input</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="Author" content="Daniel Chealwoo Lee">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+<div id="box-top">
+	<h1 id="qunit-header">WebUI Study</h1>
+	<!-- <h2 id="qunit-banner"></h2> -->
+	<div id="qunit-testrunner-toolbar">Detail</div>
+	<h2 id="qunit-userAgent">Menu</h2>
+</div> <!-- end "box-top" -->
+
+<div id="box-content">
+	<p>Example to show input element's src attribute in javascript and jQuery
+	<br />
+	<input aria-pressed="false" role="button" alt="Chime off" title="Chime alert" class="tcChat" id="btnChime_img" src="btnMuteOff.gif" style="background-color: transparent; cursor: pointer;" type="image">
+  <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas" id="togImage">Toggle image</button>
+	</p>
+</div> <!-- end "box-content" -->
+
+<div id="box-bottom">
+	<h2 id="qunit-userAgent">Site Map</h2>
+</div> <!-- end "box-bottom" -->
+
+<script type="text/javascript">
+$(function() {
+
+	$("#togImage").click( function() {
+		var pressed = $("#btnChime_img").attr("aria-pressed");
+
+		if(pressed == "true"){
+			$("#btnChime_img").attr("aria-pressed","false");
+
+// Working code in javascript
+			document.getElementById("btnChime_img").setAttribute("src","btnMuteOn.gif");
+// Working code in jQuery
+//			$("#btnChime_img").attr("src","btnMuteOn.gif");
+		} else {
+			$("#btnChime_img").attr("aria-pressed","true");
+
+//			document.getElementById("btnChime_img").setAttribute("src","btnMuteOff.gif");
+			$("#btnChime_img").attr("src","btnMuteOff.gif");
+		}
+		$("#box-bottom").text( $("#btnChime_img").attr("aria-pressed") );
+	});
+});
+</script>
+</body>
+</html>

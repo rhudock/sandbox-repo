@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="/lib/qunit/qunit-1.15.0.css" type="text/css" media="screen"/>
+   <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+</head>
+<body>
+
+	<h1 id="qunit-header">Javascript Operator Test - <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators">mdn operators</a>, <a href="http://docs.oracle.com/javase/tutorial/java/nutsandbolts/opsummary.html">Operator names (Java Tutorial)</a></h1>
+	<h2 id="qunit-banner"> </h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+	<!-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence -->
+
+<!-- script type="text/javascript" src="regexpQunit.js"></script -->	
+<script type="text/javascript">
+/**
+ * $Id$
+ * 
+ */
+$(function() {
+	
+	module( "Arithmetic Operators Test (+, -, *, /, %, ++, --, unary -, unary +)", {
+	  setup: function() {
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	  }
+	});
+
+	test("+ test", function() {
+		equal(5, 2 + 3);
+	});
+
+	test("- test", function() {
+		equal(2, 5 - 3);
+	});
+
+	test("% test", function() {
+		equal(1, 16 % 3);
+	});
+
+	test("++ test", function() {
+		var x = 100, y = 100;
+		equal(100, x++);
+		equal(101, ++y);
+	});
+
+	test("unary - test", function() {
+		var x = 100, y = 100;
+		equal(-100, -x);
+	});
+
+
+
+
+
+
+	module( "Assignment Operators (=, *=, /=, %=, +=, -=, <<=, >>=, >>>=, &=, ^=, |=) Test", {
+	  setup: function() {
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	  }
+	});
+
+	test("<<= test", function() {
+		var x = 100;
+		ok(true, "<<=2 - " + (x <<= 3));
+		ok(true, ">>=2 - " + (x >>= 2));
+
+		x = 2;
+		equal( 4, x << 1 );
+
+		x = 2;
+		equal( 8, x << 2 );
+
+		x = 100;
+		equal( 50, x >> 1 );
+
+	});
+
+	test("Unsigned Right Shift Assignment  >>>= test", function() {
+		var x;
+
+
+
+		x = 100;
+		ok(true, "100 >>>= 1 become " + (x >>>= 1));
+		
+		x=100;
+		ok(true, "100 >>>= 2 become " + (x >>>= 2));
+
+		x= 100;
+		ok(true, "100 >>>= 3 become " + (x >>>= 3));
+
+		/*
+		The variable temp has an initial value of -14 (11111111 11111111 11111111 11110010 in two's complement binary). When shifted right two bits, the value equals 1073741820 (00111111 11111111 11111111 11111100 in binary). 
+		*/		
+		x = -14;
+		ok(true, "-14 >>>= 2 become " + (x >>>= 2));
+	});
+
+
+
+
+
+
+	module( "Bitwise Operators (&, |, ^, ~, <<, >>, >>>) Test", {
+	  setup: function() {
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	  }
+	});
+
+	/*
+	 The >> operator shifts the bits of expression1 right by the number of bits specified in expression2. The sign bit of expression1 is used to fill the digits from the left. Digits shifted off the right are discarded. 
+	 For example, after the following code is evaluated, temp has a value of -4: 
+	 -14 (11110010 in two's complement binary) shifted right two bits equals -4 (11111100 in two's complement binary). 
+	 */
+
+	test("Bitwise Right Shift Operator >> test", function() {
+		equal( 4, -14 >> 2 );
+		ok(true);
+	});
+
+
+
+
+	module( "Comparison Operators (==, !=, ===, !==, >, >=, <, <=) Test", {
+	  setup: function() {
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	  }
+	});
+
+	test("throws test", function() {
+		ok(true);
+	});
+
+	module( "Logical Operators (&&, ||, !) Test", {
+	  setup: function() {
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	  }
+	});
+
+	test("throws test", function() {
+		ok(true);
+	});
+
+	module( "Logical Operators (&&, ||, !) Test", {
+	  setup: function() {
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	  }
+	});
+
+	test("throws test", function() {
+		ok(true);
+	});
+
+});
+</script>
+</body>
+</html>

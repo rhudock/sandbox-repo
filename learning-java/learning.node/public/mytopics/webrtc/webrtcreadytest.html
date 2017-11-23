@@ -1,0 +1,91 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>webRTC test</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="styles/1239ebf7.main.css">
+</head>
+<body>
+<section class="afold bg">
+    <div class="content">
+        <h1 class="outline">Does my browser support webRTC?</h1>
+        <p id="main-result" class="result outline"></p>
+    </div>
+</section>
+
+<div class="tests container">
+
+    <div id="results">
+
+    </div>
+
+    <p id="user-agent-string"></p>
+
+    <footer class="disclaimer">
+         </footer>
+</div>
+
+
+
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<script>
+    API.isAppearinCompatible(function (data) {
+        data.results.forEach(function (test) {
+            var div = document.createElement('div');
+            div.className = test.id + ' test';
+            var header = document.createElement('h3');
+            header.innerHTML = test.name;
+            var description = document.createElement('p');
+            description.className = 'description';
+            description.innerHTML = test.description;
+            var result = document.createElement('p');
+            result.className = 'result';
+            if(test.isSupported) {
+                result.className += ' success';
+                result.innerHTML = 'Supported';
+            }
+            else {
+                result.className += ' fail';
+                result.innerHTML = 'Not supported';
+            }
+
+            div.appendChild(header);
+            div.appendChild(description);
+            div.appendChild(result);
+
+            document.getElementById('results').appendChild(div);
+        });
+
+
+        if(data.isSupported) {
+            $('.bg').addClass('success');
+            $('#main-result').addClass('success').text('Yes!');
+        }
+        else {
+            $('.bg').addClass('fail');
+            $('#main-result').addClass('fail').text('Not yet :\(');
+        }
+
+        $('#user-agent-string').text(navigator.userAgent);
+    });
+
+    API.performTest('html5video', function (data) {
+    });
+
+    API.getAvailableTests(function (data) {
+
+    });
+</script>
+</body>
+</html>

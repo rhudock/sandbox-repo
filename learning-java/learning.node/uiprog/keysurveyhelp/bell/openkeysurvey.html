@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>window.open test</title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+ </head>
+
+ <body>
+
+<div id="box-top" class="">
+	<h1 id="qunit-header">window.open test</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests">
+	</ol>
+</div><!-- End of box-top -->
+
+<div id="box-content" class="">
+	
+
+<div id="box-col-left" class="">
+	
+</div><!-- End of box-col-left -->
+
+<div id="box-cod-center" class="">
+
+	<div class="">
+		<input type="text" id="test-url" name="test-url" value="http://app.keysurvey.com/f/1173287/3a98/?LQID=1&"></ br>
+		<input type="button" value="Open Desktop KeySurvey" onclick="openWindowInNewWindow('test-url')"></ br>
+	</div>
+	<div class="">
+		<input type="text" id="test-url-local" name="test-url" value="BellPostChatSurvey.html"></ br>
+		<input type="button" label="label open new keysurvey window" value="Open Desktop KeySurvey" onclick="openWindowInNewWindow('test-url-local')"></ br>
+		<input type="button" title="title open new keysurvey window" value="Open Desktop KeySurvey" onclick="openWindowInNewWindow('test-url-local')"></ br>
+		<input type="button" aria-label="aria-label open new keysurvey window" value="Open Desktop KeySurvey" onclick="openWindowInNewWindow('test-url-local')"></ br>
+		<input type="button" alt="alt open new keysurvey window" value="Open Desktop KeySurvey" onclick="openWindowInNewWindow('test-url-local')"></ br>
+</div>
+
+<p>
+<a href="https://app.keysurvey.com/votingmodule/VOTING1/f/1126876/10ec/"> https://app.keysurvey.com/votingmodule/VOTING1/f/1126876/10ec/</a>
+</p>
+
+	<div class="">
+
+	<input type="text" id="att-mobile" name="att-mobile" value="https://app.keysurvey.com/votingmodule/VOTING3/f/1038476/54f2/"></ br>
+	<input type="button" value="open att mobile keysurvey in a new window" onclick="openWindowInNewWindow('att-mobile')"></ br>
+
+	</div>
+<hr>
+
+	<div class="">
+
+	<input type="text" id="bell-mobile" name="bell-mobile" value="http://app.keysurvey.com/votingmodule/VOTING3/f/1136086/219b/"></ br>
+	<input type="button" value="open bell mobile keysurvey in a new window" onclick="openWindowInNewWindow('bell-mobile')"> Mobile Bell Canada 04.2017 - (Care English) (develop) </ br>
+
+	</div>
+<hr>
+	<div class="">
+
+	<input type="text" id="bell-mobile-local" name="bell-mobile-local" value="BellPost-test.html"></ br>
+	<input type="button" value="open bell mobile local keysurvey in a new window" onclick="openWindowInNewWindow('bell-mobile-local')"></ br>
+
+	</div>
+<hr>
+	<div class="">
+
+	<input type="text" id="bell-mobile2-local" name="bell-mobile2-local" value="BellPostChatSurvey.html"></ br>
+	<input type="button" value="open bell mobile keysurvey in a new window" onclick="openWindowInNewWindow('bell-mobile2-local')"></ br>
+
+	</div>
+
+<div id="box-msg" class="">
+	
+</div>
+ 
+</div><!-- End of box-cod-center -->
+</div><!-- End of box-content -->
+
+
+
+<div id="box-bottom" class="">
+	
+</div><!-- End of box-bottom -->
+
+
+
+<script type="text/javascript">
+
+function openWindowInNewWindow(localId) {
+	/* http://stackoverflow.com/questions/726761/javascript-open-in-a-new-window-not-tab
+	Works on Chrome
+	*/
+	window.open( $("#" + localId).val(), "mytestwin", "height=600,width=600"); 
+}
+
+</script>
+
+
+ </body>
+</html>

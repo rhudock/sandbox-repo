@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <!--<link rel="stylesheet" href="http://dev.jquery.com/view/trunk/qunit/testsuite.css" type="text/css" media="screen"/>-->
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+   <!--<script type="text/javascript" src="http://dev.jquery.com/view/trunk/qunit/testrunner.js"></script>-->
+
+   <link rel="stylesheet" href="http://github.com/jquery/qunit/raw/master/qunit/qunit.css" type="text/css"
+         media="screen"/>
+   <script type="text/javascript" src="http://github.com/jquery/qunit/raw/master/qunit/qunit.js"></script>
+
+
+   <script type="text/javascript" src="array-functions.js"></script>
+
+   <script type="text/javascript">
+      $(document).ready(function() {
+
+         module("Array function Test");
+
+         test("Remove()", function() {
+            var expected, actual, a = ['one','two','three','four'];
+
+            expected = 4;
+            actual = a.length;
+
+            equals(expected, actual, "The expected array's length is " + expected);
+
+            a.removeElement('three');
+
+            expected = 3;
+            actual = a.length;
+
+            equals(expected, actual, "The expected array's length is " + expected);
+         });
+
+
+         test("map()", function() {
+
+            var original = ['1', '2', '3', '4'],
+                  mapped = original.map(function(i) {
+                     return 'div' + i;
+                  }),
+                  expected,
+                  actual;
+
+
+            // Testing original
+            expected = "1";
+            actual = original[0];
+
+            equals(expected, actual, "trim(): The expected string is " + expected);
+
+
+            // Testing mapped
+            expected = "div1";
+            actual = mapped[0];
+
+            ok(expected === actual, "trim(): The expected string is " + expected);
+         });
+
+         test("sort()", function() {
+
+            var original = ['1', '2', '3', '4'],
+                  expected,
+                  actual;
+
+
+            // Testing original
+            expected = "1";
+            actual = original[0];
+
+            equals(expected, actual, "SORT: The expected string is " + expected);
+           
+            original.sort();
+            actual = original[0];
+
+            ok(expected === actual, "SORT(): The expected string is " + expected);
+
+            original.reverse();
+            actual = original[3];
+
+            ok(expected === actual, "reverse(): The expected string is " + expected);
+
+         });
+
+      });
+
+   </script>
+
+</head>
+
+<body>
+<h1 id="qunit-header">QUnit example</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">test markup, will be hidden</div>
+</body>
+
+</html>

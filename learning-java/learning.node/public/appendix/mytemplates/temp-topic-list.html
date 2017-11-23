@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="Author" content="Daniel Chealwoo Lee">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+
+    <title>Template Component List</title>
+
+    <!-- Bootstrap -->
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/mybootstrap.css" rel="stylesheet">
+
+    <!-- syntaxhighlighter required-->
+    <script type="text/javascript" src="/lib/syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="/lib/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+    <link type="text/css" rel="stylesheet" href="/lib/syntaxhighlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+    <!-- End syntaxhighlighter required-->
+
+</head>
+<body>
+
+<!-- Main Navigation Menu Bar -->
+<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">WebUI Study</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/myhtml/index.html">HTML</a></li>
+                <li class="active"><a href="/css/index.html">CSS</a></li>
+                <li class="active"><a href="/javascript/index.html">Javascript</a></li>
+                <li class="active"><a href="/appendix/index.html">Appendix</a></li>
+                <li class="active"><a href="/tools/index.html">Tools</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+
+<div class="container">
+    <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-xs-12 col-sm-9">
+            <p class="pull-right visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+            </p>
+
+            <!-- Main topic -->
+            <div class="jumbotron bg-primary">
+                <h1>HTML</h1>
+                <p><b>HTML</b> or <b>HyperText Markup Language</b> is the standard <a href="/wiki/Markup_language"
+                                                                                      title="Markup language">markup
+                    language</a> used to create <a href="/wiki/Web_page" title="Web page">Web pages</a>.</p>
+                <p>HTML is written in the form of <a href="/wiki/HTML_element" title="HTML element">HTML elements</a>
+                    consisting of <i>tags</i> enclosed in <a href="/wiki/Bracket#Angle_brackets" title="Bracket">angle
+                        brackets</a> (like <code>&lt;html&gt;</code>). HTML tags most commonly come in pairs like <code
+                            class="nowrap" style="">&lt;h1&gt;</code> and <code class="nowrap" style="">
+                        &lt;/h1&gt;</code>, although some tags represent <i>empty elements</i> and so are unpaired, for
+                    example <code>&lt;img&gt;</code>. The first tag in a pair is the <i>start tag</i>, and the second
+                    tag is the <i>end tag</i> (they are also called <i>opening tags</i> and <i>closing tags</i>). (<a
+                            href="http://en.wikipedia.org/wiki/HTML">Wikipedia</a>)</p>
+            </div>
+
+
+            <div id="box-content">
+                <!-- **************************** "box-content" ***************************** -->
+                <hr>
+                <div><h4>What's Studied</h4>
+                    <ul>
+                        <li><a href="dom/images.html">Image test - title chagned.</a></li>
+                        <li><a href="form/index.html">Form Example from TC</a></li>
+                    </ul>
+                </div>
+
+                <hr>
+                <div><h4>References & Specifications</h4>
+                    <ul>
+                        <li><a href="http://www.w3.org/html/">WC3 HTML</a></li>
+                        <li><a href="http://www.w3.org/TR/xmlschema-0/">XML Schema Definision
+                            http://www.w3.org/TR/xmlschema-0/</a></li>
+                        <li><a href="http://www.w3.org/html/wg/html5/">HTML 5.0 Specification</a></li>
+                        <li><a href="#refs"> - more - </a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>HTML</h3>
+                    <p>Important items you can find in list</p>
+                </div>
+
+                <hr>
+                <div>
+                    <h4><a href="ios/sound.html">&lt;audio&gt; Play Sound on iOS</a> (HTML 5)</h4>
+                    <p>iOS 8 allows only one multi-media being active. and &lt;audio&gt; tag needs user event to be
+                        active</p>
+                    <hr/>
+                </div>
+
+                <div class="cl-box">
+                    <h4>SyntaxHighlighter Example</h4>
+                    <!-- Preview Code -->
+                    <pre class="brush: js;">
+function helloSyntaxHighlighter()
+{
+	return "hi!";
+}
+</pre>
+
+                </div>
+
+                <hr/>
+
+                <div>
+                    <h4><a href="form/index.html">&lt;form&gt; Simple form</a></h4>
+                    <p>Just a simple form example page to use</p>
+                    <hr/>
+                </div>
+
+
+                <div>
+                    <h4><a href="form/input-test.html">&lt;form&gt; Toggle button test</a></h4>
+                    <p>Toggle Button with aria-pressed attribute - accessibility</p>
+                    <hr/>
+                </div>
+
+                <!-- BootStrap -->
+                <div class="bs-callout bs-callout-info">
+                    <h3>BootStrap</h3>
+                    <ul>
+                        <li><A HREF="http://getbootstrap.com/getting-started/">Bootstrap Home</A></li>
+                        <li><A HREF="https://startbootstrap.com/">Start Bootstrap com</A></li>
+                        <li><A HREF="https://startbootstrap.com/template-categories/all/">All Templates</A></li>
+                    </ul>
+                </div>
+
+                <!-- Comment -->
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Start Bootstrap
+                            <small>August 25, 2014 at 9:30 PM</small>
+                        </h4>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+                        Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                        vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    </div>
+                </div>
+
+                <hr/>
+
+                <!-- Comments Form -->
+                <div class="well">
+                    <h4>Leave a Comment:</h4>
+                    <form role="form">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+
+
+                <!-- **************************** Reference Section ***************************** -->
+                <div>
+                    <h4><a id="refs">Refs.</a></h4>
+                    <ul><h4>Official/Specification/</h4>
+                        <li><a href="http://www.w3.org/html/">WC3 HTML</a></li>
+                        <li><a href="http://www.w3.org/TR/xmlschema-0/">XML Schema Definision
+                            http://www.w3.org/TR/xmlschema-0/</a></li>
+                        <li><a href="http://www.w3.org/TR/xhtml1/">XHTML 1.0 Specification</a></li>
+                        <li><a href="http://www.w3.org/TR/html401/">HTML 4.01 Specification</a></li>
+                        <li><a href="http://www.w3.org/html/wg/html5/">HTML 5.0 Specification</a></li>
+                    </ul>
+                    <ul><h4>Tutorial/Example/Tools</h4>
+                        <li><a href="http://www.w3.org/MarkUp/Guide/Advanced.html">HTIM Tutorial</a></li>
+                        <li><a href="http://validator.w3.org/">WC3 HTML Validation Service</a></li>
+                    </ul>
+                </div>
+
+
+                <!-- **************************** End "box-content" ***************************** -->
+            </div> <!-- End "box-content" -->
+        </div><!--/.col-xs-12.col-sm-9-->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+            </div>
+        </div><!--/.sidebar-offcanvas-->
+    </div><!--/row-->
+</div><!-- /.container -->
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+    </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+

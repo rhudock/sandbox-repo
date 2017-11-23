@@ -1,0 +1,546 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+ <title>Study JavaScript</title>
+
+<link rel="stylesheet" href="/assets/webskills.css" />
+
+<link rel="stylesheet" href="/assets/ui.css" type="text/css" media="print, projection, screen">
+<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
+<!--[if lte IE 7]>
+<link rel="stylesheet" href="/assets/jquery.tabs-ie.css" type="text/css" media="projection, screen">
+<![endif]-->
+        
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/assets/ui/ui.core.js" type="text/javascript"></script>
+<script src="/assets/ui/ui.tabs.js" type="text/javascript"></script>    
+<script type="text/javascript">
+
+$(function() {
+
+	$('#ws_devnote_tab > ul').tabs();
+
+});
+</script>
+
+<link rel="stylesheet" href="/jquery/css/jquery.block_collapse.css" />
+<link rel="stylesheet" href="/jquery/css/jquery.css" />
+<script src="/jquery/scripts/jquery.block_collapse.js" type="text/javascript"></script>
+    
+<script type="text/javascript">
+// License Duration Action
+$(document).ready(function(){
+	$('.c_title').click
+	(
+		function() {
+			$(this).block_collapse(
+				{ 
+				}
+			);
+		}
+	);
+
+});
+</script>
+
+</head>
+
+<body>
+<h1>Chealwoo's JavaScript Topics</h1>
+
+<script type="text/javascript">
+var page_title = 'javascript'; 
+</script><script type="text/javascript">
+
+$(function() {
+
+	$('.submenu').addClass('ws_hidden');
+	$('#webskillmenu ul li a').removeClass('current');
+	
+	if ( page_title )
+	{
+		$('#webskillmenu ul li a[title="' + page_title + '"]').addClass('current');
+		$('.submenu[title="' + page_title + '"]').removeClass('ws_hidden');
+	};
+	
+});
+</script>
+
+
+
+
+<br /><div id="js_body">
+
+<div id="js_title">
+<h3>Title comes here</h3>
+</div>
+
+<div id="js_content">
+
+<div class="block_wrapper">
+<div class="block_title c_title"> Core JavaScript 1.5 Guide Index.
+</div>
+<div class="block_content">
+
+<p>The index or <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide">Core JavaScript 1.5 Guide</a> from mozilla. - Test codes will be added as I study and practice each section</p>
+<div id="section_3">
+    <h4><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Core_Language_Features">Core Language Features</a></h4>
+    <ol>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Values">Values</a> 
+          <ol>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Values#Data_Type_Conversion">Data Type Conversion</a> </li>
+          </ol>
+      </li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Variables">Variables</a> 
+          <ol>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Variables#Declaring_Variables">Declaring Variables</a> </li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Variables#Evaluating_Variables">Evaluating Variables</a> </li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Variables#Variable_Scope">Variable Scope</a> </li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Variables#Global_Variables">Global Variables</a> </li>
+          </ol>
+      </li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Constants">Constants</a> </li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Literals">Literals</a> 
+          <ol>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Literals#Array_Literals">Array Literals</a> </li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Literals#Boolean_Literals">Boolean Literals</a> </li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Literals#Floating-Point_Literals">Floating-Point Literals</a> </li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Literals#Integers">Integers</a> </li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Literals#Object_Literals">Object Literals</a> </li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Literals#String_Literals">String Literals</a> </li>
+          </ol>
+      </li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Unicode">Unicode</a> 
+          <ol>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Unicode#Unicode_Compatibility_with_ASCII_and_ISO">Unicode Compatibility with ASCII and ISO</a> </li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Unicode#Unicode_Escape_Sequences">Unicode Escape Sequences</a> </li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Unicode#Unicode_characters_in_JavaScript_files">Unicode characters in JavaScript files</a> </li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Unicode#Displaying_Characters_with_Unicode">Displaying Characters with Unicode</a> </li>
+          </ol>
+      </li>
+    </ol>
+    </div>
+  <div id="section_4"><a id="Expressions_and_Operators"></a>
+      <h4><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Expressions_and_Operators">Expressions and Operators</a></h4>
+      <ol>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Expressions">Expressions</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Operators">Operators</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Operators/Assignment_Operators">Assignment Operators</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Operators/Comparison_Operators">Comparison Operators</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Operators/Arithmetic_Operators">Arithmetic Operators</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Operators/Bitwise_Operators">Bitwise Operators</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Operators/Logical_Operators">Logical Operators</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Operators/String_Operators">String Operators</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Operators/Special_Operators">Special Operators</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Operators#Operator_Precedence">Operator Precedence</a> </li>
+            </ol>
+        </li>
+      </ol>
+      </div>
+  <div id="section_5"><a id="Regular_Expressions"></a>
+      <h4><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Regular_Expressions">Regular Expressions</a></h4>
+      <ol>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Creating_a_Regular_Expression">Creating a Regular Expression</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Writing_a_Regular_Expression_Pattern">Writing a Regular Expression Pattern</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Writing_a_Regular_Expression_Pattern#Using_Simple_Patterns">Using Simple Patterns</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Writing_a_Regular_Expression_Pattern#Using_Special_Characters">Using Special Characters</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Writing_a_Regular_Expression_Pattern#Using_Parentheses">Using Parentheses</a> </li>
+            </ol>
+        </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Regular_Expressions">Working with Regular Expressions</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Regular_Expressions/Using_Parenthesized_Substring_Matches">Using Parenthesized Substring Matches</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Regular_Expressions/Advanced_Searching_With_Flags">Advanced Searching With Flags</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Regular_Expressions/Examples_of_Regular_Expressions">Examples</a> </li>
+            </ol>
+        </li>
+      </ol>
+      </div>
+  <div id="section_6"><a id="Statements"></a>
+      <h4><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Statements">Statements</a></h4>
+      <ol>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Block_Statement">Block Statement</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Conditional_Statements">Conditional Statements</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Conditional_Statements#if...else_Statement">if...else Statement</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Conditional_Statements#switch_Statement">switch Statement</a> </li>
+            </ol>
+        </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Loop_Statements">Loop Statements</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Loop_Statements/for_Statement">for Statement</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Loop_Statements/do...while_Statement">do...while Statement</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Loop_Statements/while_Statement">while Statement</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Loop_Statements/label_Statement">label Statement</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Loop_Statements/break_Statement">break Statement</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Loop_Statements/continue_Statement">continue Statement</a> </li>
+            </ol>
+        </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Object_Manipulation_Statements">Object Manipulation Statements</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Object_Manipulation_Statements#for...in_Statement">for...in Statement</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Object_Manipulation_Statements#with_Statement">with Statement</a> </li>
+            </ol>
+        </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Comments">Comments</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Exception_Handling_Statements">Exception Handling Statements</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Exception_Handling_Statements/throw_Statement">throw Statement</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Exception_Handling_Statements/try...catch_Statement">try...catch Statement</a> </li>
+            </ol>
+        </li>
+      </ol>
+      </div>
+  <div id="section_7"><a id="Functions"></a>
+      <h4><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Functions">Functions</a></h4>
+      <ol>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Defining_Functions">Defining Functions</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Calling_Functions">Calling Functions</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Using_the_arguments_object">Using the arguments Object</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Functions">Predefined Functions</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Functions/eval_Function">eval Function</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Functions/isFinite_Function">isFinite Function</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Functions/isNaN_Function">isNaN Function</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Functions/parseInt_and_parseFloat_Functions">parseInt and parseFloat Functions</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Functions/Number_and_String_Functions">Number and String Functions</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Functions/escape_and_unescape_Functions">escape and unescape Functions</a> </li>
+            </ol>
+        </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Closures">Working with Closures</a> </li>
+      </ol>
+      </div>
+  <div id="section_8"><a id="Working_with_Objects"></a>
+      <h4><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Objects">Working with Objects</a></h4>
+      <ol>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Objects_and_Properties">Objects and Properties</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Creating_New_Objects">Creating New Objects</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Creating_New_Objects/Using_Object_Initializers">Using Object Initializers</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Creating_New_Objects/Using_a_Constructor_Function">Using a Constructor Function</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Creating_New_Objects/Indexing_Object_Properties">Indexing Object Properties</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Creating_New_Objects/Defining_Properties_for_an_Object_Type">Defining Properties for an Object Type</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Creating_New_Objects/Defining_Methods">Defining Methods</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Creating_New_Objects/Using_this_for_Object_References">Using this for Object References</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Creating_New_Objects/Defining_Getters_and_Setters">Defining Getters and Setters</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Creating_New_Objects/Deleting_Properties">Deleting Properties</a> </li>
+            </ol>
+        </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Core_Objects">Predefined Core Objects</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Core_Objects/Array_Object">Array Object</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Core_Objects/Boolean_Object">Boolean Object</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Core_Objects/Date_Object">Date Object</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Core_Objects/Function_Object">Function Object</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Core_Objects/Math_Object">Math Object</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Core_Objects/Number_Object">Number Object</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Core_Objects/RegExp_Object">RegExp Object</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Core_Objects/String_Object">String Object</a> </li>
+            </ol>
+        </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Inheritance">Inheritance</a> </li>
+      </ol>
+      </div>
+  <div id="section_9"><a id="Working_with_Arrays"></a>
+      <h4><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Arrays">Working with Arrays</a></h4>
+      <ol>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Arrays#Creating_an_array">Creating an array</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Arrays#Working_with_array_elements">Working with array elements</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Arrays#Understanding_length">Understanding length</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Arrays#Iterating_over_arrays">Iterating over arrays</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Arrays#Array_methods">Array methods</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Arrays#Working_with_Array-like_objects">Working with Array-like objects</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Arrays#Two-Dimensional_Arrays">Two-Dimensional Arrays</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Arrays#Array_comprehensions">Array comprehensions</a> </li>
+      </ol>
+      </div>
+  <div id="section_10"><a id="Iterators_and_Generators"></a>
+      <h4><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Iterators_and_Generators">Iterators and Generators</a></h4>
+      <ol>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Iterators_and_Generators#Iterators">Iterators</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Iterators_and_Generators#Defining_custom_iterators">Defining custom iterators</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Iterators_and_Generators#Generators:_a_better_way_to_build_Iterators">Generators: a better way to build Iterators</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Iterators_and_Generators#Advanced_generators">Advanced generators</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Iterators_and_Generators#Generator_expressions">Generator expressions</a> </li>
+      </ol>
+      </div>
+  <div id="section_11"><a id="Details_of_the_Object_Model"></a>
+      <h4><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Details_of_the_Object_Model">Details of the Object Model</a></h4>
+      <ol>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages">Class-Based vs. Prototype-Based Languages</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages#Defining_a_Class">Defining a Class</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages#Subclasses_and_Inheritance">Subclasses and Inheritance</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages#Adding_and_Removing_Properties">Adding and Removing Properties</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages#Summary_of_Differences">Summary of Differences</a> </li>
+            </ol>
+        </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/The_Employee_Example">The Employee Example</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/The_Employee_Example/Creating_the_Hierarchy">Creating the Hierarchy</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/The_Employee_Example/Object_Properties">Object Properties</a> 
+                  <ol>
+                    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/The_Employee_Example/Object_Properties/Inheriting_Properties">Inheriting Properties</a> </li>
+                    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/The_Employee_Example/Object_Properties/Adding_Properties">Adding Properties</a> </li>
+                  </ol>
+              </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/The_Employee_Example/More_Flexible_Constructors">More Flexible Constructors</a> </li>
+            </ol>
+        </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Property_Inheritance_Revisited">Property Inheritance Revisited</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Property_Inheritance_Revisited/Local_versus_Inherited_Values">Local versus Inherited Values</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Property_Inheritance_Revisited/Determining_Instance_Relationships">Determining Instance Relationships</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Property_Inheritance_Revisited/Global_Information_in_Constructors">Global Information in Constructors</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Property_Inheritance_Revisited/No_Multiple_Inheritance">No Multiple Inheritance</a> </li>
+            </ol>
+        </li>
+      </ol>
+      </div>
+  <div id="section_12"><a id="LiveConnect_Overview"></a>
+      <h4><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview">LiveConnect Overview</a></h4>
+      <ol>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview/Working_with_Wrappers">Working with Wrappers</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview/JavaScript_to_Java_Communication">JavaScript to Java Communication</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview/JavaScript_to_Java_Communication#The_Packages_Object">The Packages Object</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview/JavaScript_to_Java_Communication#Working_with_Java_Arrays">Working with Java Arrays</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview/JavaScript_to_Java_Communication#Package_and_Class_References">Package and Class References</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview/JavaScript_to_Java_Communication#Arguments_of_Type_char">Arguments of Type char</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview/JavaScript_to_Java_Communication#Handling_Java_Exceptions_in_JavaScript">Handling Java Exceptions in JavaScript</a> </li>
+            </ol>
+        </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview/Java_to_JavaScript_Communication">Java to JavaScript Communication</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview/Java_to_JavaScript_Communication/Using_the_LiveConnect_Classes">Using the LiveConnect Classes</a> </li>
+            </ol>
+        </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview/Data_Type_Conversions">Data Type Conversions</a> 
+            <ol>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview/Data_Type_Conversions/JavaScript_to_Java_Conversions">JavaScript to Java Conversions</a> </li>
+              <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview/Data_Type_Conversions/Java_to_JavaScript_Conversions">Java to JavaScript Conversions</a> </li>
+            </ol>
+        </li>
+      </ol>
+      </div>
+  <div id="section_13"><a id="Processing_XML_with_E4X"></a>
+      <h4><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Processing_XML_with_E4X">Processing XML with E4X</a></h4>
+      <ol>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Processing_XML_with_E4X#Compatibility_issues">Compatibility issues</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Processing_XML_with_E4X#Creating_an_XML_object">Creating an XML object</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Processing_XML_with_E4X#Working_with_attributes">Working with attributes</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Processing_XML_with_E4X#Working_with_XML_objects">Working with XML objects</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Processing_XML_with_E4X#Working_with_XMLLists">Working with XMLLists</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Processing_XML_with_E4X#Searching_and_filtering">Searching and filtering</a> </li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Processing_XML_with_E4X#Handling_namespaces">Handling namespaces</a> </li>
+      </ol>
+      </div>
+  <p>&nbsp;</p>
+</div> 
+<!-- end: class="block_content" -->
+</div> <!-- <div class="block_wrapper"> -->
+
+
+<div class="block_wrapper">
+<div class="block_title c_title">
+<!-- Title comes here --> 
+Index of Core JavaScript 1.5 Reference from Mozilla
+</div>
+<div class="block_content">
+<p> Index of <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference">Core JavaScript 1.5 Reference</a>. test code will be added.</p>
+<div id="section_2">
+  <h3>Standard global objects</h3>
+  <ul>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Array">Array</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Boolean">Boolean</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Date">Date</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error">Error</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/EvalError">EvalError</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Function">Function</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Math">Math</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Number">Number</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Object">Object</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/RangeError">RangeError</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/ReferenceError">ReferenceError</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/RegExp">RegExp</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/String">String</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/SyntaxError">SyntaxError</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/TypeError">TypeError</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/URIError">URIError</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/En/DOM/Storage#Storage">Storage</a>   </li>
+  </ul>
+  <p>Other objects in the global scope are either <a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Objects#Creating_New_Objects"> created by the user script</a> or provided by the host application. The host objects available in <a rel="internal" href="https://developer.mozilla.org/en/Gecko">Gecko</a>-based browsers are documented in the <a rel="internal" href="https://developer.mozilla.org/en/Gecko_DOM_Reference">Gecko DOM Reference</a>.</p>
+  For more information about the distinction between the <a rel="internal" href="https://developer.mozilla.org/en/DOM">DOM</a> and core <a rel="internal" href="https://developer.mozilla.org/en/JavaScript">JavaScript</a>, see <a rel="internal" href="https://developer.mozilla.org/en/The_DOM_and_JavaScript">The DOM and JavaScript</a> article. </div>
+<div id="section_"><a id="Global_Properties"></a>
+    <h2><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Properties">Global Properties</a></h2>
+  <p>This section lists the JavaScript properties not associated with any  object. In the ECMAScript specification, these properties are referred  to as properties of the <em>global object</em>.</p>
+  <ul>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Properties/Infinity">Infinity</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Properties/NaN">NaN</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Properties/undefined">undefined</a></li>
+  </ul>
+</div>
+<div id="section_2"><a id="Global_Functions"></a>
+    <h2><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Functions">Global Functions</a></h2>
+  <ul>
+      <p>This chapter contains JavaScript functions not associated with any  object. In the ECMAScript specification, these functions are referred  to as methods of the global object. To reduce redundancy, the  constructors are not listed here, but can be found at <a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference#Global_Objects">Global Objects</a>. </p>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Functions/decodeURI">decodeURI</a></li>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Functions/decodeURIComponent">decodeURIComponent</a></li>
+   <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Functions/encodeURI">encodeURI</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Functions/encodeURIComponent">encodeURIComponent</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Functions/eval">eval</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Functions/isFinite">isFinite</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Functions/isNaN">isNaN</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Functions/parseFloat">parseFloat</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Functions/parseInt">parseInt</a></li>
+  </ul>
+</div>
+<div id="section_14"><a id="Functions2"></a><a id="Functions_and_function_scope"></a>
+    <h2><a rel="internal" href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Functions_and_function_scope">Functions</a> and function scope</h2>
+  <ul>
+      <li><a rel="internal" href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Functions_and_function_scope/arguments">arguments</a></li>
+  </ul>
+</div>
+<div id="section_15"><a id="Statements2"></a>
+    <h2><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements">Statements</a></h2>
+  <ul>
+    <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/block">block</a></li>
+        <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/break">break</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/const">const</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/continue">continue</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/do...while">do...while</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/export">export</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/for">for</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/for...in">for...in</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/for_each...in">for each...in</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/function">function</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/if...else">if...else</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/import">import</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/label">label</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/let">let</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/return">return</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/switch">switch</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/throw">throw</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/try...catch">try...catch</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/var">var</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/while">while</a></li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Statements/with">with</a></li>
+  </ul>
+</div>
+<div id="section_16"><a id="Operators"></a>
+    <h2><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators">Operators</a></h2>
+    <ol>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Arithmetic_Operators">Arithmetic Operators</a> <br />
+        (+, -, *, /, %, ++, --, unary -)</li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Assignment_Operators">Assignment Operators</a><br />
+        (=, +=, -=, *=, /=, &gt;&gt;=, &lt;&lt;=, &gt;&gt;&gt;=, &amp;=, |=, ^=)</li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Bitwise_Operators">Bitwise Operators</a><br />
+        (&amp;, |, ^, ~, &lt;&lt;, &gt;&gt;, &gt;&gt;&gt;)</li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Comparison_Operators">Comparison Operators</a> <br />
+        (==, !=, ===, !==, &gt;, &gt;=, &lt;, &lt;=)</li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Logical_Operators">Logical Operators</a><br />
+        (&amp;&amp;, ||, !)</li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/String_Operators">String Operators</a> <br />
+        (+ and +=)</li>
+      <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Member_Operators">Member Operators</a> <br />
+        (object.property and object[&quot;property&quot;])</li>
+      <li>Special Operators
+          <ol>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/Conditional_Operator">Conditional Operator</a><br />
+              (<em>condition</em> ? <em>ifTrue</em> : <em>ifFalse</em>)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/Comma_Operator">Comma Operator</a><br />
+              (,)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/delete_Operator">delete Operator</a><br />
+              (delete)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/function_Operator">function Operator</a><br />
+              (function)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/get_Operator">get Operator</a><br />
+              (get)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/in_Operator">in Operator</a><br />
+              (in)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/instanceof_Operator">instanceof Operator</a><br />
+              (instanceof)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/let_Operator">let Operator</a><br />
+              (let)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/new_Operator">new Operator</a><br />
+              (new)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/set_Operator">set Operator</a> <br />
+              (set)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/this_Operator">this Operator</a> <br />
+              (this)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/typeof_Operator">typeof Operator</a><br />
+              (typeof)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/void_Operator">void Operator</a><br />
+              (void)</li>
+            <li><a rel="internal" href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Operators/Special_Operators/yield_Operator">yield Operator</a><br />
+              (yield)</li>
+            </ol>
+      </li>
+      </ol>
+    <p><a href="images/preloader.html">Image preloading</a> </p>
+</div>
+<p>&nbsp;</p>
+
+</div> <!-- end: class="block_content" -->
+</div> <!-- <div class="block_wrapper"> -->
+
+
+</div> <!-- End of <div id="js_content"> -->
+
+</div> <!-- End of <div id="js_body"> -->
+<hr />
+<div>
+  <div align="center"><a href="http://www.lee-create.com">Lee-Create Home</a> | 
+    <a href="http://build.lee-create.com">Build Web</a> | 
+    <a href="http://home.lee-create.com">Lee-Home</a> | 
+    <a href="http://localhost/drupal6t/">Local Drupal Test on Dady</a>
+  </div>
+</div>
+
+<div id="js_devNote">
+<div id="ws_devnote_tab">
+    <ul class="tabs-nav">
+        <li><a href="#fragment-25"><span>References</span></a></li>
+        <li><a href="#fragment-26"><span>Developer's Note</span></a></li>
+        <li><a href="#fragment-27"><span>TODOs</span></a></li>
+    </ul>
+    <div id="fragment-25">
+
+  <ul>
+    <li><a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide">Core JavaScript 1.5 Guide</a></li>
+    <li><a href="https://developer.mozilla.org/en/JavaScript">Mozilla &lt;developer center&gt;</a></li>
+    <li><a href="http://esqsoft.com/javascript-help/javascript-error-handling.htm">http://esqsoft.com/javascript-help/javascript-error-handling.htm</a></li>
+  </ul>   </div>
+    <div id="fragment-26">
+<!-- ======================================== -->
+
+<p>Dev Note </p>
+<ol>
+  <li>Need to have a index of my test code.
+    <ol>
+      <li><a href="regularexpression/regexfnstest.html">Regular Expression </a>
+        <ol>
+          <li><a href="regularexpression/regexp.html">Regular Expression          (from Netscape JavaScript guide)</a></li>
+          <li><a href="regularexpression/regexp.php">My Tests are done here</a></li>
+        </ol>
+      </li>
+      <li></li>
+    </ol>
+  </li>
+  </ol>
+<!-- ======================================== -->  
+    </div>
+    <div id="fragment-27">
+
+TODOs
+
+    </div>
+</div> <!-- <div id="ws_devnote_tab"> -->
+
+
+</div> <!-- <div id="js_devNote"> -->
+</body></html>

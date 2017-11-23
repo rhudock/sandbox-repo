@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://people.w3.org/mike/localstorage.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>HTML5 localStorage (name/value item pairs) demo</title>
+  <style>
+    td, th {
+      font-family: monospace;
+      padding: 4px;
+      background-color: #ccc;
+    }
+    #hoge {
+      border: 1px dotted blue;
+      padding: 6px;
+      background-color: #ccc;
+      margin-right: 50%;
+    }
+    #items_table {
+      border: 1px dotted blue;
+      padding: 6px;
+      margin-top: 12px;
+      margin-right: 50%;
+    }
+    #items_table h2 {
+      font-size: 18px;
+      margin-top: 0px;
+      font-family: sans-serif;
+    }
+    label {
+      vertical-align: top;
+    }
+  </style>
+ <style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style><script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/document_iterator.js"></script><script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/find_proxy.js"></script><script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/get_html_text.js"></script><script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/global_constants.js"></script><script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/name_injection_builder.js"></script><script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/number_injection_builder.js"></script><script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/menu_injection_builder.js"></script><script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/string_finder.js"></script><script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/change_sink.js"></script><meta name="find_proxy.js"><meta name="get_html_text.js"><meta name="global_constants.js"><meta name="name_injection_builder.js"><meta name="number_injection_builder.js"><meta name="menu_injection_builder.js"><meta name="string_finder.js"><meta name="change_sink.js"><meta name="document_iterator.js"></head>
+ <body onload="doShowAll()">
+  <h1>HTML5 localStorage (name/value item pairs) demo</h1>
+
+  <form name="editor">
+
+    <div id="hoge">
+     <p>
+     <label>Value: <textarea name="data" cols="41" rows="10"></textarea></label>
+     </p>
+
+     <p>
+      <label>Name: <input name="name"></label>
+      <input type="button" value="getItem()" onclick="doGetItem()">
+      <input type="button" value="setItem()" onclick="doSetItem()">
+      <input type="button" value="removeItem()" onclick="doRemoveItem()">
+     </p>
+   </div>
+
+   <div id="items_table">
+     <h2>Items</h2>
+     <table id="pairs"><tbody><tr><th>Name</th><th>Value</th></tr>
+<tr><td><i>empty</i></td>
+<td><i>empty</i></td></tr>
+</tbody></table>
+     <p>
+     <label><input type="button" value="clear()" onclick="doClear()"> <i>* clear() removes all items</i></label>
+     </p>
+   </div>
+
+
+   <script>
+
+     function doSetItem() {
+       var name = document.forms.editor.name.value;
+       var data = document.forms.editor.data.value;
+       localStorage.setItem(name, data);
+       doShowAll();
+     }
+
+     function doGetItem() {
+       var name = document.forms.editor.name.value;
+       document.forms.editor.data.value = localStorage.getItem(name);
+       doShowAll();
+     }
+
+     function doRemoveItem() {
+       var name = document.forms.editor.name.value;
+       document.forms.editor.data.value = localStorage.removeItem(name);
+       doShowAll();
+     }
+
+     function doClear() {
+       localStorage.clear();
+       doShowAll();
+     }
+
+     function doShowAll() {
+       var key = "";
+       var pairs = "<tr><th>Name</th><th>Value</th></tr>\n";
+       var i=0;
+       for (i=0; i<=localStorage.length-1; i++) {
+         key = localStorage.key(i);
+         pairs += "<tr><td>"+key+"</td>\n<td>"+localStorage.getItem(key)+"</td></tr>\n";
+       }
+       if (pairs == "<tr><th>Name</th><th>Value</th></tr>\n") {
+         pairs += "<tr><td><i>empty</i></td>\n<td><i>empty</i></td></tr>\n";
+       }
+       document.getElementById('pairs').innerHTML = pairs;
+     }
+
+   </script>
+
+  </form>
+
+ 
+
+</body><span id="skype_highlighting_settings" display="none" autoextractnumbers="1" hightlightingswitched="0"></span><object id="skype_plugin_object" location.href="http://people.w3.org/mike/localstorage.html" location.hostname="people.w3.org" width="0" height="0" type="application/x-vnd.skype.click2call.chrome.5.7.0" style="position: absolute; visibility: hidden; left: -100px; top: -100px;"></object></html>

@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+   <title>Javascript Basic Test</title>
+</head>
+<body>
+	<h1 id="qunit-header">Event Tester</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	
+
+	<div style="height: 100px;" id="my-msg"></div>
+	<div style="height: 100px;" id="qunit-fixture"></div>
+
+
+<script type="text/javascript">
+
+<!--
+	/**
+ * $Id$
+ * 
+ * 
+ * Ref: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date#Example:_Several_ways_to_assign_dates
+ */
+
+// $( document ).ready(function() {
+
+$(function() {
+
+
+	module( "Page Condition Test");
+
+	test("Check div#test object is not in DOM", function() {
+		ok(true);
+
+		equal ($('div#test').length, 0,  "number of $('div#test').length is: " + $('div#test').length);
+
+		equal( $('div#test').attr("id"), undefined, "id is " + $('div#test').attr("id") );
+	});
+
+
+/**
+ *
+ *
+ */
+	module( "Test simpleCreateDiv", {
+	  setup: function() {
+	  	simpleCreateDiv("test", ">>>>>>>>>>>>>>This is a test", 300, 300, 0, 0);
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	    $('div#test').remove();
+	  }
+	});
+
+	test("Check div#test object is not in DOM", function() {
+		ok(true);
+
+		equal ($('div#test').length, 1,  "number of $('div#test').length is: " + $('div#test').length);
+
+		equal( $('div#test').attr("id"), "test", "id is " + $('div#test').attr("id") );
+	});
+
+	function simpleCreateDiv(id, html, width, height, left, top) {
+
+		newdiv = document.createElement('div'); 
+		newdiv.setAttribute('id', id);
+		if (typeof width != "undefined") { 
+			newdiv.style.width = width + "px";
+		} 
+		if (typeof height != "undefined") { 
+			newdiv.style.height = height + "px";
+		} 
+		if ((left || top) || (left && top)) { 
+			newdiv.style.position = "absolute";
+			if (typeof left != "undefined") { 
+			newdiv.style.left = left + "px";
+			} 
+			if (typeof top != "undefined") { 
+			newdiv.style.top = top + "px";
+			} 
+		} 
+		newdiv.style.background = "#FFF";
+		newdiv.style.border = "4px solid #000";
+		if (html) { 
+			newdiv.innerHTML = html;
+		} else { 
+			newdiv.innerHTML = "nothing";
+		} 
+		document.body.appendChild(newdiv);
+
+	}
+
+
+	
+	module( "Create div test", {
+	  setup: function() {
+	  	createdivcenter("test", ">>>>>>>>>>>>>>This is a test", 300, 300);
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	    $('div#test').remove();
+	  }
+	});
+
+	test("div Create test", function() {
+		ok(true);
+
+		equal ($('div#test').length, 1,  "number of object is: " + $('div#test').length);
+
+		equal( $('div#test').attr("id"), "test", "id is " + $('div#test').attr("id") );
+	});
+
+
+	test( "Appends a div", function() {
+	  var $fixture = $( "#qunit-fixture" );
+	 
+	  $fixture.append( "<div>hello!</div>" );
+	  equal( $( "div", $fixture ).length, 1, "div added successfully!" );
+	});
+	 
+	test( "Appends a span", function() {
+	  var $fixture = $( "#qunit-fixture" );
+	 
+	  $fixture.append("<span>hello!</span>" );
+	  equal( $( "span", $fixture ).length, 1, "span added successfully!" );
+	});	
+
+
+	function createdivcenter(id, html, width, height) {
+
+		var scroll_height = 0, scroll_width = 0, top = 0, left = 0;
+		if(isIE()) {
+			scroll_height = window.parent.document.documentElement.clientHeight;
+			scroll_width = window.parent.document.documentElement.clientWidth;
+		}
+		else {
+			scroll_height = window.parent.innerHeight;
+			scroll_width = window.parent.innerWidth;
+		}
+		left = (scroll_width / 2) - (width / 2);
+		top = (scroll_height / 2) - (height / 2);
+		left = left < 0 ? 0 : left;
+		top = top < 0 ? 0 : top;
+
+		creatediv(id, html, width, height, left, top);
+	}
+
+
+
+
+	/*
+		http://stackoverflow.com/questions/9456289/how-to-make-a-div-visible-and-invisible-with-javascript
+		elem.display = 'none'; // hide
+		elem.display = 'block'; // show - use this for block elements (div, p)
+		elem.display = 'inline'; // show - use this for inline elements (span, a)
+		or
+
+		elem.visibility = 'hidden'; // hide, but let the element keep its size
+		elem.visibility = 'visible';
+		If you are using jQuery, you can do it even easier as long as you want to set the display property:
+
+		$(elem).hide();
+		$(elem).show();
+
+	*/
+	// http://it.toolbox.com/wiki/index.php/Dynamically_Creating_a_Div_in_Javascript
+
+	function creatediv(id, html, width, height, left, top) {
+
+		var newdiv;
+
+		newdiv = document.getElementById(id);
+
+		if (!!newdiv)
+		{
+			newdiv.style.visibility='visible'; 
+		} else {
+			newdiv = document.createElement('div'); 
+			newdiv.setAttribute('id', id);
+			if (typeof width != "undefined") { 
+				newdiv.style.width = width + "px";
+			} 
+			if (typeof height != "undefined") { 
+				newdiv.style.height = height + "px";
+			} 
+			if ((left || top) || (left && top)) { 
+				newdiv.style.position = "absolute";
+				if (typeof left != "undefined") { 
+				newdiv.style.left = left + "px";
+				} 
+				if (typeof top != "undefined") { 
+				newdiv.style.top = top + "px";
+				} 
+			} 
+			newdiv.style.background = "#FFF";
+			newdiv.style.border = "4px solid #000";
+			if (html) { 
+				newdiv.innerHTML = html;
+			} else { 
+				newdiv.innerHTML = "nothing";
+			} 
+			document.body.appendChild(newdiv);
+
+			newdiv = document.getElementById(id);
+			newdiv.addEventListener('click', function(e) {
+				newdiv.display = 'none';
+				newdiv.style.visibility='hidden';
+			}, false);
+		}
+	};
+
+
+
+
+	function isIE() {
+		return !!(window.document["all"]) && !window["opera"];
+	};
+
+	function displayMsg() {
+		$("#my_message .msg_height").text( window.innerHeight  );
+		$("#my_message .msg_width").text( window.innerWidth );
+	};
+
+	/**
+		// http://www.ezineasp.net/post/Javascript-Create-New-Div-HTML-Element-Dynamically.aspx
+	*/
+    function createDiv2() {
+        var divTag = document.createElement("div");
+
+        divTag.id = "div1";
+
+        divTag.setAttribute("align", "center");
+
+        divTag.style.margin = "0px auto";
+
+        divTag.className = "dynamicDiv";
+
+        divTag.innerHTML = "This HTML Div tag created " 
+                            + "using Javascript DOM dynamically.";
+
+        document.body.appendChild(divTag);
+    }
+
+});
+//-->
+</script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="/lib/qunit/qunit-1.15.0.css" type="text/css" media="screen"/>
+   <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+</head>
+<body>
+
+	<h1 id="qunit-header">jQuery Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+<!-- script type="text/javascript" src="regexpQunit.js"></script -->	
+<script type="text/javascript">
+/**
+ * $Id$
+ * 
+ * 
+ */
+$(function() {
+	
+    function ciAcceptCobAndShareInv(){
+        throw("ciAcceptCobAndShareInv is not defined");
+    }
+
+	/**
+	 * Module of Array Qunit tests
+	 */
+	module("Exception Test Module");
+
+	test("throws test", function() {
+		 function CustomError( message ) {
+			this.message = message;
+		  }
+		 
+		  CustomError.prototype.toString = function() {
+			return this.message;
+		  };
+		 
+		  throws(
+			function() {
+			  throw "error"
+			},
+			"throws with just a message, no expected"
+		  );
+		 
+		  throws(
+			function() {
+			  throw new CustomError();
+			},
+			CustomError,
+			"raised error is an instance of CustomError"
+		  );
+		 
+		  throws(
+			function() {
+			  throw new CustomError("some error description");
+			},
+			/description/,
+			"raised error message contains 'description'"
+		  );
+	});
+
+});
+</script>	
+</body>
+</html>

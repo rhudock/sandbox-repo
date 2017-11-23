@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="/lib/qunit/qunit-1.15.0.css" type="text/css" media="screen"/>
+   <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+</head>
+<body>
+
+  <h1 id="qunit-header">Javascript Operator Test - <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators">mdn operator</a></h1>
+	<h2 id="qunit-banner"> </h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+  <!-- script type="text/javascript" src="regexpQunit.js"></script -->	
+<script type="text/javascript">
+/**
+ * $Id$
+ * 
+ *   http://api.jquery.com/category/events/event-object/
+ */
+$(function() {
+	
+	module( "Basic Event Test", {
+	  setup: function() {
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	  }
+	});
+
+	test( "keylogger api behavior", function() {
+		var event,
+		$doc = $( document ),
+		keys = KeyLogger( $doc );
+
+		// trigger event
+		event = $.Event( "keydown" );
+		event.keyCode = 9;
+		// ****** truggers an event ********
+		$doc.trigger( event );
+
+		// verify expected behavior
+		equal( keys.log.length, 1, "a key was logged" );
+		equal( keys.log[ 0 ], 9, "correct key was logged" );
+	});
+
+	/**
+	 *
+	 */
+	function KeyLogger( target ) {
+		if ( !(this instanceof KeyLogger) ) {
+			return new KeyLogger( target );
+		}
+		this.target = target;
+		this.log = [];
+		var self = this;
+		this.target.off( "keydown" ).on( "keydown", function( event ) {
+			self.log.push( event.keyCode );
+		});
+	}
+
+
+
+
+	/**
+	*  This module shows how event can be triggered in jQuery and tested in Qunit
+	*  
+	*/
+	module( "Click Event Test", {
+	  setup: function() {
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	  }
+	});
+
+	test( "click event test (jquery)", function() {
+		var event, clicked = false,
+		$doc = $( document );
+		$doc.click(function() {
+			clicked = true;
+		});
+
+		equal( clicked, false, "click event is not fied" );
+		// trigger event
+		event = $.Event( "click" );
+		$doc.trigger( event );
+
+		// verify expected behavior
+		equal( clicked, true, "click event is tested" );
+	});
+
+	test( "click event test (JavaScript)", function() {
+		var event, clicked = false,
+		$body = $('body');
+
+		document.body.addEventListener('click', function(e) {
+			clicked = true;
+			}, false);
+
+		equal( clicked, false, "click event is not fied" );
+
+		// trigger event
+		event = $.Event( "click" );
+		$body.trigger( event );
+
+		// verify expected behavior
+		equal( clicked, true, "click event is tested" );
+	});
+
+
+});
+</script>	
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Device Type Test</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/lib/qunit/qunit-1.15.0.css" type="text/css" media="screen"/>
+    <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+
+<!-- script type="text/javascript" src="regexpQunit.js"></script -->
+<script type="text/javascript">
+    /**
+     * $Id$
+     *
+     *
+     */
+    $(function () {
+
+
+        /**
+         * Module of Array Qunit tests
+         */
+        module("RegExp Test - Browser Type Detection");
+
+        test("Testing regexp.prototype.test()", function () {
+            var uaString = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2";
+            var isSafari = (/safari/i).test(uaString);
+
+            ok(isSafari, "UserAgent includes Safari : " + isSafari);
+
+            isSafari = !/chrome/i.test(window.navigator.userAgent);
+
+            ok(isSafari, "UserAgent not includes chrome : " + isSafari);
+
+        });
+
+        test("Testing regexp.prototype.test() ", function () {
+            var uAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0";
+            ok(/firefox/i.test(uAgent), "The reg test is ");
+        });
+
+
+        test("Testing regexp.prototype.test()", function () {
+
+            var uaString, isSupportedBrowser;
+
+            // Test Safari
+            uaString = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2";
+            isSupportedBrowser = /safari|firefox/i.test(uaString) && !/chrome/i.test(uaString);
+            ok(isSupportedBrowser, "This is supported Browser according to " + uaString);
+
+            // Test Firefox
+            uAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0";
+            var isSupportedBrowser = /safari|firefox/i.test(uaString) && !/chrome/i.test(uaString);
+            ok(isSupportedBrowser, "This is supported Browser according to " + uaString);
+        });
+
+
+        /**
+         * Module of Array Qunit tests
+         */
+        module("Protocol Detaction (RegExp Test)");
+
+        test("check if it is https not http", function () {
+            var base = "http://home.inq.com";
+
+            if (base.toLowerCase().indexOf("http:") == 0) {
+                base = base.substring(0, 4) + 's' + base.substring(4);
+            }
+
+            equal(base, 'https://home.inq.com', "base is " + base);
+        });
+
+        test("Less Complex regexp test", function () {
+            var rxPattern = /^\s*function\s*(\([^)]*\))\s*[{]([\s\S]*)[}]\s*(\([\s\S]*\))[\t\n\r ;]*$/m;
+            var functionCode = "function(){ alert('got here'); return false; }()";
+            var matches = rxPattern.exec(functionCode);
+
+            ok(matches.length > 0, "matches should have more than zero");
+        });
+
+
+        /**
+         *  Module to test getDeviceType()
+         */
+        module("Device Type From User Agent Test");
+
+        test("Test regexp replace function", function () {
+
+            var userAgentStr = navigator.userAgent;
+            var expected = "Other";
+            equal(getDeviceType(userAgentStr), expected, "Failure: " + getDeviceType(userAgentStr) + " doesn't match with " + expected);
+
+            userAgentStr = "kajsdf ;alksdfj ipad";
+            expected = "Tablet";
+            equal(getDeviceType(userAgentStr), expected, "Failure: " + getDeviceType(userAgentStr) + " doesn't match with " + expected);
+
+        });
+
+        test("Test getDeviceType2()", function () {
+
+            var expected = "Other";
+            equal(getDeviceType2(), expected, "Compare actual: '" + getDeviceType2() + "' with expected: '" + expected + "'");
+
+
+        });
+
+        function getDeviceType(userAgentStr) {
+
+            var PHONE = 'Phone', TABLET = 'Tablet';
+            var phoneStr = "iphone|ipod|android|blackberry|opera mini|opera mobi|skyfire|maemo|windows phone|palm|iemobile|symbian|symbianos|fennec|mobile";
+            var tabletStr = "ipad|android 3|sch-i800|playbook|tablet|kindle|gt-p1000|gt-p5113|sgh-t849|shw-m180s|a510|a511|a100|dell streak|silk";
+
+            var phoneRE = new RegExp(phoneStr, "i");
+            var tabletRE = new RegExp(tabletStr, "i");
+
+            var iseragent = userAgentStr.toLowerCase();
+
+            var isPhone = phoneRE.test(iseragent.toLowerCase());
+            var isTablet = tabletRE.test(iseragent.toLowerCase());
+
+            /*
+             var isPhone = (/iphone|ipod|android|blackberry|opera mini|opera mobi|skyfire|maemo|windows phone|palm|iemobile|symbian|symbianos|fennec|mobile/i.test(navigator.userAgent.toLowerCase()));
+             var isTablet = (/ipad|android 3|sch-i800|playbook|tablet|kindle|gt-p1000|gt-p5113|sgh-t849|shw-m180s|a510|a511|a100|dell streak|silk/i.test(navigator.userAgent.toLowerCase()));
+             */
+
+            var deviceType = "Other";
+
+            /* Search for phone (mobile) first.  */
+            if (isPhone === true) {
+                deviceType = PHONE;
+            }
+
+            /* And also test if it is a supported tablet */
+            if (isTablet === true) {
+                deviceType = TABLET;
+            }
+
+            return deviceType;
+
+        }
+
+        /**
+         *
+         */
+        function getDeviceType2() {
+
+            var OTHER = "Other", deviceType = OTHER;
+
+            if (deviceType == OTHER) {
+                deviceType = (/iphone|ipod|android|blackberry|opera mini|opera mobi|skyfire|maemo|windows phone|palm|iemobile|symbian|symbianos|fennec|mobile/i.test(navigator.userAgent.toLowerCase())) ? "Phone" : OTHER;
+            }
+
+            if (deviceType == OTHER) {
+                deviceType = (/ipad|android 3|sch-i800|playbook|tablet|kindle|gt-p1000|gt-p5113|sgh-t849|shw-m180s|a510|a511|a100|dell streak|silk/i.test(navigator.userAgent.toLowerCase())) ? "Tablet" : OTHER;
+            }
+
+            return deviceType;
+        }
+
+    });
+</script>
+</body>
+</html>

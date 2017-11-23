@@ -1,0 +1,46 @@
+<html>
+
+<head>
+
+<title>if window</title>
+
+<script type="text/javascript">
+
+var msgBox;
+
+function doOnLoad() {
+    msgBox = window.document.getElementById("msg-box");
+    msgBox.innerHTML += document.title + "<p>Window is open</>";
+}
+
+function sendMsgToHostWindow(hostwindow) {
+    var message = "test message";
+    if (hostwindow ) {
+        hostwindow.postMessage ( message, "*" );
+    }
+}
+
+window.onbeforeunload = doOnBeforeUnload;
+window.onunload = doOnUnload;
+
+function checkDifferentDominAccess() {
+    var test = true;
+    alert(window.parent.opener);
+}
+    
+</script>
+
+</head>
+
+<body onload="doOnLoad()">
+
+This is child iframe window v2.
+
+<p>
+<input type="button" value="Communicate with window in different domain." onclick="checkDifferentDominAccess()" />
+</p>
+<div id="msg-box"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="/lib/qunit/qunit-1.15.0.css" type="text/css" media="screen"/>
+   <script type="text/javascript" src="/lib/qunit/qunit-1.15.0.js"></script>
+</head>
+<body>
+
+  <h1 id="qunit-header">Dom IFrame Test <a href="">deviceDataSource.xml</a></h1>
+	<h2 id="qunit-banner"> </h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+<div id="my-test-area"></div>	
+
+  <!-- script type="text/javascript" src="regexpQunit.js"></script -->	
+<script type="text/javascript">
+/**
+ * $Id$
+ * 
+ * 
+ */
+$(function() {
+	
+	module( "Create iframe test", {
+	  setup: function() {
+	  	$('<iframe src="google.com" frameborder="0" scrolling="no" id="myFrame"></iframe>').appendTo("#my-test-area");
+	    // prepare something for all following tests
+	  },
+	  teardown: function() {
+	    // clean up after each test
+	    $('iframe#myFrame').remove();
+	  }
+	});
+
+	test("iframe Create test", function() {
+
+		ok(true, "number of object with iframe is: " + $('iframe').length);
+		equal ($('iframe').length, 1,  "number of object with iframe is: " + $('iframe').length);
+		ok( $('iframe').attr("id") == "myFrame", "id is " + $('iframe').attr("id") );
+	
+	});
+
+	test("iframe Create test", function() {
+
+		var iframe = document.getElementById("myFrame");
+		ok( iframe );
+		equal( iframe.id, "yourFrame" );
+		
+		iframe.setAttribute("id", "yourFrame");
+
+		iframe = document.getElementById("yourFrame");
+
+		ok( iframe );
+		equal( iframe.id, "yourFrame" );	
+	});
+
+});
+</script>	
+</body>
+</html>

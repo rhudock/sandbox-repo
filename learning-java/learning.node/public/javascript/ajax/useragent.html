@@ -1,0 +1,328 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+</head>
+<body>
+
+	<h1 id="qunit-header">jQuery Test Suite - userAgent related regexp</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+<!-- script type="text/javascript" src="regexpQunit.js"></script -->	
+<script type="text/javascript">
+/**
+ * $Id$
+ * 
+ * 
+ */
+$(function() {
+	
+
+	/**
+	 * Module of Array Qunit tests
+	 */
+	module("To test getDeviceType");
+
+	function getDeviceType(myUserAgent) {
+		var deviceType = null;
+
+		if( deviceType == null ) {
+		deviceType = (/kindle|nook|android 2|ubuntu/i.test(myUserAgent.toLowerCase())) ? "Unsupported" : null;
+		}
+		if( deviceType == null ) {
+		deviceType = (/^(tablet(?!.*MSIE [89]\.0))|ipad|android 3|sch-i800|playbook|kindle|gt-p1000|gt-p7510|gt-p5100|gt-p5113|sgh-t849|shw-m180s|a510|a511|a100|dell streak|silk|(tablet(?=.*(MSIE 8\.0)|IEMobile)(?=.*(IEMobile)|MSIE 8\.0))|(MSIE 8\.0(?=.*(tablet)|IEMobile)(?=.*(IEMobile)|tablet))|(IEMobile(?=.*(MSIE 8\.0)|tablet)(?=.*(MSIE 8\.0)|tablet))/i.test(myUserAgent.toLowerCase())) ? "Tablet" : null;
+		}
+		/*
+		if( deviceType == null ) {
+		deviceType = (/ipad|android 3|sch-i800|playbook|tablet|kindle|gt-p1000|gt-p7510|gt-p5100|gt-p5113|sgh-t849|shw-m180s|a510|a511|a100|dell streak|silk/i.test(myUserAgent.toLowerCase())) ? "Tablet" : null;
+		}
+		*/
+		if( deviceType == null ) {
+		deviceType = (/iphone|ipod|android|blackberry|opera mini|opera mobi|skyfire|maemo|windows phone|palm|iemobile|symbian|symbianos|fennec|mobile/i.test(myUserAgent.toLowerCase())) ? "Phone" : null;
+		}
+		if( deviceType == null ) {
+		deviceType = "Standard";
+		} else {
+			/* This is because IE uses Tablet at some location. */
+			if ( deviceType == "Tablet" ) {
+				if ( /MSIE 9.0|MSIE 8.0/i.test(myUserAgent.toLowerCase()) && /tablet/i.test(myUserAgent.toLowerCase()) && !/IEMobile/i.test(myUserAgent.toLowerCase()) ) {
+					deviceType = "Standard";
+				}
+			}
+		}
+
+		return deviceType;
+	} 
+
+
+	test("Testing regexp.prototype.test() ", function() {
+		var myUserAgent = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 5_1_1 like Mac OS X; en-gb) AppleWebKit/534.46.0 (KHTML, like Gecko) CriOS/19.0.1084.60 Mobile/9B206 Safari/7534.48.3";
+
+		equal ( "Phone", getDeviceType(myUserAgent), "getDeviceType returns " + getDeviceType(myUserAgent));
+	});
+
+	/* 
+		IE Tablet Error test RTDEV-4415 
+	http://www.useragentstring.com/pages/Internet%20Explorer/
+	http://www.useragentstring.com/Internet%20Explorer6.0_id_17085.php
+	MDN device type detection.
+	https://developer.mozilla.org/en-US/docs/Browser_detection_using_the_user_agent
+	*/
+	test("Test getDeviceType() custom function.", function() {
+		var uAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 2.0.50727; SLCC2; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; Zune 4.0; Tablet PC 2.0; InfoPath.3; .NET4.0C; .NET4.0E)";
+
+		equal( "Standard", getDeviceType(uAgent), "The device type should be Standard");
+	});
+
+	/* IE Tablet Error test RTDEV-4415 */
+	test("Test getDeviceType() custom function.", function() {
+		var uAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2; .NET CLR 1.1.4322; .NET4.0C; Tablet PC 2.0)";
+
+		equal( "Standard", getDeviceType(uAgent), "The device type should be Standard");
+	});
+
+	/* IE Tablet Error test RTDEV-4415 */
+	test("Test getDeviceType() custom function.", function() {
+		var uAgent = "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; .NET CLR 2.7.58687; SLCC2; Media Center PC 5.0; Zune 3.4; Tablet PC 3.6; InfoPath.3)";
+
+		equal( "Standard", getDeviceType(uAgent), "The device type should be Standard");
+	});
+
+	/* IE Tablet Error test RTDEV-4415 */
+	test("Test getDeviceType() custom function.", function() {
+		var uAgent = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; InfoPath.3; Tablet PC 2.0)";
+
+		equal( "Standard", getDeviceType(uAgent), "The device type should be Standard");
+	});
+	
+	function getDeviceTypeShort(myUserAgent) {
+		var deviceType = "Tablet";
+		if ( /^(?=.*tablet)((?=.*MSIE [89]\.0)(?=.*IEMobile)|(?!.*MSIE [89]\.0))/i.test(myUserAgent.toLowerCase()) 
+			// && /table/i.test(myUserAgent.toLowerCase()) && !/IEMobile/i.test(myUserAgent.toLowerCase())
+			) 
+			{
+			deviceType = "Standard";		
+		}
+		return deviceType;
+	}
+
+	test("Test getDeviceType() custom function.", function() {
+		var uAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 2.0.50727; SLCC2; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; Zune 4.0; Tablet PC 2.0; InfoPath.3; .NET4.0C; .NET4.0E )";
+
+		equal( "Standard", getDeviceTypeShort(uAgent), "The device type should be Standard");
+	});
+
+	/* IE Tablet Error test RTDEV-4415 */
+	test("Test getDeviceType() custom function.", function() {
+		var uAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2; .NET CLR 1.1.4322; .NET4.0C; Tablet PC 2.0)";
+
+		equal( "Standard", getDeviceTypeShort(uAgent), "The device type should be Standard");
+	});
+
+	/* IE Tablet Error test RTDEV-4415 */
+	test("Test getDeviceType() custom function.", function() {
+		var uAgent = "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; .NET CLR 2.7.58687; SLCC2; Media Center PC 5.0; Zune 3.4; Tablet PC 3.6; InfoPath.3)";
+
+		equal( "Standard", getDeviceTypeShort(uAgent), "The device type should be Standard");
+	});
+
+	/* IE Tablet Error test RTDEV-4415 */
+	test("Test getDeviceType() custom function.", function() {
+		var uAgent = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; InfoPath.3; Tablet PC 2.0)";
+
+		equal( "Standard", getDeviceTypeShort(uAgent), "The device type should be Standard");
+	});
+	
+	/* IE Tablet Error test RTDEV-4415 */
+	test("Galaxy Test for By", function() {
+		var uAgent = "Mozilla/5.0 (Linux; U; Android 4.0.3; de-de; GT-P5100 Build/IML74K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30";
+
+		equal( "Tablet", getDeviceTypeShort(uAgent), "The device type should be Tablet");
+	});
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+	module("RegExp Test - Browser Type Detection");
+
+
+	test("Testing regexp.prototype.test()", function() {
+		var uaString = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2";
+		var isSafari = (/safari/i).test(uaString);
+
+		ok (isSafari, "UserAgent includes Safari : " + isSafari);
+
+		isSafari = !/chrome/i.test(window.navigator.userAgent);
+
+		ok (isSafari, "UserAgent not includes chrome : " + isSafari);
+
+	});
+
+	test("Testing regexp.prototype.test() ", function() {
+		var uAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0";
+		ok ( /firefox/i.test(uAgent), "The reg test is ");
+	});
+
+	/**
+	 *  Android Test
+	 */
+	// MajorVersion [> . <MinorVersion [> . <IncrementalVersion ] ] [> - <BuildNumber | Qualifier
+	test("Testing regexp.prototype.test() ", function() {
+		var uAgent = "Mozilla/5.0 (Linux; U; Android 2.2.1; fr-fr; Desire HD Build/FRG83D) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+
+		// Android version; MajorVersion [> . <MinorVersion [> . <IncrementalVersion
+		var os, majVer, minVer, incVer;
+
+		var version = /android ([0-9])\.([0-9])\.*([0-9]*)/i.exec(uAgent);
+
+		if (version.length == 4) {
+			os = "Android"; majVer = version[1]; minVer = version[2]; incVer = version[3];
+		}
+
+		equal ( "2.2.1", majVer + '.' + minVer + '.' + incVer );
+	});
+
+	/**
+	 *  Finding Android 3.1 or higher
+	 */ 
+	test("Testing if Android version is 3.1 or later", function() {
+		
+		ok ( isCSSFixedPositionSupported() );
+
+	});
+	/**
+	 *  Finding Android 3.1 or higher
+	 */ 
+	test("Testing if Android version is 3.1 or later", function() {
+		var uAgent = "Mozilla/5.0 (Linux; U; Android 3.1; fr-fr; Desire HD Build/FRG83D) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+
+		// Android version; MajorVersion [> . <MinorVersion [> . <IncrementalVersion
+		var majVer, minVer, incVer;
+
+		var version = /android ([0-9])\.([0-9])\.*([0-9]*)/i.exec(uAgent);
+
+		if (version.length == 4) {
+			os = "Android"; majVer = version[1]; minVer = version[2]; incVer = version[3];
+		}
+
+		ok ( majVer > 3 || ( majVer == 3 && minVer >= 1  ));
+
+	});
+	
+	// desktop safari user agent
+	test("Testing if Android version is 3.1 or later with Safari", function() {
+		var uAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2";
+
+		// Android version; MajorVersion [> . <MinorVersion [> . <IncrementalVersion
+		var majVer, minVer, incVer;
+
+		var version = /android ([0-9])\.([0-9])\.*([0-9]*)/i.exec(uAgent);
+
+		if ( version !== null && version.length == 4) {
+			os = "Android"; majVer = version[1]; minVer = version[2]; incVer = version[3];
+		}
+
+		ok ( !( majVer > 3 || ( majVer == 3 && minVer >= 1  ) ));
+
+	});
+	
+	test("Testing if Android version is 3.1 or later", function() {
+		var uAgent = "Mozilla/5.0 (Linux; U; Android 3.0; fr-fr; Desire HD Build/FRG83D) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+
+		// Android version; MajorVersion [> . <MinorVersion [> . <IncrementalVersion
+		var majVer, minVer, incVer;
+
+		var version = /android ([0-9])\.([0-9])\.*([0-9]*)/i.exec(uAgent);
+
+		if (version.length == 4) {
+			os = "Android"; majVer = version[1]; minVer = version[2]; incVer = version[3];
+		}
+
+		equal ( (majVer > 3 || ( majVer == 3 && minVer >= 1 )) , false );
+	});
+	
+	test("Testing regexp.prototype.test() ", function() {
+		var uAgent = "Mozilla/5.0 (Linux; U; Android 2.3; fr-fr; Desire HD Build/FRG83D) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+
+		// Android version; MajorVersion [> . <MinorVersion [> . <IncrementalVersion
+		var majVer, minVer, incVer;
+
+		var version = /android ([0-9])\.([0-9])\.*([0-9]*)/i.exec(uAgent);
+
+		if (version.length == 4) {
+			os = "Android"; majVer = version[1]; minVer = version[2]; incVer = version[3];
+		}
+
+		equal ( "2.3", majVer + '.' + minVer );
+		equal ( "2.3", "" + majVer + ((minVer !== "") ? ('.' + minVer) : "" ) );
+		equal ( "2.3", "" + majVer + (minVer !== "") ? (('.' + minVer) + ("" + (incVer !== "") ? ('.' + incVer) : "")) : "" );
+	});
+	
+});
+
+
+
+var r = /^(?=.*tablet)((?=.*MSIE [89]\.0)(?=.*IEMobile)|(?!.*MSIE [89]\.0))/i;
+
+var ls = [
+	"tablet", // tablet
+	"tablet MSIE 8.0", // Null
+	"MSIE 8.0 tablet", // Null
+    "tablet MSIE 9.0", // Null
+    "MSIE 9.0 tablet", // Null
+    "MSIE 8.0 tablet IEMobile",  // tablet
+    "MSIE 8.0 IEMobile tablet",  // tablet
+    "tablet MSIE 8.0 IEMobile",  // tablet
+    "tablet IEMobile MSIE 8.0",  // tablet 
+    "IEMobile tablet MSIE 8.0",  // tablet
+    "IEMobile MSIE 8.0 tablet",  // tablet
+    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 2.0.50727; SLCC2; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; Zune 4.0; Tablet PC 2.0; InfoPath.3; .NET4.0C; .NET4.0E)"    // Null
+];
+
+/*
+var daniel = function(myUserAgent) {
+    return /MSIE 9.0|MSIE 8.0/i.test(myUserAgent.toLowerCase()) && /table/i.test(myUserAgent.toLowerCase()) && !/IEMobile/i.test(myUserAgent.toLowerCase());
+};
+
+var test = function () {
+    for (var i in ls) {
+        var d = daniel(ls[i]);
+        var m = r.test(ls[i])
+        var w = (d != m);
+   //     console.log((w?"WARNING! ":"") + ls[i] + ":");
+     //   console.log("    daniel: " + d);
+       // console.log("    regex : " + m);
+    }
+};
+
+// test();
+*/
+
+</script>	
+</body>
+</html>
+
+
+1. check tablet, if so, 
+2. check MSIE [89]\.0, => Yes check 3,
+                           No tablet and exit
+3. check IEMobile => Yes tablet and exit
+                     No  null and exit
+

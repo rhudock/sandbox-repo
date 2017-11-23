@@ -1,0 +1,21 @@
+dlee@touchcommerce.com 1 111 atteuwestpx11.uc.att.com 7778 60398364 attinc3 connect7.uc.att.com/attinc3 60398364~~~~~ 443 80 7778
+[Servers List]
+atteuwestpx11.uc.att.com 7778 60398364 ATT_EU_West_Px11 ~~~~~ 443 80 7778;IpPref=4 
+attnawestpx37.uc.att.com 7778 60398364 ATT_NA_West_Px37 ~~~~~ 443 80 7778;IpPref=4 
+atteueastpx5.uc.att.com 7778 60398364 ATT_EU_East_Px5 ~~~~~ 443 80 7778;IpPref=4 
+attapacwestpx1.uc.att.com 7778 60398364 ATT_Apac_West_PX1 ~~~~~ 443 80 7778;IpPref=4 
+attapaceastpx2.uc.att.com 7778 60398364 ATT_Apac_East_PX2 ~~~~~ 443 80 7778;IpPref=4 
+attnaeastpx43.uc.att.com 7778 60398364 ATT_NA_East_Px43 ~~~~~ 443 80 7778;IpPref=4 
+[Servers List End]
+[PARAMS]
+Daniel;Lee;Daniel;Lee
+[END PARAMS]
+[COMMENTS]
+[END COMMENTS]
+[Additional parameters]
+Param1=
+Param2=11.5.520
+Param3=https://connect7.uc.att.com/attinc3
+Param4=
+CT=M
+[End additional parameters]

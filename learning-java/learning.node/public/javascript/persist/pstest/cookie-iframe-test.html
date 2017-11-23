@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Local Storage Test in iframe</title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+ </head>
+
+ <body>
+
+<p>Open this in www.myjs.com and see if we can read writ tc.myjs.com.</p>
+ 
+<p><a href="http://www.myjs.com/pstest/cookie.html">open it in its own domain and check cookie value</a></p>
+<iframe src="http://www.myjs.com/pstest/cookie.html" name="iframe_b" style="height: 150px; width:450px;"></iframe>
+<p><a href="http://tc.myjs.com/pstest/cookie.html">open it in sibling domain and check cookie value</a></p>
+<iframe src="http://tc.myjs.com/pstest/cookie.html" name="iframe_a" style="height: 150px; width:450px;"></iframe>
+<p><a href="http://www.webui.me/javascript/pstest/cookie.html">open it in other domain and check cookie value</a></p>
+<iframe src="http://www.webui.me/javascript/pstest/cookie.html" name="iframe_c" style="height: 150px; width:450px;"></iframe>
+
+ </body>
+</html>

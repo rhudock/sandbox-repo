@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/>
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+   <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+</head>
+<body>
+   <!-- script type="text/javascript" src="localstorageQunit.js"></script -->
+	<h1 id="qunit-header">jQuery Test Suite <a href="http://qunitjs.com/">(qunit)</a></h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	
+	<div id="my-msg"></div>
+
+   <script type="text/javascript">
+   
+$(function() {
+	
+	/**
+	 * Module of Array Qunit tests
+	 */
+	module("LocalStorage Basic Test");
+
+	test("Local Storage Supported Test", function() {
+		
+		ok ( isLSSupported(), "LocalStorage is supported on your browser" );
+	});
+	
+	test("Local Storage Read Test", function() {
+		
+		equal ( localStorage.getItem("pc"), 2, "LocalStorage is supported on your browser" + localStorage.getItem("pc"));
+	});
+
+	
+	test("Local Storage Listenr Test", function() {
+		
+		equal ( localStorage.getItem("pc"), 2, "LocalStorage is supported on your browser" + localStorage.getItem("pc"));
+	});
+   
+
+	/**
+	 * Return true if Safari is used on a supported device (tablet at the time of writing this code).
+	 * 
+	 * This generation support only Safari version xxx (not decided yet) or higher.
+	 * 
+	 * Tested Safari Versions.
+	 * The Safari version tested on iPad is 5.0 /7534.48.3 (Mobile Safari)
+	 * The Sarari tested on deskeop is 5.0 /533.16
+	 */
+	function isLSSupported() {
+
+		var isSupported = false, version, istablet;
+		var uaString = navigator.userAgent;
+		var isSafari = (uaString.toLowerCase().indexOf('safari') !== -1 && uaString.toLowerCase().indexOf('chrome') === -1);
+		
+			/* Get device and Safari information */
+			istablet = (/ipad|android 3|sch-i800|playbook|tablet|kindle|gt-p1000|sgh-t849|shw-m180s|a510|a511|a100|dell streak|silk/i.test(navigator.userAgent.toLowerCase()));
+			version = uaString.substr(uaString.lastIndexOf('Safari/') + 7, 7);
+			try {
+				/* make decision to support chat. */
+				if (window["localStorage"]) {
+					localStorage.setItem("pc", 2);
+					isSupported = true;
+				}
+			} catch(e) {
+				log("ERROR while checking window.localStorage", e);
+			}				
+		return isSupported; 
+	}
+
+	
+	function lsListenerHandler(){ }
+
+});
+
+
+$(function() {
+	module("LocalStorage Advanced Stress Test");
+
+	test("Local Storage read write Test", function() {
+		
+		var i, lsVal = 0, oi;
+		var key = "inqVital";
+		var value = 'My javascritp study unit by unit://developer.mozilla.org/en/JavaScript/ReferencejQuery 1.7.2 qunit-1.5.0 Clips <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"/script> ===================== To remove date and icon from chrome exported link on EditPlus Use the following regexp';
+
+		for ( oi = 0; oi < 1000 ; oi++ )
+		{
+			for (i = 0; i < 10 ;i++ )
+			{
+				localStorage.setItem(key, (i + 1) + value );
+			}
+
+			equal ( localStorage.getItem(key), 10 + value, "LocalStorage getItem gets the last value!!!" );
+		}
+
+	});
+
+	test("Local Storage read write Test", function() {
+		
+		var i, lsVal = 0, oi;
+		var key = "inqVital";
+		var value = 'My javascritp study unit by unit://developer.mozilla.org/en/JavaScript/ReferencejQuery 1.7.2 qunit-1.5.0 Clips <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"/script> ===================== To remove date and icon from chrome exported link on EditPlus Use the following regexp';
+
+		for ( oi = 0; oi < 1000 ; oi++ )
+		{
+			for (i = 0; i < 10 ;i++ )
+			{
+				localStorage.setItem(key, (i + 1) + value );
+			}
+			localStorage.setItem(key, oi + value );
+			equal ( localStorage.getItem(key), oi + value, "LocalStorage getItem gets the last value!!!" );
+		}
+
+	});
+
+});
+
+
+	module("LocalStorage Advanced Stress Test");
+
+	test("Local Storage read and write with iframe Test", function() {
+		
+		var i, lsVal = 0, oi;
+		var key = "inqVital";
+		var value = 'My javascritp study unit by unit://developer.mozilla.org/en/JavaScript/ReferencejQuery 1.7.2 qunit-1.5.0 Clips <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css" type="text/css" media="screen"/> <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js/script> <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.10.0.js"/script> ===================== To remove date and icon from chrome exported link on EditPlus Use the following regexp';
+
+		for ( oi = 0; oi < 1000 ; oi++ )
+		{
+			for (i = 0; i < 10 ;i++ )
+			{
+				localStorage.setItem(key, (i + 1) + value );
+			}
+			localStorage.setItem(key, oi + value );
+			equal ( localStorage.getItem(key), oi + value, "LocalStorage getItem gets the last value!!!" );
+		}
+
+	});
+
+
+   </script>
+
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+
+<head>
+
+<title>if window</title>
+
+<script type="text/javascript">
+
+var msgBox;
+
+function doOnLoad() {
+    msgBox = window.document.getElementById("msg-box");
+    msgBox.innerHTML += document.title + "<p>Window is open</>";
+}
+
+function doOnBeforeUnload(evt) {
+    msgBox.innerHTML += document.title + "<p>doOnBeforeUnload</>";
+    if (evt) {
+        var hold = evt;
+    }
+}
+
+function doOnUnload(evt) {
+    msgBox.innerHTML += document.title + "<p>doOnUnload</>";
+    alert("doOnUnload");
+    if (evt) {
+        var hold = evt;
+    }
+}
+
+window.onbeforeunload = doOnBeforeUnload;
+window.onunload = doOnUnload;
+    
+</script>
+
+</head>
+
+<body onload="doOnLoad()">
+
+This is child iframe window v2.
+
+<div id="msg-box"></div>
+
+</body>
+
+</html>

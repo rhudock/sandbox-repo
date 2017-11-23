@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+</head>
+<body>
+
+	<script type="text/javascript">
+		function mixIn(mixable) {
+			if (mixable) {
+				for ( var name in mixable) {
+					if (!this[name]) {
+						document.write(name + "() will be added to ");
+						if (this.prototype) {
+							document.write("this.prototype");
+							this.prototype[name] = mixable[name];
+						} else {
+							document.write("this");
+							this[name] = mixable[name];
+						}
+						document.write("<br />");
+					}
+				}
+			}
+			return this;
+		}
+
+		var mixable = {
+			name : 'test',
+			id : 1,
+			etc : 'etc'
+		};
+		var caller = {};
+		caller.mixIn = mixIn;
+
+		for ( var name in mixable) {
+			document.write(name);
+		}
+
+		caller.mixIn(mixable);
+
+		var callerF = new function(){};
+		callerF.mixIn = mixIn;
+
+		callerF.mixIn(mixable);
+		
+		function callerF2(){};
+		callerF2.mixIn = mixIn;
+
+		callerF2.mixIn(mixable);
+		</script>
+
+</body>
+</html>

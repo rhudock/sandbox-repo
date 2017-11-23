@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> New Document </title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+ </head>
+
+<body onload="onMyLoad()">
+<script>
+	document.write("<p>LocalStorage test on " + document.location + "</p>");
+	try
+	{
+		var inqValue = localStorage.getItem('inqVal');
+		document.write("<p>inqVal's value is: " + inqValue + "</p>");
+		if (!inqValue)
+		{
+			localStorage.setItem('inqVal', '123');
+			document.write("<p>Setting inqVal's value to " + localStorage.getItem('inqVal') + "</p>");
+		}
+	}
+	catch ( e )
+	{
+		alert("Error while doing localStorage operation:" + e.message);
+	}
+</script>
+
+<script>
+	function onMyLoad () {
+		document.getElementById("testvar").value = localStorage.getItem("testvar");
+		if( localStorage.getItem("testvar") !== null ) {
+			document.getElementById("testvarinfo").innerHTML = " - Updated from localStorage";
+		} else {
+			document.getElementById("testvarinfo").innerHTML = " - Fail to read localStorage";
+		}
+	}
+</script>
+
+<label for="testvar">Test variable for local storage </label><input id="testvar" type="text" name="testvar"/> <button id="btnsave" name="btnsave">Save value</button><label id="testvarinfo"></label><br />
+
+<script type="text/javascript">
+		var testInput = document.getElementById("testvar");
+		var btnsave = document.getElementById("btnsave");
+		btnsave.onclick = function (ev) {
+			localStorage.setItem( "testvar", testInput.value );
+			document.getElementById("testvarinfo").innerHTML = " - The value is saved to LocalStorage"
+		}
+</script>
+
+
+ </body>
+</html>
