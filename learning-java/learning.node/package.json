@@ -11,6 +11,7 @@
     "tdd:mac": "./node_modules/.bin/mocha -w"
   },
   "dependencies": {
+    "prompt": "^1.0.0",
     "request": "^2.83.0",
     "swagger-client": "^3.3.1",
     "systemjs": "0.19.40"
