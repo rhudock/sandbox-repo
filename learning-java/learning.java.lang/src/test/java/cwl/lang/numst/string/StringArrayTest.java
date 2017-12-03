@@ -10,6 +10,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 /**
  * @author dlee
  *
@@ -26,6 +29,37 @@ public class StringArrayTest {
 
 		assertEquals(name, "user");
 		assertEquals(value, "_S_23/G5XFuSMSLtbYk2iKvjw==");
+	}
+
+	static final String MASK_START = "((masked%257B%255B";
+	static final String MASK_END = "%255D%257Dmasked))";
+
+	@Test
+	public void simpleSubStrTest2() {
+		String userStr = "asdfasd%2C((masked%257B%255B4111111111111111%255D%257Dmasked))%2C((masked%257B%255B123%255D%257Dmasked))%2C((masked%257B%255B11%252F2018%255D%257Dmasked))%2C91320%2C%25241.00";
+		// userStr = URLDecoder.decode(URLDecoder.decode("asdfasd%2C((masked%257B%255B4111111111111111%255D%257Dmasked))%2C((masked%257B%255B123%255D%257Dmasked))%2C((masked%257B%255B11%252F2018%255D%257Dmasked))%2C91320%2C%25241.00"));
+
+		//String maskeedStr = userStr.replaceAll("((masked%257B%255B[^%]*%255D%257Dmasked))", "x");
+		StringBuilder newUserStr = new StringBuilder();
+		String maskedStr = "";
+		int start, end;
+		while(userStr.indexOf(MASK_START) >= 0 ) {
+			start = userStr.indexOf(MASK_START);
+			newUserStr.append(userStr.substring(0, start));
+			userStr = userStr.substring(start + MASK_START.length());
+			end = userStr.indexOf(MASK_END);
+			maskedStr = URLDecoder.decode(URLDecoder.decode(userStr.substring(0, end))).replaceAll(".", "x");
+			newUserStr.append(maskedStr);
+			if(userStr.contains(MASK_END)) {
+				userStr = userStr.substring(end + MASK_END.length());
+			}
+		}
+		newUserStr.append(userStr);
+		userStr = newUserStr.toString();
+
+		assertTrue(userStr.contains("((masked%257B%255B"));
+		assertTrue(!userStr.contains("((masked%257B%255B*%255D%257Dmasked))"));
+
 	}
 
 	@Test

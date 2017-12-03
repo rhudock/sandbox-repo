@@ -22,3 +22,7 @@ Beginners Guide to Getting Started with AS3 (Without Learning Flex)[http://www.s
 
 ### Ref
 (ActionScript 3 API Doc)[http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/]
+
+
+
+Inq.getData().LDM.pageMarker;

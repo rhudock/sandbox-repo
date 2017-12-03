@@ -1,6 +1,7 @@
 package cwl.security;
 
 import javax.crypto.Cipher;
+import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
@@ -43,4 +44,6 @@ public class SecretKeySpecUse {
         }
         return strData;
     }
+
+
 }
