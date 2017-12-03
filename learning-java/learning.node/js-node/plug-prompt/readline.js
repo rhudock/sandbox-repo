@@ -5,9 +5,21 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-rl.question('What do you think of Node.js? ', (answer) => {
-    // TODO: Log the answer in a database
-    console.log(`Thank you for your valuable feedback: ${answer}`);
+testFn();
 
-    rl.close();
-});
+function testFn() {
+
+    rl.question('What do you think of Node.js? ', (answer) => {
+        // TODO: Log the answer in a database
+        if(answer != 'end') {
+            console.log(`Thank you for your valuable feedback: ${answer}`);
+            testFn();
+        } else {
+            rl.close();
+            process.exit(0);
+        }
+    });
+
+}
+
+console.log('this is a test');
