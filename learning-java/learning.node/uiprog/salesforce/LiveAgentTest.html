@@ -1,0 +1,37 @@
+<html>
+<body>
+
+
+<a id="liveagent_button_online_573o00000008T0d" href="javascript://Chat" style="display: none;" onclick="liveagent.startChat('573o00000008T0d')">Click to Chat</a>
+<div id="liveagent_button_offline_573o00000008T0d" style="display: none;">Chat is Offline</div>
+<script type='text/javascript' src='https://c.la2w1cs.salesforceliveagent.com/content/g/js/35.0/deployment.js'></script>
+
+<script type="text/javascript">
+    if (!window._laq) {
+        window._laq = [];
+    }
+    window._laq.push(function () {
+        liveagent.showWhenOnline('573o00000008T0d', document.getElementById('liveagent_button_online_573o00000008T0d'));
+        liveagent.showWhenOffline('573o00000008T0d', document.getElementById('liveagent_button_offline_573o00000008T0d'));
+    });
+</script>
+
+<script type='text/javascript'>
+liveagent.addCustomDetail("First Name", "Ryan");
+liveagent.addCustomDetail("Last Name", "Smith");
+liveagent.addCustomDetail("Phone Number", "555-1212");
+liveagent.addCustomDetail("Case Subject", "Problem with my iPhone");
+liveagent.addCustomDetail("Case Status", "New", false);
+liveagent.findOrCreate("Contact").map("FirstName", "First Name", true, true, true).map("LastName", "Last Name", true, true, true).map("Phone", "Phone Number", false, false,true).saveToTranscript("contactId").showOnCreate().linkToEntity("Case", "ContactId");
+liveagent.findOrCreate("Case").map("Subject", "Case Subject", true, false, true).map("Status", "Case Status", false, false, true).showOnCreate();
+liveagent.init('https://d.la2w1cs.salesforceliveagent.com/chat', '572j0000000GwpS', '00Dm00000002hfD');
+</script>
+
+<script type='text/javascript' src='https://c.la1-c1-ord.salesforceliveagent.com/content/g/js/41.0/deployment.js'></script>
+<script type='text/javascript'>
+liveagent.init('https://d.la1-c1-ord.salesforceliveagent.com/chat', '572o00000008SFJ', '00Do0000000eYxt');
+</script>
+
+
+</body>
+</html>

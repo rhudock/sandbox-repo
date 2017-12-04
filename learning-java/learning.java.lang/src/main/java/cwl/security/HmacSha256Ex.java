@@ -24,6 +24,8 @@ public class HmacSha256Ex {
 
             byte[] hash = hasher.doFinal(message.getBytes());
 
+            System.out.println("Converted=" + new String(hash));
+
             // to lowercase hexits
             String myhash = DatatypeConverter.printHexBinary(hash);
 
@@ -33,6 +35,7 @@ public class HmacSha256Ex {
             myhash = DatatypeConverter.printBase64Binary(hash);
 
             System.out.println("DatatypeConverter.printBase64Binary(hash)=" + myhash);
+
         } catch (NoSuchAlgorithmException e) {
         } catch (InvalidKeyException e) {
         }
