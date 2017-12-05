@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <style> body { margin: 25px 0 0 25px; } </style>
+
+    <h1>Welcome to Support</h1>
+    <br />
+    Thank you for your interest.
+    <br /><br />
+
+    <!-- START Button code, Replace this section with your Live Agent button code snippet -->
+    <a id="liveagent_button_online_573o00000008T0d" href="javascript://Chat" style="display: none;" onclick="liveagent.startChat('573o00000008T0d')">Chat Now</a>
+    <div id="liveagent_button_offline_573o00000008T0d" style="display: none;">Live Chat is currently unavailable</div>
+    <script type="text/javascript">
+        if (!window._laq) { window._laq = []; }
+        window._laq.push(function(){
+            liveagent.showWhenOnline('573o00000008T0d', document.getElementById('liveagent_button_online_573o00000008T0d'));
+            liveagent.showWhenOffline('573o00000008T0d', document.getElementById('liveagent_button_offline_573o00000008T0d'));
+        });</script>
+
+    <!-- END Button code -->
+
+    <!-- Live Agent Deployment Code, replace with your org's values -->
+    <script type='text/javascript' src='https://c.la2w1cs.salesforceliveagent.com/content/g/js/35.0/deployment.js'></script>
+
+    <!-- Deployment Code API examples -->
+    <script type='text/javascript'>
+        /* Adds a custom detail called Contact Email and sets it value to jane@doe.com */
+        liveagent.addCustomDetail('Contact E-mail', 'jane@doe.com');
+
+        /* Creates a custom detail called First Name and sets the value to Jane */
+        liveagent.addCustomDetail('First Name', 'Jane');
+
+        /* Creates a custom detail called Last Name and sets the value to Doe */
+        liveagent.addCustomDetail('Last Name', 'Doe');
+
+        /* Creates a custom detail called Phone Number and sets the value to 415-555-1212 */
+        liveagent.addCustomDetail('Phone Number', '415-555-1212');
+
+        /* An auto-query that searches Contacts whose Email field exactly matches 'jane@doe.com'. If no result is found, it will create a Contact record with the email, first name, last name, and phone number fields set to the custom detail values. */
+        liveagent.findOrCreate('Contact').map('Email','Contact E-mail',true,true,true).map('FirstName','First Name',false,false,true).map('LastName','Last Name',false,false,true).map('Phone','Phone Number',false,false,true);
+
+        /* The contact that's found or created will be saved or associated to the chat transcript. The contact will be opened for the agent in the Console and the case is linked to the contact record */
+        liveagent.findOrCreate('Contact').saveToTranscript('ContactId').showOnCreate().linkToEntity('Case','ContactId');
+
+        /* Creates a custom detail called Case Subject and sets the value to 'Refund policy for products' and will perform a knowledge search when the chat is accepted for the agent */
+        liveagent.addCustomDetail('Case Subject','Refund policy for products').doKnowledgeSearch();
+
+        /* Creates a custom detail called Case Status and sets the value to 'New' */
+        liveagent.addCustomDetail('Case Status','New');
+
+        /* This does a non-exact search on cases by the value of the 'Case Subject' custom detail If no results are found, it will create a case and set the case's subject and status.
+        The case that's found or created will be associated to the chat and the case will open in the Console for the agent when the chat is accepted */
+        liveagent.findOrCreate('Case').map('Subject','Case Subject',true,false,true).map('Status','Case Status',false,false,true).saveToTranscript('CaseId').showOnCreate();
+
+        /* Saves the custom detail to a custom field on LiveChatTranscript at the end of a chat.  Assumes a custom field called Company__c was added to the Live Chat Transcript object */
+        liveagent.addCustomDetail('Company', 'Acme').saveToTranscript('Company__c');
+
+        /* For internal or technical details that don't concern the agent, set showToAgent to false to hide them from the display. */
+        liveagent.addCustomDetail('VisitorHash', 'c6f440178d478e4326a1', false);
+
+        /* Sets the display name of the visitor in the agent console when engaged in a chat */
+        liveagent.setName('Jane Doe');
+
+        /* Sets the width of the chat window to 500px */
+        liveagent.setChatWindowWidth(500);
+
+        /* Sets the height of the chat window to 500px */
+        liveagent.setChatWindowHeight(500);
+
+        <!-- Live Agent Deployment Code to initialize, replace with your org's values -->
+        liveagent.init('https://d.la1-c1-ord.salesforceliveagent.com/chat', '572o00000008SFJ', '00Do0000000eYxt');
+    </script>
+</body>
+</html>
