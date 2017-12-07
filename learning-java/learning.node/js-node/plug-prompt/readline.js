@@ -7,9 +7,13 @@ const rl = readline.createInterface({
 
 testFn();
 
+
+/**
+ * This function can be used as recursively accept user input.
+ */
 function testFn() {
 
-    rl.question('What do you think of Node.js? ', (answer) => {
+    rl.question('What do you think of Node.js? (type end to end)', (answer) => {
         // TODO: Log the answer in a database
         if(answer != 'end') {
             console.log(`Thank you for your valuable feedback: ${answer}`);
