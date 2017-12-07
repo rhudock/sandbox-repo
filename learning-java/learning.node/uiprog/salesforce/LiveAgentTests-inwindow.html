@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dlee live agent test</title>
+</head>
+<body>
+
+<a id="liveagent_button_online_573o00000008T0d" href="javascript://Chat" style="display: none;" onclick="startNonInqChat()">Online Chat</a>
+<div id="liveagent_button_offline_573o00000008T0d" style="display: none;">Chat Offline</div>
+
+
+<div id="inqChatSkin" style="width: 300px; height: 500px">This is Chat div box</div>
+
+<script type="text/javascript">
+    if (!window._laq) {
+        window._laq = [];
+    }
+    window._laq.push(function () {
+        liveagent.showWhenOnline('573o00000008T0d', document.getElementById('liveagent_button_online_573o00000008T0d'));
+    });
+
+    function startNonInqChat() {
+        addIFrameForNonInqChat();
+        liveagent.startChatWithWindow('573o00000008T0d', 'nonInqChatWindow');
+    }
+</script>
+
+<script type='text/javascript' src='https://c.la3-c1-was.salesforceliveagent.com/content/g/js/35.0/deployment.js'></script>
+
+
+<script type='text/javascript'>
+    liveagent.init('https://d.la3-c1-was.salesforceliveagent.com/chat', '572o00000008SFJ', '00Do0000000eYxt');
+    liveagent.enableLogging();
+
+    // listen for postMessage
+    if (window.addEventListener) {  // all browsers except IE before version 9
+        window.addEventListener("message", receiveMessage, false);
+    }
+    else {
+        if (window.attachEvent) {   // IE before version 9
+            window.attachEvent("onmessage", receiveMessage);
+        }
+    }
+
+    function receiveMessage(event) {
+        var message = event.data;
+
+        alert("on message." + message);
+    }
+</script>
+
+<script type='text/javascript'>
+    function addIFrameForNonInqChat(name, width, height) {
+        if(!name) name = "nonInqChatWindow";
+        if(!width) width = "300";
+        if(!height) height = "500";
+
+        var divsub = window.document.createElement("DIV");
+        divsub.id = "nonInqChatDiv";
+        divsub.style.cssText = 'position:relative;width:' + width + 'px;height:' + height + 'px;opacity:1;z-index:100;background:#000;';
+//        elemDiv.style.cssText = 'position:absolute;width:100%;height:100%;opacity:0.3;z-index:100;background:#000;';
+
+        var iframe  = "<IFRAME id='nonInqChatWindow' "
+            + "NAME=\"nonInqChatWindow\" "
+            + "width=\"100%\" height=\"100%\""
+            + "></IFRAME>";
+        divsub.innerHTML = iframe ;
+
+        var chatDiv = document.getElementById('inqChatSkin');
+        chatDiv.appendChild(divsub);
+    }
+
+    /**
+     * This function will be used in InqFramework.js
+     * @param name
+     */
+    function addIFrameForNonInqChatToTcChat(name) {
+        var tcChatSkin = document.getElementById('tcChat_Skin');
+
+        if (!name) name = "nonInqChatWindow";
+
+        var divsub = window.document.createElement("DIV");
+        divsub.id = "nonInqChatDiv";
+        divsub.style.cssText = 'position:absolute;top:0px;left:0px;width:100%;height:100%;opacity:1;z-index:102;background:#000;';
+
+        var iframe = "<IFRAME id='nonInqChatWindow' "
+            + "NAME=\"nonInqChatWindow\" "
+            + "width=\"100%\" height=\"100%\""
+            + "></IFRAME>";
+        divsub.innerHTML = iframe;
+
+        tcChatSkin.appendChild(divsub);
+    }
+
+</script>
+
+<br/><br/>
+<!--<iframe id="chatWindow" name="chatWindow" style="height: 400px; width: 300px;"></iframe>-->
+
+</body>
+</html>
