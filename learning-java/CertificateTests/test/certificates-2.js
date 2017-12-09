@@ -6,7 +6,8 @@ var assert = require('assert');
 //var agentMemory = require('../mockAgentMemory.js').getAgentMemory();
 // The state as it was at this part of the flow (context)
 var state = require('./mockStates.js').stateModel();
-var certificates = require('../certificates.js');
+var certificates = require('../certificates-encode.js');
+var certificatesVerify = require('../certificates-verify.js');
 
 // Test Certificates are found.
 var results = certificates.localVariables();
@@ -38,20 +39,20 @@ state.context.sessionData = {
 	settings: {},
 	debug: {}
 };
-// state.context.sessionData.settings.useNuanceCertificates = true;  // Use Nuance Certs
+state.context.sessionData.settings.useNuanceCertificates = true;  // Use Nuance Certs
 
 // Now we have a request object setup lets Validate the Request using our public key.
-var result = certificates.verifyRequest(state);
+var result = certificatesVerify.verifyRequest(state);
 assert.equal(true, result);
 
 // Run again just to double check.
 certificates.signRequest(state);
-result = certificates.verifyRequest(state);
+result = certificates.certificatesVerify(state);
 assert.equal(true, result);
 
 certificates.signRequest(state);
 state.context.input.UserText = "james";  // Change the request object AFTER signing. Verify will fail now.
-result = certificates.verifyRequest(state);
+result = certificates.certificatesVerify(state);
 assert.equal(false, result);
 
 state.context.sessionData.settings.useNuanceCertificates = false;  // Use CBA Certs
@@ -81,15 +82,15 @@ state.context.sessionData = {
 state.context.sessionData.settings.useNuanceCertificates = true;  // Use Nuance Certs
 
 // Now we have a request object setup lets Validate the Request using our public key.
-var result = certificates.verifyRequest(state);
+var result = certificates.certificatesVerify(state);
 assert.equal(true, result);
 
 // Run again just to double check.
 certificates.signRequest(state);
-result = certificates.verifyRequest(state);
+result = certificates.certificatesVerify(state);
 assert.equal(true, result);
 
 certificates.signRequest(state);
 state.context.input.UserText = "james";  // Change the request object AFTER signing. Verify will fail now.
-result = certificates.verifyRequest(state);
+result = certificates.certificatesVerify(state);
 assert.equal(false, result);

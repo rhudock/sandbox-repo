@@ -15,7 +15,7 @@ public class RSAEncriptionCBA {
         PublicKey pubKey = keyPair.getPublic();
         PrivateKey privateKey = keyPair.getPrivate();
 
-        X509Certificate cert = JwtTokenService.extractCertificate(JwtTokenService.certificate);
+        X509Certificate cert = CertificateIOUtil.extractCertificate(JwtTokenService.certificate);
         pubKey = cert.getPublicKey();
         // privateKey = cert.getpri
 

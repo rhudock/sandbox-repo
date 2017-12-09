@@ -53,7 +53,7 @@ public class JwtTokenServiceTest {
                 "HaxE33H4Hhsx5tARVG91ag==\n" +
                 "-----END CERTIFICATE-----";
 
-        X509Certificate cert = JwtTokenService.extractCertificate(certificate);
+        X509Certificate cert = CertificateIOUtil.extractCertificate(certificate);
 
         assertNotNull(cert);
     }

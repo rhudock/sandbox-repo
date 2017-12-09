@@ -42,64 +42,11 @@ public class JwtTokenService {
 
 
     public static Claims verifySigniture(String jwt) {
-        X509Certificate cert = JwtTokenService.extractCertificate(JwtTokenService.certificate);
+        X509Certificate cert = CertificateIOUtil.extractCertificate(JwtTokenService.certificate);
         Claims claims = Jwts.parser()
                 .setSigningKey(cert.getPublicKey())
                 .parseClaimsJws(jwt).getBody();
         return claims;
     }
 
-    public static X509Certificate extractCertificate(String certString) {
-        if (certString == null) return null;
-        String certBase64 = obtainCertBase64(certString);
-        byte[] decodedCert = Base64.decodeBase64(certBase64.getBytes());
-
-        try {
-            CertificateFactory cf = CertificateFactory.getInstance("X.509");
-            return (X509Certificate) cf.generateCertificate(new ByteArrayInputStream(decodedCert));
-        } catch (CertificateException e) {
-            LOG.error("Fail to extract Certificate", e);
-        }
-
-        return null;
-    }
-
-    public static String obtainCertBase64(String certAsString) {
-        BufferedReader br = null;
-        try {
-
-            StringReader fr = new StringReader(certAsString);
-
-            String descriptorFirst = "-----BEGIN CERTIFICATE-----";
-            String descriptorLast = "-----END CERTIFICATE-----";
-            String base64Text = "";
-            br = new BufferedReader(fr);
-
-            String lineIn = "";
-            lineIn = br.readLine();
-            if (lineIn.contentEquals(descriptorFirst)) {
-                while ((lineIn = br.readLine()) != null) {
-                    if (!(lineIn.contentEquals(descriptorLast))) {
-                        base64Text += lineIn;
-                    } else {
-                        return base64Text;
-                    }
-                }
-            } else {
-                LOG.error("Format Error in 509 Certificate");
-                return "";
-            }
-        } catch (java.io.IOException e) {
-            LOG.error("ERROR while working with cert string " + certAsString, e);
-
-        } finally {
-            try {
-                if (br != null)
-                    br.close();
-            } catch (IOException ex) {
-                LOG.error("ERROR while closing cert string buffer reader " + certAsString, ex);
-            }
-        }
-        return "";
-    }
 }
