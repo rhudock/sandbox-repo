@@ -8,18 +8,17 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Provider;
 import java.security.SecureRandom;
 import java.security.Security;
-public class CryptoUtil
-{
+
+public class CryptoUtil {
     private static final Provider sunJCE = new com.sun.crypto.provider.SunJCE();
     private static final String algorithm = "Blowfish";
     private static byte[] encodedAlgoParams;
 
-    public CryptoUtil()
-    {
+    public CryptoUtil() {
         Security.addProvider(sunJCE);
     }
-    public static String generateKey() throws NoSuchAlgorithmException
-    {
+
+    public static String generateKey() throws NoSuchAlgorithmException {
         KeyGenerator kgen = KeyGenerator.getInstance(algorithm);
 
         // Setup the random class and associate with key generator.
@@ -31,12 +30,11 @@ public class CryptoUtil
 
         return new String(raw);
     }
-    public String encrypt(String data, String key)
-    {
+
+    public String encrypt(String data, String key) {
         String retVal = null;
 
-        try
-        {
+        try {
             SecretKeySpec skeySpec = getSecretKeySpec(key);
 
             // Instantiate the cipher.
@@ -44,26 +42,21 @@ public class CryptoUtil
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
 
             //byte[] encrypted = cipher.doFinal( URLEncoder.encode(data).getBytes() );
-            byte[] encrypted = cipher.doFinal( data.getBytes() );
+            byte[] encrypted = cipher.doFinal(data.getBytes());
             retVal = new String(encrypted);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             System.out.println("Exception in CryptoUtil.encrypt():");
             ex.printStackTrace();
             retVal = null;
-        }
-        finally
-        {
+        } finally {
             return retVal;
         }
     }
-    public String decrypt(String data, String key)
-    {
+
+    public String decrypt(String data, String key) {
         String retVal = null;
 
-        try
-        {
+        try {
             SecretKeySpec skeySpec = getSecretKeySpec(key);
 
             // Instantiate the cipher.
@@ -71,24 +64,19 @@ public class CryptoUtil
             cipher.init(Cipher.DECRYPT_MODE, skeySpec);
 
             //byte[] decrypted = cipher.doFinal( URLDecoder.decode(data).getBytes() );
-            byte[] decrypted = cipher.doFinal( data.getBytes() );
+            byte[] decrypted = cipher.doFinal(data.getBytes());
             retVal = new String(decrypted);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             System.out.println("Exception in CryptoUtil.decrypt():");
             ex.printStackTrace();
             retVal = null;
-        }
-        finally
-        {
+        } finally {
             return retVal;
         }
     }
 
-    private SecretKeySpec getSecretKeySpec(String key) throws Exception
-    {
-        SecretKeySpec skeySpec = new SecretKeySpec( key.getBytes(), algorithm );
+    private SecretKeySpec getSecretKeySpec(String key) throws Exception {
+        SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(), algorithm);
 
         return skeySpec;
     }

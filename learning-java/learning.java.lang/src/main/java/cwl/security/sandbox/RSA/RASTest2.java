@@ -1,6 +1,5 @@
 package cwl.security.sandbox.RSA;
 
-import cwl.lang.numst.string.util.StringUtils;
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.DigestInfo;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -8,32 +7,26 @@ import org.bouncycastle.operator.DefaultDigestAlgorithmIdentifierFinder;
 import org.bouncycastle.operator.DigestAlgorithmIdentifierFinder;
 import org.bouncycastle.util.encoders.Base64;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
 import java.security.Provider;
 import java.security.Security;
 import java.security.Signature;
-import java.security.SignatureException;
 
+/**
+ * this class shows how to build signature with RAS algorithm
+ */
 public class RASTest2 {
 
     public static void main(String args[]) {
 
-        try
-        {
+        try {
             boolean useBouncyCastleProvider = false;
 
             Provider provider = null;
-            if (useBouncyCastleProvider)
-            {
+            if (useBouncyCastleProvider) {
                 provider = new BouncyCastleProvider();
                 Security.addProvider(provider);
             }
@@ -94,9 +87,7 @@ public class RASTest2 {
 
             System.out.println("Hash and Encryption Output : ");
             System.out.println("\t" + new String(Base64.encode(encrypted)));
-        }
-        catch (Throwable e)
-        {
+        } catch (Throwable e) {
             e.printStackTrace();
         }
 
@@ -105,6 +96,7 @@ public class RASTest2 {
     }
 
     private static final char[] hex = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+
     private static String byteArray2Hex(byte[] bytes) {
         StringBuilder sb = new StringBuilder(bytes.length * 2);
         for (final byte b : bytes) {
