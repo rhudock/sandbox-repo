@@ -157,9 +157,9 @@ function hasError(state) {
 // Preload what we can for Certificates Checking. This will save having to do for every request.
 function loadCertificates() {
 	_IsError = false;
-	loadNuancePublicCertificates("D:\\code\\sandbox\\learning-java\\CertificateTests\\Certificates\\Nuance\\Public");
-	loadNuancePrivateCertificate("D:\\code\\sandbox\\learning-java\\CertificateTests\\Certificates\\Nuance\\Private");  // May Comment out after Nuance testing.
-	loadCBAPublicCertificates("D:\\code\\sandbox\\learning-java\\CertificateTests\\Certificates\\CBA\\Public");
+    loadNuancePublicCertificates("/Users/dlee/code/sandbox/sandbox-repo/learning-java/CertificateTests/Certificates/Nuance/Public");
+    loadNuancePrivateCertificate("/Users/dlee/code/sandbox/sandbox-repo/learning-java/CertificateTests/Certificates/Nuance//Private");  // May Comment out after Nuance testing.
+    loadCBAPublicCertificates("/Users/dlee/code/sandbox/sandbox-repo/learning-java/CertificateTests/Certificates/CBA/Public");
 }
 
 // Load the single Nuance Certificate

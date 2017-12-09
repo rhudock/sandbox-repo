@@ -1,7 +1,6 @@
 package cwl.security.sandbox.RSA;
 
 import cwl.lang.numst.string.util.StringUtils;
-import org.apache.commons.ssl.asn1.DERObjectIdentifier;
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.DigestInfo;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;

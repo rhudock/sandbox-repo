@@ -3,9 +3,6 @@ package cwl.security;
 
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.openssl.PEMKeyPair;
-import org.bouncycastle.openssl.PEMParser;
-import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Decoder;
@@ -79,20 +76,6 @@ public class CertificateIOUtil {
         return null;
     }
 
-
-    public static PrivateKey extractPrivateKey(String fileName)  {
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            Security.addProvider(new BouncyCastleProvider());
-            PEMParser pp = new PEMParser(br);
-            PEMKeyPair pemKeyPair = (PEMKeyPair) pp.readObject();
-            KeyPair kp = new JcaPEMKeyConverter().getKeyPair(pemKeyPair);
-            pp.close();
-            return kp.getPrivate();
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
-        return null;
-    }
 
 
     public static PrivateKey readPrivateKey(File keyFile) throws Exception {

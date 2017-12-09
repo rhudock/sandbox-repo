@@ -1,6 +1,7 @@
 package cwl.security.sandbox.RSAReadKey;
 
-import org.apache.commons.ssl.asn1.DERInteger;
+
+import cwl.lang.numst.string.util.StringUtils;
 import org.bouncycastle.asn1.ASN1Sequence;
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.DigestInfo;
@@ -59,57 +60,7 @@ public class KeyReader {
         return null;
     }
 
-    public static PrivateKey getPrivateKeyTry2() {
-        try {
-            File privKeyFile = new File("D:\\code\\sandbox\\learning-java\\learning.java.lang\\src\\main\\java\\cwl\\security\\sandbox\\RSAReadKey\\private_key.pem");
 
-            FileInputStream in = new FileInputStream(privKeyFile);
-            byte[] keyBytes = new byte[in.available()];
-            in.read(keyBytes);
-            in.close();
-
-            String privateKey = new String(keyBytes, "UTF-8");
-            privateKey = privateKey.replaceAll("(-+BEGIN RSA PRIVATE KEY-+\\r?\\n|-+END RSA PRIVATE KEY-+\\r?\\n?)", "");
-            privateKey = privateKey.replaceAll("(-+BEGIN PRIVATE KEY-+\\r?\\n|-+END PRIVATE KEY-+\\r?\\n?)", "");
-
-            String privKeyPEM = privateKey;
-
-// Base64 decode the data
-            BASE64Decoder decoder = new BASE64Decoder();
-            byte[] encodedPrivateKey = decoder.decodeBuffer(privateKey);
-//            byte[] encodedPrivateKey = Base64.decode(privKeyPEM, Base64.DEFAULT);
-
-            ASN1Sequence primitive = (ASN1Sequence) ASN1Sequence
-                    .fromByteArray(encodedPrivateKey);
-            Enumeration<?> e = primitive.getObjects();
-            BigInteger v = ((DERInteger) e.nextElement()).getValue();
-
-            int version = v.intValue();
-            if (version != 0 && version != 1) {
-                throw new IllegalArgumentException("wrong version for RSA private key");
-            }
-            /**
-             * In fact only modulus and private exponent are in use.
-             */
-            BigInteger modulus = ((DERInteger) e.nextElement()).getValue();
-            BigInteger publicExponent = ((DERInteger) e.nextElement()).getValue();
-            BigInteger privateExponent = ((DERInteger) e.nextElement()).getValue();
-            BigInteger prime1 = ((DERInteger) e.nextElement()).getValue();
-            BigInteger prime2 = ((DERInteger) e.nextElement()).getValue();
-            BigInteger exponent1 = ((DERInteger) e.nextElement()).getValue();
-            BigInteger exponent2 = ((DERInteger) e.nextElement()).getValue();
-            BigInteger coefficient = ((DERInteger) e.nextElement()).getValue();
-
-            RSAPrivateKeySpec spec = new RSAPrivateKeySpec(modulus, privateExponent);
-            KeyFactory kf = KeyFactory.getInstance("RSA");
-            PrivateKey pk = kf.generatePrivate(spec);
-
-            return pk;
-        } catch (Throwable e) {
-            logger.error(e.getMessage(), e);
-        }
-        return null;
-    }
 
     public static RSAPublicKey getPublicKey() {
         try {
@@ -144,7 +95,8 @@ public class KeyReader {
                 Security.addProvider(provider);
             }
 
-            String plainText = "This is a plain text!!";
+            String plainText = "{\"TalkAgentRequest\":{\"@SCI\":\"\",\"@IID\":\"userIdentifier\",\"@TimeStamp\":\"2017-11-01T14:48:26.942763+10:00\",\"UserText\":\"userText\",\"NleResults\":true,\"NinaVars\":{\"assetType\":\"assetType\",\"invocationpoint\":\"invocationPoint\"}}}";
+
 
             // Signature
             Signature signatureProvider = null;
@@ -157,8 +109,20 @@ public class KeyReader {
             signatureProvider.update(plainText.getBytes());
             byte[] signature = signatureProvider.sign();
 
+            String signatureStr = new String(Base64.encode(signature)) ;
             System.out.println("Signature Output : ");
             System.out.println("\t" + new String(Base64.encode(signature)));
+
+            String test = "Mbt1I3PK1voz++CkRg+N8KEBuTF7+Ea46HhBoKnRJgwLN7AqhOYqbmkWI1h9Y7k3GtvghX4CKolZHtokyhAjSB/omD7pbn9tvuWzNmNEbeZi5BAYVPf325kMnAPmrkNBloEIWzIpJHU7lY39gdKpGii901U/afytJe0d6ncP4T5I6D2tOygcWr+N0ypTbm4EyZnF5ILAiOYFRUJDEPwLbZ0v74FNpgSxP3dfUh5JUcd38yAvyOy6xg6KfYIjF3h7f1Qm3lymxC4SnUNJJuBWwXpcYRWW7v0/l1tDnLxddW4TQKCvanNN24AIOR9t0fXcXLFtFqBZOnAiHDg4lFp2ZQ==";
+            if(test.equals(signatureStr)) {
+                System.out.println("both signature is same");
+            } else {
+                System.out.println("\t" + test);
+                System.out.println("both signature is DIFFERENT");
+
+            }
+
+            System.out.println("hash : \n\t" + StringUtils.byteArrayToString(signature));
 
             // Message Digest
             String hashingAlgorithm = "SHA-256";
@@ -170,6 +134,7 @@ public class KeyReader {
             messageDigestProvider.update(plainText.getBytes());
 
             byte[] hash = messageDigestProvider.digest();
+
 
             DigestAlgorithmIdentifierFinder hashAlgorithmFinder = new DefaultDigestAlgorithmIdentifierFinder();
             AlgorithmIdentifier hashingAlgorithmIdentifier = hashAlgorithmFinder.find(hashingAlgorithm);
