@@ -24,7 +24,8 @@
 		<spring-security.version>3.0.2.RELEASE</spring-security.version>
 		<webflow.version>2.0.8.RELEASE</webflow.version>
 		<aspectj.version>1.6.5.RELEASE</aspectj.version>
-		<org.slf4j.version>1.5.10</org.slf4j.version>
+		<com.springsource.slf4j.version>1.5.10</com.springsource.slf4j.version>
+		<org.slf4j.version>1.7.25</org.slf4j.version>
 		<jstl.version>1.2</jstl.version>
 		<logback.version>0.9.15</logback.version>
 		<springsource.junit.version>4.7.0</springsource.junit.version>
@@ -36,7 +37,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>com.springsource.slf4j.api</artifactId>
-			<version>${org.slf4j.version}</version>
+			<version>${com.springsource.slf4j.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -50,17 +51,17 @@
 		    <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>jcl-over-slf4j</artifactId>
-        <version>1.5.8</version>
+        <version>${org.slf4j.version}</version>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>1.5.8</version>
+        <version>${org.slf4j.version}</version>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-log4j12</artifactId>
-        <version>1.5.8</version>
+        <version>${org.slf4j.version}</version>
     </dependency>
     <dependency>
         <groupId>log4j</groupId>
