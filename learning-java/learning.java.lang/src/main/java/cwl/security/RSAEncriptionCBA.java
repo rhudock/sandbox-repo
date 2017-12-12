@@ -1,5 +1,7 @@
 package cwl.security;
 
+import cwl.security.jwt.JwtTokenService;
+
 import javax.crypto.Cipher;
 import java.security.*;
 import java.security.cert.X509Certificate;

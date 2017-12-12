@@ -1,0 +1,53 @@
+﻿{
+   "input": {
+      "@Version": "1",
+      "UserText": "Test Response Object",
+      "@SCI": "@829c6a7d-edb4-cb2f-d050-b957d84f8e12@718e25a1-0149-4cb0-87fc-6d88da025550",
+      "@IID": "ot-user",
+      "@TimeStamp": "/Date(1508824181614)/",
+      "TimeStampSpecified": true,
+      "debug": true
+   },
+   "additionalOutput": {
+      "TimeOut": 300,
+      "kqueryTimings": [
+         {
+            "nodeName": "Command",
+            "startTime": 1508824181932,
+            "duration": 1
+         }
+      ],
+      "FAQName": "Test Response",
+      "FAQId": "bea110f4-a738-4cb6-a4e7-caa0844e9754"
+   },
+   "kqueryTimingStarted": false,
+   "kqueryTimingNodeName": "Command",
+   "kqueryTimingStartTime": 1508824181932,
+   "userInteraction": true,
+   "sessionData": {
+      "initialised": true,
+      "validation": {},
+      "phone": {},
+      "customer": {},
+      "concepts": {},
+      "display": {}
+   },
+   "kqueryTimingEndTime": 1508824181933,
+   "kqueryTimingDuration": 1,
+   "nleResults": [
+      {
+         "confidence": 0,
+         "concepts": [
+            {
+               "name": "Intent",
+               "value": "0",
+               "friendlyName": "",
+               "literal": "Test Response Object"
+            }
+         ]
+      }
+   ],
+   "MatchingCriterionName": "",
+   "MatchingCriterionExpression": "DEFAULT_SELECTION",
+   "MatchingCriterionRank": 0
+}

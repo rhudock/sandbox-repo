@@ -1,5 +1,7 @@
 package cwl.security;
 
+import cwl.security.jwt.JwtTokenService;
+
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;

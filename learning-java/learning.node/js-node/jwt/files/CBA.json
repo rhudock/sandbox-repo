@@ -1,0 +1,15 @@
+﻿{
+  "@SCI": "",
+  "@IID": "userIdentifier",
+  "@TimeStamp": "2017-10-26T16:00:48.8190326+10:00",
+  "Channel": null,
+  "UserText": "userText",
+  "NleResults": true,
+  "vtz-browse": null,
+  "vtz-jump": null,
+   "NinaVars": {
+      "assetType": "assetType",
+      "invocationpoint": "invocationPoint",
+      "secret": "I3nc/H0Suzti6lLsWePvzdMv65D/LVe0CceEQ3Fz8DACFINOLBEXNveubNZt5IvE/WlvQmjZQZhMDXVEv1X97hwzZBJd8LmskPqi5GCXR47ELndGrlGei9dn3pMC96NAkUgqqlTdhdIXGdOlA+yoE++S+w1ELC3jvh+W6JGWqvRtMRvav5HmFvYw5hSVhUqTTEXNCL4Ly25z9S3AY2TN+ERazq8J3p9V1yR1SRi/foCv4WZqlwrg4F3Li6cqmF3rXafX58jyRpBy/Z/Ad8ST7Vom5HzOm5mAwzBpSXzXy2hyfislo8K3u2lUt6XZZGmo1kuDQG0VIgdNFxovfC35KQ=="
+   }
+}

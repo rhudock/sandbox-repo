@@ -1,0 +1,38 @@
+﻿"TalkAgentResponse": {
+   "@SCI": "@70eddfe0-54f4-1d7c-fc3a-76718d9ead4f@33587246-0d03-4ff5-aff7-f77d821fc45c",
+   "@IID": "d67fabe2-3f69-4f54-9e6f-b4b3aba064fe",
+   "@TimeStamp": "2017-10-16T06:20:01.1502736Z",
+   "@ResponseCode": "Found",
+   "@Version": "6",
+   "Display": {
+      "OutText": {
+         "#text": "<div><p>I couldn't find what you're looking for.</p><p>Would you like to talk to a human?</p></div> <ul><li><a href=\"#\" data-vtz-link-type=\"Dialog\" data-vtz-jump=\"43f2d341-9e5a-469f-a615-ae229afb4221\">Yes</a></li><li><a href=\"#\" data-vtz-link-type=\"Dialog\" data-vtz-jump=\"f0ba8964-e22e-493f-acf0-f53601840c3c\">No</a></li></ul>"
+      },
+      "AlternateOutText": {
+         "#text": "<div><p>I couldn't find what you're looking for.</p><p>Would you like to talk to a human?</p></div> "
+      }
+   },
+   "OutOptions": {
+      "options": [
+         "Yes",
+         "No"
+      ]
+   },
+   "TimeOut": 300,
+   "activeIntent": "4861871819091758970",
+   "activeIntentName": "NETBANK_PASSWORD_RESET",
+   "kbNodeHit": true,
+   "nleResults": [
+      {
+         "confidence": 100,
+         "concepts": [
+            {
+               "name": "Intent",
+               "value": "4861871819091758970",
+               "friendlyName": "NETBANK_PASSWORD_RESET",
+               "literal": "i forgot my password"
+            }
+         ]
+      }
+   ]
+} }

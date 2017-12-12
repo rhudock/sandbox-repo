@@ -2,10 +2,13 @@ package cwl.security.sandbox.pemfile;
 
 import org.bouncycastle.util.io.pem.PemObject;
 import org.bouncycastle.util.io.pem.PemWriter;
+import org.bouncycastle.util.io.pem.PemReader;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.security.Key;
 
@@ -23,6 +26,19 @@ public class PemFile {
             pemWriter.writeObject(this.pemObject);
         } finally {
             pemWriter.close();
+        }
+    }
+
+    /**
+     * Return PemObject
+     * @param filename
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public PemObject read(String filename) throws FileNotFoundException, IOException {
+        try (PemReader pemReader = new PemReader(new InputStreamReader(new FileInputStream(filename))) ) {
+            return pemReader.readPemObject();
         }
     }
 }

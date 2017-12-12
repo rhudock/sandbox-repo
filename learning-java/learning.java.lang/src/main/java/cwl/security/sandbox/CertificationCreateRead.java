@@ -1,5 +1,8 @@
 package cwl.security.sandbox;
 
+import org.apache.commons.codec.binary.Base64;
+import sun.misc.BASE64Encoder;
+
 import java.io.*;
 import java.security.*;
 import java.security.spec.*;
@@ -7,10 +10,10 @@ import java.security.spec.*;
 /**
  * http://snipplr.com/view/18368/
  */
-public class Adam {
+public class CertificationCreateRead {
 
     public static void main(String args[]) {
-        Adam adam = new Adam();
+        CertificationCreateRead certificationCreateRead = new CertificationCreateRead();
         try {
             String path = "learning.java.lang\\src\\main\\java\\cwl\\security\\sandbox";
 
@@ -20,12 +23,12 @@ public class Adam {
             KeyPair generatedKeyPair = keyGen.genKeyPair();
 
             System.out.println("Generated Key Pair");
-            adam.dumpKeyPair(generatedKeyPair);
-            adam.SaveKeyPair(path, generatedKeyPair);
+            certificationCreateRead.dumpKeyPair(generatedKeyPair);
+            certificationCreateRead.SaveKeyPair(path, generatedKeyPair);
 
-            KeyPair loadedKeyPair = adam.LoadKeyPair(path, "DSA");
+            KeyPair loadedKeyPair = certificationCreateRead.LoadKeyPair(path, "DSA");
             System.out.println("Loaded Key Pair");
-            adam.dumpKeyPair(loadedKeyPair);
+            certificationCreateRead.dumpKeyPair(loadedKeyPair);
         } catch (Exception e) {
             e.printStackTrace();
             return;
@@ -34,9 +37,11 @@ public class Adam {
 
     private void dumpKeyPair(KeyPair keyPair) {
         PublicKey pub = keyPair.getPublic();
+        System.out.println("Public Key: " + Base64.encodeBase64(pub.getEncoded()));
         System.out.println("Public Key: " + getHexString(pub.getEncoded()));
 
         PrivateKey priv = keyPair.getPrivate();
+        System.out.println("Private Key: " + Base64.encodeBase64(priv.getEncoded()));
         System.out.println("Private Key: " + getHexString(priv.getEncoded()));
     }
 

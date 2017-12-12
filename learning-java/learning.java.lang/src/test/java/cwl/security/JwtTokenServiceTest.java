@@ -1,5 +1,6 @@
 package cwl.security;
 
+import cwl.security.jwt.JwtTokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.impl.TextCodec;
 import org.junit.Test;
