@@ -43,7 +43,7 @@ public class CertificateIOUtil {
             StringBuilder buff = new StringBuilder();
             String lineIn = br.readLine();
             if (null != lineIn && (lineIn.contentEquals(descriptorFirst) || lineIn.contentEquals(BEGIN_PRIVATE_KEY))) {
-                while ((lineIn = br.readLine()) != null && (!(lineIn.contentEquals(descriptorLast)) && !(lineIn.contentEquals(END_PRIVATE_KEY)) ) ) {
+                while ((lineIn = br.readLine()) != null && (!(lineIn.contentEquals(descriptorLast)) && !(lineIn.contentEquals(END_PRIVATE_KEY)))) {
                     buff.append(lineIn);
                 }
             }
@@ -75,7 +75,6 @@ public class CertificateIOUtil {
 
         return null;
     }
-
 
 
     public static PrivateKey readPrivateKey(File keyFile) throws Exception {

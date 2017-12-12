@@ -7,13 +7,15 @@ import sun.misc.BASE64Encoder;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by dlee on 10/19/2016.
  */
 public class SecretKeySpecUseTest {
     private final String myKey = "thisisakey";
+
     @Test
     public void encrypt() throws Exception {
 
@@ -25,15 +27,15 @@ public class SecretKeySpecUseTest {
         String hello = SecretKeySpecUse.encrypt("hello", myKey);
         assertEquals("hello", SecretKeySpecUse.decrypt(hello, myKey));
 
-    encrypt("edwin","password");
-    decrypt("6VsVtA/nhHKUZuWWmod/BQ==");
+        encrypt("edwin", "password");
+        decrypt("6VsVtA/nhHKUZuWWmod/BQ==");
 
 //    String en = encrypt1("edwin");
 //    decrypt1(en, "edwin" + "MY KEY");
-}
+    }
 
     private static void encrypt(String username, String password) throws Exception {
-        byte[] keyData = (username+password).getBytes();
+        byte[] keyData = (username + password).getBytes();
         SecretKeySpec secretKeySpec = new SecretKeySpec(keyData, "Blowfish");
         Cipher cipher = Cipher.getInstance("Blowfish");
         cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
@@ -42,7 +44,7 @@ public class SecretKeySpecUseTest {
     }
 
     private static void decrypt(String string) throws Exception {
-        byte[] keyData = ("edwin"+"password").getBytes();
+        byte[] keyData = ("edwin" + "password").getBytes();
         SecretKeySpec secretKeySpec = new SecretKeySpec(keyData, "Blowfish");
         Cipher cipher = Cipher.getInstance("Blowfish");
         cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
@@ -51,14 +53,14 @@ public class SecretKeySpecUseTest {
     }
 
     private static String encrypt1(String to_encrypt) throws Exception {
-        String strkey="MY KEY";
+        String strkey = "MY KEY";
         SecretKeySpec key = new SecretKeySpec(strkey.getBytes("UTF-8"), "Blowfish");
         Cipher cipher = Cipher.getInstance("Blowfish");
-        if ( cipher == null || key == null) {
+        if (cipher == null || key == null) {
             throw new Exception("Invalid key or cypher");
         }
         cipher.init(Cipher.ENCRYPT_MODE, key);
-        String encryptedData =new String(cipher.doFinal(to_encrypt.getBytes("UTF-8")));
+        String encryptedData = new String(cipher.doFinal(to_encrypt.getBytes("UTF-8")));
         return encryptedData;
     }
 

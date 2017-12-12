@@ -25,7 +25,10 @@ import java.security.spec.PKCS8EncodedKeySpec;
 
 /**
  * Studied for CBA NINA Web Proxy security.
+ * Check its UnitTest for its usage.
  * <p>
+ *
+ *
  * https://community.oracle.com/thread/1528259
  * https://www.mkyong.com/java/java-digital-signatures-example/
  * https://docs.oracle.com/javase/tutorial/security/
@@ -104,6 +107,8 @@ public class CBASignatureValidater {
 
     /**
      *  Return signature in byte array
+     *
+     *  getSignature and getEncrypted are returning same result.
      *
      * @param text            - message to generate signature.
      * @param privateFilePath - private file

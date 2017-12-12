@@ -1,4 +1,4 @@
-package cwl.security.sandbox.RSA;
+package cwl.security.rsa;
 
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.DigestInfo;
@@ -17,8 +17,10 @@ import java.security.Signature;
 
 /**
  * this class shows how to build signature with RAS algorithm
+ *
+ * signature and encoded string are basically same. Am I missing something?
  */
-public class RASTest2 {
+public class RASExample {
 
     public static void main(String args[]) {
 
@@ -56,6 +58,10 @@ public class RASTest2 {
 
             System.out.println("Signature Output : ");
             System.out.println("\t" + new String(Base64.encode(signature)));
+
+
+
+
 
             // Message Digest
             String hashingAlgorithm = "SHA-256";
