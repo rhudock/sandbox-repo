@@ -4130,6 +4130,7 @@ Application.prototype.setInitialSize = function() {
     this.resize();
     return;
   } else {
+      if(!this.stg) this.stg = Application.application.stage;
     this.stg.style.height = __height + "px";
     this.stg.style.width = __width + "px";
     var mbHeight = com.inq.flash.client.chatskins.SkinControl.getTitleBarHeight();
