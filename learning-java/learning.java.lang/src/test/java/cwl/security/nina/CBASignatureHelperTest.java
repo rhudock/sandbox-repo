@@ -1,8 +1,13 @@
 package cwl.security.nina;
 
+import cwl.lang.numst.string.util.StringUtils;
+import org.bouncycastle.util.encoders.Base64;
+import org.bouncycastle.util.encoders.Base64Encoder;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.misc.BASE64Encoder;
 
 import java.security.Signature;
 
@@ -22,7 +27,8 @@ public class CBASignatureHelperTest {
     @Test
     public void verifySigTestSuccess() throws Exception {
         byte[] signitureStr = CBASignatureHelper.getSignature(plainText, null);
-        logger.debug("signatureStr : {}", signitureStr);
+        logger.debug("signatureStr : {}", StringUtils.byteArrayToString(signitureStr));
+        logger.debug("signatureStr : {}", StringUtils.byteArrayToString(Base64.encode(signitureStr)));
 
         Signature sig = Signature.getInstance("SHA256withRSA");
         sig.initVerify(CBASignatureHelper.getPublicKey(null));
@@ -30,6 +36,105 @@ public class CBASignatureHelperTest {
 
         assertTrue(sig.verify(signitureStr));
     }
+
+    @Test
+    public void verifyString() throws Exception {
+
+        String plainText2 = "{ \"TalkAgentRequest\": {\n" +
+                "        \"@SCI\": \"\",\n" +
+                "        \"@IID\": \"\",\n" +
+                "        \"@TimeStamp\": \"2017-09-07T14:55:27.799+11:00\",\n" +
+                "        \"UserText\": \"hello\",\n" +
+                "        \"origin\": \"\",\n" +
+                "        \"NinaVars\": {\n" +
+                "               \"assetType\": \"netbank\"\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+
+        byte[] signitureStr = CBASignatureHelper.getSignature(plainText2, null);
+        logger.debug("signatureStr : {}", StringUtils.byteArrayToString(signitureStr));
+        logger.debug("signatureStr : {}", StringUtils.byteArrayToString(Base64.encode(signitureStr)));
+
+        Signature sig = Signature.getInstance("SHA256withRSA");
+        sig.initVerify(CBASignatureHelper.getPublicKey(null));
+        sig.update(plainText2.getBytes());
+
+        assertTrue(sig.verify(signitureStr));
+    }
+
+    @Test
+    public void jsonObjectValidationTest() throws Exception {
+
+        String jsonStr = "{\n" +
+                "    \"TalkAgentRequest\": {\n" +
+                "        \"@SCI\": \"\",\n" +
+                "        \"@IID\": \"\",\n" +
+                "        \"@TimeStamp\": \"2017-09-07T14:55:27.799+11:00\",\n" +
+                "        \"UserText\": \"hello\",\n" +
+                "        \"origin\": \"\",\n" +
+                "        \"NinaVars\": {\n" +
+                "               \"assetType\": \"netbank\",\n" +
+                "            \"secret\": \"7b3cefbb35611294e417769cd7a49508c8ca5f885f3c608b3bbed3a013256550\"\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+
+        JSONObject jsonTalkAgentRequest = new JSONObject(jsonStr);
+        String secretStr = jsonTalkAgentRequest.getJSONObject("TalkAgentRequest").getJSONObject("NinaVars").getString("secret");
+        jsonTalkAgentRequest.getJSONObject("TalkAgentRequest").getJSONObject("NinaVars").remove("secret");
+
+        String talkAgentRequestStr = jsonTalkAgentRequest.toString();
+        logger.debug("talkAgentRequestStr : {}", talkAgentRequestStr);
+
+        byte[] signitureStr = CBASignatureHelper.getSignature(talkAgentRequestStr, null);
+        logger.debug("secretStr : {}", secretStr);
+        logger.debug("signatureStr : {}", StringUtils.byteArrayToString(signitureStr));
+        logger.debug("signatureStr : {}", StringUtils.byteArrayToString(Base64.encode(signitureStr)));
+
+        Signature sig = Signature.getInstance("SHA256withRSA");
+        sig.initVerify(CBASignatureHelper.getPublicKey(null));
+        sig.update(talkAgentRequestStr.getBytes());
+
+        assertTrue(sig.verify(signitureStr));
+    }
+
+    @Test
+    public void jsonStringValidationTest() throws Exception {
+
+        String jsonStr = "{\n" +
+                "    \"TalkAgentRequest\": {\n" +
+                "        \"@SCI\": \"\",\n" +
+                "        \"@IID\": \"\",\n" +
+                "        \"@TimeStamp\": \"2017-09-07T14:55:27.799+11:00\",\n" +
+                "        \"UserText\": \"hello\",\n" +
+                "        \"origin\": \"\",\n" +
+                "        \"NinaVars\": {\n" +
+                "               \"assetType\": \"netbank\",\n" +
+                "            \"secret\": \"7b3cefbb35611294e417769cd7a49508c8ca5f885f3c608b3bbed3a013256550\"\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+
+        JSONObject jsonTalkAgentRequest = new JSONObject(jsonStr);
+        String secretStr = jsonTalkAgentRequest.getJSONObject("TalkAgentRequest").getJSONObject("NinaVars").getString("secret");
+        jsonTalkAgentRequest.getJSONObject("TalkAgentRequest").getJSONObject("NinaVars").remove("secret");
+
+        String talkAgentRequestStr = jsonTalkAgentRequest.toString();
+        logger.debug("talkAgentRequestStr : {}", talkAgentRequestStr);
+
+        byte[] signitureStr = CBASignatureHelper.getSignature(talkAgentRequestStr, null);
+        logger.debug("secretStr : {}", secretStr);
+        logger.debug("signatureStr : {}", StringUtils.byteArrayToString(signitureStr));
+        logger.debug("signatureStr : {}", StringUtils.byteArrayToString(Base64.encode(signitureStr)));
+
+        Signature sig = Signature.getInstance("SHA256withRSA");
+        sig.initVerify(CBASignatureHelper.getPublicKey(null));
+        sig.update(talkAgentRequestStr.getBytes());
+
+        assertTrue(sig.verify(signitureStr));
+    }
+
     @Test
     public void verifySigTestFail() throws Exception {
         byte[] signitureStr = CBASignatureHelper.getSignature(plainText, null);

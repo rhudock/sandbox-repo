@@ -39,7 +39,7 @@ public class CBASignatureHelper {
     public static PrivateKey getPrivateKey(String filePath) {
 
         if (null == filePath)
-            filePath = "D:\\code\\sandbox\\learning-java\\learning.java.lang\\src\\main\\resources\\Certificates\\Nuance\\Private\\private_key.pem";
+            filePath = "/Users/dlee/code/sandbox-repo/learning-java/learning.java.lang/src/main/resources/Certificates/Nuance/Private/private_key.pem";
 
         File privateKeyFile = new File(filePath);
 
@@ -73,7 +73,7 @@ public class CBASignatureHelper {
     public static PublicKey getPublicKey(String filePath) {
 
         if (null == filePath)
-            filePath = "D:\\code\\sandbox\\learning-java\\learning.java.lang\\src\\main\\resources\\Certificates\\Nuance\\Public\\public.crt";
+            filePath = "/Users/dlee/code/sandbox-repo/learning-java/learning.java.lang/src/main/resources/Certificates/Nuance/Public/public.crt";
 
         File pubKeyFile = new File(filePath);
 
