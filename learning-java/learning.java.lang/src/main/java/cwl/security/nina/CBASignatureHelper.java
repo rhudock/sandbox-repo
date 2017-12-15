@@ -33,8 +33,8 @@ import java.security.spec.PKCS8EncodedKeySpec;
  * https://www.mkyong.com/java/java-digital-signatures-example/
  * https://docs.oracle.com/javase/tutorial/security/
  */
-public class CBASignatureValidater {
-    private static final Logger logger = LoggerFactory.getLogger(CBASignatureValidater.class);
+public class CBASignatureHelper {
+    private static final Logger logger = LoggerFactory.getLogger(CBASignatureHelper.class);
 
     public static PrivateKey getPrivateKey(String filePath) {
 

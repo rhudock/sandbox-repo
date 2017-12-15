@@ -1,7 +1,7 @@
 
 # Projects
 CBA Nina Web Proxy Security Module
-cwl.security.nina.CBASignatureValidater
+cwl.security.nina.CBASignatureHelper
 
 
 

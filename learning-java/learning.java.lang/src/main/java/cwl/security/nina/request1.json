@@ -1,0 +1,19 @@
+{
+  "TalkAgentRequest": {
+    "@SCI": "",
+    "@IID": "",
+    "@TimeStamp": "2017-12-13T14:55:27.799+11:00",
+    "UserText": "Hello",
+    "origin": "",
+    "NinaVars": {
+      "assetType": "netbank",
+      "secret": "7b3cefbb35611294e417769cd7a49508c8ca5f885f3c608b3bbed3a013256550"
+    }
+  }
+}
+
+
+
+https://api-va-aus.digital.nod.nuance.com/CBA-AU-EnglishUS-WebBotRouter/jbotservice.asmx/TalkAgent
+https://api-va-aus.digital.nod.nuance.com/CBA-AU-EnglishUS-WebBotRouter/jbotservice.asmx/TalkAgent
+
