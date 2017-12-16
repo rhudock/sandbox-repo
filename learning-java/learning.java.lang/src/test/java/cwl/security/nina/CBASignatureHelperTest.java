@@ -2,21 +2,20 @@ package cwl.security.nina;
 
 import cwl.lang.numst.string.util.StringUtils;
 import org.bouncycastle.util.encoders.Base64;
-import org.bouncycastle.util.encoders.Base64Encoder;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.misc.BASE64Encoder;
 
 import java.security.Signature;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class CBASignatureHelperTest {
     private static final Logger logger = LoggerFactory.getLogger(CBASignatureHelperTest.class);
     private static final String plainText = "{\"TalkAgentRequest\":{\"@SCI\":\"\",\"@IID\":\"userIdentifier\",\"@TimeStamp\":\"2017-11-01T14:48:26.942763+10:00\",\"UserText\":\"userText\",\"NleResults\":true,\"NinaVars\":{\"assetType\":\"assetType\",\"invocationpoint\":\"invocationPoint\"}}}";
-    private static final String plainTextMod = "{\"TalkAgentRequest\":{\"@SCI\":\"test\",\"@IID\":\"userIdentifier\",\"@TimeStamp\":\"2017-11-01T14:48:26.942763+10:00\",\"UserText\":\"userText\",\"NleResults\":true,\"NinaVars\":{\"assetType\":\"assetType\",\"invocationpoint\":\"invocationPoint\"}}}";
+    private static final String plainTextMod = "{\"TalkAgentRequest\":{\"@SCI\":\" \",\"@IID\":\"userIdentifier\",\"@TimeStamp\":\"2017-11-01T14:48:26.942763+10:00\",\"UserText\":\"userText\",\"NleResults\":true,\"NinaVars\":{\"assetType\":\"assetType\",\"invocationpoint\":\"invocationPoint\"}}}";
 
     @Test
     public void getSignatureStrAndgetEncryptedTest() throws Exception {
