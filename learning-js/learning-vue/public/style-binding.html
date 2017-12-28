@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Introduction</title>
+</head>
+<body>
+
+<!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+<script src="js/vue.js"></script>
+
+<div id="app-1" class="static"
+     v-bind:class="{ active: isActive, 'text-danger': hasError }">
+    This is a text.
+</div>
+
+
+<script>
+    var myVue = new Vue({
+        el: '#app-1',
+        data: {
+            isActive: true,
+            hasError: true
+        }
+    })
+</script>
+
+<div id="app-2" v-bind:class="classObject">This is a test</div>
+
+<script>
+    var myVue = new Vue({
+        el: '#app-2',
+        data: {
+            classObject: {
+                active: true,
+                'text-danger': false
+            }
+        }
+    })
+</script>
+
+<div id="app-3" v-bind:class="classObject">This is a test</div>
+
+<script>
+    var myVue = new Vue({
+        el: '#app-3',
+        data: {
+            isActive: true,
+            error: null
+        },
+        computed: {
+            classObject: function () {
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    })
+</script>
+
+<div id="app-4" class="[activeClass, errorClass]">This is a test</div>
+
+<script>
+    var myVue = new Vue({
+        el: '#app-3',
+        data: {
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        }
+    })
+</script>
+
+</body>
+</html>
