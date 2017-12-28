@@ -1,0 +1,167 @@
+/* Guide CSS
+ *
+ * Compatible with all browsers except no hover highlighting in IE6.
+ * (normal)
+ *
+ */
+
+body {
+    margin: 0;
+}
+
+.title {
+    /* _margin: -10px 0 5px 10px; is for IE6 */
+    color: #AAE100;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 0 5px 10px; _margin: -10px 0 5px 10px;
+    padding-bottom: 10px;
+    width: 90%;
+}
+
+.title2 {
+    /* _margin: -10px 0 5px 10px; is for IE6 */
+    color: black;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 10px 0 5px 10px;
+    width: 90%;
+}
+
+.green {
+    color: #AAE100;
+}
+
+/* 
+ * Options
+ */
+ 
+.option {
+    width: 95%;
+    background-image: url(guide_rollover.gif);
+    background-repeat: no-repeat;
+    background-position: 0 -41px;
+    height: 41px;
+    border: none;
+    text-align: left;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.option:hover {
+    cursor: pointer;
+    background-position: 0 0;
+}
+
+.option-text {
+    color: black;
+    font-family: Arial;
+	font-size: 13px;
+	padding-left: 35px; *padding-left: 40px;
+	width: 90%;
+    margin: -3px 0 0 0;
+}
+
+ul {
+    list-style: none;
+    font-family: Arial;
+    font-size: 13px;
+}
+li {
+    position: relative;
+    padding-top: 3px;
+}
+li:before {
+    position: absolute;
+    margin: 5px 0 0 -12px;
+    /* accommodate Camino */
+    vertical-align: middle;
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: #AAE100;
+    content: "";
+}
+
+/*
+ * iPhone details button
+ */
+ 
+.iphonedetails{
+	width: 85px;
+	height: 27px;
+	margin-left: 25px;
+	background-image: url("button_learnmore.png");
+	border: 0px;
+	cursor: pointer;
+}
+
+/*
+ * Start over button
+ */
+ 
+.startover {
+    background: url("button_overlay.png") repeat-x scroll 0 0 #AAE100;
+    border-radius: 5px 5px 5px 5px;
+    border-style: none;
+	bottom: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font: bold 13px "Helvetica Neue",Helvetica,Arial,clean,sans-serif !important;
+    overflow: visible;
+    padding: 5px;
+	position: absolute;
+	right: 10px;
+    text-align: center;
+    text-decoration: none;
+    /*text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25), -2px 0 1px rgba(0, 0, 0, 0.25);*/
+    white-space: nowrap;
+	_background-image: none;
+	-moz-border-radius: 5px;
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	-webkit-border-radius: 5px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	_zoom: 1;
+}
+ 
+.startover:hover, .startover:focus {
+	background-position: 0 -50px;
+	color: white;
+}
+ 
+.startover:active {
+	background-position: 0 -100px;
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7);
+	-webkit-box-shadow: none;
+}
+
+/*
+ * Loading message
+ */
+ 
+.xforms-loading-loading {
+	opacity: 0;
+	filter: alpha(opacity=1); /* --> IE8 and earlier */
+}
+
+/*
+ * Close guide (Thank you window; for guides that do not close automatically)
+ */
+ 
+.close-guide {
+    background-color: #4D5F71;
+    color: #FFF;
+    font-family: Arial;
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    padding: 10px;
+    width: 85%;
+}

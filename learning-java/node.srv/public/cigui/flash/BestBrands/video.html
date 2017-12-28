@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Video</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		.video {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+		}
+	</style>
+	<script>
+		resetVideo = function(e) {
+		 	// console.log('vidFrame listener called!');
+			var url = document.getElementById('vidFrame').getAttribute('src'); 
+			document.getElementById('vidFrame').setAttribute('src',''); 
+			document.getElementById('vidFrame').setAttribute('src',url);
+		}
+	
+		window.addEventListener('message', resetVideo, false);	
+	</script>
+</head>
+	<body>
+		<iframe ID="vidFrame" class="video" width="100%" src="//www.youtube.com/embed/m9xXAlEaB5Y" frameborder="0" allowfullscreen></iframe>
+	</body>
+</html>

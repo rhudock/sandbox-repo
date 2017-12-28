@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+	<title>DirecTV Video</title>
+	<meta http-equiv=Content-Type content="text/html; charset=utf-8" />
+	<script type="text/javascript">
+		var player;//a reference to the experience module
+		var videoPlayer;  //a reference to the videoPlayer module
+
+		// called when template loads, we use this to store a reference to the player and modules
+		// and add event listeners for the video load (when the user clicks on a video)
+		function onTemplateLoaded(experienceId) {
+			player = brightcove.getExperience(experienceId);
+			videoPlayer = player.getModule(APIModules.VIDEO_PLAYER);
+			pauseState = false;
+		}
+
+		function togglePause(){
+			//if you pass true (or no parameters) to pause 
+			//the video will pause
+			//see http://docs.brightcove.com/en/player/com/brightcove/api/modules/VideoPlayerModule.html#pause()
+			//for more info
+			if(videoPlayer.isPlaying()){
+				videoPlayer.pause(true);
+			}else{
+				videoPlayer.pause(false);
+			}
+		}
+		
+		window.addEventListener('message', togglePause, false);	
+    </script>
+</head>
+
+<body style="margin: 0">
+<!--
+By use of this code snippet, I agree to the Brightcove Publisher T and C 
+found at https://accounts.brightcove.com/en/terms-and-conditions/. 
+-->
+<script language="JavaScript" type="text/javascript" src="http://admin.brightcove.com/js/BrightcoveExperiences.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://admin.brightcove.com/js/APIModules_all.js"></script>
+
+<object id="myExperience1689925193001" class="BrightcoveExperience">
+  <param name="bgcolor" value="#FFFFFF" />
+  <param name="width" value="305" />
+  <param name="height" value="206" />
+  <param name="playerID" value="1094920011001" />
+  <param name="playerKey" value="AQ~~,AAAAnNyD9nE~,MDzGbNdcuDGMRPikHaUb-72feVNFxz2u" />
+  <param name="isVid" value="true" />
+  <param name="isUI" value="true" />
+  <param name="dynamicStreaming" value="true" />
+  <param name="autoStart" value="false" />
+  <param name="@videoPlayer" value="1689925193001" />
+  <param name="wmode" value="transparent" />
+</object>
+</body>
+</html>
