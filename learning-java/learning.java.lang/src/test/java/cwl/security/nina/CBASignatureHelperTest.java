@@ -33,7 +33,7 @@ public class CBASignatureHelperTest {
         sig.initVerify(CBASignatureHelper.getPublicKey(null));
         sig.update(plainText.getBytes());
 
-        assertTrue(sig.verify(signitureStr));
+        assertTrue(sig.verify(Base64.decode(signitureStr)));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class CBASignatureHelperTest {
         sig.initVerify(CBASignatureHelper.getPublicKey(null));
         sig.update(plainText2.getBytes());
 
-        assertTrue(sig.verify(signitureStr));
+        assertTrue(sig.verify(Base64.decode(signitureStr)));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class CBASignatureHelperTest {
         sig.initVerify(CBASignatureHelper.getPublicKey(null));
         sig.update(talkAgentRequestStr.getBytes());
 
-        assertTrue(sig.verify(signitureStr));
+        assertTrue(sig.verify(Base64.decode(signitureStr)));
     }
 
     @Test
@@ -131,7 +131,7 @@ public class CBASignatureHelperTest {
         sig.initVerify(CBASignatureHelper.getPublicKey(null));
         sig.update(talkAgentRequestStr.getBytes());
 
-        assertTrue(sig.verify(signitureStr));
+        assertTrue(sig.verify(Base64.decode(signitureStr)));
     }
 
     @Test
@@ -143,6 +143,6 @@ public class CBASignatureHelperTest {
         sig.initVerify(CBASignatureHelper.getPublicKey(null));
         sig.update(plainTextMod.getBytes());
 
-        assertTrue(!sig.verify(signitureStr));
+        assertTrue(!sig.verify(Base64.decode(signitureStr)));
     }
 }

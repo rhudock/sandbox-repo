@@ -1,5 +1,9 @@
 package cwl.security.nina;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Preconditions;
+import com.google.common.io.Resources;
+import cwl.lang.numst.string.util.StringUtils;
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.DigestInfo;
 import org.bouncycastle.operator.DefaultDigestAlgorithmIdentifierFinder;
@@ -13,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileReader;
+import java.net.URL;
 import java.security.KeyFactory;
 import java.security.MessageDigest;
 import java.security.PrivateKey;
@@ -121,13 +126,42 @@ public class CBASignatureHelper {
             signatureProvider.initSign(getPrivateKey(privateFilePath));
 
             signatureProvider.update(text.getBytes());
-            return signatureProvider.sign();
+            return Base64.encode(signatureProvider.sign());
         } catch (Throwable e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    public static void main(String[] args) {
+        Preconditions.checkArgument(args != null);
+
+        String resourceName = "Certificates/Nuance/Private/private_key.pem";
+        ClassLoader loader =
+                MoreObjects.firstNonNull(
+                        Thread.currentThread().getContextClassLoader(), Resources.class.getClassLoader());
+        URL url = loader.getResource(resourceName);
+
+        String privateKeyFilePath = url.getFile();
+        String payload = "{\n" +
+                "\"TalkAgentRequest\": {\n" +
+                "\"@xmlns\": \"http://www.virtuoz.com\",\n" +
+                "\"@SCI\": \"\",\n" +
+                "\"@IID\": \"\",\n" +
+                "\"@TimeStamp\": \"2014-10-23T22:46:42.996-04:00\",\n" +
+                "\"UserText\": \"hi\",\n" +
+                "\"Debug\": {},\n" +
+                "\"uiID\": 1929446423053.0916,\n" +
+                "\"ClientMetaData\": {\n" +
+                "\"chatReferrer\": \"\",\n" +
+                "\"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36(KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36\"},\n" +
+                "\"VisitorIsTyping\": true,\n" +
+                "\"NinaVars\": {\"preprod\": true,\"ninachat\": true}\n" +
+                "}\n" +
+                "}";
+
+        logger.info(StringUtils.byteArrayToString(getSignature(payload, privateKeyFilePath)));
+    }
 
     /**
      * Same as getSignatureStr function
@@ -156,7 +190,7 @@ public class CBASignatureHelper {
             Cipher encCipher = Cipher.getInstance("RSA");
             encCipher.init(Cipher.ENCRYPT_MODE, getPrivateKey(privateFilePath));
 
-            return encCipher.doFinal(hashToEncrypt);
+            return Base64.encode(encCipher.doFinal(hashToEncrypt));
 
         } catch (Throwable e) {
             e.printStackTrace();
