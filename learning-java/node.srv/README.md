@@ -9,3 +9,9 @@ https://github.com/epic-math
 Also this project is used to test myIndex.html - InqFramework.html
 
 npm install mongodb save
+
+
+## CIGUI project
+1. run 
+```node script/www```
+2. goto http://localhost:3000/cigui/
