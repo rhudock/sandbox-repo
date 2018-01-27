@@ -1,0 +1,20 @@
+{
+  "interactiveData": {
+    "appId": 311548709,
+    "appName": "WFBusinessChat",
+    "URL": "?name=WF%20Authentication&session=abcdefghijklmnop123456789&action=requestIdentity",
+    "bid": "com.apple.messages.MSMessageExtensionBalloonPlugin:X72GZ2M47G:com.wf.mobilebanking.imessage.extension",
+    "sessionIdentifier": "1234567890",
+    "receivedMessage": {
+      "title": "Wells Fargo Authentication",
+      "subtitle": "Please login to continue",
+      "secondarySubtitle": "",
+      "tertiarySubtitle": "",
+      "imageTitle": "Apple Business Chat",
+      "imageSubtitle": ""
+    },
+    "useLiveLayout": false
+  },
+  "attachments": [],
+  "type": "interactive"
+}

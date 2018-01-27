@@ -23,9 +23,7 @@ public class CallableTest {
         Integer result = null;
         try {
             result = future.get();   // Blocks and Waits here.
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
