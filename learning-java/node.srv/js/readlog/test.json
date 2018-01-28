@@ -1,0 +1,78 @@
+{  "type": "interactive",
+  "interactiveData": {
+    "bid": "com.apple.messages.MSMessageExtensionBalloonPlugin:0000000000:com.apple.icloud.apps.messages.business.extension",
+    "data": {
+      "event": {
+        "identifier": "97478480-d4fc-4455-ad2b-434c89a46ed6",
+        "timeslots": [
+          {
+            "duration": 1800,
+            "startTime": "2017-12-21T16:00+0000",
+            "identifier": "0"
+          },
+          {
+            "duration": 1800,
+            "startTime": "2017-12-21T16:30+0000",
+            "identifier": "1"
+          },
+          {
+            "duration": 1800,
+            "startTime": "2017-12-21T17:00+0000",
+            "identifier": "2"
+          },
+          {
+            "duration": 1800,
+            "startTime": "2017-12-22T20:00+0000",
+            "identifier": "3"
+          },
+          {
+            "duration": 1800,
+            "startTime": "2017-12-22T20:30+0000",
+            "identifier": "4"
+          },
+          {
+            "duration": 1800,
+            "startTime": "2017-12-23T21:00+0000",
+            "identifier": "5"
+          },
+          {
+            "duration": 1800,
+            "startTime": "2017-12-23T21:30+0000",
+            "identifier": "6"
+          },
+          {
+            "duration": 1800,
+            "startTime": "2017-12-23T23:00+0000",
+            "identifier": "7"
+          },
+          {
+            "duration": 1800,
+            "startTime": "2017-12-23T23:30+0000",
+            "identifier": "8"
+          }
+        ],
+        "timezoneOffset": 700,
+        "title": "Appointment Time",
+        "location": {
+          "title": "333 Market St. San Francisco CA, 94105",
+          "latitude": "37.7915",
+          "longitude": "122.3976",
+          "radius": "10"
+        }
+      }
+    },
+    "mspVersion": "1.0",
+    "requestIdentifier": "8EF748B5-3DC5-47AE-B185-65E91518D209",
+    "receivedMessage": {
+      "style": "large",
+      "title": "Schedule an Appointment",
+      "subtitle": "Select an appointment date",
+      "imageIdentifier": "a064b010-c5e1-4ded-aa19-c3256628957b"
+    },
+    "replyMessage": {
+      "style": "large",
+      "title": "Appointment Scheduled",
+      "imageIdentifier": "0bcfef7e-22ff-4d29-9f44-8bc4ff8af10b"
+    }
+  }
+}
