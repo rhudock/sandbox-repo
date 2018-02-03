@@ -19,7 +19,7 @@
             <version>4.5.3</version>
         </dependency>
 
-        <dependency>
+<!--        <dependency>
             <groupId>org.slf4j</groupId>
             <version>1.7.25</version>
             <artifactId>slf4j-api</artifactId>
@@ -33,7 +33,7 @@
             <groupId>org.slf4j</groupId>
             <version>1.7.25</version>
             <artifactId>jcl-over-slf4j</artifactId>
-        </dependency>
+        </dependency>-->
 
 
         <dependency>
