@@ -152,11 +152,11 @@ com.inq.stage = com.inq.stage || {};
 com.inq.ui = com.inq.ui || {};
 com.inq.utils = com.inq.utils || {};
 com.inq.aria = com.inq.aria || {};
-com.inq.events.EventDispatcher = function() {  console.warn("com.inq.events.EventDispatcher");
+com.inq.events.EventDispatcher = function() {
   this.eventListeners = {};
 };
 $hxClasses.registerClass(com.inq.events.EventDispatcher, "com.inq.events.EventDispatcher");
-com.inq.events.EventDispatcher.domEventHandler = function(handler) {  console.warn("com.inq.events.EventDispatcher.domEventHandler");
+com.inq.events.EventDispatcher.domEventHandler = function(handler) {
   var instance = handler.scope;
   var method = handler.method;
   var newClosure = function(ev) {
@@ -183,7 +183,7 @@ com.inq.events.EventDispatcher.domEventHandler = function(handler) {  console.wa
   newClosure.object = instance;
   return newClosure;
 };
-com.inq.events.EventDispatcher.prototype.addEventListener = function(type, listener, useCapture, priority, useWeakReference) {  console.warn("com.inq.events.EventDispatcher.prototype.addEventListener");
+com.inq.events.EventDispatcher.prototype.addEventListener = function(type, listener, useCapture, priority, useWeakReference) {
   if (typeof listener == "function") {
     if (!this.hasEventListener[type]) {
       this.eventListeners[type] = [];
@@ -193,13 +193,13 @@ com.inq.events.EventDispatcher.prototype.addEventListener = function(type, liste
     }
   }
 };
-com.inq.events.EventDispatcher.prototype.willTrigger = function(type) {  console.warn("com.inq.events.EventDispatcher.prototype.willTrigger");
+com.inq.events.EventDispatcher.prototype.willTrigger = function(type) {
   return false;
 };
-com.inq.events.EventDispatcher.prototype.toString = function() {  console.warn("com.inq.events.EventDispatcher.prototype.toString");
+com.inq.events.EventDispatcher.prototype.toString = function() {
   return "EventDispacher";
 };
-com.inq.events.EventDispatcher.prototype.removeEventListener = function(type, listener, useCapture) {  console.warn("com.inq.events.EventDispatcher.prototype.removeEventListener");
+com.inq.events.EventDispatcher.prototype.removeEventListener = function(type, listener, useCapture) {
   if (typeof listener == "function" && this.hasEventListener(type)) {
     var i = this._getListenerId(type, listener);
     if (i != -1) {
@@ -210,10 +210,10 @@ com.inq.events.EventDispatcher.prototype.removeEventListener = function(type, li
     }
   }
 };
-com.inq.events.EventDispatcher.prototype.hasEventListener = function(type) {  console.warn("com.inq.events.EventDispatcher.prototype.hasEventListener");
+com.inq.events.EventDispatcher.prototype.hasEventListener = function(type) {
   return this.eventListeners[type] != null;
 };
-com.inq.events.EventDispatcher.prototype.dispatchEvent = function(event) {  console.warn("com.inq.events.EventDispatcher.prototype.dispatchEvent");
+com.inq.events.EventDispatcher.prototype.dispatchEvent = function(event) {
   if (this.hasEventListener(event.type)) {
     var returnValue;
     var listeners = this.eventListeners[event.type];
@@ -225,7 +225,7 @@ com.inq.events.EventDispatcher.prototype.dispatchEvent = function(event) {  cons
   }
   return returnValue;
 };
-com.inq.events.EventDispatcher.prototype._getListenerId = function(type, listener) {  console.warn("com.inq.events.EventDispatcher.prototype._getListenerId");
+com.inq.events.EventDispatcher.prototype._getListenerId = function(type, listener) {
   var listeners = this.eventListeners[type];
   if (listeners && listeners.length > 0) {
     for (var i = 0;i < listeners.length;i++) {
@@ -238,7 +238,7 @@ com.inq.events.EventDispatcher.prototype._getListenerId = function(type, listene
 };
 com.inq.events.EventDispatcher.prototype.eventListeners = null;
 com.inq.events.EventDispatcher.prototype.__class__ = com.inq.events.EventDispatcher;
-com.inq.ui.Container = function(_id, _parentNode, document) {  console.warn("com.inq.ui.Container");
+com.inq.ui.Container = function(_id, _parentNode, document) {
   com.inq.events.EventDispatcher.call(this);
   this._backgroundImage = null;
   this._visible = true;
@@ -277,7 +277,7 @@ com.inq.ui.Container = function(_id, _parentNode, document) {  console.warn("com
   this.addCssClass(this._div);
 };
 $hxClasses.extend(com.inq.events.EventDispatcher, com.inq.ui.Container, "com.inq.ui.Container");
-com.inq.ui.Container.getElementById = function(_id) {  console.warn("com.inq.ui.Container.getElementById");
+com.inq.ui.Container.getElementById = function(_id) {
   var element = null;
   if (com.inq.ui.Container.isString(_id)) {
     if (com.inq.ui.SkinLoader.skinInClient && _id.indexOf(com.inq.ui.Container.CLIENT_SPACE_PREFIX) == 0 || _id.indexOf(com.inq.ui.Container.LEGACY_PREFIX) == 0) {
@@ -294,7 +294,7 @@ com.inq.ui.Container.getElementById = function(_id) {  console.warn("com.inq.ui.
   }
   return element;
 };
-com.inq.ui.Container._getElementById = function(id, doc) {  console.warn("com.inq.ui.Container._getElementById");
+com.inq.ui.Container._getElementById = function(id, doc) {
   if (doc == null) {
     doc = window.document;
   }
@@ -311,12 +311,12 @@ com.inq.ui.Container._getElementById = function(id, doc) {  console.warn("com.in
   }
   return el;
 };
-com.inq.ui.Container.find = function(label) {  console.warn("com.inq.ui.Container.find");
+com.inq.ui.Container.find = function(label) {
   var element = window.document.getElementById(label);
   var found = element != null ? element.container : null;
   return found;
 };
-com.inq.ui.Container.encodeSize = function(size, defaultSuffix) {  console.warn("com.inq.ui.Container.encodeSize");
+com.inq.ui.Container.encodeSize = function(size, defaultSuffix) {
   if (defaultSuffix == null) {
     defaultSuffix = "px";
   }
@@ -327,13 +327,13 @@ com.inq.ui.Container.encodeSize = function(size, defaultSuffix) {  console.warn(
     return size;
   }
 };
-com.inq.ui.Container.isString = function(ob) {  console.warn("com.inq.ui.Container.isString");
+com.inq.ui.Container.isString = function(ob) {
   if (null == ob) {
     return false;
   }
   return js.Boot.__instanceof(ob, String);
 };
-com.inq.ui.Container.show = function(id) {  console.warn("com.inq.ui.Container.show");
+com.inq.ui.Container.show = function(id) {
   var cntr = Application.getContainer(id);
   if (cntr != null && (id !== "chat" || !com.inq.flash.client.control.MinimizeManager.isMinimized()) && (id !== "btnEmail" || com.inq.flash.client.chatskins.EmailMgr.getRequestStatus() !== com.inq.flash.client.chatskins.EmailMgr.REQUEST_STATUS_REQUESTED)) {
     if (com.inq.utils.Capabilities.isIphone() && id === "chat") {
@@ -351,7 +351,7 @@ com.inq.ui.Container.show = function(id) {  console.warn("com.inq.ui.Container.s
     }
   }
 };
-com.inq.ui.Container.hide = function(id) {  console.warn("com.inq.ui.Container.hide");
+com.inq.ui.Container.hide = function(id) {
   if (id === "email") {
     com.inq.flash.client.chatskins.EmailMgr.actionCancelEmail();
   } else {
@@ -364,23 +364,23 @@ com.inq.ui.Container.hide = function(id) {  console.warn("com.inq.ui.Container.h
     com.inq.aria.AriaMsg.restoreScreenReaderForChat();
   }
 };
-com.inq.ui.Container.initializeClass = function(initFunc) {  console.warn("com.inq.ui.Container.initializeClass");
+com.inq.ui.Container.initializeClass = function(initFunc) {
   eval("var initFn=" + initFunc);
   initFn();
 };
-com.inq.ui.Container.playVideo = function(id) {  console.warn("com.inq.ui.Container.playVideo");
+com.inq.ui.Container.playVideo = function(id) {
   var el = Application.application.getMxmlItem(id);
   if (el != null) {
     el.play();
   }
 };
-com.inq.ui.Container.pauseVideo = function(id) {  console.warn("com.inq.ui.Container.pauseVideo");
+com.inq.ui.Container.pauseVideo = function(id) {
   var el = Application.application.getMxmlItem(id);
   if (el != null) {
     el.pause();
   }
 };
-com.inq.ui.Container.prototype.addMxmlListeners = function() {  console.warn("com.inq.ui.Container.prototype.addMxmlListeners");
+com.inq.ui.Container.prototype.addMxmlListeners = function() {
   if (this.styles["onClick"]) {
     if (com.inq.ui.CommandParser.executeLogic(this.styles["onClick"], true, this)) {
       this.setOnClick($bind(this, this.onClick));
@@ -410,10 +410,10 @@ com.inq.ui.Container.prototype.addMxmlListeners = function() {  console.warn("co
     }
   }
 };
-com.inq.ui.Container.prototype.onClick = function() {  console.warn("com.inq.ui.Container.prototype.onClick");
+com.inq.ui.Container.prototype.onClick = function() {
   com.inq.ui.CommandParser.executeLogic(this.styles["onClick"], false, this);
 };
-com.inq.ui.Container.prototype.getNewImage = function() {  console.warn("com.inq.ui.Container.prototype.getNewImage");
+com.inq.ui.Container.prototype.getNewImage = function() {
   var newImage = new Image;
   var doc = newImage.ownerDocument;
   var containerDoc = this._div.ownerDocument;
@@ -428,13 +428,13 @@ com.inq.ui.Container.prototype.getNewImage = function() {  console.warn("com.inq
   }
   return newImage;
 };
-com.inq.ui.Container.prototype.getIsSprite = function() {  console.warn("com.inq.ui.Container.prototype.getIsSprite");
+com.inq.ui.Container.prototype.getIsSprite = function() {
   if (this._isSprite == null) {
     this._isSprite = !(null == this.getStyle("sprite-width") && null == this.getStyle("sprite-height") && null == this.getStyle("sprite-left") && null == this.getStyle("sprite-top"));
   }
   return this._isSprite;
 };
-com.inq.ui.Container.prototype.loadContent = function() {  console.warn("com.inq.ui.Container.prototype.loadContent");
+com.inq.ui.Container.prototype.loadContent = function() {
   if (this.contains) {
     this.contains.forEach(function(child) {
       if (child) {
@@ -443,7 +443,7 @@ com.inq.ui.Container.prototype.loadContent = function() {  console.warn("com.inq
     });
   }
 };
-com.inq.ui.Container.prototype.renderCanvas = function(canvas) {  console.warn("com.inq.ui.Container.prototype.renderCanvas");
+com.inq.ui.Container.prototype.renderCanvas = function(canvas) {
   if (!!canvas.sourceImage) {
     var context = null;
     canvas.height = canvas.spriteHeight;
@@ -496,21 +496,21 @@ com.inq.ui.Container.prototype.renderCanvas = function(canvas) {  console.warn("
     haxe.Log.trace("Canvas source image is missing", {fileName:"Container.hx", lineNumber:1354, className:"com.inq.ui.Container", methodName:"renderCanvas"});
   }
 };
-com.inq.ui.Container.prototype.calculateHeight = function() {  console.warn("com.inq.ui.Container.prototype.calculateHeight");
+com.inq.ui.Container.prototype.calculateHeight = function() {
   var top = this.evaluatePosition(this.getStyle("top"));
   var bottom = this.evaluatePosition(this.getStyle("bottom"));
   var height = this._div.clientHeight;
   height -= bottom - top;
   return height > 0 ? height : 0;
 };
-com.inq.ui.Container.prototype.calculateWidth = function() {  console.warn("com.inq.ui.Container.prototype.calculateWidth");
+com.inq.ui.Container.prototype.calculateWidth = function() {
   var left = this.evaluatePosition(this.getStyle("left"));
   var right = this.evaluatePosition(this.getStyle("right"));
   var width = this._div.clientWidth;
   width -= right - left;
   return width > 0 ? width : 0;
 };
-com.inq.ui.Container.prototype.findChild = function(childId) {  console.warn("com.inq.ui.Container.prototype.findChild");
+com.inq.ui.Container.prototype.findChild = function(childId) {
   for (var i = 0;i < this.contains.length;i++) {
     var child = this.contains[i];
     if (child && child._div) {
@@ -521,12 +521,12 @@ com.inq.ui.Container.prototype.findChild = function(childId) {  console.warn("co
   }
   return null;
 };
-com.inq.ui.Container.prototype.getChildren = function() {  console.warn("com.inq.ui.Container.prototype.getChildren");
+com.inq.ui.Container.prototype.getChildren = function() {
   return this.contains;
 };
-com.inq.ui.Container.prototype.setScrolling = function(val) {  console.warn("com.inq.ui.Container.prototype.setScrolling");
+com.inq.ui.Container.prototype.setScrolling = function(val) {
 };
-com.inq.ui.Container.prototype.updateSrc = function(val, initiator) {  console.warn("com.inq.ui.Container.prototype.updateSrc");
+com.inq.ui.Container.prototype.updateSrc = function(val, initiator) {
   if (this.contains) {
     this.contains.forEach(function(child) {
       if (child) {
@@ -535,9 +535,9 @@ com.inq.ui.Container.prototype.updateSrc = function(val, initiator) {  console.w
     });
   }
 };
-com.inq.ui.Container.prototype.setSrc = function(val) {  console.warn("com.inq.ui.Container.prototype.setSrc");
+com.inq.ui.Container.prototype.setSrc = function(val) {
 };
-com.inq.ui.Container.prototype.removeFrom = function(parentContainer) {  console.warn("com.inq.ui.Container.prototype.removeFrom");
+com.inq.ui.Container.prototype.removeFrom = function(parentContainer) {
   if (parentContainer == null) {
     parentContainer = this.parent;
   }
@@ -556,7 +556,7 @@ com.inq.ui.Container.prototype.removeFrom = function(parentContainer) {  console
     }
   }
 };
-com.inq.ui.Container.prototype.attachTo = function(parentContainer, after) {  console.warn("com.inq.ui.Container.prototype.attachTo");
+com.inq.ui.Container.prototype.attachTo = function(parentContainer, after) {
   var ob = parentContainer._div;
   var obSibling = after != null ? after._div : null;
   if (!js.Boot.__instanceof(parentContainer, com.inq.ui.ClientBody)) {
@@ -571,7 +571,7 @@ com.inq.ui.Container.prototype.attachTo = function(parentContainer, after) {  co
   this.parent = parentContainer;
   this._clientStage = parentContainer._clientStage;
 };
-com.inq.ui.Container.prototype.attachToElement = function(ob, after) {  console.warn("com.inq.ui.Container.prototype.attachToElement");
+com.inq.ui.Container.prototype.attachToElement = function(ob, after) {
   this._parent = ob;
   if (this._div.parentNode != null && this._div.parentNode.nodeName.indexOf("#") != 0) {
     return;
@@ -597,7 +597,7 @@ com.inq.ui.Container.prototype.attachToElement = function(ob, after) {  console.
     }
   }
 };
-com.inq.ui.Container.prototype.resizer = function(cntns) {  console.warn("com.inq.ui.Container.prototype.resizer");
+com.inq.ui.Container.prototype.resizer = function(cntns) {
   if (cntns == null || cntns.length == 0) {
     return;
   }
@@ -619,10 +619,10 @@ com.inq.ui.Container.prototype.resizer = function(cntns) {  console.warn("com.in
     }
   }
 };
-com.inq.ui.Container.prototype.resize = function() {  console.warn("com.inq.ui.Container.prototype.resize");
+com.inq.ui.Container.prototype.resize = function() {
   this.applyStyle();
 };
-com.inq.ui.Container.prototype.applyStyle = function() {  console.warn("com.inq.ui.Container.prototype.applyStyle");
+com.inq.ui.Container.prototype.applyStyle = function() {
   this.buildStyle();
   if (this._div != null) {
     this._div.style.cssText = this._style;
@@ -637,7 +637,7 @@ com.inq.ui.Container.prototype.applyStyle = function() {  console.warn("com.inq.
     }
   }
 };
-com.inq.ui.Container.prototype.evaluateString = function(value) {  console.warn("com.inq.ui.Container.prototype.evaluateString");
+com.inq.ui.Container.prototype.evaluateString = function(value) {
   try {
     value = StringTools.trim(value);
     if (value.charAt(0) == "{") {
@@ -672,7 +672,7 @@ com.inq.ui.Container.prototype.evaluateString = function(value) {  console.warn(
   }
   return "";
 };
-com.inq.ui.Container.prototype.evaluatePosition = function(value) {  console.warn("com.inq.ui.Container.prototype.evaluatePosition");
+com.inq.ui.Container.prototype.evaluatePosition = function(value) {
   if (value) {
     try {
       value = StringTools.trim(value);
@@ -711,7 +711,7 @@ com.inq.ui.Container.prototype.evaluatePosition = function(value) {  console.war
   }
   return 0;
 };
-com.inq.ui.Container.prototype.getParentHeight = function() {  console.warn("com.inq.ui.Container.prototype.getParentHeight");
+com.inq.ui.Container.prototype.getParentHeight = function() {
   var h = this._parent.clientHeight;
   var isIE = window.navigator.userAgent.indexOf("MSIE") != -1 || window.navigator.userAgent.indexOf("Trident") != -1;
   if (isIE && this instanceof Application && this._parent != null && this._parent.id != "Skin") {
@@ -722,10 +722,10 @@ com.inq.ui.Container.prototype.getParentHeight = function() {  console.warn("com
   }
   return h;
 };
-com.inq.ui.Container.prototype.addCssTextProperty = function(property, value) {  console.warn("com.inq.ui.Container.prototype.addCssTextProperty");
+com.inq.ui.Container.prototype.addCssTextProperty = function(property, value) {
   this._style += this.createCssText(property, value);
 };
-com.inq.ui.Container.prototype.createCssText = function(property, value) {  console.warn("com.inq.ui.Container.prototype.createCssText");
+com.inq.ui.Container.prototype.createCssText = function(property, value) {
   if (/[A-Z]/.test(property)) {
     property = property.replace(/([A-Z])/g, function(match) {
       return "-" + match.toLowerCase();
@@ -733,7 +733,7 @@ com.inq.ui.Container.prototype.createCssText = function(property, value) {  cons
   }
   return property + ": " + value + ";";
 };
-com.inq.ui.Container.prototype.buildCssText = function(initStyle, clientElement) {  console.warn("com.inq.ui.Container.prototype.buildCssText");
+com.inq.ui.Container.prototype.buildCssText = function(initStyle, clientElement) {
   var width = this.styles["width"];
   var left = this.styles["left"];
   var top = this.styles["top"];
@@ -956,17 +956,17 @@ com.inq.ui.Container.prototype.buildCssText = function(initStyle, clientElement)
   }
   return this._style;
 };
-com.inq.ui.Container.prototype.buildStyleOriginal = function() {  console.warn("com.inq.ui.Container.prototype.buildStyleOriginal");
+com.inq.ui.Container.prototype.buildStyleOriginal = function() {
   this.buildNewStyle();
 };
-com.inq.ui.Container.prototype.buildChatElementStyle = function() {  console.warn("com.inq.ui.Container.prototype.buildChatElementStyle");
+com.inq.ui.Container.prototype.buildChatElementStyle = function() {
   this.buildNewStyle();
 };
-com.inq.ui.Container.prototype.buildNewStyle = function() {  console.warn("com.inq.ui.Container.prototype.buildNewStyle");
+com.inq.ui.Container.prototype.buildNewStyle = function() {
   this._style = this.buildCssText("position: absolute; overflow: hidden;");
   com.inq.ui.Container.MaxWidth = null;
 };
-com.inq.ui.Container.prototype.fixCssClasses = function() {  console.warn("com.inq.ui.Container.prototype.fixCssClasses");
+com.inq.ui.Container.prototype.fixCssClasses = function() {
   var children = this._div.getElementsByTagName("*");
   for (var i = 0;i < children.length;i++) {
     try {
@@ -975,7 +975,7 @@ com.inq.ui.Container.prototype.fixCssClasses = function() {  console.warn("com.i
     }
   }
 };
-com.inq.ui.Container.prototype.addCssClass = function(element) {  console.warn("com.inq.ui.Container.prototype.addCssClass");
+com.inq.ui.Container.prototype.addCssClass = function(element) {
   if (element == null || element.nodeName.toUpperCase() == "BODY" || element.id == null || element.id == "" || element.id.indexOf(com.inq.ui.Container.CLIENT_SPACE_PREFIX) != 0 && element.id.indexOf(com.inq.ui.Container.LEGACY_PREFIX) != 0) {
     return;
   }
@@ -987,7 +987,7 @@ com.inq.ui.Container.prototype.addCssClass = function(element) {  console.warn("
     }
   }
 };
-com.inq.ui.Container.prototype.buildStyle = function() {  console.warn("com.inq.ui.Container.prototype.buildStyle");
+com.inq.ui.Container.prototype.buildStyle = function() {
   if (com.inq.utils.Capabilities._isWebKit() && com.inq.ui.SkinLoader.skinInClient || com.inq.ui.SkinLoader.hasClientBody) {
     this.fixCssClasses();
     if (this.parent != null && js.Boot.__instanceof(this.parent, com.inq.ui.ClientBody)) {
@@ -999,10 +999,10 @@ com.inq.ui.Container.prototype.buildStyle = function() {  console.warn("com.inq.
     this.buildNewStyle();
   }
 };
-com.inq.ui.Container.prototype.buildClientElementStyle = function() {  console.warn("com.inq.ui.Container.prototype.buildClientElementStyle");
+com.inq.ui.Container.prototype.buildClientElementStyle = function() {
   this._style = this.buildCssText("", true);
 };
-com.inq.ui.Container.prototype.setVisible = function(val) {  console.warn("com.inq.ui.Container.prototype.setVisible");
+com.inq.ui.Container.prototype.setVisible = function(val) {
   try {
     this._visible = !("false" == val || null == val || false == val);
     if (this._visible) {
@@ -1026,19 +1026,19 @@ com.inq.ui.Container.prototype.setVisible = function(val) {  console.warn("com.i
   } catch (e) {
   }
 };
-com.inq.ui.Container.prototype.fireVisible = function() {  console.warn("com.inq.ui.Container.prototype.fireVisible");
+com.inq.ui.Container.prototype.fireVisible = function() {
   com.inq.ui.CommandParser.executeLogic(this.styles["onVisible"], false, this);
 };
-com.inq.ui.Container.prototype.fireHidden = function() {  console.warn("com.inq.ui.Container.prototype.fireHidden");
+com.inq.ui.Container.prototype.fireHidden = function() {
   com.inq.ui.CommandParser.executeLogic(this.styles["onHidden"], false, this);
 };
-com.inq.ui.Container.prototype.getVisible = function() {  console.warn("com.inq.ui.Container.prototype.getVisible");
+com.inq.ui.Container.prototype.getVisible = function() {
   return this._visible;
 };
-com.inq.ui.Container.prototype.setWidth = function(val) {  console.warn("com.inq.ui.Container.prototype.setWidth");
+com.inq.ui.Container.prototype.setWidth = function(val) {
   this.styles["width"] = "" + Std.string(val);
 };
-com.inq.ui.Container.prototype.getWidth = function() {  console.warn("com.inq.ui.Container.prototype.getWidth");
+com.inq.ui.Container.prototype.getWidth = function() {
   if (this.styles["visibility"] == "collapse") {
     return 0;
   }
@@ -1051,10 +1051,10 @@ com.inq.ui.Container.prototype.getWidth = function() {  console.warn("com.inq.ui
   }
   return this._div.clientWidth;
 };
-com.inq.ui.Container.prototype.setHeight = function(val) {  console.warn("com.inq.ui.Container.prototype.setHeight");
+com.inq.ui.Container.prototype.setHeight = function(val) {
   this.styles["height"] = val;
 };
-com.inq.ui.Container.prototype.getHeight = function() {  console.warn("com.inq.ui.Container.prototype.getHeight");
+com.inq.ui.Container.prototype.getHeight = function() {
   if (this.styles["visibility"] == "collapse") {
     return 0;
   }
@@ -1063,10 +1063,10 @@ com.inq.ui.Container.prototype.getHeight = function() {  console.warn("com.inq.u
   }
   return Std.parseInt("" + Std.string(this._div.style.height));
 };
-com.inq.ui.Container.prototype.getStyle = function(styleName) {  console.warn("com.inq.ui.Container.prototype.getStyle");
+com.inq.ui.Container.prototype.getStyle = function(styleName) {
   return this.styles[styleName];
 };
-com.inq.ui.Container.prototype.setStyle = function(styleName, styleValue) {  console.warn("com.inq.ui.Container.prototype.setStyle");
+com.inq.ui.Container.prototype.setStyle = function(styleName, styleValue) {
   this.styles[styleName] = styleValue;
   if (this.parent == null) {
     return;
@@ -1074,21 +1074,21 @@ com.inq.ui.Container.prototype.setStyle = function(styleName, styleValue) {  con
   this.resize();
   this.resizer(this.contains);
 };
-com.inq.ui.Container.prototype.initStyle = function(styleName, styleValue) {  console.warn("com.inq.ui.Container.prototype.initStyle");
+com.inq.ui.Container.prototype.initStyle = function(styleName, styleValue) {
   this.styles[styleName] = styleValue;
 };
-com.inq.ui.Container.prototype.initAttribute = function(attName, attValue) {  console.warn("com.inq.ui.Container.prototype.initAttribute");
+com.inq.ui.Container.prototype.initAttribute = function(attName, attValue) {
   this.attributeMap[attName] = attValue;
 };
-com.inq.ui.Container.prototype.applyAttributeMap = function() {  console.warn("com.inq.ui.Container.prototype.applyAttributeMap");
+com.inq.ui.Container.prototype.applyAttributeMap = function() {
   for (var myKey in this.attributeMap) {
     this.getPrimaryObject().setAttribute(myKey, this.attributeMap[myKey]);
   }
 };
-com.inq.ui.Container.prototype.getPrimaryObject = function() {  console.warn("com.inq.ui.Container.prototype.getPrimaryObject");
+com.inq.ui.Container.prototype.getPrimaryObject = function() {
   return this._div;
 };
-com.inq.ui.Container.prototype.setX = function(val) {  console.warn("com.inq.ui.Container.prototype.setX");
+com.inq.ui.Container.prototype.setX = function(val) {
   this.setStyle("left", "" + Std.string(val));
   if (this.parent == null) {
     return;
@@ -1096,26 +1096,26 @@ com.inq.ui.Container.prototype.setX = function(val) {  console.warn("com.inq.ui.
   this.resize();
   this.resizer(this.contains);
 };
-com.inq.ui.Container.prototype.getX = function() {  console.warn("com.inq.ui.Container.prototype.getX");
+com.inq.ui.Container.prototype.getX = function() {
   var styleLeft = this._div.style["left"];
   if (styleLeft != null) {
     return this.evaluatePosition("" + styleLeft);
   }
   return this._div.clientLeft;
 };
-com.inq.ui.Container.prototype.setY = function(val) {  console.warn("com.inq.ui.Container.prototype.setY");
+com.inq.ui.Container.prototype.setY = function(val) {
   this.setStyle("top", "" + Std.string(val));
   this.resize();
   this.resizer(this.contains);
 };
-com.inq.ui.Container.prototype.getY = function() {  console.warn("com.inq.ui.Container.prototype.getY");
+com.inq.ui.Container.prototype.getY = function() {
   var styleTop = this._div.style["top"];
   if (styleTop != null) {
     return this.evaluatePosition("" + styleTop);
   }
   return this._div.clientTop;
 };
-com.inq.ui.Container.prototype.whenLoaded = function(ev) {  console.warn("com.inq.ui.Container.prototype.whenLoaded");
+com.inq.ui.Container.prototype.whenLoaded = function(ev) {
   try {
     var element = this._backgroundImage;
     var imageElement = this._backgroundImage;
@@ -1196,7 +1196,7 @@ com.inq.ui.Container.prototype.whenLoaded = function(ev) {  console.warn("com.in
     haxe.Log.trace("ERROR: " + Std.string(e), {fileName:"Container.hx", lineNumber:340, className:"com.inq.ui.Container", methodName:"whenLoaded"});
   }
 };
-com.inq.ui.Container.prototype.setBackgroundImage = function(val, hide) {  console.warn("com.inq.ui.Container.prototype.setBackgroundImage");
+com.inq.ui.Container.prototype.setBackgroundImage = function(val, hide) {
   this.setStyle("backgroundImage", val);
   if (this.styles["backgroundImage"] == null || this.styles["backgroundImage"] == "") {
     return;
@@ -1212,10 +1212,10 @@ com.inq.ui.Container.prototype.setBackgroundImage = function(val, hide) {  conso
     this._backgroundImage.setAttribute("tabindex", "-1");
   }
 };
-com.inq.ui.Container.prototype.getID = function() {  console.warn("com.inq.ui.Container.prototype.getID");
+com.inq.ui.Container.prototype.getID = function() {
   return this.styles["id"];
 };
-com.inq.ui.Container.prototype.setID = function(val) {  console.warn("com.inq.ui.Container.prototype.setID");
+com.inq.ui.Container.prototype.setID = function(val) {
   if (com.inq.flash.client.control.FlashPeer.getIsBuilder()) {
     var alreadyPrepended = val.indexOf(com.inq.ui.Container.CLIENT_SPACE_PREFIX) == 0 || val.indexOf(com.inq.ui.Container.LEGACY_PREFIX) == 0;
     var prefixedId = val;
@@ -1229,12 +1229,12 @@ com.inq.ui.Container.prototype.setID = function(val) {  console.warn("com.inq.ui
     this.styles["id"] = val;
   }
 };
-com.inq.ui.Container.prototype.setAttribute = function(attName, attValu) {  console.warn("com.inq.ui.Container.prototype.setAttribute");
+com.inq.ui.Container.prototype.setAttribute = function(attName, attValu) {
   if (typeof this._div != "undefined") {
     this._div.setAttribute(attName, attValu);
   }
 };
-com.inq.ui.Container.prototype.addHtmlLabel = function(val) {  console.warn("com.inq.ui.Container.prototype.addHtmlLabel");
+com.inq.ui.Container.prototype.addHtmlLabel = function(val) {
   if (typeof this._div != "undefined") {
     var label = document.createElement("label");
     if (this.getHtmlLabelObject()) {
@@ -1246,14 +1246,14 @@ com.inq.ui.Container.prototype.addHtmlLabel = function(val) {  console.warn("com
     this._htmlLabel = label;
   }
 };
-com.inq.ui.Container.prototype.getHtmlLabelObject = function() {  console.warn("com.inq.ui.Container.prototype.getHtmlLabelObject");
+com.inq.ui.Container.prototype.getHtmlLabelObject = function() {
   var labelObjet = null;
   if (typeof this._div != "undefined") {
     labelObjet = this._div.firstChild;
   }
   return labelObjet;
 };
-com.inq.ui.Container.prototype.setFocus = function() {  console.warn("com.inq.ui.Container.prototype.setFocus");
+com.inq.ui.Container.prototype.setFocus = function() {
   try {
     this._div.focus();
   } catch (e) {
@@ -1263,7 +1263,7 @@ com.inq.ui.Container.prototype.setFocus = function() {  console.warn("com.inq.ui
     }
   }
 };
-com.inq.ui.Container.prototype.setEnabled = function(val) {  console.warn("com.inq.ui.Container.prototype.setEnabled");
+com.inq.ui.Container.prototype.setEnabled = function(val) {
   if (this._div != null) {
     this._div.disabled = val ? false : true;
   }
@@ -1271,23 +1271,23 @@ com.inq.ui.Container.prototype.setEnabled = function(val) {  console.warn("com.i
     com.inq.ui.CommandParser.executeLogic(this.styles["onEnable"], false, this);
   }
 };
-com.inq.ui.Container.prototype.getEnabled = function() {  console.warn("com.inq.ui.Container.prototype.getEnabled");
+com.inq.ui.Container.prototype.getEnabled = function() {
   if (this._div != null) {
     return this._div.disabled ? false : true;
   } else {
     return false;
   }
 };
-com.inq.ui.Container.prototype.clear = function() {  console.warn("com.inq.ui.Container.prototype.clear");
+com.inq.ui.Container.prototype.clear = function() {
   var ob = this._div;
   while (ob.lastChild != null) {
     ob.removeChild(ob.lastChild);
   }
 };
-com.inq.ui.Container.prototype.setOnClick = function(whenClicked) {  console.warn("com.inq.ui.Container.prototype.setOnClick");
+com.inq.ui.Container.prototype.setOnClick = function(whenClicked) {
   this._div.onclick = whenClicked;
 };
-com.inq.ui.Container.prototype.cleanUp = function() {  console.warn("com.inq.ui.Container.prototype.cleanUp");
+com.inq.ui.Container.prototype.cleanUp = function() {
 };
 com.inq.ui.Container.prototype._clientStage = null;
 com.inq.ui.Container.prototype.document = null;
@@ -1330,11 +1330,11 @@ if (!com.inq.flash.client) {
 if (!com.inq.flash.client.control) {
   com.inq.flash.client.control = {};
 }
-;com.inq.flash.client.control.FlashPeer = function() {  console.warn("com.inq.flash.client.control.FlashPeer");
+;com.inq.flash.client.control.FlashPeer = function() {
 };
 $hxClasses["com.inq.flash.client.control.FlashPeer"] = com.inq.flash.client.control.FlashPeer;
 com.inq.flash.client.control.FlashPeer.__name__ = ["com", "inq", "flash", "client", "control", "FlashPeer"];
-com.inq.flash.client.control.FlashPeer.call = function(funcName, args, deflt) {  console.warn("com.inq.flash.client.control.FlashPeer.call");
+com.inq.flash.client.control.FlashPeer.call = function(funcName, args, deflt) {
   if (com.inq.flash.client.control.FlashPeer.inqFlashPeer[funcName] == null) {
     haxe.Log.trace("window.Inq.FlashPeer." + funcName + " does not exist", {fileName:"FlashPeer.hx", lineNumber:25, className:"com.inq.flash.client.control.FlashPeer", methodName:"call"});
     return deflt;
@@ -1700,17 +1700,17 @@ js.Boot.__cast = function(o, t) {
   }
 };
 js.Boot.prototype.__class__ = js.Boot;
-com.inq.ui.SkinLoader = function(app) {  console.warn("com.inq.ui.SkinLoader");
+com.inq.ui.SkinLoader = function(app) {
   com.inq.events.EventDispatcher.call(this);
   this.application = app || Application.application;
   com.inq.ui.SkinLoader.init();
 };
 $hxClasses.extend(com.inq.events.EventDispatcher, com.inq.ui.SkinLoader, "com.inq.ui.SkinLoader");
-com.inq.ui.SkinLoader.init = function() {  console.warn("com.inq.ui.SkinLoader.init");
+com.inq.ui.SkinLoader.init = function() {
   com.inq.ui.SkinLoader.hasClientBody = null;
   com.inq.ui.SkinLoader.skinInClient = null;
 };
-com.inq.ui.SkinLoader._preloadImage = function(imageName) {  console.warn("com.inq.ui.SkinLoader._preloadImage");
+com.inq.ui.SkinLoader._preloadImage = function(imageName) {
   var obj = com.inq.ui.SkinLoader.imageCollection[imageName];
   if (obj == null) {
     obj = {path:imageName, image:null, width:-1, height:-1};
@@ -1718,23 +1718,23 @@ com.inq.ui.SkinLoader._preloadImage = function(imageName) {  console.warn("com.i
     haxe.Log.trace("preload image " + imageName, {fileName:"SkinLoader.hx", lineNumber:668, className:"com.inq.ui.SkinLoader", methodName:"_preloadImage"});
   }
 };
-com.inq.ui.SkinLoader._getSkinPath = function() {  console.warn("com.inq.ui.SkinLoader._getSkinPath");
+com.inq.ui.SkinLoader._getSkinPath = function() {
   if (com.inq.flash.client.control.FlashPeer.getIsSkinLocal()) {
     return com.inq.ui.SkinLoader._skinpath = com.inq.flash.client.control.FlashPeer.getSkinPath();
   } else {
     return com.inq.ui.SkinLoader._skinpath = com.inq.flash.client.control.FlashPeer.getImagePath();
   }
 };
-com.inq.ui.SkinLoader.getSkinBase = function() {  console.warn("com.inq.ui.SkinLoader.getSkinBase");
+com.inq.ui.SkinLoader.getSkinBase = function() {
   var skin = com.inq.flash.client.control.FlashPeer.getSkin();
   var aPath = skin.split("\\").join("/").split("/");
   aPath.pop();
   return aPath.join("/");
 };
-com.inq.ui.SkinLoader.getSkinPath = function() {  console.warn("com.inq.ui.SkinLoader.getSkinPath");
+com.inq.ui.SkinLoader.getSkinPath = function() {
   return com.inq.ui.SkinLoader._skinpath;
 };
-com.inq.ui.SkinLoader.prepareSkinPath = function(skinPath) {  console.warn("com.inq.ui.SkinLoader.prepareSkinPath");
+com.inq.ui.SkinLoader.prepareSkinPath = function(skinPath) {
   if (HxOverrides.substr(skinPath, 0, 2) == "./") {
     skinPath = HxOverrides.substr(skinPath, 2, null);
   }
@@ -1743,13 +1743,13 @@ com.inq.ui.SkinLoader.prepareSkinPath = function(skinPath) {  console.warn("com.
   }
   return skinPath;
 };
-com.inq.ui.SkinLoader.PreloadNewSkin = function(nameNextSkin) {  console.warn("com.inq.ui.SkinLoader.PreloadNewSkin");
+com.inq.ui.SkinLoader.PreloadNewSkin = function(nameNextSkin) {
   var skinPath = com.inq.ui.SkinLoader.prepareSkinPath(nameNextSkin);
   if (!com.inq.ui.SkinLoader.skinCollection[skinPath]) {
     com.inq.flash.client.control.FlashPeer.prefetchURL(skinPath);
   }
 };
-com.inq.ui.SkinLoader.LoadNewSkin = function(nameNextSkin) {  console.warn("com.inq.ui.SkinLoader.LoadNewSkin");
+com.inq.ui.SkinLoader.LoadNewSkin = function(nameNextSkin) {
   var sl = new com.inq.ui.SkinLoader;
   var ti = Application.application.getTextInput("txtInput");
   var cPB = Application.application.getButton("ClickPersistent");
@@ -1768,7 +1768,7 @@ com.inq.ui.SkinLoader.LoadNewSkin = function(nameNextSkin) {  console.warn("com.
   sl.addEventListener(com.inq.events.Event.COMPLETE, com.inq.ui.SkinLoader.successNewSkinLoad);
   sl.drawSkin(nameNextSkin);
 };
-com.inq.ui.SkinLoader.successNewSkinLoad = function(event) {  console.warn("com.inq.ui.SkinLoader.successNewSkinLoad");
+com.inq.ui.SkinLoader.successNewSkinLoad = function(event) {
   haxe.Log.trace("success", {fileName:"SkinLoader.hx", lineNumber:877, className:"com.inq.ui.SkinLoader", methodName:"successNewSkinLoad"});
   com.inq.flash.client.chatskins.SkinControl.cw = new com.inq.flash.client.chatskins.ChatTextArea(Application.application.chatWindow);
   Application.application.resize();
@@ -1824,7 +1824,7 @@ com.inq.ui.SkinLoader.successNewSkinLoad = function(event) {  console.warn("com.
   }
 };
 com.inq.ui.SkinLoader.prototype.getSkinPath = com.inq.ui.SkinLoader.getSkinPath;
-com.inq.ui.SkinLoader.prototype.whenPreloaded = function(img, drawWhenFinished) {  console.warn("com.inq.ui.SkinLoader.prototype.whenPreloaded");
+com.inq.ui.SkinLoader.prototype.whenPreloaded = function(img, drawWhenFinished) {
   try {
     var imagePath = img.src;
     var imageItem = com.inq.ui.SkinLoader.imageCollection[imagePath];
@@ -1849,7 +1849,7 @@ com.inq.ui.SkinLoader.prototype.whenPreloaded = function(img, drawWhenFinished) 
   }
   return true;
 };
-com.inq.ui.SkinLoader.prototype._preloadImages = function(it) {  console.warn("com.inq.ui.SkinLoader.prototype._preloadImages");
+com.inq.ui.SkinLoader.prototype._preloadImages = function(it) {
   var name;
   var xmlNode;
   haxe.Log.trace("_preloadImages", {fileName:"SkinLoader.hx", lineNumber:743, className:"com.inq.ui.SkinLoader", methodName:"_preloadImages"});
@@ -1901,7 +1901,7 @@ com.inq.ui.SkinLoader.prototype._preloadImages = function(it) {  console.warn("c
     }
   }
 };
-com.inq.ui.SkinLoader.prototype.preloadAllMxmlImages = function(it, drawWhenFinished) {  console.warn("com.inq.ui.SkinLoader.prototype.preloadAllMxmlImages");
+com.inq.ui.SkinLoader.prototype.preloadAllMxmlImages = function(it, drawWhenFinished) {
   if (drawWhenFinished == null) {
     drawWhenFinished = false;
   }
@@ -1936,7 +1936,7 @@ com.inq.ui.SkinLoader.prototype.preloadAllMxmlImages = function(it, drawWhenFini
     imageItem.image.src = imageItem.path;
   }
 };
-com.inq.ui.SkinLoader.prototype._preloadAttributeImages = function(xmlNode) {  console.warn("com.inq.ui.SkinLoader.prototype._preloadAttributeImages");
+com.inq.ui.SkinLoader.prototype._preloadAttributeImages = function(xmlNode) {
   var $it0 = xmlNode.attributes();
   while ($it0.hasNext()) {
     var ats = $it0.next();
@@ -1957,7 +1957,7 @@ com.inq.ui.SkinLoader.prototype._preloadAttributeImages = function(xmlNode) {  c
     }
   }
 };
-com.inq.ui.SkinLoader.prototype.testClientBody = function(xmlNode) {  console.warn("com.inq.ui.SkinLoader.prototype.testClientBody");
+com.inq.ui.SkinLoader.prototype.testClientBody = function(xmlNode) {
   var fast = new haxe.xml.Fast(xmlNode.firstElement());
   var clientNode;
   try {
@@ -1967,7 +1967,7 @@ com.inq.ui.SkinLoader.prototype.testClientBody = function(xmlNode) {  console.wa
   }
   return clientNode != null;
 };
-com.inq.ui.SkinLoader.prototype.testSkinInClient = function(xmlNode) {  console.warn("com.inq.ui.SkinLoader.prototype.testSkinInClient");
+com.inq.ui.SkinLoader.prototype.testSkinInClient = function(xmlNode) {
   var fast = new haxe.xml.Fast(xmlNode.firstElement());
   var clientNode;
   var _isPersistent = window.parent.name == "_inqPersistentChat";
@@ -1999,7 +1999,7 @@ com.inq.ui.SkinLoader.prototype.testSkinInClient = function(xmlNode) {  console.
   }
   return false;
 };
-com.inq.ui.SkinLoader.prototype.loadSkinConfig = function(xmlNode) {  console.warn("com.inq.ui.SkinLoader.prototype.loadSkinConfig");
+com.inq.ui.SkinLoader.prototype.loadSkinConfig = function(xmlNode) {
   var fast = new haxe.xml.Fast(xmlNode.firstElement());
   var scriptNode;
   try {
@@ -2012,7 +2012,7 @@ com.inq.ui.SkinLoader.prototype.loadSkinConfig = function(xmlNode) {  console.wa
   }
   this._processMxmlScript(scriptNode.getInnerData());
 };
-com.inq.ui.SkinLoader.prototype.parseSkinConfigJSON = function(jsonString) {  console.warn("com.inq.ui.SkinLoader.prototype.parseSkinConfigJSON");
+com.inq.ui.SkinLoader.prototype.parseSkinConfigJSON = function(jsonString) {
   var pattern = new EReg("\\bsetTimeout\\b|\\bsetInterval\\b|\\balert\\b|\\beval\\b", "g");
   jsonString = pattern.replace(jsonString, "noop");
   var pattern1 = new EReg("(\\bfunction\\b\\s*\\(.*\\)\\s*{)", "g");
@@ -2023,7 +2023,7 @@ com.inq.ui.SkinLoader.prototype.parseSkinConfigJSON = function(jsonString) {  co
   } catch (e) {
   }
 };
-com.inq.ui.SkinLoader.prototype._processMxmlScript = function(source) {  console.warn("com.inq.ui.SkinLoader.prototype._processMxmlScript");
+com.inq.ui.SkinLoader.prototype._processMxmlScript = function(source) {
   var indx;
   if (Application.application["skinConfig"]) {
     return;
@@ -2036,7 +2036,7 @@ com.inq.ui.SkinLoader.prototype._processMxmlScript = function(source) {  console
     func();
   }
 };
-com.inq.ui.SkinLoader.prototype._renderMxml = function(it, parentObject) {  console.warn("com.inq.ui.SkinLoader.prototype._renderMxml");
+com.inq.ui.SkinLoader.prototype._renderMxml = function(it, parentObject) {
   var name;
   var id;
   var xmlNode;
@@ -2272,7 +2272,7 @@ com.inq.ui.SkinLoader.prototype._renderMxml = function(it, parentObject) {  cons
     }
   }
 };
-com.inq.ui.SkinLoader.prototype._draw = function(mxml) {  console.warn("com.inq.ui.SkinLoader.prototype._draw");
+com.inq.ui.SkinLoader.prototype._draw = function(mxml) {
   var xml;
   var me = new com.inq.ui.Container("Skin");
   me.clear();
@@ -2340,7 +2340,7 @@ com.inq.ui.SkinLoader.prototype._draw = function(mxml) {  console.warn("com.inq.
   }
   this.executeCode();
 };
-com.inq.ui.SkinLoader.prototype.applyAttributes = function(xmlNode, container) {  console.warn("com.inq.ui.SkinLoader.prototype.applyAttributes");
+com.inq.ui.SkinLoader.prototype.applyAttributes = function(xmlNode, container) {
   var $it0 = xmlNode.attributes();
   while ($it0.hasNext()) {
     var ats = $it0.next();
@@ -2412,7 +2412,7 @@ com.inq.ui.SkinLoader.prototype.applyAttributes = function(xmlNode, container) {
   container.applyStyle();
   container.applyAttributeMap();
 };
-com.inq.ui.SkinLoader.prototype.unembed = function(source, con) {  console.warn("com.inq.ui.SkinLoader.prototype.unembed");
+com.inq.ui.SkinLoader.prototype.unembed = function(source, con) {
   var bEmbeded = false;
   var s = source;
   var embedRegexp = new EReg("@Embed\\('([^']*)',([^,]*),([^,]*),([^,]*),([^,]*)\\)", "i");
@@ -2464,7 +2464,7 @@ com.inq.ui.SkinLoader.prototype.unembed = function(source, con) {  console.warn(
     throw new String("Could not parse embed: " + source);
   }
 };
-com.inq.ui.SkinLoader.prototype.getImageMap = function() {  console.warn("com.inq.ui.SkinLoader.prototype.getImageMap");
+com.inq.ui.SkinLoader.prototype.getImageMap = function() {
   if (com.inq.ui.SkinLoader.spriteMap != null) {
     return com.inq.ui.SkinLoader.spriteMap;
   }
@@ -2479,7 +2479,7 @@ com.inq.ui.SkinLoader.prototype.getImageMap = function() {  console.warn("com.in
   }
   return com.inq.ui.SkinLoader.spriteMap;
 };
-com.inq.ui.SkinLoader.prototype._thenDraw = function() {  console.warn("com.inq.ui.SkinLoader.prototype._thenDraw");
+com.inq.ui.SkinLoader.prototype._thenDraw = function() {
   haxe.Log.trace("_thenDraw", {fileName:"SkinLoader.hx", lineNumber:140, className:"com.inq.ui.SkinLoader", methodName:"_thenDraw"});
   if (com.inq.flash.client.control.FlashPeer.getIsSkinLocal()) {
     var mxmlData = com.inq.flash.client.control.FlashPeer.getSkinMXML();
@@ -2499,7 +2499,7 @@ com.inq.ui.SkinLoader.prototype._thenDraw = function() {  console.warn("com.inq.
   this.executeCode();
   this._afterDraw();
 };
-com.inq.ui.SkinLoader.prototype._successSkinLoadThenDraw = function(e) {  console.warn("com.inq.ui.SkinLoader.prototype._successSkinLoadThenDraw");
+com.inq.ui.SkinLoader.prototype._successSkinLoadThenDraw = function(e) {
   var path = this._requestSkin.url;
   com.inq.ui.SkinLoader.skinCollection[path] = {mxml:this._loaderSkin.data, path:path};
   var xml = Xml.parse(this._loaderSkin.data);
@@ -2512,12 +2512,12 @@ com.inq.ui.SkinLoader.prototype._successSkinLoadThenDraw = function(e) {  consol
   }
   this.dispatchEvent(e);
 };
-com.inq.ui.SkinLoader.prototype._afterDraw = function() {  console.warn("com.inq.ui.SkinLoader.prototype._afterDraw");
+com.inq.ui.SkinLoader.prototype._afterDraw = function() {
   if (!com.inq.flash.client.control.FlashPeer.getIsBuilder() && window.parent.name == "_inqPersistentChat") {
     window.parent.document.title = com.inq.utils.Util.getConfig("sPersistentFrameTitle", "Chat");
   }
 };
-com.inq.ui.SkinLoader.prototype.executeCode = function() {  console.warn("com.inq.ui.SkinLoader.prototype.executeCode");
+com.inq.ui.SkinLoader.prototype.executeCode = function() {
   try {
     var onInit = com.inq.utils.Util.getConfig("onInit", null);
     if (typeof onInit == "function") {
@@ -2529,14 +2529,14 @@ com.inq.ui.SkinLoader.prototype.executeCode = function() {  console.warn("com.in
     haxe.Log.trace("Could not run SkinLoader.executeCode. ERROR: " + e, {fileName:"SkinLoader.js", methodName:"executeCode"});
   }
 };
-com.inq.ui.SkinLoader.prototype._successSkinLoad = function(e) {  console.warn("com.inq.ui.SkinLoader.prototype._successSkinLoad");
+com.inq.ui.SkinLoader.prototype._successSkinLoad = function(e) {
   if (e.target.responseStatus == 200 || e.target.responseStatus == 304) {
     this._addLoadedSkinToCollection();
     this._draw(this._loaderSkin.data);
     this.dispatchEvent(e);
   }
 };
-com.inq.ui.SkinLoader.prototype.drawSkin = function(skinPath) {  console.warn("com.inq.ui.SkinLoader.prototype.drawSkin");
+com.inq.ui.SkinLoader.prototype.drawSkin = function(skinPath) {
   skinPath = com.inq.ui.SkinLoader.prepareSkinPath(skinPath);
   haxe.Log.trace("drawSkin: " + skinPath, {fileName:"SkinLoader.js", lineNumber:1247, className:"com.inq.ui.SkinLoader", methodName:"drawSkin"});
   var obj = com.inq.ui.SkinLoader.skinCollection[skinPath];
@@ -2552,7 +2552,7 @@ com.inq.ui.SkinLoader.prototype.drawSkin = function(skinPath) {  console.warn("c
     this.dispatchEvent(e);
   }
 };
-com.inq.ui.SkinLoader.prototype.drawSkinLocal = function() {  console.warn("com.inq.ui.SkinLoader.prototype.drawSkinLocal");
+com.inq.ui.SkinLoader.prototype.drawSkinLocal = function() {
   var mxmlData = com.inq.flash.client.control.FlashPeer.getSkinMXML();
   this._draw(mxmlData);
   var e = new com.inq.events.Event(com.inq.events.Event.COMPLETE);
@@ -2567,11 +2567,11 @@ com.inq.ui.SkinLoader.prototype.drawSkinLocal = function() {  console.warn("com.
     com.inq.flash.client.control.ApplicationController.prototype.appendReceivedText(systemMessage, "", 5);
   }
 };
-com.inq.ui.SkinLoader.prototype._addLoadedSkinToCollection = function() {  console.warn("com.inq.ui.SkinLoader.prototype._addLoadedSkinToCollection");
+com.inq.ui.SkinLoader.prototype._addLoadedSkinToCollection = function() {
   var path = this._requestSkin.url;
   com.inq.ui.SkinLoader.skinCollection[path] = {mxml:this._loaderSkin.data, path:path};
 };
-com.inq.ui.SkinLoader.prototype.cleanUp = function() {  console.warn("com.inq.ui.SkinLoader.prototype.cleanUp");
+com.inq.ui.SkinLoader.prototype.cleanUp = function() {
   com.inq.ui.SkinLoader.imageCollection = {};
   com.inq.ui.SkinLoader.contextArray = new Array;
   com.inq.ui.SkinLoader.skinCollection = {};
@@ -2586,7 +2586,7 @@ com.inq.ui.SkinLoader.contextArray = new Array;
 com.inq.ui.SkinLoader.imageCollection = {};
 com.inq.ui.SkinLoader.imageCount = 0;
 com.inq.ui.SkinLoader.spriteMap = null;
-com.inq.utils.ConsoleLogger = function() {  console.warn("com.inq.utils.ConsoleLogger");
+com.inq.utils.ConsoleLogger = function() {
 };
 $hxClasses["com.inq.utils.ConsoleLogger"] = com.inq.utils.ConsoleLogger;
 com.inq.utils.ConsoleLogger.__name__ = ["com", "inq", "utils", "ConsoleLogger"];
@@ -2595,11 +2595,11 @@ com.inq.utils.ConsoleLogger.detect = !com.inq.flash.client.control.FlashPeer.isL
 } : function() {
   return false;
 };
-com.inq.utils.ConsoleLogger.redirectTraces = function() {  console.warn("com.inq.utils.ConsoleLogger.redirectTraces");
+com.inq.utils.ConsoleLogger.redirectTraces = function() {
   haxe.Log.trace = com.inq.utils.ConsoleLogger.trace;
   js.Lib.onerror = com.inq.utils.ConsoleLogger.onError;
 };
-com.inq.utils.ConsoleLogger.onError = function(err, stack) {  console.warn("com.inq.utils.ConsoleLogger.onError");
+com.inq.utils.ConsoleLogger.onError = function(err, stack) {
   var buf = err + "\n";
   var _g = 0;
   while (_g < stack.length) {
@@ -2610,7 +2610,7 @@ com.inq.utils.ConsoleLogger.onError = function(err, stack) {  console.warn("com.
   com.inq.utils.ConsoleLogger.trace(buf, null);
   return true;
 };
-com.inq.utils.ConsoleLogger.trace = function(v, inf) {  console.warn("com.inq.utils.ConsoleLogger.trace");
+com.inq.utils.ConsoleLogger.trace = function(v, inf) {
   if (!com.inq.utils.ConsoleLogger.detect()) {
     return;
   }
@@ -2687,7 +2687,7 @@ EReg.prototype.match = function(s) {
 };
 EReg.prototype.r = null;
 EReg.prototype.__class__ = EReg;
-com.inq.utils.Capabilities = function() {  console.warn("com.inq.utils.Capabilities");
+com.inq.utils.Capabilities = function() {
 };
 $hxClasses["com.inq.utils.Capabilities"] = com.inq.utils.Capabilities;
 com.inq.utils.Capabilities.__name__ = ["com", "inq", "utils", "Capabilities"];
@@ -2696,7 +2696,7 @@ com.inq.utils.Capabilities._os = null;
 com.inq.utils.Capabilities.userAgent = null;
 com.inq.utils.Capabilities.isWebKit = null;
 com.inq.utils.Capabilities.viewportDetector = null;
-com.inq.utils.Capabilities.init = function() {  console.warn("com.inq.utils.Capabilities.init");
+com.inq.utils.Capabilities.init = function() {
   var platform = null;
   var cpuClass = null;
   var replaceWith = null;
@@ -2769,37 +2769,37 @@ com.inq.utils.Capabilities.init = function() {  console.warn("com.inq.utils.Capa
   }
   return true;
 };
-com.inq.utils.Capabilities._getOS = function() {  console.warn("com.inq.utils.Capabilities._getOS");
+com.inq.utils.Capabilities._getOS = function() {
   if (com.inq.utils.Capabilities._init == false) {
     com.inq.utils.Capabilities._init = com.inq.utils.Capabilities.init();
   }
   return com.inq.utils.Capabilities._os;
 };
-com.inq.utils.Capabilities.getUserAgent = function() {  console.warn("com.inq.utils.Capabilities.getUserAgent");
+com.inq.utils.Capabilities.getUserAgent = function() {
   if (com.inq.utils.Capabilities.userAgent == null) {
     com.inq.utils.Capabilities.userAgent = window.navigator.userAgent;
   }
   var userAgentCopy = com.inq.utils.Capabilities.userAgent;
   return userAgentCopy;
 };
-com.inq.utils.Capabilities.isMobile = function() {  console.warn("com.inq.utils.Capabilities.isMobile");
+com.inq.utils.Capabilities.isMobile = function() {
   if (com.inq.utils.Capabilities.mobile == null) {
     com.inq.utils.Capabilities.mobile = com.inq.utils.Capabilities.isPhone() || com.inq.utils.Capabilities.isTablet();
   }
   return com.inq.utils.Capabilities.mobile;
 };
-com.inq.utils.Capabilities.isIphone = function() {  console.warn("com.inq.utils.Capabilities.isIphone");
+com.inq.utils.Capabilities.isIphone = function() {
   return com.inq.utils.Capabilities.isPhone() && com.inq.utils.Capabilities._getOS().indexOf("iPhone") != -1;
 };
-com.inq.utils.Capabilities.isIpad = function() {  console.warn("com.inq.utils.Capabilities.isIpad");
+com.inq.utils.Capabilities.isIpad = function() {
   return com.inq.utils.Capabilities._getOS() != null && com.inq.utils.Capabilities._getOS().indexOf("iPad") != -1;
 };
-com.inq.utils.Capabilities.isIe10Phone = function() {  console.warn("com.inq.utils.Capabilities.isIe10Phone");
+com.inq.utils.Capabilities.isIe10Phone = function() {
   var win = com.inq.utils.Capabilities.isWindowsPhone();
   var v = com.inq.utils.Capabilities.getIeVersion();
   return win && v >= 10;
 };
-com.inq.utils.Capabilities.getIeVersion = function() {  console.warn("com.inq.utils.Capabilities.getIeVersion");
+com.inq.utils.Capabilities.getIeVersion = function() {
   try {
     if (com.inq.utils.Capabilities.ieVersion != null) {
       return com.inq.utils.Capabilities.ieVersion;
@@ -2814,22 +2814,22 @@ com.inq.utils.Capabilities.getIeVersion = function() {  console.warn("com.inq.ut
     return -1;
   }
 };
-com.inq.utils.Capabilities.isPhone = function() {  console.warn("com.inq.utils.Capabilities.isPhone");
+com.inq.utils.Capabilities.isPhone = function() {
   return com.inq.utils.Capabilities.getDeviceType() == "Phone";
 };
-com.inq.utils.Capabilities.isTablet = function() {  console.warn("com.inq.utils.Capabilities.isTablet");
+com.inq.utils.Capabilities.isTablet = function() {
   return com.inq.utils.Capabilities.getDeviceType() == "Tablet";
 };
-com.inq.utils.Capabilities.getDeviceType = function() {  console.warn("com.inq.utils.Capabilities.getDeviceType");
+com.inq.utils.Capabilities.getDeviceType = function() {
   if (com.inq.utils.Capabilities.deviceType == null) {
     com.inq.utils.Capabilities.deviceType = com.inq.flash.client.control.FlashPeer.getDeviceType();
   }
   return com.inq.utils.Capabilities.deviceType;
 };
-com.inq.utils.Capabilities.isChrome = function() {  console.warn("com.inq.utils.Capabilities.isChrome");
+com.inq.utils.Capabilities.isChrome = function() {
   return com.inq.utils.Capabilities.getUserAgent().toLowerCase().indexOf("edge") == -1 && com.inq.utils.Capabilities.getUserAgent().toLowerCase().indexOf("chrome") > -1;
 };
-com.inq.utils.Capabilities.getChromeVersion = function() {  console.warn("com.inq.utils.Capabilities.getChromeVersion");
+com.inq.utils.Capabilities.getChromeVersion = function() {
   try {
     if (com.inq.utils.Capabilities.chromeVersion != null) {
       return com.inq.utils.Capabilities.chromeVersion;
@@ -2848,7 +2848,7 @@ com.inq.utils.Capabilities.getChromeVersion = function() {  console.warn("com.in
     return -1;
   }
 };
-com.inq.utils.Capabilities._isWebKit = function() {  console.warn("com.inq.utils.Capabilities._isWebKit");
+com.inq.utils.Capabilities._isWebKit = function() {
   if (com.inq.utils.Capabilities.webKit != null) {
     return com.inq.utils.Capabilities.webKit;
   } else {
@@ -2857,7 +2857,7 @@ com.inq.utils.Capabilities._isWebKit = function() {  console.warn("com.inq.utils
     return com.inq.utils.Capabilities.webKit;
   }
 };
-com.inq.utils.Capabilities.isSafari = function() {  console.warn("com.inq.utils.Capabilities.isSafari");
+com.inq.utils.Capabilities.isSafari = function() {
   if (com.inq.utils.Capabilities._isSafari != null) {
     return com.inq.utils.Capabilities._isSafari;
   } else {
@@ -2866,7 +2866,7 @@ com.inq.utils.Capabilities.isSafari = function() {  console.warn("com.inq.utils.
     return com.inq.utils.Capabilities._isSafari;
   }
 };
-com.inq.utils.Capabilities.isSafariVersion8 = function() {  console.warn("com.inq.utils.Capabilities.isSafariVersion8");
+com.inq.utils.Capabilities.isSafariVersion8 = function() {
   if (com.inq.utils.Capabilities._isVersion8 != null) {
     return com.inq.utils.Capabilities._isVersion8;
   } else {
@@ -2875,7 +2875,7 @@ com.inq.utils.Capabilities.isSafariVersion8 = function() {  console.warn("com.in
     return com.inq.utils.Capabilities._isVersion8;
   }
 };
-com.inq.utils.Capabilities.isSafariVersion9 = function() {  console.warn("com.inq.utils.Capabilities.isSafariVersion9");
+com.inq.utils.Capabilities.isSafariVersion9 = function() {
   if (com.inq.utils.Capabilities._isVersion9 != null) {
     return com.inq.utils.Capabilities._isVersion9;
   } else {
@@ -2884,7 +2884,7 @@ com.inq.utils.Capabilities.isSafariVersion9 = function() {  console.warn("com.in
     return com.inq.utils.Capabilities._isVersion9;
   }
 };
-com.inq.utils.Capabilities.isSafariVersion10 = function() {  console.warn("com.inq.utils.Capabilities.isSafariVersion10");
+com.inq.utils.Capabilities.isSafariVersion10 = function() {
   var _cap = com.inq.utils.Capabilities;
   if (_cap._isVersion10 != null) {
     return _cap._isVersion10;
@@ -2898,7 +2898,7 @@ com.inq.utils.Capabilities.isSafariVersion10 = function() {  console.warn("com.i
     return _cap._isVersion10;
   }
 };
-com.inq.utils.Capabilities.isSafariVersion11 = function() {  console.warn("com.inq.utils.Capabilities.isSafariVersion11");
+com.inq.utils.Capabilities.isSafariVersion11 = function() {
   var _cap = com.inq.utils.Capabilities;
   if (_cap._isVersion11 != null) {
     return _cap._isVersion11;
@@ -2912,7 +2912,7 @@ com.inq.utils.Capabilities.isSafariVersion11 = function() {  console.warn("com.i
     return _cap._isVersion11;
   }
 };
-com.inq.utils.Capabilities.isIOSWebView = function() {  console.warn("com.inq.utils.Capabilities.isIOSWebView");
+com.inq.utils.Capabilities.isIOSWebView = function() {
   if (com.inq.utils.Capabilities._isIOSWebView != null) {
     return com.inq.utils.Capabilities._isIOSWebView;
   } else {
@@ -2921,7 +2921,7 @@ com.inq.utils.Capabilities.isIOSWebView = function() {  console.warn("com.inq.ut
     return com.inq.utils.Capabilities._isIOSWebView;
   }
 };
-com.inq.utils.Capabilities.isAndroidWebView = function() {  console.warn("com.inq.utils.Capabilities.isAndroidWebView");
+com.inq.utils.Capabilities.isAndroidWebView = function() {
   if (com.inq.utils.Capabilities._isAndroidWebView != null) {
     return com.inq.utils.Capabilities._isAndroidWebView;
   } else {
@@ -2930,7 +2930,7 @@ com.inq.utils.Capabilities.isAndroidWebView = function() {  console.warn("com.in
     return com.inq.utils.Capabilities._isAndroidWebView;
   }
 };
-com.inq.utils.Capabilities.isSafariVersionPrior8 = function() {  console.warn("com.inq.utils.Capabilities.isSafariVersionPrior8");
+com.inq.utils.Capabilities.isSafariVersionPrior8 = function() {
   if (com.inq.utils.Capabilities._isVersionPrior8 != null) {
     return com.inq.utils.Capabilities._isVersionPrior8;
   } else {
@@ -2939,7 +2939,7 @@ com.inq.utils.Capabilities.isSafariVersionPrior8 = function() {  console.warn("c
     return com.inq.utils.Capabilities._isVersionPrior8;
   }
 };
-com.inq.utils.Capabilities.isChromeiOS8 = function() {  console.warn("com.inq.utils.Capabilities.isChromeiOS8");
+com.inq.utils.Capabilities.isChromeiOS8 = function() {
   if (com.inq.utils.Capabilities._isCriOS8 != null) {
     return com.inq.utils.Capabilities._isCriOS8;
   } else {
@@ -2948,7 +2948,7 @@ com.inq.utils.Capabilities.isChromeiOS8 = function() {  console.warn("com.inq.ut
     return com.inq.utils.Capabilities._isCriOS8;
   }
 };
-com.inq.utils.Capabilities.isChromeiOS10 = function() {  console.warn("com.inq.utils.Capabilities.isChromeiOS10");
+com.inq.utils.Capabilities.isChromeiOS10 = function() {
   if (com.inq.utils.Capabilities._isCriOS10 != null) {
     return com.inq.utils.Capabilities._isCriOS10;
   } else {
@@ -2957,7 +2957,7 @@ com.inq.utils.Capabilities.isChromeiOS10 = function() {  console.warn("com.inq.u
     return com.inq.utils.Capabilities._isCriOS10;
   }
 };
-com.inq.utils.Capabilities.isChromeiOS11 = function() {  console.warn("com.inq.utils.Capabilities.isChromeiOS11");
+com.inq.utils.Capabilities.isChromeiOS11 = function() {
   if (com.inq.utils.Capabilities._isCriOS11 != null) {
     return com.inq.utils.Capabilities._isCriOS11;
   } else {
@@ -2966,7 +2966,7 @@ com.inq.utils.Capabilities.isChromeiOS11 = function() {  console.warn("com.inq.u
     return com.inq.utils.Capabilities._isCriOS11;
   }
 };
-com.inq.utils.Capabilities.isChromeiOS = function() {  console.warn("com.inq.utils.Capabilities.isChromeiOS");
+com.inq.utils.Capabilities.isChromeiOS = function() {
   if (com.inq.utils.Capabilities._isCriOS != null) {
     return com.inq.utils.Capabilities._isCriOS;
   } else {
@@ -2975,7 +2975,7 @@ com.inq.utils.Capabilities.isChromeiOS = function() {  console.warn("com.inq.uti
     return com.inq.utils.Capabilities._isCriOS;
   }
 };
-com.inq.utils.Capabilities.BindListener = function(node, event, handler) {  console.warn("com.inq.utils.Capabilities.BindListener");
+com.inq.utils.Capabilities.BindListener = function(node, event, handler) {
   if (null != window["addEventListener"]) {
     node.addEventListener(event, handler, false);
   } else {
@@ -2984,7 +2984,7 @@ com.inq.utils.Capabilities.BindListener = function(node, event, handler) {  cons
     }
   }
 };
-com.inq.utils.Capabilities.UnbindListener = function(node, event, handler) {  console.warn("com.inq.utils.Capabilities.UnbindListener");
+com.inq.utils.Capabilities.UnbindListener = function(node, event, handler) {
   if (null != window["removeEventListener"]) {
     node.removeEventListener(event, handler, false);
   } else {
@@ -2993,28 +2993,28 @@ com.inq.utils.Capabilities.UnbindListener = function(node, event, handler) {  co
     }
   }
 };
-com.inq.utils.Capabilities.isWindowsPhone = function(testString) {  console.warn("com.inq.utils.Capabilities.isWindowsPhone");
+com.inq.utils.Capabilities.isWindowsPhone = function(testString) {
   var matched = (new EReg("Windows Phone", "i")).match(com.inq.utils.Capabilities.getUserAgent());
   if (matched && testString != null) {
     matched = com.inq.utils.Capabilities.getUserAgent().indexOf(testString) != -1;
   }
   return matched;
 };
-com.inq.utils.Capabilities.isAndroid = function(testString) {  console.warn("com.inq.utils.Capabilities.isAndroid");
+com.inq.utils.Capabilities.isAndroid = function(testString) {
   var matched = (new EReg("^(?!.*windows)(?=.*android)", "i")).match(com.inq.utils.Capabilities.getUserAgent());
   if (matched && testString != null) {
     matched = com.inq.utils.Capabilities.getUserAgent().indexOf(testString) != -1;
   }
   return matched;
 };
-com.inq.utils.Capabilities.isAndroidO = function(testString) {  console.warn("com.inq.utils.Capabilities.isAndroidO");
+com.inq.utils.Capabilities.isAndroidO = function(testString) {
   var matched = (new EReg("Android.*Build/OPP2.*", "i")).match(com.inq.utils.Capabilities.getUserAgent());
   if (matched && testString != null) {
     matched = com.inq.utils.Capabilities.getUserAgent().indexOf(testString) != -1;
   }
   return matched;
 };
-com.inq.utils.Capabilities.getDefaultResizeArea = function() {  console.warn("com.inq.utils.Capabilities.getDefaultResizeArea");
+com.inq.utils.Capabilities.getDefaultResizeArea = function() {
   var a;
   if (com.inq.utils.Capabilities.isMobile()) {
     a = new com.inq.utils.Area(0, 0, 32, 32);
@@ -3023,7 +3023,7 @@ com.inq.utils.Capabilities.getDefaultResizeArea = function() {  console.warn("co
   }
   return a;
 };
-com.inq.utils.Capabilities.isAutoZoom = function() {  console.warn("com.inq.utils.Capabilities.isAutoZoom");
+com.inq.utils.Capabilities.isAutoZoom = function() {
   var result = false;
   if (com.inq.utils.Capabilities.isMobile()) {
     if ((new EReg("android", "i")).match(com.inq.utils.Capabilities.getUserAgent()) && (new EReg("a100|a200|transformer tf101|transformer tf300|gt-p6210|gt-p7100|sony tablet s|kindle fire", "i")).match(com.inq.utils.Capabilities.getUserAgent())) {
@@ -3034,7 +3034,7 @@ com.inq.utils.Capabilities.isAutoZoom = function() {  console.warn("com.inq.util
   }
   return result;
 };
-com.inq.utils.Capabilities.getViewport = function() {  console.warn("com.inq.utils.Capabilities.getViewport");
+com.inq.utils.Capabilities.getViewport = function() {
   var x = com.inq.flash.client.chatskins.ScrollMonitor.getScrollLeft();
   var y = com.inq.flash.client.chatskins.ScrollMonitor.getScrollTop();
   var vp;
@@ -3048,7 +3048,7 @@ com.inq.utils.Capabilities.getViewport = function() {  console.warn("com.inq.uti
   }
   return vp;
 };
-com.inq.utils.Capabilities.getOrientation = function() {  console.warn("com.inq.utils.Capabilities.getOrientation");
+com.inq.utils.Capabilities.getOrientation = function() {
   var portrait = "orientation" in window ? (window.parent.orientation + 360) % 180 === 0 : true;
   if (com.inq.utils.Capabilities.isChrome()) {
     var bver = parseInt(window.navigator.appVersion.match(/Chrome\/(\d+)\./)[1], 10);
@@ -3063,7 +3063,7 @@ com.inq.utils.Capabilities.getOrientation = function() {  console.warn("com.inq.
   }
   return portrait;
 };
-com.inq.utils.Capabilities.getScreenHeight = function() {  console.warn("com.inq.utils.Capabilities.getScreenHeight");
+com.inq.utils.Capabilities.getScreenHeight = function() {
   var clientWin = window.top;
   if (com.inq.utils.Capabilities.isIphone() || com.inq.utils.Capabilities.isIpad()) {
     var isPortrait = com.inq.utils.Capabilities.getOrientation();
@@ -3076,7 +3076,7 @@ com.inq.utils.Capabilities.getScreenHeight = function() {  console.warn("com.inq
     return clientWin.screen.height;
   }
 };
-com.inq.utils.Capabilities.getScreenWidth = function() {  console.warn("com.inq.utils.Capabilities.getScreenWidth");
+com.inq.utils.Capabilities.getScreenWidth = function() {
   var clientWin = window.top;
   if (com.inq.utils.Capabilities.isIphone() || com.inq.utils.Capabilities.isIpad()) {
     var isPortrait = com.inq.utils.Capabilities.getOrientation();
@@ -3089,7 +3089,7 @@ com.inq.utils.Capabilities.getScreenWidth = function() {  console.warn("com.inq.
     return clientWin.screen.width;
   }
 };
-com.inq.utils.Capabilities.getAvailHeight = function() {  console.warn("com.inq.utils.Capabilities.getAvailHeight");
+com.inq.utils.Capabilities.getAvailHeight = function() {
   var clientWin = window.top;
   if (com.inq.utils.Capabilities.isIphone() || com.inq.utils.Capabilities.isIpad()) {
     var isPortrait = com.inq.utils.Capabilities.getOrientation();
@@ -3101,11 +3101,11 @@ com.inq.utils.Capabilities.getAvailHeight = function() {  console.warn("com.inq.
   }
   return clientWin.screen.availHeight;
 };
-com.inq.utils.Capabilities.isChromed = function() {  console.warn("com.inq.utils.Capabilities.isChromed");
+com.inq.utils.Capabilities.isChromed = function() {
   var clientWin = window.top;
   return clientWin.innerHeight === com.inq.utils.Capabilities.getAvailHeight();
 };
-com.inq.utils.Capabilities.getZoom = function() {  console.warn("com.inq.utils.Capabilities.getZoom");
+com.inq.utils.Capabilities.getZoom = function() {
   try {
     var vp = com.inq.utils.Capabilities.getViewport();
     var rw = Std.parseInt(window.parent.screen.width);
@@ -3115,7 +3115,7 @@ com.inq.utils.Capabilities.getZoom = function() {  console.warn("com.inq.utils.C
     return 1;
   }
 };
-com.inq.utils.Capabilities.getLowerRightCorner = function() {  console.warn("com.inq.utils.Capabilities.getLowerRightCorner");
+com.inq.utils.Capabilities.getLowerRightCorner = function() {
   if (window.top.pageYOffset == 0) {
     window.top.scrollBy(0, 1);
   }
@@ -3134,7 +3134,7 @@ com.inq.utils.Capabilities.getLowerRightCorner = function() {  console.warn("com
   }
   return new com.inq.utils.Point(x, y);
 };
-com.inq.utils.Capabilities.initZoomDetection = function() {  console.warn("com.inq.utils.Capabilities.initZoomDetection");
+com.inq.utils.Capabilities.initZoomDetection = function() {
   try {
     if (!com.inq.utils.Capabilities.viewportDetectorInitialized) {
       var pix = window.parent.document.createElement("DIV");
@@ -3155,7 +3155,7 @@ com.inq.utils.Capabilities.initZoomDetection = function() {  console.warn("com.i
     }
   }
 };
-com.inq.utils.Capabilities.waitFor = function(test, interval, cb, max, ripples) {  console.warn("com.inq.utils.Capabilities.waitFor");
+com.inq.utils.Capabilities.waitFor = function(test, interval, cb, max, ripples) {
   if (ripples == null) {
     ripples = 1;
   }
@@ -3176,7 +3176,7 @@ com.inq.utils.Capabilities.waitFor = function(test, interval, cb, max, ripples) 
   }, interval);
   return token;
 };
-com.inq.utils.Capabilities.setDomSafeTimeout = function(f, t) {  console.warn("com.inq.utils.Capabilities.setDomSafeTimeout");
+com.inq.utils.Capabilities.setDomSafeTimeout = function(f, t) {
   var random = (Math.random() + "").substring(2);
   var type = "domsafe" + random;
   var h = function() {
@@ -3192,7 +3192,7 @@ com.inq.utils.Capabilities.setDomSafeTimeout = function(f, t) {  console.warn("c
     com.inq.utils.Capabilities.UnbindListener(window, type, h);
   }};
 };
-com.inq.utils.Capabilities.viewportStopsMoving = function(time) {  console.warn("com.inq.utils.Capabilities.viewportStopsMoving");
+com.inq.utils.Capabilities.viewportStopsMoving = function(time) {
   var vp = com.inq.utils.Capabilities.getViewport();
   var t = (new Date).getTime();
   return function() {
@@ -3217,7 +3217,7 @@ com.inq.utils.Capabilities.viewportStopsMoving = function(time) {  console.warn(
     }
   };
 };
-com.inq.utils.Capabilities.extractBrowserNameAndVersion = function(userAgent) {  console.warn("com.inq.utils.Capabilities.extractBrowserNameAndVersion");
+com.inq.utils.Capabilities.extractBrowserNameAndVersion = function(userAgent) {
   var replaceWith = null;
   var pattern = null;
   var patternTable = [{browser:"IOS WebView", pattern:"(.*)(iPhone|iPod|iPad)(.*)AppleWebKit(?!.*Safari)(.*)", replaceWith:"IOS WebView"}, {browser:"Android WebView", pattern:"(.*?)Android(.*?)(wv|Version\\/[.0-9]+)(.*?)Chrome\\/([0-9]{2})(.*?)Mobile(.*)", replaceWith:"Android WebView/Stock Browser - Chrome $5"}, {browser:"Edge", pattern:"(.*)(Edge)(/)([0-9.]*)", replaceWith:"Edge $4"}, {browser:"Android Browser", pattern:".*Android(?!.*Chrome)(?=.*Mobile Safari).*Version/([0-9.]+).*", replaceWith:"Android Browser $1"}, 
@@ -3265,41 +3265,41 @@ com.inq.utils.Capabilities._isCriOS = null;
 com.inq.utils.Capabilities._isSafari = null;
 com.inq.utils.Capabilities._isIOSWebView = null;
 com.inq.utils.Capabilities._isAndroidWebView = null;
-com.inq.utils.Point = function(x, y) {  console.warn("com.inq.utils.Point");
+com.inq.utils.Point = function(x, y) {
   this.x = x;
   this.y = y;
 };
 $hxClasses["com.inq.utils.Point"] = com.inq.utils.Point;
 com.inq.utils.Point.__name__ = ["com", "inq", "utils", "Point"];
-com.inq.utils.Point.prototype.copy = function() {  console.warn("com.inq.utils.Point.prototype.copy");
+com.inq.utils.Point.prototype.copy = function() {
   return new com.inq.utils.Point(this.x, this.y);
 };
-com.inq.utils.Point.prototype.toString = function() {  console.warn("com.inq.utils.Point.prototype.toString");
+com.inq.utils.Point.prototype.toString = function() {
   return "Point[x: " + this.x + ", y: " + this.y + "]";
 };
-com.inq.utils.Point.prototype.diff = function(p) {  console.warn("com.inq.utils.Point.prototype.diff");
+com.inq.utils.Point.prototype.diff = function(p) {
   var x = p.x - this.x;
   var y = p.y - this.y;
   return new com.inq.utils.Point(x, y);
 };
-com.inq.utils.Point.prototype.equals = function(p) {  console.warn("com.inq.utils.Point.prototype.equals");
+com.inq.utils.Point.prototype.equals = function(p) {
   return p.x == this.x && p.y == this.y;
 };
-com.inq.utils.Point.prototype.moveTo = function(x, y) {  console.warn("com.inq.utils.Point.prototype.moveTo");
+com.inq.utils.Point.prototype.moveTo = function(x, y) {
   this.x += x;
   this.y += y;
   return this;
 };
-com.inq.utils.Point.prototype.move = function(dx, dy) {  console.warn("com.inq.utils.Point.prototype.move");
+com.inq.utils.Point.prototype.move = function(dx, dy) {
   this.x += dx;
   this.y += dy;
   return this;
 };
-com.inq.utils.Point.prototype.moveInto = function(area) {  console.warn("com.inq.utils.Point.prototype.moveInto");
+com.inq.utils.Point.prototype.moveInto = function(area) {
   this.x = this.forceRange(this.x, area.x, area.x + area.w);
   this.y = this.forceRange(this.y, area.y, area.y + area.h);
 };
-com.inq.utils.Point.prototype.forceRange = function(x, min, max) {  console.warn("com.inq.utils.Point.prototype.forceRange");
+com.inq.utils.Point.prototype.forceRange = function(x, min, max) {
   var r = x;
   if (r > max) {
     r = max;
@@ -3312,33 +3312,33 @@ com.inq.utils.Point.prototype.forceRange = function(x, min, max) {  console.warn
 com.inq.utils.Point.prototype.y = null;
 com.inq.utils.Point.prototype.x = null;
 com.inq.utils.Point.prototype.__class__ = com.inq.utils.Point;
-com.inq.utils.Area = function(x, y, w, h) {  console.warn("com.inq.utils.Area");
+com.inq.utils.Area = function(x, y, w, h) {
   com.inq.utils.Point.call(this, x, y);
   this.w = w;
   this.h = h;
 };
 $hxClasses.extend(com.inq.utils.Point, com.inq.utils.Area, "com.inq.utils.Area");
-com.inq.utils.Area.prototype.toString = function() {  console.warn("com.inq.utils.Area.prototype.toString");
+com.inq.utils.Area.prototype.toString = function() {
   return "Area[x: " + this.x + ", y: " + this.y + ", w: " + this.w + ", h: " + this.h + "]";
 };
-com.inq.utils.Area.prototype.equals = function(area) {  console.warn("com.inq.utils.Area.prototype.equals");
+com.inq.utils.Area.prototype.equals = function(area) {
   return this.x == area.x && this.y == area.y && this.w == area.w && this.h == area.h;
 };
-com.inq.utils.Area.prototype.scale = function(zoom) {  console.warn("com.inq.utils.Area.prototype.scale");
+com.inq.utils.Area.prototype.scale = function(zoom) {
   this.w = Math.round(this.w * zoom);
   this.h = Math.round(this.h * zoom);
   return this;
 };
-com.inq.utils.Area.prototype.resize = function(dw, dh) {  console.warn("com.inq.utils.Area.prototype.resize");
+com.inq.utils.Area.prototype.resize = function(dw, dh) {
   this.w += dw;
   this.h += dh;
   return this;
 };
-com.inq.utils.Area.prototype.moveInto = function(area) {  console.warn("com.inq.utils.Area.prototype.moveInto");
+com.inq.utils.Area.prototype.moveInto = function(area) {
   this.x = this.forceRange(this.x, area.x, area.x + area.w - this.w);
   this.y = this.forceRange(this.y, area.y, area.y + area.h - this.h);
 };
-com.inq.utils.Area.prototype.copy = function() {  console.warn("com.inq.utils.Area.prototype.copy");
+com.inq.utils.Area.prototype.copy = function() {
   return new com.inq.utils.Area(this.x, this.y, this.w, this.h);
 };
 com.inq.utils.Area.prototype.h = null;
@@ -4634,7 +4634,7 @@ Application.setFocusToBtnCloseOnOpen = false;
 Application.parentDocumentBodyMarginTop = 0;
 Application.customerNameInputField = undefined;
 Application.savePage = {bodyPosition:null};
-com.inq.utils.Dictionary = function(weakKeys) {  console.warn("com.inq.utils.Dictionary");
+com.inq.utils.Dictionary = function(weakKeys) {
 };
 $hxClasses["com.inq.utils.Dictionary"] = com.inq.utils.Dictionary;
 com.inq.utils.Dictionary.__name__ = ["com", "inq", "utils", "Dictionary"];
@@ -5046,10 +5046,10 @@ Reflect.fields = function(o) {
 Reflect.isFunction = function(f) {
   return typeof f == "function" && !(f.__name__ || f.__ename__);
 };
-Reflect.compare = function(a, b) {  console.warn("compare");
+Reflect.compare = function(a, b) {
   return a == b ? 0 : a > b ? 1 : -1;
 };
-Reflect.compareMethods = function(f1, f2) {  console.warn("compareMethods");
+Reflect.compareMethods = function(f1, f2) {
   if (f1 == f2) {
     return true;
   }
@@ -5458,7 +5458,7 @@ Xml.createCData = function(data) {
   r.setNodeValue(data);
   return r;
 };
-Xml.createComment = function(data) {  console.warn("Comment");
+Xml.createComment = function(data) {
   var r = new Xml;
   r.nodeType = Xml.Comment;
   r.setNodeValue(data);
@@ -5716,7 +5716,7 @@ Xml.prototype.nodeValue = null;
 Xml.prototype.nodeName = null;
 Xml.prototype.nodeType = null;
 Xml.prototype.__class__ = Xml;
-com.inq.events.Event = function(type, originalEvent) {  console.warn("com.inq.events.Event");
+com.inq.events.Event = function(type, originalEvent) {
   this.type = type;
   this.originalEvent = originalEvent;
 };
@@ -5755,7 +5755,7 @@ com.inq.events.Event.TAB_ENABLED_CHANGE = "tabEnabledChange";
 com.inq.events.Event.TAB_INDEX_CHANGE = "tabIndexChange";
 com.inq.events.Event.UNLOAD = "unload";
 com.inq.events.Event.UNAUTHORIZED = "unauthorized";
-com.inq.events.TextEvent = function(type, bubbles, cancelable, text) {  console.warn("com.inq.events.TextEvent");
+com.inq.events.TextEvent = function(type, bubbles, cancelable, text) {
   com.inq.events.Event.call(this, type);
 };
 $hxClasses["com.inq.events.TextEvent"] = com.inq.events.TextEvent;
@@ -5769,7 +5769,7 @@ com.inq.events.TextEvent.prototype.text = null;
 com.inq.events.TextEvent.prototype.__class__ = com.inq.events.TextEvent;
 com.inq.events.TextEvent.LINK = "link";
 com.inq.events.TextEvent.TEXT_INPUT = "textInput";
-com.inq.events.ErrorEvent = function(type, bubbles, cancelable, text) {  console.warn("com.inq.events.ErrorEvent");
+com.inq.events.ErrorEvent = function(type, bubbles, cancelable, text) {
   com.inq.events.TextEvent.call(this, type);
 };
 $hxClasses["com.inq.events.ErrorEvent"] = com.inq.events.ErrorEvent;
@@ -5780,7 +5780,7 @@ for (var k in com.inq.events.TextEvent.prototype) {
 }
 com.inq.events.ErrorEvent.prototype.__class__ = com.inq.events.ErrorEvent;
 com.inq.events.ErrorEvent.ERROR = "error";
-com.inq.events.FocusEvent = function(type, bubbles, cancelable, relatedObject, shiftKey, keyCode) {  console.warn("com.inq.events.FocusEvent");
+com.inq.events.FocusEvent = function(type, bubbles, cancelable, relatedObject, shiftKey, keyCode) {
   com.inq.events.Event.call(this, type);
 };
 $hxClasses["com.inq.events.FocusEvent"] = com.inq.events.FocusEvent;
@@ -5800,7 +5800,7 @@ com.inq.events.FocusEvent.prototype.keyCode = null;
 com.inq.events.FocusEvent.prototype.__class__ = com.inq.events.FocusEvent;
 com.inq.events.FocusEvent.FOCUS_IN = "FocusIn";
 com.inq.events.FocusEvent.FOCUS_OUT = "FocusOut";
-com.inq.events.HTTPStatusEvent = function(type, bubbles, cancelable, status) {  console.warn("com.inq.events.HTTPStatusEvent");
+com.inq.events.HTTPStatusEvent = function(type, bubbles, cancelable, status) {
   com.inq.events.Event.call(this, type);
 };
 $hxClasses["com.inq.events.HTTPStatusEvent"] = com.inq.events.HTTPStatusEvent;
@@ -5813,7 +5813,7 @@ com.inq.events.HTTPStatusEvent.prototype.m_status = null;
 com.inq.events.HTTPStatusEvent.prototype.status = null;
 com.inq.events.HTTPStatusEvent.prototype.__class__ = com.inq.events.HTTPStatusEvent;
 com.inq.events.HTTPStatusEvent.HTTP_STATUS = "http_status";
-com.inq.events.IOErrorEvent = function(type, bubbles, cancelable, text) {  console.warn("com.inq.events.IOErrorEvent");
+com.inq.events.IOErrorEvent = function(type, bubbles, cancelable, text) {
   com.inq.events.ErrorEvent.call(this, type);
 };
 $hxClasses["com.inq.events.IOErrorEvent"] = com.inq.events.IOErrorEvent;
@@ -5827,7 +5827,7 @@ com.inq.events.IOErrorEvent.DISK_ERROR = "diskError";
 com.inq.events.IOErrorEvent.IO_ERROR = "ioError";
 com.inq.events.IOErrorEvent.NETWORK_ERROR = "networkError";
 com.inq.events.IOErrorEvent.VERIFY_ERROR = "verifyError";
-com.inq.events.KeyboardEvent = function(type, bubbles, cancelable, charCode, keyCode, keyLocation, ctrlKey, altKey, shiftKey) {  console.warn("com.inq.events.KeyboardEvent");
+com.inq.events.KeyboardEvent = function(type, bubbles, cancelable, charCode, keyCode, keyLocation, ctrlKey, altKey, shiftKey) {
   com.inq.events.Event.call(this, type);
 };
 $hxClasses["com.inq.events.KeyboardEvent"] = com.inq.events.KeyboardEvent;
@@ -5842,7 +5842,7 @@ com.inq.events.KeyboardEvent.prototype.m_keyCode = null;
 com.inq.events.KeyboardEvent.prototype.m_ctrlKey = null;
 com.inq.events.KeyboardEvent.prototype.m_charCode = null;
 com.inq.events.KeyboardEvent.prototype.m_altKey = null;
-com.inq.events.KeyboardEvent.prototype.updateAfterEvent = function() {  console.warn("com.inq.events.KeyboardEvent.prototype.updateAfterEvent");
+com.inq.events.KeyboardEvent.prototype.updateAfterEvent = function() {
 };
 com.inq.events.KeyboardEvent.prototype.shiftKey = null;
 com.inq.events.KeyboardEvent.prototype.keyLocation = null;
@@ -5854,7 +5854,7 @@ com.inq.events.KeyboardEvent.prototype.__class__ = com.inq.events.KeyboardEvent;
 com.inq.events.KeyboardEvent.KEY_DOWN = "KeyDown";
 com.inq.events.KeyboardEvent.KEY_UP = "KeyUp";
 com.inq.events.KeyboardEvent.KEY_PRESS = "KeyPress";
-com.inq.events.MouseEvent = function(type, originalEvent) {  console.warn("com.inq.events.MouseEvent");
+com.inq.events.MouseEvent = function(type, originalEvent) {
   com.inq.events.Event.call(this, type, originalEvent);
 };
 $hxClasses["com.inq.events.MouseEvent"] = com.inq.events.MouseEvent;
@@ -5892,7 +5892,7 @@ com.inq.events.MouseEvent.prototype.buttonDown = null;
 com.inq.events.MouseEvent.prototype.altKey = null;
 com.inq.events.MouseEvent.prototype.__class__ = com.inq.events.MouseEvent;
 com.inq.events.MouseEvent.CLICK = "click";
-com.inq.events.ProgressEvent = function(type, bubbles, cancelable, bytesLoaded, bytesTotal) {  console.warn("com.inq.events.ProgressEvent");
+com.inq.events.ProgressEvent = function(type, bubbles, cancelable, bytesLoaded, bytesTotal) {
   com.inq.events.Event.call(this, type);
 };
 $hxClasses["com.inq.events.ProgressEvent"] = com.inq.events.ProgressEvent;
@@ -5908,7 +5908,7 @@ com.inq.events.ProgressEvent.prototype.bytesLoaded = null;
 com.inq.events.ProgressEvent.prototype.__class__ = com.inq.events.ProgressEvent;
 com.inq.events.ProgressEvent.PROGRESS = "progress";
 com.inq.events.ProgressEvent.SOCKET_DATA = "socketData";
-com.inq.events.SecurityErrorEvent = function(type, bubbles, cancelable, text) {  console.warn("com.inq.events.SecurityErrorEvent");
+com.inq.events.SecurityErrorEvent = function(type, bubbles, cancelable, text) {
   com.inq.events.ErrorEvent.call(this, type);
 };
 $hxClasses["com.inq.events.SecurityErrorEvent"] = com.inq.events.SecurityErrorEvent;
@@ -5922,11 +5922,11 @@ com.inq.events.SecurityErrorEvent.SECURITY_ERROR = "securityError";
 if (!com.inq.flash.client.chatskins) {
   com.inq.flash.client.chatskins = {};
 }
-;com.inq.flash.client.chatskins.BalloonNotifier = function() {  console.warn("com.inq.flash.client.chatskins.BalloonNotifier");
+;com.inq.flash.client.chatskins.BalloonNotifier = function() {
 };
 $hxClasses["com.inq.flash.client.chatskins.BalloonNotifier"] = com.inq.flash.client.chatskins.BalloonNotifier;
 com.inq.flash.client.chatskins.BalloonNotifier.__name__ = ["com", "inq", "flash", "client", "chatskins", "BalloonNotifier"];
-com.inq.flash.client.chatskins.BalloonNotifier.Clear = function() {  console.warn("com.inq.flash.client.chatskins.BalloonNotifier.Clear");
+com.inq.flash.client.chatskins.BalloonNotifier.Clear = function() {
   var elements = null;
   try {
     elements = Application.application._div.getElementsByTagName("*");
@@ -5948,7 +5948,7 @@ com.inq.flash.client.chatskins.BalloonNotifier.Clear = function() {  console.war
     }
   }
 };
-com.inq.flash.client.chatskins.BalloonNotifier.Resize = function() {  console.warn("com.inq.flash.client.chatskins.BalloonNotifier.Resize");
+com.inq.flash.client.chatskins.BalloonNotifier.Resize = function() {
   var elements = null;
   try {
     elements = Application.application._div.getElementsByTagName("*");
@@ -5969,23 +5969,23 @@ com.inq.flash.client.chatskins.BalloonNotifier.Resize = function() {  console.wa
     }
   }
 };
-com.inq.flash.client.chatskins.BalloonNotifier.Notify = function(element, text) {  console.warn("com.inq.flash.client.chatskins.BalloonNotifier.Notify");
+com.inq.flash.client.chatskins.BalloonNotifier.Notify = function(element, text) {
   com.inq.flash.client.chatskins.BalloonNotifier.show(element, text, "BalloonNotify");
 };
-com.inq.flash.client.chatskins.BalloonNotifier.Warn = function(element, text) {  console.warn("com.inq.flash.client.chatskins.BalloonNotifier.Warn");
+com.inq.flash.client.chatskins.BalloonNotifier.Warn = function(element, text) {
   com.inq.flash.client.chatskins.BalloonNotifier.show(element, text, "BalloonWarn");
   element.onfocus = function(ev) {
     element.balloon.destroy();
   };
 };
-com.inq.flash.client.chatskins.BalloonNotifier.show = function(element, text, styleName) {  console.warn("com.inq.flash.client.chatskins.BalloonNotifier.show");
+com.inq.flash.client.chatskins.BalloonNotifier.show = function(element, text, styleName) {
   var c = window.document.getElementById("chatWindow_span").parentNode;
   if (c != null || c.length > 0) {
     element.balloon = new com.inq.ui.BalloonOverlaying(Std.string(element.id) + "_balloon", styleName, element, text, c);
     element.balloon.addEventListener(com.inq.events.MouseEvent.CLICK, com.inq.flash.client.chatskins.BalloonNotifier.onBalloonClick);
   }
 };
-com.inq.flash.client.chatskins.BalloonNotifier.onBalloonClick = function(me) {  console.warn("com.inq.flash.client.chatskins.BalloonNotifier.onBalloonClick");
+com.inq.flash.client.chatskins.BalloonNotifier.onBalloonClick = function(me) {
   try {
     var target = me.currentTarget;
     var el = null;
@@ -6001,7 +6001,7 @@ com.inq.flash.client.chatskins.BalloonNotifier.onBalloonClick = function(me) {  
   return true;
 };
 com.inq.flash.client.chatskins.BalloonNotifier.prototype.__class__ = com.inq.flash.client.chatskins.BalloonNotifier;
-com.inq.flash.client.chatskins.ChatTextArea = function(__textArea) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea");
+com.inq.flash.client.chatskins.ChatTextArea = function(__textArea) {
   this._ta = null;
   this._setHtmlText("");
   this._tabStops = null;
@@ -6029,27 +6029,27 @@ com.inq.flash.client.chatskins.ChatTextArea = function(__textArea) {  console.wa
 };
 $hxClasses["com.inq.flash.client.chatskins.ChatTextArea"] = com.inq.flash.client.chatskins.ChatTextArea;
 com.inq.flash.client.chatskins.ChatTextArea.__name__ = ["com", "inq", "flash", "client", "chatskins", "ChatTextArea"];
-com.inq.flash.client.chatskins.ChatTextArea.prototype.setStyle = function(styleName, styleValue) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.setStyle");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.setStyle = function(styleName, styleValue) {
   if (this._ta != null) {
     this._ta.setStyle(styleName, styleValue);
   }
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.getTranscriptMessage = function(index) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.getTranscriptMessage");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.getTranscriptMessage = function(index) {
   return this.arrayTranscripts[index];
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.replaceTranscriptLineNoRender = function(index, newLine) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.replaceTranscriptLineNoRender");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.replaceTranscriptLineNoRender = function(index, newLine) {
   if (index < 0 || index > this.arrayTranscripts.length) {
     return false;
   }
   this.arrayTranscripts[index]["Msg"] = newLine;
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.replaceTranscriptLine = function(index, newLine) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.replaceTranscriptLine");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.replaceTranscriptLine = function(index, newLine) {
   if (this.replaceTranscriptLineNoRender(index, newLine)) {
     this.render();
   }
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.updateTranscriptArray = function(element) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.updateTranscriptArray");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.updateTranscriptArray = function(element) {
   var div = window.document.createElement("DIV");
   var elementID = null;
   var p = element.parentNode;
@@ -6085,13 +6085,13 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.updateTranscriptArray = fu
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.getTranscriptLine = function(index) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.getTranscriptLine");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.getTranscriptLine = function(index) {
   if (index < 0 || index > this.arrayTranscripts.length) {
     return null;
   }
   return this.arrayTranscripts[index]["Msg"];
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.findTranscriptLineIndex = function(subString) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.findTranscriptLineIndex");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.findTranscriptLineIndex = function(subString) {
   var o;
   var _g1 = 0, _g = this.arrayTranscripts.length;
   while (_g1 < _g) {
@@ -6114,10 +6114,10 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.findTranscriptLineIndex = 
   }
   return -1;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.getHtmlText = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.getHtmlText");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.getHtmlText = function() {
   return this.__htmlText;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.addTranscriptLine = function(Id, Msg, msgId, MsgType, _html, cssClass) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.addTranscriptLine");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.addTranscriptLine = function(Id, Msg, msgId, MsgType, _html, cssClass) {
   var defaultAgentAlias = com.inq.utils.Util.getConfig("defaultAgentAlias", "");
   var usecolon = defaultAgentAlias == "" && Id == "&nbsp;" ? "" : ":";
   var sText = Msg;
@@ -6157,10 +6157,10 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.addTranscriptLine = functi
   _html = this.reverseChat ? sText + _html : _html + sText;
   return _html;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.addBufferedAriaMsg = function(Id, Msg, MsgType, force) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.addBufferedAriaMsg");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.addBufferedAriaMsg = function(Id, Msg, MsgType, force) {
   com.inq.aria.AriaMsg.addBufferedAriaMsg(Id, Msg, MsgType, force);
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.addTranscript = function(Id, Msg, MsgType, position, expressionList, restoreMode, cssClass) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.addTranscript");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.addTranscript = function(Id, Msg, MsgType, position, expressionList, restoreMode, cssClass) {
   var res = -1;
   try {
     if (this.arrayTranscripts.length > 0) {
@@ -6198,14 +6198,14 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.addTranscript = function(I
   }
   return res;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype._isCustomerOrSystemMessage = function(position) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype._isCustomerOrSystemMessage");
+com.inq.flash.client.chatskins.ChatTextArea.prototype._isCustomerOrSystemMessage = function(position) {
   if (this.arrayTranscripts[position]) {
     var entry = this.arrayTranscripts[position];
     return entry.position == -1 && (entry.MsgType == com.inq.flash.client.chatskins.ChatTextArea.CUSTOMER || entry.MsgType == com.inq.flash.client.chatskins.ChatTextArea.SYSTEM);
   }
   return false;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.addOpenerScript = function(Id, Msg, MsgType, position, expressionList) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.addOpenerScript");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.addOpenerScript = function(Id, Msg, MsgType, position, expressionList) {
   try {
     var openerMessage = {};
     openerMessage["Id"] = Id;
@@ -6229,7 +6229,7 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.addOpenerScript = function
   }
   return position;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.prepareExpressionForRender = function(list, msgId) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.prepareExpressionForRender");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.prepareExpressionForRender = function(list, msgId) {
   if (list && msgId) {
     for (var i = 0;i < list.length;i++) {
       switch(list[i]) {
@@ -6240,11 +6240,11 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.prepareExpressionForRender
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.clearTranscript = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.clearTranscript");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.clearTranscript = function() {
   this._setHtmlText("");
   this._ta._setHtmlText("<table>" + this.__htmlText + "</table>");
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.scrollToEnd = function(ta) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.scrollToEnd");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.scrollToEnd = function(ta) {
   try {
     if (ta == null) {
       ta = this._ta;
@@ -6264,12 +6264,12 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.scrollToEnd = function(ta)
     haxe.Log.trace(e, {fileName:"ChatTextArea.hx", lineNumber:505, className:"com.inq.flash.client.chatskins.ChatTextArea", methodName:"scrollToEnd"});
   }
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype._resetRestoreChatState = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype._resetRestoreChatState");
+com.inq.flash.client.chatskins.ChatTextArea.prototype._resetRestoreChatState = function() {
   com.inq.flash.client.control.MinimizeManager.restoreChatInProgress = false;
   this._resetRestoreChatTimer.stop();
   this._resetRestoreChatTimer = null;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype._render = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype._render");
+com.inq.flash.client.chatskins.ChatTextArea.prototype._render = function() {
   try {
     this._renderTimer = null;
     this._setHtmlText(this.renderToHtml());
@@ -6309,18 +6309,18 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype._render = function() {  co
     haxe.Log.trace(e, {fileName:"ChatTextArea.hx", lineNumber:480, className:"com.inq.flash.client.chatskins.ChatTextArea", methodName:"_render"});
   }
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.renderInset = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.renderInset");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.renderInset = function() {
   for (var i = 0;i < this._inset.length;i++) {
     this._inset[i].show();
     this._inset[i].enableEventListener();
   }
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.disableInset = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.disableInset");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.disableInset = function() {
   for (var i = 0;i < this._inset.length;i++) {
     this._inset[i].disableEventListener();
   }
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.render = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.render");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.render = function() {
   if (com.inq.flash.client.control.MinimizeManager.restoreChatInProgress) {
     if (this._resetRestoreChatTimer) {
       this._resetRestoreChatTimer.stop();
@@ -6332,14 +6332,14 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.render = function() {  con
   }
   this._renderTimer = com.inq.utils.Timer.delay($bind(this, this._render), com.inq.flash.client.chatskins.ChatTextArea.RENDER_DELAY);
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.isCustomerMsgExist = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.isCustomerMsgExist");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.isCustomerMsgExist = function() {
   for (var i = 0;i < this.arrayTranscripts.length;i++) {
     if (this.arrayTranscripts[i]["MsgType"] == 2) {
       return true;
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.renderToHtml = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.renderToHtml");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.renderToHtml = function() {
   var o;
   var htmlText = "";
   for (var i = 0, l = this.arrayOpeners.length;i < l;i++) {
@@ -6380,7 +6380,7 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.renderToHtml = function() 
     return testStr;
   }
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.setTabStops = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.setTabStops");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.setTabStops = function() {
   try {
     var lmt = Math.floor(this._textArea.getWidth());
     if (lmt <= 0) {
@@ -6403,16 +6403,16 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.setTabStops = function() {
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.getLength = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.getLength");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.getLength = function() {
   return this._ta._getHtmlText().length;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.setIndent = function(indent) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.setIndent");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.setIndent = function(indent) {
   this._indent = indent;
   this.setTabStops();
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.setGraphicId = function(graphicID) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.setGraphicId");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.setGraphicId = function(graphicID) {
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.applyStyles = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.applyStyles");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.applyStyles = function() {
   var sFontSize;
   var sIndent;
   var sTabStops;
@@ -6469,7 +6469,7 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.applyStyles = function() {
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.exportData = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.exportData");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.exportData = function() {
   var o;
   var txt = "{ " + "__taId: " + com.inq.utils.StringUtil.toJsString(this._textArea.getID()) + ",\n" + "__htmlText: " + com.inq.utils.StringUtil.toJsString(this.__htmlText) + ",\n" + "_initialized: " + Std.string(this._initialized) + ",\n" + "arrayOpeners: [";
   for (var i = 0;i < this.arrayOpeners.length;i++) {
@@ -6506,7 +6506,7 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.exportData = function() { 
   txt += "}";
   return txt;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.importData = function(data) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.importData");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.importData = function(data) {
   var obj = this.stringToObject(data);
   var importedHtml = obj["__htmlText"];
   this._setHtmlText(importedHtml);
@@ -6528,7 +6528,7 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.importData = function(data
   }
   this.scrollToBottom();
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.stringToObject = function(s) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.stringToObject");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.stringToObject = function(s) {
   var func;
   var obj = null;
   try {
@@ -6543,24 +6543,24 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.stringToObject = function(
   }
   return obj;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.scrollToTop = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.scrollToTop");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.scrollToTop = function() {
   this._textArea.scrollToTop();
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.scrollToBottom = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.scrollToBottom");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.scrollToBottom = function() {
   this._textArea.scrollToBottom();
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.setActualSize = function(w, h) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.setActualSize");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.setActualSize = function(w, h) {
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.setHtmlText = function(str) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.setHtmlText");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.setHtmlText = function(str) {
   this._setHtmlText(str);
   var sTextFormatStart = "<table>";
   var sTextFormatEnd = "</table>";
   this._textArea._setHtmlText(sTextFormatStart + this.__htmlText + sTextFormatEnd);
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype._setHtmlText = function(htmlText) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype._setHtmlText");
+com.inq.flash.client.chatskins.ChatTextArea.prototype._setHtmlText = function(htmlText) {
   this.__htmlText = htmlText;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.syncForms = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.syncForms");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.syncForms = function() {
   var allForms = this._ta._div.getElementsByTagName("FORM");
   var inputs;
   for (var i = 0, len = allForms.length;i < len;i++) {
@@ -6581,22 +6581,22 @@ com.inq.flash.client.chatskins.ChatTextArea.prototype.syncForms = function() {  
   }
   this.__htmlText = this.renderToHtml();
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.setStyleSheet = function(ss) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.setStyleSheet");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.setStyleSheet = function(ss) {
   return;
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.getY = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.getY");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.getY = function() {
   return this._textArea.getY();
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.getX = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.getX");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.getX = function() {
   return this._textArea.getX();
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.getWidth = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.getWidth");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.getWidth = function() {
   return this._textArea.getWidth();
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.getHeight = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.getHeight");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.getHeight = function() {
   return this._textArea.getHeight();
 };
-com.inq.flash.client.chatskins.ChatTextArea.prototype.updateCustomerName = function(name) {  console.warn("com.inq.flash.client.chatskins.ChatTextArea.prototype.updateCustomerName");
+com.inq.flash.client.chatskins.ChatTextArea.prototype.updateCustomerName = function(name) {
   if (this.arrayTranscripts.length > 0) {
     for (var i = 0;i < this.arrayTranscripts.length;i++) {
       var message = this.arrayTranscripts[i];
@@ -6652,7 +6652,7 @@ com.inq.flash.client.chatskins.ChatTextArea.SYS_PFX = "<tr><td><span class='syst
 com.inq.flash.client.chatskins.ChatTextArea.SYS_SFX = "</span></td></tr>";
 com.inq.flash.client.chatskins.ChatTextArea.SYSSTAT_PFX = "<tr><td><span class='systemStatMsg'>";
 com.inq.flash.client.chatskins.ChatTextArea.SYSSTAT_SFX = "</span></td></tr>";
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase = function() {
   this.iframe = null;
   this.windowPosition = null;
   this.chatArea = null;
@@ -6689,7 +6689,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.tapTimer =
 com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.scrollState = 0;
 com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.viewPort;
 com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.isTouched = false;
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.init = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.init");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.init = function() {
   if (!com.inq.utils.Capabilities.isMobile() || !com.inq.utils.Capabilities.isAutoZoom()) {
     this.inited = false;
     return this.inited;
@@ -6705,7 +6705,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.init = fun
   this.inited = true;
   return this.inited;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.Close = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.Close");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.Close = function() {
   if (!this.inited) {
     return;
   }
@@ -6720,7 +6720,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.Close = fu
   }
   this.inited = false;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.bindListeners = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.bindListeners");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.bindListeners = function() {
   var stageDiv = com.inq.ui.Stage.getStageElement();
   var titleBarDiv = Application.application.getTitleBarElement();
   if (!com.inq.utils.Capabilities.isIpad()) {
@@ -6749,7 +6749,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.bindListen
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.bindOrbeonListeners = function(dtid, fields) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.bindOrbeonListeners");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.bindOrbeonListeners = function(dtid, fields) {
   for (var i = 0, len = fields.length;i < len;i++) {
     var el = fields[i];
     if (el != null) {
@@ -6760,7 +6760,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.bindOrbeon
   }
   this.orbeonDtidMap[dtid] = fields;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.unbindOrbeonListeners = function(dtid) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.unbindOrbeonListeners");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.unbindOrbeonListeners = function(dtid) {
   var fields = this.orbeonDtidMap[dtid];
   if (fields) {
     for (var i = 0, len = fields.length;i < len;i++) {
@@ -6774,12 +6774,12 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.unbindOrbe
     this.orbeonDtidMap[dtid] = null;
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.blur = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.blur");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.blur = function() {
   if (this.focusElement != null) {
     this.focusElement.blur();
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.unbindListeners = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.unbindListeners");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.unbindListeners = function() {
   var stageDiv = com.inq.ui.Stage.getStageElement();
   var titleBarDiv = Application.application.getTitleBarElement();
   if (!com.inq.utils.Capabilities.isIpad()) {
@@ -6804,41 +6804,41 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.unbindList
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.HasFocus = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.HasFocus");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.HasFocus = function() {
   return this.hasFocus;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.setHasFocus = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.setHasFocus");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.setHasFocus = function() {
   this.hasFocus = true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.getFocusElement = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.getFocusElement");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.getFocusElement = function() {
   return this.focusElement;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.scrollToPrevious = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.scrollToPrevious");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.scrollToPrevious = function() {
   if (this.windowPosition != null) {
     com.inq.flash.client.chatskins.ScrollMonitor.ScrollTo(this.windowPosition.x, this.windowPosition.y);
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.saveWindowPositionForce = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.saveWindowPositionForce");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.saveWindowPositionForce = function() {
   this.windowPosition = com.inq.utils.Capabilities.getViewport();
   if (this.windowPosition.y == 0) {
     this.windowPosition.y = 1;
   }
   this.chatArea = Application.GetArea();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.saveWindowPosition = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.saveWindowPosition");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.saveWindowPosition = function() {
   if (this.windowPosition == null && this.chatArea == null) {
     this.windowPosition = com.inq.utils.Capabilities.getViewport();
     this.chatArea = Application.GetArea();
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.clearWindowPosition = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.clearWindowPosition");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.clearWindowPosition = function() {
   this.windowPosition = null;
   this.chatArea = null;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.hasSavedWindowPosition = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.hasSavedWindowPosition");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.hasSavedWindowPosition = function() {
   return this.windowPosition != null && this.chatArea != null;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.restoreWindowPosition = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.restoreWindowPosition");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.restoreWindowPosition = function() {
   var stage = com.inq.ui.Stage.getInstance();
   var stageIsVisible = stage.getVisible();
   if (Application.IsPersistent()) {
@@ -6861,7 +6861,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.restoreWin
   stage.setVisible(stageIsVisible);
   this.windowPosition = this.chatArea = null;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.FixIPhoneFocusScroll = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.FixIPhoneFocusScroll");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.FixIPhoneFocusScroll = function() {
   if (this.focusScroll.X != top.scrollX || this.focusScroll.Y != top.scrollY) {
     window.top.scrollTo(this.focusScroll.X, this.focusScroll.Y);
     return true;
@@ -6869,7 +6869,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.FixIPhoneF
     return false;
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onFocus = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onFocus");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onFocus = function(ev, element) {
   var isButtonHasFirstFocus = com.inq.flash.client.chatskins.SkinControl.accessibilityHelp.isButtonHasFirstFocus;
   this.hasFocus = true;
   this.focusElement = element;
@@ -6893,7 +6893,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onFocus = 
     return this.onFocusImpl(ev, element);
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onFocusRelatedTargetImpl = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onFocusRelatedTargetImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onFocusRelatedTargetImpl = function(ev) {
   this.hasFocus = true;
   this.FixIPhoneFocusScroll();
   var __this__ = this;
@@ -6902,7 +6902,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onFocusRel
   }, 100);
   return false;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onFocusImpl = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onFocusImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onFocusImpl = function(ev, element) {
   if (com.inq.utils.Capabilities.isPhone() || com.inq.utils.Capabilities.isIpad() && Application.IsPersistent()) {
     this.focusElement = element;
     this.bindOrientationListener();
@@ -6915,7 +6915,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onFocusImp
   }
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onTouchStart = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onTouchStart");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onTouchStart = function(ev, element) {
   this.saveScrollPosition();
   var date = new Date;
   var time = date.getTime();
@@ -6925,20 +6925,20 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onTouchSta
   this.tapTimer = time;
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.saveScrollPosition = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.saveScrollPosition");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.saveScrollPosition = function() {
   this.curScroll = {X:top.scrollX, Y:top.scrollY};
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onMouseDown = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onMouseDown");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onMouseDown = function(ev) {
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onTouchMove = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onTouchMove");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onTouchMove = function(ev) {
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onTouchEnd = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onTouchEnd");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onTouchEnd = function(ev) {
   top.scrollTo(this.curScroll.X, this.curScroll.Y);
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.zoomViewport = function(clientWin) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.zoomViewport");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.zoomViewport = function(clientWin) {
   if (com.inq.utils.Capabilities.isPhone()) {
     var newZoom = com.inq.stage.ViewportMgr.getChatZoomLevel();
     if (newZoom != Application.initialZoom) {
@@ -6947,7 +6947,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.zoomViewpo
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.resizeToViewport = function(from) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.resizeToViewport");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.resizeToViewport = function(from) {
   if (this.bResizeToViewport || com.inq.flash.client.control.MinimizeManager.minimized) {
     return;
   }
@@ -6968,7 +6968,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.resizeToVi
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.resizeToViewportImpl = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.resizeToViewportImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.resizeToViewportImpl = function() {
   var viewPort = com.inq.utils.Capabilities.getViewport();
   Application.SetArea(viewPort);
   Application.Resize();
@@ -6980,12 +6980,12 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.resizeToVi
   }, 0);
   this.bResizeToViewport = false;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.scrollTranscriptToEnd = function(from) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.scrollTranscriptToEnd");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.scrollTranscriptToEnd = function(from) {
   com.inq.utils.Timer.delay(function() {
     com.inq.flash.client.chatskins.SkinControl.cw.scrollToEnd();
   }, 1);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.resizeToViewportFocused = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.resizeToViewportFocused");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.resizeToViewportFocused = function() {
   var keyboardHeight = this.getKeyboardHeight();
   var clientWin = window.parent;
   if (keyboardHeight) {
@@ -7006,26 +7006,26 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.resizeToVi
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.adjustFocusedHeight = function(viewportHeight) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.adjustFocusedHeight");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.adjustFocusedHeight = function(viewportHeight) {
   return viewportHeight;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.getKeyboardHeight = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.getKeyboardHeight");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.getKeyboardHeight = function() {
   var h = this.keyboardHeightArray[com.inq.utils.Capabilities.getOrientation() ? 0 : 1];
   return h;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.setKeyboardHeight = function(keyboardHeight) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.setKeyboardHeight");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.setKeyboardHeight = function(keyboardHeight) {
   this.keyboardHeightArray[com.inq.utils.Capabilities.getOrientation() ? 0 : 1] = keyboardHeight;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.bindOrientationListener = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.bindOrientationListener");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.bindOrientationListener = function() {
   var clientWin = window.parent;
   this.unbindOrientationListener();
   com.inq.utils.Capabilities.BindListener(clientWin, "orientationchange", this.onOrientationChange);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.unbindOrientationListener = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.unbindOrientationListener");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.unbindOrientationListener = function() {
   var clientWin = window.parent;
   com.inq.utils.Capabilities.UnbindListener(clientWin, "orientationchange", this.onOrientationChange);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onOrientationChange = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onOrientationChange");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onOrientationChange = function(ev) {
   if (com.inq.ui.Stage.getInstance().getVisible()) {
     if (this.hasFocus) {
       this.clearWindowPosition();
@@ -7039,7 +7039,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onOrientat
   }
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onBlurHandlerPhoneIphone = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onBlurHandlerPhoneIphone");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onBlurHandlerPhoneIphone = function() {
   this.hasFocus = false;
   this.unbindOrientationListener();
   this.blurToken = null;
@@ -7054,17 +7054,17 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onBlurHand
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onPaste = function(evt) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onPaste");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onPaste = function(evt) {
   haxe.Timer.delay(function() {
     var txt = evt.srcElement;
     txt.value = txt.value.replace(/\n*$/, "");
   }, 10);
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.isBlurHandlerPending = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.isBlurHandlerPending");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.isBlurHandlerPending = function() {
   return this.onBlurHandlerScheduleId != null;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.cancelBlurHandler = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.cancelBlurHandler");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.cancelBlurHandler = function() {
   switch(typeof this.onBlurHandlerScheduleId) {
     case "object":
       try {
@@ -7079,7 +7079,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.cancelBlur
   }
   this.onBlurHandlerScheduleId = null;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onBlur = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onBlur");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onBlur = function(ev) {
   if (ev && ev.relatedTarget) {
     if (com.inq.utils.Capabilities.isAndroidWebView() && ev.relatedTarget.id === "tcChat_btnSend_img" && ev.currentTarget.value === "") {
       ev.stopPropagation();
@@ -7102,9 +7102,9 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onBlur = f
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.isTouched = false;
   return this.onBlurImpl(ev);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.blurFocusedElement = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.blurFocusedElement");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.blurFocusedElement = function() {
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onBlurImpl = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onBlurImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onBlurImpl = function(ev) {
   if (com.inq.utils.Capabilities.isIphone()) {
     this.onBlurHandlerScheduleId = com.inq.utils.Capabilities.setDomSafeTimeout(this.onBlurHandlerPhoneIphone, 1);
   } else {
@@ -7123,17 +7123,17 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onBlurImpl
   }
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.isIos6 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.isIos6");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.isIos6 = function() {
   var agent = com.inq.utils.Capabilities.getUserAgent();
   return agent.indexOf("iPhone OS 6_") != -1;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onScrollCallback = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onScrollCallback");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.prototype.onScrollCallback = function() {
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos.prototype.resizeToViewport = function(from) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos.prototype.resizeToViewport");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos.prototype.resizeToViewport = function(from) {
   if (this.bResizeToViewport || com.inq.flash.client.control.MinimizeManager.minimized) {
     return;
   }
@@ -7161,7 +7161,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos.prototype.
     this.bResizeToViewport = false;
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos.prototype.onBlurImpl = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos.prototype.onBlurImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos.prototype.onBlurImpl = function(ev) {
   var stage = com.inq.ui.Stage.getInstance();
   var stageIsVisible = stage.getVisible();
   var clientWin = window.parent;
@@ -7171,20 +7171,20 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplVodafoneAppIos.prototype.
   this.onBlurHandlerPhoneIphone();
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.onFocusRelatedTargetImpl = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.onFocusRelatedTargetImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.onFocusRelatedTargetImpl = function(ev) {
   this.hasFocus = true;
   return false;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.onBlurImpl = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.onBlurImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.onBlurImpl = function(ev) {
   this.unbindOrientationListener();
   this.blurToken = null;
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.resizeToViewportImpl = function(from) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.resizeToViewportImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.resizeToViewportImpl = function(from) {
   var clientWin = window.top;
   viewPort = com.inq.utils.Capabilities.getViewport();
   Application.SetArea(viewPort);
@@ -7192,7 +7192,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.resizeTo
   this.scrollTranscriptToEnd();
   this.bResizeToViewport = false;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.onFocusImpl = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.onFocusImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.onFocusImpl = function(ev, element) {
   this.focusElement = element;
   this.bindOrientationListener();
   this.focusToken = null;
@@ -7203,11 +7203,11 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.onFocusI
   }
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped.prototype.resizeToViewport = function(from) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped.prototype.resizeToViewport");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped.prototype.resizeToViewport = function(from) {
   if (this.bResizeToViewport || com.inq.flash.client.control.MinimizeManager.minimized) {
     return;
   }
@@ -7218,7 +7218,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped.prototype.resi
     var scrollListener;
     var keyboardHeight = this.getKeyboardHeight();
     if (keyboardHeight == null) {
-      com.inq.utils.Capabilities.BindListener(clientWin, "scroll", scrollListener = function(event) {  console.warn("com.inq.utils.Capabilities.BindListener(clientWin, \"scroll\", scrollListener");
+      com.inq.utils.Capabilities.BindListener(clientWin, "scroll", scrollListener = function(event) {
         viewPort = com.inq.utils.Capabilities.getViewport();
         if (!com.inq.utils.Capabilities.isIphone()) {
           Application.SetArea(viewPort);
@@ -7237,7 +7237,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped.prototype.resi
         com.inq.utils.Capabilities.UnbindListener(clientWin, "scroll", scrollListener);
         if (com.inq.utils.Capabilities.isIphone()) {
           var scrollListenerToOrigin;
-          com.inq.utils.Capabilities.BindListener(clientWin, "scroll", scrollListenerToOrigin = function(event) {  console.warn("com.inq.utils.Capabilities.BindListener(clientWin, \"scroll\", scrollListenerToOrigin");
+          com.inq.utils.Capabilities.BindListener(clientWin, "scroll", scrollListenerToOrigin = function(event) {
             com.inq.utils.Capabilities.UnbindListener(clientWin, "scroll", scrollListenerToOrigin);
             keyboardHeight = clientWin.innerHeight - viewPort.h;
             if (keyboardHeight > 0) {
@@ -7276,7 +7276,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped.prototype.resi
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7 = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7");
@@ -7314,16 +7314,16 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.k
 com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.iOS8ViewableHeight = 0;
 com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.iOS8FocusElement = null;
 com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.focusTimerId = -1;
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.setKeyboardHeight = function(keyboardHeight) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.setKeyboardHeight");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.setKeyboardHeight = function(keyboardHeight) {
   this.keyboardHeightArray[com.inq.utils.Capabilities.getOrientation() ? 0 : 1] = keyboardHeight;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.getKeyboardHeight = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.getKeyboardHeight");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.getKeyboardHeight = function() {
   return this.keyboardHeightArray[com.inq.utils.Capabilities.getOrientation() ? 0 : 1];
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.FixIPhoneFocusScroll = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.FixIPhoneFocusScroll");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.FixIPhoneFocusScroll = function() {
   return false;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.blurFocusedElement = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.blurFocusedElement");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.blurFocusedElement = function() {
   try {
     this.focusScroll = null;
     if (this.iOS8FocusElement === null) {
@@ -7337,7 +7337,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.b
     haxe.Log.trace("Error: " + err, {fileName:"ChatTextFocusMonitorImplIphoneSafari7.js", lineNumber:371, className:"com.inq.flash.client.chatskins.ChatTextFocusMonitor", methodName:"blurFocusedElement"});
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.resizeToViewport = function(from) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.resizeToViewport");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.resizeToViewport = function(from) {
   if (this.bResizeToViewport || com.inq.flash.client.control.MinimizeManager.minimized) {
     return;
   }
@@ -7360,7 +7360,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.r
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.resizeToViewportFocused = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.resizeToViewportFocused");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.resizeToViewportFocused = function() {
   var clientWin = window.parent;
   var oldSize = Application.GetArea();
   this.viewPort = com.inq.utils.Capabilities.getViewport();
@@ -7375,7 +7375,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.r
     }, 1);
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.calculateViewableArea = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.calculateViewableArea");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.calculateViewableArea = function() {
   var kb = 0;
   var vph = 0;
   var isPortrait = com.inq.utils.Capabilities.getOrientation();
@@ -7407,7 +7407,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.c
   }
   return vph;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onScrollCallback = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onScrollCallback");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onScrollCallback = function() {
   try {
     var clientWin = window.parent;
     var clientDoc = clientWin.document;
@@ -7515,12 +7515,12 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.o
     haxe.Log.trace("Error: " + err, {fileName:"ChatTextFocusMonitorImplIphoneSafari7.js", lineNumber:154, className:"com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7", methodName:"uponScrolliOS8"});
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onBlurImpl = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onBlurImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onBlurImpl = function(ev, element) {
   this.scrollState = com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.STATE_INITIAL;
   this.focusElement = null;
   return com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.__super__.prototype.onBlurImpl.call(this, ev, element);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onFocusImpl = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onFocusImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onFocusImpl = function(ev, element) {
   this.scrollState = com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.STATE_FOCUS;
   this.iOS8FocusElement = element;
   var that = this;
@@ -7532,7 +7532,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.o
   }, 100);
   return com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.__super__.prototype.onFocusImpl.call(this, ev, element);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onFocusRelatedTargetImpl = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onFocusRelatedTargetImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onFocusRelatedTargetImpl = function(ev) {
   this.hasFocus = true;
   var __this__ = this;
   com.inq.utils.Timer.delay(function() {
@@ -7540,14 +7540,14 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.o
   }, 100);
   ev.preventDefault();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onOrientationChange = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onOrientationChange");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onOrientationChange = function(ev) {
   this.blurFocusedElement();
   var clientWin = window.parent;
   clientWin.scrollTo(0, 0);
   this.realInnerHeight = null;
   return com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.__super__.prototype.onOrientationChange.call(this, ev);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onTouchStart = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onTouchStart");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.onTouchStart = function(ev, element) {
   haxe.Log.trace("onTouchStart: ", {fileName:"ChatTextFocusMonitorImplIphoneSafari7.js", lineNumber:465, className:"com.inq.flash.client.chatskins.ChatTextFocusMonitor", methodName:"onTouchStart"});
   var el = ev.target;
   if (this.hasFocus && el && el.id.indexOf("btnCloseChat") == -1) {
@@ -7578,18 +7578,18 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.prototype.o
   }
   return com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.__super__.prototype.onTouchStart.call(this, ev);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8 = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8.__super__.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8.prototype.onBlurImpl = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8.prototype.onBlurImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8.prototype.onBlurImpl = function(ev, element) {
   var stage = com.inq.ui.Stage.getInstance();
   var stageIsVisible = stage.getVisible();
   var clientWin = window.parent;
   this.scrollState = com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari7.STATE_INITIAL;
   return com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8.__super__.prototype.onBlurImpl.call(this, ev, element);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8.prototype.onOrientationChange = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8.prototype.onOrientationChange");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8.prototype.onOrientationChange = function(ev) {
   this.blurFocusedElement();
   var clientWin = window.parent;
   var stage = com.inq.ui.Stage.getInstance();
@@ -7599,23 +7599,23 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8.prototype.o
   }
   return com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8.__super__.prototype.onOrientationChange.call(this, ev);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari9 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari9");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari9 = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari9.__super__.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari9, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari9");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari10 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari10");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari10 = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari10.__super__.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari9, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari10, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari10");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari11 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari11");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari11 = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari11.__super__.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari10, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari11, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari11");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8 = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8.__super__.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari8, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8.prototype.resizeToViewportFocused = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8.prototype.resizeToViewportFocused");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8.prototype.resizeToViewportFocused = function() {
   var clientWin = window.parent;
   var oldSize = Application.GetArea();
   this.viewPort = com.inq.utils.Capabilities.getViewport();
@@ -7629,16 +7629,16 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8.prototype.resizeTo
     }, 100);
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8.prototype.onFocusImpl = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8.prototype.onFocusImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8.prototype.onFocusImpl = function(ev, element) {
   var retVal = com.inq.flash.client.chatskins.ChatTextFocusMonitorImplCRiOS8.__super__.prototype.onFocusImpl.call(this, ev, element);
   this.onScrollCallback();
   return retVal;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10 = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.__super__.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari10, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.prototype.resizeToViewportFocused = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.prototype.resizeToViewportFocused");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.prototype.resizeToViewportFocused = function() {
   var clientWin = window.parent;
   var oldSize = Application.GetArea();
   this.viewPort = com.inq.utils.Capabilities.getViewport();
@@ -7654,7 +7654,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.prototype.r
 };
 com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.CHROME_IOS_HEIGHT_DIFF = 44;
 com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.SKIRT_ID = "bottomSkirt";
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.prototype.onFocusImpl = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.prototype.onFocusImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.prototype.onFocusImpl = function(ev, element) {
   try {
     var background = Application.application.getCanvas("background");
     var clientBody = new com.inq.ui.ClientBody;
@@ -7680,26 +7680,26 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.prototype.o
   this.onScrollCallback();
   return retVal;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.prototype.onBlurImpl = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.prototype.onBlurImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.prototype.onBlurImpl = function(ev, element) {
   var canvasSkirt = Application.application.getMxmlItem(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.SKIRT_ID);
   if (canvasSkirt) {
     canvasSkirt.setVisible("false");
   }
   return com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10.__super__.prototype.onBlurImpl.call(this, ev, element);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS11 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS11");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS11 = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS11.__super__.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS10, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS11, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneCRiOS11");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneChrome = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneChrome");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneChrome = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneChrome, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneChrome");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplOverlapped, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari.forceFocus = function(e) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari.forceFocus");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari.forceFocus = function(e) {
   var _cap = com.inq.utils.Capabilities;
   var _target = e.target;
   var _nodeN = _target.nodeName.toUpperCase();
@@ -7712,18 +7712,18 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari.forceFocus =
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplAndroid = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplAndroid");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplAndroid = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplAndroid, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplAndroid");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplAndroid.prototype.FixIPhoneFocusScroll = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplAndroid.prototype.FixIPhoneFocusScroll");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplAndroid.prototype.FixIPhoneFocusScroll = function() {
   return false;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.call(this);
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize, com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone, "com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone");
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.bindListeners = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.bindListeners");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.bindListeners = function() {
   var stageDiv = com.inq.ui.Stage.getStageElement();
   com.inq.utils.Capabilities.BindListener(stageDiv, "mousedown", com.inq.flash.client.chatskins.ChatTextFocusMonitor.onMouseDown);
   com.inq.utils.Capabilities.BindListener(stageDiv, "touchstart", com.inq.flash.client.chatskins.ChatTextFocusMonitor.onTouchStart);
@@ -7747,7 +7747,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.bi
     txtInput.setFocus();
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.unbindListeners = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.unbindListeners");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.unbindListeners = function() {
   var stageDiv = com.inq.ui.Stage.getStageElement();
   com.inq.utils.Capabilities.UnbindListener(stageDiv, "mousedown", com.inq.flash.client.chatskins.ChatTextFocusMonitor.onMouseDown);
   com.inq.utils.Capabilities.UnbindListener(stageDiv, "touchstart", com.inq.flash.client.chatskins.ChatTextFocusMonitor.onTouchStart);
@@ -7767,7 +7767,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.un
     }
   });
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.bindOrbeonListeners = function(dtid, fields) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.bindOrbeonListeners");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.bindOrbeonListeners = function(dtid, fields) {
   var ix = 0;
   while (ix < fields.length) {
     var el = fields[ix];
@@ -7780,7 +7780,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.bi
   }
   this.orbeonDtidMap[dtid] = fields;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.unbindOrbeonListeners = function(dtid) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.unbindOrbeonListeners");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.unbindOrbeonListeners = function(dtid) {
   var ix = 0;
   var fields = this.orbeonDtidMap[dtid];
   if (fields && fields.length > 0) {
@@ -7796,7 +7796,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.un
     this.orbeonDtidMap[dtid] = null;
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.resizeToViewport = function(from) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.resizeToViewport");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.resizeToViewport = function(from) {
   if (this.bResizeToViewport || com.inq.flash.client.control.MinimizeManager.minimized) {
     return;
   }
@@ -7817,13 +7817,13 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.re
     }
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onMouseDown = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onMouseDown");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onMouseDown = function(ev) {
   if (com.inq.flash.client.chatskins.ChatTextFocusMonitor.HasFocus() && ev.target != this.focusElement) {
     ev.preventDefault();
     ev.stopPropagation();
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onTouchStart = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onTouchStart");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onTouchStart = function(ev, element) {
   if (this.hasFocus) {
     var possibleButton = ev.target.container;
     if (possibleButton) {
@@ -7840,12 +7840,12 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.on
   }
   return com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.__super__.prototype.onTouchStart.call(this, ev);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onTouchMove = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onTouchMove");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onTouchMove = function(ev) {
   this.keepFocus = this.hasFocus;
   ev.preventDefault();
   ev.stopPropagation();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onTouchEnd = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onTouchEnd");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onTouchEnd = function(ev) {
   if (this.keepFocus) {
     this.keepFocus = false;
     if (this.focusElement) {
@@ -7870,7 +7870,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.on
   }
   return com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.__super__.prototype.onTouchEnd.call(this, ev);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onFocusImpl = function(ev, element) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onFocusImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onFocusImpl = function(ev, element) {
   this.focusElement = element;
   this.bindOrientationListener();
   this.focusToken = null;
@@ -7881,7 +7881,7 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.on
   }, 15, 3);
   return true;
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onBlurImpl = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onBlurImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.onBlurImpl = function(ev) {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplResize.prototype.onBlurImpl.apply(this, arguments);
   var self = this;
   com.inq.utils.Capabilities.waitFor(com.inq.utils.Capabilities.viewportStopsMoving(500), 200, function() {
@@ -7890,16 +7890,16 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.on
   return true;
 };
 com.inq.flash.client.chatskins.ChatTextFocusMonitorImplWindowsPhone.prototype.keepFocus = false;
-com.inq.flash.client.chatskins.ChatTextFocusMonitor = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor = function() {
 };
 $hxClasses.registerClass(com.inq.flash.client.chatskins.ChatTextFocusMonitor, "com.inq.flash.client.chatskins.ChatTextFocusMonitor");
 com.inq.flash.client.chatskins.ChatTextFocusMonitor.impl = null;
 com.inq.flash.client.chatskins.ChatTextFocusMonitor._isCriOS8 = /(iPhone|iPod|iPad).*(CPU\s(iPhone|iPod|iPad)\sOS\s(6|7|8|9)_).*AppleWebKit?.*CriOS/i.test(navigator.userAgent);
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.init = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.init");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.init = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.closing = false;
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().init();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl = function() {
   if (!!com.inq.flash.client.chatskins.ChatTextFocusMonitor.impl) {
     return com.inq.flash.client.chatskins.ChatTextFocusMonitor.impl;
   } else {
@@ -7960,118 +7960,118 @@ com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl = function() {  cons
     return com.inq.flash.client.chatskins.ChatTextFocusMonitor.impl;
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.Close = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.Close");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.Close = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.closing = true;
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().Close();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.blur = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.blur");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.blur = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().blur();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.HasFocus = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.HasFocus");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.HasFocus = function() {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().HasFocus();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.setHasFocus = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.setHasFocus");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.setHasFocus = function() {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().setHasFocus();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.getFocusElement = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.getFocusElement");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.getFocusElement = function() {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().getFocusElement();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.blurFocusedElement = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.blurFocusedElement");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.blurFocusedElement = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().blurFocusedElement();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.scrollToPrevious = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.scrollToPrevious");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.scrollToPrevious = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().scrollToPrevious();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.saveWindowPositionForce = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.saveWindowPositionForce");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.saveWindowPositionForce = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().saveWindowPositionForce();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.saveWindowPosition = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.saveWindowPosition");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.saveWindowPosition = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().saveWindowPosition();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.clearWindowPosition = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.clearWindowPosition");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.clearWindowPosition = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().clearWindowPosition();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.hasSavedWindowPosition = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.hasSavedWindowPosition");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.hasSavedWindowPosition = function() {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().hasSavedWindowPosition();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.restoreWindowPosition = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.restoreWindowPosition");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.restoreWindowPosition = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().restoreWindowPosition();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.FixIPhoneFocusScroll = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.FixIPhoneFocusScroll");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.FixIPhoneFocusScroll = function() {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().FixIPhoneFocusScroll();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.onFocus = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.onFocus");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.onFocus = function(ev) {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().onFocus(ev, this);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.onTouchStart = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.onTouchStart");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.onTouchStart = function(ev) {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().onTouchStart(ev, this);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.onMouseDown = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.onMouseDown");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.onMouseDown = function(ev) {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().onMouseDown(ev, this);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.onTouchMove = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.onTouchMove");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.onTouchMove = function(ev) {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().onTouchMove(ev, this);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.onTouchEnd = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.onTouchEnd");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.onTouchEnd = function(ev) {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().onTouchEnd(ev, this);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.resizeToViewportIphone = function(from) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.resizeToViewportIphone");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.resizeToViewportIphone = function(from) {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().resizeToViewportIphone();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.resizeToViewportLegacy = function(from) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.resizeToViewportLegacy");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.resizeToViewportLegacy = function(from) {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().resizeToViewportLegacy(from);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.resizeToViewport = function(from) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.resizeToViewport");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.resizeToViewport = function(from) {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().resizeToViewport(from);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.getKeyboardHeight = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.getKeyboardHeight");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.getKeyboardHeight = function() {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().getKeyboardHeight();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.setKeyboardHeight = function(keyboardHeight) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.setKeyboardHeight");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.setKeyboardHeight = function(keyboardHeight) {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().setKeyboardHeight(keyboardHeight);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.onOrientationChange = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.onOrientationChange");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.onOrientationChange = function(ev) {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().onOrientationChange(ev, this);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.onBlurHandlerPhoneIphone = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.onBlurHandlerPhoneIphone");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.onBlurHandlerPhoneIphone = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().onBlurHandlerPhoneIphone();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.onPaste = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.onPaste");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.onPaste = function(ev) {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().onPaste(ev, this);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.isBlurHandlerPending = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.isBlurHandlerPending");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.isBlurHandlerPending = function() {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().isBlurHandlerPending();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.cancelBlurHandler = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.cancelBlurHandler");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.cancelBlurHandler = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().cancelBlurHandler();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.onBlur = function(ev) {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.onBlur");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.onBlur = function(ev) {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().onBlur(ev, this);
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.isIos6 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.isIos6");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.isIos6 = function() {
   return com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().isIos6();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.onScrollCallback = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.onScrollCallback");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.onScrollCallback = function() {
   try {
     com.inq.flash.client.chatskins.ChatTextFocusMonitor.getImpl().onScrollCallback();
   } catch (err) {
     haxe.Log.trace("Error: " + err, {fileName:"ChatTextFocusMonitor.js", lineNumber:167, className:"com.inq.flash.client.chatskins.ChatTextFocusMonitor", methodName:"onScrollCallback"});
   }
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.isVersion8 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.isVersion8");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.isVersion8 = function() {
   return com.inq.utils.Capabilities.isSafariVersion8();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.isVersionPrior8 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.isVersionPrior8");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.isVersionPrior8 = function() {
   return com.inq.utils.Capabilities.isSafariVersionPrior8();
 };
-com.inq.flash.client.chatskins.ChatTextFocusMonitor.isCriOS8 = function() {  console.warn("com.inq.flash.client.chatskins.ChatTextFocusMonitor.isCriOS8");
+com.inq.flash.client.chatskins.ChatTextFocusMonitor.isCriOS8 = function() {
   return com.inq.utils.Capabilities.isChromeiOS8();
 };
 com.inq.flash.client.chatskins.ChatTextFocusMonitor.SAFARI_KEYBOARD_HEIGHT_PORTRAIT = 260;
 com.inq.flash.client.chatskins.ChatTextFocusMonitor.SAFARI_KEYBOARD_HEIGHT_LANDSCAPE = 162;
-com.inq.flash.client.chatskins.CoBrowseMgr = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr");
+com.inq.flash.client.chatskins.CoBrowseMgr = function() {
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.init = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.init");
+com.inq.flash.client.chatskins.CoBrowseMgr.init = function() {
   com.inq.flash.client.chatskins.CoBrowseMgr.customerAcceptsCobrowse = _getLocalizedMessage("customerAcceptsCobrowse");
   com.inq.flash.client.chatskins.CoBrowseMgr.customerDeclinesCobrowse = _getLocalizedMessage("customerDeclinesCobrowse");
   com.inq.flash.client.chatskins.CoBrowseMgr.customerAcceptsSharedControl = _getLocalizedMessage("customerAcceptsSharedControl");
@@ -8117,10 +8117,10 @@ com.inq.flash.client.chatskins.CoBrowseMgr.init = function() {  console.warn("co
     return com.inq.flash.client.control.FlashPeer.getLocalizedMessage(key);
   }
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.getCobEndButtonID = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.getCobEndButtonID");
+com.inq.flash.client.chatskins.CoBrowseMgr.getCobEndButtonID = function() {
   return com.inq.flash.client.chatskins.CoBrowseMgr.cobEndButtonID;
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.ariaCobStart = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.ariaCobStart");
+com.inq.flash.client.chatskins.CoBrowseMgr.ariaCobStart = function() {
   var cbMgr = com.inq.flash.client.chatskins.CoBrowseMgr;
   cbMgr.addCobEndButton();
   if (com.inq.flash.client.control.MinimizeManager.minimized !== true) {
@@ -8132,13 +8132,13 @@ com.inq.flash.client.chatskins.CoBrowseMgr.ariaCobStart = function() {  console.
     }, 5E3);
   }
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.ariaCobEnd = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.ariaCobEnd");
+com.inq.flash.client.chatskins.CoBrowseMgr.ariaCobEnd = function() {
   com.inq.flash.client.chatskins.CoBrowseMgr.removeCobEndButton();
   if (com.inq.flash.client.control.MinimizeManager.minimized !== true) {
     com.inq.flash.client.chatskins.SkinControl.hideModalWindowDivs(true);
   }
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.addCobEndButton = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.addCobEndButton");
+com.inq.flash.client.chatskins.CoBrowseMgr.addCobEndButton = function() {
   if (com.inq.flash.client.control.FlashVars.getPersistentFrame() && document.getElementById(com.inq.flash.client.chatskins.CoBrowseMgr.cobEndButtonID) == null) {
     var btnCobEnd = document.createElement("div");
     btnCobEnd.innerHTML = com.inq.flash.client.chatskins.CoBrowseMgr.btnCobEndHTML;
@@ -8149,13 +8149,13 @@ com.inq.flash.client.chatskins.CoBrowseMgr.addCobEndButton = function() {  conso
   }
   com.inq.aria.AriaMsg.addAriaMsg(com.inq.utils.Util.getConfig("cobSessionStartMsg", "You're being assisted"));
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.closeChat = function(e) {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.closeChat");
+com.inq.flash.client.chatskins.CoBrowseMgr.closeChat = function(e) {
   com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChat(e);
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.restoreAndExitChat = function(e) {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.restoreAndExitChat");
+com.inq.flash.client.chatskins.CoBrowseMgr.restoreAndExitChat = function(e) {
   com.inq.flash.client.chatskins.SkinControl.actionRestoreAndExitChat(e);
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.removeCobEndButton = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.removeCobEndButton");
+com.inq.flash.client.chatskins.CoBrowseMgr.removeCobEndButton = function() {
   var cobEnd = document.getElementById(com.inq.flash.client.chatskins.CoBrowseMgr.cobEndButtonID);
   if (cobEnd != null) {
     try {
@@ -8166,7 +8166,7 @@ com.inq.flash.client.chatskins.CoBrowseMgr.removeCobEndButton = function() {  co
     }
   }
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.stopCob = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.stopCob");
+com.inq.flash.client.chatskins.CoBrowseMgr.stopCob = function() {
   if (Inq["CBC"]) {
     Inq["CBC"].stop();
     if (com.inq.flash.client.control.FlashVars.getPersistentFrame()) {
@@ -8174,22 +8174,22 @@ com.inq.flash.client.chatskins.CoBrowseMgr.stopCob = function() {  console.warn(
     }
   }
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.setFocusOnChatInputField = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.setFocusOnChatInputField");
+com.inq.flash.client.chatskins.CoBrowseMgr.setFocusOnChatInputField = function() {
   if (!(com.inq.flash.client.control.FlashVars.getPersistentFrame() && com.inq.utils.Util.isIE)) {
     Application.application.setFocusOnInputField();
   }
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.sendResultOfBenchmarkTest = function(messageText) {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.sendResultOfBenchmarkTest");
+com.inq.flash.client.chatskins.CoBrowseMgr.sendResultOfBenchmarkTest = function(messageText) {
   Application.application.applicationController.sendCoBrowseMessageQuietly(messageText, com.inq.flash.client.data.MessageFields.KEY_COBROWSE_EVENT_TYPE_CLIENT_PERFORMANCE_TEST);
 };
-com.inq.flash.client.chatskins.CoBrowseMgr._isConnectionExist = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr._isConnectionExist");
+com.inq.flash.client.chatskins.CoBrowseMgr._isConnectionExist = function() {
   try {
     return Application.application.applicationController.isConnected();
   } catch (e) {
     return false;
   }
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseFailHandler = function(failMsg) {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseFailHandler");
+com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseFailHandler = function(failMsg) {
   if (!failMsg) {
     failMsg = com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseUnexpectedFail;
   }
@@ -8203,7 +8203,7 @@ com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseFailHandler = function(failMs
   }
   return sentMsg;
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseSuppressedPage = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseSuppressedPage");
+com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseSuppressedPage = function() {
   if (!com.inq.flash.client.chatskins.CoBrowseMgr._isConnectionExist()) {
     return false;
   } else {
@@ -8211,7 +8211,7 @@ com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseSuppressedPage = function() {
     return true;
   }
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.getCobrowseEnableHighlight = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.getCobrowseEnableHighlight");
+com.inq.flash.client.chatskins.CoBrowseMgr.getCobrowseEnableHighlight = function() {
   try {
     return Inq["getEnableHighlight"]();
   } catch (e) {
@@ -8219,7 +8219,7 @@ com.inq.flash.client.chatskins.CoBrowseMgr.getCobrowseEnableHighlight = function
     return true;
   }
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.getCobrowseEnableMinimizeRestore = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.getCobrowseEnableMinimizeRestore");
+com.inq.flash.client.chatskins.CoBrowseMgr.getCobrowseEnableMinimizeRestore = function() {
   try {
     if (com.inq.utils.Capabilities.isPhone() && com.inq.flash.client.control.FlashPeer.getCobrowseEnableMinimizeRestore()) {
       return true;
@@ -8229,26 +8229,26 @@ com.inq.flash.client.chatskins.CoBrowseMgr.getCobrowseEnableMinimizeRestore = fu
   }
   return false;
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.showCobBanner = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.showCobBanner");
+com.inq.flash.client.chatskins.CoBrowseMgr.showCobBanner = function() {
   if (!com.inq.flash.client.control.FlashVars.getPersistentFrame() && Inq["CBC"]) {
     Inq["CBC"]["showBanner"]();
     window.setTimeout(com.inq.flash.client.chatskins.CoBrowseMgr.focusCobEndBtn, 500);
   }
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.focusCobEndBtn = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.focusCobEndBtn");
+com.inq.flash.client.chatskins.CoBrowseMgr.focusCobEndBtn = function() {
   var btnCobend = window.parent.document.getElementById("tcChat_cobend");
   if (btnCobend != null) {
     btnCobend.focus();
   }
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.focusMinimizedBtn = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.focusMinimizedBtn");
+com.inq.flash.client.chatskins.CoBrowseMgr.focusMinimizedBtn = function() {
   var _app = Application.application;
   var btnMinimized = _app.getButton("minimize") || _app.getButton("btnMinimize");
   if (btnMinimized != null) {
     btnMinimized.setImageFocus();
   }
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.acceptCobInv = function(flagStartBenchmarkTest) {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.acceptCobInv");
+com.inq.flash.client.chatskins.CoBrowseMgr.acceptCobInv = function(flagStartBenchmarkTest) {
   if (com.inq.flash.client.control.FlashPeer.isCobrowseEngaged()) {
     return;
   }
@@ -8259,7 +8259,7 @@ com.inq.flash.client.chatskins.CoBrowseMgr.acceptCobInv = function(flagStartBenc
   com.inq.flash.client.chatskins.CoBrowseMgr.showCobBanner();
   com.inq.flash.client.control.FlashPeer.acceptCobInvSafe(flagStartBenchmarkTest);
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.declineCobInv = function(event) {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.declineCobInv");
+com.inq.flash.client.chatskins.CoBrowseMgr.declineCobInv = function(event) {
   var cap = com.inq.utils.Capabilities;
   if ((cap.isIphone() || cap.isIpad()) && event) {
     event.preventDefault();
@@ -8270,7 +8270,7 @@ com.inq.flash.client.chatskins.CoBrowseMgr.declineCobInv = function(event) {  co
   }
   Application.application.applicationController.sendCoBrowseMessage(com.inq.flash.client.chatskins.CoBrowseMgr.customerDeclinesCobrowse, com.inq.flash.client.data.MessageFields.KEY_COBROWSE_EVENT_TYPE_CLIENT_COBROWSE_DECLINE);
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.acceptCobShareInv = function(flagStartBenchmarkTest) {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.acceptCobShareInv");
+com.inq.flash.client.chatskins.CoBrowseMgr.acceptCobShareInv = function(flagStartBenchmarkTest) {
   if (com.inq.flash.client.control.FlashPeer.isCobrowseSharedControl()) {
     return;
   }
@@ -8280,7 +8280,7 @@ com.inq.flash.client.chatskins.CoBrowseMgr.acceptCobShareInv = function(flagStar
   Application.application.applicationController.sendCoBrowseMessage(com.inq.flash.client.chatskins.CoBrowseMgr.customerAcceptsSharedControl, com.inq.flash.client.data.MessageFields.KEY_COBROWSE_EVENT_TYPE_CLIENT_COBROWSE_ACCEPT_SHARE, com.inq.flash.client.chatskins.CoBrowseMgr.getCobrowseEnableHighlight(), com.inq.flash.client.chatskins.CoBrowseMgr.getCobrowseEnableMinimizeRestore());
   com.inq.flash.client.control.FlashPeer.acceptCobShareInv(flagStartBenchmarkTest);
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.declineCobShareInv = function(event) {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.declineCobShareInv");
+com.inq.flash.client.chatskins.CoBrowseMgr.declineCobShareInv = function(event) {
   var cap = com.inq.utils.Capabilities;
   if ((cap.isIphone() || cap.isIpad()) && event) {
     event.preventDefault();
@@ -8291,24 +8291,24 @@ com.inq.flash.client.chatskins.CoBrowseMgr.declineCobShareInv = function(event) 
   }
   Application.application.applicationController.sendCoBrowseMessage(com.inq.flash.client.chatskins.CoBrowseMgr.customerDeclinesSharedControl, com.inq.flash.client.data.MessageFields.KEY_COBROWSE_EVENT_TYPE_CLIENT_COBROWSE_DECLINE_SHARE);
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.endCob = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.endCob");
+com.inq.flash.client.chatskins.CoBrowseMgr.endCob = function() {
   if (!com.inq.flash.client.control.FlashPeer.isCobrowseEngaged()) {
     return;
   }
   com.inq.flash.client.chatskins.CoBrowseMgr.sendCobrowseEnded();
   com.inq.flash.client.control.FlashPeer.endCob();
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.agentEndsCob = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.agentEndsCob");
+com.inq.flash.client.chatskins.CoBrowseMgr.agentEndsCob = function() {
   Application.application.applicationController.sendCoBrowseMessage(com.inq.flash.client.chatskins.CoBrowseMgr.agentEndCobrowseSession, com.inq.flash.client.data.MessageFields.KEY_COBROWSE_EVENT_TYPE_AGENT_COBROWSE_END_MESSAGE_FROM_CI);
   com.inq.flash.client.control.FlashPeer.endCob();
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.sendCobrowseEnded = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.sendCobrowseEnded");
+com.inq.flash.client.chatskins.CoBrowseMgr.sendCobrowseEnded = function() {
   Application.application.applicationController.sendCoBrowseMessage(com.inq.flash.client.chatskins.CoBrowseMgr.customerEndCobrowseSession, com.inq.flash.client.data.MessageFields.KEY_COBROWSE_EVENT_TYPE_CLIENT_COBROWSE_END);
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.sendMessageQuietly = function(message) {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.sendMessageQuietly");
+com.inq.flash.client.chatskins.CoBrowseMgr.sendMessageQuietly = function(message) {
   Application.application.applicationController.sendCoBrowseMessageQuietly(message, com.inq.flash.client.data.MessageFields.KEY_COBROWSE_EVENT_TYPE_CLIENT_COBROWSE_ACCEPT);
 };
-com.inq.flash.client.chatskins.CoBrowseMgr.isSupportedBrowser = function() {  console.warn("com.inq.flash.client.chatskins.CoBrowseMgr.isSupportedBrowser");
+com.inq.flash.client.chatskins.CoBrowseMgr.isSupportedBrowser = function() {
   var result = true;
   try {
     var browInfo = com.inq.flash.client.control.FlashPeer.getBrowserTypeAndVersion();
@@ -8335,15 +8335,15 @@ com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseUnexpectedFail = null;
 com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseSuppressed = null;
 com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseTestSuccess = null;
 com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseTestFail = null;
-com.inq.flash.client.chatskins.EmailMgr = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr");
+com.inq.flash.client.chatskins.EmailMgr = function() {
 };
 $hxClasses["com.inq.flash.client.chatskins.EmailMgr"] = com.inq.flash.client.chatskins.EmailMgr;
 com.inq.flash.client.chatskins.EmailMgr.__name__ = ["com", "inq", "flash", "client", "chatskins", "EmailMgr"];
 com.inq.flash.client.chatskins.EmailMgr.savedEmailInputTitle = null;
-com.inq.flash.client.chatskins.EmailMgr._init = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr._init");
+com.inq.flash.client.chatskins.EmailMgr._init = function() {
   return true;
 };
-com.inq.flash.client.chatskins.EmailMgr.init = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr.init");
+com.inq.flash.client.chatskins.EmailMgr.init = function() {
   com.inq.flash.client.chatskins.EmailMgr.emailButtonCap = Application.application.getButton("btnEmailCapture");
   com.inq.flash.client.chatskins.EmailMgr.emailCanvasCap = Application.application.getMxmlItem("emailCapture");
   com.inq.flash.client.chatskins.EmailMgr.emailButton = Application.application.getButton("btnEmail");
@@ -8371,11 +8371,11 @@ com.inq.flash.client.chatskins.EmailMgr.init = function() {  console.warn("com.i
   }
   return true;
 };
-com.inq.flash.client.chatskins.EmailMgr.showEmailCaptureCanvas = function(me) {  console.warn("com.inq.flash.client.chatskins.EmailMgr.showEmailCaptureCanvas");
+com.inq.flash.client.chatskins.EmailMgr.showEmailCaptureCanvas = function(me) {
   com.inq.flash.client.chatskins.EmailMgr.setCaptureState(com.inq.flash.client.chatskins.EmailMgr.SHOW_ALL_STATE);
   return false;
 };
-com.inq.flash.client.chatskins.EmailMgr.showEmailCanvas = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr.showEmailCanvas");
+com.inq.flash.client.chatskins.EmailMgr.showEmailCanvas = function() {
   var app = Application.application;
   if (!app.isConnected() || !app.isAgentAssigned() && !app.isVirtualAgent() || com.inq.flash.client.chatskins.EmailMgr.isEmailCanvasAndButtonVisible()) {
     return false;
@@ -8428,10 +8428,10 @@ com.inq.flash.client.chatskins.EmailMgr.showEmailCanvas = function() {  console.
     }
   }
 };
-com.inq.flash.client.chatskins.EmailMgr.isEmailCanvasAndButtonVisible = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr.isEmailCanvasAndButtonVisible");
+com.inq.flash.client.chatskins.EmailMgr.isEmailCanvasAndButtonVisible = function() {
   return com.inq.flash.client.chatskins.EmailMgr.getState() === com.inq.flash.client.chatskins.EmailMgr.SHOW_ALL_STATE;
 };
-com.inq.flash.client.chatskins.EmailMgr.showEmailCanvasIpad = function(me) {  console.warn("com.inq.flash.client.chatskins.EmailMgr.showEmailCanvasIpad");
+com.inq.flash.client.chatskins.EmailMgr.showEmailCanvasIpad = function(me) {
   window.setTimeout(function() {
     com.inq.flash.client.chatskins.EmailMgr.setState(com.inq.flash.client.chatskins.EmailMgr.SHOW_ALL_STATE);
     var ti = Application.application.getTextInput("emailInput");
@@ -8443,13 +8443,13 @@ com.inq.flash.client.chatskins.EmailMgr.showEmailCanvasIpad = function(me) {  co
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.isTouched = true;
   return false;
 };
-com.inq.flash.client.chatskins.EmailMgr.modalEmailCanvas = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr.modalEmailCanvas");
+com.inq.flash.client.chatskins.EmailMgr.modalEmailCanvas = function() {
   com.inq.aria.ModalWindow.modalEmailCanvas();
 };
-com.inq.flash.client.chatskins.EmailMgr.unModalEmailCanvas = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr.unModalEmailCanvas");
+com.inq.flash.client.chatskins.EmailMgr.unModalEmailCanvas = function() {
   com.inq.aria.ModalWindow.unModalEmailCanvas();
 };
-com.inq.flash.client.chatskins.EmailMgr.setCaptureState = function(state) {  console.warn("com.inq.flash.client.chatskins.EmailMgr.setCaptureState");
+com.inq.flash.client.chatskins.EmailMgr.setCaptureState = function(state) {
   var chatHeight = 0;
   if (com.inq.flash.client.chatskins.EmailMgr.emailCanvasCap != null && com.inq.flash.client.chatskins.EmailMgr.emailButtonCap != null) {
     switch(state) {
@@ -8494,7 +8494,7 @@ com.inq.flash.client.chatskins.EmailMgr.setCaptureState = function(state) {  con
     com.inq.flash.client.control.PersistenceManager.SetValue("emlc", state);
   }
 };
-com.inq.flash.client.chatskins.EmailMgr.setState = function(state) {  console.warn("com.inq.flash.client.chatskins.EmailMgr.setState");
+com.inq.flash.client.chatskins.EmailMgr.setState = function(state) {
   var chatHeight = 0;
   if (com.inq.flash.client.chatskins.EmailMgr.emailCanvas != null && com.inq.flash.client.chatskins.EmailMgr.emailButton != null) {
     switch(state) {
@@ -8547,10 +8547,10 @@ com.inq.flash.client.chatskins.EmailMgr.setState = function(state) {  console.wa
     com.inq.flash.client.control.PersistenceManager.SetValue("eml", state);
   }
 };
-com.inq.flash.client.chatskins.EmailMgr.getState = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr.getState");
+com.inq.flash.client.chatskins.EmailMgr.getState = function() {
   return com.inq.flash.client.control.PersistenceManager.GetValue("eml");
 };
-com.inq.flash.client.chatskins.EmailMgr.actionBtnCaptureSendEmail = function(me) {  console.warn("com.inq.flash.client.chatskins.EmailMgr.actionBtnCaptureSendEmail");
+com.inq.flash.client.chatskins.EmailMgr.actionBtnCaptureSendEmail = function(me) {
   if (com.inq.flash.client.chatskins.SkinControl.isInApplication("emailInputCapture")) {
     var emailInputCapture = Application.application.getMxmlItem("emailInputCapture");
     var emailAddressCapture = emailInputCapture._getInput();
@@ -8565,7 +8565,7 @@ com.inq.flash.client.chatskins.EmailMgr.actionBtnCaptureSendEmail = function(me)
   }
   return false;
 };
-com.inq.flash.client.chatskins.EmailMgr.actionBtnSendEmail = function(ev) {  console.warn("com.inq.flash.client.chatskins.EmailMgr.actionBtnSendEmail");
+com.inq.flash.client.chatskins.EmailMgr.actionBtnSendEmail = function(ev) {
   if (com.inq.flash.client.chatskins.SkinControl.isInApplication("emailInput")) {
     var emailInput = Application.application.getMxmlItem("emailInput");
     var _aria = com.inq.aria.AriaMsg;
@@ -8636,7 +8636,7 @@ com.inq.flash.client.chatskins.EmailMgr.actionBtnSendEmail = function(ev) {  con
   }
   return false;
 };
-com.inq.flash.client.chatskins.EmailMgr.actionCancelEmail = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr.actionCancelEmail");
+com.inq.flash.client.chatskins.EmailMgr.actionCancelEmail = function() {
   com.inq.flash.client.chatskins.EmailMgr.unModalEmailCanvas();
   com.inq.flash.client.chatskins.EmailMgr.hideEmailButton();
   var successSendItem = Application.application.getMxmlItem("SuccessSend");
@@ -8670,13 +8670,13 @@ com.inq.flash.client.chatskins.EmailMgr.actionCancelEmail = function() {  consol
     }
   }
 };
-com.inq.flash.client.chatskins.EmailMgr.saveRequestedStatus = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr.saveRequestedStatus");
+com.inq.flash.client.chatskins.EmailMgr.saveRequestedStatus = function() {
   com.inq.flash.client.control.PersistenceManager.SetValue(com.inq.flash.client.chatskins.EmailMgr.REQUEST_STATUS_COOKIE_NAME, com.inq.flash.client.chatskins.EmailMgr.REQUEST_STATUS_REQUESTED);
 };
-com.inq.flash.client.chatskins.EmailMgr.getRequestStatus = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr.getRequestStatus");
+com.inq.flash.client.chatskins.EmailMgr.getRequestStatus = function() {
   return com.inq.flash.client.control.PersistenceManager.GetValue(com.inq.flash.client.chatskins.EmailMgr.REQUEST_STATUS_COOKIE_NAME, com.inq.flash.client.chatskins.EmailMgr.REQUEST_STATUS_DEFAULT);
 };
-com.inq.flash.client.chatskins.EmailMgr.updateEmailInputTitle = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr.updateEmailInputTitle");
+com.inq.flash.client.chatskins.EmailMgr.updateEmailInputTitle = function() {
   var appendTextToTitle = function(element, keyId) {
     var container = Application.application.getMxmlItem(keyId);
     if (container && container.getStyle("text")) {
@@ -8694,14 +8694,14 @@ com.inq.flash.client.chatskins.EmailMgr.updateEmailInputTitle = function() {  co
     appendTextToTitle(ti._text, "EmailDescription");
   }
 };
-com.inq.flash.client.chatskins.EmailMgr.restoreEmailInputTitle = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr.restoreEmailInputTitle");
+com.inq.flash.client.chatskins.EmailMgr.restoreEmailInputTitle = function() {
   var ti = Application.application.getTextInput("emailInput");
   if (ti && com.inq.flash.client.chatskins.EmailMgr.savedEmailInputTitle) {
     ti._text.title = com.inq.flash.client.chatskins.EmailMgr.savedEmailInputTitle;
     com.inq.flash.client.chatskins.EmailMgr.savedEmailInputTitle = null;
   }
 };
-com.inq.flash.client.chatskins.EmailMgr.hideEmailButton = function() {  console.warn("com.inq.flash.client.chatskins.EmailMgr.hideEmailButton");
+com.inq.flash.client.chatskins.EmailMgr.hideEmailButton = function() {
   com.inq.flash.client.chatskins.EmailMgr.setState(com.inq.flash.client.chatskins.EmailMgr.SHOW_NONE_STATE);
 };
 com.inq.flash.client.chatskins.EmailMgr.prototype.__class__ = com.inq.flash.client.chatskins.EmailMgr;
@@ -8724,11 +8724,11 @@ com.inq.flash.client.chatskins.EmailMgr.FAIL_MSG_PART1 = "Validation Fail";
 com.inq.flash.client.chatskins.EmailMgr.FAIL_MSG = "Fail to send email address for chat transcript";
 com.inq.flash.client.chatskins.EmailMgr.SUCCESS_MSG_PART1 = "Validation Success";
 com.inq.flash.client.chatskins.EmailMgr.SUCCESS_MSG = "Your request has been sent.  Your transcript will be sent to you when your chat is completed.";
-com.inq.flash.client.chatskins.FocusMonitor = function() {  console.warn("com.inq.flash.client.chatskins.FocusMonitor");
+com.inq.flash.client.chatskins.FocusMonitor = function() {
 };
 $hxClasses["com.inq.flash.client.chatskins.FocusMonitor"] = com.inq.flash.client.chatskins.FocusMonitor;
 com.inq.flash.client.chatskins.FocusMonitor.__name__ = ["com", "inq", "flash", "client", "chatskins", "FocusMonitor"];
-com.inq.flash.client.chatskins.FocusMonitor.init = function() {  console.warn("com.inq.flash.client.chatskins.FocusMonitor.init");
+com.inq.flash.client.chatskins.FocusMonitor.init = function() {
   com.inq.flash.client.chatskins.FocusMonitor.clientWin = window.parent;
   com.inq.flash.client.chatskins.FocusMonitor.clientDoc = window.parent.doc;
   if (com.inq.flash.client.chatskins.FocusMonitor.clientWin.name != "_inqPersistentChat") {
@@ -8758,14 +8758,14 @@ com.inq.flash.client.chatskins.FocusMonitor.init = function() {  console.warn("c
   com.inq.utils.Capabilities.BindListener(window, "blur", com.inq.flash.client.chatskins.FocusMonitor.whenBlur);
   return true;
 };
-com.inq.flash.client.chatskins.FocusMonitor.isFocused = function() {  console.warn("com.inq.flash.client.chatskins.FocusMonitor.isFocused");
+com.inq.flash.client.chatskins.FocusMonitor.isFocused = function() {
   return com.inq.flash.client.chatskins.FocusMonitor._bFocused;
 };
-com.inq.flash.client.chatskins.FocusMonitor.toggleTitlebar = function() {  console.warn("com.inq.flash.client.chatskins.FocusMonitor.toggleTitlebar");
+com.inq.flash.client.chatskins.FocusMonitor.toggleTitlebar = function() {
   var ttl = window.parent.document.title;
   window.parent.document.title = ttl != com.inq.flash.client.chatskins.FocusMonitor._sTitleBarFlashText ? com.inq.flash.client.chatskins.FocusMonitor._sTitleBarFlashText : com.inq.flash.client.chatskins.FocusMonitor._sTitleBarText;
 };
-com.inq.flash.client.chatskins.FocusMonitor.startTitlebarFlash = function() {  console.warn("com.inq.flash.client.chatskins.FocusMonitor.startTitlebarFlash");
+com.inq.flash.client.chatskins.FocusMonitor.startTitlebarFlash = function() {
   if (com.inq.flash.client.chatskins.FocusMonitor.clientWin.name != "_inqPersistentChat") {
     return;
   }
@@ -8778,21 +8778,21 @@ com.inq.flash.client.chatskins.FocusMonitor.startTitlebarFlash = function() {  c
   window.parent.document.title = com.inq.flash.client.chatskins.FocusMonitor._sTitleBarFlashText;
   com.inq.flash.client.chatskins.FocusMonitor._timer = window.setInterval(com.inq.flash.client.chatskins.FocusMonitor.toggleTitlebar, com.inq.flash.client.chatskins.FocusMonitor._timerInterval);
 };
-com.inq.flash.client.chatskins.FocusMonitor.stopTitlebarFlash = function() {  console.warn("com.inq.flash.client.chatskins.FocusMonitor.stopTitlebarFlash");
+com.inq.flash.client.chatskins.FocusMonitor.stopTitlebarFlash = function() {
   if (com.inq.flash.client.chatskins.FocusMonitor._timer != -1) {
     window.clearInterval(com.inq.flash.client.chatskins.FocusMonitor._timer);
   }
   com.inq.flash.client.chatskins.FocusMonitor._timer = -1;
   window.parent.document.title = com.inq.flash.client.chatskins.FocusMonitor._sTitleBarText;
 };
-com.inq.flash.client.chatskins.FocusMonitor.whenBlur = function(e) {  console.warn("com.inq.flash.client.chatskins.FocusMonitor.whenBlur");
+com.inq.flash.client.chatskins.FocusMonitor.whenBlur = function(e) {
   if (com.inq.flash.client.chatskins.FocusMonitor._bFocused) {
     haxe.Log.trace("lost focus", {fileName:"FocusMonitor.hx", lineNumber:84, className:"com.inq.flash.client.chatskins.FocusMonitor", methodName:"whenBlur"});
   }
   com.inq.flash.client.chatskins.FocusMonitor._bFocused = false;
   return true;
 };
-com.inq.flash.client.chatskins.FocusMonitor.whenFocus = function(e) {  console.warn("com.inq.flash.client.chatskins.FocusMonitor.whenFocus");
+com.inq.flash.client.chatskins.FocusMonitor.whenFocus = function(e) {
   if (!com.inq.flash.client.chatskins.FocusMonitor._bFocused) {
     haxe.Log.trace("gained focus", {fileName:"FocusMonitor.hx", lineNumber:92, className:"com.inq.flash.client.chatskins.FocusMonitor", methodName:"whenFocus"});
   }
@@ -8809,10 +8809,10 @@ com.inq.flash.client.chatskins.FocusMonitor._sTitleBarText = "Let's Chat";
 com.inq.flash.client.chatskins.FocusMonitor._sTitleBarFlashText = "<<<<<>>>>>";
 com.inq.flash.client.chatskins.FocusMonitor._timerInterval = 2E3;
 com.inq.flash.client.chatskins.FocusMonitor._timer = -1;
-com.inq.flash.client.chatskins.FontMgr = function() {  console.warn("com.inq.flash.client.chatskins.FontMgr");
+com.inq.flash.client.chatskins.FontMgr = function() {
 };
 $hxClasses.registerClass(com.inq.flash.client.chatskins.FontMgr, "com.inq.flash.client.chatskins.FontMgr");
-com.inq.flash.client.chatskins.FontMgr.init = function() {  console.warn("com.inq.flash.client.chatskins.FontMgr.init");
+com.inq.flash.client.chatskins.FontMgr.init = function() {
   if (com.inq.flash.client.chatskins.FontMgr.defaultSkin == null) {
     var fullyQualifiedSkinPath = com.inq.flash.client.control.FlashPeer.getSkin();
     if (com.inq.flash.client.control.FlashPeer.isEmbeddedThemeValid()) {
@@ -8843,7 +8843,7 @@ com.inq.flash.client.chatskins.FontMgr.init = function() {  console.warn("com.in
   }
   return true;
 };
-com.inq.flash.client.chatskins.FontMgr.toggleFontSize = function(size) {  console.warn("com.inq.flash.client.chatskins.FontMgr.toggleFontSize");
+com.inq.flash.client.chatskins.FontMgr.toggleFontSize = function(size) {
   size = parseInt(size);
   var newSize = 0;
   if (com.inq.flash.client.chatskins.FontMgr.isLarger) {
@@ -8853,7 +8853,7 @@ com.inq.flash.client.chatskins.FontMgr.toggleFontSize = function(size) {  consol
   }
   return newSize.toString();
 };
-com.inq.flash.client.chatskins.FontMgr.toggleElements = function(elements) {  console.warn("com.inq.flash.client.chatskins.FontMgr.toggleElements");
+com.inq.flash.client.chatskins.FontMgr.toggleElements = function(elements) {
   var isDivChat = com.inq.utils.Util.getConfig("divSkin", false) && !com.inq.flash.client.chatskins.SkinControl.getIsPersistentChat();
   var chatsWindow = isDivChat === true ? window.parent.window : window;
   var fontSize = null;
@@ -8877,7 +8877,7 @@ com.inq.flash.client.chatskins.FontMgr.toggleElements = function(elements) {  co
     }
   }
 };
-com.inq.flash.client.chatskins.FontMgr.applyFontSizeAfterMsg = function(parentEl) {  console.warn("com.inq.flash.client.chatskins.FontMgr.applyFontSizeAfterMsg");
+com.inq.flash.client.chatskins.FontMgr.applyFontSizeAfterMsg = function(parentEl) {
   if (com.inq.utils.Util.getConfig("nextSkin", null) == null) {
     if (com.inq.flash.client.chatskins.FontMgr.isLarger) {
       com.inq.flash.client.chatskins.FontMgr.isLarger = !com.inq.flash.client.chatskins.FontMgr.isLarger;
@@ -8886,7 +8886,7 @@ com.inq.flash.client.chatskins.FontMgr.applyFontSizeAfterMsg = function(parentEl
     }
   }
 };
-com.inq.flash.client.chatskins.FontMgr.applyFontSizeNewWay = function(parentEl) {  console.warn("com.inq.flash.client.chatskins.FontMgr.applyFontSizeNewWay");
+com.inq.flash.client.chatskins.FontMgr.applyFontSizeNewWay = function(parentEl) {
   var items = [parentEl.getElementsByClassName("customerId"), parentEl.getElementsByClassName("customerMsg"), parentEl.getElementsByClassName("agentId"), parentEl.getElementsByClassName("agentMsg"), parentEl.getElementsByClassName("systemMsg"), parentEl.getElementsByClassName("systemStatMsg"), parentEl.getElementsByTagName("textarea")];
   var i = 0;
   while (i < items.length) {
@@ -8894,7 +8894,7 @@ com.inq.flash.client.chatskins.FontMgr.applyFontSizeNewWay = function(parentEl) 
     i++;
   }
 };
-com.inq.flash.client.chatskins.FontMgr.actionBtnNewFont = function(me) {  console.warn("com.inq.flash.client.chatskins.FontMgr.actionBtnNewFont");
+com.inq.flash.client.chatskins.FontMgr.actionBtnNewFont = function(me) {
   var skin = com.inq.utils.Util.getConfig("nextSkin", null);
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.isTouched = true;
   if (skin === null) {
@@ -8928,14 +8928,14 @@ com.inq.flash.client.chatskins.FontMgr.actionBtnNewFont = function(me) {  consol
 };
 com.inq.flash.client.chatskins.FontMgr.nameNextSkin = null;
 com.inq.flash.client.chatskins.FontMgr.isLarger = false;
-com.inq.flash.client.chatskins.FormMgr = function() {  console.warn("com.inq.flash.client.chatskins.FormMgr");
+com.inq.flash.client.chatskins.FormMgr = function() {
 };
 $hxClasses["com.inq.flash.client.chatskins.FormMgr"] = com.inq.flash.client.chatskins.FormMgr;
 com.inq.flash.client.chatskins.FormMgr.__name__ = ["com", "inq", "flash", "client", "chatskins", "FormMgr"];
-com.inq.flash.client.chatskins.FormMgr.init = function() {  console.warn("com.inq.flash.client.chatskins.FormMgr.init");
+com.inq.flash.client.chatskins.FormMgr.init = function() {
   return true;
 };
-com.inq.flash.client.chatskins.FormMgr.validateData = function(dataElement, regex) {  console.warn("com.inq.flash.client.chatskins.FormMgr.validateData");
+com.inq.flash.client.chatskins.FormMgr.validateData = function(dataElement, regex) {
   var isValid = false;
   if (regex == null) {
     isValid = true;
@@ -8978,13 +8978,13 @@ com.inq.flash.client.chatskins.FormMgr.validateData = function(dataElement, rege
   }
   return isValid;
 };
-com.inq.flash.client.chatskins.FormMgr.enableDisableElements = function(formID, disable) {  console.warn("com.inq.flash.client.chatskins.FormMgr.enableDisableElements");
+com.inq.flash.client.chatskins.FormMgr.enableDisableElements = function(formID, disable) {
   var el = window.document.getElementById(formID).getElementsByTagName("INPUT");
   for (var i = 0, l = el.length;i < l;i++) {
     el[i].disabled = disable;
   }
 };
-com.inq.flash.client.chatskins.FormMgr.getNextFormElement = function(elmnt) {  console.warn("com.inq.flash.client.chatskins.FormMgr.getNextFormElement");
+com.inq.flash.client.chatskins.FormMgr.getNextFormElement = function(elmnt) {
   var el = com.inq.flash.client.chatskins.FormMgr.getFormFromElement(elmnt).getElementsByTagName("INPUT");
   var strt = el.length;
   var nxtEl;
@@ -9002,7 +9002,7 @@ com.inq.flash.client.chatskins.FormMgr.getNextFormElement = function(elmnt) {  c
   }
   return null;
 };
-com.inq.flash.client.chatskins.FormMgr.getFormFromElement = function(elmnt) {  console.warn("com.inq.flash.client.chatskins.FormMgr.getFormFromElement");
+com.inq.flash.client.chatskins.FormMgr.getFormFromElement = function(elmnt) {
   var par = elmnt.parentNode;
   while (par != null) {
     if (par["tagName"] != null && par.tagName.toLowerCase() == "form") {
@@ -9012,7 +9012,7 @@ com.inq.flash.client.chatskins.FormMgr.getFormFromElement = function(elmnt) {  c
   }
   return par;
 };
-com.inq.flash.client.chatskins.FormMgr.listen4ChangeElements = function(formID) {  console.warn("com.inq.flash.client.chatskins.FormMgr.listen4ChangeElements");
+com.inq.flash.client.chatskins.FormMgr.listen4ChangeElements = function(formID) {
   var el = com.inq.ui.Container.getElementById(formID).getElementsByTagName("INPUT");
   try {
     for (var i = 0, l = el.length;i < l;i++) {
@@ -9061,13 +9061,13 @@ com.inq.flash.client.chatskins.FormMgr.listen4ChangeElements = function(formID) 
     }
   }
 };
-com.inq.flash.client.chatskins.FormMgr.disableAllElements = function(cw) {  console.warn("com.inq.flash.client.chatskins.FormMgr.disableAllElements");
+com.inq.flash.client.chatskins.FormMgr.disableAllElements = function(cw) {
   var el = com.inq.ui.Container.getElementById("chatWindow").getElementsByTagName("INPUT");
   for (var i = 0, l = el.length;i < l;i++) {
     el[i].disabled = true;
   }
 };
-com.inq.flash.client.chatskins.FormMgr.submit = function(formID) {  console.warn("com.inq.flash.client.chatskins.FormMgr.submit");
+com.inq.flash.client.chatskins.FormMgr.submit = function(formID) {
   try {
     com.inq.flash.client.chatskins.BalloonNotifier.Clear();
     com.inq.flash.client.chatskins.FormMgr.enableDisableElements(formID, true);
@@ -9113,7 +9113,7 @@ com.inq.flash.client.chatskins.FormMgr.submit = function(formID) {  console.warn
   }
   return false;
 };
-com.inq.flash.client.chatskins.FormMgr.updateFormFields = function(formData, formName, formId, cw) {  console.warn("com.inq.flash.client.chatskins.FormMgr.updateFormFields");
+com.inq.flash.client.chatskins.FormMgr.updateFormFields = function(formData, formName, formId, cw) {
   var chatWindowDiv = com.inq.ui.Container.getElementById("chatWindow");
   var allForms = chatWindowDiv.getElementsByTagName("FORM");
   for (var i = 0, l = allForms.length;i < l;i++) {
@@ -9140,7 +9140,7 @@ com.inq.flash.client.chatskins.FormMgr.updateFormFields = function(formData, for
     cw.syncForms();
   }
 };
-com.inq.flash.client.chatskins.FormMgr.updateFormTimeExecutor = function(cw) {  console.warn("com.inq.flash.client.chatskins.FormMgr.updateFormTimeExecutor");
+com.inq.flash.client.chatskins.FormMgr.updateFormTimeExecutor = function(cw) {
   var chatWindowDiv = com.inq.ui.Container.getElementById("chatWindow");
   if (chatWindowDiv != null) {
     haxe.Timer.delay(function() {
@@ -9152,7 +9152,7 @@ com.inq.flash.client.chatskins.FormMgr.updateFormTimeExecutor = function(cw) {  
     }, com.inq.flash.client.chatskins.ChatTextArea.RENDER_DELAY);
   }
 };
-com.inq.flash.client.chatskins.FormMgr.updateForm = function(cw) {  console.warn("com.inq.flash.client.chatskins.FormMgr.updateForm");
+com.inq.flash.client.chatskins.FormMgr.updateForm = function(cw) {
   var chatWindowDiv = com.inq.ui.Container.getElementById("chatWindow");
   var allForms = chatWindowDiv.getElementsByTagName("FORM");
   if (allForms.length > 0) {
@@ -9171,16 +9171,16 @@ com.inq.flash.client.chatskins.FormMgr.updateForm = function(cw) {  console.warn
 com.inq.flash.client.chatskins.FormMgr.prototype.__class__ = com.inq.flash.client.chatskins.FormMgr;
 com.inq.flash.client.chatskins.FormMgr.chatCanvas = null;
 com.inq.flash.client.chatskins.FormMgr.randomNumber = 0;
-com.inq.flash.client.chatskins.OpenerScript = function() {  console.warn("com.inq.flash.client.chatskins.OpenerScript");
+com.inq.flash.client.chatskins.OpenerScript = function() {
   com.inq.flash.client.chatskins.OpenerScript.resetOpenersStopped();
   this.reset();
 };
 $hxClasses["com.inq.flash.client.chatskins.OpenerScript"] = com.inq.flash.client.chatskins.OpenerScript;
 com.inq.flash.client.chatskins.OpenerScript.__name__ = ["com", "inq", "flash", "client", "chatskins", "OpenerScript"];
-com.inq.flash.client.chatskins.OpenerScript.resetOpenersStopped = function() {  console.warn("com.inq.flash.client.chatskins.OpenerScript.resetOpenersStopped");
+com.inq.flash.client.chatskins.OpenerScript.resetOpenersStopped = function() {
   com.inq.flash.client.chatskins.OpenerScript.bOpenersStopped = false;
 };
-com.inq.flash.client.chatskins.OpenerScript.prototype.openerScriptsLoaded = function(event) {  console.warn("com.inq.flash.client.chatskins.OpenerScript.prototype.openerScriptsLoaded");
+com.inq.flash.client.chatskins.OpenerScript.prototype.openerScriptsLoaded = function(event) {
   if (this.runOnce) {
     return;
   }
@@ -9241,7 +9241,7 @@ com.inq.flash.client.chatskins.OpenerScript.prototype.openerScriptsLoaded = func
     }
   }
 };
-com.inq.flash.client.chatskins.OpenerScript.getAdaIntroduction = function(event) {  console.warn("com.inq.flash.client.chatskins.OpenerScript.getAdaIntroduction");
+com.inq.flash.client.chatskins.OpenerScript.getAdaIntroduction = function(event) {
   var adaIntroduction = com.inq.utils.Util.getConfig("adaIntroduction", null);
   if (adaIntroduction != null) {
     adaIntroduction = adaIntroduction.replace("{accesskey}", getBrowserAccessKey());
@@ -9259,10 +9259,10 @@ com.inq.flash.client.chatskins.OpenerScript.getAdaIntroduction = function(event)
     return accessKey;
   }
 };
-com.inq.flash.client.chatskins.OpenerScript.prototype.openerScriptFailed = function(event) {  console.warn("com.inq.flash.client.chatskins.OpenerScript.prototype.openerScriptFailed");
+com.inq.flash.client.chatskins.OpenerScript.prototype.openerScriptFailed = function(event) {
   return;
 };
-com.inq.flash.client.chatskins.OpenerScript.prototype.getOpenerScripts = function() {  console.warn("com.inq.flash.client.chatskins.OpenerScript.prototype.getOpenerScripts");
+com.inq.flash.client.chatskins.OpenerScript.prototype.getOpenerScripts = function() {
   var opID = com.inq.flash.client.control.FlashVars.getValue("openerID");
   var opName = com.inq.flash.client.control.FlashVars.getValue("openerName");
   if (opID <= 0 && !opName) {
@@ -9280,7 +9280,7 @@ com.inq.flash.client.chatskins.OpenerScript.prototype.getOpenerScripts = functio
   this.scriptLoader.addEventListener(com.inq.events.Event.COMPLETE, $bind(this, this.openerScriptsLoaded));
   this.scriptLoader.load(scriptRequest);
 };
-com.inq.flash.client.chatskins.OpenerScript.prototype.displayScriptLine = function(replay) {  console.warn("com.inq.flash.client.chatskins.OpenerScript.prototype.displayScriptLine");
+com.inq.flash.client.chatskins.OpenerScript.prototype.displayScriptLine = function(replay) {
   var agentName = com.inq.flash.client.control.FlashVars.getValue("agentName");
   var useAgentAlias = com.inq.utils.Util.getConfig("useAgentAlias", false);
   if (useAgentAlias == true && com.inq.flash.client.control.FlashVars.getValue("overrideAgentAlias") != "true") {
@@ -9297,29 +9297,29 @@ com.inq.flash.client.chatskins.OpenerScript.prototype.displayScriptLine = functi
     com.inq.flash.client.chatskins.SkinControl.getApplicationController().enqueueOpenerText(msg, agentName);
   }
 };
-com.inq.flash.client.chatskins.OpenerScript.prototype.displayScript = function() {  console.warn("com.inq.flash.client.chatskins.OpenerScript.prototype.displayScript");
+com.inq.flash.client.chatskins.OpenerScript.prototype.displayScript = function() {
   this.stopOpenersTimer();
   if (!com.inq.flash.client.chatskins.OpenerScript.bOpenersStopped) {
     this.displayScriptLine(false);
     this.startOpenersTimer();
   }
 };
-com.inq.flash.client.chatskins.OpenerScript.prototype.displayadaIntroduction = function(adaIntroduction) {  console.warn("com.inq.flash.client.chatskins.OpenerScript.prototype.displayadaIntroduction");
+com.inq.flash.client.chatskins.OpenerScript.prototype.displayadaIntroduction = function(adaIntroduction) {
   com.inq.flash.client.chatskins.ChatTextArea.prototype.addBufferedAriaMsg("", adaIntroduction, com.inq.flash.client.chatskins.ChatTextArea.SYSTEM);
 };
-com.inq.flash.client.chatskins.OpenerScript.prototype.startOpenersTimer = function() {  console.warn("com.inq.flash.client.chatskins.OpenerScript.prototype.startOpenersTimer");
+com.inq.flash.client.chatskins.OpenerScript.prototype.startOpenersTimer = function() {
   if (!com.inq.flash.client.chatskins.OpenerScript.bOpenersStopped && this.scriptCur < this.scriptCnt) {
     this.intervalTimer = new com.inq.utils.Timer(this._delay);
     this.intervalTimer.run = $bind(this, this.displayScript);
   }
 };
-com.inq.flash.client.chatskins.OpenerScript.prototype.stopOpenersTimer = function() {  console.warn("com.inq.flash.client.chatskins.OpenerScript.prototype.stopOpenersTimer");
+com.inq.flash.client.chatskins.OpenerScript.prototype.stopOpenersTimer = function() {
   if (this.intervalTimer != null) {
     this.intervalTimer.stop();
     this.intervalTimer = null;
   }
 };
-com.inq.flash.client.chatskins.OpenerScript.prototype.stop = function(bForce) {  console.warn("com.inq.flash.client.chatskins.OpenerScript.prototype.stop");
+com.inq.flash.client.chatskins.OpenerScript.prototype.stop = function(bForce) {
   if (bForce == null) {
     bForce = false;
   }
@@ -9334,7 +9334,7 @@ com.inq.flash.client.chatskins.OpenerScript.prototype.stop = function(bForce) { 
   }
   this.intervalTimer = null;
 };
-com.inq.flash.client.chatskins.OpenerScript.prototype.start = function(bForce) {  console.warn("com.inq.flash.client.chatskins.OpenerScript.prototype.start");
+com.inq.flash.client.chatskins.OpenerScript.prototype.start = function(bForce) {
   if (bForce == null) {
     bForce = false;
   }
@@ -9349,10 +9349,10 @@ com.inq.flash.client.chatskins.OpenerScript.prototype.start = function(bForce) {
   }
   this.getOpenerScripts();
 };
-com.inq.flash.client.chatskins.OpenerScript.prototype.setDelay = function(dly) {  console.warn("com.inq.flash.client.chatskins.OpenerScript.prototype.setDelay");
+com.inq.flash.client.chatskins.OpenerScript.prototype.setDelay = function(dly) {
   this._delay = dly;
 };
-com.inq.flash.client.chatskins.OpenerScript.prototype.reset = function() {  console.warn("com.inq.flash.client.chatskins.OpenerScript.prototype.reset");
+com.inq.flash.client.chatskins.OpenerScript.prototype.reset = function() {
   this.runOnce = false;
   this.force = false;
   this.scriptLoader = null;
@@ -9372,16 +9372,16 @@ com.inq.flash.client.chatskins.OpenerScript.prototype.scripts = null;
 com.inq.flash.client.chatskins.OpenerScript.prototype.scriptLoader = null;
 com.inq.flash.client.chatskins.OpenerScript.prototype.__class__ = com.inq.flash.client.chatskins.OpenerScript;
 com.inq.flash.client.chatskins.OpenerScript.bOpenersStopped = false;
-com.inq.flash.client.chatskins.PrintMgr = function() {  console.warn("com.inq.flash.client.chatskins.PrintMgr");
+com.inq.flash.client.chatskins.PrintMgr = function() {
 };
 $hxClasses["com.inq.flash.client.chatskins.PrintMgr"] = com.inq.flash.client.chatskins.PrintMgr;
 com.inq.flash.client.chatskins.PrintMgr.__name__ = ["com", "inq", "flash", "client", "chatskins", "PrintMgr"];
 com.inq.flash.client.chatskins.PrintMgr.loaderSkin = null;
-com.inq.flash.client.chatskins.PrintMgr._init = function() {  console.warn("com.inq.flash.client.chatskins.PrintMgr._init");
+com.inq.flash.client.chatskins.PrintMgr._init = function() {
   var win = window;
   return true;
 };
-com.inq.flash.client.chatskins.PrintMgr.init = function() {  console.warn("com.inq.flash.client.chatskins.PrintMgr.init");
+com.inq.flash.client.chatskins.PrintMgr.init = function() {
   if (com.inq.flash.client.chatskins.SkinControl.isInApplication("btnPrint")) {
     var badChrome = /\bChrome\/(34|35)\b/.test(window.navigator.userAgent);
     var btnPrint = Application.application.getButton("btnPrint");
@@ -9395,20 +9395,20 @@ com.inq.flash.client.chatskins.PrintMgr.init = function() {  console.warn("com.i
   }
   return true;
 };
-com.inq.flash.client.chatskins.PrintMgr.actionBtnPrintTranscript = function(me) {  console.warn("com.inq.flash.client.chatskins.PrintMgr.actionBtnPrintTranscript");
+com.inq.flash.client.chatskins.PrintMgr.actionBtnPrintTranscript = function(me) {
   com.inq.flash.client.chatskins.PrintMgr.printWindow = window.open("", "inqPrint", "left=0,top=0,height=600,width=400,status=0,toolbar=0");
   var transcript = "<table>" + Std.string(com.inq.flash.client.chatskins.SkinControl.cw.getHtmlText()) + "</table>";
   var links = document.body.parentNode.getElementsByTagName("LINK");
   var linkUrl = links[0].href;
   if (null != com.inq.flash.client.chatskins.PrintMgr.printWindow) {
-    com.inq.flash.client.chatskins.PrintMgr.printWindow.onload = function() {  console.warn("com.inq.flash.client.chatskins.PrintMgr.printWindow.onload");
+    com.inq.flash.client.chatskins.PrintMgr.printWindow.onload = function() {
       return true;
     };
     com.inq.flash.client.chatskins.PrintMgr.printWindow.document.open();
     com.inq.flash.client.chatskins.PrintMgr.printWindow.document.write("<html><head>" + '<link type="text/css" rel="stylesheet" media="print" href="' + linkUrl + '" />' + '<link type="text/css" rel="stylesheet" media="screen" href="' + linkUrl + '" />' + "</head></html>");
     com.inq.flash.client.chatskins.PrintMgr.printWindow.document.write("<body>" + transcript + '<script>\n setTimeout("window.print();window.close();",1000);\n\x3c/script></body>');
     if (com.inq.utils.Capabilities.isTablet()) {
-      com.inq.flash.client.chatskins.PrintMgr.printWindow.onunload = function(ev) {  console.warn("com.inq.flash.client.chatskins.PrintMgr.printWindow.onunload");
+      com.inq.flash.client.chatskins.PrintMgr.printWindow.onunload = function(ev) {
         var txtInput = com.inq.flash.client.chatskins.SkinControl.getTextInputField();
         if (com.inq.utils.Capabilities.isIpad()) {
           window.setTimeout(function() {
@@ -9433,10 +9433,10 @@ com.inq.flash.client.chatskins.PrintMgr.actionBtnPrintTranscript = function(me) 
 com.inq.flash.client.chatskins.PrintMgr.prototype.__class__ = com.inq.flash.client.chatskins.PrintMgr;
 com.inq.flash.client.chatskins.PrintMgr._initialized = com.inq.flash.client.chatskins.PrintMgr._init();
 com.inq.flash.client.chatskins.PrintMgr.printWindow = null;
-com.inq.flash.client.chatskins.ScrollMonitor = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor");
+com.inq.flash.client.chatskins.ScrollMonitor = function() {
 };
 $hxClasses.registerClass(com.inq.flash.client.chatskins.ScrollMonitor, "com.inq.flash.client.chatskins.ScrollMonitor");
-com.inq.flash.client.chatskins.ScrollMonitor.init = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.init");
+com.inq.flash.client.chatskins.ScrollMonitor.init = function() {
   com.inq.flash.client.chatskins.ScrollMonitor._initialZoom = com.inq.flash.client.chatskins.ScrollMonitor._zoomPrev = com.inq.utils.Capabilities.isMobile() ? com.inq.utils.Capabilities.getZoom() : 0;
   com.inq.flash.client.chatskins.ScrollMonitor.whenScrollClosure = com.inq.utils.Capabilities.isPhone() ? com.inq.flash.client.chatskins.ScrollMonitor.whenPhoneScroll : com.inq.flash.client.chatskins.ScrollMonitor.whenScroll;
   if (window.parent.name == "_inqPersistentChat") {
@@ -9448,7 +9448,7 @@ com.inq.flash.client.chatskins.ScrollMonitor.init = function() {  console.warn("
   com.inq.flash.client.chatskins.ScrollMonitor.bindAll();
   return true;
 };
-com.inq.flash.client.chatskins.ScrollMonitor.bindAll = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.bindAll");
+com.inq.flash.client.chatskins.ScrollMonitor.bindAll = function() {
   if (!com.inq.utils.Capabilities.isPhone()) {
     com.inq.utils.Capabilities.BindListener(window.parent, "scroll", com.inq.flash.client.chatskins.ScrollMonitor.whenScrollClosure);
     com.inq.utils.Capabilities.BindListener(window.parent, "resize", com.inq.flash.client.chatskins.ScrollMonitor.whenScrollClosure);
@@ -9474,7 +9474,7 @@ com.inq.flash.client.chatskins.ScrollMonitor.bindAll = function() {  console.war
     }
   }
 };
-com.inq.flash.client.chatskins.ScrollMonitor.unbindAll = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.unbindAll");
+com.inq.flash.client.chatskins.ScrollMonitor.unbindAll = function() {
   if (com.inq.utils.Capabilities.isPhone() && com.inq.flash.client.chatskins.ScrollMonitor.sizeChangeEventTimer != -1) {
     clearInterval(com.inq.flash.client.chatskins.ScrollMonitor.sizeChangeEventTimer);
     com.inq.flash.client.chatskins.ScrollMonitor.sizeChangeEventTimer = -1;
@@ -9486,22 +9486,22 @@ com.inq.flash.client.chatskins.ScrollMonitor.unbindAll = function() {  console.w
     com.inq.utils.Capabilities.UnbindListener(window.parent, "scroll", com.inq.stage.ViewportMgr.impl.toggleZoomedScreenMsg);
   }
 };
-com.inq.flash.client.chatskins.ScrollMonitor.Close = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.Close");
+com.inq.flash.client.chatskins.ScrollMonitor.Close = function() {
   com.inq.flash.client.chatskins.ScrollMonitor.unbindAll();
 };
-com.inq.flash.client.chatskins.ScrollMonitor.suspend = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.suspend");
+com.inq.flash.client.chatskins.ScrollMonitor.suspend = function() {
   com.inq.flash.client.chatskins.ScrollMonitor.suspendedLevel++;
 };
-com.inq.flash.client.chatskins.ScrollMonitor.resume = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.resume");
+com.inq.flash.client.chatskins.ScrollMonitor.resume = function() {
   com.inq.flash.client.chatskins.ScrollMonitor.suspendedLevel--;
 };
-com.inq.flash.client.chatskins.ScrollMonitor.isSuspended = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.isSuspended");
+com.inq.flash.client.chatskins.ScrollMonitor.isSuspended = function() {
   return com.inq.utils.Capabilities.isIpad() ? false : com.inq.flash.client.chatskins.ScrollMonitor.suspendedLevel > 0;
 };
-com.inq.flash.client.chatskins.ScrollMonitor.ScrollToPoint = function(p) {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.ScrollToPoint");
+com.inq.flash.client.chatskins.ScrollMonitor.ScrollToPoint = function(p) {
   com.inq.flash.client.chatskins.ScrollMonitor.ScrollTo(p.x, p.y);
 };
-com.inq.flash.client.chatskins.ScrollMonitor.ScrollTo = function(x, y) {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.ScrollTo");
+com.inq.flash.client.chatskins.ScrollMonitor.ScrollTo = function(x, y) {
   com.inq.flash.client.chatskins.ScrollMonitor.suspend();
   try {
     window.parent.scrollTo(x, y);
@@ -9510,7 +9510,7 @@ com.inq.flash.client.chatskins.ScrollMonitor.ScrollTo = function(x, y) {  consol
   }
   window.setTimeout(com.inq.flash.client.chatskins.ScrollMonitor.resume, 100);
 };
-com.inq.flash.client.chatskins.ScrollMonitor.ScrollBy = function(dx, dy) {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.ScrollBy");
+com.inq.flash.client.chatskins.ScrollMonitor.ScrollBy = function(dx, dy) {
   com.inq.flash.client.chatskins.ScrollMonitor.suspend();
   try {
     window.parent.scrollBy(dx, dy);
@@ -9519,20 +9519,20 @@ com.inq.flash.client.chatskins.ScrollMonitor.ScrollBy = function(dx, dy) {  cons
   }
   window.setTimeout(com.inq.flash.client.chatskins.ScrollMonitor.resume, 100);
 };
-com.inq.flash.client.chatskins.ScrollMonitor.ScrollToTop = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.ScrollToTop");
+com.inq.flash.client.chatskins.ScrollMonitor.ScrollToTop = function() {
   com.inq.flash.client.chatskins.ScrollMonitor.ScrollTo(0, 0);
 };
-com.inq.flash.client.chatskins.ScrollMonitor.ScrollToNearTop = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.ScrollToNearTop");
+com.inq.flash.client.chatskins.ScrollMonitor.ScrollToNearTop = function() {
   com.inq.flash.client.chatskins.ScrollMonitor.ScrollTo(0, 1);
 };
-com.inq.flash.client.chatskins.ScrollMonitor.ScrollToBottom = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.ScrollToBottom");
+com.inq.flash.client.chatskins.ScrollMonitor.ScrollToBottom = function() {
   var windowPosition = com.inq.utils.Capabilities.getViewport();
   com.inq.flash.client.chatskins.ScrollMonitor.ScrollTo(windowPosition.x, window.parent.document.documentElement.offsetHeight);
 };
-com.inq.flash.client.chatskins.ScrollMonitor.notify = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.notify");
+com.inq.flash.client.chatskins.ScrollMonitor.notify = function() {
   com.inq.flash.client.chatskins.ScrollMonitor.whenScroll(null);
 };
-com.inq.flash.client.chatskins.ScrollMonitor.whenScroll = function(e) {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.whenScroll");
+com.inq.flash.client.chatskins.ScrollMonitor.whenScroll = function(e) {
   if (com.inq.flash.client.chatskins.ScrollMonitor.isSuspended()) {
     return true;
   }
@@ -9573,7 +9573,7 @@ com.inq.flash.client.chatskins.ScrollMonitor.whenScroll = function(e) {  console
     }
   }
 };
-com.inq.flash.client.chatskins.ScrollMonitor.whenPhoneScroll = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.whenPhoneScroll");
+com.inq.flash.client.chatskins.ScrollMonitor.whenPhoneScroll = function() {
   if (com.inq.flash.client.control.MinimizeManager.onActionRestore) {
     com.inq.flash.client.chatskins.ChatTextFocusMonitor.setHasFocus();
   }
@@ -9595,7 +9595,7 @@ com.inq.flash.client.chatskins.ScrollMonitor.whenPhoneScroll = function() {  con
     com.inq.flash.client.chatskins.ChatTextFocusMonitor.FixIPhoneFocusScroll();
   }, 100);
 };
-com.inq.flash.client.chatskins.ScrollMonitor.whenPhoneChangedHeight = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.whenPhoneChangedHeight");
+com.inq.flash.client.chatskins.ScrollMonitor.whenPhoneChangedHeight = function() {
   var oldHeight = Application.application.area.h;
   var vpArea = com.inq.utils.Capabilities.getViewport();
   if (!com.inq.flash.client.chatskins.ChatTextFocusMonitor.HasFocus() && vpArea.h != oldHeight) {
@@ -9603,10 +9603,10 @@ com.inq.flash.client.chatskins.ScrollMonitor.whenPhoneChangedHeight = function()
     Application.Resize();
   }
 };
-com.inq.flash.client.chatskins.ScrollMonitor.waitForLull = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.waitForLull");
+com.inq.flash.client.chatskins.ScrollMonitor.waitForLull = function() {
   com.inq.flash.client.chatskins.ScrollMonitor.waitingForLull = true;
 };
-com.inq.flash.client.chatskins.ScrollMonitor.handleRapidScroll = function(type) {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.handleRapidScroll");
+com.inq.flash.client.chatskins.ScrollMonitor.handleRapidScroll = function(type) {
   if (com.inq.flash.client.chatskins.ScrollMonitor.isSuspended()) {
     return;
   } else {
@@ -9621,7 +9621,7 @@ com.inq.flash.client.chatskins.ScrollMonitor.handleRapidScroll = function(type) 
     com.inq.flash.client.chatskins.ScrollMonitor.moveChat(false, type);
   }
 };
-com.inq.flash.client.chatskins.ScrollMonitor.moveChat = function(forceMove, type) {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.moveChat");
+com.inq.flash.client.chatskins.ScrollMonitor.moveChat = function(forceMove, type) {
   if (!forceMove) {
     forceMove = false;
   }
@@ -9748,7 +9748,7 @@ com.inq.flash.client.chatskins.ScrollMonitor.moveChat = function(forceMove, type
     }
   }
 };
-com.inq.flash.client.chatskins.ScrollMonitor.storeCurrentPosition = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.storeCurrentPosition");
+com.inq.flash.client.chatskins.ScrollMonitor.storeCurrentPosition = function() {
   var vp = com.inq.utils.Capabilities.getViewport();
   var z = com.inq.utils.Capabilities.getZoom();
   com.inq.flash.client.chatskins.ScrollMonitor._scrollLeftPrev = vp.x;
@@ -9756,7 +9756,7 @@ com.inq.flash.client.chatskins.ScrollMonitor.storeCurrentPosition = function() {
   com.inq.flash.client.chatskins.ScrollMonitor._zoomPrev = z;
   com.inq.flash.client.chatskins.ScrollMonitor._vieportWidthPrev = vp.w;
 };
-com.inq.flash.client.chatskins.ScrollMonitor.getScrollWidth = function(clientWin) {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.getScrollWidth");
+com.inq.flash.client.chatskins.ScrollMonitor.getScrollWidth = function(clientWin) {
   if (!clientWin) {
     clientWin = window.parent;
   }
@@ -9779,7 +9779,7 @@ com.inq.flash.client.chatskins.ScrollMonitor.getScrollWidth = function(clientWin
   }
   return iScrollWidth;
 };
-com.inq.flash.client.chatskins.ScrollMonitor.getScrollHeight = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.getScrollHeight");
+com.inq.flash.client.chatskins.ScrollMonitor.getScrollHeight = function() {
   var iScrollHeight = 0;
   var clientDoc = window.parent.document;
   if (null == window.parent["innerHeight"]) {
@@ -9801,10 +9801,10 @@ com.inq.flash.client.chatskins.ScrollMonitor.getScrollHeight = function() {  con
   }
   return iScrollHeight;
 };
-com.inq.flash.client.chatskins.ScrollMonitor.getScrollPoint = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.getScrollPoint");
+com.inq.flash.client.chatskins.ScrollMonitor.getScrollPoint = function() {
   return new com.inq.utils.Point(com.inq.flash.client.chatskins.ScrollMonitor.getScrollLeft(), com.inq.flash.client.chatskins.ScrollMonitor.getScrollTop());
 };
-com.inq.flash.client.chatskins.ScrollMonitor.getScrollTop = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.getScrollTop");
+com.inq.flash.client.chatskins.ScrollMonitor.getScrollTop = function() {
   var clientWin = window.parent;
   var clientDoc = clientWin.document;
   try {
@@ -9825,7 +9825,7 @@ com.inq.flash.client.chatskins.ScrollMonitor.getScrollTop = function() {  consol
   }
   return 0;
 };
-com.inq.flash.client.chatskins.ScrollMonitor.getScrollLeft = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.getScrollLeft");
+com.inq.flash.client.chatskins.ScrollMonitor.getScrollLeft = function() {
   try {
     var clientWin = window.parent;
     var clientDoc = clientWin.document;
@@ -9846,7 +9846,7 @@ com.inq.flash.client.chatskins.ScrollMonitor.getScrollLeft = function() {  conso
   }
   return 0;
 };
-com.inq.flash.client.chatskins.ScrollMonitor.getScrollBarWidth = function() {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.getScrollBarWidth");
+com.inq.flash.client.chatskins.ScrollMonitor.getScrollBarWidth = function() {
   var scr;
   var inn;
   var wNoScroll;
@@ -9869,7 +9869,7 @@ com.inq.flash.client.chatskins.ScrollMonitor.getScrollBarWidth = function() {  c
   window.parent.document.body.removeChild(window.parent.document.body.lastChild);
   return wNoScroll - wScroll;
 };
-com.inq.flash.client.chatskins.ScrollMonitor.getOffsetTopToStage = function(el) {  console.warn("com.inq.flash.client.chatskins.ScrollMonitor.getOffsetTopToStage");
+com.inq.flash.client.chatskins.ScrollMonitor.getOffsetTopToStage = function(el) {
   var stageDiv = com.inq.ui.Stage.getStageElement(), offsetT = 0;
   if (stageDiv && stageDiv.getBoundingClientRect) {
     offsetT = Math.abs(stageDiv.getBoundingClientRect().top - el.getBoundingClientRect().top);
@@ -9889,19 +9889,19 @@ com.inq.flash.client.chatskins.ScrollMonitor._timerIdScroll = -1;
 com.inq.flash.client.chatskins.ScrollMonitor.whenScrollClosure = null;
 com.inq.flash.client.chatskins.ScrollMonitor.waitingForLull = false;
 com.inq.flash.client.chatskins.ScrollMonitor._iPadSafariOrChrome = /(iPad).*AppleWebKit?.*Version\/(6|7|8|9)/i.test(navigator.userAgent) || /(iPad).*AppleWebKit?.*CriOS/i.test(navigator.userAgent);
-com.inq.flash.client.chatskins.VideoPlayerBase = function() {  console.warn("com.inq.flash.client.chatskins.VideoPlayerBase");
+com.inq.flash.client.chatskins.VideoPlayerBase = function() {
 };
-com.inq.flash.client.chatskins.VideoPlayerBase.init = function(type) {  console.warn("com.inq.flash.client.chatskins.VideoPlayerBase.init");
+com.inq.flash.client.chatskins.VideoPlayerBase.init = function(type) {
   return com.inq.flash.client.chatskins.VideoPlayerBase.getImpl(type);
 };
-com.inq.flash.client.chatskins.VideoPlayerBase.getImpl = function(type) {  console.warn("com.inq.flash.client.chatskins.VideoPlayerBase.getImpl");
+com.inq.flash.client.chatskins.VideoPlayerBase.getImpl = function(type) {
   var impl = null;
   if (type === "AdobeS7") {
     impl = new com.inq.flash.client.chatskins.VideoPlayerScene7;
   }
   return impl;
 };
-com.inq.flash.client.chatskins.VideoPlayerBase.loadExternalScript = function(src, pObj) {  console.warn("com.inq.flash.client.chatskins.VideoPlayerBase.loadExternalScript");
+com.inq.flash.client.chatskins.VideoPlayerBase.loadExternalScript = function(src, pObj) {
   var _pOjb = pObj.pInst, isDiv = _pOjb.isDivC(), tW = window.top;
   if (_pOjb == null) {
     return;
@@ -9924,7 +9924,7 @@ com.inq.flash.client.chatskins.VideoPlayerBase.loadExternalScript = function(src
   nSct.src = src;
   fSct.parentElement.insertBefore(nSct, fSct);
 };
-com.inq.flash.client.chatskins.VideoPlayerBase.prototype.play = function() {  console.warn("com.inq.flash.client.chatskins.VideoPlayerBase.prototype.play");
+com.inq.flash.client.chatskins.VideoPlayerBase.prototype.play = function() {
   if (this.pStat === "P") {
     this.resume();
   } else {
@@ -9933,19 +9933,19 @@ com.inq.flash.client.chatskins.VideoPlayerBase.prototype.play = function() {  co
     }
   }
 };
-com.inq.flash.client.chatskins.VideoPlayerBase.prototype.pause = function() {  console.warn("com.inq.flash.client.chatskins.VideoPlayerBase.prototype.pause");
+com.inq.flash.client.chatskins.VideoPlayerBase.prototype.pause = function() {
   this.pause();
 };
-com.inq.flash.client.chatskins.VideoPlayerBase.prototype.close = function() {  console.warn("com.inq.flash.client.chatskins.VideoPlayerBase.prototype.close");
+com.inq.flash.client.chatskins.VideoPlayerBase.prototype.close = function() {
   if (!this.completed) {
     this.sendToAgent(com.inq.flash.client.chatskins.VideoPlayerBase.CLOSE, "videoAbandoned");
     this.clear();
   }
 };
-com.inq.flash.client.chatskins.VideoPlayerBase.prototype.sendToAgent = function(msg, action) {  console.warn("com.inq.flash.client.chatskins.VideoPlayerBase.prototype.sendToAgent");
+com.inq.flash.client.chatskins.VideoPlayerBase.prototype.sendToAgent = function(msg, action) {
   com.inq.flash.client.chatskins.SkinControl.getApplicationController().sendVideoStatusMessage(msg, this.name, action);
 };
-com.inq.flash.client.chatskins.VideoPlayerBase.prototype.isDivC = function() {  console.warn("com.inq.flash.client.chatskins.VideoPlayerBase.prototype.isDivC");
+com.inq.flash.client.chatskins.VideoPlayerBase.prototype.isDivC = function() {
   return com.inq.utils.Util.getConfig("divSkin", false) || com.inq.ui.SkinLoader.skinInClient;
 };
 com.inq.flash.client.chatskins.VideoPlayerBase.DISPLAY = "Video player is displayed.";
@@ -9959,13 +9959,13 @@ com.inq.flash.client.chatskins.VideoPlayerBase.prototype.pStat = "";
 com.inq.flash.client.chatskins.VideoPlayerBase.prototype.viewer = null;
 com.inq.flash.client.chatskins.VideoPlayerBase.prototype.viewerConsN = "";
 com.inq.flash.client.chatskins.VideoPlayerBase.prototype.completed = false;
-com.inq.flash.client.chatskins.VideoPlayerScene7 = function() {  console.warn("com.inq.flash.client.chatskins.VideoPlayerScene7");
+com.inq.flash.client.chatskins.VideoPlayerScene7 = function() {
   this.viewerConsN = "s7viewers";
   this.viewerName = "VideoViewer";
   this.mInterval = 0;
 };
 $hxClasses.extend(com.inq.flash.client.chatskins.VideoPlayerBase, com.inq.flash.client.chatskins.VideoPlayerScene7, "com.inq.flash.client.chatskins.VideoPlayerScene7");
-com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.setup = function(contObj, p) {  console.warn("com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.setup");
+com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.setup = function(contObj, p) {
   var vidUrl = contObj.getStyle("vidSerUrl") || getParams(1), serUrl = contObj.getStyle("serUrl") || getParams(2), asset = contObj.getStyle("asset") || getParams(3), tw = window.top;
   if (vidUrl == null || serUrl == null || asset == null || !"s7viewers" in window && !"s7viewers" in tw) {
     return;
@@ -9985,7 +9985,7 @@ com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.setup = function(cont
     }
   }
 };
-com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.registerEventH = function() {  console.warn("com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.registerEventH");
+com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.registerEventH = function() {
   var that = this;
   this.viewer.setHandlers({"initComplete":function() {
     that.pStat = "S";
@@ -9998,7 +9998,7 @@ com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.registerEventH = func
     that.eHandler(arguments[4]);
   }});
 };
-com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.initPlay = function() {  console.warn("com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.initPlay");
+com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.initPlay = function() {
   if (!this.viewer) {
     return;
   }
@@ -10008,7 +10008,7 @@ com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.initPlay = function()
   this.viewer.init();
   this.sendToAgent(com.inq.flash.client.chatskins.VideoPlayerBase.DISPLAY, "videoDisplayed");
 };
-com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.pause = function() {  console.warn("com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.pause");
+com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.pause = function() {
   var that = this;
   if (that.pStat == "P" || !that.viewer) {
     return;
@@ -10022,10 +10022,10 @@ com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.pause = function() { 
     }
   }, 1E3);
 };
-com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.resume = function() {  console.warn("com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.resume");
+com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.resume = function() {
   this.initPlay();
 };
-com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.eHandler = function(e) {  console.warn("com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.eHandler");
+com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.eHandler = function(e) {
   try {
     var vals = e.split(",");
     var meta = vals[vals.length - 1];
@@ -10052,36 +10052,36 @@ com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.eHandler = function(e
   } catch (e) {
   }
 };
-com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.clear = function() {  console.warn("com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.clear");
+com.inq.flash.client.chatskins.VideoPlayerScene7.prototype.clear = function() {
   this.viewer = null;
   if (this.container) {
     this.container._div.innerHTML = "";
   }
   this.pStat = "";
 };
-com.inq.flash.client.control.PersistenceManager = function() {  console.warn("com.inq.flash.client.control.PersistenceManager");
+com.inq.flash.client.control.PersistenceManager = function() {
   this.getCookieInfo();
 };
 $hxClasses["com.inq.flash.client.control.PersistenceManager"] = com.inq.flash.client.control.PersistenceManager;
 com.inq.flash.client.control.PersistenceManager.__name__ = ["com", "inq", "flash", "client", "control", "PersistenceManager"];
-com.inq.flash.client.control.PersistenceManager.Close = function() {  console.warn("com.inq.flash.client.control.PersistenceManager.Close");
+com.inq.flash.client.control.PersistenceManager.Close = function() {
   com.inq.flash.client.control.PersistenceManager.__inst = null;
 };
-com.inq.flash.client.control.PersistenceManager.reopen = function() {  console.warn("com.inq.flash.client.control.PersistenceManager.reopen");
+com.inq.flash.client.control.PersistenceManager.reopen = function() {
   com.inq.flash.client.control.PersistenceManager.__inst = new com.inq.flash.client.control.PersistenceManager;
 };
-com.inq.flash.client.control.PersistenceManager.ClearValues = function() {  console.warn("com.inq.flash.client.control.PersistenceManager.ClearValues");
+com.inq.flash.client.control.PersistenceManager.ClearValues = function() {
   if (com.inq.flash.client.control.PersistenceManager.__inst != null) {
     com.inq.flash.client.control.PersistenceManager.__inst.clearValues();
   }
 };
-com.inq.flash.client.control.PersistenceManager.GetValue = function(label, defaultVal) {  console.warn("com.inq.flash.client.control.PersistenceManager.GetValue");
+com.inq.flash.client.control.PersistenceManager.GetValue = function(label, defaultVal) {
   if (com.inq.flash.client.control.PersistenceManager.__inst != null) {
     return com.inq.flash.client.control.PersistenceManager.__inst.getValue(label, defaultVal);
   }
   return defaultVal;
 };
-com.inq.flash.client.control.PersistenceManager.SetValue = function(label, val, force, updateCookies) {  console.warn("com.inq.flash.client.control.PersistenceManager.SetValue");
+com.inq.flash.client.control.PersistenceManager.SetValue = function(label, val, force, updateCookies) {
   if (updateCookies == null) {
     updateCookies = true;
   }
@@ -10092,22 +10092,22 @@ com.inq.flash.client.control.PersistenceManager.SetValue = function(label, val, 
     com.inq.flash.client.control.PersistenceManager.__inst.setValue(label, val, force, updateCookies);
   }
 };
-com.inq.flash.client.control.PersistenceManager.SetValues = function(map) {  console.warn("com.inq.flash.client.control.PersistenceManager.SetValues");
+com.inq.flash.client.control.PersistenceManager.SetValues = function(map) {
   if (com.inq.flash.client.control.PersistenceManager.__inst != null) {
     com.inq.flash.client.control.PersistenceManager.__inst.setValues(map);
   }
 };
-com.inq.flash.client.control.PersistenceManager.createInstance = function() {  console.warn("com.inq.flash.client.control.PersistenceManager.createInstance");
+com.inq.flash.client.control.PersistenceManager.createInstance = function() {
   haxe.Log.trace("create PersistenceManager", {fileName:"PersistenceManager.hx", lineNumber:105, className:"com.inq.flash.client.control.PersistenceManager", methodName:"createInstance"});
   return new com.inq.flash.client.control.PersistenceManager;
 };
-com.inq.flash.client.control.PersistenceManager.prototype.setCookieInfo = function() {  console.warn("com.inq.flash.client.control.PersistenceManager.prototype.setCookieInfo");
+com.inq.flash.client.control.PersistenceManager.prototype.setCookieInfo = function() {
   com.inq.flash.client.control.FlashPeer.setV3Data(this.dict);
 };
-com.inq.flash.client.control.PersistenceManager.prototype.getCookieInfo = function() {  console.warn("com.inq.flash.client.control.PersistenceManager.prototype.getCookieInfo");
+com.inq.flash.client.control.PersistenceManager.prototype.getCookieInfo = function() {
   this.dict = com.inq.flash.client.control.FlashPeer.getV3Data();
 };
-com.inq.flash.client.control.PersistenceManager.prototype.setValue = function(label, val, force, updateCookies) {  console.warn("com.inq.flash.client.control.PersistenceManager.prototype.setValue");
+com.inq.flash.client.control.PersistenceManager.prototype.setValue = function(label, val, force, updateCookies) {
   if (updateCookies == null) {
     updateCookies = true;
   }
@@ -10121,7 +10121,7 @@ com.inq.flash.client.control.PersistenceManager.prototype.setValue = function(la
     }
   }
 };
-com.inq.flash.client.control.PersistenceManager.prototype.setValues = function(map) {  console.warn("com.inq.flash.client.control.PersistenceManager.prototype.setValues");
+com.inq.flash.client.control.PersistenceManager.prototype.setValues = function(map) {
   var keyz = Reflect.fields(map);
   for (var i = 0;i < keyz.length;i++) {
     var k = "" + keyz[i];
@@ -10129,7 +10129,7 @@ com.inq.flash.client.control.PersistenceManager.prototype.setValues = function(m
   }
   com.inq.flash.client.control.FlashPeer.setV3Data(this.dict);
 };
-com.inq.flash.client.control.PersistenceManager.prototype.getValue = function(label, defaultVal) {  console.warn("com.inq.flash.client.control.PersistenceManager.prototype.getValue");
+com.inq.flash.client.control.PersistenceManager.prototype.getValue = function(label, defaultVal) {
   var value = this.dict[label];
   if (null == value) {
     value = defaultVal;
@@ -10137,7 +10137,7 @@ com.inq.flash.client.control.PersistenceManager.prototype.getValue = function(la
   haxe.Log.trace("value [" + label + "]:" + Std.string(value), {fileName:"PersistenceManager.hx", lineNumber:56, className:"com.inq.flash.client.control.PersistenceManager", methodName:"getValue"});
   return value;
 };
-com.inq.flash.client.control.PersistenceManager.prototype.clearValues = function() {  console.warn("com.inq.flash.client.control.PersistenceManager.prototype.clearValues");
+com.inq.flash.client.control.PersistenceManager.prototype.clearValues = function() {
   this.dict = {};
   this.setCookieInfo();
 };
@@ -10153,7 +10153,7 @@ com.inq.flash.client.control.PersistenceManager.WIDTH = "w";
 com.inq.flash.client.control.PersistenceManager.CLIENT_NAME_PERSIST = "cn";
 com.inq.flash.client.control.PersistenceManager.__inst = com.inq.flash.client.control.PersistenceManager.createInstance();
 com.inq.aria.AriaUtil = {};
-com.inq.aria.AriaUtil.hideTag = function(box, tagName) {  console.warn("com.inq.aria.AriaUtil.hideTag");
+com.inq.aria.AriaUtil.hideTag = function(box, tagName) {
   if (!box || typeof box.getElementsByTagName !== "function" || !tagName) {
     return;
   }
@@ -10171,7 +10171,7 @@ com.inq.aria.ModalWindow = {};
 com.inq.aria.ModalWindow.isOn = false;
 com.inq.aria.ModalWindow.tags = ["img", "a", "li", "input", "div", "select", "button", "textarea", "h1", "h2", "h3", "h4", "h5", "h6"];
 com.inq.aria.ModalWindow.forceTabedTags = ["p"];
-com.inq.aria.ModalWindow.buildModal = function(myWin) {  console.warn("com.inq.aria.ModalWindow.buildModal");
+com.inq.aria.ModalWindow.buildModal = function(myWin) {
   if (!myWin || !myWin.document) {
     return false;
   }
@@ -10251,10 +10251,10 @@ com.inq.aria.ModalWindow.buildModal = function(myWin) {  console.warn("com.inq.a
     return arr;
   }
 };
-com.inq.aria.ModalWindow.isDivNeedAriaHidden = function(div) {  console.warn("com.inq.aria.ModalWindow.isDivNeedAriaHidden");
+com.inq.aria.ModalWindow.isDivNeedAriaHidden = function(div) {
   return div.id === null || div.id === "inqTitleBar" || !(div.id.indexOf("tc") === 0 || div.id.indexOf("inq") === 0) || com.inq.flash.client.chatskins.SkinControl.getIsPersistentChat() && !(div.id.indexOf("tc") === 0 || div.id.indexOf("inq") === 0);
 };
-com.inq.aria.ModalWindow.buildModalWindow = function() {  console.warn("com.inq.aria.ModalWindow.buildModalWindow");
+com.inq.aria.ModalWindow.buildModalWindow = function() {
   try {
     if (typeof com.inq.aria.ModalWindow.ariaDivsHidden === "undefined") {
       com.inq.aria.ModalWindow.ariaDivsHidden = [];
@@ -10266,7 +10266,7 @@ com.inq.aria.ModalWindow.buildModalWindow = function() {  console.warn("com.inq.
   } catch (ex) {
   }
 };
-com.inq.aria.ModalWindow.hideModalWindowDivs = function(toShow) {  console.warn("com.inq.aria.ModalWindow.hideModalWindowDivs");
+com.inq.aria.ModalWindow.hideModalWindowDivs = function(toShow) {
   try {
     var i = 0;
     var aValue = toShow === true ? "true" : "false";
@@ -10300,7 +10300,7 @@ com.inq.aria.ModalWindow.hideModalWindowDivs = function(toShow) {  console.warn(
   } catch (ex) {
   }
 };
-com.inq.aria.ModalWindow.tempDisableAriaLive = function(obj, flag) {  console.warn("com.inq.aria.ModalWindow.tempDisableAriaLive");
+com.inq.aria.ModalWindow.tempDisableAriaLive = function(obj, flag) {
   var ariaTemp;
   if (!flag) {
     if (obj.hasAttribute("aria-live")) {
@@ -10316,7 +10316,7 @@ com.inq.aria.ModalWindow.tempDisableAriaLive = function(obj, flag) {  console.wa
     }
   }
 };
-com.inq.aria.ModalWindow.removeModalWindow = function() {  console.warn("com.inq.aria.ModalWindow.removeModalWindow");
+com.inq.aria.ModalWindow.removeModalWindow = function() {
   if (typeof com.inq.aria.ModalWindow.ariaTabObjs !== "undefined") {
     for (i = 0;i < com.inq.aria.ModalWindow.ariaTabObjs.length;i++) {
       com.inq.aria.ModalWindow.ariaTabObjs[i].removeAttribute("tabindex");
@@ -10335,7 +10335,7 @@ com.inq.aria.ModalWindow.removeModalWindow = function() {  console.warn("com.inq
   }
   com.inq.aria.ModalWindow.isOn = false;
 };
-com.inq.aria.ModalWindow.setCircularModalWindow = function(div, firstEl, lastEl) {  console.warn("com.inq.aria.ModalWindow.setCircularModalWindow");
+com.inq.aria.ModalWindow.setCircularModalWindow = function(div, firstEl, lastEl) {
   try {
     if (com.inq.utils.Capabilities.isMobile()) {
       return false;
@@ -10369,7 +10369,7 @@ com.inq.aria.ModalWindow.setCircularModalWindow = function(div, firstEl, lastEl)
     }
   }
 };
-com.inq.aria.ModalWindow.removeCircularModalWindow = function() {  console.warn("com.inq.aria.ModalWindow.removeCircularModalWindow");
+com.inq.aria.ModalWindow.removeCircularModalWindow = function() {
   com.inq.aria.ModalWindow.firstEl = null;
   com.inq.aria.ModalWindow.lastEl = null;
   if (com.inq.aria.ModalWindow.frontBlock) {
@@ -10381,7 +10381,7 @@ com.inq.aria.ModalWindow.removeCircularModalWindow = function() {  console.warn(
     com.inq.aria.ModalWindow.backBlock = null;
   }
 };
-com.inq.aria.ModalWindow.modalEmailCanvas = function() {  console.warn("com.inq.aria.ModalWindow.modalEmailCanvas");
+com.inq.aria.ModalWindow.modalEmailCanvas = function() {
   var divs, inputs, textareas, i, j, k;
   if (com.inq.aria.ModalWindow.isOn === false) {
     return false;
@@ -10427,7 +10427,7 @@ com.inq.aria.ModalWindow.modalEmailCanvas = function() {  console.warn("com.inq.
   }
   return true;
 };
-com.inq.aria.ModalWindow.unModalEmailCanvas = function() {  console.warn("com.inq.aria.ModalWindow.unModalEmailCanvas");
+com.inq.aria.ModalWindow.unModalEmailCanvas = function() {
   if (com.inq.flash.client.chatskins.EmailMgr.ariaDivsHidden !== null) {
     var divs = com.inq.flash.client.chatskins.EmailMgr.ariaDivsHidden;
     for (var i = 0;i < divs.length;i++) {
@@ -10462,14 +10462,14 @@ com.inq.aria.ModalWindow.unModalEmailCanvas = function() {  console.warn("com.in
     }
   }
 };
-com.inq.aria.ModalWindow.setCircularApplication = function() {  console.warn("com.inq.aria.ModalWindow.setCircularApplication");
+com.inq.aria.ModalWindow.setCircularApplication = function() {
   var container = Application.application.getPrimaryObject();
   var tabbingElements = com.inq.aria.ModalWindow.getTabbingElementsList(container);
   var firstEl = tabbingElements[0];
   var lastEl = tabbingElements[tabbingElements.length - 1];
   return com.inq.aria.ModalWindow.setCircularModalWindow(container, firstEl, lastEl);
 };
-com.inq.aria.ModalWindow.getTabbingElementsList = function(parent) {  console.warn("com.inq.aria.ModalWindow.getTabbingElementsList");
+com.inq.aria.ModalWindow.getTabbingElementsList = function(parent) {
   var list = [];
   var tabbingElements;
   var selectors = "input, textarea, select, button, a, [tabindex]";
@@ -10483,7 +10483,7 @@ com.inq.aria.ModalWindow.getTabbingElementsList = function(parent) {  console.wa
   }
   return list;
 };
-com.inq.aria.ModalWindow.cleanUp = function() {  console.warn("com.inq.aria.ModalWindow.cleanUp");
+com.inq.aria.ModalWindow.cleanUp = function() {
   com.inq.aria.ModalWindow.circularTabbingList = [];
   com.inq.flash.client.chatskins.EmailMgr.ariaDivsHidden = null;
   com.inq.flash.client.chatskins.EmailMgr.ariaInputsHidden = null;
@@ -10494,7 +10494,7 @@ com.inq.aria.ModalWindow.cleanUp = function() {  console.warn("com.inq.aria.Moda
   com.inq.aria.ModalWindow.ariaForcedTabObjs = [];
 };
 com.inq.aria.AriaMsg = {};
-com.inq.aria.AriaMsg.addAriaMsg = function(msg, msgType, force) {  console.warn("com.inq.aria.AriaMsg.addAriaMsg");
+com.inq.aria.AriaMsg.addAriaMsg = function(msg, msgType, force) {
   var _chatTxtArea = com.inq.flash.client.chatskins.ChatTextArea;
   if (typeof msgType === "undefined") {
     msgType = _chatTxtArea.SYSTEM;
@@ -10525,7 +10525,7 @@ com.inq.aria.AriaMsg.addAriaMsg = function(msg, msgType, force) {  console.warn(
     }
   }
 };
-com.inq.aria.AriaMsg.formatMsg = function(msg) {  console.warn("com.inq.aria.AriaMsg.formatMsg");
+com.inq.aria.AriaMsg.formatMsg = function(msg) {
   if (typeof msg === "undefined") {
     return msg;
   }
@@ -10538,10 +10538,10 @@ com.inq.aria.AriaMsg.formatMsg = function(msg) {  console.warn("com.inq.aria.Ari
     return str.split(a).join(b);
   }
 };
-com.inq.aria.AriaMsg.clearAriaMsg = function(msg) {  console.warn("com.inq.aria.AriaMsg.clearAriaMsg");
+com.inq.aria.AriaMsg.clearAriaMsg = function(msg) {
   com.inq.aria.AriaMsg.addAriaMsg(msg);
 };
-com.inq.aria.AriaMsg.firstBufferedAriaMsgDelay = function() {  console.warn("com.inq.aria.AriaMsg.firstBufferedAriaMsgDelay");
+com.inq.aria.AriaMsg.firstBufferedAriaMsgDelay = function() {
   if (Application.IsPersistent()) {
     return 25 * 1E3;
   } else {
@@ -10549,7 +10549,7 @@ com.inq.aria.AriaMsg.firstBufferedAriaMsgDelay = function() {  console.warn("com
     return _inTxt.length * 4 * 60;
   }
 }();
-com.inq.aria.AriaMsg.addBufferedAriaMsg = function(id, msg, msgType, force) {  console.warn("com.inq.aria.AriaMsg.addBufferedAriaMsg");
+com.inq.aria.AriaMsg.addBufferedAriaMsg = function(id, msg, msgType, force) {
   var iniBuf;
   var item = {id:id, msg:msg, msgType:msgType, f:force};
   com.inq.aria.AriaMsg.ariaMessages.push(item);
@@ -10561,7 +10561,7 @@ com.inq.aria.AriaMsg.addBufferedAriaMsg = function(id, msg, msgType, force) {  c
     com.inq.ui.Stage.getStageElement().onkeyup = com.inq.aria.AriaMsg.clearTimer;
   }
 };
-com.inq.aria.AriaMsg.sendAriaMsgAndCheckNext = function(timer) {  console.warn("com.inq.aria.AriaMsg.sendAriaMsgAndCheckNext");
+com.inq.aria.AriaMsg.sendAriaMsgAndCheckNext = function(timer) {
   var item = com.inq.aria.AriaMsg.ariaMessages.shift();
   com.inq.aria.AriaMsg.addAriaMsg(item.msg, item.msgType, item.f);
   if (0 < com.inq.aria.AriaMsg.ariaMessages.length) {
@@ -10570,7 +10570,7 @@ com.inq.aria.AriaMsg.sendAriaMsgAndCheckNext = function(timer) {  console.warn("
     com.inq.aria.AriaMsg.clearTimer();
   }
 };
-com.inq.aria.AriaMsg.clearTimer = function() {  console.warn("com.inq.aria.AriaMsg.clearTimer");
+com.inq.aria.AriaMsg.clearTimer = function() {
   if (com.inq.aria.AriaMsg.addBufferedAriaMsgTimerID >= 0) {
     window.clearTimeout(com.inq.aria.AriaMsg.addBufferedAriaMsgTimerID);
   }
@@ -10580,7 +10580,7 @@ com.inq.aria.AriaMsg.clearTimer = function() {  console.warn("com.inq.aria.AriaM
     com.inq.ui.Stage.getStageElement().onkeyup = null;
   }
 };
-com.inq.aria.AriaMsg.onChatShown = function() {  console.warn("com.inq.aria.AriaMsg.onChatShown");
+com.inq.aria.AriaMsg.onChatShown = function() {
   try {
     var oChatWithItem = Application.application.getMxmlItem("ChatWith");
     if (oChatWithItem) {
@@ -10589,7 +10589,7 @@ com.inq.aria.AriaMsg.onChatShown = function() {  console.warn("com.inq.aria.Aria
   } catch (e) {
   }
 };
-com.inq.aria.AriaMsg.disableScreenReaderForChat = function() {  console.warn("com.inq.aria.AriaMsg.disableScreenReaderForChat");
+com.inq.aria.AriaMsg.disableScreenReaderForChat = function() {
   var elm;
   var idsArray = ["tcChat_titleBar", "tcChat_chat"];
   for (var i = 0;i < idsArray.length;i++) {
@@ -10602,7 +10602,7 @@ com.inq.aria.AriaMsg.disableScreenReaderForChat = function() {  console.warn("co
     }
   }
 };
-com.inq.aria.AriaMsg.restoreScreenReaderForChat = function() {  console.warn("com.inq.aria.AriaMsg.restoreScreenReaderForChat");
+com.inq.aria.AriaMsg.restoreScreenReaderForChat = function() {
   var elm;
   var idsArray = ["tcChat_titleBar", "tcChat_chat"];
   for (var i = 0;i < idsArray.length;i++) {
@@ -10622,11 +10622,11 @@ com.inq.aria.AriaMsg.restoreScreenReaderForChat = function() {  console.warn("co
 com.inq.aria.AriaMsg.addAriaMsgLast = "";
 com.inq.aria.AriaMsg.ariaMessages = [];
 com.inq.aria.AriaMsg.addBufferedAriaMsgTimerID = -1;
-com.inq.flash.client.chatskins.AccessibilityHelp = function() {  console.warn("com.inq.flash.client.chatskins.AccessibilityHelp");
+com.inq.flash.client.chatskins.AccessibilityHelp = function() {
   this.reset();
 };
 $hxClasses.registerClass(com.inq.flash.client.chatskins.AccessibilityHelp, "com.inq.flash.client.chatskins.AccessibilityHelp");
-com.inq.flash.client.chatskins.AccessibilityHelp.prototype.reset = function() {  console.warn("com.inq.flash.client.chatskins.AccessibilityHelp.prototype.reset");
+com.inq.flash.client.chatskins.AccessibilityHelp.prototype.reset = function() {
   this.btnSendOriginalTitle = "";
   this.btnSendOriginalAlt = "";
   this.isAccessibilityHelpOnBtnSend = false;
@@ -10634,7 +10634,7 @@ com.inq.flash.client.chatskins.AccessibilityHelp.prototype.reset = function() { 
   this.isAddHelpOnBtnSendCalled = false;
   this.isAccessibilityHelpUsed = false;
 };
-com.inq.flash.client.chatskins.AccessibilityHelp.prototype.addHelpOnBtnSend = function() {  console.warn("com.inq.flash.client.chatskins.AccessibilityHelp.prototype.addHelpOnBtnSend");
+com.inq.flash.client.chatskins.AccessibilityHelp.prototype.addHelpOnBtnSend = function() {
   if (com.inq.flash.client.chatskins.SkinControl.initialFocusClaimedBy) {
     return;
   }
@@ -10665,7 +10665,7 @@ com.inq.flash.client.chatskins.AccessibilityHelp.prototype.addHelpOnBtnSend = fu
     this.isAccessibilityHelpOnBtnSend = true;
   }
 };
-com.inq.flash.client.chatskins.AccessibilityHelp.prototype.removeHelpOnBtnSend = function() {  console.warn("com.inq.flash.client.chatskins.AccessibilityHelp.prototype.removeHelpOnBtnSend");
+com.inq.flash.client.chatskins.AccessibilityHelp.prototype.removeHelpOnBtnSend = function() {
   var that = com.inq.flash.client.chatskins.AccessibilityHelp;
   var btnSendP = com.inq.flash.client.chatskins.SkinControl.getSendButton();
   btnSendP._img.setAttribute("title", this.btnSendOriginalTitle);
@@ -10675,7 +10675,7 @@ com.inq.flash.client.chatskins.AccessibilityHelp.prototype.removeHelpOnBtnSend =
   this.isAccessibilityHelpUsed = true;
   that.removeHelpOnBtnSendCallback = null;
 };
-com.inq.flash.client.chatskins.AccessibilityHelp.createInstance = function() {  console.warn("com.inq.flash.client.chatskins.AccessibilityHelp.createInstance");
+com.inq.flash.client.chatskins.AccessibilityHelp.createInstance = function() {
   return new com.inq.flash.client.chatskins.AccessibilityHelp;
 };
 com.inq.flash.client.chatskins.AccessibilityHelp.prototype.btnSendOriginalTitle = "";
@@ -10685,7 +10685,7 @@ com.inq.flash.client.chatskins.AccessibilityHelp.prototype.isButtonHasFirstFocus
 com.inq.flash.client.chatskins.AccessibilityHelp.prototype.isAddHelpOnBtnSendCalled = false;
 com.inq.flash.client.chatskins.AccessibilityHelp.prototype.isAccessibilityHelpUsed = false;
 com.inq.flash.client.chatskins.AccessibilityHelp.removeHelpOnBtnSendCallback = null;
-com.inq.flash.client.chatskins.SkinControl = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl");
+com.inq.flash.client.chatskins.SkinControl = function() {
 };
 $hxClasses.registerClass(com.inq.flash.client.chatskins.SkinControl, "com.inq.flash.client.chatskins.SkinControl");
 com.inq.flash.client.chatskins.SkinControl.inqPersistentUrl = null;
@@ -10707,7 +10707,7 @@ com.inq.flash.client.chatskins.SkinControl.timeoutAction = null;
 com.inq.flash.client.chatskins.SkinControl.initialFocusClaimedBy = null;
 com.inq.flash.client.chatskins.SkinControl.chatSessionEnded = false;
 com.inq.flash.client.chatskins.SkinControl.ciEmbeddedChatEnabled = false;
-com.inq.flash.client.chatskins.SkinControl.getOpener = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getOpener");
+com.inq.flash.client.chatskins.SkinControl.getOpener = function() {
   var opener = null;
   try {
     if (com.inq.flash.client.chatskins.SkinControl.isClick2WebCall() || com.inq.flash.client.control.WebRTCMgr.isEngaged) {
@@ -10720,14 +10720,14 @@ com.inq.flash.client.chatskins.SkinControl.getOpener = function() {  console.war
   }
   return opener;
 };
-com.inq.flash.client.chatskins.SkinControl.StopTimer = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.StopTimer");
+com.inq.flash.client.chatskins.SkinControl.StopTimer = function() {
   if (com.inq.flash.client.chatskins.SkinControl.timerTimeout != null) {
     com.inq.flash.client.chatskins.SkinControl.timerTimeout.stop();
     com.inq.flash.client.chatskins.SkinControl.timerTimeout = null;
     com.inq.flash.client.chatskins.SkinControl.stopWarning();
   }
 };
-com.inq.flash.client.chatskins.SkinControl.stopOpenerScript = function(bForce) {  console.warn("com.inq.flash.client.chatskins.SkinControl.stopOpenerScript");
+com.inq.flash.client.chatskins.SkinControl.stopOpenerScript = function(bForce) {
   if (bForce == null) {
     bForce = false;
   }
@@ -10736,10 +10736,10 @@ com.inq.flash.client.chatskins.SkinControl.stopOpenerScript = function(bForce) {
     com.inq.flash.client.chatskins.SkinControl.openerScript.stop(bForce);
   }
 };
-com.inq.flash.client.chatskins.SkinControl.getApplicationController = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getApplicationController");
+com.inq.flash.client.chatskins.SkinControl.getApplicationController = function() {
   return com.inq.flash.client.chatskins.SkinControl.applicationController;
 };
-com.inq.flash.client.chatskins.SkinControl.SkinResize = function(data) {  console.warn("com.inq.flash.client.chatskins.SkinControl.SkinResize");
+com.inq.flash.client.chatskins.SkinControl.SkinResize = function(data) {
   try {
     Application.application.setWidth(Application.application.screen.getWidth());
     Application.application.setHeight(Application.application.screen.getHeight());
@@ -10751,13 +10751,13 @@ com.inq.flash.client.chatskins.SkinControl.SkinResize = function(data) {  consol
   }
   return true;
 };
-com.inq.flash.client.chatskins.SkinControl.applyTranscriptToPersistent = function(sHtml) {  console.warn("com.inq.flash.client.chatskins.SkinControl.applyTranscriptToPersistent");
+com.inq.flash.client.chatskins.SkinControl.applyTranscriptToPersistent = function(sHtml) {
   com.inq.flash.client.chatskins.SkinControl.cw.setHtmlText(sHtml);
 };
-com.inq.flash.client.chatskins.SkinControl.setSocketIP = function(crAddress) {  console.warn("com.inq.flash.client.chatskins.SkinControl.setSocketIP");
+com.inq.flash.client.chatskins.SkinControl.setSocketIP = function(crAddress) {
   com.inq.flash.client.chatskins.SkinControl.sSocketIP = crAddress;
 };
-com.inq.flash.client.chatskins.SkinControl.addWebRTCToStream = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.addWebRTCToStream");
+com.inq.flash.client.chatskins.SkinControl.addWebRTCToStream = function() {
   if (!com.inq.utils.Util.getConfig("WebRTCEnabled", false)) {
     return "";
   }
@@ -10765,15 +10765,15 @@ com.inq.flash.client.chatskins.SkinControl.addWebRTCToStream = function() {  con
   var rtc = com.inq.flash.client.control.WebRTCMgr.isWebRTCCapable();
   return com.inq.flash.client.chatskins.SkinControl.CSDL_WEBRTC_CAP + rtc + sep;
 };
-com.inq.flash.client.chatskins.SkinControl.setApplicationController = function(controller) {  console.warn("com.inq.flash.client.chatskins.SkinControl.setApplicationController");
+com.inq.flash.client.chatskins.SkinControl.setApplicationController = function(controller) {
   haxe.Log.trace("setApplicationController: entered", {fileName:"SkinControl.hx", lineNumber:295, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"setApplicationController"});
   com.inq.flash.client.chatskins.SkinControl.applicationController = controller;
 };
-com.inq.flash.client.chatskins.SkinControl.ChatWindowInitialized = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.ChatWindowInitialized");
+com.inq.flash.client.chatskins.SkinControl.ChatWindowInitialized = function() {
   haxe.Log.trace("chat window initialized", {fileName:"SkinControl.hx", lineNumber:301, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"ChatWindowInitialized"});
   com.inq.flash.client.chatskins.SkinControl.Test();
 };
-com.inq.flash.client.chatskins.SkinControl.setTranscriptWindowSettings = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.setTranscriptWindowSettings");
+com.inq.flash.client.chatskins.SkinControl.setTranscriptWindowSettings = function() {
   com.inq.flash.client.chatskins.SkinControl.transcriptAgentColor = "#0000CB";
   com.inq.flash.client.chatskins.SkinControl.transcriptCustomerColor = "#000000";
   com.inq.flash.client.chatskins.SkinControl.transcriptFontSize = "11pt";
@@ -10785,20 +10785,20 @@ com.inq.flash.client.chatskins.SkinControl.setTranscriptWindowSettings = functio
   com.inq.flash.client.chatskins.SkinControl.transcriptFont = com.inq.utils.Util.getConfig("sFont", "Veranda");
   com.inq.flash.client.chatskins.SkinControl.transcriptAgentSample = com.inq.utils.Util.getConfig("sSampleAgentText", "Jessica:  ");
 };
-com.inq.flash.client.chatskins.SkinControl.AddCustomerTextToChatWindow = function(Msg, position, expressionList, restoreMode) {  console.warn("com.inq.flash.client.chatskins.SkinControl.AddCustomerTextToChatWindow");
+com.inq.flash.client.chatskins.SkinControl.AddCustomerTextToChatWindow = function(Msg, position, expressionList, restoreMode) {
   return com.inq.flash.client.chatskins.SkinControl.AddTranscriptItemToChatWindow(com.inq.flash.client.control.FlashVars.getCustomerName(), com.inq.flash.messagingframework.StringUtils.htmlEncode(Msg), com.inq.flash.client.chatskins.ChatTextArea.CUSTOMER, position, expressionList, restoreMode);
 };
-com.inq.flash.client.chatskins.SkinControl.ReAddCustomerTextToChatWindow = function(Msg, position) {  console.warn("com.inq.flash.client.chatskins.SkinControl.ReAddCustomerTextToChatWindow");
+com.inq.flash.client.chatskins.SkinControl.ReAddCustomerTextToChatWindow = function(Msg, position) {
   if (com.inq.flash.client.chatskins.SkinControl.hostIndx < com.inq.flash.client.chatskins.SkinControl.customerIndx) {
     return -1;
   }
   com.inq.flash.client.chatskins.SkinControl.hostIndx++;
   return com.inq.flash.client.chatskins.SkinControl.AddTranscriptItemToChatWindow(com.inq.flash.client.control.FlashVars.getCustomerName(), Msg, com.inq.flash.client.chatskins.ChatTextArea.CUSTOMER, position);
 };
-com.inq.flash.client.chatskins.SkinControl.isContinued = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.isContinued");
+com.inq.flash.client.chatskins.SkinControl.isContinued = function() {
   return !!com.inq.flash.client.control.FlashVars.isContinued();
 };
-com.inq.flash.client.chatskins.SkinControl.ClearTranscript = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.ClearTranscript");
+com.inq.flash.client.chatskins.SkinControl.ClearTranscript = function() {
   Application.application.notificationController.hideNotification();
   try {
     if (null != com.inq.flash.client.chatskins.SkinControl.cw) {
@@ -10812,12 +10812,12 @@ com.inq.flash.client.chatskins.SkinControl.ClearTranscript = function() {  conso
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.updateCustomerName = function(name) {  console.warn("com.inq.flash.client.chatskins.SkinControl.updateCustomerName");
+com.inq.flash.client.chatskins.SkinControl.updateCustomerName = function(name) {
   if (com.inq.flash.client.chatskins.SkinControl.cw) {
     com.inq.flash.client.chatskins.SkinControl.cw.updateCustomerName(name);
   }
 };
-com.inq.flash.client.chatskins.SkinControl.AddTranscriptItemToChatWindow = function(Id, Msg, ChatType, position, expressionList, restoreMode, cssClass) {  console.warn("com.inq.flash.client.chatskins.SkinControl.AddTranscriptItemToChatWindow");
+com.inq.flash.client.chatskins.SkinControl.AddTranscriptItemToChatWindow = function(Id, Msg, ChatType, position, expressionList, restoreMode, cssClass) {
   var val = -1;
   haxe.Log.trace("SkinControl.AddTranscriptItemToChatWindow: entered", {fileName:"SkinControl.hx", lineNumber:360, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"AddTranscriptItemToChatWindow"});
   try {
@@ -10828,7 +10828,7 @@ com.inq.flash.client.chatskins.SkinControl.AddTranscriptItemToChatWindow = funct
   }
   return val;
 };
-com.inq.flash.client.chatskins.SkinControl.modifyDTFields = function(dtId, selectedLinkName) {  console.warn("com.inq.flash.client.chatskins.SkinControl.modifyDTFields");
+com.inq.flash.client.chatskins.SkinControl.modifyDTFields = function(dtId, selectedLinkName) {
   var div = window.document.getElementById(dtId);
   var elements = div.getElementsByTagName("INPUT");
   var el;
@@ -10848,7 +10848,7 @@ com.inq.flash.client.chatskins.SkinControl.modifyDTFields = function(dtId, selec
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.modifyDTString = function(msg, selectedLinkName, selectedCheckboxNames) {  console.warn("com.inq.flash.client.chatskins.SkinControl.modifyDTString");
+com.inq.flash.client.chatskins.SkinControl.modifyDTString = function(msg, selectedLinkName, selectedCheckboxNames) {
   if (msg == null) {
     return null;
   }
@@ -10876,14 +10876,14 @@ com.inq.flash.client.chatskins.SkinControl.modifyDTString = function(msg, select
   }
   return msg;
 };
-com.inq.flash.client.chatskins.SkinControl.AddOpenerToChatWindow = function(Id, Msg, ChatType, position, expressionList) {  console.warn("com.inq.flash.client.chatskins.SkinControl.AddOpenerToChatWindow");
+com.inq.flash.client.chatskins.SkinControl.AddOpenerToChatWindow = function(Id, Msg, ChatType, position, expressionList) {
   haxe.Log.trace("SkinControl.AddOpenerToChatWindow: entered", {fileName:"SkinControl.hx", lineNumber:472, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"AddOpenerToChatWindow"});
   return com.inq.flash.client.chatskins.SkinControl.cw.addOpenerScript(Id, Msg, ChatType, position, expressionList);
 };
-com.inq.flash.client.chatskins.SkinControl.MoveChatHistory = function(chatWindow) {  console.warn("com.inq.flash.client.chatskins.SkinControl.MoveChatHistory");
+com.inq.flash.client.chatskins.SkinControl.MoveChatHistory = function(chatWindow) {
   return;
 };
-com.inq.flash.client.chatskins.SkinControl.isInApplication = function(name) {  console.warn("com.inq.flash.client.chatskins.SkinControl.isInApplication");
+com.inq.flash.client.chatskins.SkinControl.isInApplication = function(name) {
   var bExists = false;
   try {
     var obj = Application.application.getMxmlItem(name);
@@ -10899,7 +10899,7 @@ com.inq.flash.client.chatskins.SkinControl.isInApplication = function(name) {  c
   }
   return bExists;
 };
-com.inq.flash.client.chatskins.SkinControl.Test = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.Test");
+com.inq.flash.client.chatskins.SkinControl.Test = function() {
   if (com.inq.flash.client.control.FlashVars.getPersistentFrame()) {
     return;
   }
@@ -10907,7 +10907,7 @@ com.inq.flash.client.chatskins.SkinControl.Test = function() {  console.warn("co
     return;
   }
 };
-com.inq.flash.client.chatskins.SkinControl.doChatExit = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.doChatExit");
+com.inq.flash.client.chatskins.SkinControl.doChatExit = function() {
   com.inq.flash.client.chatskins.SkinControl.stopOpenerScript();
   com.inq.flash.client.chatskins.SkinControl.StopTimer();
   com.inq.flash.client.chatskins.SkinControl.applicationController.shutdownQuietly();
@@ -10923,7 +10923,7 @@ com.inq.flash.client.chatskins.SkinControl.doChatExit = function() {  console.wa
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.sendCloseEventToAutomations = function(event) {  console.warn("com.inq.flash.client.chatskins.SkinControl.sendCloseEventToAutomations");
+com.inq.flash.client.chatskins.SkinControl.sendCloseEventToAutomations = function(event) {
   var sendingEventFlag = false;
   var xframes = Application.application.getXFrameItems();
   for (var i = 0;i < xframes.length;i++) {
@@ -10933,7 +10933,7 @@ com.inq.flash.client.chatskins.SkinControl.sendCloseEventToAutomations = functio
   }
   return sendingEventFlag;
 };
-com.inq.flash.client.chatskins.SkinControl.sendEventToAllAutomatons = function(event, params) {  console.warn("com.inq.flash.client.chatskins.SkinControl.sendEventToAllAutomatons");
+com.inq.flash.client.chatskins.SkinControl.sendEventToAllAutomatons = function(event, params) {
   var sendingEventFlag = false;
   var xframes = Application.application.getXFrameItems();
   for (var i = 0;i < xframes.length;i++) {
@@ -10943,12 +10943,12 @@ com.inq.flash.client.chatskins.SkinControl.sendEventToAllAutomatons = function(e
   }
   return sendingEventFlag;
 };
-com.inq.flash.client.chatskins.SkinControl.doThankYou = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.doThankYou");
+com.inq.flash.client.chatskins.SkinControl.doThankYou = function() {
   var btn = Application.application.getButton("btnCloseChat");
   btn.addEventListener(com.inq.events.MouseEvent.CLICK, com.inq.flash.client.chatskins.SkinControl.actionCloseThankYouNotice);
   com.inq.flash.client.chatskins.SkinControl.gotoThankyouScene();
 };
-com.inq.flash.client.chatskins.SkinControl.agentClosesChat = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.agentClosesChat");
+com.inq.flash.client.chatskins.SkinControl.agentClosesChat = function() {
   var tY = com.inq.flash.client.control.FlashPeer.isThankYouEnabled();
   var closeChatOnAgentClose = com.inq.utils.Util.getConfig("closeChatOnAgentClose", false);
   com.inq.flash.client.chatskins.SkinControl.closeChatSession();
@@ -10996,7 +10996,7 @@ com.inq.flash.client.chatskins.SkinControl.agentClosesChat = function() {  conso
   com.inq.flash.client.control.WebRTCMgr.close();
   this.agentClosedChat = true;
 };
-com.inq.flash.client.chatskins.SkinControl.preparingClosingChat = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.preparingClosingChat");
+com.inq.flash.client.chatskins.SkinControl.preparingClosingChat = function() {
   com.inq.flash.client.chatskins.SkinControl.closeChatSession();
   com.inq.flash.client.chatskins.SkinControl.disableInput();
   com.inq.flash.client.chatskins.SkinControl.StopTimer();
@@ -11010,7 +11010,7 @@ com.inq.flash.client.chatskins.SkinControl.preparingClosingChat = function() {  
   com.inq.flash.client.control.UploadHandler.close();
   com.inq.flash.client.control.FlashPeer.setDisconnectFlag();
 };
-com.inq.flash.client.chatskins.SkinControl.connectionLostClosingChat = function(showNotification) {  console.warn("com.inq.flash.client.chatskins.SkinControl.connectionLostClosingChat");
+com.inq.flash.client.chatskins.SkinControl.connectionLostClosingChat = function(showNotification) {
   if (!com.inq.flash.client.chatskins.SkinControl.getApplicationController().isConnected()) {
     return;
   }
@@ -11037,7 +11037,7 @@ com.inq.flash.client.chatskins.SkinControl.connectionLostClosingChat = function(
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.cleanUpChatAndThankyou = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.cleanUpChatAndThankyou");
+com.inq.flash.client.chatskins.SkinControl.cleanUpChatAndThankyou = function() {
   var skinControl = com.inq.flash.client.chatskins.SkinControl;
   skinControl.closeChatSession();
   skinControl.sendExitMsg();
@@ -11047,7 +11047,7 @@ com.inq.flash.client.chatskins.SkinControl.cleanUpChatAndThankyou = function() {
   skinControl.ClearTranscript();
   skinControl.doThankYou();
 };
-com.inq.flash.client.chatskins.SkinControl.timeoutClosesChat = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.timeoutClosesChat");
+com.inq.flash.client.chatskins.SkinControl.timeoutClosesChat = function() {
   var tY = com.inq.flash.client.control.FlashPeer.isThankYouEnabled();
   if (tY) {
     com.inq.flash.client.chatskins.SkinControl.cleanUpChatAndThankyou();
@@ -11055,7 +11055,7 @@ com.inq.flash.client.chatskins.SkinControl.timeoutClosesChat = function() {  con
     com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChat(null);
   }
 };
-com.inq.flash.client.chatskins.SkinControl.getThankYou = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getThankYou");
+com.inq.flash.client.chatskins.SkinControl.getThankYou = function() {
   var cTY = null;
   if (com.inq.flash.client.chatskins.SkinControl.wasSaleAction()) {
     cTY = Application.application.getCanvas("thankYouSale");
@@ -11065,7 +11065,7 @@ com.inq.flash.client.chatskins.SkinControl.getThankYou = function() {  console.w
   }
   return cTY;
 };
-com.inq.flash.client.chatskins.SkinControl.getThankYouButton = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getThankYouButton");
+com.inq.flash.client.chatskins.SkinControl.getThankYouButton = function() {
   var out = null;
   if (com.inq.flash.client.chatskins.SkinControl.wasSaleAction()) {
     out = Application.application.getButton("btnThankYouSale");
@@ -11075,7 +11075,7 @@ com.inq.flash.client.chatskins.SkinControl.getThankYouButton = function() {  con
   }
   return out;
 };
-com.inq.flash.client.chatskins.SkinControl.fireMxmlHandler = function(HandlerName) {  console.warn("com.inq.flash.client.chatskins.SkinControl.fireMxmlHandler");
+com.inq.flash.client.chatskins.SkinControl.fireMxmlHandler = function(HandlerName) {
   try {
     var func = com.inq.utils.Util.getConfig(HandlerName, null);
     if (func != null) {
@@ -11088,7 +11088,7 @@ com.inq.flash.client.chatskins.SkinControl.fireMxmlHandler = function(HandlerNam
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.gotoThankyouScene = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.gotoThankyouScene");
+com.inq.flash.client.chatskins.SkinControl.gotoThankyouScene = function() {
   var cTY = com.inq.flash.client.chatskins.SkinControl.getThankYou();
   var tyLabel = Application.application.getButton("btnThankYou").label;
   var tkyMsg = tyLabel !== null ? tyLabel : "Thank you. Close this window.";
@@ -11151,17 +11151,17 @@ com.inq.flash.client.chatskins.SkinControl.gotoThankyouScene = function() {  con
     com.inq.flash.client.chatskins.SkinControl.disableInput();
   }
 };
-com.inq.flash.client.chatskins.SkinControl.disableOutdatedStylesheets = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.disableOutdatedStylesheets");
+com.inq.flash.client.chatskins.SkinControl.disableOutdatedStylesheets = function() {
   for (var i = 0;i < Application.application.styleLinksList.length;i++) {
     Application.application.styleLinksList[i].disabled = true;
   }
 };
-com.inq.flash.client.chatskins.SkinControl.HideClientDecorations = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.HideClientDecorations");
+com.inq.flash.client.chatskins.SkinControl.HideClientDecorations = function() {
   com.inq.ui.ClientBody.closeAll();
   Application.application.closeMxmlItems();
   com.inq.flash.client.chatskins.SkinControl.disableOutdatedStylesheets();
 };
-com.inq.flash.client.chatskins.SkinControl.closeChat = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.closeChat");
+com.inq.flash.client.chatskins.SkinControl.closeChat = function() {
   try {
     com.inq.flash.client.chatskins.SkinControl.removeModalWindow();
     if (com.inq.flash.client.control.MinimizeManager.talkBackDummyRestoreBtnAdded == true) {
@@ -11182,7 +11182,7 @@ com.inq.flash.client.chatskins.SkinControl.closeChat = function() {  console.war
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.closeThroughThankYouScene = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.closeThroughThankYouScene");
+com.inq.flash.client.chatskins.SkinControl.closeThroughThankYouScene = function() {
   var btn = Application.application.getButton("btnCloseChatx") || Application.application.getButton("btnCloseChat");
   if (btn != null) {
     if (btn.styles["onClick"]) {
@@ -11201,7 +11201,7 @@ com.inq.flash.client.chatskins.SkinControl.closeThroughThankYouScene = function(
   }
   com.inq.flash.client.control.FlashPeer.closePersistentWindowIfOpen();
 };
-com.inq.flash.client.chatskins.SkinControl.restoreFocusToMainWindow = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.restoreFocusToMainWindow");
+com.inq.flash.client.chatskins.SkinControl.restoreFocusToMainWindow = function() {
   if (!com.inq.flash.client.chatskins.SkinControl.getIsPersistentChat()) {
     window.top.focus();
   } else {
@@ -11212,18 +11212,18 @@ com.inq.flash.client.chatskins.SkinControl.restoreFocusToMainWindow = function()
   }
 };
 com.inq.flash.client.chatskins.SkinControl.HideChat = com.inq.flash.client.chatskins.SkinControl.closeChat;
-com.inq.flash.client.chatskins.SkinControl.ShowChat = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.ShowChat");
+com.inq.flash.client.chatskins.SkinControl.ShowChat = function() {
 };
-com.inq.flash.client.chatskins.SkinControl.scrollTranscriptToEnd = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.scrollTranscriptToEnd");
+com.inq.flash.client.chatskins.SkinControl.scrollTranscriptToEnd = function() {
   if (com.inq.flash.client.chatskins.SkinControl.cw != null) {
     com.inq.flash.client.chatskins.SkinControl.cw.scrollToEnd();
   }
 };
-com.inq.flash.client.chatskins.SkinControl.requestLcKillPopup = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.requestLcKillPopup");
+com.inq.flash.client.chatskins.SkinControl.requestLcKillPopup = function() {
 };
-com.inq.flash.client.chatskins.SkinControl.ask4Transcript = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.ask4Transcript");
+com.inq.flash.client.chatskins.SkinControl.ask4Transcript = function() {
 };
-com.inq.flash.client.chatskins.SkinControl.showPersistentChatButtons = function(bShow) {  console.warn("com.inq.flash.client.chatskins.SkinControl.showPersistentChatButtons");
+com.inq.flash.client.chatskins.SkinControl.showPersistentChatButtons = function(bShow) {
   haxe.Log.trace("SkinControl:showPersistentChatButtons(" + Std.string(bShow) + ");", {fileName:"SkinControl.hx", lineNumber:723, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"showPersistentChatButtons"});
   if (!com.inq.flash.client.control.FlashVars.getPersistentFrame()) {
     var clickPersistent = Application.application.getButton("ClickPersistent");
@@ -11232,14 +11232,14 @@ com.inq.flash.client.chatskins.SkinControl.showPersistentChatButtons = function(
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.showChatIDText = function(bShow) {  console.warn("com.inq.flash.client.chatskins.SkinControl.showChatIDText");
+com.inq.flash.client.chatskins.SkinControl.showChatIDText = function(bShow) {
   haxe.Log.trace("SkinControl:showChatIDText(" + Std.string(bShow) + ");", {fileName:"SkinControl.hx", lineNumber:736, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"showChatIDText"});
   var chatIDText = Application.application.getMxmlItem("ChatIDText");
   if (com.inq.flash.client.chatskins.SkinControl.isInApplication("ChatIDText")) {
     chatIDText.setVisible(bShow);
   }
 };
-com.inq.flash.client.chatskins.SkinControl.killPopup = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.killPopup");
+com.inq.flash.client.chatskins.SkinControl.killPopup = function() {
   haxe.Log.trace("SkinControl.killPopup: Entered", {fileName:"SkinControl.hx", lineNumber:746, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"killPopup"});
   if (com.inq.flash.client.chatskins.SkinControl.applicationController.isConnected()) {
     com.inq.flash.client.chatskins.SkinControl.applicationController.shutdownQuietly();
@@ -11255,12 +11255,12 @@ com.inq.flash.client.chatskins.SkinControl.killPopup = function() {  console.war
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.endChatQuietPopup = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.endChatQuietPopup");
+com.inq.flash.client.chatskins.SkinControl.endChatQuietPopup = function() {
   haxe.Log.trace("SkinControl.endChatQuietPopup: Entered", {fileName:"SkinControl.hx", lineNumber:757, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"endChatQuietPopup"});
   com.inq.flash.client.chatskins.SkinControl.sendExitMsg();
   com.inq.flash.client.chatskins.SkinControl.quietPopup();
 };
-com.inq.flash.client.chatskins.SkinControl.quietPopup = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.quietPopup");
+com.inq.flash.client.chatskins.SkinControl.quietPopup = function() {
   haxe.Log.trace("SkinControl.killPopup: Entered", {fileName:"SkinControl.hx", lineNumber:767, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"quietPopup"});
   try {
     com.inq.flash.client.control.FlashPeer.closeChat();
@@ -11272,7 +11272,7 @@ com.inq.flash.client.chatskins.SkinControl.quietPopup = function() {  console.wa
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.goToPersistentChat = function(event) {  console.warn("com.inq.flash.client.chatskins.SkinControl.goToPersistentChat");
+com.inq.flash.client.chatskins.SkinControl.goToPersistentChat = function(event) {
   var success;
   var clickPersistent = null;
   if (!com.inq.flash.client.chatskins.SkinControl.getApplicationController().isSendMessageFail() && !com.inq.flash.client.chatskins.SkinControl.chatSessionEnded && com.inq.flash.client.chatskins.SkinControl.bPersistBtnPressed == false) {
@@ -11289,7 +11289,7 @@ com.inq.flash.client.chatskins.SkinControl.goToPersistentChat = function(event) 
     com.inq.flash.client.chatskins.SkinControl.bPersistBtnPressed = false;
   }
 };
-com.inq.flash.client.chatskins.SkinControl.PushToFrameset = function(_sUrl, _sTarget) {  console.warn("com.inq.flash.client.chatskins.SkinControl.PushToFrameset");
+com.inq.flash.client.chatskins.SkinControl.PushToFrameset = function(_sUrl, _sTarget) {
   try {
     var myURL = window.parent.document.URL;
     var destURL = HxOverrides.substr(_sUrl, _sUrl.length - 1, null) != "/" ? _sUrl : HxOverrides.substr(_sUrl, 0, _sUrl.length - 1);
@@ -11311,7 +11311,7 @@ com.inq.flash.client.chatskins.SkinControl.PushToFrameset = function(_sUrl, _sTa
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.enablePersistentChatButtonAndEstablishUrl = function(_sUrl) {  console.warn("com.inq.flash.client.chatskins.SkinControl.enablePersistentChatButtonAndEstablishUrl");
+com.inq.flash.client.chatskins.SkinControl.enablePersistentChatButtonAndEstablishUrl = function(_sUrl) {
   haxe.Log.trace("SkinControl.enablePersistentChatButtonAndEstablishUrl entered", {fileName:"SkinControl.hx", lineNumber:833, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"enablePersistentChatButtonAndEstablishUrl"});
   if (com.inq.flash.client.control.FlashVars.getPersistentFrame()) {
     return;
@@ -11341,19 +11341,19 @@ com.inq.flash.client.chatskins.SkinControl.enablePersistentChatButtonAndEstablis
   } catch (err) {
   }
 };
-com.inq.flash.client.chatskins.SkinControl.isClick2call = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.isClick2call");
+com.inq.flash.client.chatskins.SkinControl.isClick2call = function() {
   if (!com.inq.flash.client.chatskins.SkinControl.click2call) {
     com.inq.flash.client.chatskins.SkinControl.click2call = com.inq.flash.client.chatskins.SkinControl.isInApplication("btnCall");
   }
   return com.inq.flash.client.chatskins.SkinControl.click2call;
 };
-com.inq.flash.client.chatskins.SkinControl.isClick2WebCall = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.isClick2WebCall");
+com.inq.flash.client.chatskins.SkinControl.isClick2WebCall = function() {
   return com.inq.flash.client.control.FlashVars.getValue("launchType") === "C2WEBRTC";
 };
-com.inq.flash.client.chatskins.SkinControl.getCallerNameString = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getCallerNameString");
+com.inq.flash.client.chatskins.SkinControl.getCallerNameString = function() {
   return com.inq.flash.client.chatskins.SkinControl.callerNameString.length == 0 ? com.inq.flash.client.control.FlashVars.getCustomerName() : com.inq.flash.client.chatskins.SkinControl.callerNameString;
 };
-com.inq.flash.client.chatskins.SkinControl.actionBtnCall = function(me) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionBtnCall");
+com.inq.flash.client.chatskins.SkinControl.actionBtnCall = function(me) {
   var skinControl = com.inq.flash.client.chatskins.SkinControl;
   try {
     skinControl.click2call = true;
@@ -11383,7 +11383,7 @@ com.inq.flash.client.chatskins.SkinControl.actionBtnCall = function(me) {  conso
     return;
   }
 };
-com.inq.flash.client.chatskins.SkinControl.actionBtnSend = function(me) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionBtnSend");
+com.inq.flash.client.chatskins.SkinControl.actionBtnSend = function(me) {
   if (me && me.originalEvent && me.originalEvent.stopPropagation) {
     me.originalEvent.stopPropagation();
   }
@@ -11422,11 +11422,11 @@ com.inq.flash.client.chatskins.SkinControl.actionBtnSend = function(me) {  conso
   return false;
 };
 com.inq.flash.client.chatskins.SkinControl.accessibilityHelp = com.inq.flash.client.chatskins.AccessibilityHelp.createInstance();
-com.inq.flash.client.chatskins.SkinControl.actionBtnPopOut = function(me) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionBtnPopOut");
+com.inq.flash.client.chatskins.SkinControl.actionBtnPopOut = function(me) {
   com.inq.flash.client.chatskins.SkinControl.removeModalWindow();
   return com.inq.flash.client.control.FlashPeer.popOutChat(true, com.inq.flash.client.chatskins.SkinControl.resizable);
 };
-com.inq.flash.client.chatskins.SkinControl.customerClosingChat = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.customerClosingChat");
+com.inq.flash.client.chatskins.SkinControl.customerClosingChat = function() {
   com.inq.flash.client.chatskins.SkinControl.stopOpenerScript();
   com.inq.flash.client.chatskins.SkinControl.ClearTranscript();
   com.inq.flash.client.chatskins.SkinControl.endCobrowse();
@@ -11457,7 +11457,7 @@ com.inq.flash.client.chatskins.SkinControl.customerClosingChat = function() {  c
     Application.application.setPreventChatClosed(false);
   }
 };
-com.inq.flash.client.chatskins.SkinControl.customerClosedChat = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.customerClosedChat");
+com.inq.flash.client.chatskins.SkinControl.customerClosedChat = function() {
   var appCont = com.inq.flash.client.chatskins.SkinControl.applicationController;
   appCont.disable();
   com.inq.flash.client.chatskins.SkinControl.bInitialized = false;
@@ -11490,17 +11490,17 @@ com.inq.flash.client.chatskins.SkinControl.customerClosedChat = function() {  co
     }, 1E3);
   }
 };
-com.inq.flash.client.chatskins.SkinControl.actionCloseChat = function(tY) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionCloseChat");
+com.inq.flash.client.chatskins.SkinControl.actionCloseChat = function(tY) {
   if (tY === undefined) {
     tY = com.inq.flash.client.control.FlashPeer.isThankYouEnabled();
   }
   com.inq.flash.client.chatskins.SkinControl.isThankYou = !!tY;
   com.inq.flash.client.chatskins.SkinControl.customerClosingChat();
 };
-com.inq.flash.client.chatskins.SkinControl.endCobrowse = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.endCobrowse");
+com.inq.flash.client.chatskins.SkinControl.endCobrowse = function() {
   com.inq.flash.client.chatskins.CoBrowseMgr.endCob();
 };
-com.inq.flash.client.chatskins.SkinControl.actionCloseThankYouNotice = function(me) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionCloseThankYouNotice");
+com.inq.flash.client.chatskins.SkinControl.actionCloseThankYouNotice = function(me) {
   com.inq.flash.client.control.FlashPeer.onBeforeChatClosed();
   if (Application.application.getPreventChatClosed()) {
     Application.application.setPreventChatClosed(false);
@@ -11513,14 +11513,14 @@ com.inq.flash.client.chatskins.SkinControl.actionCloseThankYouNotice = function(
   }
   return false;
 };
-com.inq.flash.client.chatskins.SkinControl.actionFocusVideo = function(me) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionFocusVideo");
+com.inq.flash.client.chatskins.SkinControl.actionFocusVideo = function(me) {
   if (com.inq.flash.client.chatskins.SkinControl.isInApplication("video")) {
     top.window.document.getElementById("tcChat_video").focus();
   } else {
   }
   return false;
 };
-com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChat = function(me) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChat");
+com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChat = function(me) {
   if (Application.application[com.inq.utils.Util.configArea][com.inq.utils.Util.xformsCloseEventFlag]) {
     var sendingEventFlag = com.inq.flash.client.chatskins.SkinControl.sendCloseEventToAutomations("onChatClose");
     if (!sendingEventFlag) {
@@ -11531,25 +11531,25 @@ com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChat = function(me) {  
   }
   return true;
 };
-com.inq.flash.client.chatskins.SkinControl.actionBtnClickToChat = function(me) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionBtnClickToChat");
+com.inq.flash.client.chatskins.SkinControl.actionBtnClickToChat = function(me) {
 };
-com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChatWindow = function(me) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChatWindow");
+com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChatWindow = function(me) {
   com.inq.flash.client.chatskins.SkinControl.showPersistentChatButtons(false);
   com.inq.flash.client.chatskins.SkinControl.applicationController.shutdown();
   com.inq.flash.client.control.FlashPeer.closeChat();
 };
-com.inq.flash.client.chatskins.SkinControl.actionRestoreAndExitChat = function(me) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionRestoreAndExitChat");
+com.inq.flash.client.chatskins.SkinControl.actionRestoreAndExitChat = function(me) {
   com.inq.flash.client.control.MinimizeManager.actionRestore();
   com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChat(me);
   return true;
 };
-com.inq.flash.client.chatskins.SkinControl.actionClickOnTxtInput = function(me) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionClickOnTxtInput");
+com.inq.flash.client.chatskins.SkinControl.actionClickOnTxtInput = function(me) {
   if (com.inq.flash.client.chatskins.SkinControl.bHaveFocus == false) {
     com.inq.flash.client.chatskins.SkinControl.bHaveFocus = true;
     haxe.Log.trace("Flash gained focus", {fileName:"SkinControl.hx", lineNumber:1067, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"actionClickOnTxtInput"});
   }
 };
-com.inq.flash.client.chatskins.SkinControl.actionAutoTabToPhoneField2 = function(ke) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionAutoTabToPhoneField2");
+com.inq.flash.client.chatskins.SkinControl.actionAutoTabToPhoneField2 = function(ke) {
   var callerPhoneField1 = Application.application.getTextInput(com.inq.flash.client.chatskins.SkinControl.CALL_SUBMIT_PRE + "phoneField1");
   var callerPhoneField2 = Application.application.getTextInput(com.inq.flash.client.chatskins.SkinControl.CALL_SUBMIT_PRE + "phoneField2");
   if (callerPhoneField1 != null && StringTools.trim(callerPhoneField1._getInput()).length == 3 && (ke.keyCode >= 48 && ke.keyCode <= 57 || ke.keyCode >= 96 && ke.keyCode <= 105 || ke.keyCode == 39) && callerPhoneField1.getCursorPosition() == 3) {
@@ -11557,7 +11557,7 @@ com.inq.flash.client.chatskins.SkinControl.actionAutoTabToPhoneField2 = function
   }
   return true;
 };
-com.inq.flash.client.chatskins.SkinControl.actionAutoTabToPhoneField3 = function(ke) {  console.warn("com.inq.flash.client.chatskins.SkinControl.actionAutoTabToPhoneField3");
+com.inq.flash.client.chatskins.SkinControl.actionAutoTabToPhoneField3 = function(ke) {
   var callerPhoneField2 = Application.application.getTextInput(com.inq.flash.client.chatskins.SkinControl.CALL_SUBMIT_PRE + "phoneField2");
   var callerPhoneField3 = Application.application.getTextInput(com.inq.flash.client.chatskins.SkinControl.CALL_SUBMIT_PRE + "phoneField3");
   if (callerPhoneField2 != null && StringTools.trim(callerPhoneField2._getInput()).length == 3 && (ke.keyCode >= 48 && ke.keyCode <= 57 || ke.keyCode >= 96 && ke.keyCode <= 105 || ke.keyCode == 39) && callerPhoneField2.getCursorPosition() == 3) {
@@ -11565,7 +11565,7 @@ com.inq.flash.client.chatskins.SkinControl.actionAutoTabToPhoneField3 = function
   }
   return true;
 };
-com.inq.flash.client.chatskins.SkinControl.setupButtons = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.setupButtons");
+com.inq.flash.client.chatskins.SkinControl.setupButtons = function() {
   try {
     var stg = Application.application.stage;
     if (stg != null) {
@@ -11614,7 +11614,7 @@ com.inq.flash.client.chatskins.SkinControl.setupButtons = function() {  console.
     Application.application.getButton("btnThankYouSale").addEventListener(com.inq.events.MouseEvent.CLICK, actionCloseThankyouNotice);
   }
 };
-com.inq.flash.client.chatskins.SkinControl.InitThankYouGraphic = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.InitThankYouGraphic");
+com.inq.flash.client.chatskins.SkinControl.InitThankYouGraphic = function() {
   haxe.Log.trace("InitThankYouGraphic()", {fileName:"SkinControl.hx", lineNumber:1150, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"InitThankYouGraphic"});
   var thankYou = com.inq.flash.client.chatskins.SkinControl.getThankYou();
   thankYou.setVisible(false);
@@ -11625,12 +11625,12 @@ com.inq.flash.client.chatskins.SkinControl.InitThankYouGraphic = function() {  c
     com.inq.flash.client.control.FlashPeer.closeChat();
   };
 };
-com.inq.flash.client.chatskins.SkinControl.checkForSpecialExpression = function(text) {  console.warn("com.inq.flash.client.chatskins.SkinControl.checkForSpecialExpression");
+com.inq.flash.client.chatskins.SkinControl.checkForSpecialExpression = function(text) {
   text = com.inq.flash.client.chatskins.SkinControl.checkForGoToPersistentChatMsg(text);
   var result = {expressionList:[], text:text};
   return com.inq.flash.client.chatskins.SkinControl.checkForCustomerNameInputField(result);
 };
-com.inq.flash.client.chatskins.SkinControl.checkMessageForSpecialExpression = function(chatCommunicationMessage) {  console.warn("com.inq.flash.client.chatskins.SkinControl.checkMessageForSpecialExpression");
+com.inq.flash.client.chatskins.SkinControl.checkMessageForSpecialExpression = function(chatCommunicationMessage) {
   var chatTextKey = chatCommunicationMessage.getMessageType() == com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION_OUTCOME ? com.inq.flash.client.data.MessageFields.KEY_CLIENT_OUTCOME_DATA : com.inq.flash.client.data.MessageFields.KEY_CHAT_DATA;
   var chatText = com.inq.flash.messagingframework.StringUtils.completeDecodeStringFromMessage(chatCommunicationMessage.getProperty(chatTextKey));
   if (chatCommunicationMessage.getMessageType() != com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION || chatCommunicationMessage.getProperty(com.inq.flash.client.data.MessageFields.KEY_MSG_AGENT_ALIAS)) {
@@ -11639,7 +11639,7 @@ com.inq.flash.client.chatskins.SkinControl.checkMessageForSpecialExpression = fu
     return {expressionList:[], text:chatText};
   }
 };
-com.inq.flash.client.chatskins.SkinControl.checkForGoToPersistentChatMsg = function(msg) {  console.warn("com.inq.flash.client.chatskins.SkinControl.checkForGoToPersistentChatMsg");
+com.inq.flash.client.chatskins.SkinControl.checkForGoToPersistentChatMsg = function(msg) {
   haxe.Log.trace("SkinControl.as: checkForGoToPersistentChatMsg: entered", {fileName:"SkinControl.hx", lineNumber:1164, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"checkForGoToPersistentChatMsg"});
   if (null == msg) {
     haxe.Log.trace("msg is null", {fileName:"SkinControl.hx", lineNumber:1168, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"checkForGoToPersistentChatMsg"});
@@ -11680,14 +11680,14 @@ com.inq.flash.client.chatskins.SkinControl.checkForGoToPersistentChatMsg = funct
   }
   return sMsgRevised;
 };
-com.inq.flash.client.chatskins.SkinControl.checkForCustomerNameInputField = function(expressionObject) {  console.warn("com.inq.flash.client.chatskins.SkinControl.checkForCustomerNameInputField");
+com.inq.flash.client.chatskins.SkinControl.checkForCustomerNameInputField = function(expressionObject) {
   if (com.inq.ui.CustomerNameInputField.isContainsInsertionMarker(expressionObject.text)) {
     expressionObject.expressionList.push(com.inq.flash.client.data.MessageFields.CUSTOMER_NAME_INPUT_FIELD);
     expressionObject.text = com.inq.ui.CustomerNameInputField.removeInsertionMarker(expressionObject.text);
   }
   return expressionObject;
 };
-com.inq.flash.client.chatskins.SkinControl.reFormatMessage = function(msg) {  console.warn("com.inq.flash.client.chatskins.SkinControl.reFormatMessage");
+com.inq.flash.client.chatskins.SkinControl.reFormatMessage = function(msg) {
   var sMsg = msg.toString();
   sMsg = sMsg.split("<br/></font><br/>").join("</font><br/>");
   sMsg = sMsg.split("<br /></font><br />").join("</font><br/>");
@@ -11700,7 +11700,7 @@ com.inq.flash.client.chatskins.SkinControl.reFormatMessage = function(msg) {  co
   sMsg = com.inq.flash.client.chatskins.SkinControl.checkForGoToPersistentChatMsg(msg);
   return sMsg;
 };
-com.inq.flash.client.chatskins.SkinControl.setFocusOnInputField = function(forceButton) {  console.warn("com.inq.flash.client.chatskins.SkinControl.setFocusOnInputField");
+com.inq.flash.client.chatskins.SkinControl.setFocusOnInputField = function(forceButton) {
   var pSkinControl = com.inq.flash.client.chatskins.SkinControl;
   var pCapabilities = com.inq.utils.Capabilities;
   if (top.inqCustData && top.inqCustData.openerSetFocus) {
@@ -11737,10 +11737,10 @@ com.inq.flash.client.chatskins.SkinControl.setFocusOnInputField = function(force
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.getTextInputField = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getTextInputField");
+com.inq.flash.client.chatskins.SkinControl.getTextInputField = function() {
   return Application.application.getTextInput("txtInput");
 };
-com.inq.flash.client.chatskins.SkinControl.startFocusListener = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.startFocusListener");
+com.inq.flash.client.chatskins.SkinControl.startFocusListener = function() {
   var someListener = new com.inq.utils.Dictionary;
   someListener.onSetFocus = function(oldfocus, newfocus) {
     var sFrom;
@@ -11770,7 +11770,7 @@ com.inq.flash.client.chatskins.SkinControl.startFocusListener = function() {  co
     }
   };
 };
-com.inq.flash.client.chatskins.SkinControl.startMouseListener = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.startMouseListener");
+com.inq.flash.client.chatskins.SkinControl.startMouseListener = function() {
   var someListenerSocket = new EventDispatcher;
   someListenerSocket.onMouseDown = function(ev) {
     if (com.inq.flash.client.chatskins.SkinControl.bHaveFocus == false) {
@@ -11788,10 +11788,10 @@ com.inq.flash.client.chatskins.SkinControl.startMouseListener = function() {  co
     }
   };
 };
-com.inq.flash.client.chatskins.SkinControl.uponEnterKey = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.uponEnterKey");
+com.inq.flash.client.chatskins.SkinControl.uponEnterKey = function() {
   com.inq.flash.client.chatskins.SkinControl.actionBtnSend(null);
 };
-com.inq.flash.client.chatskins.SkinControl.monitorCustomerTyping = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.monitorCustomerTyping");
+com.inq.flash.client.chatskins.SkinControl.monitorCustomerTyping = function() {
   var appController = com.inq.flash.client.chatskins.SkinControl.getApplicationController();
   if (com.inq.flash.client.chatskins.SkinControl.keyCount == 0 && appController.msgcntAtEntry < 1) {
     window.setTimeout(com.inq.flash.client.control.Incrementality.onEngaged, 0);
@@ -11810,13 +11810,13 @@ com.inq.flash.client.chatskins.SkinControl.monitorCustomerTyping = function() { 
   }
   com.inq.flash.client.chatskins.SkinControl.timerForTyping = window.setTimeout(com.inq.flash.client.chatskins.SkinControl.whenStoppedTyping, com.inq.flash.client.chatskins.SkinControl.typingTimeout);
 };
-com.inq.flash.client.chatskins.SkinControl.isTypingInProgress = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.isTypingInProgress");
+com.inq.flash.client.chatskins.SkinControl.isTypingInProgress = function() {
   return com.inq.flash.client.chatskins.SkinControl.typeActivityMessageInProgress;
 };
-com.inq.flash.client.chatskins.SkinControl.setTypingActivity = function(flag) {  console.warn("com.inq.flash.client.chatskins.SkinControl.setTypingActivity");
+com.inq.flash.client.chatskins.SkinControl.setTypingActivity = function(flag) {
   com.inq.flash.client.chatskins.SkinControl.typeActivityMessageInProgress = flag;
 };
-com.inq.flash.client.chatskins.SkinControl.onInput = function(e) {  console.warn("com.inq.flash.client.chatskins.SkinControl.onInput");
+com.inq.flash.client.chatskins.SkinControl.onInput = function(e) {
   if (/\n/.test(e.target.value)) {
     e.target.value = e.target.value.replace(/\n/, "");
     com.inq.flash.client.chatskins.SkinControl.uponEnterKey();
@@ -11825,11 +11825,11 @@ com.inq.flash.client.chatskins.SkinControl.onInput = function(e) {  console.warn
   window.setTimeout(com.inq.flash.client.chatskins.SkinControl.monitorCustomerTyping, 0);
   return true;
 };
-com.inq.flash.client.chatskins.SkinControl.onPaste = function(e) {  console.warn("com.inq.flash.client.chatskins.SkinControl.onPaste");
+com.inq.flash.client.chatskins.SkinControl.onPaste = function(e) {
   window.setTimeout(com.inq.flash.client.chatskins.SkinControl.monitorCustomerTyping, 0);
   return true;
 };
-com.inq.flash.client.chatskins.SkinControl.onKeyDown = function(ke) {  console.warn("com.inq.flash.client.chatskins.SkinControl.onKeyDown");
+com.inq.flash.client.chatskins.SkinControl.onKeyDown = function(ke) {
   if (com.inq.flash.client.chatskins.SkinControl.isSkinActive()) {
     if (ke.keyCode == com.inq.ui.Keyboard.ENTER) {
       return false;
@@ -11839,7 +11839,7 @@ com.inq.flash.client.chatskins.SkinControl.onKeyDown = function(ke) {  console.w
     return true;
   }
 };
-com.inq.flash.client.chatskins.SkinControl.onKeyPress = function(ke) {  console.warn("com.inq.flash.client.chatskins.SkinControl.onKeyPress");
+com.inq.flash.client.chatskins.SkinControl.onKeyPress = function(ke) {
   try {
     var keyCode = !ke.charCode ? ke.keyCode : ke.charCode;
     if (keyCode === com.inq.ui.Keyboard.ENTER && !ke.altKey && !ke.ctrlKey && !ke.shiftKey) {
@@ -11852,7 +11852,7 @@ com.inq.flash.client.chatskins.SkinControl.onKeyPress = function(ke) {  console.
     haxe.Log.trace("ERROR: " + err, {fileName:"SkinControl.js", lineNumber:2010, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"onKeyPress"});
   }
 };
-com.inq.flash.client.chatskins.SkinControl.onKeyPressEmailInput = function(ke) {  console.warn("com.inq.flash.client.chatskins.SkinControl.onKeyPressEmailInput");
+com.inq.flash.client.chatskins.SkinControl.onKeyPressEmailInput = function(ke) {
   if (ke.charCode == com.inq.ui.Keyboard.ENTER && !ke.altKey && !ke.ctrlKey && !ke.shiftKey) {
     com.inq.flash.client.chatskins.EmailMgr.actionBtnSendEmail();
     return false;
@@ -11866,7 +11866,7 @@ com.inq.flash.client.chatskins.SkinControl.onKeyPressEmailInput = function(ke) {
   }
   return true;
 };
-com.inq.flash.client.chatskins.SkinControl.onKeyUp = function(ke) {  console.warn("com.inq.flash.client.chatskins.SkinControl.onKeyUp");
+com.inq.flash.client.chatskins.SkinControl.onKeyUp = function(ke) {
   if (com.inq.flash.client.chatskins.SkinControl.isSkinActive()) {
     if (ke.keyCode == com.inq.ui.Keyboard.ENTER) {
       window.setTimeout(com.inq.flash.client.chatskins.SkinControl.uponEnterKey, 0);
@@ -11878,17 +11878,17 @@ com.inq.flash.client.chatskins.SkinControl.onKeyUp = function(ke) {  console.war
     return true;
   }
 };
-com.inq.flash.client.chatskins.SkinControl.isSkinActive = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.isSkinActive");
+com.inq.flash.client.chatskins.SkinControl.isSkinActive = function() {
   var inqFrameElement = window.frameElement;
   if (inqFrameElement != null) {
     return inqFrameElement.style.display == "none" ? false : true;
   }
   return false;
 };
-com.inq.flash.client.chatskins.SkinControl.onKeyDownCall = function(ke) {  console.warn("com.inq.flash.client.chatskins.SkinControl.onKeyDownCall");
+com.inq.flash.client.chatskins.SkinControl.onKeyDownCall = function(ke) {
   return true;
 };
-com.inq.flash.client.chatskins.SkinControl.onKeyUpCall = function(ke) {  console.warn("com.inq.flash.client.chatskins.SkinControl.onKeyUpCall");
+com.inq.flash.client.chatskins.SkinControl.onKeyUpCall = function(ke) {
   var skinControl = com.inq.flash.client.chatskins.SkinControl;
   if (skinControl.keyCount == 0 && skinControl.applicationController.msgcntAtEntry < 1) {
     window.setTimeout(function() {
@@ -11898,7 +11898,7 @@ com.inq.flash.client.chatskins.SkinControl.onKeyUpCall = function(ke) {  console
   skinControl.keyCount++;
   return true;
 };
-com.inq.flash.client.chatskins.SkinControl.onTextInputFocus = function(ke) {  console.warn("com.inq.flash.client.chatskins.SkinControl.onTextInputFocus");
+com.inq.flash.client.chatskins.SkinControl.onTextInputFocus = function(ke) {
   var skinControl = com.inq.flash.client.chatskins.SkinControl;
   if (skinControl.keyCount == 0 && skinControl.applicationController.msgcntAtEntry < 1) {
     try {
@@ -11911,7 +11911,7 @@ com.inq.flash.client.chatskins.SkinControl.onTextInputFocus = function(ke) {  co
   }
   return true;
 };
-com.inq.flash.client.chatskins.SkinControl.whenStoppedTyping = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.whenStoppedTyping");
+com.inq.flash.client.chatskins.SkinControl.whenStoppedTyping = function() {
   if (com.inq.flash.client.chatskins.SkinControl.timerForTyping != -1 && com.inq.flash.client.chatskins.SkinControl.isTypingInProgress()) {
     window.clearTimeout(com.inq.flash.client.chatskins.SkinControl.timerForTyping);
     com.inq.flash.client.chatskins.SkinControl.timerForTyping = -1;
@@ -11919,14 +11919,14 @@ com.inq.flash.client.chatskins.SkinControl.whenStoppedTyping = function() {  con
     com.inq.flash.client.chatskins.SkinControl.setTypingActivity(false);
   }
 };
-com.inq.flash.client.chatskins.SkinControl.whenStartTyping = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.whenStartTyping");
+com.inq.flash.client.chatskins.SkinControl.whenStartTyping = function() {
   com.inq.flash.client.chatskins.SkinControl.applicationController.TypingActivity(true);
 };
-com.inq.flash.client.chatskins.SkinControl.onTextInputFocusLoss = function(ke) {  console.warn("com.inq.flash.client.chatskins.SkinControl.onTextInputFocusLoss");
+com.inq.flash.client.chatskins.SkinControl.onTextInputFocusLoss = function(ke) {
   com.inq.flash.client.chatskins.SkinControl.whenStoppedTyping();
   return true;
 };
-com.inq.flash.client.chatskins.SkinControl.setUpFocusAndSelection = function(isInitiate) {  console.warn("com.inq.flash.client.chatskins.SkinControl.setUpFocusAndSelection");
+com.inq.flash.client.chatskins.SkinControl.setUpFocusAndSelection = function(isInitiate) {
   var skinControl = com.inq.flash.client.chatskins.SkinControl;
   Application.application.setVisible(true);
   if (com.inq.utils.Util.getConfig("enableModal", false) == true && !com.inq.flash.client.control.FlashPeer.getIsBuilder()) {
@@ -11951,16 +11951,16 @@ com.inq.flash.client.chatskins.SkinControl.setUpFocusAndSelection = function(isI
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.buildModalWindow = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.buildModalWindow");
+com.inq.flash.client.chatskins.SkinControl.buildModalWindow = function() {
   com.inq.aria.ModalWindow.buildModalWindow();
 };
-com.inq.flash.client.chatskins.SkinControl.hideModalWindowDivs = function(toShow) {  console.warn("com.inq.flash.client.chatskins.SkinControl.hideModalWindowDivs");
+com.inq.flash.client.chatskins.SkinControl.hideModalWindowDivs = function(toShow) {
   com.inq.aria.ModalWindow.hideModalWindowDivs(toShow);
 };
-com.inq.flash.client.chatskins.SkinControl.removeModalWindow = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.removeModalWindow");
+com.inq.flash.client.chatskins.SkinControl.removeModalWindow = function() {
   com.inq.aria.ModalWindow.removeModalWindow();
 };
-com.inq.flash.client.chatskins.SkinControl.startKeyListener = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.startKeyListener");
+com.inq.flash.client.chatskins.SkinControl.startKeyListener = function() {
   var txtInput = com.inq.flash.client.chatskins.SkinControl.getTextInputField();
   if (txtInput == null) {
     return;
@@ -11980,19 +11980,19 @@ com.inq.flash.client.chatskins.SkinControl.startKeyListener = function() {  cons
     txtInput.addEventListener(com.inq.events.MouseEvent.CLICK, com.inq.flash.client.chatskins.SkinControl.onTextInputFocus);
   }
 };
-com.inq.flash.client.chatskins.SkinControl.startEmailKeyListener = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.startEmailKeyListener");
+com.inq.flash.client.chatskins.SkinControl.startEmailKeyListener = function() {
   var ti = Application.application.getTextInput("emailInput");
   if (ti && !com.inq.flash.client.chatskins.SkinControl.isClick2call()) {
     ti.addEventListener(com.inq.events.KeyboardEvent.KEY_PRESS, com.inq.flash.client.chatskins.SkinControl.onKeyPressEmailInput);
   }
 };
-com.inq.flash.client.chatskins.SkinControl.setupLocalCommunications = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.setupLocalCommunications");
+com.inq.flash.client.chatskins.SkinControl.setupLocalCommunications = function() {
 };
-com.inq.flash.client.chatskins.SkinControl.PushEmbeddedForm = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.PushEmbeddedForm");
+com.inq.flash.client.chatskins.SkinControl.PushEmbeddedForm = function() {
 };
-com.inq.flash.client.chatskins.SkinControl.thankYou = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.thankYou");
+com.inq.flash.client.chatskins.SkinControl.thankYou = function() {
 };
-com.inq.flash.client.chatskins.SkinControl.setAgentConfig = function(agentID, eventData, coBrowseEnabled, buID, agentGroupID) {  console.warn("com.inq.flash.client.chatskins.SkinControl.setAgentConfig");
+com.inq.flash.client.chatskins.SkinControl.setAgentConfig = function(agentID, eventData, coBrowseEnabled, buID, agentGroupID) {
   if (coBrowseEnabled == null) {
     coBrowseEnabled = false;
   }
@@ -12002,7 +12002,7 @@ com.inq.flash.client.chatskins.SkinControl.setAgentConfig = function(agentID, ev
   com.inq.flash.client.control.FlashPeer.setAgentConfig(agentID, coBrowseEnabled, eventData, buID, agentGroupID);
   com.inq.flash.client.chatskins.SkinControl.sendEventToAllAutomatons("onAgentAssigned");
 };
-com.inq.flash.client.chatskins.SkinControl.onTimeout = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.onTimeout");
+com.inq.flash.client.chatskins.SkinControl.onTimeout = function() {
   com.inq.flash.client.chatskins.SkinControl.StopTimer();
   com.inq.stage.DragResize.WhenDone();
   if (com.inq.flash.client.chatskins.SkinControl.applicationController == null) {
@@ -12013,9 +12013,9 @@ com.inq.flash.client.chatskins.SkinControl.onTimeout = function() {  console.war
   } catch (e) {
   }
 };
-com.inq.flash.client.chatskins.SkinControl.shutdownPopup = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.shutdownPopup");
+com.inq.flash.client.chatskins.SkinControl.shutdownPopup = function() {
 };
-com.inq.flash.client.chatskins.SkinControl.ClassInits = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.ClassInits");
+com.inq.flash.client.chatskins.SkinControl.ClassInits = function() {
   Application.application.notificationController.init();
   com.inq.flash.client.control.Incrementality.init();
   com.inq.flash.client.control.XFrameWorker.init();
@@ -12039,7 +12039,7 @@ com.inq.flash.client.chatskins.SkinControl.ClassInits = function() {  console.wa
   com.inq.flash.client.control.FlashPeer.setCiFunction("ciSendText", com.inq.flash.client.chatskins.SkinControl.actionBtnSend);
   com.inq.flash.client.control.FlashPeer.setCiFunction("ciActionRestoreAndExitChat", com.inq.flash.client.chatskins.SkinControl.actionRestoreAndExitChat);
 };
-com.inq.flash.client.chatskins.SkinControl.InitializeAutomoton = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.InitializeAutomoton");
+com.inq.flash.client.chatskins.SkinControl.InitializeAutomoton = function() {
   com.inq.flash.client.chatskins.SkinControl.startTimer(com.inq.flash.client.chatskins.SkinControl.TIMEOUT_AVOIDANCE, function() {
     com.inq.flash.client.control.PersistenceManager.SetValue("lt", (new Date).getTime(), false);
   });
@@ -12067,16 +12067,16 @@ com.inq.flash.client.chatskins.SkinControl.InitializeAutomoton = function() {  c
     haxe.Log.trace("uriFrame is null. Did you proerly ID the iframe component in the mxml?", {fileName:"SkinControl.hx", lineNumber:1590, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"InitializeAutomoton"});
   }
 };
-com.inq.flash.client.chatskins.SkinControl.getIntroduction = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getIntroduction");
+com.inq.flash.client.chatskins.SkinControl.getIntroduction = function() {
   return com.inq.utils.Util.getConfig("sIntroduction", null);
 };
-com.inq.flash.client.chatskins.SkinControl.showIntroductionAfterPreloadMessages = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.showIntroductionAfterPreloadMessages");
+com.inq.flash.client.chatskins.SkinControl.showIntroductionAfterPreloadMessages = function() {
   var ti = com.inq.flash.client.chatskins.SkinControl.getTextInputField();
   if (!com.inq.flash.client.chatskins.SkinControl.cw.isCustomerMsgExist()) {
     ti.setIntroduction();
   }
 };
-com.inq.flash.client.chatskins.SkinControl.startTimer = function(timeout, timeoutAction) {  console.warn("com.inq.flash.client.chatskins.SkinControl.startTimer");
+com.inq.flash.client.chatskins.SkinControl.startTimer = function(timeout, timeoutAction) {
   timeout = com.inq.flash.client.chatskins.SkinControl.initializeTimerTimeout(timeout);
   if (com.inq.flash.client.chatskins.SkinControl.timerTimeout != null) {
     if (!timeoutAction) {
@@ -12093,7 +12093,7 @@ com.inq.flash.client.chatskins.SkinControl.startTimer = function(timeout, timeou
     haxe.Log.trace("Couldn't start timer to close not started chat, because instance of `timerTimeout` has not been initialized");
   }
 };
-com.inq.flash.client.chatskins.SkinControl.restartTimer = function(timeout, actionOnTimeout) {  console.warn("com.inq.flash.client.chatskins.SkinControl.restartTimer");
+com.inq.flash.client.chatskins.SkinControl.restartTimer = function(timeout, actionOnTimeout) {
   try {
     if (!timeout) {
       if (!com.inq.flash.client.chatskins.SkinControl.timeoutTime) {
@@ -12115,7 +12115,7 @@ com.inq.flash.client.chatskins.SkinControl.restartTimer = function(timeout, acti
     haxe.Log.trace("Couldn't restart timer to close not started chat", {timeout:timeout, actionOnTimeout:actionOnTimeout, error:err});
   }
 };
-com.inq.flash.client.chatskins.SkinControl.InitializeGlue = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.InitializeGlue");
+com.inq.flash.client.chatskins.SkinControl.InitializeGlue = function() {
   var appCont = com.inq.flash.client.chatskins.SkinControl.applicationController;
   com.inq.flash.client.control.FlashPeer.setCiFunction("ciActionBtnCloseChat", com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChat);
   if (com.inq.flash.client.chatskins.SkinControl.bInitialized) {
@@ -12285,7 +12285,7 @@ com.inq.flash.client.chatskins.SkinControl.InitializeGlue = function() {  consol
     com.inq.flash.client.chatskins.SkinControl.positionTheEmbeddedChat();
   }
 };
-com.inq.flash.client.chatskins.SkinControl.positionTheEmbeddedChat = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.positionTheEmbeddedChat");
+com.inq.flash.client.chatskins.SkinControl.positionTheEmbeddedChat = function() {
   try {
     var tcChat_Skin = window.parent.document.getElementById("tcChat_Skin");
     tcChat_Skin.style.top = "0px";
@@ -12296,14 +12296,14 @@ com.inq.flash.client.chatskins.SkinControl.positionTheEmbeddedChat = function() 
     haxe.Log.trace("An error occurred with positionTheEmbeddedChat. Message: " + Std.string(msg));
   }
 };
-com.inq.flash.client.chatskins.SkinControl.getIsPersistentChat = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getIsPersistentChat");
+com.inq.flash.client.chatskins.SkinControl.getIsPersistentChat = function() {
   return com.inq.flash.client.control.FlashVars.getPersistentFrame();
 };
-com.inq.flash.client.chatskins.SkinControl.getInitialTimeout = function(timeout) {  console.warn("com.inq.flash.client.chatskins.SkinControl.getInitialTimeout");
+com.inq.flash.client.chatskins.SkinControl.getInitialTimeout = function(timeout) {
   var defaultTimeout = timeout ? timeout : com.inq.flash.client.chatskins.SkinControl.DEFAULT_INITIAL_TIMEOUT;
   return parseInt("" + com.inq.utils.Util.getConfig("initialTimeOut", defaultTimeout));
 };
-com.inq.flash.client.chatskins.SkinControl.startWarning = function(initialTimeOut) {  console.warn("com.inq.flash.client.chatskins.SkinControl.startWarning");
+com.inq.flash.client.chatskins.SkinControl.startWarning = function(initialTimeOut) {
   var initialTimeOutInt = parseInt(initialTimeOut);
   var timeInMs = (new Date).getTime();
   var timeToClose = timeInMs + initialTimeOutInt * 1E3;
@@ -12330,7 +12330,7 @@ com.inq.flash.client.chatskins.SkinControl.startWarning = function(initialTimeOu
     }, 120 * 1E3);
   }
 };
-com.inq.flash.client.chatskins.SkinControl.stopWarning = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.stopWarning");
+com.inq.flash.client.chatskins.SkinControl.stopWarning = function() {
   if (com.inq.flash.client.chatskins.SkinControl.warningEvery2minId > 0) {
     clearInterval(com.inq.flash.client.chatskins.SkinControl.warningEvery2minId);
   }
@@ -12339,7 +12339,7 @@ com.inq.flash.client.chatskins.SkinControl.stopWarning = function() {  console.w
   }
   com.inq.aria.AriaMsg.clearAriaMsg("");
 };
-com.inq.flash.client.chatskins.SkinControl.initializeTimerTimeout = function(timeout) {  console.warn("com.inq.flash.client.chatskins.SkinControl.initializeTimerTimeout");
+com.inq.flash.client.chatskins.SkinControl.initializeTimerTimeout = function(timeout) {
   try {
     var initialTimeOut = timeout ? com.inq.flash.client.chatskins.SkinControl.getInitialTimeout(timeout) : com.inq.flash.client.chatskins.SkinControl.getInitialTimeout(com.inq.flash.client.chatskins.SkinControl.DEFAULT_INITIAL_TIMEOUT);
     var maxTimeOut = Math.pow(2, 32) - 1;
@@ -12364,7 +12364,7 @@ com.inq.flash.client.chatskins.SkinControl.initializeTimerTimeout = function(tim
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.getCallStreamData = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getCallStreamData");
+com.inq.flash.client.chatskins.SkinControl.getCallStreamData = function() {
   var skinVersion = com.inq.utils.Util.getConfig("skinVersion", "0");
   var utfenable = com.inq.utils.Util.getConfig("utfenable", false);
   var callStreamDataLocal;
@@ -12512,7 +12512,7 @@ function readCallerName() {
   myReg = new EReg("\\s+-|-\\s+", "g");
   return myReg.replace(callerNameString, "-");
 }
-com.inq.flash.client.chatskins.SkinControl.getCallFormData = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getCallFormData");
+com.inq.flash.client.chatskins.SkinControl.getCallFormData = function() {
   var skinVersion = com.inq.utils.Util.getConfig("skinVersion", "0");
   var divElements;
   var formString;
@@ -12583,21 +12583,21 @@ com.inq.flash.client.chatskins.SkinControl.getCallFormData = function() {  conso
     return formString;
   }
 };
-com.inq.flash.client.chatskins.SkinControl.getInitialClickstreamData = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getInitialClickstreamData");
+com.inq.flash.client.chatskins.SkinControl.getInitialClickstreamData = function() {
   var streamBuilder = com.inq.flash.client.control.ClickStreamBuilder;
   var sInitialClickstreamData = streamBuilder.IdentifyPlatform() + streamBuilder.parseInitialClickstreamData() + streamBuilder.parseURLfromClickStreamData() + streamBuilder.parseDFVfromClickStreamData() + com.inq.flash.client.chatskins.SkinControl.callStreamData + com.inq.flash.client.chatskins.SkinControl.addWebRTCToStream();
   return sInitialClickstreamData;
 };
-com.inq.flash.client.chatskins.SkinControl.getChatWindow = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getChatWindow");
+com.inq.flash.client.chatskins.SkinControl.getChatWindow = function() {
   return com.inq.flash.client.chatskins.SkinControl.cw;
 };
-com.inq.flash.client.chatskins.SkinControl.updateFormFields = function(formData, formName, formId) {  console.warn("com.inq.flash.client.chatskins.SkinControl.updateFormFields");
+com.inq.flash.client.chatskins.SkinControl.updateFormFields = function(formData, formName, formId) {
   com.inq.flash.client.chatskins.FormMgr.updateFormFields(formData, formName, formId, com.inq.flash.client.chatskins.SkinControl.cw);
 };
-com.inq.flash.client.chatskins.SkinControl.getInputArea = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getInputArea");
+com.inq.flash.client.chatskins.SkinControl.getInputArea = function() {
   return Application.application.getMxmlItem("txtInput");
 };
-com.inq.flash.client.chatskins.SkinControl.disableInput = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.disableInput");
+com.inq.flash.client.chatskins.SkinControl.disableInput = function() {
   var ti = com.inq.flash.client.chatskins.SkinControl.getTextInputField();
   if (com.inq.utils.Capabilities.isPhone()) {
     ti.blur();
@@ -12612,15 +12612,15 @@ com.inq.flash.client.chatskins.SkinControl.disableInput = function() {  console.
     btn.disable();
   }
 };
-com.inq.flash.client.chatskins.SkinControl.sendDisableInput = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.sendDisableInput");
+com.inq.flash.client.chatskins.SkinControl.sendDisableInput = function() {
   com.inq.flash.client.chatskins.SkinControl.disableInput();
 };
-com.inq.flash.client.chatskins.SkinControl.popupChatInitialize = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.popupChatInitialize");
+com.inq.flash.client.chatskins.SkinControl.popupChatInitialize = function() {
   var xdMode = Inq.xdMode || Inq.xd;
   if (!xdMode) {
     try {
       var bChrome = js.Lib.window.navigator.userAgent.toLowerCase().indexOf("chrome") >= 0;
-      com.inq.flash.client.chatskins.SkinControl.unloadHandler = function(ev) {  console.warn("com.inq.flash.client.chatskins.SkinControl.unloadHandler");
+      com.inq.flash.client.chatskins.SkinControl.unloadHandler = function(ev) {
         var map = {};
         map["a"] = false;
         map["lt"] = (new Date).getTime();
@@ -12641,12 +12641,12 @@ com.inq.flash.client.chatskins.SkinControl.popupChatInitialize = function() {  c
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.noUnload = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.noUnload");
+com.inq.flash.client.chatskins.SkinControl.noUnload = function() {
   window.onunload = function(ev) {
     return true;
   };
 };
-com.inq.flash.client.chatskins.SkinControl.kickOffChat = function(noOpeners) {  console.warn("com.inq.flash.client.chatskins.SkinControl.kickOffChat");
+com.inq.flash.client.chatskins.SkinControl.kickOffChat = function(noOpeners) {
   if (noOpeners == null) {
     noOpeners = false;
   }
@@ -12675,12 +12675,12 @@ com.inq.flash.client.chatskins.SkinControl.kickOffChat = function(noOpeners) {  
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.onChatEngaged = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.onChatEngaged");
+com.inq.flash.client.chatskins.SkinControl.onChatEngaged = function() {
   com.inq.flash.client.chatskins.SkinControl.stopOpenerScript(true);
   com.inq.flash.client.chatskins.SkinControl.StopTimer();
   com.inq.flash.client.chatskins.SkinControl.setFocusOnInputField(true);
 };
-com.inq.flash.client.chatskins.SkinControl.persistentChatInitialize = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.persistentChatInitialize");
+com.inq.flash.client.chatskins.SkinControl.persistentChatInitialize = function() {
   var skinControl = com.inq.flash.client.chatskins.SkinControl;
   try {
     window.onload = function(ev) {
@@ -12725,26 +12725,26 @@ com.inq.flash.client.chatskins.SkinControl.persistentChatInitialize = function()
     haxe.Log.trace("error" + Std.string(e), {fileName:"SkinControl.hx", lineNumber:2306, className:"com.inq.flash.client.chatskins.SkinControl", methodName:"persistentChatInitialize"});
   }
 };
-com.inq.flash.client.chatskins.SkinControl.blockService = function(blockDetails) {  console.warn("com.inq.flash.client.chatskins.SkinControl.blockService");
+com.inq.flash.client.chatskins.SkinControl.blockService = function(blockDetails) {
   com.inq.flash.client.control.FlashPeer.blockService(blockDetails);
 };
-com.inq.flash.client.chatskins.SkinControl.wasSaleAction = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.wasSaleAction");
+com.inq.flash.client.chatskins.SkinControl.wasSaleAction = function() {
   return com.inq.flash.client.control.FlashPeer.wasSaleAction();
 };
-com.inq.flash.client.chatskins.SkinControl.executeCustomCommand = function(commandParam) {  console.warn("com.inq.flash.client.chatskins.SkinControl.executeCustomCommand");
+com.inq.flash.client.chatskins.SkinControl.executeCustomCommand = function(commandParam) {
   return com.inq.flash.client.control.FlashPeer.executeCustomCommand(commandParam);
 };
-com.inq.flash.client.chatskins.SkinControl.getScriptLine = function(index) {  console.warn("com.inq.flash.client.chatskins.SkinControl.getScriptLine");
+com.inq.flash.client.chatskins.SkinControl.getScriptLine = function(index) {
   return com.inq.flash.client.chatskins.SkinControl.cw.getTranscriptMessage(index);
 };
-com.inq.flash.client.chatskins.SkinControl.getSendButton = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getSendButton");
+com.inq.flash.client.chatskins.SkinControl.getSendButton = function() {
   return Application.application.getButton("btnSend");
 };
-com.inq.flash.client.chatskins.SkinControl.hideInput = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.hideInput");
+com.inq.flash.client.chatskins.SkinControl.hideInput = function() {
   com.inq.flash.client.chatskins.SkinControl.disableInput();
   com.inq.flash.client.chatskins.SkinControl.showBottomImgWithoutInput(true);
 };
-com.inq.flash.client.chatskins.SkinControl.showInput = function(showIntroduction) {  console.warn("com.inq.flash.client.chatskins.SkinControl.showInput");
+com.inq.flash.client.chatskins.SkinControl.showInput = function(showIntroduction) {
   var button = com.inq.flash.client.chatskins.SkinControl.getSendButton();
   if (button != null) {
     button.enable();
@@ -12762,7 +12762,7 @@ com.inq.flash.client.chatskins.SkinControl.showInput = function(showIntroduction
   }
   com.inq.flash.client.chatskins.SkinControl.showBottomImgWithoutInput(false);
 };
-com.inq.flash.client.chatskins.SkinControl.showBottomImgWithoutInput = function(isShow) {  console.warn("com.inq.flash.client.chatskins.SkinControl.showBottomImgWithoutInput");
+com.inq.flash.client.chatskins.SkinControl.showBottomImgWithoutInput = function(isShow) {
   var chatWin = Application.application.getCanvas("chat");
   if (chatWin == null) {
     return;
@@ -12792,7 +12792,7 @@ com.inq.flash.client.chatskins.SkinControl.showBottomImgWithoutInput = function(
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.executeAfter = function(condition, handler, contextLocation, timeout, cleanupHandler) {  console.warn("com.inq.flash.client.chatskins.SkinControl.executeAfter");
+com.inq.flash.client.chatskins.SkinControl.executeAfter = function(condition, handler, contextLocation, timeout, cleanupHandler) {
   if (timeout == null) {
     timeout = 2E3;
   }
@@ -12820,7 +12820,7 @@ com.inq.flash.client.chatskins.SkinControl.executeAfter = function(condition, ha
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.hideObscuredChatDiv = function(isChatRestored, txtEL) {  console.warn("com.inq.flash.client.chatskins.SkinControl.hideObscuredChatDiv");
+com.inq.flash.client.chatskins.SkinControl.hideObscuredChatDiv = function(isChatRestored, txtEL) {
   var pm = com.inq.flash.client.control.PersistenceManager;
   if (isChatRestored || pm.GetValue("cntOS", -1) >= 1 || pm.GetValue("msgcnt", 0) > 0 || com.inq.utils.Capabilities.isPhone() && /Firefox|FxiOS/.test(navigator.userAgent)) {
     if (txtEL._input.offsetParent == null) {
@@ -12854,7 +12854,7 @@ com.inq.flash.client.chatskins.SkinControl.hideObscuredChatDiv = function(isChat
   }
   return false;
 };
-com.inq.flash.client.chatskins.SkinControl.sendExitMsg = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.sendExitMsg");
+com.inq.flash.client.chatskins.SkinControl.sendExitMsg = function() {
   var skinControl = com.inq.flash.client.chatskins.SkinControl;
   if (skinControl.applicationController.customerClosesPopup()) {
     var cTY = Application.application.getCanvas("thankYou");
@@ -12863,7 +12863,7 @@ com.inq.flash.client.chatskins.SkinControl.sendExitMsg = function() {  console.w
     }
   }
 };
-com.inq.flash.client.chatskins.SkinControl.cleanUp = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.cleanUp");
+com.inq.flash.client.chatskins.SkinControl.cleanUp = function() {
   com.inq.flash.client.chatskins.SkinControl.cw = null;
   com.inq.flash.client.chatskins.SkinControl.objHasFocus = null;
   if (com.inq.utils.Capabilities.isChrome()) {
@@ -12877,7 +12877,7 @@ com.inq.flash.client.chatskins.SkinControl.cleanUp = function() {  console.warn(
   clearInterval(com.inq.flash.client.chatskins.SkinControl.warningEvery2minId);
   com.inq.flash.client.chatskins.SkinControl.accessibilityHelp = null;
 };
-com.inq.flash.client.chatskins.SkinControl.closeChatSession = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.closeChatSession");
+com.inq.flash.client.chatskins.SkinControl.closeChatSession = function() {
   var appController = com.inq.flash.client.chatskins.SkinControl.getApplicationController();
   if (!com.inq.flash.client.chatskins.SkinControl.chatSessionEnded) {
     com.inq.flash.client.chatskins.SkinControl.chatSessionEnded = true;
@@ -12886,7 +12886,7 @@ com.inq.flash.client.chatskins.SkinControl.closeChatSession = function() {  cons
   }
   appController.getMessageHandlerByPrefix(com.inq.flash.client.data.MessageFields.TYPE_CHAT_NEED_WAIT).clearQueueMessageTimer();
 };
-com.inq.flash.client.chatskins.SkinControl.init = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.init");
+com.inq.flash.client.chatskins.SkinControl.init = function() {
   com.inq.flash.client.chatskins.SkinControl.isThankYouShown = false;
   com.inq.flash.client.chatskins.SkinControl.msgcntAtEntry = com.inq.flash.client.control.PersistenceManager.GetValue("msgcnt", 0);
   var accHelp = com.inq.flash.client.chatskins.SkinControl.accessibilityHelp;
@@ -12896,37 +12896,37 @@ com.inq.flash.client.chatskins.SkinControl.init = function() {  console.warn("co
     com.inq.flash.client.chatskins.SkinControl.accessibilityHelp = com.inq.flash.client.chatskins.AccessibilityHelp.createInstance();
   }
 };
-com.inq.flash.client.chatskins.SkinControl.getTitleBarHeight = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getTitleBarHeight");
+com.inq.flash.client.chatskins.SkinControl.getTitleBarHeight = function() {
   return com.inq.utils.Util.getConfig("titleBarImageHeight") || com.inq.flash.client.control.FlashPeer.getTitleBarHeight();
 };
-com.inq.flash.client.chatskins.SkinControl.getSkinLocation = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getSkinLocation");
+com.inq.flash.client.chatskins.SkinControl.getSkinLocation = function() {
   return com.inq.utils.Util.getConfig("flashPos") || com.inq.flash.client.control.FlashPeer.getSkinLocation();
 };
-com.inq.flash.client.chatskins.SkinControl.getSkinHeight = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getSkinHeight");
+com.inq.flash.client.chatskins.SkinControl.getSkinHeight = function() {
   return com.inq.utils.Util.getConfig("flashDimHeight") || com.inq.flash.client.control.FlashPeer.getSkinHeight();
 };
-com.inq.flash.client.chatskins.SkinControl.getSkinWidth = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getSkinWidth");
+com.inq.flash.client.chatskins.SkinControl.getSkinWidth = function() {
   return com.inq.utils.Util.getConfig("flashDimWidth") || com.inq.flash.client.control.FlashPeer.getSkinWidth();
 };
-com.inq.flash.client.chatskins.SkinControl.getSkinLeft = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getSkinLeft");
+com.inq.flash.client.chatskins.SkinControl.getSkinLeft = function() {
   return com.inq.utils.Util.getConfig("flashPosX") || com.inq.flash.client.control.FlashPeer.getSkinLeft();
 };
-com.inq.flash.client.chatskins.SkinControl.getSkinTop = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getSkinTop");
+com.inq.flash.client.chatskins.SkinControl.getSkinTop = function() {
   return com.inq.utils.Util.getConfig("flashPosY") || com.inq.flash.client.control.FlashPeer.getSkinTop();
 };
-com.inq.flash.client.chatskins.SkinControl.getPersistentXPos = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getPersistentXPos");
+com.inq.flash.client.chatskins.SkinControl.getPersistentXPos = function() {
   return com.inq.utils.Util.getConfig("persistentXPos") || com.inq.flash.client.control.FlashPeer.getPersistentXPos();
 };
-com.inq.flash.client.chatskins.SkinControl.getPersistentYPos = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getPersistentYPos");
+com.inq.flash.client.chatskins.SkinControl.getPersistentYPos = function() {
   return com.inq.utils.Util.getConfig("persistentYPos") || com.inq.flash.client.control.FlashPeer.getPersistentYPos();
 };
-com.inq.flash.client.chatskins.SkinControl.getPersistentWidth = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getPersistentWidth");
+com.inq.flash.client.chatskins.SkinControl.getPersistentWidth = function() {
   return com.inq.utils.Util.getConfig("persistentWidth") || com.inq.flash.client.control.FlashPeer.getPersistentWidth();
 };
-com.inq.flash.client.chatskins.SkinControl.getPersistentHeight = function() {  console.warn("com.inq.flash.client.chatskins.SkinControl.getPersistentHeight");
+com.inq.flash.client.chatskins.SkinControl.getPersistentHeight = function() {
   return com.inq.utils.Util.getConfig("persistentHeight") || com.inq.flash.client.control.FlashPeer.getPersistentHeight();
 };
-com.inq.flash.client.chatskins.SkinControl.fireCustomEvent = function(eventName, evtDataSupplementFcn) {  console.warn("com.inq.flash.client.chatskins.SkinControl.fireCustomEvent");
+com.inq.flash.client.chatskins.SkinControl.fireCustomEvent = function(eventName, evtDataSupplementFcn) {
   if (eventName == "PrechatSurveyShown") {
     if (com.inq.flash.client.control.PersistenceManager.GetValue("pss") == 1) {
       return;
@@ -12984,7 +12984,7 @@ com.inq.flash.client.chatskins.SkinControl.isThankYou = false;
 com.inq.flash.client.chatskins.SkinControl.isThankYouShown = false;
 com.inq.flash.client.chatskins.SkinControl.typeActivityMessageInProgress = false;
 com.inq.flash.client.chatskins.SkinControl.customerTypedText = "";
-com.inq.flash.client.chatskins.SndMgr = function() {  console.warn("com.inq.flash.client.chatskins.SndMgr");
+com.inq.flash.client.chatskins.SndMgr = function() {
 };
 $hxClasses["com.inq.flash.client.chatskins.SndMgr"] = com.inq.flash.client.chatskins.SndMgr;
 com.inq.flash.client.chatskins.SndMgr.__name__ = ["com", "inq", "flash", "client", "chatskins", "SndMgr"];
@@ -13007,7 +13007,7 @@ com.inq.flash.client.chatskins.SndMgr.postInit = {runCallback:function() {
 }, clear:function() {
   com.inq.flash.client.chatskins.SndMgr.postInit.callback = null;
 }, callback:null};
-com.inq.flash.client.chatskins.SndMgr._init = function() {  console.warn("com.inq.flash.client.chatskins.SndMgr._init");
+com.inq.flash.client.chatskins.SndMgr._init = function() {
   com.inq.flash.client.chatskins.SndMgr.lazyInitDone = false;
   com.inq.flash.client.chatskins.SndMgr.postInit.clear();
   var div = document.getElementById("divSound");
@@ -13017,14 +13017,14 @@ com.inq.flash.client.chatskins.SndMgr._init = function() {  console.warn("com.in
   }
   return true;
 };
-com.inq.flash.client.chatskins.SndMgr.soundSrc = function(html5AudioSrc) {  console.warn("com.inq.flash.client.chatskins.SndMgr.soundSrc");
+com.inq.flash.client.chatskins.SndMgr.soundSrc = function(html5AudioSrc) {
   if (html5AudioSrc.indexOf(":/") < 0 && !html5AudioSrc.match(/^\/\//)) {
     var skinPath = com.inq.ui.SkinLoader.getSkinPath();
     html5AudioSrc = skinPath + (skinPath.charAt(skinPath.length - 1) === "/" ? "" : "/") + html5AudioSrc;
   }
   return html5AudioSrc;
 };
-com.inq.flash.client.chatskins.SndMgr.buildSoundDiv = function() {  console.warn("com.inq.flash.client.chatskins.SndMgr.buildSoundDiv");
+com.inq.flash.client.chatskins.SndMgr.buildSoundDiv = function() {
   var div = document.getElementById("divSound");
   if (null == div) {
     div = document.createElement("DIV");
@@ -13052,7 +13052,7 @@ com.inq.flash.client.chatskins.SndMgr.buildSoundDiv = function() {  console.warn
     }
   }
 };
-com.inq.flash.client.chatskins.SndMgr.initIosAudio = function(html5AudioSrc, loop) {  console.warn("com.inq.flash.client.chatskins.SndMgr.initIosAudio");
+com.inq.flash.client.chatskins.SndMgr.initIosAudio = function(html5AudioSrc, loop) {
   var audio = new Audio(html5AudioSrc);
   audio.loop = loop || false;
   var _cap = com.inq.utils.Capabilities;
@@ -13095,7 +13095,7 @@ com.inq.flash.client.chatskins.SndMgr.initIosAudio = function(html5AudioSrc, loo
   _tdoc.addEventListener("keydown", iosSnd.startAudio, false);
   return iosSnd;
 };
-com.inq.flash.client.chatskins.SndMgr.initHTMLAudio = function(src) {  console.warn("com.inq.flash.client.chatskins.SndMgr.initHTMLAudio");
+com.inq.flash.client.chatskins.SndMgr.initHTMLAudio = function(src) {
   var audiodatauri = com.inq.utils.Util.getConfig("audiodatauri", null);
   if (audiodatauri) {
     src = audiodatauri;
@@ -13103,22 +13103,22 @@ com.inq.flash.client.chatskins.SndMgr.initHTMLAudio = function(src) {  console.w
   com.inq.flash.client.chatskins.SndMgr.audio = new Audio(src);
   com.inq.flash.client.chatskins.SndMgr.audioSupport = com.inq.flash.client.chatskins.SndMgr.audio.play ? true : false;
 };
-com.inq.flash.client.chatskins.SndMgr.getMute = function() {  console.warn("com.inq.flash.client.chatskins.SndMgr.getMute");
+com.inq.flash.client.chatskins.SndMgr.getMute = function() {
   return com.inq.flash.client.chatskins.SndMgr._mute ? 1 : 0;
 };
-com.inq.flash.client.chatskins.SndMgr.isMuted = function() {  console.warn("com.inq.flash.client.chatskins.SndMgr.isMuted");
+com.inq.flash.client.chatskins.SndMgr.isMuted = function() {
   return com.inq.flash.client.chatskins.SndMgr._mute;
 };
-com.inq.flash.client.chatskins.SndMgr.setMute = function(mute) {  console.warn("com.inq.flash.client.chatskins.SndMgr.setMute");
+com.inq.flash.client.chatskins.SndMgr.setMute = function(mute) {
   com.inq.flash.client.chatskins.SndMgr._mute = mute;
   com.inq.flash.client.control.PersistenceManager.SetValue(com.inq.flash.client.control.PersistenceManager.MUTE_SOUND, com.inq.flash.client.chatskins.SndMgr.getMute(), false, true);
 };
-com.inq.flash.client.chatskins.SndMgr.init = function() {  console.warn("com.inq.flash.client.chatskins.SndMgr.init");
+com.inq.flash.client.chatskins.SndMgr.init = function() {
   com.inq.flash.client.chatskins.SndMgr.lazyInit();
   com.inq.flash.client.chatskins.SndMgr.postInit.runCallback();
 };
 com.inq.flash.client.chatskins.SndMgr.lazyInitDone = false;
-com.inq.flash.client.chatskins.SndMgr.lazyInit = function() {  console.warn("com.inq.flash.client.chatskins.SndMgr.lazyInit");
+com.inq.flash.client.chatskins.SndMgr.lazyInit = function() {
   if (com.inq.flash.client.chatskins.SndMgr.lazyInitDone) {
     return;
   }
@@ -13179,7 +13179,7 @@ com.inq.flash.client.chatskins.SndMgr.lazyInit = function() {  console.warn("com
     }
   }
 };
-com.inq.flash.client.chatskins.SndMgr.actionBtnMuteOn = function(me) {  console.warn("com.inq.flash.client.chatskins.SndMgr.actionBtnMuteOn");
+com.inq.flash.client.chatskins.SndMgr.actionBtnMuteOn = function(me) {
   try {
     if (!com.inq.utils.Capabilities.isMobile()) {
       com.inq.flash.client.chatskins.SndMgr.setMute(true);
@@ -13199,7 +13199,7 @@ com.inq.flash.client.chatskins.SndMgr.actionBtnMuteOn = function(me) {  console.
   }
   return true;
 };
-com.inq.flash.client.chatskins.SndMgr.actionBtnMuteOff = function(me) {  console.warn("com.inq.flash.client.chatskins.SndMgr.actionBtnMuteOff");
+com.inq.flash.client.chatskins.SndMgr.actionBtnMuteOff = function(me) {
   try {
     if (!com.inq.utils.Capabilities.isMobile()) {
       com.inq.flash.client.chatskins.SndMgr.setMute(false);
@@ -13219,13 +13219,13 @@ com.inq.flash.client.chatskins.SndMgr.actionBtnMuteOff = function(me) {  console
   }
   return true;
 };
-com.inq.flash.client.chatskins.SndMgr.fixButtons = function() {  console.warn("com.inq.flash.client.chatskins.SndMgr.fixButtons");
+com.inq.flash.client.chatskins.SndMgr.fixButtons = function() {
   if (com.inq.flash.client.chatskins.SndMgr.btnMuteOn != null && com.inq.flash.client.chatskins.SndMgr.btnMuteOff != null) {
     com.inq.flash.client.chatskins.SndMgr.btnMuteOn.setVisible(com.inq.flash.client.chatskins.SndMgr.isMuted());
     com.inq.flash.client.chatskins.SndMgr.btnMuteOff.setVisible(!com.inq.flash.client.chatskins.SndMgr.btnMuteOn.getVisible());
   }
 };
-com.inq.flash.client.chatskins.SndMgr.toggleBtnChime = function() {  console.warn("com.inq.flash.client.chatskins.SndMgr.toggleBtnChime");
+com.inq.flash.client.chatskins.SndMgr.toggleBtnChime = function() {
   var _aria = com.inq.aria.AriaMsg;
   if (com.inq.flash.client.chatskins.SndMgr.btnChime != null) {
     var objCheck = com.inq.flash.client.chatskins.SndMgr.btnChime._img;
@@ -13259,7 +13259,7 @@ com.inq.flash.client.chatskins.SndMgr.toggleBtnChime = function() {  console.war
     }
   }
 };
-com.inq.flash.client.chatskins.SndMgr.PlaySound = function(soundURL) {  console.warn("com.inq.flash.client.chatskins.SndMgr.PlaySound");
+com.inq.flash.client.chatskins.SndMgr.PlaySound = function(soundURL) {
   com.inq.flash.client.chatskins.SndMgr.postInit.runCallback();
   if (com.inq.utils.Capabilities.isMobile() && typeof com.inq.flash.client.chatskins.SndMgr.audio != "undefined") {
     if (com.inq.flash.client.chatskins.SndMgr.btnChime != null) {
@@ -13287,7 +13287,7 @@ com.inq.flash.client.chatskins.SndMgr.PlaySound = function(soundURL) {  console.
   }
   com.inq.flash.client.chatskins.SndMgr.play(soundURL);
 };
-com.inq.flash.client.chatskins.SndMgr.play = function(soundURL) {  console.warn("com.inq.flash.client.chatskins.SndMgr.play");
+com.inq.flash.client.chatskins.SndMgr.play = function(soundURL) {
   if (com.inq.utils.Capabilities.isMobile() && typeof com.inq.flash.client.chatskins.SndMgr.audio != "undefined") {
     com.inq.flash.client.chatskins.SndMgr.ios.startAudio();
     return;
@@ -13368,7 +13368,7 @@ com.inq.flash.client.chatskins.SndMgr.play = function(soundURL) {  console.warn(
     }
   }
 };
-com.inq.flash.client.chatskins.SndMgr.searchForMimeType = function(mimeType) {  console.warn("com.inq.flash.client.chatskins.SndMgr.searchForMimeType");
+com.inq.flash.client.chatskins.SndMgr.searchForMimeType = function(mimeType) {
   var mimes = window.navigator["mimeTypes"];
   if (mimes == null || mimes.length < 1) {
     return false;
@@ -13397,10 +13397,10 @@ com.inq.flash.client.chatskins.SndMgr._initialized = com.inq.flash.client.chatsk
 com.inq.flash.client.chatskins.SndMgr._mute = false;
 com.inq.flash.client.chatskins.SndMgr.soundEnabled = true;
 com.inq.flash.client.chatskins.SndMgr.swfSoundSuppress = false;
-com.inq.flash.client.chatskins.VideoMgr = function() {  console.warn("com.inq.flash.client.chatskins.VideoMgr");
+com.inq.flash.client.chatskins.VideoMgr = function() {
   return {};
 }();
-com.inq.flash.client.chatskins.VideoMgr.init = function() {  console.warn("com.inq.flash.client.chatskins.VideoMgr.init");
+com.inq.flash.client.chatskins.VideoMgr.init = function() {
   com.inq.flash.client.chatskins.VideoMgr.customerAcceptsVideo = com.inq.utils.Util.getConfig("customerAcceptsVideo", "Customer accepts video-chat invitation.");
   com.inq.flash.client.chatskins.VideoMgr.customerDeclinesVideo = com.inq.utils.Util.getConfig("customerDeclinesVideo", "Customer declines video-chat invitation.");
   com.inq.flash.client.chatskins.VideoMgr.customerStopsVideo = com.inq.utils.Util.getConfig("customerStopsVideo", "Customer stops video-chat.");
@@ -13408,34 +13408,34 @@ com.inq.flash.client.chatskins.VideoMgr.init = function() {  console.warn("com.i
   com.inq.flash.client.control.FlashPeer.setCiFunction("ciDeclineVideoInv", com.inq.flash.client.chatskins.VideoMgr.declineVideo);
   com.inq.flash.client.control.FlashPeer.setCiFunction("ciStopVideo", com.inq.flash.client.chatskins.VideoMgr.stopVideo);
 };
-com.inq.flash.client.chatskins.VideoMgr.acceptVideo = function() {  console.warn("com.inq.flash.client.chatskins.VideoMgr.acceptVideo");
+com.inq.flash.client.chatskins.VideoMgr.acceptVideo = function() {
   com.inq.flash.client.chatskins.SkinControl.getApplicationController().sendVideoMessage(com.inq.flash.client.chatskins.VideoMgr.customerAcceptsVideo, com.inq.flash.client.data.MessageFields.DATA_CLIENT_VIDEO_ACCEPT);
 };
-com.inq.flash.client.chatskins.VideoMgr.declineVideo = function() {  console.warn("com.inq.flash.client.chatskins.VideoMgr.declineVideo");
+com.inq.flash.client.chatskins.VideoMgr.declineVideo = function() {
   com.inq.flash.client.chatskins.SkinControl.getApplicationController().sendVideoMessage(com.inq.flash.client.chatskins.VideoMgr.customerDeclinesVideo, com.inq.flash.client.data.MessageFields.DATA_CLIENT_VIDEO_DECLINE);
 };
-com.inq.flash.client.chatskins.VideoMgr.stopVideo = function() {  console.warn("com.inq.flash.client.chatskins.VideoMgr.stopVideo");
+com.inq.flash.client.chatskins.VideoMgr.stopVideo = function() {
   com.inq.flash.client.chatskins.SkinControl.getApplicationController().sendVideoMessage(com.inq.flash.client.chatskins.VideoMgr.customerStopsVideo, com.inq.flash.client.data.MessageFields.DATA_CLIENT_VIDEO_STOP);
 };
 com.inq.flash.client.chatskins.VideoMgr.customerAcceptsVideo = null;
 com.inq.flash.client.chatskins.VideoMgr.customerDeclinesVideo = null;
 com.inq.flash.client.chatskins.VideoMgr.customerStopsVideo = null;
-com.inq.flash.client.chatskins.XTrace = function() {  console.warn("com.inq.flash.client.chatskins.XTrace");
+com.inq.flash.client.chatskins.XTrace = function() {
 };
 $hxClasses["com.inq.flash.client.chatskins.XTrace"] = com.inq.flash.client.chatskins.XTrace;
 com.inq.flash.client.chatskins.XTrace.__name__ = ["com", "inq", "flash", "client", "chatskins", "XTrace"];
-com.inq.flash.client.chatskins.XTrace.redirection = function() {  console.warn("com.inq.flash.client.chatskins.XTrace.redirection");
+com.inq.flash.client.chatskins.XTrace.redirection = function() {
   haxe.Log.trace = com.inq.flash.client.chatskins.XTrace.sysTrace;
   return true;
 };
-com.inq.flash.client.chatskins.XTrace.setRedirection = function() {  console.warn("com.inq.flash.client.chatskins.XTrace.setRedirection");
+com.inq.flash.client.chatskins.XTrace.setRedirection = function() {
   haxe.Log.trace = com.inq.flash.client.chatskins.XTrace.sysTrace;
   haxe.Log.trace("", {fileName:"XTrace.hx", lineNumber:34, className:"com.inq.flash.client.chatskins.XTrace", methodName:"setRedirection"});
 };
-com.inq.flash.client.chatskins.XTrace.sysTrace = function(v, inf) {  console.warn("com.inq.flash.client.chatskins.XTrace.sysTrace");
+com.inq.flash.client.chatskins.XTrace.sysTrace = function(v, inf) {
   var txt = "[" + inf.fileName + ":" + inf.lineNumber + " " + inf.methodName + "] " + Std.string(v);
 };
-com.inq.flash.client.chatskins.XTrace.StackTrace = function(err, hdr) {  console.warn("com.inq.flash.client.chatskins.XTrace.StackTrace");
+com.inq.flash.client.chatskins.XTrace.StackTrace = function(err, hdr) {
   if (hdr == null) {
     hdr = "WARNING:";
   }
@@ -13445,7 +13445,7 @@ com.inq.flash.client.chatskins.XTrace.StackTrace = function(err, hdr) {  console
   haxe.Log.trace(hdr + " " + st, {fileName:"XTrace.hx", lineNumber:137, className:"com.inq.flash.client.chatskins.XTrace", methodName:"StackTrace"});
 };
 com.inq.flash.client.chatskins.XTrace.prototype.__class__ = com.inq.flash.client.chatskins.XTrace;
-com.inq.flash.client.control.ApplicationController = function() {  console.warn("com.inq.flash.client.control.ApplicationController");
+com.inq.flash.client.control.ApplicationController = function() {
   if (null == com.inq.flash.client.control.ApplicationController.applicationController) {
     com.inq.flash.client.control.ApplicationController.applicationController = this;
   }
@@ -13473,7 +13473,7 @@ com.inq.flash.client.control.ApplicationController = function() {  console.warn(
 };
 $hxClasses.registerClass(com.inq.flash.client.control.ApplicationController, "com.inq.flash.client.control.ApplicationController");
 com.inq.flash.client.control.ApplicationController.isSkipRestoreMsgOnce = false;
-com.inq.flash.client.control.ApplicationController.prototype.registerMessageHandlers = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.registerMessageHandlers");
+com.inq.flash.client.control.ApplicationController.prototype.registerMessageHandlers = function() {
   var MsgHandler = com.inq.flash.client.control.messagehandlers;
   this.registerHandler(new MsgHandler.ChatCommunicationMessageHandler);
   this.registerHandler(new MsgHandler.ChatAcceptedMessageHandler);
@@ -13504,10 +13504,10 @@ com.inq.flash.client.control.ApplicationController.prototype.registerMessageHand
   this.registerHandler(new MsgHandler.AgentDataPassMessageHandler);
   this.skinControl = com.inq.flash.client.chatskins.SkinControl;
 };
-com.inq.flash.client.control.ApplicationController.prototype.getChat = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.getChat");
+com.inq.flash.client.control.ApplicationController.prototype.getChat = function() {
   return this.chat;
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendDTEvent = function(eventName, data) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendDTEvent");
+com.inq.flash.client.control.ApplicationController.prototype.sendDTEvent = function(eventName, data) {
   var msg = new com.inq.flash.client.data.ChatAutomatonResponseMessage(this.chat, eventName, data);
   var selectedLinkName = null;
   if (data.selectedLinkName) {
@@ -13519,7 +13519,7 @@ com.inq.flash.client.control.ApplicationController.prototype.sendDTEvent = funct
   com.inq.flash.client.control.Incrementality.onInteracted();
   com.inq.flash.client.control.Incrementality.onCustomerMsg();
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendInputState = function(itemName, attributeName, state, changeNow) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendInputState");
+com.inq.flash.client.control.ApplicationController.prototype.sendInputState = function(itemName, attributeName, state, changeNow) {
   if (changeNow) {
     com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.setAttribute(itemName, attributeName, state);
   }
@@ -13527,7 +13527,7 @@ com.inq.flash.client.control.ApplicationController.prototype.sendInputState = fu
   this.sendMessageOrQueue(msg);
   com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.incrementOutstandingCount();
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendCoBrowseMessage = function(messageString, eventType, highlightEnabled, showMinimizeRestore) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendCoBrowseMessage");
+com.inq.flash.client.control.ApplicationController.prototype.sendCoBrowseMessage = function(messageString, eventType, highlightEnabled, showMinimizeRestore) {
   var message = new com.inq.flash.client.data.ChatCommunicationCobrowseMessage(this.chat, messageString);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_COBROWSE_EVENT, eventType);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_LINE_NR, "-1");
@@ -13539,32 +13539,32 @@ com.inq.flash.client.control.ApplicationController.prototype.sendCoBrowseMessage
   }
   this.sendText(message);
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendVideoMessage = function(messageString, eventType) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendVideoMessage");
+com.inq.flash.client.control.ApplicationController.prototype.sendVideoMessage = function(messageString, eventType) {
   var message = new com.inq.flash.client.data.ChatActivityMessage(this.chat, eventType);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_DISPLAY_TEXT, messageString);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_LINE_NR, "-1");
   this.sendText(message);
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendFileUploadMessage = function(messageString, delSetting) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendFileUploadMessage");
+com.inq.flash.client.control.ApplicationController.prototype.sendFileUploadMessage = function(messageString, delSetting) {
   var message = new com.inq.flash.client.data.ChatCommunicationFileUploadMessage(this.chat, messageString);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_FILE_DELETE_SETTING, delSetting);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_LINE_NR, "-1");
   this.sendMessageOrQueue(message);
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendVideoStatusMessage = function(messageString, url, action) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendVideoStatusMessage");
+com.inq.flash.client.control.ApplicationController.prototype.sendVideoStatusMessage = function(messageString, url, action) {
   var message = new com.inq.flash.client.data.ChatVideoPlayerStatusMessage(this.chat, messageString);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_VIDEO_URL, url);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_VIDEO_ACTION, action);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_LINE_NR, "-1");
   this.sendMessageOrQueue(message);
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendWebCallMessage = function(messageString, action) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendWebCallMessage");
+com.inq.flash.client.control.ApplicationController.prototype.sendWebCallMessage = function(messageString, action) {
   var message = new com.inq.flash.client.data.ChatCommunicationWebCallMessage(this.chat, messageString);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_WEBCALL_ACTION, action);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_LINE_NR, "-1");
   this.sendMessageOrQueue(message);
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendWebCallEndMessage = function(messageString, isCusEnd, isAbandoned) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendWebCallEndMessage");
+com.inq.flash.client.control.ApplicationController.prototype.sendWebCallEndMessage = function(messageString, isCusEnd, isAbandoned) {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   var mf = com.inq.flash.client.data.MessageFields;
   var message = new com.inq.flash.client.data.ChatCommunicationWebCallMessage(this.chat, messageString);
@@ -13573,7 +13573,7 @@ com.inq.flash.client.control.ApplicationController.prototype.sendWebCallEndMessa
   message.addProperty(mf.KEY_LINE_NR, "-1");
   this.sendMessageOrQueue(message);
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendCoBrowseMessageQuietly = function(messageString, eventType, testResult, highlightEnabled) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendCoBrowseMessageQuietly");
+com.inq.flash.client.control.ApplicationController.prototype.sendCoBrowseMessageQuietly = function(messageString, eventType, testResult, highlightEnabled) {
   var message = new com.inq.flash.client.data.ChatCommunicationCobrowseMessage(this.chat, messageString);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_COBROWSE_EVENT, eventType);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_LINE_NR, "-1");
@@ -13586,20 +13586,20 @@ com.inq.flash.client.control.ApplicationController.prototype.sendCoBrowseMessage
   }
   this.sendText(message);
 };
-com.inq.flash.client.control.ApplicationController.prototype.updateFormFields = function(formData, formName, formId) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.updateFormFields");
+com.inq.flash.client.control.ApplicationController.prototype.updateFormFields = function(formData, formName, formId) {
   this.skinControl.updateFormFields(formData, formName, formId);
 };
-com.inq.flash.client.control.ApplicationController.prototype.submitForm = function(formName, formId, formString, displayMessage) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.submitForm");
+com.inq.flash.client.control.ApplicationController.prototype.submitForm = function(formName, formId, formString, displayMessage) {
   var message = new com.inq.flash.client.data.ChatCommunicationMessage(this.chat, displayMessage);
   message.addProperty(com.inq.flash.client.data.MessageFields.FORM_DATA, formString);
   message.addProperty(com.inq.flash.client.data.MessageFields.FORM_NAME, formName);
   message.addProperty(com.inq.flash.client.data.MessageFields.FORM_ID, formId);
   this.sendText(message);
 };
-com.inq.flash.client.control.ApplicationController.prototype.isFirstMessageSent = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.isFirstMessageSent");
+com.inq.flash.client.control.ApplicationController.prototype.isFirstMessageSent = function() {
   return this.firstMessageSent;
 };
-com.inq.flash.client.control.ApplicationController.prototype.customerClosesPopup = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.customerClosesPopup");
+com.inq.flash.client.control.ApplicationController.prototype.customerClosesPopup = function() {
   this.waitingToExitChat = true;
   try {
     var msgcnt = com.inq.flash.client.control.PersistenceManager.GetValue("msgcnt", 0);
@@ -13619,7 +13619,7 @@ com.inq.flash.client.control.ApplicationController.prototype.customerClosesPopup
   }
   return false;
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendChatExitMsg = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendChatExitMsg");
+com.inq.flash.client.control.ApplicationController.prototype.sendChatExitMsg = function() {
   try {
     if (this.chat != null && this.framework.isConnected()) {
       var cid = this.chat.getChatID();
@@ -13632,18 +13632,18 @@ com.inq.flash.client.control.ApplicationController.prototype.sendChatExitMsg = f
     haxe.Log.trace("sendChatExitMsg: Warning:" + Std.string(e), {fileName:"ApplicationController.js", lineNumber:920, className:"com.inq.flash.client.control.ApplicationController", methodName:"sendChatExitMsg"});
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.checkForChatExit = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.checkForChatExit");
+com.inq.flash.client.control.ApplicationController.prototype.checkForChatExit = function() {
   if (this.waitingToExitChat) {
     this.skinControl.sendExitMsg();
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.setSocketIP = function(crAddress) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.setSocketIP");
+com.inq.flash.client.control.ApplicationController.prototype.setSocketIP = function(crAddress) {
   haxe.Log.trace("setSocketIP:207 crAddress=" + crAddress, {fileName:"ApplicationController.hx", lineNumber:838, className:"com.inq.flash.client.control.ApplicationController", methodName:"setSocketIP"});
   haxe.Log.trace("setSocketIP:213 crAddress=" + crAddress, {fileName:"ApplicationController.hx", lineNumber:844, className:"com.inq.flash.client.control.ApplicationController", methodName:"setSocketIP"});
   this.persistentFrameReconnect();
   haxe.Log.trace("setSocketIP:215 crAddress=" + crAddress, {fileName:"ApplicationController.hx", lineNumber:846, className:"com.inq.flash.client.control.ApplicationController", methodName:"setSocketIP"});
 };
-com.inq.flash.client.control.ApplicationController.prototype.setQueueMessages = function(doQ) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.setQueueMessages");
+com.inq.flash.client.control.ApplicationController.prototype.setQueueMessages = function(doQ) {
   this.authorizedOnce = true;
   if (!doQ) {
     this.attemptingConnection = false;
@@ -13664,7 +13664,7 @@ com.inq.flash.client.control.ApplicationController.prototype.setQueueMessages = 
   }
   this.queueMessages = doQ;
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendFirstQueuedMessage = function(authTime) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendFirstQueuedMessage");
+com.inq.flash.client.control.ApplicationController.prototype.sendFirstQueuedMessage = function(authTime) {
   if (!this.queueMessages || this.messageQueue.length < 1) {
     return;
   }
@@ -13681,7 +13681,7 @@ com.inq.flash.client.control.ApplicationController.prototype.sendFirstQueuedMess
   msg.addProperty(com.inq.flash.client.data.MessageFields.KEY_TIME_DELTA, "" + deltaTime);
   this.sendMessage(msg);
 };
-com.inq.flash.client.control.ApplicationController.prototype.playQueueMessages = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.playQueueMessages");
+com.inq.flash.client.control.ApplicationController.prototype.playQueueMessages = function() {
   var i;
   for (var i = 0;i < this.messageQueue.length;i++) {
     var msgItem = this.messageQueue[i];
@@ -13692,21 +13692,21 @@ com.inq.flash.client.control.ApplicationController.prototype.playQueueMessages =
     this.framework.sendMessage(msg);
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.shouldBeDisconnected = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.shouldBeDisconnected");
+com.inq.flash.client.control.ApplicationController.prototype.shouldBeDisconnected = function() {
   return this.intentionalDisconnect;
 };
-com.inq.flash.client.control.ApplicationController.prototype.shutdownQuietly = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.shutdownQuietly");
+com.inq.flash.client.control.ApplicationController.prototype.shutdownQuietly = function() {
   this.intentionalDisconnect = true;
   this.framework.disconnect();
 };
-com.inq.flash.client.control.ApplicationController.prototype.shutdown = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.shutdown");
+com.inq.flash.client.control.ApplicationController.prototype.shutdown = function() {
   this.shutdownQuietly();
   if (this.waitingToExitChat == true) {
     return;
   }
   this.skinControl.agentClosesChat();
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendChatCommunicationMessage = function(message, loc) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendChatCommunicationMessage");
+com.inq.flash.client.control.ApplicationController.prototype.sendChatCommunicationMessage = function(message, loc) {
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_LINE_NR, "" + loc);
   if (!this.attemptingConnection && !this.intentionalDisconnect && !this.framework.isConnected() && !this.wasConnected) {
     this.sendButtonClickedTime = Math.round((new Date).getTime());
@@ -13730,7 +13730,7 @@ com.inq.flash.client.control.ApplicationController.prototype.sendChatCommunicati
     this.sendText(message);
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.prepareEngageChat = function(chatParams) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.prepareEngageChat");
+com.inq.flash.client.control.ApplicationController.prototype.prepareEngageChat = function(chatParams) {
   if (!this.attemptingConnection && !this.intentionalDisconnect && (this.chatRouterListen || !this.framework.isConnected() && !this.wasConnected)) {
     this.setEngageParameters(chatParams);
     var message = new com.inq.flash.client.data.ChatEngageMessage(this.chat, chatParams["agentOutcome"], chatParams["clientOutcome"], this.getAgentAlias());
@@ -13748,7 +13748,7 @@ com.inq.flash.client.control.ApplicationController.prototype.prepareEngageChat =
   }
   return false;
 };
-com.inq.flash.client.control.ApplicationController.prototype.engageChat = function(chatParams) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.engageChat");
+com.inq.flash.client.control.ApplicationController.prototype.engageChat = function(chatParams) {
   if (!this.attemptingConnection && !this.intentionalDisconnect && (this.chatRouterListen || !this.framework.isConnected() && !this.wasConnected)) {
     this.sendButtonClickedTime = Math.round((new Date).getTime());
     this.setEngageParameters(chatParams);
@@ -13765,7 +13765,7 @@ com.inq.flash.client.control.ApplicationController.prototype.engageChat = functi
   }
   return false;
 };
-com.inq.flash.client.control.ApplicationController.prototype.setEngageParameters = function(chatParams) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.setEngageParameters");
+com.inq.flash.client.control.ApplicationController.prototype.setEngageParameters = function(chatParams) {
   if (chatParams["agentAttrs"]) {
     this.chat.setAgentAttributes(chatParams["agentAttrs"]);
   }
@@ -13800,11 +13800,11 @@ com.inq.flash.client.control.ApplicationController.prototype.setEngageParameters
   }
   this.chat.setRoutingAllocSpecs(chatParams.routingAllocSpecs);
 };
-com.inq.flash.client.control.ApplicationController.prototype.addClientOutcomeToChatWindow = function(clientOutcome) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.addClientOutcomeToChatWindow");
+com.inq.flash.client.control.ApplicationController.prototype.addClientOutcomeToChatWindow = function(clientOutcome) {
   var expressionObject = this.skinControl.checkForSpecialExpression(clientOutcome);
   return this.skinControl.AddOpenerToChatWindow(StringTools.htmlUnescape(this.getAgentAlias()), expressionObject.text, com.inq.flash.client.chatskins.ChatTextArea.AGENT, -1, expressionObject.expressionList);
 };
-com.inq.flash.client.control.ApplicationController.prototype.getAgentAlias = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.getAgentAlias");
+com.inq.flash.client.control.ApplicationController.prototype.getAgentAlias = function() {
   var agentName = com.inq.flash.client.control.FlashVars.getFlashVars()["agentName"];
   var useAgentAlias = com.inq.utils.Util.getConfig("useAgentAlias", false);
   if (useAgentAlias == true && com.inq.flash.client.control.FlashVars.getValue("overrideAgentAlias") != "true") {
@@ -13813,7 +13813,7 @@ com.inq.flash.client.control.ApplicationController.prototype.getAgentAlias = fun
   }
   return agentName;
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendButtonClicked = function(text) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendButtonClicked");
+com.inq.flash.client.control.ApplicationController.prototype.sendButtonClicked = function(text) {
   haxe.Log.trace("enter", {fileName:"ApplicationController.hx", lineNumber:664, className:"com.inq.flash.client.control.ApplicationController", methodName:"sendButtonClicked"});
   if (text == null || text == "") {
     haxe.Log.trace("no text", {fileName:"ApplicationController.hx", lineNumber:670, className:"com.inq.flash.client.control.ApplicationController", methodName:"sendButtonClicked"});
@@ -13832,7 +13832,7 @@ com.inq.flash.client.control.ApplicationController.prototype.sendButtonClicked =
     this.cancelUpdateUsername();
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendVALinkClicked = function(event) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendVALinkClicked");
+com.inq.flash.client.control.ApplicationController.prototype.sendVALinkClicked = function(event) {
   var el = event.target || event.srcElement;
   if (el.tagName != "A") {
     return;
@@ -13858,7 +13858,7 @@ com.inq.flash.client.control.ApplicationController.prototype.sendVALinkClicked =
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_RETURN_RECEIPT, "0");
   this.sendChatCommunicationMessage(message, loc);
 };
-com.inq.flash.client.control.ApplicationController.prototype.callButtonClicked = function(text, callStreamData, callerNameString) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.callButtonClicked");
+com.inq.flash.client.control.ApplicationController.prototype.callButtonClicked = function(text, callStreamData, callerNameString) {
   this.callStreamData = callStreamData;
   var message = new com.inq.flash.client.data.CallCommunicationMessage(this.chat, text);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_USERNAME, callerNameString);
@@ -13869,27 +13869,27 @@ com.inq.flash.client.control.ApplicationController.prototype.callButtonClicked =
   this.sendMessageOrQueue(message);
   this.chatRouterListen = false;
 };
-com.inq.flash.client.control.ApplicationController.prototype.isConnected = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.isConnected");
+com.inq.flash.client.control.ApplicationController.prototype.isConnected = function() {
   if (this.framework == null) {
     return false;
   }
   return this.framework.isConnected();
 };
-com.inq.flash.client.control.ApplicationController.prototype.isSendMessageFail = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.isSendMessageFail");
+com.inq.flash.client.control.ApplicationController.prototype.isSendMessageFail = function() {
   if (this.framework) {
     return this.framework.isSendMessageFail();
   } else {
     return false;
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.getResponseTimestamp = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.getResponseTimestamp");
+com.inq.flash.client.control.ApplicationController.prototype.getResponseTimestamp = function() {
   if (this.framework) {
     return this.framework._getResponseTimestamp();
   } else {
     return 0;
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.localChatRouterListen = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.localChatRouterListen");
+com.inq.flash.client.control.ApplicationController.prototype.localChatRouterListen = function() {
   try {
     if (this.framework.isConnected()) {
       return;
@@ -13908,7 +13908,7 @@ com.inq.flash.client.control.ApplicationController.prototype.localChatRouterList
     }
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.persistentFrameReconnect = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.persistentFrameReconnect");
+com.inq.flash.client.control.ApplicationController.prototype.persistentFrameReconnect = function() {
   try {
     if (!this.attemptingConnection) {
       this.attemptingConnection = true;
@@ -13927,11 +13927,11 @@ com.inq.flash.client.control.ApplicationController.prototype.persistentFrameReco
     }
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.connectionLost = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.connectionLost");
+com.inq.flash.client.control.ApplicationController.prototype.connectionLost = function() {
   haxe.Log.trace("connectionLost();", {fileName:"ApplicationController.hx", lineNumber:591, className:"com.inq.flash.client.control.ApplicationController", methodName:"connectionLost"});
   this.queueMessages = true;
 };
-com.inq.flash.client.control.ApplicationController.prototype.setAgentConfig = function(agentID, eventData, coBrowseEnabled, buID, agentGroupID) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.setAgentConfig");
+com.inq.flash.client.control.ApplicationController.prototype.setAgentConfig = function(agentID, eventData, coBrowseEnabled, buID, agentGroupID) {
   if (coBrowseEnabled == null) {
     coBrowseEnabled = false;
   }
@@ -13941,7 +13941,7 @@ com.inq.flash.client.control.ApplicationController.prototype.setAgentConfig = fu
   this.skinControl.setTypingActivity(false);
   this.skinControl.setAgentConfig(agentID, eventData, coBrowseEnabled, buID, agentGroupID);
 };
-com.inq.flash.client.control.ApplicationController.prototype.urlStringToObject = function(urlStr) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.urlStringToObject");
+com.inq.flash.client.control.ApplicationController.prototype.urlStringToObject = function(urlStr) {
   var retObj = new com.inq.utils.Dictionary;
   var strArr = StringTools.urlDecode(urlStr).split("&");
   for (var i = 0;i < strArr.length;i++) {
@@ -13955,14 +13955,14 @@ com.inq.flash.client.control.ApplicationController.prototype.urlStringToObject =
   }
   return retObj;
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendMessage = function(msg, successListener, errorListener) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendMessage");
+com.inq.flash.client.control.ApplicationController.prototype.sendMessage = function(msg, successListener, errorListener) {
   this.addClickStreamData(msg);
   this.framework.sendMessage(msg, successListener, errorListener);
   if (com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION == msg.getMessageType() && Application.application.notificationController) {
     Application.application.notificationController.hideNotification();
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.initializeAutomatonMode = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.initializeAutomatonMode");
+com.inq.flash.client.control.ApplicationController.prototype.initializeAutomatonMode = function() {
   if (this.isAutomatonMode() && !this.framework.isConnected() && !this.skinControl.isContinued()) {
     haxe.Log.trace("initializing Inline DT automaton", {fileName:"ApplicationController.hx", lineNumber:553, className:"com.inq.flash.client.control.ApplicationController", methodName:"initializeAutomatonMode"});
     this.sendButtonClickedTime = Math.round((new Date).getTime());
@@ -13970,10 +13970,10 @@ com.inq.flash.client.control.ApplicationController.prototype.initializeAutomaton
     this.skinControl.StopTimer();
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.isAutomatonMode = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.isAutomatonMode");
+com.inq.flash.client.control.ApplicationController.prototype.isAutomatonMode = function() {
   return this.chat.getAutomatonId() != null;
 };
-com.inq.flash.client.control.ApplicationController.prototype.addInitialData = function(msg, name, data, label) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.addInitialData");
+com.inq.flash.client.control.ApplicationController.prototype.addInitialData = function(msg, name, data, label) {
   var prefix = com.inq.flash.client.data.MessageFields.KEY_INITIAL_CLICKSTREAM_PREFIX + msg.nextInitialDataIndex();
   msg.addProperty(prefix + ".id", name);
   msg.addProperty(prefix + ".data", com.inq.flash.messagingframework.StringUtils.encodeStringForMessage(data));
@@ -13981,7 +13981,7 @@ com.inq.flash.client.control.ApplicationController.prototype.addInitialData = fu
     msg.addProperty(prefix + ".label", label);
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.addClickStreamData = function(msg) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.addClickStreamData");
+com.inq.flash.client.control.ApplicationController.prototype.addClickStreamData = function(msg) {
   if (com.inq.flash.client.control.PersistenceManager.GetValue("s", 0) == 0) {
     this.bSendClickStreamData = true;
   }
@@ -14039,7 +14039,7 @@ com.inq.flash.client.control.ApplicationController.prototype.addClickStreamData 
   }
   com.inq.flash.client.control.PersistenceManager.SetValue("s", 1);
 };
-com.inq.flash.client.control.ApplicationController.prototype.connectionEstablished = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.connectionEstablished");
+com.inq.flash.client.control.ApplicationController.prototype.connectionEstablished = function() {
   try {
     com.inq.flash.client.control.FlashPeer.setCABeacon(this.chat.BEACON_ACTIVATE);
     var connectionType = this.framework.getConnectionType();
@@ -14088,13 +14088,13 @@ com.inq.flash.client.control.ApplicationController.prototype.connectionEstablish
   }
   haxe.Log.trace("exit connectionEstablished", {fileName:"ApplicationController.hx", lineNumber:440, className:"com.inq.flash.client.control.ApplicationController", methodName:"connectionEstablished"});
 };
-com.inq.flash.client.control.ApplicationController.prototype.isConnectionAccepted = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.isConnectionAccepted");
+com.inq.flash.client.control.ApplicationController.prototype.isConnectionAccepted = function() {
   return this.chatAccepted;
 };
-com.inq.flash.client.control.ApplicationController.prototype.setConnectionAccepted = function(b) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.setConnectionAccepted");
+com.inq.flash.client.control.ApplicationController.prototype.setConnectionAccepted = function(b) {
   this.chatAccepted = b;
 };
-com.inq.flash.client.control.ApplicationController.prototype.acknowledgeChatPersistent = function(clientProtoDomain, messageCnt) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.acknowledgeChatPersistent");
+com.inq.flash.client.control.ApplicationController.prototype.acknowledgeChatPersistent = function(clientProtoDomain, messageCnt) {
   var b = com.inq.flash.client.control.FlashPeer.registerPersistentWindow();
   if (!b) {
     com.inq.flash.client.chatskins.SkinControl.noUnload();
@@ -14102,20 +14102,20 @@ com.inq.flash.client.control.ApplicationController.prototype.acknowledgeChatPers
   var protoDomain = window.location.protocol + "//" + window.location.hostname;
   this.framework.acknowledgePersistentActive(this.chat.getChatID(), protoDomain, clientProtoDomain, !b, messageCnt);
 };
-com.inq.flash.client.control.ApplicationController.prototype.acknowledgeChatActive = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.acknowledgeChatActive");
+com.inq.flash.client.control.ApplicationController.prototype.acknowledgeChatActive = function() {
   this.framework.acknowledgeChatActive(this.chat.getChatID());
 };
-com.inq.flash.client.control.ApplicationController.prototype.enable = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.enable");
+com.inq.flash.client.control.ApplicationController.prototype.enable = function() {
   this.framework.enable();
 };
-com.inq.flash.client.control.ApplicationController.prototype.disable = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.disable");
+com.inq.flash.client.control.ApplicationController.prototype.disable = function() {
   this.framework.disable();
   var ieVersion = com.inq.flash.client.control.FlashPeer.getBrowserMajorVer(true);
   if (!com.inq.flash.client.control.FlashPeer.isPersistentChat() || com.inq.flash.client.control.FlashVars.getPersistentFrame() || !com.inq.utils.Util.isIE || ieVersion > 7) {
     com.inq.flash.client.control.FlashPeer.setCABeacon(this.chat.BEACON_DEACTIVATE);
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendMessageOrQueue = function(message, clientTime) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendMessageOrQueue");
+com.inq.flash.client.control.ApplicationController.prototype.sendMessageOrQueue = function(message, clientTime) {
   if (!this.queueMessages) {
     this.sendMessage(message);
   } else {
@@ -14123,7 +14123,7 @@ com.inq.flash.client.control.ApplicationController.prototype.sendMessageOrQueue 
     this.messageQueue.push({clientTime:now, msg:message});
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.processClickToCallQueueMessages = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.processClickToCallQueueMessages");
+com.inq.flash.client.control.ApplicationController.prototype.processClickToCallQueueMessages = function() {
   var opener = com.inq.flash.client.chatskins.SkinControl.getOpener();
   this.openerMessageQueue = opener["com"]["inq"]["getOpenerMessageQueue"]();
   var messageQueue = opener["com"]["inq"]["getMessageQueue"]();
@@ -14135,7 +14135,7 @@ com.inq.flash.client.control.ApplicationController.prototype.processClickToCallQ
     this.sendChatCommunicationMessage(message, loc);
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.processClickToWebCallQueueMessages = function(chatParams) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.processClickToWebCallQueueMessages");
+com.inq.flash.client.control.ApplicationController.prototype.processClickToWebCallQueueMessages = function(chatParams) {
   this.callStreamData = "^^" + com.inq.flash.client.chatskins.SkinControl.CSDL_WEBCALLADDRESS + "video-" + !com.inq.flash.client.control.WebRTCMgr.isAudioOnlyWebCall();
   this.callStreamData += " " + com.inq.flash.client.control.FlashPeer.getVanityUrl();
   var message = new com.inq.flash.client.data.CallCommunicationMessage(this.chat, com.inq.utils.Util.getConfig("webCallStart", "Start call"));
@@ -14157,13 +14157,13 @@ com.inq.flash.client.control.ApplicationController.prototype.processClickToWebCa
   this.chatRouterListen = false;
   this.processClickToCallQueueMessages();
 };
-com.inq.flash.client.control.ApplicationController.prototype.getMessageQueue = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.getMessageQueue");
+com.inq.flash.client.control.ApplicationController.prototype.getMessageQueue = function() {
   return this.messageQueue;
 };
-com.inq.flash.client.control.ApplicationController.prototype.getOpenerMessageQueue = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.getOpenerMessageQueue");
+com.inq.flash.client.control.ApplicationController.prototype.getOpenerMessageQueue = function() {
   return this.openerMessageQueue;
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendOpenerQueue = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendOpenerQueue");
+com.inq.flash.client.control.ApplicationController.prototype.sendOpenerQueue = function() {
   while (this.openerMessageQueue.length > 0) {
     var openerItem = this.openerMessageQueue.shift();
     var openerText = openerItem.data;
@@ -14171,16 +14171,16 @@ com.inq.flash.client.control.ApplicationController.prototype.sendOpenerQueue = f
     this.sendMessageOrQueue(message, openerItem.clientTime);
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendQueueingText = function(queueingText, position, agentAlias) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendQueueingText");
+com.inq.flash.client.control.ApplicationController.prototype.sendQueueingText = function(queueingText, position, agentAlias) {
   var message = new com.inq.flash.client.data.ChatCommunicationQueueMessage(this.chat, queueingText, agentAlias);
   message.addProperty(com.inq.flash.client.data.MessageFields.KEY_LINE_NR, "" + position);
   this.sendMessageOrQueue(message);
 };
-com.inq.flash.client.control.ApplicationController.prototype.enqueueOpenerText = function(text, alias) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.enqueueOpenerText");
+com.inq.flash.client.control.ApplicationController.prototype.enqueueOpenerText = function(text, alias) {
   var now = (new Date).getTime();
   this.openerMessageQueue.push({clientTime:now, data:text, agentAlias:alias});
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendText = function(message) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendText");
+com.inq.flash.client.control.ApplicationController.prototype.sendText = function(message) {
   if (!this.firstMessageSent) {
     this.sendOpenerQueue();
   }
@@ -14188,7 +14188,7 @@ com.inq.flash.client.control.ApplicationController.prototype.sendText = function
   this.chatRouterListen = false;
   this.firstMessageSent = true;
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendTextToAgent = function(text) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendTextToAgent");
+com.inq.flash.client.control.ApplicationController.prototype.sendTextToAgent = function(text) {
   haxe.Log.trace("enter", {fileName:"ApplicationController.hx", lineNumber:618, className:"com.inq.flash.client.control.ApplicationController", methodName:"sendTextToAgent"});
   if (text == null || text == "") {
     haxe.Log.trace("no text", {fileName:"ApplicationController.hx", lineNumber:670, className:"com.inq.flash.client.control.ApplicationController", methodName:"sendTextToAgent"});
@@ -14200,7 +14200,7 @@ com.inq.flash.client.control.ApplicationController.prototype.sendTextToAgent = f
   var message = new com.inq.flash.client.data.ChatCommunicationMessage(this.chat, text);
   this.sendChatCommunicationMessage(message, loc);
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendRestoredMessage = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendRestoredMessage");
+com.inq.flash.client.control.ApplicationController.prototype.sendRestoredMessage = function() {
   if (com.inq.flash.client.control.PersistenceManager.GetValue("msgcnt", 0) > 0) {
     if (com.inq.flash.client.control.ApplicationController.isSkipRestoreMsgOnce === true) {
       com.inq.flash.client.control.ApplicationController.isSkipRestoreMsgOnce = false;
@@ -14210,13 +14210,13 @@ com.inq.flash.client.control.ApplicationController.prototype.sendRestoredMessage
     }
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.sendMinimizedMessage = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.sendMinimizedMessage");
+com.inq.flash.client.control.ApplicationController.prototype.sendMinimizedMessage = function() {
   if (com.inq.flash.client.control.PersistenceManager.GetValue("msgcnt", 0) > 0) {
     var message = new com.inq.flash.client.data.ChatActivityMessage(this.chat, com.inq.flash.client.data.MessageFields.ACTIVITY_CUSTOMER_MINIMIZED);
     this.sendMessageOrQueue(message);
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.TypingActivity = function(bTyping) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.TypingActivity");
+com.inq.flash.client.control.ApplicationController.prototype.TypingActivity = function(bTyping) {
   var msgcnt = com.inq.flash.client.control.PersistenceManager.GetValue("msgcnt", 0);
   if (this.firstMessageSent || msgcnt > 0) {
     var txtInput = Application.application.getTextInput("txtInput");
@@ -14227,10 +14227,10 @@ com.inq.flash.client.control.ApplicationController.prototype.TypingActivity = fu
     this.skinControl.setTypingActivity(false);
   }
 };
-com.inq.flash.client.control.ApplicationController.prototype.appendSentText = function(text, position) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.appendSentText");
+com.inq.flash.client.control.ApplicationController.prototype.appendSentText = function(text, position) {
   return com.inq.flash.client.chatskins.SkinControl.AddCustomerTextToChatWindow(text, position);
 };
-com.inq.flash.client.control.ApplicationController.prototype.appendReceivedText = function(text, sender, position, isAgentMessage, expressionList, restoreMode) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.appendReceivedText");
+com.inq.flash.client.control.ApplicationController.prototype.appendReceivedText = function(text, sender, position, isAgentMessage, expressionList, restoreMode) {
   var chatTextArea = com.inq.flash.client.chatskins.ChatTextArea;
   if (!com.inq.flash.client.control.XFrameWorker.isDisplayInCI(text)) {
     haxe.Log.trace('Text filtered... "' + text + '"', {fileName:"ApplicationController.hx", lineNumber:167, className:"com.inq.flash.client.control.ApplicationController", methodName:"appendReceivedText"});
@@ -14252,36 +14252,36 @@ com.inq.flash.client.control.ApplicationController.prototype.appendReceivedText 
   }
   ++this.msgCount;
 };
-com.inq.flash.client.control.ApplicationController.prototype.registerHandler = function(handler) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.registerHandler");
+com.inq.flash.client.control.ApplicationController.prototype.registerHandler = function(handler) {
   this.framework.registerMessageHandler(handler);
   handler.setController(this);
 };
-com.inq.flash.client.control.ApplicationController.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.processMessage");
+com.inq.flash.client.control.ApplicationController.prototype.processMessage = function(message) {
   this.framework.processMessage(message);
 };
-com.inq.flash.client.control.ApplicationController.prototype.getMessagingFramework = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.getMessagingFramework");
+com.inq.flash.client.control.ApplicationController.prototype.getMessagingFramework = function() {
   return this.framework;
 };
-com.inq.flash.client.control.ApplicationController.prototype.isAgentAssigned = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.isAgentAssigned");
+com.inq.flash.client.control.ApplicationController.prototype.isAgentAssigned = function() {
   return !!com.inq.flash.client.control.FlashPeer.getAgentID();
 };
-com.inq.flash.client.control.ApplicationController.prototype.setFlagChatInQueue = function(v) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.setFlagChatInQueue");
+com.inq.flash.client.control.ApplicationController.prototype.setFlagChatInQueue = function(v) {
   this.flagChatInQueue = v;
 };
-com.inq.flash.client.control.ApplicationController.prototype.isChatInQueue = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.isChatInQueue");
+com.inq.flash.client.control.ApplicationController.prototype.isChatInQueue = function() {
   return this.flagChatInQueue;
 };
-com.inq.flash.client.control.ApplicationController.prototype.updateUsername = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.updateUsername");
+com.inq.flash.client.control.ApplicationController.prototype.updateUsername = function() {
   this._updateUsername = true;
 };
-com.inq.flash.client.control.ApplicationController.prototype.cancelUpdateUsername = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.cancelUpdateUsername");
+com.inq.flash.client.control.ApplicationController.prototype.cancelUpdateUsername = function() {
   this._updateUsername = false;
 };
-com.inq.flash.client.control.ApplicationController.prototype.isUpdateUsername = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.isUpdateUsername");
+com.inq.flash.client.control.ApplicationController.prototype.isUpdateUsername = function() {
   var customerDisplayName = com.inq.flash.client.control.FlashVars.getCustomerDisplayName();
   return this._updateUsername && !!customerDisplayName;
 };
-com.inq.flash.client.control.ApplicationController.sendSystemMessage = function(text, cssClass, context) {  console.warn("com.inq.flash.client.control.ApplicationController.sendSystemMessage");
+com.inq.flash.client.control.ApplicationController.sendSystemMessage = function(text, cssClass, context) {
   var position = "-1";
   if (!context || context === "customerInterface") {
     position = com.inq.flash.client.chatskins.SkinControl.AddTranscriptItemToChatWindow("", text, com.inq.flash.client.chatskins.ChatTextArea.SYSTEM, -1, null, null, cssClass);
@@ -14290,22 +14290,22 @@ com.inq.flash.client.control.ApplicationController.sendSystemMessage = function(
   var message = new com.inq.flash.client.data.ChatCommunicationSystemMessage(ac.chat, text, "" + position, context, cssClass);
   ac.sendMessageOrQueue(message);
 };
-com.inq.flash.client.control.ApplicationController.prototype.onNetworkTimeout = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.onNetworkTimeout");
+com.inq.flash.client.control.ApplicationController.prototype.onNetworkTimeout = function() {
   this.skinControl.timeoutClosesChat();
 };
-com.inq.flash.client.control.ApplicationController.prototype.onLostConnection = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.onLostConnection");
+com.inq.flash.client.control.ApplicationController.prototype.onLostConnection = function() {
   this.skinControl.connectionLostClosingChat(true);
 };
-com.inq.flash.client.control.ApplicationController.prototype.noUnload = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.noUnload");
+com.inq.flash.client.control.ApplicationController.prototype.noUnload = function() {
   this.skinControl.noUnload();
 };
-com.inq.flash.client.control.ApplicationController.prototype.showIntroductionAfterPreloadMessages = function() {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.showIntroductionAfterPreloadMessages");
+com.inq.flash.client.control.ApplicationController.prototype.showIntroductionAfterPreloadMessages = function() {
   this.skinControl.showIntroductionAfterPreloadMessages();
 };
-com.inq.flash.client.control.ApplicationController.prototype.getMessageHandlerByPrefix = function(messageType) {  console.warn("com.inq.flash.client.control.ApplicationController.prototype.getMessageHandlerByPrefix");
+com.inq.flash.client.control.ApplicationController.prototype.getMessageHandlerByPrefix = function(messageType) {
   return this.framework.getMessageHandlerByPrefix(messageType);
 };
-com.inq.flash.client.control.ApplicationController.cleanUp = function() {  console.warn("com.inq.flash.client.control.ApplicationController.cleanUp");
+com.inq.flash.client.control.ApplicationController.cleanUp = function() {
   com.inq.flash.client.control.ApplicationController.applicationController = null;
 };
 com.inq.flash.client.control.ApplicationController.prototype.sendButtonClickedTime = null;
@@ -14338,22 +14338,22 @@ if (!com.inq.flash.messagingframework) {
 if (!com.inq.flash.messagingframework.connectionhandling) {
   com.inq.flash.messagingframework.connectionhandling = {};
 }
-;com.inq.flash.client.control.ClientConnectionEventHandler = function(controller) {  console.warn("com.inq.flash.client.control.ClientConnectionEventHandler");
+;com.inq.flash.client.control.ClientConnectionEventHandler = function(controller) {
   this.controller = controller;
 };
 $hxClasses["com.inq.flash.client.control.ClientConnectionEventHandler"] = com.inq.flash.client.control.ClientConnectionEventHandler;
 com.inq.flash.client.control.ClientConnectionEventHandler.__name__ = ["com", "inq", "flash", "client", "control", "ClientConnectionEventHandler"];
-com.inq.flash.client.control.ClientConnectionEventHandler.prototype.allConnectionAttemptsFailed = function() {  console.warn("com.inq.flash.client.control.ClientConnectionEventHandler.prototype.allConnectionAttemptsFailed");
+com.inq.flash.client.control.ClientConnectionEventHandler.prototype.allConnectionAttemptsFailed = function() {
 };
-com.inq.flash.client.control.ClientConnectionEventHandler.prototype.connectionSuccessful = function() {  console.warn("com.inq.flash.client.control.ClientConnectionEventHandler.prototype.connectionSuccessful");
+com.inq.flash.client.control.ClientConnectionEventHandler.prototype.connectionSuccessful = function() {
   haxe.Log.trace("enter", {fileName:"ClientConnectionEventHandler.hx", lineNumber:25, className:"com.inq.flash.client.control.ClientConnectionEventHandler", methodName:"connectionSuccessful"});
   this.controller.connectionEstablished();
   haxe.Log.trace("exit", {fileName:"ClientConnectionEventHandler.hx", lineNumber:27, className:"com.inq.flash.client.control.ClientConnectionEventHandler", methodName:"connectionSuccessful"});
 };
-com.inq.flash.client.control.ClientConnectionEventHandler.prototype.connectionClosedNeedRetryRequest = function() {  console.warn("com.inq.flash.client.control.ClientConnectionEventHandler.prototype.connectionClosedNeedRetryRequest");
+com.inq.flash.client.control.ClientConnectionEventHandler.prototype.connectionClosedNeedRetryRequest = function() {
   return this.connectionFailedNeedRetryRequest(3, 3);
 };
-com.inq.flash.client.control.ClientConnectionEventHandler.prototype.connectionFailedNeedRetryRequest = function(connectionRetryAttempts, maxConnectionRetries) {  console.warn("com.inq.flash.client.control.ClientConnectionEventHandler.prototype.connectionFailedNeedRetryRequest");
+com.inq.flash.client.control.ClientConnectionEventHandler.prototype.connectionFailedNeedRetryRequest = function(connectionRetryAttempts, maxConnectionRetries) {
   this.controller.connectionLost();
   if (this.controller.shouldBeDisconnected()) {
     return false;
@@ -14362,13 +14362,13 @@ com.inq.flash.client.control.ClientConnectionEventHandler.prototype.connectionFa
 };
 com.inq.flash.client.control.ClientConnectionEventHandler.prototype.controller = null;
 com.inq.flash.client.control.ClientConnectionEventHandler.prototype.__class__ = com.inq.flash.client.control.ClientConnectionEventHandler;
-com.inq.flash.client.control.FlashVars = function() {  console.warn("com.inq.flash.client.control.FlashVars");
+com.inq.flash.client.control.FlashVars = function() {
 };
 $hxClasses["com.inq.flash.client.control.FlashVars"] = com.inq.flash.client.control.FlashVars;
 com.inq.flash.client.control.FlashVars.__name__ = ["com", "inq", "flash", "client", "control", "FlashVars"];
 com.inq.flash.client.control.FlashVars._flashVars = null;
 com.inq.flash.client.control.FlashVars.flashVars = null;
-com.inq.flash.client.control.FlashVars.getFlashVars = function() {  console.warn("com.inq.flash.client.control.FlashVars.getFlashVars");
+com.inq.flash.client.control.FlashVars.getFlashVars = function() {
   if (null == com.inq.flash.client.control.FlashVars._flashVars) {
     com.inq.flash.client.control.FlashVars.setApplicationParameters();
   }
@@ -14385,38 +14385,38 @@ com.inq.flash.client.control.FlashVars.openerID = null;
 com.inq.flash.client.control.FlashVars.agentName = null;
 com.inq.flash.client.control.FlashVars.openerDelay = null;
 com.inq.flash.client.control.FlashVars.userAgent = null;
-com.inq.flash.client.control.FlashVars._init = function() {  console.warn("com.inq.flash.client.control.FlashVars._init");
+com.inq.flash.client.control.FlashVars._init = function() {
   com.inq.flash.client.control.FlashVars._flashVars = null;
   return true;
 };
-com.inq.flash.client.control.FlashVars.getValue = function(keyName) {  console.warn("com.inq.flash.client.control.FlashVars.getValue");
+com.inq.flash.client.control.FlashVars.getValue = function(keyName) {
   return com.inq.flash.client.control.FlashVars.getFlashVars()[keyName];
 };
-com.inq.flash.client.control.FlashVars.setValue = function(keyName, vl) {  console.warn("com.inq.flash.client.control.FlashVars.setValue");
+com.inq.flash.client.control.FlashVars.setValue = function(keyName, vl) {
   com.inq.flash.client.control.FlashVars.getFlashVars()[keyName] = vl;
 };
-com.inq.flash.client.control.FlashVars.setAgentName = function(valu) {  console.warn("com.inq.flash.client.control.FlashVars.setAgentName");
+com.inq.flash.client.control.FlashVars.setAgentName = function(valu) {
   if (valu == null || valu == "null" || StringTools.trim(valu) == "") {
     valu = "Jessica";
   }
   com.inq.flash.client.control.FlashVars.getFlashVars()["agentName"] = valu;
 };
-com.inq.flash.client.control.FlashVars.setAutomatonSpecData = function(val) {  console.warn("com.inq.flash.client.control.FlashVars.setAutomatonSpecData");
+com.inq.flash.client.control.FlashVars.setAutomatonSpecData = function(val) {
   com.inq.flash.client.control.FlashVars.setValue("automatonSpecData", val);
 };
-com.inq.flash.client.control.FlashVars.getAutomatonSpecData = function() {  console.warn("com.inq.flash.client.control.FlashVars.getAutomatonSpecData");
+com.inq.flash.client.control.FlashVars.getAutomatonSpecData = function() {
   return com.inq.flash.client.control.FlashVars.getValue("automatonSpecData");
 };
-com.inq.flash.client.control.FlashVars.setPersistentFrame = function(val) {  console.warn("com.inq.flash.client.control.FlashVars.setPersistentFrame");
+com.inq.flash.client.control.FlashVars.setPersistentFrame = function(val) {
   com.inq.flash.client.control.FlashVars.setValue("PersistentFrame", val);
 };
-com.inq.flash.client.control.FlashVars.getUserAgent = function() {  console.warn("com.inq.flash.client.control.FlashVars.getUserAgent");
+com.inq.flash.client.control.FlashVars.getUserAgent = function() {
   return com.inq.flash.client.control.FlashVars.getValue("userAgent");
 };
-com.inq.flash.client.control.FlashVars.getPersistentFrame = function() {  console.warn("com.inq.flash.client.control.FlashVars.getPersistentFrame");
+com.inq.flash.client.control.FlashVars.getPersistentFrame = function() {
   return com.inq.flash.client.control.FlashVars.getValue("PersistentFrame");
 };
-com.inq.flash.client.control.FlashVars.getChatID = function() {  console.warn("com.inq.flash.client.control.FlashVars.getChatID");
+com.inq.flash.client.control.FlashVars.getChatID = function() {
   try {
     return com.inq.flash.client.control.FlashVars.getValue("chatID");
   } catch (e) {
@@ -14428,35 +14428,35 @@ com.inq.flash.client.control.FlashVars.getChatID = function() {  console.warn("c
     }
   }
 };
-com.inq.flash.client.control.FlashVars.getClickStream = function() {  console.warn("com.inq.flash.client.control.FlashVars.getClickStream");
+com.inq.flash.client.control.FlashVars.getClickStream = function() {
   var datum = com.inq.flash.client.control.FlashVars.getValue("clickStream");
   return datum;
 };
-com.inq.flash.client.control.FlashVars.getSubmitURL = function() {  console.warn("com.inq.flash.client.control.FlashVars.getSubmitURL");
+com.inq.flash.client.control.FlashVars.getSubmitURL = function() {
   return com.inq.flash.client.control.FlashVars.getValue("submitURL");
 };
-com.inq.flash.client.control.FlashVars.getShutdownPopup = function() {  console.warn("com.inq.flash.client.control.FlashVars.getShutdownPopup");
+com.inq.flash.client.control.FlashVars.getShutdownPopup = function() {
   return com.inq.flash.client.control.FlashVars.getValue("shutdownPopup");
 };
-com.inq.flash.client.control.FlashVars.isContinued = function() {  console.warn("com.inq.flash.client.control.FlashVars.isContinued");
+com.inq.flash.client.control.FlashVars.isContinued = function() {
   return Std.parseInt("" + Std.string(com.inq.flash.client.control.FlashVars.getValue("continued"))) == 1;
 };
-com.inq.flash.client.control.FlashVars.getTagServerBaseURL = function() {  console.warn("com.inq.flash.client.control.FlashVars.getTagServerBaseURL");
+com.inq.flash.client.control.FlashVars.getTagServerBaseURL = function() {
   return com.inq.flash.client.control.FlashVars.getValue("tagServerBaseURL");
 };
-com.inq.flash.client.control.FlashVars.getOpenerID = function() {  console.warn("com.inq.flash.client.control.FlashVars.getOpenerID");
+com.inq.flash.client.control.FlashVars.getOpenerID = function() {
   return com.inq.flash.client.control.FlashVars.getValue("openerID");
 };
-com.inq.flash.client.control.FlashVars.getAgentName = function() {  console.warn("com.inq.flash.client.control.FlashVars.getAgentName");
+com.inq.flash.client.control.FlashVars.getAgentName = function() {
   if (com.inq.utils.Util.getConfig("agentName")) {
     return com.inq.utils.Util.getConfig("agentName");
   }
   return com.inq.flash.client.control.FlashVars.getValue("agentName");
 };
-com.inq.flash.client.control.FlashVars.getCustomerDisplayName = function() {  console.warn("com.inq.flash.client.control.FlashVars.getCustomerDisplayName");
+com.inq.flash.client.control.FlashVars.getCustomerDisplayName = function() {
   return com.inq.flash.client.control.PersistenceManager.GetValue("ci_cdn", null);
 };
-com.inq.flash.client.control.FlashVars.getCustomerName = function() {  console.warn("com.inq.flash.client.control.FlashVars.getCustomerName");
+com.inq.flash.client.control.FlashVars.getCustomerName = function() {
   if (com.inq.flash.client.control.FlashVars.customerName == null) {
     var customerDisplayName = com.inq.flash.client.control.FlashVars.getCustomerDisplayName();
     if (customerDisplayName == null || customerDisplayName == "") {
@@ -14470,7 +14470,7 @@ com.inq.flash.client.control.FlashVars.getCustomerName = function() {  console.w
   }
   return com.inq.flash.messagingframework.StringUtils.htmlEncode(com.inq.flash.client.control.FlashVars.customerName);
 };
-com.inq.flash.client.control.FlashVars.setCustomerName = function(customerName, saveCookie) {  console.warn("com.inq.flash.client.control.FlashVars.setCustomerName");
+com.inq.flash.client.control.FlashVars.setCustomerName = function(customerName, saveCookie) {
   com.inq.flash.client.control.FlashVars.customerName = customerName;
   Application.application.updateCustomerName(customerName);
   com.inq.flash.client.control.FlashVars.setValue("userName", customerName);
@@ -14478,7 +14478,7 @@ com.inq.flash.client.control.FlashVars.setCustomerName = function(customerName, 
     com.inq.flash.client.control.PersistenceManager.SetValue("ci_cdn", customerName);
   }
 };
-com.inq.flash.client.control.FlashVars.isCustomerNameUpdated = function() {  console.warn("com.inq.flash.client.control.FlashVars.isCustomerNameUpdated");
+com.inq.flash.client.control.FlashVars.isCustomerNameUpdated = function() {
   var customerDisplayName = com.inq.flash.client.control.FlashVars.getCustomerDisplayName();
   var customerName = com.inq.utils.Util.getConfig("customerName");
   var userName = com.inq.flash.client.control.FlashVars.getValue("userName");
@@ -14488,13 +14488,13 @@ com.inq.flash.client.control.FlashVars.isCustomerNameUpdated = function() {  con
     return false;
   }
 };
-com.inq.flash.client.control.FlashVars.getOpenerDelay = function() {  console.warn("com.inq.flash.client.control.FlashVars.getOpenerDelay");
+com.inq.flash.client.control.FlashVars.getOpenerDelay = function() {
   return com.inq.flash.client.control.FlashVars.getValue("openerDelay");
 };
-com.inq.flash.client.control.FlashVars.getWindowId = function() {  console.warn("com.inq.flash.client.control.FlashVars.getWindowId");
+com.inq.flash.client.control.FlashVars.getWindowId = function() {
   return com.inq.flash.client.control.FlashVars.getValue(com.inq.flash.client.data.MessageFields.WINDOW_ID_PARAM);
 };
-com.inq.flash.client.control.FlashVars.setApplicationParameters = function() {  console.warn("com.inq.flash.client.control.FlashVars.setApplicationParameters");
+com.inq.flash.client.control.FlashVars.setApplicationParameters = function() {
   com.inq.flash.client.control.FlashVars._flashVars = new com.inq.utils.Dictionary;
   var keyz = Reflect.fields(Application.application.parameters);
   haxe.Log.trace("MainApplication.parameters=" + Std.string(Application.application.parameters), {fileName:"FlashVars.hx", lineNumber:100, className:"com.inq.flash.client.control.FlashVars", methodName:"setApplicationParameters"});
@@ -14554,7 +14554,7 @@ com.inq.flash.client.control.FlashVars.setApplicationParameters = function() {  
   Application.application.fireMxmlEvent("onParsedFlashVars");
   return com.inq.flash.client.control.FlashVars._flashVars;
 };
-com.inq.flash.client.control.FlashVars.setupFlashVar = function(name, defValue) {  console.warn("com.inq.flash.client.control.FlashVars.setupFlashVar");
+com.inq.flash.client.control.FlashVars.setupFlashVar = function(name, defValue) {
   try {
     var _datum = null;
     try {
@@ -14578,16 +14578,16 @@ com.inq.flash.client.control.FlashVars.setupFlashVar = function(name, defValue) 
     }
   }
 };
-com.inq.flash.client.control.FlashVars.get = function(key) {  console.warn("com.inq.flash.client.control.FlashVars.get");
+com.inq.flash.client.control.FlashVars.get = function(key) {
   com.inq.flash.client.control.FlashVars.getFlashVars();
   return com.inq.flash.client.control.FlashVars._flashVars[key];
 };
 com.inq.flash.client.control.FlashVars.prototype.__class__ = com.inq.flash.client.control.FlashVars;
 com.inq.flash.client.control.FlashVars.customerName = null;
-com.inq.flash.client.control.ClickStreamBuilder = function() {  console.warn("com.inq.flash.client.control.ClickStreamBuilder");
+com.inq.flash.client.control.ClickStreamBuilder = function() {
 };
 $hxClasses.registerClass(com.inq.flash.client.control.ClickStreamBuilder, "com.inq.flash.client.control.ClickStreamBuilder");
-com.inq.flash.client.control.ClickStreamBuilder.IdentifyPlatform = function() {  console.warn("com.inq.flash.client.control.ClickStreamBuilder.IdentifyPlatform");
+com.inq.flash.client.control.ClickStreamBuilder.IdentifyPlatform = function() {
   var sep;
   var sPlatformInfo;
   var builder = com.inq.flash.client.control.ClickStreamBuilder;
@@ -14613,7 +14613,7 @@ com.inq.flash.client.control.ClickStreamBuilder.IdentifyPlatform = function() { 
   haxe.Log.trace("IdentifyPlatform(): exit", {fileName:"ClickStreamBuilder.hx", lineNumber:289, className:"com.inq.flash.client.control.ClickStreamBuilder", methodName:"IdentifyPlatform"});
   return sPlatformInfo;
 };
-com.inq.flash.client.control.ClickStreamBuilder.parseInitialClickstreamData = function() {  console.warn("com.inq.flash.client.control.ClickStreamBuilder.parseInitialClickstreamData");
+com.inq.flash.client.control.ClickStreamBuilder.parseInitialClickstreamData = function() {
   haxe.Log.trace("ClickStreamBuilder.parseInitialClickstreamData: entered", {fileName:"ClickStreamBuilder.hx", lineNumber:1765, className:"com.inq.flash.client.control.ClickStreamBuilder", methodName:"parseInitialClickstreamData"});
   var builder = com.inq.flash.client.control.ClickStreamBuilder;
   var sep = "&";
@@ -14644,7 +14644,7 @@ com.inq.flash.client.control.ClickStreamBuilder.parseInitialClickstreamData = fu
   haxe.Log.trace("ClickStreamBuilder.parseInitialClickstreamData: " + csd, {fileName:"ClickStreamBuilder.hx", lineNumber:1794, className:"com.inq.flash.client.control.ClickStreamBuilder", methodName:"parseInitialClickstreamData"});
   return csd;
 };
-com.inq.flash.client.control.ClickStreamBuilder.parseURLfromClickStreamData = function() {  console.warn("com.inq.flash.client.control.ClickStreamBuilder.parseURLfromClickStreamData");
+com.inq.flash.client.control.ClickStreamBuilder.parseURLfromClickStreamData = function() {
   var sep = "&";
   var csdURL = "";
   var clickStream = StringTools.urlDecode(com.inq.flash.client.control.FlashVars.getValue("clickStream"));
@@ -14662,7 +14662,7 @@ com.inq.flash.client.control.ClickStreamBuilder.parseURLfromClickStreamData = fu
   }
   return "^^" + csdURL;
 };
-com.inq.flash.client.control.ClickStreamBuilder.parseDFVfromClickStreamData = function() {  console.warn("com.inq.flash.client.control.ClickStreamBuilder.parseDFVfromClickStreamData");
+com.inq.flash.client.control.ClickStreamBuilder.parseDFVfromClickStreamData = function() {
   var sep = "&";
   var csdDFV = "";
   var clickStream = StringTools.urlDecode(com.inq.flash.client.control.FlashVars.getValue("clickStream"));
@@ -14690,16 +14690,16 @@ com.inq.flash.client.control.ClickStreamBuilder.CSDL_VISITED = "_visited=Page Ma
 com.inq.flash.client.control.ClickStreamBuilder.CSDL_LAUNCH_PAGE_MARKER = "_launchPageMarker=Page Marker^^launchPageMarker=";
 com.inq.flash.client.control.ClickStreamBuilder.CSDL_URL = "_URL=Page URL^^URL=";
 com.inq.flash.client.control.ClickStreamBuilder.CSDL_DFV = "_dfv=Data^^dfv=";
-com.inq.flash.client.control.Incrementality = function() {  console.warn("com.inq.flash.client.control.Incrementality");
+com.inq.flash.client.control.Incrementality = function() {
 };
 $hxClasses["com.inq.flash.client.control.Incrementality"] = com.inq.flash.client.control.Incrementality;
 com.inq.flash.client.control.Incrementality.__name__ = ["com", "inq", "flash", "client", "control", "Incrementality"];
 com.inq.flash.client.control.Incrementality.interacted = null;
-com.inq.flash.client.control.Incrementality.init = function() {  console.warn("com.inq.flash.client.control.Incrementality.init");
+com.inq.flash.client.control.Incrementality.init = function() {
   com.inq.flash.client.control.Incrementality.interacted = com.inq.flash.client.control.PersistenceManager.GetValue("ai", false);
   return true;
 };
-com.inq.flash.client.control.Incrementality.onEngaged = function() {  console.warn("com.inq.flash.client.control.Incrementality.onEngaged");
+com.inq.flash.client.control.Incrementality.onEngaged = function() {
   var appInstance = Application.application;
   appInstance.applicationController.skinControl.StopTimer();
   if (com.inq.flash.client.control.FlashVars.getFlashVars().PersistentFrame) {
@@ -14712,7 +14712,7 @@ com.inq.flash.client.control.Incrementality.onEngaged = function() {  console.wa
   appInstance.fireMxmlEvent("onEngaged");
   haxe.Log.trace("Incrementality.onEngaged", {fileName:"Incrementality.hx", lineNumber:28, className:"com.inq.flash.client.control.Incrementality", methodName:"onEngaged"});
 };
-com.inq.flash.client.control.Incrementality.onInteracted = function() {  console.warn("com.inq.flash.client.control.Incrementality.onInteracted");
+com.inq.flash.client.control.Incrementality.onInteracted = function() {
   try {
     var bInteracted = false;
     var AppInstance = Application.application;
@@ -14738,7 +14738,7 @@ com.inq.flash.client.control.Incrementality.onInteracted = function() {  console
     haxe.Log.trace("onInteracted failed: " + Std.string(e), {fileName:"Incrementality.hx", lineNumber:52, className:"com.inq.flash.client.control.Incrementality", methodName:"onInteracted"});
   }
 };
-com.inq.flash.client.control.Incrementality.onAgentMsg = function(chatData) {  console.warn("com.inq.flash.client.control.Incrementality.onAgentMsg");
+com.inq.flash.client.control.Incrementality.onAgentMsg = function(chatData) {
   if (com.inq.flash.client.control.FlashVars.getFlashVars().brID == "") {
     return;
   }
@@ -14746,7 +14746,7 @@ com.inq.flash.client.control.Incrementality.onAgentMsg = function(chatData) {  c
   Application.application.fireMxmlEvent("onAgentMsg");
   haxe.Log.trace("onAgentMsg", {fileName:"Incrementality.hx", lineNumber:63, className:"com.inq.flash.client.control.Incrementality", methodName:"onAgentMsg"});
 };
-com.inq.flash.client.control.Incrementality.onAgentDataPass = function(chatData) {  console.warn("com.inq.flash.client.control.Incrementality.onAgentDataPass");
+com.inq.flash.client.control.Incrementality.onAgentDataPass = function(chatData) {
   if (com.inq.flash.client.control.FlashVars.getFlashVars().brID == "") {
     return;
   }
@@ -14754,7 +14754,7 @@ com.inq.flash.client.control.Incrementality.onAgentDataPass = function(chatData)
   Application.application.fireMxmlEvent("onAgentDataPass");
   haxe.Log.trace("onAgentDataPass", {fileName:"Incrementality.hx", lineNumber:63, className:"com.inq.flash.client.control.Incrementality", methodName:"onAgentDataPass"});
 };
-com.inq.flash.client.control.Incrementality.onCustomerMsg = function(chatData) {  console.warn("com.inq.flash.client.control.Incrementality.onCustomerMsg");
+com.inq.flash.client.control.Incrementality.onCustomerMsg = function(chatData) {
   if (com.inq.flash.client.control.FlashVars.getFlashVars().brID == "") {
     return;
   }
@@ -14763,7 +14763,7 @@ com.inq.flash.client.control.Incrementality.onCustomerMsg = function(chatData) {
   Application.application.fireMxmlEvent("onCustomerMsg");
   haxe.Log.trace("onCustomerMsg", {fileName:"Incrementality.hx", lineNumber:75, className:"com.inq.flash.client.control.Incrementality", methodName:"onCustomerMsg"});
 };
-com.inq.flash.client.control.Incrementality.onAssisted = function() {  console.warn("com.inq.flash.client.control.Incrementality.onAssisted");
+com.inq.flash.client.control.Incrementality.onAssisted = function() {
   if (com.inq.flash.client.control.FlashVars.getFlashVars().brID == "") {
     return;
   }
@@ -14772,7 +14772,7 @@ com.inq.flash.client.control.Incrementality.onAssisted = function() {  console.w
   haxe.Log.trace("onAssisted", {fileName:"Incrementality.hx", lineNumber:85, className:"com.inq.flash.client.control.Incrementality", methodName:"onAssisted"});
 };
 com.inq.flash.client.control.Incrementality.prototype.__class__ = com.inq.flash.client.control.Incrementality;
-com.inq.flash.client.control.MinimizeManager = function() {  console.warn("com.inq.flash.client.control.MinimizeManager");
+com.inq.flash.client.control.MinimizeManager = function() {
 };
 $hxClasses.registerClass(com.inq.flash.client.control.MinimizeManager, "com.inq.flash.client.control.MinimizeManager");
 com.inq.flash.client.control.MinimizeManager.count = 0;
@@ -14780,7 +14780,7 @@ com.inq.flash.client.control.MinimizeManager.minimized = false;
 com.inq.flash.client.control.MinimizeManager.onActionRestore = false;
 com.inq.flash.client.control.MinimizeManager.restoreChatInProgress = false;
 com.inq.flash.client.control.MinimizeManager.minimizedBySleep = false;
-com.inq.flash.client.control.MinimizeManager.onClose = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.onClose");
+com.inq.flash.client.control.MinimizeManager.onClose = function() {
   if ((com.inq.flash.client.control.PersistenceManager.GetValue("rm", com.inq.flash.client.control.MinimizeManager.count) == com.inq.flash.client.control.MinimizeManager.IS_MINIMIZED || com.inq.flash.client.control.MinimizeManager.btnRestore == null) && com.inq.flash.client.control.MinimizeManager.minimized) {
     var tY = com.inq.flash.client.control.FlashPeer.isThankYouEnabled();
     if (!tY) {
@@ -14790,7 +14790,7 @@ com.inq.flash.client.control.MinimizeManager.onClose = function() {  console.war
   }
   com.inq.flash.client.control.MinimizeManager.Restore();
 };
-com.inq.flash.client.control.MinimizeManager.lastAgentMessage = function(agentMsg) {  console.warn("com.inq.flash.client.control.MinimizeManager.lastAgentMessage");
+com.inq.flash.client.control.MinimizeManager.lastAgentMessage = function(agentMsg) {
   if (agentMsg != null && agentMsg.length > 0 && com.inq.flash.client.control.MinimizeManager.isMinimized()) {
     com.inq.flash.client.control.MinimizeManager.count++;
     com.inq.flash.client.control.PersistenceManager.SetValue("mc", com.inq.flash.client.control.MinimizeManager.count);
@@ -14800,7 +14800,7 @@ com.inq.flash.client.control.MinimizeManager.lastAgentMessage = function(agentMs
     com.inq.flash.client.control.MinimizeManager.Restore();
   }
 };
-com.inq.flash.client.control.MinimizeManager.showCloseButton = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.showCloseButton");
+com.inq.flash.client.control.MinimizeManager.showCloseButton = function() {
   var btnClose = Application.application.getButton("btnCloseChat");
   if (btnClose != null) {
     btnClose.setVisible(true);
@@ -14813,7 +14813,7 @@ com.inq.flash.client.control.MinimizeManager.showCloseButton = function() {  con
     }
   }
 };
-com.inq.flash.client.control.MinimizeManager.displayAgentMessageAndCount = function(agentMsg) {  console.warn("com.inq.flash.client.control.MinimizeManager.displayAgentMessageAndCount");
+com.inq.flash.client.control.MinimizeManager.displayAgentMessageAndCount = function(agentMsg) {
   if (agentMsg != null && agentMsg.length > 0 && com.inq.flash.client.control.MinimizeManager.isMinimized() && com.inq.flash.client.control.MinimizeManager.count > 0) {
     if (com.inq.utils.Capabilities.isIOSWebView()) {
       com.inq.flash.client.control.MinimizeManager.floatMinimized();
@@ -14835,7 +14835,7 @@ com.inq.flash.client.control.MinimizeManager.displayAgentMessageAndCount = funct
     }
   }
 };
-com.inq.flash.client.control.MinimizeManager.displaySmallScreenMsg = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.displaySmallScreenMsg");
+com.inq.flash.client.control.MinimizeManager.displaySmallScreenMsg = function() {
   if (com.inq.utils.Capabilities.isPhone()) {
     var landscape = "orientation" in window ? !(window.parent.orientation == 0 || window.parent.orientation == 180) : false;
     if (com.inq.utils.Capabilities.isChrome()) {
@@ -14852,7 +14852,7 @@ com.inq.flash.client.control.MinimizeManager.displaySmallScreenMsg = function() 
     com.inq.flash.client.control.MinimizeManager.onoffSmallScreenWarning(landscape && com.inq.flash.client.control.MinimizeManager.minimized == false);
   }
 };
-com.inq.flash.client.control.MinimizeManager.onoffSmallScreenWarning = function(isOn) {  console.warn("com.inq.flash.client.control.MinimizeManager.onoffSmallScreenWarning");
+com.inq.flash.client.control.MinimizeManager.onoffSmallScreenWarning = function(isOn) {
   var can = Application.application.getCanvas("smallScreenMsg");
   if (can != null) {
     can.setVisible(isOn);
@@ -14867,7 +14867,7 @@ com.inq.flash.client.control.MinimizeManager.onoffSmallScreenWarning = function(
     }
   }
 };
-com.inq.flash.client.control.MinimizeManager.initButtonVisibility = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.initButtonVisibility");
+com.inq.flash.client.control.MinimizeManager.initButtonVisibility = function() {
   if (!com.inq.flash.client.chatskins.SkinControl.getIsPersistentChat()) {
     if (com.inq.flash.client.control.MinimizeManager.btnReallyMinimized != null && com.inq.flash.client.control.MinimizeManager.btnReallyMinimized.getStyle("neverShow") != null && com.inq.flash.client.control.MinimizeManager.btnReallyMinimized.getStyle("neverShow") == "true" && com.inq.flash.client.control.PersistenceManager.GetValue("rm", com.inq.flash.client.control.MinimizeManager.count) == com.inq.flash.client.control.MinimizeManager.SHOW_FAKE_MINIMIZE) {
       if (com.inq.flash.client.chatskins.SkinControl.isInApplication("btnCloseChat")) {
@@ -14901,7 +14901,7 @@ com.inq.flash.client.control.MinimizeManager.initButtonVisibility = function() {
     }
   }
 };
-com.inq.flash.client.control.MinimizeManager.attachButtonHandlers = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.attachButtonHandlers");
+com.inq.flash.client.control.MinimizeManager.attachButtonHandlers = function() {
   var clientWin = window.parent;
   if (com.inq.flash.client.control.MinimizeManager.btnMinimize != null) {
     com.inq.flash.client.control.MinimizeManager.btnMinimize.addEventListener(com.inq.events.MouseEvent.CLICK, com.inq.flash.client.control.MinimizeManager.actionMinimize);
@@ -14921,7 +14921,7 @@ com.inq.flash.client.control.MinimizeManager.attachButtonHandlers = function() {
     com.inq.flash.client.control.MinimizeManager.bindHandlerForClientInputFieldsIos();
   }
 };
-com.inq.flash.client.control.MinimizeManager.restoreState = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.restoreState");
+com.inq.flash.client.control.MinimizeManager.restoreState = function() {
   var _minimizedState = com.inq.flash.client.control.PersistenceManager.GetValue("mc", com.inq.flash.client.control.MinimizeManager.NOT_MINIMIZED);
   var isInitiate = true;
   if (com.inq.flash.client.control.FlashPeer.isEmbeddedThemeValid()) {
@@ -14939,7 +14939,7 @@ com.inq.flash.client.control.MinimizeManager.restoreState = function() {  consol
     }
   }
 };
-com.inq.flash.client.control.MinimizeManager.iPhoneSleepAwakeHandler = function(ev) {  console.warn("com.inq.flash.client.control.MinimizeManager.iPhoneSleepAwakeHandler");
+com.inq.flash.client.control.MinimizeManager.iPhoneSleepAwakeHandler = function(ev) {
   var restoreDelay = 400;
   if (!com.inq.flash.client.control.MinimizeManager.isMinimized()) {
     if (window.parent.document.visibilityState === "hidden") {
@@ -14955,7 +14955,7 @@ com.inq.flash.client.control.MinimizeManager.iPhoneSleepAwakeHandler = function(
     }
   }
 };
-com.inq.flash.client.control.MinimizeManager.init = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.init");
+com.inq.flash.client.control.MinimizeManager.init = function() {
   if (!com.inq.flash.client.control.FlashPeer.getIsSkinLocal()) {
     if (com.inq.utils.Capabilities.isPhone() && com.inq.flash.client.chatskins.SkinControl.isInApplication("smallScreenMsg")) {
       com.inq.flash.client.control.MinimizeManager.displaySmallScreenMsg();
@@ -14989,7 +14989,7 @@ com.inq.flash.client.control.MinimizeManager.init = function() {  console.warn("
   com.inq.flash.client.control.MinimizeManager.restoreState();
   com.inq.flash.client.control.MinimizeManager.initButtonVisibility();
 };
-com.inq.flash.client.control.MinimizeManager.turnOffScaling = function(state) {  console.warn("com.inq.flash.client.control.MinimizeManager.turnOffScaling");
+com.inq.flash.client.control.MinimizeManager.turnOffScaling = function(state) {
   if (state == null) {
     state = true;
   }
@@ -15002,13 +15002,13 @@ com.inq.flash.client.control.MinimizeManager.turnOffScaling = function(state) { 
     }
   }
 };
-com.inq.flash.client.control.MinimizeManager.removeScalingMeta = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.removeScalingMeta");
+com.inq.flash.client.control.MinimizeManager.removeScalingMeta = function() {
   var meta = window.parent.document.getElementById("tcChat_viewport");
   if (meta) {
     meta.parentNode.removeChild(meta);
   }
 };
-com.inq.flash.client.control.MinimizeManager.Close = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.Close");
+com.inq.flash.client.control.MinimizeManager.Close = function() {
   var minMgr = com.inq.flash.client.control.MinimizeManager;
   var clientWin = window.parent;
   if (minMgr.displaySmallScreenMsgFnPoint != null) {
@@ -15036,7 +15036,7 @@ com.inq.flash.client.control.MinimizeManager.Close = function() {  console.warn(
     minMgr.unBindHandlerForClientInputFieldsIos();
   }
 };
-com.inq.flash.client.control.MinimizeManager.Restore = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.Restore");
+com.inq.flash.client.control.MinimizeManager.Restore = function() {
   try {
     if (com.inq.flash.client.control.MinimizeManager.minimized) {
       com.inq.flash.client.control.MinimizeManager.actionRestore();
@@ -15045,7 +15045,7 @@ com.inq.flash.client.control.MinimizeManager.Restore = function() {  console.war
     haxe.Log.trace("Error: " + Std.string(e), {fileName:"MinimizeManager.hx", lineNumber:295, className:"com.inq.flash.client.control.MinimizeManager", methodName:"Restore"});
   }
 };
-com.inq.flash.client.control.MinimizeManager.actionReallyMinimize = function(me) {  console.warn("com.inq.flash.client.control.MinimizeManager.actionReallyMinimize");
+com.inq.flash.client.control.MinimizeManager.actionReallyMinimize = function(me) {
   if (com.inq.flash.client.control.PersistenceManager.GetValue("msgcnt", 0) == 0) {
     com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChat(null);
   } else {
@@ -15119,7 +15119,7 @@ com.inq.flash.client.control.MinimizeManager.dummyRestoreBtn = {add:function() {
     }
   }
 }};
-com.inq.flash.client.control.MinimizeManager.actionMinimize = function(me, isInitiate) {  console.warn("com.inq.flash.client.control.MinimizeManager.actionMinimize");
+com.inq.flash.client.control.MinimizeManager.actionMinimize = function(me, isInitiate) {
   if (!com.inq.flash.client.chatskins.SkinControl.getIsPersistentChat()) {
     com.inq.flash.client.control.MinimizeManager.minimized = true;
     if (com.inq.utils.Capabilities.isIphone() && !(isInitiate === true)) {
@@ -15222,7 +15222,7 @@ com.inq.flash.client.control.MinimizeManager.actionMinimize = function(me, isIni
   }
   return false;
 };
-com.inq.flash.client.control.MinimizeManager.actionRestore = function(evt, isInitiate) {  console.warn("com.inq.flash.client.control.MinimizeManager.actionRestore");
+com.inq.flash.client.control.MinimizeManager.actionRestore = function(evt, isInitiate) {
   var isChatRestored = false;
   var _skinCont = com.inq.flash.client.chatskins.SkinControl;
   var _minMgr = com.inq.flash.client.control.MinimizeManager;
@@ -15332,7 +15332,7 @@ com.inq.flash.client.control.MinimizeManager.actionRestore = function(evt, isIni
   _minMgr.restoreFocusedElement(evt, isInitiate, isChatRestored);
   return false;
 };
-com.inq.flash.client.control.MinimizeManager.restoreFocusedElement = function(evt, isInitiate, isChatRestored) {  console.warn("com.inq.flash.client.control.MinimizeManager.restoreFocusedElement");
+com.inq.flash.client.control.MinimizeManager.restoreFocusedElement = function(evt, isInitiate, isChatRestored) {
   var _skinCont = com.inq.flash.client.chatskins.SkinControl;
   var _minMgr = com.inq.flash.client.control.MinimizeManager;
   var txtInput = _skinCont.getTextInputField();
@@ -15410,10 +15410,10 @@ com.inq.flash.client.control.MinimizeManager.restoreFocusedElement = function(ev
     }
   }
 };
-com.inq.flash.client.control.MinimizeManager.isMinimized = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.isMinimized");
+com.inq.flash.client.control.MinimizeManager.isMinimized = function() {
   return com.inq.flash.client.control.MinimizeManager.minimized === true || com.inq.flash.client.control.PersistenceManager.GetValue("mc", com.inq.flash.client.control.MinimizeManager.NOT_MINIMIZED) !== com.inq.flash.client.control.MinimizeManager.NOT_MINIMIZED;
 };
-com.inq.flash.client.control.MinimizeManager.floatMinimized = function(e) {  console.warn("com.inq.flash.client.control.MinimizeManager.floatMinimized");
+com.inq.flash.client.control.MinimizeManager.floatMinimized = function(e) {
   if (com.inq.flash.client.control.MinimizeManager.isMinimized() && com.inq.utils.Capabilities.isMobile() && com.inq.flash.client.control.MinimizeManager.elMinimized != null) {
     if ((com.inq.utils.Capabilities.isSafariVersion9() || com.inq.utils.Capabilities.isSafariVersion10() || com.inq.utils.Capabilities.isSafariVersion11() || com.inq.utils.Capabilities.isChromeiOS()) && com.inq.flash.client.control.MinimizeManager.elMinimized.getStyle("position") == "fixed") {
       e && e.stopPropagation && e.stopPropagation();
@@ -15471,7 +15471,7 @@ com.inq.flash.client.control.MinimizeManager.floatMinimized = function(e) {  con
   }
   return false;
 };
-com.inq.flash.client.control.MinimizeManager.iosPositionMinimized = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.iosPositionMinimized");
+com.inq.flash.client.control.MinimizeManager.iosPositionMinimized = function() {
   try {
     var divRestore = null;
     var clientLayoutHeight = 0;
@@ -15518,19 +15518,19 @@ com.inq.flash.client.control.MinimizeManager.iosPositionMinimized = function() {
   }
   return true;
 };
-com.inq.flash.client.control.MinimizeManager.iosPositionWebViewMinimized = function(restoreBtn, restoreBtnHeight) {  console.warn("com.inq.flash.client.control.MinimizeManager.iosPositionWebViewMinimized");
+com.inq.flash.client.control.MinimizeManager.iosPositionWebViewMinimized = function(restoreBtn, restoreBtnHeight) {
   restoreBtn.style.position = "absolute";
   restoreBtn.style.top = window.top.pageYOffset + (window.top.innerHeight - restoreBtnHeight) + "px";
   restoreBtn.style.left = window.top.pageXOffset + "px";
 };
-com.inq.flash.client.control.MinimizeManager.fixPhoneMinimizedWidth = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.fixPhoneMinimizedWidth");
+com.inq.flash.client.control.MinimizeManager.fixPhoneMinimizedWidth = function() {
   var minimizedEl = Application.application.getMxmlItem("Minimized") && Application.application.getMxmlItem("Minimized")._div;
   var winWidth = window.top.innerWidth;
   if (minimizedEl && minimizedEl.clientWidth > winWidth) {
     minimizedEl.style.width = winWidth + "px";
   }
 };
-com.inq.flash.client.control.MinimizeManager.iosClientInputFocus = function(e) {  console.warn("com.inq.flash.client.control.MinimizeManager.iosClientInputFocus");
+com.inq.flash.client.control.MinimizeManager.iosClientInputFocus = function(e) {
   var clientWin = window.parent;
   com.inq.utils.Capabilities.UnbindListener(clientWin, "scroll", com.inq.flash.client.control.MinimizeManager.floatMinimized);
   com.inq.utils.Capabilities.UnbindListener(clientWin, "resize", com.inq.flash.client.control.MinimizeManager.floatMinimized);
@@ -15542,7 +15542,7 @@ com.inq.flash.client.control.MinimizeManager.iosClientInputFocus = function(e) {
     com.inq.flash.client.control.MinimizeManager.iosPositionMinimized();
   }
 };
-com.inq.flash.client.control.MinimizeManager.iosClientInputBlur = function(e) {  console.warn("com.inq.flash.client.control.MinimizeManager.iosClientInputBlur");
+com.inq.flash.client.control.MinimizeManager.iosClientInputBlur = function(e) {
   window.top.removeEventListener("scroll", com.inq.flash.client.control.MinimizeManager.iosPositionMinimized, false);
   window.top.removeEventListener("orientationchange", com.inq.flash.client.control.MinimizeManager.iosPositionMinimized, false);
   if (com.inq.utils.Capabilities.isSafariVersion9() || com.inq.utils.Capabilities.isSafariVersion10() || com.inq.utils.Capabilities.isSafariVersion11()) {
@@ -15559,7 +15559,7 @@ com.inq.flash.client.control.MinimizeManager.iosClientInputBlur = function(e) { 
   com.inq.utils.Capabilities.BindListener(clientWin, "orientationchange", com.inq.flash.client.control.MinimizeManager.floatMinimized);
   com.inq.flash.client.chatskins.ScrollMonitor.bindAll();
 };
-com.inq.flash.client.control.MinimizeManager.bindHandlerForClientInputFieldsIos = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.bindHandlerForClientInputFieldsIos");
+com.inq.flash.client.control.MinimizeManager.bindHandlerForClientInputFieldsIos = function() {
   if (com.inq.utils.Capabilities.isSafariVersion9() || com.inq.utils.Capabilities.isSafariVersion10() || com.inq.utils.Capabilities.isSafariVersion11()) {
     var divRestore = window.top.document.getElementById("tcChat_Minimized");
     com.inq.flash.client.control.MinimizeManager.btnRestoreLocation = {position:divRestore.style.position, left:divRestore.style.left, top:divRestore.style.top};
@@ -15586,7 +15586,7 @@ com.inq.flash.client.control.MinimizeManager.bindHandlerForClientInputFieldsIos 
     }
   }
 };
-com.inq.flash.client.control.MinimizeManager.unBindHandlerForClientInputFieldsIos = function() {  console.warn("com.inq.flash.client.control.MinimizeManager.unBindHandlerForClientInputFieldsIos");
+com.inq.flash.client.control.MinimizeManager.unBindHandlerForClientInputFieldsIos = function() {
   var minMgr = com.inq.flash.client.control.MinimizeManager;
   var inputs = window.top.document.getElementsByTagName("input");
   for (var i = 0;i < inputs.length;i++) {
@@ -15634,7 +15634,7 @@ com.inq.flash.client.control.MinimizeManager.positionMode = null;
 com.inq.flash.client.control.MinimizeManager.touchStartPoint = null;
 com.inq.flash.client.control.MinimizeManager.SAFARI_KEYBOARD_HEIGHT_PORTRAIT = 216;
 com.inq.flash.client.control.MinimizeManager.SAFARI_KEYBOARD_HEIGHT_LANDSCAPE = 162;
-com.inq.flash.client.control.NotificationController = function(application) {  console.warn("com.inq.flash.client.control.NotificationController");
+com.inq.flash.client.control.NotificationController = function(application) {
   this._application = application;
   this._notifications = {};
   this._countdownTimers = {};
@@ -15646,7 +15646,7 @@ com.inq.flash.client.control.NotificationController = function(application) {  c
   this._elementHeight = 0;
   this._elementBottomPosition = 0;
 };
-com.inq.flash.client.control.NotificationController.prototype.init = function() {  console.warn("com.inq.flash.client.control.NotificationController.prototype.init");
+com.inq.flash.client.control.NotificationController.prototype.init = function() {
   var isNotificationEnabled = com.inq.utils.Util.getConfig(this.FLAG_NOTIFICATION_ENABLED, false);
   var notificationId;
   if (this._deferredNotification) {
@@ -15667,7 +15667,7 @@ com.inq.flash.client.control.NotificationController.prototype.init = function() 
     this._countdownTimers = {};
   }
 };
-com.inq.flash.client.control.NotificationController.prototype.reactivateNotification = function(notificationId) {  console.warn("com.inq.flash.client.control.NotificationController.prototype.reactivateNotification");
+com.inq.flash.client.control.NotificationController.prototype.reactivateNotification = function(notificationId) {
   switch(notificationId) {
     case this.CONNECTION_ISSUES_MESSAGE_ID:
       this.showConnectionIssuesMessage();
@@ -15680,12 +15680,12 @@ com.inq.flash.client.control.NotificationController.prototype.reactivateNotifica
       break;
   }
 };
-com.inq.flash.client.control.NotificationController.prototype.addNotificationElements = function() {  console.warn("com.inq.flash.client.control.NotificationController.prototype.addNotificationElements");
+com.inq.flash.client.control.NotificationController.prototype.addNotificationElements = function() {
   this._notifications[this.CONNECTION_ISSUES_MESSAGE_ID] = this._application.getMxmlItem(this.CONNECTION_ISSUES_MESSAGE_ID);
   this._notifications[this.CONNECTION_RESTORED_MESSAGE_ID] = this._application.getMxmlItem(this.CONNECTION_RESTORED_MESSAGE_ID);
   this._notifications[this.CONNECTION_FAILED_MESSAGE_ID] = this._application.getMxmlItem(this.CONNECTION_FAILED_MESSAGE_ID);
 };
-com.inq.flash.client.control.NotificationController.prototype.setupCountdownTimer = function(notificationId) {  console.warn("com.inq.flash.client.control.NotificationController.prototype.setupCountdownTimer");
+com.inq.flash.client.control.NotificationController.prototype.setupCountdownTimer = function(notificationId) {
   if (this._notifications[notificationId]) {
     var messageContainer = this._notifications[notificationId].getChildren();
     if (messageContainer && messageContainer[0]) {
@@ -15697,10 +15697,10 @@ com.inq.flash.client.control.NotificationController.prototype.setupCountdownTime
     }
   }
 };
-com.inq.flash.client.control.NotificationController.prototype.notificationIsActive = function() {  console.warn("com.inq.flash.client.control.NotificationController.prototype.notificationIsActive");
+com.inq.flash.client.control.NotificationController.prototype.notificationIsActive = function() {
   return this._activeNotification != null;
 };
-com.inq.flash.client.control.NotificationController.prototype.showNotification = function(notificationId) {  console.warn("com.inq.flash.client.control.NotificationController.prototype.showNotification");
+com.inq.flash.client.control.NotificationController.prototype.showNotification = function(notificationId) {
   this._activeNotification = this._deferredNotification || this._notifications[notificationId];
   if (this._activeNotification) {
     var countdownTimer = this._countdownTimers[notificationId];
@@ -15728,7 +15728,7 @@ com.inq.flash.client.control.NotificationController.prototype.showNotification =
     com.inq.aria.AriaMsg.addAriaMsg(ariaMessage);
   }
 };
-com.inq.flash.client.control.NotificationController.prototype.hideNotification = function() {  console.warn("com.inq.flash.client.control.NotificationController.prototype.hideNotification");
+com.inq.flash.client.control.NotificationController.prototype.hideNotification = function() {
   if (this._activeNotification) {
     var notificationId = this._activeNotification.getStyle("id");
     var countdownTimer = this._countdownTimers[notificationId];
@@ -15740,7 +15740,7 @@ com.inq.flash.client.control.NotificationController.prototype.hideNotification =
     this._activeNotification = null;
   }
 };
-com.inq.flash.client.control.NotificationController.prototype.setNotificationTimeout = function(notificationId, delay, hideInputField) {  console.warn("com.inq.flash.client.control.NotificationController.prototype.setNotificationTimeout");
+com.inq.flash.client.control.NotificationController.prototype.setNotificationTimeout = function(notificationId, delay, hideInputField) {
   this._deferredNotification = this._notifications[notificationId];
   if (this._deferredNotification) {
     this._timerDeferring = setTimeout(function() {
@@ -15752,14 +15752,14 @@ com.inq.flash.client.control.NotificationController.prototype.setNotificationTim
     }.bind(this), delay);
   }
 };
-com.inq.flash.client.control.NotificationController.prototype.clearNotificationTimeout = function() {  console.warn("com.inq.flash.client.control.NotificationController.prototype.clearNotificationTimeout");
+com.inq.flash.client.control.NotificationController.prototype.clearNotificationTimeout = function() {
   if (this._deferredNotification && this._timerDeferring) {
     clearTimeout(this._timerDeferring);
     this._deferredNotification = null;
     this._timerDeferring = null;
   }
 };
-com.inq.flash.client.control.NotificationController.prototype.showConnectionIssuesMessage = function() {  console.warn("com.inq.flash.client.control.NotificationController.prototype.showConnectionIssuesMessage");
+com.inq.flash.client.control.NotificationController.prototype.showConnectionIssuesMessage = function() {
   var connectionLag = Date.now() - this.getLastResponseTimestamp();
   var displayDelay = this.DISPLAY_DELAY - connectionLag;
   if (displayDelay < 0) {
@@ -15776,7 +15776,7 @@ com.inq.flash.client.control.NotificationController.prototype.showConnectionIssu
     }
   }
 };
-com.inq.flash.client.control.NotificationController.prototype.showConnectionRestoredMessage = function() {  console.warn("com.inq.flash.client.control.NotificationController.prototype.showConnectionRestoredMessage");
+com.inq.flash.client.control.NotificationController.prototype.showConnectionRestoredMessage = function() {
   if (this._deferredNotification && this.CONNECTION_ISSUES_MESSAGE_ID == this._deferredNotification.getStyle("id")) {
     this.clearNotificationTimeout();
   } else {
@@ -15790,14 +15790,14 @@ com.inq.flash.client.control.NotificationController.prototype.showConnectionRest
   }
   com.inq.flash.client.chatskins.SkinControl.getTextInputField().setFocus(true);
 };
-com.inq.flash.client.control.NotificationController.prototype.showConnectionFailedMessage = function() {  console.warn("com.inq.flash.client.control.NotificationController.prototype.showConnectionFailedMessage");
+com.inq.flash.client.control.NotificationController.prototype.showConnectionFailedMessage = function() {
   if (!this._activeNotification || this.CONNECTION_FAILED_MESSAGE_ID != this._activeNotification.getStyle("id")) {
     this.hideNotification();
     this.showNotification(this.CONNECTION_FAILED_MESSAGE_ID);
     com.inq.flash.client.chatskins.SkinControl.hideInput();
   }
 };
-com.inq.flash.client.control.NotificationController.prototype.updatePosition = function() {  console.warn("com.inq.flash.client.control.NotificationController.prototype.updatePosition");
+com.inq.flash.client.control.NotificationController.prototype.updatePosition = function() {
   var notificationId = this._activeNotification.getStyle("id");
   var chatWindowElement = this._application.getMxmlItem("chatWindow");
   var notificationBottomDefaultValue = Std.parseInt(this._application.getMxmlItem("connectionRestoredMessage").getStyle("bottom"));
@@ -15818,7 +15818,7 @@ com.inq.flash.client.control.NotificationController.prototype.updatePosition = f
   }
   com.inq.flash.client.chatskins.SkinControl.cw.scrollToEnd();
 };
-com.inq.flash.client.control.NotificationController.prototype.getLastResponseTimestamp = function() {  console.warn("com.inq.flash.client.control.NotificationController.prototype.getLastResponseTimestamp");
+com.inq.flash.client.control.NotificationController.prototype.getLastResponseTimestamp = function() {
   return this._application.applicationController.getResponseTimestamp();
 };
 com.inq.flash.client.control.NotificationController.prototype.FLAG_NOTIFICATION_ENABLED = "disconnectionNotification";
@@ -15826,11 +15826,11 @@ com.inq.flash.client.control.NotificationController.prototype.CONNECTION_ISSUES_
 com.inq.flash.client.control.NotificationController.prototype.CONNECTION_RESTORED_MESSAGE_ID = "connectionRestoredMessage";
 com.inq.flash.client.control.NotificationController.prototype.CONNECTION_FAILED_MESSAGE_ID = "connectionFailedMessage";
 com.inq.flash.client.control.NotificationController.prototype.DISPLAY_DELAY = 15E3;
-com.inq.flash.client.control.UploadHandler = function() {  console.warn("com.inq.flash.client.control.UploadHandler");
+com.inq.flash.client.control.UploadHandler = function() {
   com.inq.utils.Util.publish("window.inqFrame.com.inq.flash.client.control.UploadHandler.uploadFile", com.inq.flash.client.control.UploadHandler.engageFileUpload);
 };
 $hxClasses.registerClass(com.inq.flash.client.control.UploadHandler, "com.inq.flash.client.control.UploadHandler");
-com.inq.flash.client.control.UploadHandler.init = function() {  console.warn("com.inq.flash.client.control.UploadHandler.init");
+com.inq.flash.client.control.UploadHandler.init = function() {
   var _app = Application.application;
   var fi = _app.getMxmlItem("UploadButton");
   var _uHand = com.inq.flash.client.control.UploadHandler;
@@ -15842,7 +15842,7 @@ com.inq.flash.client.control.UploadHandler.init = function() {  console.warn("co
     _uHand.successText = _app.getMxmlItem("UploadSuccess");
   }
 };
-com.inq.flash.client.control.UploadHandler.close = function() {  console.warn("com.inq.flash.client.control.UploadHandler.close");
+com.inq.flash.client.control.UploadHandler.close = function() {
   var _uHand = com.inq.flash.client.control.UploadHandler;
   _uHand.fileInput && _uHand.fileInput.removeEventListener("change", _uHand.actionUpload);
   _uHand.fileInput = null;
@@ -15851,7 +15851,7 @@ com.inq.flash.client.control.UploadHandler.close = function() {  console.warn("c
   _uHand.successText = null;
   _uHand.uploadForm = null;
 };
-com.inq.flash.client.control.UploadHandler.actionUpload = function(e) {  console.warn("com.inq.flash.client.control.UploadHandler.actionUpload");
+com.inq.flash.client.control.UploadHandler.actionUpload = function(e) {
   var _fp = com.inq.flash.client.control.FlashPeer;
   var _fv = com.inq.flash.client.control.FlashVars;
   var _uHand = com.inq.flash.client.control.UploadHandler;
@@ -15910,7 +15910,7 @@ com.inq.flash.client.control.UploadHandler.actionUpload = function(e) {  console
     return _uHand.actionUploadIE(e, agentGroupId, siteId, errorElement);
   }
 };
-com.inq.flash.client.control.UploadHandler.actionUploadIE = function(e, agentGroupId, siteId, errorElement) {  console.warn("com.inq.flash.client.control.UploadHandler.actionUploadIE");
+com.inq.flash.client.control.UploadHandler.actionUploadIE = function(e, agentGroupId, siteId, errorElement) {
   var _uHand = com.inq.flash.client.control.UploadHandler;
   var _config = com.inq.utils.Util.getConfig;
   var fileName;
@@ -15972,19 +15972,19 @@ com.inq.flash.client.control.UploadHandler.actionUploadIE = function(e, agentGro
     _uHand.uploadForm.submit();
   }
 };
-com.inq.flash.client.control.UploadHandler.engageFileUpload = function(e, params) {  console.warn("com.inq.flash.client.control.UploadHandler.engageFileUpload");
+com.inq.flash.client.control.UploadHandler.engageFileUpload = function(e, params) {
   var _uHand = com.inq.flash.client.control.UploadHandler;
   _uHand.engageParms = params;
   return _uHand.actionUpload(e);
 };
-com.inq.flash.client.control.UploadHandler.actionClose = function() {  console.warn("com.inq.flash.client.control.UploadHandler.actionClose");
+com.inq.flash.client.control.UploadHandler.actionClose = function() {
   var errorElement = Application.application.getMxmlItem("UploadError");
   com.inq.flash.client.control.ApplicationController.sendSystemMessage("Customer has closed the file upload window.");
   if (errorElement) {
     errorElement.setVisible(false);
   }
 };
-com.inq.flash.client.control.UploadHandler.sendUploadSuccesMessage = function(resp, siteId, agentGroupId) {  console.warn("com.inq.flash.client.control.UploadHandler.sendUploadSuccesMessage");
+com.inq.flash.client.control.UploadHandler.sendUploadSuccesMessage = function(resp, siteId, agentGroupId) {
   var fileDel = com.inq.flash.client.control.FlashPeer.getFileDeleteSetting() || "ON_CHAT_END";
   var _uHand = com.inq.flash.client.control.UploadHandler;
   var uploadMsg = _uHand.engageParms["success"] || com.inq.utils.Util.getConfig("uploadSuccessMsg", "File successfully uploaded");
@@ -15995,7 +15995,7 @@ com.inq.flash.client.control.UploadHandler.sendUploadSuccesMessage = function(re
     _uHand.successText.setVisible(true);
   }
 };
-com.inq.flash.client.control.UploadHandler.showUploadFailedMessage = function(errorElement, msg) {  console.warn("com.inq.flash.client.control.UploadHandler.showUploadFailedMessage");
+com.inq.flash.client.control.UploadHandler.showUploadFailedMessage = function(errorElement, msg) {
   if (errorElement) {
     errorElement.setText(msg);
     errorElement.setVisible(true);
@@ -16008,14 +16008,14 @@ com.inq.flash.client.control.UploadHandler.fileInput = null;
 com.inq.flash.client.control.UploadHandler.closeButton = null;
 com.inq.flash.client.control.UploadHandler.successText = null;
 com.inq.flash.client.control.UploadHandler.engageParms = {};
-com.inq.flash.client.control.WebRTCMgr = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr");
+com.inq.flash.client.control.WebRTCMgr = function() {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   com.inq.utils.Util.publish("window.inqFrame.com.inq.flash.client.control.WebRTCMgr.engageAudio", wMgr.engageAudio);
   com.inq.utils.Util.publish("window.inqFrame.com.inq.flash.client.control.WebRTCMgr.isWebRTCCapable", wMgr.isWebRTCCapable);
   com.inq.utils.Util.publish("window.inqFrame.com.inq.flash.client.control.WebRTCMgr.endCall", wMgr.endCall);
 };
 $hxClasses.registerClass(com.inq.flash.client.control.WebRTCMgr, "com.inq.flash.client.control.WebRTCMgr");
-com.inq.flash.client.control.WebRTCMgr.init = function(audioOnly) {  console.warn("com.inq.flash.client.control.WebRTCMgr.init");
+com.inq.flash.client.control.WebRTCMgr.init = function(audioOnly) {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   var getMxmlItem = wMgr.getElement;
   var _chat = com.inq.flash.client.chatskins.SkinControl.getApplicationController().chat;
@@ -16059,7 +16059,7 @@ com.inq.flash.client.control.WebRTCMgr.init = function(audioOnly) {  console.war
   wMgr.muteBtn = muteCallBtn;
   wMgr.unmuteBtn = unMuteCallBtn;
 };
-com.inq.flash.client.control.WebRTCMgr.mute = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.mute");
+com.inq.flash.client.control.WebRTCMgr.mute = function() {
   if (window.top.WebRTCApp) {
     window.top.WebRTCApp.muteCall();
   } else {
@@ -16075,7 +16075,7 @@ com.inq.flash.client.control.WebRTCMgr.mute = function() {  console.warn("com.in
   WebRTCMgr.toggleElState(WebRTCMgr.muteBtn, false);
   WebRTCMgr.toggleElState(WebRTCMgr.unmuteBtn, true);
 };
-com.inq.flash.client.control.WebRTCMgr.unmute = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.unmute");
+com.inq.flash.client.control.WebRTCMgr.unmute = function() {
   if (window.top.WebRTCApp) {
     window.top.WebRTCApp.unMuteCall();
   } else {
@@ -16091,7 +16091,7 @@ com.inq.flash.client.control.WebRTCMgr.unmute = function() {  console.warn("com.
   WebRTCMgr.toggleElState(WebRTCMgr.muteBtn, true);
   WebRTCMgr.toggleElState(WebRTCMgr.unmuteBtn, false);
 };
-com.inq.flash.client.control.WebRTCMgr.accessConstrants = function(audio, video) {  console.warn("com.inq.flash.client.control.WebRTCMgr.accessConstrants");
+com.inq.flash.client.control.WebRTCMgr.accessConstrants = function(audio, video) {
   if (navigator.mediaDevices === undefined) {
     navigator.mediaDevices = {};
   }
@@ -16105,7 +16105,7 @@ com.inq.flash.client.control.WebRTCMgr.accessConstrants = function(audio, video)
   }
   return navigator.mediaDevices.getUserMedia({audio:audio, video:video});
 };
-com.inq.flash.client.control.WebRTCMgr.initSounds = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.initSounds");
+com.inq.flash.client.control.WebRTCMgr.initSounds = function() {
   var _config = com.inq.utils.Util.getConfig;
   var sndD = _config("callDisconnectSnd", null), sndRing = _config("callDial", null);
   var sngMgr = com.inq.flash.client.chatskins.SndMgr;
@@ -16116,7 +16116,7 @@ com.inq.flash.client.control.WebRTCMgr.initSounds = function() {  console.warn("
     this.ringSnd = sngMgr.initIosAudio(sngMgr.soundSrc(sndRing), true);
   }
 };
-com.inq.flash.client.control.WebRTCMgr.initAudioCall = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.initAudioCall");
+com.inq.flash.client.control.WebRTCMgr.initAudioCall = function() {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   if (wMgr.webCallStatus === "progress" || wMgr.isEngaged) {
     return;
@@ -16126,7 +16126,7 @@ com.inq.flash.client.control.WebRTCMgr.initAudioCall = function() {  console.war
   wMgr.audioOnlyChat = true;
   wMgr.init(true);
 };
-com.inq.flash.client.control.WebRTCMgr.initVideoCall = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.initVideoCall");
+com.inq.flash.client.control.WebRTCMgr.initVideoCall = function() {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   if (wMgr.webCallStatus === "progress" || wMgr.isEngaged) {
     return;
@@ -16135,7 +16135,7 @@ com.inq.flash.client.control.WebRTCMgr.initVideoCall = function() {  console.war
   wMgr.close();
   wMgr.init();
 };
-com.inq.flash.client.control.WebRTCMgr.engageAudio = function(chatParams) {  console.warn("com.inq.flash.client.control.WebRTCMgr.engageAudio");
+com.inq.flash.client.control.WebRTCMgr.engageAudio = function(chatParams) {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   if (wMgr.isEngaged) {
     return;
@@ -16144,7 +16144,7 @@ com.inq.flash.client.control.WebRTCMgr.engageAudio = function(chatParams) {  con
   wMgr.engageElStatus(true, false, chatParams);
   com.inq.flash.client.control.PersistenceManager.SetValue("ewcall", "AC");
 };
-com.inq.flash.client.control.WebRTCMgr.engageCall = function(chatParams) {  console.warn("com.inq.flash.client.control.WebRTCMgr.engageCall");
+com.inq.flash.client.control.WebRTCMgr.engageCall = function(chatParams) {
   var sc = com.inq.flash.client.chatskins.SkinControl;
   if (sc.getApplicationController().isConnected()) {
     com.inq.flash.client.control.WebRTCMgr.sendStartCallMessage();
@@ -16156,7 +16156,7 @@ com.inq.flash.client.control.WebRTCMgr.engageCall = function(chatParams) {  cons
   sc.StopTimer();
   this.ringSnd && this.ringSnd.audio.play();
 };
-com.inq.flash.client.control.WebRTCMgr.engageElStatus = function(isAudio, reload, chatParams) {  console.warn("com.inq.flash.client.control.WebRTCMgr.engageElStatus");
+com.inq.flash.client.control.WebRTCMgr.engageElStatus = function(isAudio, reload, chatParams) {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   var cForm = wMgr.getElement("webCall", isAudio);
   wMgr.webCallStatus = "started";
@@ -16200,7 +16200,7 @@ com.inq.flash.client.control.WebRTCMgr.engageElStatus = function(isAudio, reload
     }, 2E3);
   });
 };
-com.inq.flash.client.control.WebRTCMgr.engageVideo = function(chatParams) {  console.warn("com.inq.flash.client.control.WebRTCMgr.engageVideo");
+com.inq.flash.client.control.WebRTCMgr.engageVideo = function(chatParams) {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   if (wMgr.isEngaged) {
     return;
@@ -16209,7 +16209,7 @@ com.inq.flash.client.control.WebRTCMgr.engageVideo = function(chatParams) {  con
   wMgr.engageElStatus(false, false, chatParams);
   com.inq.flash.client.control.PersistenceManager.SetValue("ewcall", "VC");
 };
-com.inq.flash.client.control.WebRTCMgr.close = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.close");
+com.inq.flash.client.control.WebRTCMgr.close = function() {
   var webRTCMgr = com.inq.flash.client.control.WebRTCMgr;
   if (webRTCMgr.webCallStatus === "progress" || webRTCMgr.webCallStatus == "restarted") {
     webRTCMgr.endCall();
@@ -16246,7 +16246,7 @@ com.inq.flash.client.control.WebRTCMgr.close = function() {  console.warn("com.i
   webRTCMgr.webCallPDen = null;
   clearTimeout(webRTCMgr.timerID);
 };
-com.inq.flash.client.control.WebRTCMgr.actionStartCall = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.actionStartCall");
+com.inq.flash.client.control.WebRTCMgr.actionStartCall = function() {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   if (wMgr.webCallStatus == "started") {
     return;
@@ -16269,7 +16269,7 @@ com.inq.flash.client.control.WebRTCMgr.actionStartCall = function() {  console.w
     }
   }
 };
-com.inq.flash.client.control.WebRTCMgr.iosSDKperGrant = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.iosSDKperGrant");
+com.inq.flash.client.control.WebRTCMgr.iosSDKperGrant = function() {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   var sc = com.inq.flash.client.chatskins.SkinControl;
   if (wMgr.automatonParams) {
@@ -16282,11 +16282,11 @@ com.inq.flash.client.control.WebRTCMgr.iosSDKperGrant = function() {  console.wa
     }
   }
 };
-com.inq.flash.client.control.WebRTCMgr.actionEndCall = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.actionEndCall");
+com.inq.flash.client.control.WebRTCMgr.actionEndCall = function() {
   com.inq.flash.client.control.WebRTCMgr.isCustomerEndsChat = true;
   com.inq.flash.client.control.WebRTCMgr.endCall();
 };
-com.inq.flash.client.control.WebRTCMgr.endCall = function(closeOnEnd) {  console.warn("com.inq.flash.client.control.WebRTCMgr.endCall");
+com.inq.flash.client.control.WebRTCMgr.endCall = function(closeOnEnd) {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   if (window.top.WebRTCApp) {
     window.top.WebRTCApp.endCall();
@@ -16306,22 +16306,22 @@ com.inq.flash.client.control.WebRTCMgr.endCall = function(closeOnEnd) {  console
     wMgr.processCallEnded();
   }
 };
-com.inq.flash.client.control.WebRTCMgr.isAudioOnlyWebCall = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.isAudioOnlyWebCall");
+com.inq.flash.client.control.WebRTCMgr.isAudioOnlyWebCall = function() {
   return com.inq.flash.client.control.WebRTCMgr.audioOnlyChat;
 };
-com.inq.flash.client.control.WebRTCMgr.sendWebCallMessage = function(msgString, action) {  console.warn("com.inq.flash.client.control.WebRTCMgr.sendWebCallMessage");
+com.inq.flash.client.control.WebRTCMgr.sendWebCallMessage = function(msgString, action) {
   var controller = com.inq.flash.client.chatskins.SkinControl.getApplicationController();
   if (controller) {
     controller.sendWebCallMessage(msgString, action);
   }
 };
-com.inq.flash.client.control.WebRTCMgr.sendWebCallEndMessage = function(msgString, isCusEnd, abandoned) {  console.warn("com.inq.flash.client.control.WebRTCMgr.sendWebCallEndMessage");
+com.inq.flash.client.control.WebRTCMgr.sendWebCallEndMessage = function(msgString, isCusEnd, abandoned) {
   var controller = com.inq.flash.client.chatskins.SkinControl.getApplicationController();
   if (controller) {
     controller.sendWebCallEndMessage(msgString, isCusEnd, abandoned);
   }
 };
-com.inq.flash.client.control.WebRTCMgr.processAgentMessage = function(msgAction) {  console.warn("com.inq.flash.client.control.WebRTCMgr.processAgentMessage");
+com.inq.flash.client.control.WebRTCMgr.processAgentMessage = function(msgAction) {
   var msg = msgAction ? msgAction.split(",") : [], sMsg = "";
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   var _status = wMgr.webCallStatus;
@@ -16378,7 +16378,7 @@ com.inq.flash.client.control.WebRTCMgr.processAgentMessage = function(msgAction)
       break;
   }
 };
-com.inq.flash.client.control.WebRTCMgr.joinCall = function(serverUrl, token) {  console.warn("com.inq.flash.client.control.WebRTCMgr.joinCall");
+com.inq.flash.client.control.WebRTCMgr.joinCall = function(serverUrl, token) {
   var WebRTCApp = window.top.WebRTCApp;
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   if (wMgr.isIOSSDK()) {
@@ -16400,7 +16400,7 @@ com.inq.flash.client.control.WebRTCMgr.joinCall = function(serverUrl, token) {  
     }
   }
 };
-com.inq.flash.client.control.WebRTCMgr.processCallStarted = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.processCallStarted");
+com.inq.flash.client.control.WebRTCMgr.processCallStarted = function() {
   var callMesg = "";
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   var pm = com.inq.flash.client.control.PersistenceManager;
@@ -16425,7 +16425,7 @@ com.inq.flash.client.control.WebRTCMgr.processCallStarted = function() {  consol
   pm.SetValue("watoken", wMgr.chatInfo.authToken);
   wMgr.ringSnd && wMgr.ringSnd.audio.pause();
 };
-com.inq.flash.client.control.WebRTCMgr.processCallEnded = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.processCallEnded");
+com.inq.flash.client.control.WebRTCMgr.processCallEnded = function() {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   var pm = com.inq.flash.client.control.PersistenceManager;
   if (wMgr.webCallStatus == "callerror") {
@@ -16457,7 +16457,7 @@ com.inq.flash.client.control.WebRTCMgr.processCallEnded = function() {  console.
     com.inq.flash.client.chatskins.SkinControl.actionBtnCloseChat(null);
   }
 };
-com.inq.flash.client.control.WebRTCMgr.onError = function(errorString, agentMsg) {  console.warn("com.inq.flash.client.control.WebRTCMgr.onError");
+com.inq.flash.client.control.WebRTCMgr.onError = function(errorString, agentMsg) {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   var wApp = window.top.WebRTCApp;
   if (wMgr.webCallStatus == "progress" || wMgr.webCallStatus == "restarted" || wMgr.webCallStatus == "ended") {
@@ -16503,7 +16503,7 @@ com.inq.flash.client.control.WebRTCMgr.onError = function(errorString, agentMsg)
   wMgr.sendWebCallMessage(err, pd ? wMgr.PERM_DENIED : wMgr.WEBCALL_ERROR);
   wMgr.disSnd && wMgr.disSnd.audio.play();
 };
-com.inq.flash.client.control.WebRTCMgr.setErrorText = function(errorString, customText, reconnect, denied) {  console.warn("com.inq.flash.client.control.WebRTCMgr.setErrorText");
+com.inq.flash.client.control.WebRTCMgr.setErrorText = function(errorString, customText, reconnect, denied) {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   var text = typeof errorString == "string" ? errorString : customText;
   var toggleEl = wMgr.toggleElState;
@@ -16534,7 +16534,7 @@ com.inq.flash.client.control.WebRTCMgr.setErrorText = function(errorString, cust
   }
   return text;
 };
-com.inq.flash.client.control.WebRTCMgr.onDisconnect = function(errorString, stateOnly) {  console.warn("com.inq.flash.client.control.WebRTCMgr.onDisconnect");
+com.inq.flash.client.control.WebRTCMgr.onDisconnect = function(errorString, stateOnly) {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   if (wMgr.webCallStatus == "ended" || wMgr.webCallStatus == "callerror") {
     return;
@@ -16546,13 +16546,13 @@ com.inq.flash.client.control.WebRTCMgr.onDisconnect = function(errorString, stat
     wMgr.timerID = setTimeout(wMgr.onTimeout, 3E3);
   }
 };
-com.inq.flash.client.control.WebRTCMgr.onRestart = function(msg) {  console.warn("com.inq.flash.client.control.WebRTCMgr.onRestart");
+com.inq.flash.client.control.WebRTCMgr.onRestart = function(msg) {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   window.top.WebRTCApp.leaveRoom();
   wMgr.setErrorText(msg, "", true);
   wMgr.incrementCount();
 };
-com.inq.flash.client.control.WebRTCMgr.onTimeout = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.onTimeout");
+com.inq.flash.client.control.WebRTCMgr.onTimeout = function() {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   if (com.inq.flash.client.control.PersistenceManager.GetValue("wcall", 0) === 1) {
     if (wMgr.retryCount < 5) {
@@ -16567,7 +16567,7 @@ com.inq.flash.client.control.WebRTCMgr.onTimeout = function() {  console.warn("c
     }
   }
 };
-com.inq.flash.client.control.WebRTCMgr.onKMSLoad = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.onKMSLoad");
+com.inq.flash.client.control.WebRTCMgr.onKMSLoad = function() {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   if (wMgr.isEngaged) {
     var endCallBtn = Application.application.getButton("btnEndCallA");
@@ -16579,22 +16579,22 @@ com.inq.flash.client.control.WebRTCMgr.onKMSLoad = function() {  console.warn("c
     wMgr.sendStartCallMessage();
   }
 };
-com.inq.flash.client.control.WebRTCMgr.sendStartCallMessage = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.sendStartCallMessage");
+com.inq.flash.client.control.WebRTCMgr.sendStartCallMessage = function() {
   com.inq.flash.client.control.WebRTCMgr.sendWebCallMessage("Video-" + (com.inq.flash.client.control.WebRTCMgr.isAudioOnlyWebCall() ? "false" : "true") + "," + com.inq.flash.client.control.FlashPeer.getVanityUrl() + "," + com.inq.flash.client.control.WebRTCMgr.webcallCounter + "," + com.inq.utils.Util.getConfig("webCallStart", "Start call"), com.inq.flash.client.control.WebRTCMgr.WEBCALL_REQUESTED);
 };
-com.inq.flash.client.control.WebRTCMgr.getElement = function(id, audioOnly) {  console.warn("com.inq.flash.client.control.WebRTCMgr.getElement");
+com.inq.flash.client.control.WebRTCMgr.getElement = function(id, audioOnly) {
   return Application.application.getMxmlItem(audioOnly ? id + "A" : id);
 };
-com.inq.flash.client.control.WebRTCMgr.toggleElState = function(el, state) {  console.warn("com.inq.flash.client.control.WebRTCMgr.toggleElState");
+com.inq.flash.client.control.WebRTCMgr.toggleElState = function(el, state) {
   if (el) {
     el.setVisible(state);
   }
 };
-com.inq.flash.client.control.WebRTCMgr.incrementCount = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.incrementCount");
+com.inq.flash.client.control.WebRTCMgr.incrementCount = function() {
   com.inq.flash.client.control.WebRTCMgr.webcallCounter++;
   com.inq.flash.client.control.WebRTCMgr.chatInfo["counter"] = com.inq.flash.client.control.WebRTCMgr.webcallCounter;
 };
-com.inq.flash.client.control.WebRTCMgr.resetElState = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.resetElState");
+com.inq.flash.client.control.WebRTCMgr.resetElState = function() {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   var toggleEl = wMgr.toggleElState;
   toggleEl(wMgr.webCallStartCallBtn, true);
@@ -16604,28 +16604,28 @@ com.inq.flash.client.control.WebRTCMgr.resetElState = function() {  console.warn
   toggleEl(wMgr.webCallRecon, false);
   wMgr.webCallStatus = "";
 };
-com.inq.flash.client.control.WebRTCMgr.isWebRTCCapable = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.isWebRTCCapable");
+com.inq.flash.client.control.WebRTCMgr.isWebRTCCapable = function() {
   var wMgr = com.inq.flash.client.control.WebRTCMgr;
   return typeof(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia) == "function" || wMgr.isIOSSDK() != undefined || wMgr.getAndSDKInst() != undefined;
 };
-com.inq.flash.client.control.WebRTCMgr.setCallQueue = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.setCallQueue");
+com.inq.flash.client.control.WebRTCMgr.setCallQueue = function() {
   if (WebRTCMgr.webCallStatus == "started" && !WebRTCMgr.isQueued) {
     WebRTCMgr.sendWebCallMessage("Call in Queue.", WebRTCMgr.CALL_QUEUED);
     WebRTCMgr.isQueued = true;
   }
 };
-com.inq.flash.client.control.WebRTCMgr.isIOSSDK = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.isIOSSDK");
+com.inq.flash.client.control.WebRTCMgr.isIOSSDK = function() {
   var _pWin = window.parent;
   return _pWin.webkit && _pWin.webkit.messageHandlers && _pWin.webkit.messageHandlers.tcrtc;
 };
-com.inq.flash.client.control.WebRTCMgr.getAndSDKInst = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.getAndSDKInst");
+com.inq.flash.client.control.WebRTCMgr.getAndSDKInst = function() {
   var _pWin = window.parent;
   return _pWin.NuanRTCSDK;
 };
-com.inq.flash.client.control.WebRTCMgr.getMuteBtn = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.getMuteBtn");
+com.inq.flash.client.control.WebRTCMgr.getMuteBtn = function() {
   return com.inq.flash.client.control.WebRTCMgr.muteBtn;
 };
-com.inq.flash.client.control.WebRTCMgr.isCallStarted = function() {  console.warn("com.inq.flash.client.control.WebRTCMgr.isCallStarted");
+com.inq.flash.client.control.WebRTCMgr.isCallStarted = function() {
   var webRTCMgr = com.inq.flash.client.control.WebRTCMgr;
   return webRTCMgr.webCallStatus && webRTCMgr.webCallStatus != "ended" && webRTCMgr.webCallStatus != "callerror";
 };
@@ -16656,10 +16656,10 @@ WebRTCMgr.PERM_DENIED = "wcDenied";
 WebRTCMgr.CALL_QUEUED = "wcQueued";
 WebRTCMgr.CALL_LEFT_MSG = "Customer left the call.";
 WebRTCMgr.CALL_WS_MSG = "Customer lost web socket connection.";
-com.inq.flash.client.control.XFrameWorker = function() {  console.warn("com.inq.flash.client.control.XFrameWorker");
+com.inq.flash.client.control.XFrameWorker = function() {
 };
 $hxClasses.registerClass(com.inq.flash.client.control.XFrameWorker, "com.inq.flash.client.control.XFrameWorker");
-com.inq.flash.client.control.XFrameWorker.init = function() {  console.warn("com.inq.flash.client.control.XFrameWorker.init");
+com.inq.flash.client.control.XFrameWorker.init = function() {
   com.inq.utils.Util.publish("window.inqFrame.com.inq.flash.client.control.XFrameWorker.setEngageParameters", com.inq.flash.client.control.XFrameWorker.setEngageParameters);
   com.inq.utils.Util.publish("window.inqFrame.com.inq.flash.client.control.XFrameWorker.engageChat", com.inq.flash.client.control.XFrameWorker.engageChat);
   com.inq.utils.Util.publish("window.inqFrame.com.inq.flash.client.control.XFrameWorker.isChatConnected", com.inq.flash.client.control.XFrameWorker.isChatConnected);
@@ -16710,7 +16710,7 @@ com.inq.flash.client.control.XFrameWorker.init = function() {  console.warn("com
   }
   return true;
 };
-com.inq.flash.client.control.XFrameWorker.isLayerVisible = function(layerID) {  console.warn("com.inq.flash.client.control.XFrameWorker.isLayerVisible");
+com.inq.flash.client.control.XFrameWorker.isLayerVisible = function(layerID) {
   var visible = false;
   if (com.inq.flash.client.chatskins.SkinControl.isInApplication(layerID)) {
     var cntr = Application.application.getMxmlItem(layerID);
@@ -16722,7 +16722,7 @@ com.inq.flash.client.control.XFrameWorker.isLayerVisible = function(layerID) {  
   }
   return visible;
 };
-com.inq.flash.client.control.XFrameWorker.showVideoLayer = function(layerID, noOpeners, url, businessUnitID, updateCookies, initiator, params) {  console.warn("com.inq.flash.client.control.XFrameWorker.showVideoLayer");
+com.inq.flash.client.control.XFrameWorker.showVideoLayer = function(layerID, noOpeners, url, businessUnitID, updateCookies, initiator, params) {
   var p = params.split(",");
   var cntr = Application.application.getMxmlItem(layerID);
   try {
@@ -16752,7 +16752,7 @@ com.inq.flash.client.control.XFrameWorker.showVideoLayer = function(layerID, noO
   } catch (e) {
   }
 };
-com.inq.flash.client.control.XFrameWorker.showLayer = function(layerID, noOpeners, url, businessUnitID, updateCookies, initiator) {  console.warn("com.inq.flash.client.control.XFrameWorker.showLayer");
+com.inq.flash.client.control.XFrameWorker.showLayer = function(layerID, noOpeners, url, businessUnitID, updateCookies, initiator) {
   if (com.inq.flash.client.control.MinimizeManager.isMinimized()) {
     return;
   }
@@ -16864,7 +16864,7 @@ com.inq.flash.client.control.XFrameWorker.showLayer = function(layerID, noOpener
     }
   }
 };
-com.inq.flash.client.control.XFrameWorker.enableChatWindow = function() {  console.warn("com.inq.flash.client.control.XFrameWorker.enableChatWindow");
+com.inq.flash.client.control.XFrameWorker.enableChatWindow = function() {
   var cWindow = window.parent.document.getElementById("tcChat_chatWindow");
   if (cWindow && cWindow.hasAttribute("data-disabled")) {
     com.inq.flash.client.chatskins.SkinControl.getInputArea().setVisible(true);
@@ -16873,21 +16873,21 @@ com.inq.flash.client.control.XFrameWorker.enableChatWindow = function() {  conso
     cWindow.removeAttribute("data-disabled");
   }
 };
-com.inq.flash.client.control.XFrameWorker.showLayerXcd = function(layerID, updateCookies, automatonId) {  console.warn("com.inq.flash.client.control.XFrameWorker.showLayerXcd");
+com.inq.flash.client.control.XFrameWorker.showLayerXcd = function(layerID, updateCookies, automatonId) {
   var initiator = {type:"automaton", id:automatonId};
   com.inq.flash.client.control.XFrameWorker.showLayer(layerID, false, null, null, updateCookies, initiator);
 };
-com.inq.flash.client.control.XFrameWorker.showAutomatonXcd = function(automatonId, layerID, url, updateCookies) {  console.warn("com.inq.flash.client.control.XFrameWorker.showAutomatonXcd");
+com.inq.flash.client.control.XFrameWorker.showAutomatonXcd = function(automatonId, layerID, url, updateCookies) {
   var initiator = {type:"automaton", id:automatonId};
   com.inq.flash.client.control.XFrameWorker.showLayer(layerID, false, url, null, updateCookies, initiator);
 };
-com.inq.flash.client.control.XFrameWorker.fireCustomEvt = function(eventName, jsonData, dataFcn) {  console.warn("com.inq.flash.client.control.XFrameWorker.fireCustomEvt");
+com.inq.flash.client.control.XFrameWorker.fireCustomEvt = function(eventName, jsonData, dataFcn) {
   if (dataFcn != null && dataFcn == "") {
     dataFcn = null;
   }
   com.inq.flash.client.control.FlashPeer.fireCustomEvt(eventName, jsonData, dataFcn);
 };
-com.inq.flash.client.control.XFrameWorker.hideLayer = function(layerID, updateCookies) {  console.warn("com.inq.flash.client.control.XFrameWorker.hideLayer");
+com.inq.flash.client.control.XFrameWorker.hideLayer = function(layerID, updateCookies) {
   if (updateCookies == null) {
     updateCookies = true;
   }
@@ -16915,7 +16915,7 @@ com.inq.flash.client.control.XFrameWorker.hideLayer = function(layerID, updateCo
     haxe.Log.trace("XFrameWorker.hideLayer('" + layerID + "', ...): layer is not in the application", {fileName:"XFrameWorker.hx", lineNumber:170, className:"com.inq.flash.client.control.XFrameWorker", methodName:"hideLayer", customParams:["warn"]});
   }
 };
-com.inq.flash.client.control.XFrameWorker.hideLayerAndEndChat = function(layerID, updateCookies) {  console.warn("com.inq.flash.client.control.XFrameWorker.hideLayerAndEndChat");
+com.inq.flash.client.control.XFrameWorker.hideLayerAndEndChat = function(layerID, updateCookies) {
   if (updateCookies == null) {
     updateCookies = true;
   }
@@ -16926,7 +16926,7 @@ com.inq.flash.client.control.XFrameWorker.hideLayerAndEndChat = function(layerID
     com.inq.flash.client.control.XFrameWorker.hideLayer(layerID, updateCookies);
   }
 };
-com.inq.flash.client.control.XFrameWorker.grow = function(layerID, url, updateCookies, initiator) {  console.warn("com.inq.flash.client.control.XFrameWorker.grow");
+com.inq.flash.client.control.XFrameWorker.grow = function(layerID, url, updateCookies, initiator) {
   if (updateCookies == null) {
     updateCookies = true;
   }
@@ -16988,11 +16988,11 @@ com.inq.flash.client.control.XFrameWorker.grow = function(layerID, url, updateCo
     return accessKey;
   }
 };
-com.inq.flash.client.control.XFrameWorker.growXcd = function(layerID, updateCookies, automatonId) {  console.warn("com.inq.flash.client.control.XFrameWorker.growXcd");
+com.inq.flash.client.control.XFrameWorker.growXcd = function(layerID, updateCookies, automatonId) {
   var initiator = {type:"automaton", id:automatonId};
   com.inq.flash.client.control.XFrameWorker.showLayer(layerID, false, null, null, updateCookies, initiator);
 };
-com.inq.flash.client.control.XFrameWorker.shrink = function(layerID, updateCookies) {  console.warn("com.inq.flash.client.control.XFrameWorker.shrink");
+com.inq.flash.client.control.XFrameWorker.shrink = function(layerID, updateCookies) {
   if (updateCookies == null) {
     updateCookies = true;
   }
@@ -17031,7 +17031,7 @@ com.inq.flash.client.control.XFrameWorker.shrink = function(layerID, updateCooki
     com.inq.flash.client.control.XFrameWorker.setPersistentState(layerID, false, updateCookies);
   }
 };
-com.inq.flash.client.control.XFrameWorker.setEngageParameters = function(chatParams) {  console.warn("com.inq.flash.client.control.XFrameWorker.setEngageParameters");
+com.inq.flash.client.control.XFrameWorker.setEngageParameters = function(chatParams) {
   if (typeof chatParams != "object") {
     chatParams = com.inq.flash.client.control.XFrameWorker._preparingChatParameters.apply(null, arguments);
   }
@@ -17041,7 +17041,7 @@ com.inq.flash.client.control.XFrameWorker.setEngageParameters = function(chatPar
     com.inq.flash.client.chatskins.SkinControl.onChatEngaged();
   }
 };
-com.inq.flash.client.control.XFrameWorker.engageChat = function(chatParams) {  console.warn("com.inq.flash.client.control.XFrameWorker.engageChat");
+com.inq.flash.client.control.XFrameWorker.engageChat = function(chatParams) {
   if (typeof chatParams != "object") {
     chatParams = com.inq.flash.client.control.XFrameWorker._preparingChatParameters.apply(null, arguments);
   }
@@ -17051,17 +17051,17 @@ com.inq.flash.client.control.XFrameWorker.engageChat = function(chatParams) {  c
     com.inq.flash.client.chatskins.SkinControl.onChatEngaged();
   }
 };
-com.inq.flash.client.control.XFrameWorker.setCircularTabbing = function(enable) {  console.warn("com.inq.flash.client.control.XFrameWorker.setCircularTabbing");
+com.inq.flash.client.control.XFrameWorker.setCircularTabbing = function(enable) {
   if (enable) {
     com.inq.flash.client.control.XFrameWorker.setCircularApplication();
   } else {
     com.inq.flash.client.control.XFrameWorker.removeCircularModalWindow();
   }
 };
-com.inq.flash.client.control.XFrameWorker._preparingChatParameters = function(text, clientText, agentAttrs, businessUnitID, phone, agentGroupId, scriptTreeId, publicUserId, automatonId, automatonFields) {  console.warn("com.inq.flash.client.control.XFrameWorker._preparingChatParameters");
+com.inq.flash.client.control.XFrameWorker._preparingChatParameters = function(text, clientText, agentAttrs, businessUnitID, phone, agentGroupId, scriptTreeId, publicUserId, automatonId, automatonFields) {
   return {"agentOutcome":text, "clientOutcome":clientText, "agentAttrs":agentAttrs, "businessUnitID":businessUnitID, "phone":phone, "agentGroupId":agentGroupId, "scriptTreeId":scriptTreeId, "publicUserId":publicUserId, "automatonId":automatonId, "automatonFields":automatonFields};
 };
-com.inq.flash.client.control.XFrameWorker.isChatConnected = function() {  console.warn("com.inq.flash.client.control.XFrameWorker.isChatConnected");
+com.inq.flash.client.control.XFrameWorker.isChatConnected = function() {
   var skinControl = com.inq.flash.client.chatskins.SkinControl;
   var msgRereadLmt = com.inq.flash.client.control.PersistenceManager.GetValue("msgcnt", 0);
   if (skinControl.getIsPersistentChat() && msgRereadLmt < skinControl.applicationController.msgcntAtEntry) {
@@ -17069,7 +17069,7 @@ com.inq.flash.client.control.XFrameWorker.isChatConnected = function() {  consol
   }
   return skinControl.applicationController.isConnected() || msgRereadLmt > 0;
 };
-com.inq.flash.client.control.XFrameWorker.findCustomerName = function(aStr) {  console.warn("com.inq.flash.client.control.XFrameWorker.findCustomerName");
+com.inq.flash.client.control.XFrameWorker.findCustomerName = function(aStr) {
   var cdnStr;
   var myregex = new RegExp("CustomerDisplayName: (.*)\n", "i");
   if (myregex.test(aStr)) {
@@ -17081,20 +17081,20 @@ com.inq.flash.client.control.XFrameWorker.findCustomerName = function(aStr) {  c
   }
   return aStr;
 };
-com.inq.flash.client.control.XFrameWorker.closeChat = function() {  console.warn("com.inq.flash.client.control.XFrameWorker.closeChat");
+com.inq.flash.client.control.XFrameWorker.closeChat = function() {
   com.inq.flash.client.chatskins.SkinControl.actionCloseChat();
 };
-com.inq.flash.client.control.XFrameWorker.setAutomatonDataMapXcd = function(json) {  console.warn("com.inq.flash.client.control.XFrameWorker.setAutomatonDataMapXcd");
+com.inq.flash.client.control.XFrameWorker.setAutomatonDataMapXcd = function(json) {
   com.inq.flash.client.control.FlashVars.setAutomatonSpecData(json);
   if (com.inq.flash.client.control.XFrameWorker.isChatConnected()) {
     var message = new com.inq.flash.client.data.ChatAutomatonDataMapMessage(com.inq.flash.client.control.FlashVars.getChatID(), json);
     com.inq.flash.client.chatskins.SkinControl.getApplicationController().sendMessage(message);
   }
 };
-com.inq.flash.client.control.XFrameWorker.isDisplayInCI = function(text) {  console.warn("com.inq.flash.client.control.XFrameWorker.isDisplayInCI");
+com.inq.flash.client.control.XFrameWorker.isDisplayInCI = function(text) {
   return text.indexOf(com.inq.flash.client.control.XFrameWorker.DO_NOT_DISPLAY_IN_CI) < 0;
 };
-com.inq.flash.client.control.XFrameWorker.setPersistentState = function(id, show, updateCookies) {  console.warn("com.inq.flash.client.control.XFrameWorker.setPersistentState");
+com.inq.flash.client.control.XFrameWorker.setPersistentState = function(id, show, updateCookies) {
   haxe.Log.trace("XFrameWorker.setPersistentState entered: layer '" + id + "' = " + Std.string(show) + ", updateCookies=" + Std.string(updateCookies), {fileName:"XFrameWorker.hx", lineNumber:263, className:"com.inq.flash.client.control.XFrameWorker", methodName:"setPersistentState"});
   var xf = com.inq.flash.client.control.PersistenceManager.GetValue("xf", {});
   if (show) {
@@ -17120,13 +17120,13 @@ com.inq.flash.client.control.XFrameWorker.setPersistentState = function(id, show
     }
   }
 };
-com.inq.flash.client.control.XFrameWorker.resizeStage = function(stageWidth, stageHeight) {  console.warn("com.inq.flash.client.control.XFrameWorker.resizeStage");
+com.inq.flash.client.control.XFrameWorker.resizeStage = function(stageWidth, stageHeight) {
   Application.ResizeStage(stageWidth, stageHeight);
   Application.application.resize();
   com.inq.flash.client.chatskins.ScrollMonitor.moveChat();
   com.inq.flash.client.control.XFrameWorker.hideLoadingButton();
 };
-com.inq.flash.client.control.XFrameWorker.moveStage = function(location, x, y) {  console.warn("com.inq.flash.client.control.XFrameWorker.moveStage");
+com.inq.flash.client.control.XFrameWorker.moveStage = function(location, x, y) {
   var area = Application.GetArea();
   var vp = com.inq.utils.Capabilities.getViewport();
   var pos = Application.calcChatLocation(area.w, area.h, x, y, location);
@@ -17141,7 +17141,7 @@ com.inq.flash.client.control.XFrameWorker.moveStage = function(location, x, y) {
     haxe.Log.trace("XFrameWorker.moveStage('" + location + "', ...): can't move persistent chat window");
   }
 };
-com.inq.flash.client.control.XFrameWorker.syncLayer = function(layerID, cacheId, dtid) {  console.warn("com.inq.flash.client.control.XFrameWorker.syncLayer");
+com.inq.flash.client.control.XFrameWorker.syncLayer = function(layerID, cacheId, dtid) {
   var cntr;
   var indx;
   var map = {};
@@ -17201,10 +17201,10 @@ com.inq.flash.client.control.XFrameWorker.syncLayer = function(layerID, cacheId,
     }
   }
 };
-com.inq.flash.client.control.XFrameWorker.onCookiesCommitted = function(handler) {  console.warn("com.inq.flash.client.control.XFrameWorker.onCookiesCommitted");
+com.inq.flash.client.control.XFrameWorker.onCookiesCommitted = function(handler) {
   com.inq.flash.client.control.FlashPeer.onCookiesCommitted(handler);
 };
-com.inq.flash.client.control.XFrameWorker.ariaHelpOnLoadingButton = function() {  console.warn("com.inq.flash.client.control.XFrameWorker.ariaHelpOnLoadingButton");
+com.inq.flash.client.control.XFrameWorker.ariaHelpOnLoadingButton = function() {
   var xframeloadingDiv = Application.application.getMxmlItem("xframeloading");
   var _aria = com.inq.aria.AriaMsg;
   if (xframeloadingDiv && xframeloadingDiv._visible == true) {
@@ -17225,7 +17225,7 @@ com.inq.flash.client.control.XFrameWorker.ariaHelpOnLoadingButton = function() {
     }
   }
 };
-com.inq.flash.client.control.XFrameWorker.hideLoadingButton = function() {  console.warn("com.inq.flash.client.control.XFrameWorker.hideLoadingButton");
+com.inq.flash.client.control.XFrameWorker.hideLoadingButton = function() {
   var xframeloadingDiv = Application.application.getMxmlItem("xframeloading");
   if (xframeloadingDiv && xframeloadingDiv._visible == true) {
     xframeloadingDiv.setVisible(false);
@@ -17235,19 +17235,19 @@ com.inq.flash.client.control.XFrameWorker.hideLoadingButton = function() {  cons
     }
   }
 };
-com.inq.flash.client.control.XFrameWorker.setCircularModalWindow = function(div, firstEl, lastEl) {  console.warn("com.inq.flash.client.control.XFrameWorker.setCircularModalWindow");
+com.inq.flash.client.control.XFrameWorker.setCircularModalWindow = function(div, firstEl, lastEl) {
   return com.inq.aria.ModalWindow.setCircularModalWindow(div, firstEl, lastEl);
 };
-com.inq.flash.client.control.XFrameWorker.setCircularApplication = function() {  console.warn("com.inq.flash.client.control.XFrameWorker.setCircularApplication");
+com.inq.flash.client.control.XFrameWorker.setCircularApplication = function() {
   com.inq.aria.ModalWindow.setCircularApplication();
 };
-com.inq.flash.client.control.XFrameWorker.removeCircularModalWindow = function() {  console.warn("com.inq.flash.client.control.XFrameWorker.removeCircularModalWindow");
+com.inq.flash.client.control.XFrameWorker.removeCircularModalWindow = function() {
   com.inq.aria.ModalWindow.removeCircularModalWindow();
 };
-com.inq.flash.client.control.XFrameWorker.isCircularTabbingEnabled = function() {  console.warn("com.inq.flash.client.control.XFrameWorker.isCircularTabbingEnabled");
+com.inq.flash.client.control.XFrameWorker.isCircularTabbingEnabled = function() {
   return com.inq.aria.ModalWindow.isCircularTabbingEnabled;
 };
-com.inq.flash.client.control.XFrameWorker.transitionPage = function() {  console.warn("com.inq.flash.client.control.XFrameWorker.transitionPage");
+com.inq.flash.client.control.XFrameWorker.transitionPage = function() {
   var xframes = Application.application.getXFrameItems();
   for (var i = 0;i < xframes.length;i++) {
     xframes[i].resetScrolling();
@@ -17257,21 +17257,21 @@ com.inq.flash.client.control.XFrameWorker.prototype.__class__ = com.inq.flash.cl
 com.inq.flash.client.control.XFrameWorker.DO_NOT_DISPLAY_IN_CI = "\x3c!-- Data Pass --\x3e";
 com.inq.flash.client.control.XFrameWorker.xframeLoadingIntIdCount = 0;
 com.inq.flash.client.control.XFrameWorker.xframeLoadingIntId = -1;
-com.inq.flash.messagingframework.AbstractMessageHandler = function(messageType) {  console.warn("com.inq.flash.messagingframework.AbstractMessageHandler");
+com.inq.flash.messagingframework.AbstractMessageHandler = function(messageType) {
   this.messageType = messageType;
 };
 $hxClasses["com.inq.flash.messagingframework.AbstractMessageHandler"] = com.inq.flash.messagingframework.AbstractMessageHandler;
 com.inq.flash.messagingframework.AbstractMessageHandler.__name__ = ["com", "inq", "flash", "messagingframework", "AbstractMessageHandler"];
-com.inq.flash.messagingframework.AbstractMessageHandler.prototype.getMessagingFramework = function() {  console.warn("com.inq.flash.messagingframework.AbstractMessageHandler.prototype.getMessagingFramework");
+com.inq.flash.messagingframework.AbstractMessageHandler.prototype.getMessagingFramework = function() {
   return this.framework;
 };
-com.inq.flash.messagingframework.AbstractMessageHandler.prototype.setMessagingFramework = function(framework) {  console.warn("com.inq.flash.messagingframework.AbstractMessageHandler.prototype.setMessagingFramework");
+com.inq.flash.messagingframework.AbstractMessageHandler.prototype.setMessagingFramework = function(framework) {
   this.framework = framework;
 };
-com.inq.flash.messagingframework.AbstractMessageHandler.prototype.getMessageType = function() {  console.warn("com.inq.flash.messagingframework.AbstractMessageHandler.prototype.getMessageType");
+com.inq.flash.messagingframework.AbstractMessageHandler.prototype.getMessageType = function() {
   return this.messageType;
 };
-com.inq.flash.messagingframework.AbstractMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.messagingframework.AbstractMessageHandler.prototype.processMessage");
+com.inq.flash.messagingframework.AbstractMessageHandler.prototype.processMessage = function(message) {
 };
 com.inq.flash.messagingframework.AbstractMessageHandler.prototype.framework = null;
 com.inq.flash.messagingframework.AbstractMessageHandler.prototype.messageType = null;
@@ -17279,7 +17279,7 @@ com.inq.flash.messagingframework.AbstractMessageHandler.prototype.__class__ = co
 if (!com.inq.flash.client.control.messagehandlers) {
   com.inq.flash.client.control.messagehandlers = {};
 }
-;com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler = function(messageType) {  console.warn("com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler");
+;com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler = function(messageType) {
   com.inq.flash.messagingframework.AbstractMessageHandler.call(this, messageType);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler"] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler;
@@ -17288,15 +17288,15 @@ com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.__s
 for (var k in com.inq.flash.messagingframework.AbstractMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k] = com.inq.flash.messagingframework.AbstractMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype.getController = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype.getController");
+com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype.getController = function() {
   return this.controller;
 };
-com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype.setController = function(controller) {  console.warn("com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype.setController");
+com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype.setController = function(controller) {
   this.controller = controller;
 };
 com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype.controller = null;
 com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_ACCEPTED);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler"] = com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler;
@@ -17305,7 +17305,7 @@ com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler.__super_
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler.prototype.processMessage = function(message) {
   if (message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_AUTOMATON_ID)) {
     return;
   }
@@ -17321,18 +17321,18 @@ com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler.prototyp
   Application.application.fireMxmlEvent("onChatAccepted");
 };
 com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatAcceptedMessageHandler;
-com.inq.flash.client.control.messagehandlers.ClientAuthDataMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ClientAuthDataMessageHandler");
+com.inq.flash.client.control.messagehandlers.ClientAuthDataMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CLIENT_AUTH_DATA);
 };
 $hxClasses.extend(com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler, com.inq.flash.client.control.messagehandlers.ClientAuthDataMessageHandler, "com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler");
-com.inq.flash.client.control.messagehandlers.ClientAuthDataMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ClientAuthDataMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ClientAuthDataMessageHandler.prototype.processMessage = function(message) {
   var clientName = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_USERNAME);
   if (clientName != null) {
     com.inq.flash.client.control.FlashVars.setCustomerName(clientName, true);
   }
 };
 com.inq.flash.client.control.messagehandlers.ClientAuthDataMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ClientAuthDataMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_AUTHORIZED);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler"] = com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler;
@@ -17341,7 +17341,7 @@ com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler.__supe
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler.prototype.processMessage = function(message) {
   if (message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CHATROOM_MEMBER_TYPE) == com.inq.flash.client.data.MessageFields.DATA_CHATROOM_MEMBER_VIRTUAL_AGENT) {
     com.inq.flash.client.control.PersistenceManager.SetValue("va", 1, true, true);
   }
@@ -17350,7 +17350,7 @@ com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler.protot
   this.getController().setQueueMessages(false);
 };
 com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatAuthorizedMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler");
+com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_AUTOMATON_SETTING);
   this.REPLACE_STRING = "_REPLACE_";
 };
@@ -17360,7 +17360,7 @@ com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingH
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.setAttribute = function(elementID, attributeName, attributeValue) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.setAttribute");
+com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.setAttribute = function(elementID, attributeName, attributeValue) {
   var elements = window.document.getElementsByName(elementID);
   if (elements.length == 0) {
     haxe.Log.trace("element not found by name [" + elementID + "]", {fileName:"ChatAutomatonRequestElementSettingHandler.hx", lineNumber:72, className:"com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler", methodName:"setAttribute", customParams:["error"]});
@@ -17401,36 +17401,36 @@ com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingH
     }
   }
 };
-com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.incrementOutstandingCount = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.incrementOutstandingCount");
+com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.incrementOutstandingCount = function() {
   com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.outstanding++;
   haxe.Log.trace("incrementOutstandingCount: " + com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.outstanding, {fileName:"ChatAutomatonRequestElementSettingHandler.hx", lineNumber:109, className:"com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler", methodName:"incrementOutstandingCount"});
 };
-com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.decrementOutstandingCount = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.decrementOutstandingCount");
+com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.decrementOutstandingCount = function() {
   --com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.outstanding;
   haxe.Log.trace("decrementOutstandingCount: " + com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.outstanding, {fileName:"ChatAutomatonRequestElementSettingHandler.hx", lineNumber:122, className:"com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler", methodName:"decrementOutstandingCount"});
   if (com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.outstanding < 0) {
     com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.outstanding = 0;
   }
 };
-com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.getOutstandingCount = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.getOutstandingCount");
+com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.getOutstandingCount = function() {
   return com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.outstanding;
 };
-com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.hasNoOutstandingMessages = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.hasNoOutstandingMessages");
+com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.hasNoOutstandingMessages = function() {
   return com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.getOutstandingCount() == 0;
 };
-com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.setAttributesInChatTextArea = function(element) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.setAttributesInChatTextArea");
+com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.setAttributesInChatTextArea = function(element) {
   com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.setEngaged();
   var cw = com.inq.flash.client.chatskins.SkinControl.getChatWindow();
   cw.updateTranscriptArray(element);
 };
-com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.setEngaged = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.setEngaged");
+com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.setEngaged = function() {
   if (com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler._engaged) {
     return;
   }
   com.inq.flash.client.control.Incrementality.onEngaged();
   com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler._engaged = true;
 };
-com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.prototype.processMessage = function(message) {
   com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler._engaged = true;
   if ("1" != message.getProperty(com.inq.flash.client.data.MessageFields.KEY_REPLAY)) {
     com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.decrementOutstandingCount();
@@ -17450,7 +17450,7 @@ com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingH
 com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler;
 com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler.outstanding = 0;
 com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestElementSettingHandler._engaged = false;
-com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_AUTOMATON_REQUEST);
   this.REPLACE_STRING = "_REPLACE_";
 };
@@ -17460,7 +17460,7 @@ com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.onChange = function(name) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.onChange");
+com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.onChange = function(name) {
   var elements = window.document.getElementsByName(name);
   if (elements.length > 0) {
     var el = elements[elements.length - 1];
@@ -17475,7 +17475,7 @@ com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.
   }
   return false;
 };
-com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.prototype.processMessage = function(message) {
   var agentName = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_MSG_AGENT_ALIAS);
   com.inq.flash.client.control.Incrementality.onAgentMsg();
   var chatText = com.inq.flash.messagingframework.StringUtils.decodeStringFromMessage(message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_AUTOMATON_DATA));
@@ -17577,7 +17577,7 @@ com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.
 com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.prototype.REPLACE_STRING = null;
 com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.prototype.chat = null;
 com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatAutomatonRequestMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_COBROWSE);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler"] = com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler;
@@ -17586,28 +17586,28 @@ com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.__super_
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.executeCobrowseInvite = function(message, agentName, chatText) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.executeCobrowseInvite");
+com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.executeCobrowseInvite = function(message, agentName, chatText) {
   var replay = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_REPLAY);
   com.inq.flash.client.chatskins.SkinControl.AddTranscriptItemToChatWindow(agentName, chatText, com.inq.flash.client.chatskins.ChatTextArea.AGENT, -1, null, replay);
   if (replay != "1") {
     com.inq.flash.client.control.MinimizeManager.lastAgentMessage(chatText);
   }
 };
-com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.executeCobrowseGetHTMLTest = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.executeCobrowseGetHTMLTest");
+com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.executeCobrowseGetHTMLTest = function() {
   var testResult = false;
   if (Inq["CBC"]) {
     testResult = Inq["CBC"].testGetHTML();
   }
   this.sendCobrowseTestResult(testResult);
 };
-com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.sendCobrowseTestResult = function(testResult) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.sendCobrowseTestResult");
+com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.sendCobrowseTestResult = function(testResult) {
   if (testResult) {
     Application.application.applicationController.sendCoBrowseMessageQuietly(com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseTestSuccess, com.inq.flash.client.data.MessageFields.KEY_COBROWSE_EVENT_TYPE_AGENT_COBROWSE_SENT_INVITE_TEST_RESULT, com.inq.flash.client.data.MessageFields.KEY_COB_TEST_RESULT_SUCCESS);
   } else {
     Application.application.applicationController.sendCoBrowseMessageQuietly(com.inq.flash.client.chatskins.CoBrowseMgr.cobrowseTestFail, com.inq.flash.client.data.MessageFields.KEY_COBROWSE_EVENT_TYPE_AGENT_COBROWSE_SENT_INVITE_TEST_RESULT, com.inq.flash.client.data.MessageFields.KEY_COB_TEST_RESULT_FAILURE);
   }
 };
-com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.processMessage = function(message) {
   var chatText = com.inq.flash.messagingframework.StringUtils.completeDecodeStringFromMessage(message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_DATA));
   var agentName = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_MESSAGE_AGENT_ALIAS);
   var quiet = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_MESSAGE_CUSTOMER_QUIET);
@@ -17651,7 +17651,7 @@ com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototyp
   }
 };
 com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatCobrowseMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler"] = com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler;
@@ -17660,7 +17660,7 @@ com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler.__s
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler.prototype.processMessage = function(message) {
   var agentName;
   if (message.getProperty(com.inq.flash.client.data.MessageFields.KEY_AGENT_ALIAS)) {
     agentName = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_AGENT_ALIAS);
@@ -17747,7 +17747,7 @@ com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler.pro
 };
 com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler.prototype.chat = null;
 com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatCommunicationMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_DENIED);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler"] = com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler;
@@ -17756,7 +17756,7 @@ com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler.__super__ 
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler.prototype.processMessage = function(message) {
   var deniedMessageLabel = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_TY_LABEL);
   if (deniedMessageLabel != null && deniedMessageLabel != "undefined" && deniedMessageLabel != "null") {
     com.inq.flash.client.chatskins.SkinControl.tYImageLabel = com.inq.flash.messagingframework.StringUtils.completeDecodeStringFromMessage(deniedMessageLabel);
@@ -17767,7 +17767,7 @@ com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler.prototype.
   this.getController().disable();
 };
 com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatDeniedMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_EXIT);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler"] = com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler;
@@ -17776,7 +17776,7 @@ com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler.__super__ = 
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler.prototype.processMessage = function(message) {
   var tYLabel = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_TY_LABEL);
   if (tYLabel != null && tYLabel != "undefined" && tYLabel != "null") {
     com.inq.flash.client.chatskins.SkinControl.tYImageLabel = com.inq.flash.messagingframework.StringUtils.completeDecodeStringFromMessage(tYLabel);
@@ -17794,7 +17794,7 @@ com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler.prototype.pr
   }
 };
 com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatExitMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatNeedWaitMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatNeedWaitMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatNeedWaitMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_WAIT);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatNeedWaitMessageHandler"] = com.inq.flash.client.control.messagehandlers.ChatNeedWaitMessageHandler;
@@ -17803,11 +17803,11 @@ com.inq.flash.client.control.messagehandlers.ChatNeedWaitMessageHandler.__super_
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatNeedWaitMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatNeedWaitMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatNeedWaitMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatNeedWaitMessageHandler.prototype.processMessage = function(message) {
   this.getController().setQueueMessages(true);
 };
 com.inq.flash.client.control.messagehandlers.ChatNeedWaitMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatNeedWaitMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_SYSTEM);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler"] = com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler;
@@ -17816,7 +17816,7 @@ com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler.__super__ 
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler.prototype.processMessage = function(message) {
   var textToDisplay = message.getProperty("client.display.text");
   if (textToDisplay != null) {
     var displayText = StringTools.trim(textToDisplay);
@@ -17830,7 +17830,7 @@ com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler.prototype.
   }
 };
 com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatSystemMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHATROOM_MEMBER_CONNECTED);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandler"] = com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandler;
@@ -17839,7 +17839,7 @@ com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandl
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandler.prototype.processMessage = function(message) {
   if (message.getProperty(com.inq.flash.client.data.MessageFields.KEY_OWNER) == com.inq.flash.client.data.MessageFields.DATA_TRUE && "1" != message.getProperty(com.inq.flash.client.data.MessageFields.KEY_REPLAY)) {
     var cobrowseEnabled = com.inq.flash.messagingframework.StringUtils.getBooleanValue(message.getProperty(com.inq.flash.client.data.MessageFields.KEY_COBROWSE_ENABLED));
     var agentID = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CHATROOM_MEMBER_ID);
@@ -17856,7 +17856,7 @@ com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandl
   }
 };
 com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatroomMemberConnectedMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHATROOM_MEMBER_LOST);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler"] = com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler;
@@ -17865,7 +17865,7 @@ com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler.__
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler.prototype.processMessage = function(message) {
   var textToDisplay = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CLIENT_DISPLAY_TEXT);
   if (textToDisplay != null) {
     var displayText = StringTools.trim(textToDisplay);
@@ -17876,7 +17876,7 @@ com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler.pr
   }
 };
 com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatroomMemberLostMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_OWNER_TRANSFER_RESPONSE);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessageHandler"] = com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessageHandler;
@@ -17885,7 +17885,7 @@ com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessag
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessageHandler.prototype.processMessage = function(message) {
   var newOwner = StringTools.trim(message.getProperty("owner.id"));
   if (newOwner != null && newOwner != "undefined" && newOwner != "null" && "1" != message.getProperty(com.inq.flash.client.data.MessageFields.KEY_REPLAY)) {
     var cobrowseEnabled = com.inq.flash.messagingframework.StringUtils.getBooleanValue(message.getProperty(com.inq.flash.client.data.MessageFields.KEY_COBROWSE_ENABLED));
@@ -17893,7 +17893,7 @@ com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessag
   }
 };
 com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatroomOwnerTransferResponseMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse");
+com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_TRANSFER_RESPONSE);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse"] = com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse;
@@ -17902,7 +17902,7 @@ com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse.__super__ 
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse.prototype.processMessage = function(message) {
   var displayText = StringTools.trim(message.getProperty("client.display.text"));
   var messageParts = displayText.split("&nl;");
   var agentID = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_AGENT_ID);
@@ -17915,7 +17915,7 @@ com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse.prototype.
   }
 };
 com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatroomTransferResponse;
-com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler");
+com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler = function() {
   this.replaybleCommandsQueue = [];
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CLIENT_COMMAND);
 };
@@ -17925,13 +17925,13 @@ com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.__super
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototype.runCommands = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototype.runCommands");
+com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototype.runCommands = function() {
   for (var i = this.replaybleCommandsQueue.length - 1;i >= 0;i--) {
     this.processCommand(this.replaybleCommandsQueue[i], true);
   }
   this.replaybleCommandsQueue = [];
 };
-com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototype.processCommand = function(message, replay) {  console.warn("com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototype.processCommand");
+com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototype.processCommand = function(message, replay) {
   var cmd = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CLIENT_CMD_PARAM);
   if (cmd == null || cmd == "") {
     cmd = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CLIENT_COMMAND_PARAM);
@@ -18043,7 +18043,7 @@ com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototy
     }
   }
 };
-com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototype.processMessage = function(message) {
   var replay = "1" == message.getProperty(com.inq.flash.client.data.MessageFields.KEY_REPLAY);
   if (replay) {
     this.replaybleCommandsQueue.push(message);
@@ -18054,7 +18054,7 @@ com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototy
 com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototype.chat = null;
 com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler;
 com.inq.flash.client.control.messagehandlers.ClientCommandMessageHandler.XFORM_SERVER_PLACEHOLDER = "${xformsServerUrl}";
-com.inq.flash.client.control.messagehandlers.ContinueTransitionHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ContinueTransitionHandler");
+com.inq.flash.client.control.messagehandlers.ContinueTransitionHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CONTINUE_TRANSITION);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ContinueTransitionHandler"] = com.inq.flash.client.control.messagehandlers.ContinueTransitionHandler;
@@ -18063,11 +18063,11 @@ com.inq.flash.client.control.messagehandlers.ContinueTransitionHandler.__super__
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ContinueTransitionHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ContinueTransitionHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ContinueTransitionHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ContinueTransitionHandler.prototype.processMessage = function(message) {
   this.getController().acknowledgeChatActive();
 };
 com.inq.flash.client.control.messagehandlers.ContinueTransitionHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ContinueTransitionHandler;
-com.inq.flash.client.control.messagehandlers.ErrorHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ErrorHandler");
+com.inq.flash.client.control.messagehandlers.ErrorHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_ERROR);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ErrorHandler"] = com.inq.flash.client.control.messagehandlers.ErrorHandler;
@@ -18076,11 +18076,11 @@ com.inq.flash.client.control.messagehandlers.ErrorHandler.__super__ = com.inq.fl
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ErrorHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ErrorHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ErrorHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ErrorHandler.prototype.processMessage = function(message) {
   haxe.Log.trace("MessageHandler: " + message.getProperty(com.inq.flash.client.data.MessageFields.KEY_ERROR_MSG), {fileName:"ErrorHandler.hx", lineNumber:15, className:"com.inq.flash.client.control.messagehandlers.ErrorHandler", methodName:"processMessage"});
 };
 com.inq.flash.client.control.messagehandlers.ErrorHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ErrorHandler;
-com.inq.flash.client.control.messagehandlers.NinaCoachChatTakeOverMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.NinaCoachChatTakeOverMessageHandler");
+com.inq.flash.client.control.messagehandlers.NinaCoachChatTakeOverMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_NINA_COACH_CHAT_TAKE_OVER);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.NinaCoachChatTakeOverMessageHandler"] = com.inq.flash.client.control.messagehandlers.NinaCoachChatTakeOverMessageHandler;
@@ -18089,13 +18089,13 @@ com.inq.flash.client.control.messagehandlers.NinaCoachChatTakeOverMessageHandler
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.NinaCoachChatTakeOverMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.NinaCoachChatTakeOverMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.NinaCoachChatTakeOverMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.NinaCoachChatTakeOverMessageHandler.prototype.processMessage = function(message) {
   var agentID = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_AGENT_ID);
   this.getController().setAgentConfig(agentID, com.inq.utils.EventDataUtils.fromMessage(message), false, message.getProperty(com.inq.flash.client.data.MessageFields.KEY_BUSINESS_UNIT_ID), message.getProperty(com.inq.flash.client.data.MessageFields.KEY_AGENT_GROUP_ID));
   com.inq.flash.client.chatskins.SkinControl.AddTranscriptItemToChatWindow("", com.inq.flash.messagingframework.StringUtils.completeDecodeStringFromMessage(message.getProperty(com.inq.flash.client.data.MessageFields.KEY_DISPLAY_TEXT)), com.inq.flash.client.chatskins.ChatTextArea.SYSTEM, -1, null, message.getProperty(com.inq.flash.client.data.MessageFields.KEY_REPLAY));
 };
 com.inq.flash.client.control.messagehandlers.NinaCoachChatTakeOverMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.NinaCoachChatTakeOverMessageHandler;
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_NEED_WAIT);
   haxe.Log.trace("NeedWaitHandler.Constructor", {fileName:"NeedWaitHandler.hx", lineNumber:103, className:"com.inq.flash.client.control.messagehandlers.NeedWaitHandler", methodName:"new"});
   com.inq.flash.client.control.messagehandlers.NeedWaitHandler.cntMessage = -1;
@@ -18131,10 +18131,10 @@ com.inq.flash.client.control.messagehandlers.NeedWaitHandler = function() {  con
 $hxClasses.extend(com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler, com.inq.flash.client.control.messagehandlers.NeedWaitHandler, "com.inq.flash.client.control.messagehandlers.NeedWaitHandler");
 com.inq.flash.client.control.messagehandlers.NeedWaitHandler.cntMessage = null;
 com.inq.flash.client.control.messagehandlers.NeedWaitHandler.needWaitSequenceList = null;
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler.incrementCounter = function() {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler.incrementCounter");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler.incrementCounter = function() {
   com.inq.flash.client.control.messagehandlers.NeedWaitHandler.cntMessage++;
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.initNeedWaitSequenceList = function(messages) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.initNeedWaitSequenceList");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.initNeedWaitSequenceList = function(messages) {
   haxe.Log.trace("start initNeedWaitSequenceList function", {fileName:"NeedWaitHandler.hx", lineNumber:369, className:"com.inq.flash.client.control.messagehandlers.NeedWaitHandler", methodName:"initNeedWaitSequenceList"});
   var arrayMessages = messages.split("//");
   com.inq.flash.client.control.messagehandlers.NeedWaitHandler.needWaitSequenceList = new Array;
@@ -18163,13 +18163,13 @@ com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.initNeedW
     com.inq.flash.client.control.messagehandlers.NeedWaitHandler.needWaitSequenceList.push(sequenceMessage);
   }
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.sendQueueingMsgString = function(agentName, queueingMsgString, restoreMode) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.sendQueueingMsgString");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.sendQueueingMsgString = function(agentName, queueingMsgString, restoreMode) {
   queueingMsgString = com.inq.utils.StringUtil.escapeSpecialCharacters(queueingMsgString);
   var position = com.inq.flash.client.chatskins.SkinControl.AddTranscriptItemToChatWindow(agentName, queueingMsgString, com.inq.flash.client.chatskins.ChatTextArea.AGENT, -1, null, restoreMode);
   com.inq.flash.client.chatskins.SkinControl.getApplicationController().sendQueueingText(queueingMsgString, position, agentName);
   com.inq.flash.client.control.WebRTCMgr.setCallQueue();
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.sequenceMessageProcessing = function(agentName, restoreMode) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.sequenceMessageProcessing");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.sequenceMessageProcessing = function(agentName, restoreMode) {
   var queueingMsgString = com.inq.flash.client.control.messagehandlers.NeedWaitHandler.NEED_WAIT_MESSAGE_DEFAULT;
   var now = (new Date).getTime();
   var period = (now - this.lastProcessedWaitMsg) / 1E3;
@@ -18201,7 +18201,7 @@ com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.sequenceM
     this.lastProcessedWaitMsg = now;
   }
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.legacyMessageProcessing = function(message, agentName) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.legacyMessageProcessing");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.legacyMessageProcessing = function(message, agentName) {
   var queueingMsgString;
   if (++com.inq.flash.client.control.messagehandlers.NeedWaitHandler.cntMessage == 0) {
     queueingMsgString = this.substituteWaitTime(message, this.needwaitMessageFirst, this.needwaitMessageFirstSoon, this.needwaitMessageFirstSeconds, this.needwaitMessageFirstMinutes, this.needwaitMessageFirstNoAgentAvailable, this.needwaitMessageFirstDefault);
@@ -18225,7 +18225,7 @@ com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.legacyMes
     }
   }
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteWaitTime = function(message, waitText, waitTextSoon, waitTextSeconds, waitTextMinutes, waitTextNoAgentsAvailable, waitTextDefault) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteWaitTime");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteWaitTime = function(message, waitText, waitTextSoon, waitTextSeconds, waitTextMinutes, waitTextNoAgentsAvailable, waitTextDefault) {
   var queueingMsgString = waitText;
   var waitTime = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_WAIT_EST_ASSIGN_TIME);
   if (waitTime != null) {
@@ -18265,24 +18265,24 @@ com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substitut
   }
   return queueingMsgString;
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteText = function(text, defaultText, pattern, substitute) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteText");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteText = function(text, defaultText, pattern, substitute) {
   if (substitute == null) {
     return defaultText;
   } else {
     return text.replace(pattern, substitute);
   }
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteTextFromMessage = function(text, defaultText, pattern, message, property) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteTextFromMessage");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteTextFromMessage = function(text, defaultText, pattern, message, property) {
   var substitute = message.getProperty(property);
   return this.substituteText(text, defaultText, pattern, substitute);
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteQPFromMessage = function(text, defaultText, message) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteQPFromMessage");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteQPFromMessage = function(text, defaultText, message) {
   return this.substituteText(text, defaultText, com.inq.flash.client.control.messagehandlers.NeedWaitHandler.QUEUE_POSITION, message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_WAIT_POS));
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteQP = function(text, defaultText, position) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteQP");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.substituteQP = function(text, defaultText, position) {
   return this.substituteText(text, defaultText, com.inq.flash.client.control.messagehandlers.NeedWaitHandler.QUEUE_POSITION, position);
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.processMessage = function(message) {
   haxe.Log.trace("Processing message behavior: " + this.processingBehavior, {fileName:"NeedWaitHandler.hx", lineNumber:146, className:"com.inq.flash.client.control.messagehandlers.NeedWaitHandler", methodName:"processMessage"});
   if (message.data["isWaitMsgFirst"] == "true") {
     com.inq.flash.client.control.messagehandlers.NeedWaitHandler.cntMessage = -1;
@@ -18311,7 +18311,7 @@ com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.processMe
     }
   }
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.clearQueueMessageTimer = function() {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.clearQueueMessageTimer");
+com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.clearQueueMessageTimer = function() {
   this.queueMessagingHandler.clearPendingTimer();
 };
 com.inq.flash.client.control.messagehandlers.NeedWaitHandler.prototype.processingBehavior = null;
@@ -18346,43 +18346,43 @@ com.inq.flash.client.control.messagehandlers.NeedWaitHandler.QUEUE_POSITION = "<
 com.inq.flash.client.control.messagehandlers.NeedWaitHandler.NEED_WAIT_SEQUENCE_MESSAGE = "Still busy, please wait | 1 |30";
 com.inq.flash.client.control.messagehandlers.NeedWaitHandler.LEGACY_MESSAGE_PROCESSING = "LEGACY_MESSAGE_PROCESSING";
 com.inq.flash.client.control.messagehandlers.NeedWaitHandler.SEQUENCE_MESSAGE_PROCESSING = "SEQUENCE_MESSAGE_PROCESSING";
-com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage = function() {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage");
+com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage = function() {
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage"] = com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage;
 com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.__name__ = ["com", "inq", "flash", "client", "control", "messagehandlers", "NeedWaitSequenceMessage"];
-com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.decrCount = function() {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.decrCount");
+com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.decrCount = function() {
   var _g = this;
   var _g1 = _g.getCountHit();
   _g.setCountHit(_g1 - 1);
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.incrCount = function() {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.incrCount");
+com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.incrCount = function() {
   var _g = this;
   var _g1 = _g.getCountHit();
   _g.setCountHit(_g1 + 1);
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.getCountHit = function() {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.getCountHit");
+com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.getCountHit = function() {
   return this.countHit;
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.setCountHit = function(count) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.setCountHit");
+com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.setCountHit = function(count) {
   return this.countHit = count;
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.getTimeShift = function() {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.getTimeShift");
+com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.getTimeShift = function() {
   return this.timeShift;
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.setTimeShift = function(time) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.setTimeShift");
+com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.setTimeShift = function(time) {
   return this.timeShift = time;
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.getNeedWaitMessage = function() {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.getNeedWaitMessage");
+com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.getNeedWaitMessage = function() {
   return this.needWaitMessage;
 };
-com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.setNeedWaitMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.setNeedWaitMessage");
+com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.setNeedWaitMessage = function(message) {
   return this.needWaitMessage = message;
 };
 com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.countHit = null;
 com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.timeShift = null;
 com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.needWaitMessage = null;
 com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage.prototype.__class__ = com.inq.flash.client.control.messagehandlers.NeedWaitSequenceMessage;
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler = function(parent) {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler = function(parent) {
   this.needWaitHandler = parent;
   this.spec = this.getQueueMessagingSpec();
   this.isEnabled = !!this.spec;
@@ -18396,7 +18396,7 @@ com.inq.flash.client.control.messagehandlers.QueueMessagingHandler = function(pa
   this.pendingTimer = null;
 };
 $hxClasses.registerClass(com.inq.flash.client.control.messagehandlers.QueueMessagingHandler, "com.inq.flash.client.control.messagehandlers.QueueMessagingHandler");
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.getQueueMessagingSpec = function() {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.getQueueMessagingSpec");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.getQueueMessagingSpec = function() {
   var qmSpec = com.inq.flash.client.control.FlashPeer.getQueueMessagingSpec();
   if (qmSpec) {
     var ewtKey = this.QMS.EWT_REMAINING_IN_SECONDS;
@@ -18406,7 +18406,7 @@ com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.get
   }
   return qmSpec;
 };
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.msgProcessing = function(message, agentName) {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.msgProcessing");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.msgProcessing = function(message, agentName) {
   this.currentPosition = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_WAIT_POS);
   this.currentEstTime = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_WAIT_EST_ASSIGN_TIME);
   this.keyReplay = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_REPLAY);
@@ -18428,7 +18428,7 @@ com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.msg
     this.startTimer();
   }
 };
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.startTimer = function() {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.startTimer");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.startTimer = function() {
   var timeout = this.nextWaitTime();
   var that = this;
   if (timeout >= 0) {
@@ -18440,13 +18440,13 @@ com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.sta
     this.pendingTimer = null;
   }
 };
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.clearPendingTimer = function() {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.clearPendingTimer");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.clearPendingTimer = function() {
   if (this.pendingTimer) {
     clearTimeout(this.pendingTimer);
     this.pendingTimer = null;
   }
 };
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.nextWaitTime = function() {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.nextWaitTime");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.nextWaitTime = function() {
   var secondWaitTime = Math.floor(this.currentEstTime / 1E3);
   var result = -1;
   var period = ((new Date).getTime() - this.lastProcessedQueueMsg) / 1E3;
@@ -18458,7 +18458,7 @@ com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.nex
   }
   return result > 0 ? result * 1E3 : 0;
 };
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.displayQueueMessage = function() {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.displayQueueMessage");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.displayQueueMessage = function() {
   if (!com.inq.flash.client.chatskins.SkinControl.applicationController.isChatInQueue() || this.needWaitHandler.framework.isSendMessageFail()) {
     this.pendingTimer = null;
     return;
@@ -18484,7 +18484,7 @@ com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.dis
   this.lastProcessedQueueMsg = Date.now();
   this.startTimer();
 };
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.updateActiveSet = function(waitTime) {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.updateActiveSet");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.updateActiveSet = function(waitTime) {
   var sets = this.spec[this.QMS.SETS];
   var currentSetId = 0;
   var sortKey = this.QMS.MESSAGE_ORDER;
@@ -18516,15 +18516,15 @@ com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.upd
     }
   }
 };
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.isThresholdAgentOfflineMsg = function() {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.isThresholdAgentOfflineMsg");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.isThresholdAgentOfflineMsg = function() {
   var period = ((new Date).getTime() - this.lastProcessedQueueMsg) / 1E3;
   return period >= Std.parseInt(this.spec[this.QMS.AGENT_OFFLINE_REPEAT_INTERVAL]);
 };
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.isThresholdMsg = function() {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.isThresholdMsg");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.isThresholdMsg = function() {
   var period = ((new Date).getTime() - this.lastProcessedQueueMsg) / 1E3;
   return period >= Std.parseInt(this.set[this.QMS.MESSAGES][this.msgId][this.QMS.REPEAT_INTERVAL_IN_SECONDS]);
 };
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.substituteEWT = function(waitText, waitTime) {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.substituteEWT");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.substituteEWT = function(waitText, waitTime) {
   if (waitText == "") {
     return waitText;
   }
@@ -18537,7 +18537,7 @@ com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.sub
   }
   return queueingMsg;
 };
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.updateMsgOrder = function() {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.updateMsgOrder");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.updateMsgOrder = function() {
   this.msgCount++;
   com.inq.flash.client.control.PersistenceManager.SetValue("qmCnt", this.msgCount);
   var msgCollection = this.set[this.QMS.MESSAGES];
@@ -18552,15 +18552,15 @@ com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.upd
     }
   }
 };
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.substituteQP = function(text, position) {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.substituteQP");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.substituteQP = function(text, position) {
   return this.needWaitHandler.substituteQP(text, this.needWaitHandler.needwaitMessageDefault, position);
 };
-com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.substituteText = function(text, pattern, substitute) {  console.warn("com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.substituteText");
+com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.substituteText = function(text, pattern, substitute) {
   return this.needWaitHandler.substituteText(text, this.needWaitHandler.needwaitMessageDefault, pattern, substitute);
 };
 com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.EWT = {FULL:"<<FULL>>", MINUTES:"<<MINUTES>>", MINUTES_ONLY:"<<MINUTES-ONLY>>", SECONDS:"<<SECONDS>>", SECONDS_ONLY:"<<SECONDS-ONLY>>"};
 com.inq.flash.client.control.messagehandlers.QueueMessagingHandler.prototype.QMS = {AGENT_OFFLINE_MSG:"aom", AGENT_OFFLINE_REPEAT_INTERVAL:"aori", SETS:"qms", EWT_REMAINING_IN_SECONDS:"ewt", MESSAGES:"qm", MESSAGE_ORDER:"mo", MESSAGE_TEXT:"mt", DISPLAY_TIMES:"dt", REPEAT_INTERVAL_IN_SECONDS:"ris"};
-com.inq.flash.client.control.messagehandlers.PersistentActiveHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.PersistentActiveHandler");
+com.inq.flash.client.control.messagehandlers.PersistentActiveHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_GET_PERSISTENT_DOMAIN);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.PersistentActiveHandler"] = com.inq.flash.client.control.messagehandlers.PersistentActiveHandler;
@@ -18569,7 +18569,7 @@ com.inq.flash.client.control.messagehandlers.PersistentActiveHandler.__super__ =
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.PersistentActiveHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.PersistentActiveHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.PersistentActiveHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.PersistentActiveHandler.prototype.processMessage = function(message) {
   var replay = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_REPLAY);
   if (!com.inq.flash.client.chatskins.SkinControl.getIsPersistentChat()) {
     return;
@@ -18602,7 +18602,7 @@ com.inq.flash.client.control.messagehandlers.PersistentActiveHandler.prototype.p
   }
 };
 com.inq.flash.client.control.messagehandlers.PersistentActiveHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.PersistentActiveHandler;
-com.inq.flash.client.control.messagehandlers.TypingActivityHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.TypingActivityHandler");
+com.inq.flash.client.control.messagehandlers.TypingActivityHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_ACTIVITY);
   this.sAgentIsTyping = com.inq.utils.Util.getConfig("sAgentIsTyping", "Agent is typing");
   this.sAgentStoppedTyping = com.inq.utils.Util.getConfig("sAgentStoppedTyping", "Agent stopped typing");
@@ -18613,7 +18613,7 @@ com.inq.flash.client.control.messagehandlers.TypingActivityHandler.__super__ = c
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.TypingActivityHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.TypingActivityHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.TypingActivityHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.TypingActivityHandler.prototype.processMessage = function(message) {
   var cw = com.inq.flash.client.chatskins.SkinControl.cw;
   switch(message.getProperty(com.inq.flash.client.data.MessageFields.KEY_TYPE)) {
     case com.inq.flash.client.data.MessageFields.ACTIVITY_AGENT_TYPING:
@@ -18643,7 +18643,7 @@ com.inq.flash.client.control.messagehandlers.TypingActivityHandler.prototype.nee
 com.inq.flash.client.control.messagehandlers.TypingActivityHandler.prototype.needwaitMessageFirst = null;
 com.inq.flash.client.control.messagehandlers.TypingActivityHandler.prototype.cntMessage = null;
 com.inq.flash.client.control.messagehandlers.TypingActivityHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.TypingActivityHandler;
-com.inq.flash.client.control.messagehandlers.CommandMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.CommandMessageHandler");
+com.inq.flash.client.control.messagehandlers.CommandMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_COMMAND);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.CommandMessageHandler"] = com.inq.flash.client.control.messagehandlers.CommandMessageHandler;
@@ -18652,12 +18652,12 @@ com.inq.flash.client.control.messagehandlers.CommandMessageHandler.__super__ = c
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.CommandMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.CommandMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.CommandMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.CommandMessageHandler.prototype.processMessage = function(message) {
   message.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CLIENT_COMMAND);
   this.getController().processMessage(message);
 };
 com.inq.flash.client.control.messagehandlers.CommandMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.CommandMessageHandler;
-com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler");
+com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_STATE_CHANGE);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler"] = com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler;
@@ -18666,7 +18666,7 @@ com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler.__super__
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler.prototype.processMessage = function(message) {
   var oldType = message.getMessageType();
   var state = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_STATE);
   switch(state) {
@@ -18694,7 +18694,7 @@ com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler.prototype
   }
 };
 com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.StateChangeMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatLineMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatLineMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatLineMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHATLINE);
 };
 $hxClasses["com.inq.flash.client.control.messagehandlers.ChatLineMessageHandler"] = com.inq.flash.client.control.messagehandlers.ChatLineMessageHandler;
@@ -18703,27 +18703,27 @@ com.inq.flash.client.control.messagehandlers.ChatLineMessageHandler.__super__ = 
 for (var k in com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype) {
   com.inq.flash.client.control.messagehandlers.ChatLineMessageHandler.prototype[k] = com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.prototype[k];
 }
-com.inq.flash.client.control.messagehandlers.ChatLineMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatLineMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatLineMessageHandler.prototype.processMessage = function(message) {
   message.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION);
   this.getController().processMessage(message);
 };
 com.inq.flash.client.control.messagehandlers.ChatLineMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.ChatLineMessageHandler;
-com.inq.flash.client.control.messagehandlers.ChatWebCallMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.ChatWebCallMessageHandler");
+com.inq.flash.client.control.messagehandlers.ChatWebCallMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_CHAT_WEBCALL);
 };
 $hxClasses.extend(com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler, com.inq.flash.client.control.messagehandlers.ChatWebCallMessageHandler, "com.inq.flash.client.control.messagehandlers.ChatWebCallMessageHandler");
-com.inq.flash.client.control.messagehandlers.ChatWebCallMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.ChatWebCallMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.ChatWebCallMessageHandler.prototype.processMessage = function(message) {
   com.inq.flash.client.control.WebRTCMgr.processAgentMessage(com.inq.flash.messagingframework.StringUtils.decodeStringFromMessage(message.getProperty(com.inq.flash.client.data.MessageFields.KEY_WEBCALL_ACTION)));
 };
-com.inq.flash.client.control.messagehandlers.AgentDataPassMessageHandler = function() {  console.warn("com.inq.flash.client.control.messagehandlers.AgentDataPassMessageHandler");
+com.inq.flash.client.control.messagehandlers.AgentDataPassMessageHandler = function() {
   com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler.call(this, com.inq.flash.client.data.MessageFields.TYPE_AGENT_DATA_PASS);
 };
 $hxClasses.extend(com.inq.flash.client.control.messagehandlers.ClientApplicationMessageHandler, com.inq.flash.client.control.messagehandlers.AgentDataPassMessageHandler, "com.inq.flash.client.control.messagehandlers.AgentDataPassMessageHandler");
-com.inq.flash.client.control.messagehandlers.AgentDataPassMessageHandler.prototype.processMessage = function(message) {  console.warn("com.inq.flash.client.control.messagehandlers.AgentDataPassMessageHandler.prototype.processMessage");
+com.inq.flash.client.control.messagehandlers.AgentDataPassMessageHandler.prototype.processMessage = function(message) {
   com.inq.flash.client.control.Incrementality.onAgentDataPass(message);
 };
 com.inq.flash.client.control.messagehandlers.AgentDataPassMessageHandler.prototype.__class__ = com.inq.flash.client.control.messagehandlers.AgentDataPassMessageHandler;
-com.inq.flash.messagingframework.Message = function() {  console.warn("com.inq.flash.messagingframework.Message");
+com.inq.flash.messagingframework.Message = function() {
   this.data = {};
   this.data[com.inq.flash.client.data.MessageFields.KEY_VERSION] = "0.05";
   this.data[com.inq.flash.client.data.MessageFields.WINDOW_ID_PARAM] = com.inq.flash.client.control.FlashVars.getWindowId();
@@ -18731,7 +18731,7 @@ com.inq.flash.messagingframework.Message = function() {  console.warn("com.inq.f
 };
 $hxClasses["com.inq.flash.messagingframework.Message"] = com.inq.flash.messagingframework.Message;
 com.inq.flash.messagingframework.Message.__name__ = ["com", "inq", "flash", "messagingframework", "Message"];
-com.inq.flash.messagingframework.Message.prototype.toString = function() {  console.warn("com.inq.flash.messagingframework.Message.prototype.toString");
+com.inq.flash.messagingframework.Message.prototype.toString = function() {
   var dataString = "";
   var keyz = Reflect.fields(this.data);
   var _g1 = 0, _g = keyz.length;
@@ -18758,7 +18758,7 @@ com.inq.flash.messagingframework.Message.prototype.toString = function() {  cons
   dataString += "\n";
   return dataString;
 };
-com.inq.flash.messagingframework.Message.prototype.serializeToURL = function() {  console.warn("com.inq.flash.messagingframework.Message.prototype.serializeToURL");
+com.inq.flash.messagingframework.Message.prototype.serializeToURL = function() {
   var dataString = "";
   for (var key in this.data) {
     if (key) {
@@ -18771,24 +18771,24 @@ com.inq.flash.messagingframework.Message.prototype.serializeToURL = function() {
   }
   return dataString;
 };
-com.inq.flash.messagingframework.Message.prototype.getMessageType = function() {  console.warn("com.inq.flash.messagingframework.Message.prototype.getMessageType");
+com.inq.flash.messagingframework.Message.prototype.getMessageType = function() {
   return this.data[com.inq.flash.client.data.MessageFields.KEY_MESSAGE_TYPE];
 };
-com.inq.flash.messagingframework.Message.prototype.getProperty = function(name) {  console.warn("com.inq.flash.messagingframework.Message.prototype.getProperty");
+com.inq.flash.messagingframework.Message.prototype.getProperty = function(name) {
   return this.data[name];
 };
-com.inq.flash.messagingframework.Message.prototype.addProperty = function(name, value) {  console.warn("com.inq.flash.messagingframework.Message.prototype.addProperty");
+com.inq.flash.messagingframework.Message.prototype.addProperty = function(name, value) {
   this.data[name] = value;
 };
-com.inq.flash.messagingframework.Message.prototype.addPropertyIfNotNull = function(name, value) {  console.warn("com.inq.flash.messagingframework.Message.prototype.addPropertyIfNotNull");
+com.inq.flash.messagingframework.Message.prototype.addPropertyIfNotNull = function(name, value) {
   if (value != null) {
     this.data[name] = value;
   }
 };
-com.inq.flash.messagingframework.Message.prototype.nextInitialDataIndex = function() {  console.warn("com.inq.flash.messagingframework.Message.prototype.nextInitialDataIndex");
+com.inq.flash.messagingframework.Message.prototype.nextInitialDataIndex = function() {
   return this.initialDataIndex++;
 };
-com.inq.flash.messagingframework.Message.prototype.setData = function(fields) {  console.warn("com.inq.flash.messagingframework.Message.prototype.setData");
+com.inq.flash.messagingframework.Message.prototype.setData = function(fields) {
   if (typeof fields == "object") {
     this.data = fields;
   } else {
@@ -18800,7 +18800,7 @@ com.inq.flash.messagingframework.Message.prototype.setData = function(fields) { 
     }
   }
 };
-com.inq.flash.messagingframework.Message.prototype.setMessageType = function(messageType) {  console.warn("com.inq.flash.messagingframework.Message.prototype.setMessageType");
+com.inq.flash.messagingframework.Message.prototype.setMessageType = function(messageType) {
   this.data[com.inq.flash.client.data.MessageFields.KEY_MESSAGE_TYPE] = messageType;
 };
 com.inq.flash.messagingframework.Message.prototype.postSend = null;
@@ -18810,7 +18810,7 @@ com.inq.flash.messagingframework.Message.prototype.__class__ = com.inq.flash.mes
 if (!com.inq.flash.client.data) {
   com.inq.flash.client.data = {};
 }
-;com.inq.flash.client.data.ChatCommunicationMessage = function(chat, text, updateUsername) {  console.warn("com.inq.flash.client.data.ChatCommunicationMessage");
+;com.inq.flash.client.data.ChatCommunicationMessage = function(chat, text, updateUsername) {
   com.inq.flash.messagingframework.Message.call(this);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION);
   this.addProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_ID, chat.getChatID());
@@ -18846,7 +18846,7 @@ for (var k in com.inq.flash.messagingframework.Message.prototype) {
   com.inq.flash.client.data.ChatCommunicationMessage.prototype[k] = com.inq.flash.messagingframework.Message.prototype[k];
 }
 com.inq.flash.client.data.ChatCommunicationMessage.prototype.__class__ = com.inq.flash.client.data.ChatCommunicationMessage;
-com.inq.flash.client.data.CallCommunicationMessage = function(chat, text) {  console.warn("com.inq.flash.client.data.CallCommunicationMessage");
+com.inq.flash.client.data.CallCommunicationMessage = function(chat, text) {
   com.inq.flash.client.data.ChatCommunicationMessage.call(this, chat, text);
   this.addProperty(com.inq.flash.client.data.MessageFields.KEY_CALL_ENABLED, com.inq.flash.messagingframework.StringUtils.encodeStringForMessage("true"));
 };
@@ -18857,7 +18857,7 @@ for (var k in com.inq.flash.client.data.ChatCommunicationMessage.prototype) {
   com.inq.flash.client.data.CallCommunicationMessage.prototype[k] = com.inq.flash.client.data.ChatCommunicationMessage.prototype[k];
 }
 com.inq.flash.client.data.CallCommunicationMessage.prototype.__class__ = com.inq.flash.client.data.CallCommunicationMessage;
-com.inq.flash.client.data.Chat = function() {  console.warn("com.inq.flash.client.data.Chat");
+com.inq.flash.client.data.Chat = function() {
   this.transcript = new Array;
   this.chatID = com.inq.flash.client.control.FlashVars.getValue("chatID");
   this.siteID = com.inq.flash.client.control.FlashVars.getValue("siteID");
@@ -18901,19 +18901,19 @@ com.inq.flash.client.data.Chat = function() {  console.warn("com.inq.flash.clien
 };
 $hxClasses["com.inq.flash.client.data.Chat"] = com.inq.flash.client.data.Chat;
 com.inq.flash.client.data.Chat.__name__ = ["com", "inq", "flash", "client", "data", "Chat"];
-com.inq.flash.client.data.Chat.prototype.setHasAuthorized = function(flag) {  console.warn("com.inq.flash.client.data.Chat.prototype.setHasAuthorized");
+com.inq.flash.client.data.Chat.prototype.setHasAuthorized = function(flag) {
   this.hasAuthorized = flag;
 };
-com.inq.flash.client.data.Chat.prototype.isAsyncChat = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.isAsyncChat");
+com.inq.flash.client.data.Chat.prototype.isAsyncChat = function() {
   return !!parseInt(this.asyncChat);
 };
-com.inq.flash.client.data.Chat.prototype.getHasAuthorized = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getHasAuthorized");
+com.inq.flash.client.data.Chat.prototype.getHasAuthorized = function() {
   return this.hasAuthorized;
 };
-com.inq.flash.client.data.Chat.prototype.toString = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.toString");
+com.inq.flash.client.data.Chat.prototype.toString = function() {
   return "Chat[" + this.chatID + "]: site-" + this.siteID + ", buID-" + this.businessUnitID + ", agentName-" + this.agentName + ", scriptID=" + this.scriptID + ", customerID-" + this.thisCustomerID + ", chatTitle-" + this.chatTitle + ", brID-" + this.brID;
 };
-com.inq.flash.client.data.Chat.prototype.addTextToTranscript = function(text, sender) {  console.warn("com.inq.flash.client.data.Chat.prototype.addTextToTranscript");
+com.inq.flash.client.data.Chat.prototype.addTextToTranscript = function(text, sender) {
   var entry = new com.inq.flash.messagingframework.TranscriptEntry;
   if (null != sender) {
     sender = "";
@@ -18927,129 +18927,129 @@ com.inq.flash.client.data.Chat.prototype.addTextToTranscript = function(text, se
   }
   this.transcript.push(entry);
 };
-com.inq.flash.client.data.Chat.prototype.setAutomatonId = function(id) {  console.warn("com.inq.flash.client.data.Chat.prototype.setAutomatonId");
+com.inq.flash.client.data.Chat.prototype.setAutomatonId = function(id) {
   this.automatonId = id;
 };
-com.inq.flash.client.data.Chat.prototype.setAutomatonFields = function(automatonFields) {  console.warn("com.inq.flash.client.data.Chat.prototype.setAutomatonFields");
+com.inq.flash.client.data.Chat.prototype.setAutomatonFields = function(automatonFields) {
   this.automatonFields = automatonFields;
 };
-com.inq.flash.client.data.Chat.prototype.getAutomatonFields = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getAutomatonFields");
+com.inq.flash.client.data.Chat.prototype.getAutomatonFields = function() {
   return this.automatonFields;
 };
-com.inq.flash.client.data.Chat.prototype.setRuleAttributes = function(attributes) {  console.warn("com.inq.flash.client.data.Chat.prototype.setRuleAttributes");
+com.inq.flash.client.data.Chat.prototype.setRuleAttributes = function(attributes) {
   this.ruleAttributes = attributes;
 };
-com.inq.flash.client.data.Chat.prototype.setAgentAttributes = function(attributes) {  console.warn("com.inq.flash.client.data.Chat.prototype.setAgentAttributes");
+com.inq.flash.client.data.Chat.prototype.setAgentAttributes = function(attributes) {
   this.agentAttributes = attributes;
 };
-com.inq.flash.client.data.Chat.prototype.getLanguage = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getLanguage");
+com.inq.flash.client.data.Chat.prototype.getLanguage = function() {
   return this.language;
 };
-com.inq.flash.client.data.Chat.prototype.getExternalCustomerIDs = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getExternalCustomerIDs");
+com.inq.flash.client.data.Chat.prototype.getExternalCustomerIDs = function() {
   return this.externalCustomerIDs;
 };
-com.inq.flash.client.data.Chat.prototype.getOperatingSystemType = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getOperatingSystemType");
+com.inq.flash.client.data.Chat.prototype.getOperatingSystemType = function() {
   return this.operatingSystemType;
 };
-com.inq.flash.client.data.Chat.prototype.getBrowserVersion = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getBrowserVersion");
+com.inq.flash.client.data.Chat.prototype.getBrowserVersion = function() {
   return this.browserVersion;
 };
-com.inq.flash.client.data.Chat.prototype.getBrowserType = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getBrowserType");
+com.inq.flash.client.data.Chat.prototype.getBrowserType = function() {
   return this.browserType;
 };
-com.inq.flash.client.data.Chat.prototype.getDeviceType = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getDeviceType");
+com.inq.flash.client.data.Chat.prototype.getDeviceType = function() {
   return this.deviceType;
 };
-com.inq.flash.client.data.Chat.prototype.getLaunchType = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getLaunchType");
+com.inq.flash.client.data.Chat.prototype.getLaunchType = function() {
   return this.launchType;
 };
-com.inq.flash.client.data.Chat.prototype.getLaunchPageMarker = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getLaunchPageMarker");
+com.inq.flash.client.data.Chat.prototype.getLaunchPageMarker = function() {
   return this.launchPageMarker;
 };
-com.inq.flash.client.data.Chat.prototype.getLaunchPageId = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getLaunchPageId");
+com.inq.flash.client.data.Chat.prototype.getLaunchPageId = function() {
   return this.launchPageId;
 };
-com.inq.flash.client.data.Chat.prototype.getBrID = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getBrID");
+com.inq.flash.client.data.Chat.prototype.getBrID = function() {
   return this.brID;
 };
-com.inq.flash.client.data.Chat.prototype.setBusinessUnitID = function(id) {  console.warn("com.inq.flash.client.data.Chat.prototype.setBusinessUnitID");
+com.inq.flash.client.data.Chat.prototype.setBusinessUnitID = function(id) {
   this.businessUnitID = id;
 };
-com.inq.flash.client.data.Chat.prototype.setAgentGroupID = function(agId) {  console.warn("com.inq.flash.client.data.Chat.prototype.setAgentGroupID");
+com.inq.flash.client.data.Chat.prototype.setAgentGroupID = function(agId) {
   this.agId = agId;
 };
-com.inq.flash.client.data.Chat.prototype.getAgentGroupID = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getAgentGroupID");
+com.inq.flash.client.data.Chat.prototype.getAgentGroupID = function() {
   return this.agId;
 };
-com.inq.flash.client.data.Chat.prototype.setPublicUserId = function(publicUserId) {  console.warn("com.inq.flash.client.data.Chat.prototype.setPublicUserId");
+com.inq.flash.client.data.Chat.prototype.setPublicUserId = function(publicUserId) {
   this.publicUserId = publicUserId;
 };
-com.inq.flash.client.data.Chat.prototype.getPublicUserId = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getPublicUserId");
+com.inq.flash.client.data.Chat.prototype.getPublicUserId = function() {
   return this.publicUserId;
 };
-com.inq.flash.client.data.Chat.prototype.getUniqueAgentName = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getUniqueAgentName");
+com.inq.flash.client.data.Chat.prototype.getUniqueAgentName = function() {
   return this.uniqueAgentName;
 };
-com.inq.flash.client.data.Chat.prototype.setAgentName = function(agentName) {  console.warn("com.inq.flash.client.data.Chat.prototype.setAgentName");
+com.inq.flash.client.data.Chat.prototype.setAgentName = function(agentName) {
   this.agentName = agentName;
 };
-com.inq.flash.client.data.Chat.prototype.getAutomatonId = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getAutomatonId");
+com.inq.flash.client.data.Chat.prototype.getAutomatonId = function() {
   return this.automatonId;
 };
-com.inq.flash.client.data.Chat.prototype.getRuleAttributes = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getRuleAttributes");
+com.inq.flash.client.data.Chat.prototype.getRuleAttributes = function() {
   return this.ruleAttributes;
 };
-com.inq.flash.client.data.Chat.prototype.getVisitorAttributes = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getVisitorAttributes");
+com.inq.flash.client.data.Chat.prototype.getVisitorAttributes = function() {
   return com.inq.flash.client.control.FlashPeer.getVisitorAttributes();
 };
-com.inq.flash.client.data.Chat.prototype.getAgentAttributes = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getAgentAttributes");
+com.inq.flash.client.data.Chat.prototype.getAgentAttributes = function() {
   return this.agentAttributes;
 };
-com.inq.flash.client.data.Chat.prototype.getBusinessUnitID = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getBusinessUnitID");
+com.inq.flash.client.data.Chat.prototype.getBusinessUnitID = function() {
   return this.businessUnitID;
 };
-com.inq.flash.client.data.Chat.prototype.getChatID = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getChatID");
+com.inq.flash.client.data.Chat.prototype.getChatID = function() {
   return this.chatID;
 };
-com.inq.flash.client.data.Chat.prototype.getCustomerID = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getCustomerID");
+com.inq.flash.client.data.Chat.prototype.getCustomerID = function() {
   return this.thisCustomerID;
 };
-com.inq.flash.client.data.Chat.prototype.getSessionId = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getSessionId");
+com.inq.flash.client.data.Chat.prototype.getSessionId = function() {
   return this.sessionID;
 };
-com.inq.flash.client.data.Chat.prototype.getIncAssignmentId = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getIncAssignmentId");
+com.inq.flash.client.data.Chat.prototype.getIncAssignmentId = function() {
   return this.incAssignmentID;
 };
-com.inq.flash.client.data.Chat.prototype.getAgentName = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getAgentName");
+com.inq.flash.client.data.Chat.prototype.getAgentName = function() {
   return this.agentName;
 };
-com.inq.flash.client.data.Chat.prototype.getScriptID = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getScriptID");
+com.inq.flash.client.data.Chat.prototype.getScriptID = function() {
   return this.scriptID;
 };
-com.inq.flash.client.data.Chat.prototype.setScriptID = function(scriptID) {  console.warn("com.inq.flash.client.data.Chat.prototype.setScriptID");
+com.inq.flash.client.data.Chat.prototype.setScriptID = function(scriptID) {
   this.scriptID = scriptID;
 };
-com.inq.flash.client.data.Chat.prototype.getUsername = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getUsername");
+com.inq.flash.client.data.Chat.prototype.getUsername = function() {
   return com.inq.flash.client.control.FlashVars.getCustomerName();
 };
-com.inq.flash.client.data.Chat.prototype.setUsername = function(userName) {  console.warn("com.inq.flash.client.data.Chat.prototype.setUsername");
+com.inq.flash.client.data.Chat.prototype.setUsername = function(userName) {
   this.thisParticipantName = userName;
 };
-com.inq.flash.client.data.Chat.prototype.getSiteID = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getSiteID");
+com.inq.flash.client.data.Chat.prototype.getSiteID = function() {
   return this.siteID;
 };
-com.inq.flash.client.data.Chat.prototype.getChatTitle = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getChatTitle");
+com.inq.flash.client.data.Chat.prototype.getChatTitle = function() {
   return this.chatTitle;
 };
-com.inq.flash.client.data.Chat.prototype.getRoutingAllocSpecs = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getRoutingAllocSpecs");
+com.inq.flash.client.data.Chat.prototype.getRoutingAllocSpecs = function() {
   return this.routingAllocSpecs;
 };
-com.inq.flash.client.data.Chat.prototype.setRoutingAllocSpecs = function(val) {  console.warn("com.inq.flash.client.data.Chat.prototype.setRoutingAllocSpecs");
+com.inq.flash.client.data.Chat.prototype.setRoutingAllocSpecs = function(val) {
   if (typeof val == "string" && val.length > 0) {
     this.routingAllocSpecs = val;
   }
 };
-com.inq.flash.client.data.Chat.prototype.getQueueThreshold = function() {  console.warn("com.inq.flash.client.data.Chat.prototype.getQueueThreshold");
+com.inq.flash.client.data.Chat.prototype.getQueueThreshold = function() {
   return this.queueThreshold;
 };
 com.inq.flash.client.data.Chat.prototype.hasAuthorized = null;
@@ -19085,7 +19085,7 @@ com.inq.flash.client.data.Chat.prototype.routingAllocSpecs = null;
 com.inq.flash.client.data.Chat.prototype.__class__ = com.inq.flash.client.data.Chat;
 com.inq.flash.client.data.Chat.prototype.BEACON_ACTIVATE = "ACTIVATE";
 com.inq.flash.client.data.Chat.prototype.BEACON_DEACTIVATE = "DEACTIVATE";
-com.inq.flash.client.data.ChatActivityMessage = function(chat, activityType, text, returnReceipt) {  console.warn("com.inq.flash.client.data.ChatActivityMessage");
+com.inq.flash.client.data.ChatActivityMessage = function(chat, activityType, text, returnReceipt) {
   com.inq.flash.messagingframework.Message.call(this);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_ACTIVITY);
   this.addProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_ID, chat.getChatID());
@@ -19104,7 +19104,7 @@ for (var k in com.inq.flash.messagingframework.Message.prototype) {
   com.inq.flash.client.data.ChatActivityMessage.prototype[k] = com.inq.flash.messagingframework.Message.prototype[k];
 }
 com.inq.flash.client.data.ChatActivityMessage.prototype.__class__ = com.inq.flash.client.data.ChatActivityMessage;
-com.inq.flash.client.data.ChatAutomatonElementSetMessage = function(chat, itemName, attributeName, state) {  console.warn("com.inq.flash.client.data.ChatAutomatonElementSetMessage");
+com.inq.flash.client.data.ChatAutomatonElementSetMessage = function(chat, itemName, attributeName, state) {
   com.inq.flash.messagingframework.Message.call(this);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_AUTOMATON_SETTING);
   this.addProperty(com.inq.flash.client.data.MessageFields.KEY_RETURN_RECEIPT, "1");
@@ -19120,7 +19120,7 @@ for (var k in com.inq.flash.messagingframework.Message.prototype) {
   com.inq.flash.client.data.ChatAutomatonElementSetMessage.prototype[k] = com.inq.flash.messagingframework.Message.prototype[k];
 }
 com.inq.flash.client.data.ChatAutomatonElementSetMessage.prototype.__class__ = com.inq.flash.client.data.ChatAutomatonElementSetMessage;
-com.inq.flash.client.data.ChatAutomatonResponseMessage = function(chat, eventName, data) {  console.warn("com.inq.flash.client.data.ChatAutomatonResponseMessage");
+com.inq.flash.client.data.ChatAutomatonResponseMessage = function(chat, eventName, data) {
   com.inq.flash.messagingframework.Message.call(this);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_AUTOMATON_RESPONSE);
   this.addProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_ID, chat.getChatID());
@@ -19162,7 +19162,7 @@ for (var k in com.inq.flash.messagingframework.Message.prototype) {
   com.inq.flash.client.data.ChatAutomatonResponseMessage.prototype[k] = com.inq.flash.messagingframework.Message.prototype[k];
 }
 com.inq.flash.client.data.ChatAutomatonResponseMessage.prototype.__class__ = com.inq.flash.client.data.ChatAutomatonResponseMessage;
-com.inq.flash.client.data.ChatAutomatonDataMapMessage = function(chatID, automatonDataMap) {  console.warn("com.inq.flash.client.data.ChatAutomatonDataMapMessage");
+com.inq.flash.client.data.ChatAutomatonDataMapMessage = function(chatID, automatonDataMap) {
   com.inq.flash.messagingframework.Message.call(this);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_AUTOMATON_DATA_MAP);
   this.addProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_ID, chatID);
@@ -19175,7 +19175,7 @@ for (var k in com.inq.flash.messagingframework.Message.prototype) {
   com.inq.flash.client.data.ChatAutomatonDataMapMessage.prototype[k] = com.inq.flash.messagingframework.Message.prototype[k];
 }
 com.inq.flash.client.data.ChatAutomatonDataMapMessage.prototype.__class__ = com.inq.flash.client.data.ChatAutomatonDataMapMessage;
-com.inq.flash.client.data.ChatCommunicationCobrowseMessage = function(chat, text) {  console.warn("com.inq.flash.client.data.ChatCommunicationCobrowseMessage");
+com.inq.flash.client.data.ChatCommunicationCobrowseMessage = function(chat, text) {
   com.inq.flash.client.data.ChatCommunicationMessage.call(this, chat, text);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_COBROWSE);
 };
@@ -19186,23 +19186,23 @@ for (var k in com.inq.flash.client.data.ChatCommunicationMessage.prototype) {
   com.inq.flash.client.data.ChatCommunicationCobrowseMessage.prototype[k] = com.inq.flash.client.data.ChatCommunicationMessage.prototype[k];
 }
 com.inq.flash.client.data.ChatCommunicationCobrowseMessage.prototype.__class__ = com.inq.flash.client.data.ChatCommunicationCobrowseMessage;
-com.inq.flash.client.data.ChatCommunicationWebCallMessage = function(chat, text) {  console.warn("com.inq.flash.client.data.ChatCommunicationWebCallMessage");
+com.inq.flash.client.data.ChatCommunicationWebCallMessage = function(chat, text) {
   com.inq.flash.client.data.ChatCommunicationMessage.call(this, chat, text);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_WEBCALL);
 };
 $hxClasses.extend(com.inq.flash.client.data.ChatCommunicationMessage, com.inq.flash.client.data.ChatCommunicationWebCallMessage, "com.inq.flash.client.data.ChatCommunicationWebCallMessage");
 com.inq.flash.client.data.ChatCommunicationWebCallMessage.prototype.__class__ = com.inq.flash.client.data.ChatCommunicationWebCallMessage;
-com.inq.flash.client.data.ChatCommunicationFileUploadMessage = function(chat, text) {  console.warn("com.inq.flash.client.data.ChatCommunicationFileUploadMessage");
+com.inq.flash.client.data.ChatCommunicationFileUploadMessage = function(chat, text) {
   com.inq.flash.client.data.ChatCommunicationMessage.call(this, chat, text);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_FILEUPLOAD);
 };
 $hxClasses.extend(com.inq.flash.client.data.ChatCommunicationMessage, com.inq.flash.client.data.ChatCommunicationFileUploadMessage, "com.inq.flash.client.data.ChatCommunicationFileUploadMessage");
-com.inq.flash.client.data.ChatVideoPlayerStatusMessage = function(chat, text) {  console.warn("com.inq.flash.client.data.ChatVideoPlayerStatusMessage");
+com.inq.flash.client.data.ChatVideoPlayerStatusMessage = function(chat, text) {
   com.inq.flash.client.data.ChatCommunicationMessage.call(this, chat, text);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_VIDEOPlAYER_STATUS);
 };
 $hxClasses.extend(com.inq.flash.client.data.ChatCommunicationMessage, com.inq.flash.client.data.ChatVideoPlayerStatusMessage, "com.inq.flash.client.data.ChatVideoPlayerStatusMessage");
-com.inq.flash.client.data.ChatCommunicationOpenerMessage = function(chat, text, agentAlias) {  console.warn("com.inq.flash.client.data.ChatCommunicationOpenerMessage");
+com.inq.flash.client.data.ChatCommunicationOpenerMessage = function(chat, text, agentAlias) {
   com.inq.flash.client.data.ChatCommunicationMessage.call(this, chat, text);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION_OPENER);
   this.addProperty(com.inq.flash.client.data.MessageFields.KEY_RETURN_RECEIPT, "0");
@@ -19217,7 +19217,7 @@ for (var k in com.inq.flash.client.data.ChatCommunicationMessage.prototype) {
   com.inq.flash.client.data.ChatCommunicationOpenerMessage.prototype[k] = com.inq.flash.client.data.ChatCommunicationMessage.prototype[k];
 }
 com.inq.flash.client.data.ChatCommunicationOpenerMessage.prototype.__class__ = com.inq.flash.client.data.ChatCommunicationOpenerMessage;
-com.inq.flash.client.data.ChatCommunicationQueueMessage = function(chat, text, alias) {  console.warn("com.inq.flash.client.data.ChatCommunicationQueueMessage");
+com.inq.flash.client.data.ChatCommunicationQueueMessage = function(chat, text, alias) {
   com.inq.flash.client.data.ChatCommunicationMessage.call(this, chat, text);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION_QUEUE);
   this.addProperty(com.inq.flash.client.data.MessageFields.KEY_RETURN_RECEIPT, "1");
@@ -19232,7 +19232,7 @@ for (var k in com.inq.flash.client.data.ChatCommunicationMessage.prototype) {
   com.inq.flash.client.data.ChatCommunicationQueueMessage.prototype[k] = com.inq.flash.client.data.ChatCommunicationMessage.prototype[k];
 }
 com.inq.flash.client.data.ChatCommunicationQueueMessage.prototype.__class__ = com.inq.flash.client.data.ChatCommunicationQueueMessage;
-com.inq.flash.client.data.ChatCommunicationSystemMessage = function(chat, text, position, context, cssClass) {  console.warn("com.inq.flash.client.data.ChatCommunicationSystemMessage");
+com.inq.flash.client.data.ChatCommunicationSystemMessage = function(chat, text, position, context, cssClass) {
   com.inq.flash.client.data.ChatCommunicationMessage.call(this, chat, text);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION_SYSTEM);
   this.addPropertyIfNotNull(com.inq.flash.client.data.MessageFields.KEY_LINE_NR, position);
@@ -19240,7 +19240,7 @@ com.inq.flash.client.data.ChatCommunicationSystemMessage = function(chat, text, 
   this.addPropertyIfNotNull(com.inq.flash.client.data.MessageFields.KEY_CSS_CLASS_NAME, cssClass);
 };
 $hxClasses.extend(com.inq.flash.client.data.ChatCommunicationMessage, com.inq.flash.client.data.ChatCommunicationSystemMessage, "com.inq.flash.client.data.ChatCommunicationSystemMessage");
-com.inq.flash.client.data.ChatEngageMessage = function(chat, agentOutcome, clientOutcome, agentAlias) {  console.warn("com.inq.flash.client.data.ChatEngageMessage");
+com.inq.flash.client.data.ChatEngageMessage = function(chat, agentOutcome, clientOutcome, agentAlias) {
   com.inq.flash.client.data.ChatCommunicationMessage.call(this, chat, agentOutcome);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION_OUTCOME);
   this.addProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_ID, chat.getChatID());
@@ -19256,7 +19256,7 @@ for (var k in com.inq.flash.client.data.ChatCommunicationMessage.prototype) {
   com.inq.flash.client.data.ChatEngageMessage.prototype[k] = com.inq.flash.client.data.ChatCommunicationMessage.prototype[k];
 }
 com.inq.flash.client.data.ChatEngageMessage.prototype.__class__ = com.inq.flash.client.data.ChatEngageMessage;
-com.inq.flash.client.data.ChatExitMessage = function(chatID) {  console.warn("com.inq.flash.client.data.ChatExitMessage");
+com.inq.flash.client.data.ChatExitMessage = function(chatID) {
   com.inq.flash.messagingframework.Message.call(this);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_EXIT);
   this.addProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_ID, chatID);
@@ -19268,7 +19268,7 @@ for (var k in com.inq.flash.messagingframework.Message.prototype) {
   com.inq.flash.client.data.ChatExitMessage.prototype[k] = com.inq.flash.messagingframework.Message.prototype[k];
 }
 com.inq.flash.client.data.ChatExitMessage.prototype.__class__ = com.inq.flash.client.data.ChatExitMessage;
-com.inq.flash.client.data.ChatRequestMessage = function(chat, isPersistent, agentID, deltaTime, applicationCont) {  console.warn("com.inq.flash.client.data.ChatRequestMessage");
+com.inq.flash.client.data.ChatRequestMessage = function(chat, isPersistent, agentID, deltaTime, applicationCont) {
   com.inq.flash.messagingframework.Message.call(this);
   this.setMessageType(com.inq.flash.client.data.MessageFields.TYPE_CHAT_REQUEST);
   this.addProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_ID, chat.getChatID());
@@ -19403,7 +19403,7 @@ for (var k in com.inq.flash.messagingframework.Message.prototype) {
   com.inq.flash.client.data.ChatRequestMessage.prototype[k] = com.inq.flash.messagingframework.Message.prototype[k];
 }
 com.inq.flash.client.data.ChatRequestMessage.prototype.__class__ = com.inq.flash.client.data.ChatRequestMessage;
-com.inq.flash.client.data.MessageFields = function() {  console.warn("com.inq.flash.client.data.MessageFields");
+com.inq.flash.client.data.MessageFields = function() {
 };
 $hxClasses["com.inq.flash.client.data.MessageFields"] = com.inq.flash.client.data.MessageFields;
 com.inq.flash.client.data.MessageFields.__name__ = ["com", "inq", "flash", "client", "data", "MessageFields"];
@@ -19616,7 +19616,7 @@ com.inq.flash.client.data.MessageFields.KEY_CHAT_INFO = "/chatinfo";
 com.inq.flash.client.data.MessageFields.WINDOW_ID_PARAM = "windowId";
 com.inq.flash.client.data.MessageFields.KEY_CSS_CLASS_NAME = "css.class_name";
 com.inq.flash.client.data.MessageFields.KEY_CONTEXT = "context";
-com.inq.flash.messagingframework.FlashMessagingFramework = function(applicationController) {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework");
+com.inq.flash.messagingframework.FlashMessagingFramework = function(applicationController) {
   haxe.Log.trace("entered", {fileName:"FlashMessagingFramework.hx", lineNumber:60, className:"com.inq.flash.messagingframework.FlashMessagingFramework", methodName:"new"});
   this.params = [];
   this.maxConnectionRetries = 100;
@@ -19633,40 +19633,40 @@ com.inq.flash.messagingframework.FlashMessagingFramework = function(applicationC
 };
 $hxClasses["com.inq.flash.messagingframework.FlashMessagingFramework"] = com.inq.flash.messagingframework.FlashMessagingFramework;
 com.inq.flash.messagingframework.FlashMessagingFramework.__name__ = ["com", "inq", "flash", "messagingframework", "FlashMessagingFramework"];
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.sendMessage = function(message, successListener, errorListener) {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.sendMessage");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.sendMessage = function(message, successListener, errorListener) {
   haxe.Log.trace("in FMF.sendMessage: " + message.toString(), {fileName:"FlashMessagingFramework.js", lineNumber:86, methodName:"sendMessage", className:"com.inq.flash.messagingframework.FlashMessagingFramework"});
   if (this.selectedConnectionHandler != null) {
     this.selectedConnectionHandler.sendMessage(message, successListener, errorListener);
   }
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.startListenForMessages = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.startListenForMessages");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.startListenForMessages = function() {
   this.getConnection().listenForMessages();
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.isConnected = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.isConnected");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.isConnected = function() {
   if (this.selectedConnectionHandler == null) {
     return false;
   }
   return this.selectedConnectionHandler.isConnected();
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.isSendMessageFail = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.isSendMessageFail");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.isSendMessageFail = function() {
   if (this.selectedConnectionHandler) {
     return this.selectedConnectionHandler.isSendMessageFail();
   }
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype._getResponseTimestamp = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype._getResponseTimestamp");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype._getResponseTimestamp = function() {
   if (this.selectedConnectionHandler) {
     return this.selectedConnectionHandler._getResponseTimestamp();
   }
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.disconnect = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.disconnect");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.disconnect = function() {
   if (this.selectedConnectionHandler != null) {
     this.selectedConnectionHandler.disconnect();
   }
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.abortingConnectionAttempt = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.abortingConnectionAttempt");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.abortingConnectionAttempt = function() {
   this.applicationConnectionEventHandler.allConnectionAttemptsFailed();
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.connectionFailed = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.connectionFailed");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.connectionFailed = function() {
   if (this.selectedConnectionHandler != null) {
     this.connectionRetryAttempts++;
     if (this.connectionRetryAttempts < this.maxConnectionRetries) {
@@ -19683,20 +19683,20 @@ com.inq.flash.messagingframework.FlashMessagingFramework.prototype.connectionFai
   }
   return false;
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.connectionSuccesful = function(connectionHandler) {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.connectionSuccesful");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.connectionSuccesful = function(connectionHandler) {
   this.selectedConnectionHandler = connectionHandler;
   this.connectionRetryAttempts = 0;
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.getConnection = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.getConnection");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.getConnection = function() {
   return this.selectedConnectionHandler || null;
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.getConnectionType = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.getConnectionType");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.getConnectionType = function() {
   if (this.selectedConnectionHandler == null) {
     return null;
   }
   return this.selectedConnectionHandler.getConnectionType();
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.selectNextConnectionHandler = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.selectNextConnectionHandler");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.selectNextConnectionHandler = function() {
   this.connectionHandlerAttemptIndex++;
   if (this.connectionHandlerAttemptIndex >= this.connectionHandlers.length) {
     this.connectionHandlerAttemptIndex = 0;
@@ -19712,27 +19712,27 @@ com.inq.flash.messagingframework.FlashMessagingFramework.prototype.selectNextCon
     this.abortingConnectionAttempt();
   }
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.acknowledgePersistentActive = function(chatID, protoDomain, clientProtoDomain, needNewOpener, messageCnt) {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.acknowledgePersistentActive");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.acknowledgePersistentActive = function(chatID, protoDomain, clientProtoDomain, needNewOpener, messageCnt) {
   if (this.selectedConnectionHandler != null && !(com.inq.flash.client.control.FlashVars.getValue("isCachePersistentUsed") === true)) {
     this.selectedConnectionHandler.acknowledgePersistentActive(chatID, protoDomain, clientProtoDomain, needNewOpener, messageCnt);
   }
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.acknowledgeChatActive = function(chatID) {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.acknowledgeChatActive");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.acknowledgeChatActive = function(chatID) {
   if (this.selectedConnectionHandler != null) {
     this.selectedConnectionHandler.acknowledgeChatActive(chatID);
   }
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.enable = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.enable");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.enable = function() {
   if (this.selectedConnectionHandler != null) {
     this.selectedConnectionHandler.enable();
   }
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.disable = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.disable");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.disable = function() {
   if (this.selectedConnectionHandler != null) {
     this.selectedConnectionHandler.disable();
   }
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.connect = function() {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.connect");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.connect = function() {
   haxe.Log.trace("enter connect", {fileName:"FlashMessagingFramework.hx", lineNumber:146, className:"com.inq.flash.messagingframework.FlashMessagingFramework", methodName:"connect"});
   this.connectionHandlerAttemptIndex = -1;
   haxe.Log.trace("in FMF connect()", {fileName:"FlashMessagingFramework.hx", lineNumber:148, className:"com.inq.flash.messagingframework.FlashMessagingFramework", methodName:"connect"});
@@ -19748,14 +19748,14 @@ com.inq.flash.messagingframework.FlashMessagingFramework.prototype.connect = fun
   }
   haxe.Log.trace("exit", {fileName:"FlashMessagingFramework.hx", lineNumber:161, className:"com.inq.flash.messagingframework.FlashMessagingFramework", methodName:"connect"});
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.registerMessageHandler = function(messageHandler) {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.registerMessageHandler");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.registerMessageHandler = function(messageHandler) {
   this.messageRouter.registerMessageHandler(messageHandler);
   messageHandler.setMessagingFramework(this);
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.processMessage = function(message) {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.processMessage");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.processMessage = function(message) {
   this.messageRouter.processMessage(message);
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.setupConnection = function(connectionHandler, index) {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.setupConnection");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.setupConnection = function(connectionHandler, index) {
   haxe.Log.trace("enter", {fileName:"FlashMessagingFramework.hx", lineNumber:130, className:"com.inq.flash.messagingframework.FlashMessagingFramework", methodName:"setupConnection"});
   connectionHandler.setApplicationConnectionEventHandler(this.applicationConnectionEventHandler);
   connectionHandler.setMessageRouter(this.messageRouter);
@@ -19763,14 +19763,14 @@ com.inq.flash.messagingframework.FlashMessagingFramework.prototype.setupConnecti
   this.connectionHandlers[index] = connectionHandler;
   haxe.Log.trace("exit: " + this.connectionHandlers.length, {fileName:"FlashMessagingFramework.hx", lineNumber:136, className:"com.inq.flash.messagingframework.FlashMessagingFramework", methodName:"setupConnection"});
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.setParam = function(field, value) {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.setParam");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.setParam = function(field, value) {
   if (null != this.selectedConnectionHandler) {
     this.selectedConnectionHandler.setParam(field, value);
   } else {
     this.params[field] = value;
   }
 };
-com.inq.flash.messagingframework.FlashMessagingFramework.prototype.getMessageHandlerByPrefix = function(messageType) {  console.warn("com.inq.flash.messagingframework.FlashMessagingFramework.prototype.getMessageHandlerByPrefix");
+com.inq.flash.messagingframework.FlashMessagingFramework.prototype.getMessageHandlerByPrefix = function(messageType) {
   return this.messageRouter.getHandlerByPrefix(messageType);
 };
 com.inq.flash.messagingframework.FlashMessagingFramework.prototype.selectedConnectionHandler = null;
@@ -19784,12 +19784,12 @@ com.inq.flash.messagingframework.FlashMessagingFramework.prototype.messageRouter
 com.inq.flash.messagingframework.FlashMessagingFramework.prototype.applicationConnectionEventHandler = null;
 com.inq.flash.messagingframework.FlashMessagingFramework.prototype.__class__ = com.inq.flash.messagingframework.FlashMessagingFramework;
 com.inq.flash.messagingframework.FlashMessagingFramework.CONNECTION_TYPE_HTTP = "http";
-com.inq.flash.messagingframework.MessageRouter = function() {  console.warn("com.inq.flash.messagingframework.MessageRouter");
+com.inq.flash.messagingframework.MessageRouter = function() {
   this.handlers = new com.inq.utils.Dictionary;
 };
 $hxClasses["com.inq.flash.messagingframework.MessageRouter"] = com.inq.flash.messagingframework.MessageRouter;
 com.inq.flash.messagingframework.MessageRouter.__name__ = ["com", "inq", "flash", "messagingframework", "MessageRouter"];
-com.inq.flash.messagingframework.MessageRouter.prototype.processMessage = function(message) {  console.warn("com.inq.flash.messagingframework.MessageRouter.prototype.processMessage");
+com.inq.flash.messagingframework.MessageRouter.prototype.processMessage = function(message) {
   try {
     var handler = this.getHandlerByPrefix(message.getMessageType());
     if (handler) {
@@ -19806,7 +19806,7 @@ com.inq.flash.messagingframework.MessageRouter.prototype.processMessage = functi
     haxe.Log.trace("Error: " + Std.string(e), {fileName:"MessageRouter.hx", lineNumber:44, className:"com.inq.flash.messagingframework.MessageRouter", methodName:"processMessage", customParams:["error"]});
   }
 };
-com.inq.flash.messagingframework.MessageRouter.prototype.getHandlerByPrefix = function(messageType) {  console.warn("com.inq.flash.messagingframework.MessageRouter.prototype.getHandlerByPrefix");
+com.inq.flash.messagingframework.MessageRouter.prototype.getHandlerByPrefix = function(messageType) {
   var keyz = Reflect.fields(this.handlers);
   for (var i = 0;i < keyz.length;i++) {
     var handler = this.handlers[keyz[i]];
@@ -19816,72 +19816,72 @@ com.inq.flash.messagingframework.MessageRouter.prototype.getHandlerByPrefix = fu
     }
   }
 };
-com.inq.flash.messagingframework.MessageRouter.prototype.registerMessageHandler = function(messageHandler) {  console.warn("com.inq.flash.messagingframework.MessageRouter.prototype.registerMessageHandler");
+com.inq.flash.messagingframework.MessageRouter.prototype.registerMessageHandler = function(messageHandler) {
   this.handlers[messageHandler.getMessageType()] = messageHandler;
 };
 com.inq.flash.messagingframework.MessageRouter.prototype.handlers = null;
 com.inq.flash.messagingframework.MessageRouter.prototype.__class__ = com.inq.flash.messagingframework.MessageRouter;
-com.inq.flash.messagingframework.Participant = function(type, id, username) {  console.warn("com.inq.flash.messagingframework.Participant");
+com.inq.flash.messagingframework.Participant = function(type, id, username) {
   this.participantType = type;
   this.ID = id;
   this.username = username;
 };
 $hxClasses["com.inq.flash.messagingframework.Participant"] = com.inq.flash.messagingframework.Participant;
 com.inq.flash.messagingframework.Participant.__name__ = ["com", "inq", "flash", "messagingframework", "Participant"];
-com.inq.flash.messagingframework.Participant.prototype.getType = function() {  console.warn("com.inq.flash.messagingframework.Participant.prototype.getType");
+com.inq.flash.messagingframework.Participant.prototype.getType = function() {
   return this.participantType;
 };
-com.inq.flash.messagingframework.Participant.prototype.getUsername = function() {  console.warn("com.inq.flash.messagingframework.Participant.prototype.getUsername");
+com.inq.flash.messagingframework.Participant.prototype.getUsername = function() {
   return this.username;
 };
-com.inq.flash.messagingframework.Participant.prototype.getID = function() {  console.warn("com.inq.flash.messagingframework.Participant.prototype.getID");
+com.inq.flash.messagingframework.Participant.prototype.getID = function() {
   return this.ID;
 };
 com.inq.flash.messagingframework.Participant.prototype.username = null;
 com.inq.flash.messagingframework.Participant.prototype.participantType = null;
 com.inq.flash.messagingframework.Participant.prototype.ID = null;
 com.inq.flash.messagingframework.Participant.prototype.__class__ = com.inq.flash.messagingframework.Participant;
-com.inq.flash.messagingframework.StringUtils = function() {  console.warn("com.inq.flash.messagingframework.StringUtils");
+com.inq.flash.messagingframework.StringUtils = function() {
 };
 $hxClasses["com.inq.flash.messagingframework.StringUtils"] = com.inq.flash.messagingframework.StringUtils;
 com.inq.flash.messagingframework.StringUtils.__name__ = ["com", "inq", "flash", "messagingframework", "StringUtils"];
-com.inq.flash.messagingframework.StringUtils.encodeStringForMessage = function(message) {  console.warn("com.inq.flash.messagingframework.StringUtils.encodeStringForMessage");
+com.inq.flash.messagingframework.StringUtils.encodeStringForMessage = function(message) {
   if (message == null || message.length == 0) {
     return message;
   }
   return message.split("=").join("&eq;").split("\n").join("&nl;").split("\r").join("");
 };
-com.inq.flash.messagingframework.StringUtils.completeEncodeStringForMessage = function(message) {  console.warn("com.inq.flash.messagingframework.StringUtils.completeEncodeStringForMessage");
+com.inq.flash.messagingframework.StringUtils.completeEncodeStringForMessage = function(message) {
   if (message == null || message.length == 0) {
     return message;
   }
   return com.inq.flash.messagingframework.StringUtils.encodeStringForMessage(message.replace(/&/gi, "&amp;"));
 };
-com.inq.flash.messagingframework.StringUtils.decodeStringFromMessage = function(message) {  console.warn("com.inq.flash.messagingframework.StringUtils.decodeStringFromMessage");
+com.inq.flash.messagingframework.StringUtils.decodeStringFromMessage = function(message) {
   if (message == null || message.length == 0) {
     return message;
   }
   return message.split("&eq;").join("=").split("&nl;").join("\n").split("&rt;").join("\r");
 };
-com.inq.flash.messagingframework.StringUtils.completeDecodeStringFromMessage = function(message) {  console.warn("com.inq.flash.messagingframework.StringUtils.completeDecodeStringFromMessage");
+com.inq.flash.messagingframework.StringUtils.completeDecodeStringFromMessage = function(message) {
   if (message == null || message.length == 0) {
     return message;
   }
   return com.inq.flash.messagingframework.StringUtils.decodeStringFromMessage(message).replace(/&amp;/gi, "&");
 };
-com.inq.flash.messagingframework.StringUtils.htmlEncode = function(text) {  console.warn("com.inq.flash.messagingframework.StringUtils.htmlEncode");
+com.inq.flash.messagingframework.StringUtils.htmlEncode = function(text) {
   if (text == null || text.length == 0) {
     return text;
   }
   return text.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;").split('"').join("&#034;");
 };
-com.inq.flash.messagingframework.StringUtils.htmlDecode = function(text) {  console.warn("com.inq.flash.messagingframework.StringUtils.htmlDecode");
+com.inq.flash.messagingframework.StringUtils.htmlDecode = function(text) {
   if (text == null || text.length == 0) {
     return text;
   }
   return text.split("&eq;").join("=").split("&lt;").join("<").split("&gt;").join(">").split("&amp;").join("&").split("&#034;").join('"').split("&nl;").join("<br/>");
 };
-com.inq.flash.messagingframework.StringUtils.parseQueryString = function(str) {  console.warn("com.inq.flash.messagingframework.StringUtils.parseQueryString");
+com.inq.flash.messagingframework.StringUtils.parseQueryString = function(str) {
   var _params = new com.inq.utils.Dictionary;
   try {
     if (str != null && str != "") {
@@ -19907,7 +19907,7 @@ com.inq.flash.messagingframework.StringUtils.parseQueryString = function(str) { 
   }
   return _params;
 };
-com.inq.flash.messagingframework.StringUtils.getBooleanValue = function(value) {  console.warn("com.inq.flash.messagingframework.StringUtils.getBooleanValue");
+com.inq.flash.messagingframework.StringUtils.getBooleanValue = function(value) {
   var returnValue = false;
   var tempValue = "";
   if (value != null) {
@@ -19930,30 +19930,30 @@ com.inq.flash.messagingframework.StringUtils.getBooleanValue = function(value) {
   return returnValue;
 };
 com.inq.flash.messagingframework.StringUtils.prototype.__class__ = com.inq.flash.messagingframework.StringUtils;
-com.inq.flash.messagingframework.TranscriptEntry = function() {  console.warn("com.inq.flash.messagingframework.TranscriptEntry");
+com.inq.flash.messagingframework.TranscriptEntry = function() {
   this.timestamp = Math.floor((new Date).getTime() % 1E3);
 };
 $hxClasses["com.inq.flash.messagingframework.TranscriptEntry"] = com.inq.flash.messagingframework.TranscriptEntry;
 com.inq.flash.messagingframework.TranscriptEntry.__name__ = ["com", "inq", "flash", "messagingframework", "TranscriptEntry"];
-com.inq.flash.messagingframework.TranscriptEntry.prototype.getData = function() {  console.warn("com.inq.flash.messagingframework.TranscriptEntry.prototype.getData");
+com.inq.flash.messagingframework.TranscriptEntry.prototype.getData = function() {
   return this.data;
 };
-com.inq.flash.messagingframework.TranscriptEntry.prototype.getType = function() {  console.warn("com.inq.flash.messagingframework.TranscriptEntry.prototype.getType");
+com.inq.flash.messagingframework.TranscriptEntry.prototype.getType = function() {
   return this.type;
 };
-com.inq.flash.messagingframework.TranscriptEntry.prototype.getSender = function() {  console.warn("com.inq.flash.messagingframework.TranscriptEntry.prototype.getSender");
+com.inq.flash.messagingframework.TranscriptEntry.prototype.getSender = function() {
   return this.sender;
 };
-com.inq.flash.messagingframework.TranscriptEntry.prototype.getTimestamp = function() {  console.warn("com.inq.flash.messagingframework.TranscriptEntry.prototype.getTimestamp");
+com.inq.flash.messagingframework.TranscriptEntry.prototype.getTimestamp = function() {
   return this.timestamp;
 };
-com.inq.flash.messagingframework.TranscriptEntry.prototype.setData = function(data) {  console.warn("com.inq.flash.messagingframework.TranscriptEntry.prototype.setData");
+com.inq.flash.messagingframework.TranscriptEntry.prototype.setData = function(data) {
   this.data = data;
 };
-com.inq.flash.messagingframework.TranscriptEntry.prototype.setType = function(type) {  console.warn("com.inq.flash.messagingframework.TranscriptEntry.prototype.setType");
+com.inq.flash.messagingframework.TranscriptEntry.prototype.setType = function(type) {
   this.type = type;
 };
-com.inq.flash.messagingframework.TranscriptEntry.prototype.setSender = function(sender) {  console.warn("com.inq.flash.messagingframework.TranscriptEntry.prototype.setSender");
+com.inq.flash.messagingframework.TranscriptEntry.prototype.setSender = function(sender) {
   this.sender = sender;
 };
 com.inq.flash.messagingframework.TranscriptEntry.prototype.data = null;
@@ -19961,7 +19961,7 @@ com.inq.flash.messagingframework.TranscriptEntry.prototype.type = null;
 com.inq.flash.messagingframework.TranscriptEntry.prototype.sender = null;
 com.inq.flash.messagingframework.TranscriptEntry.prototype.timestamp = null;
 com.inq.flash.messagingframework.TranscriptEntry.prototype.__class__ = com.inq.flash.messagingframework.TranscriptEntry;
-com.inq.flash.messagingframework.connectionhandling.ConnectionHandler = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.ConnectionHandler");
+com.inq.flash.messagingframework.connectionhandling.ConnectionHandler = function() {
 };
 $hxClasses["com.inq.flash.messagingframework.connectionhandling.ConnectionHandler"] = com.inq.flash.messagingframework.connectionhandling.ConnectionHandler;
 com.inq.flash.messagingframework.connectionhandling.ConnectionHandler.__name__ = ["com", "inq", "flash", "messagingframework", "connectionhandling", "ConnectionHandler"];
@@ -19980,7 +19980,7 @@ com.inq.flash.messagingframework.connectionhandling.ConnectionHandler.prototype.
 com.inq.flash.messagingframework.connectionhandling.ConnectionHandler.prototype.setMessagingFramework = null;
 com.inq.flash.messagingframework.connectionhandling.ConnectionHandler.prototype.setMessageRouter = null;
 com.inq.flash.messagingframework.connectionhandling.ConnectionHandler.prototype.__class__ = com.inq.flash.messagingframework.connectionhandling.ConnectionHandler;
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler = function(host, _chatID, _params, applicationController) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler = function(host, _chatID, _params, applicationController) {
   this.msgCount = 0;
   this.params = _params;
   this.connected = false;
@@ -20023,25 +20023,25 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler = func
 };
 $hxClasses["com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler"] = com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler;
 com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.__name__ = ["com", "inq", "flash", "messagingframework", "connectionhandling", "HTTPConnectionHandler"];
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getQueueSize = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getQueueSize");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getQueueSize = function() {
   return this.messageQueue.length;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getQueueFirstItem = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getQueueFirstItem");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getQueueFirstItem = function() {
   return this.messageQueue[0];
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getInProgressMsgCount = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getInProgressMsgCount");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getInProgressMsgCount = function() {
   return Object.keys(this.messagesInProgress).length;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.deleteInProgressMsg = function(key) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.deleteInProgressMsg");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.deleteInProgressMsg = function(key) {
   var msgContext = this.messagesInProgress[key];
   delete this.messagesInProgress[key];
   return msgContext;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMessageHTTPStatus = function(event) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMessageHTTPStatus");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMessageHTTPStatus = function(event) {
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMessageHTTPStatus = function(event) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMessageHTTPStatus");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMessageHTTPStatus = function(event) {
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMsgComplete = function(event) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMsgComplete");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMsgComplete = function(event) {
   this.successfulResponseHandler();
   var msgContext = this.deleteInProgressMsg(event.currentTarget.key);
   if (msgContext) {
@@ -20063,7 +20063,7 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     }
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMsgCompletePreload = function(event) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMsgCompletePreload");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMsgCompletePreload = function(event) {
   this.successfulResponseHandler();
   if (this.isUnknownMessage(this.getMsgPreLoader)) {
     this.getMessageFailed(event);
@@ -20093,16 +20093,16 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     }
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isEmptyResponseStatusCode = function(loader) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isEmptyResponseStatusCode");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isEmptyResponseStatusCode = function(loader) {
   return loader.responseStatus == com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.STATUS_CODE_NO_CONTENT || loader.responseStatus == com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.STATUS_CODE_NO_CONTENT_IE9;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isUnknownMessage = function(loader) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isUnknownMessage");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isUnknownMessage = function(loader) {
   if (!this.isEmptyResponseStatusCode(loader) && loader.responseStatus != 401) {
     return loader.data == null || typeof loader.data != "object";
   }
   return false;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMsgComplete = function(event) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMsgComplete");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMsgComplete = function(event) {
   this.successfulResponseHandler();
   if (this.isUnknownMessage(this.getMsgLoader)) {
     this.getMessageFailed(event);
@@ -20136,7 +20136,7 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     haxe.Log.trace("forceDisconnect", {fileName:"HTTPConnectionHandler.js", methodName:"getMsgComplete"});
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMsgCompleteProcessing = function(loader, replay) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMsgCompleteProcessing");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMsgCompleteProcessing = function(loader, replay) {
   var newCount = 0;
   try {
     var msgData = loader.data;
@@ -20167,7 +20167,7 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
   }
   return newCount;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isMsgReplayable = function(message) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isMsgReplayable");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isMsgReplayable = function(message) {
   var msgType = message.getMessageType();
   var cid = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_CHAT_ID);
   var isThisChatSession = (msgType == com.inq.flash.client.data.MessageFields.TYPE_CHATLINE || msgType == com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION || msgType == com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION_QUEUE || msgType == com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION_SYSTEM || msgType == com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION_OUTCOME) && cid == this.chatIDForGetMsg;
@@ -20176,7 +20176,7 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
   message.getProperty(com.inq.flash.client.data.MessageFields.KEY_STATE) == com.inq.flash.client.data.MessageFields.DATA_TRANSFER);
   return replayable;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.routeQueuedRequests = function(replay) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.routeQueuedRequests");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.routeQueuedRequests = function(replay) {
   var msg;
   while (this.processMessageQueue.length > 0) {
     msg = this.processMessageQueue.shift();
@@ -20190,20 +20190,20 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     handler.runCommands();
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putRequestSecurityError = function(event) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putRequestSecurityError");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putRequestSecurityError = function(event) {
   this.putMessageFailed(event);
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getRequestSecurityError = function(event) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getRequestSecurityError");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getRequestSecurityError = function(event) {
   this.getMessageFailed(event);
   this.sendMessageFail = true;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMessageRetry = function(key) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMessageRetry");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMessageRetry = function(key) {
   var firstContext = this.getQueueFirstItem();
   if (firstContext) {
     this.putMessage(firstContext, key);
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMessageFailed = function(event) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMessageFailed");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMessageFailed = function(event) {
   this.failedResponseHandler();
   var msgContext = this.messagesInProgress[event.currentTarget.key];
   if (msgContext) {
@@ -20213,25 +20213,25 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     msgContext.onError(event);
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getNetworkErrorHandler = function(event) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getNetworkErrorHandler");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getNetworkErrorHandler = function(event) {
   if (!this.forceDisconnected) {
     this.failedResponseHandler();
     this.getMessageFailed(event);
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMessageFailed = function(event) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMessageFailed");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMessageFailed = function(event) {
   if (!this.forceDisconnected) {
     this.resetNetworkTimeout();
     window.setTimeout($bind(this, this.listenForMessages), com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.RETRY_DELAY);
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getConnectionType = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getConnectionType");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getConnectionType = function() {
   return com.inq.flash.messagingframework.FlashMessagingFramework.CONNECTION_TYPE_HTTP;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.abortGetMessage = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.abortGetMessage");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.abortGetMessage = function() {
   this.getMsgLoader.cancelLoad();
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMessage = function(msgContext, retryKey) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMessage");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putMessage = function(msgContext, retryKey) {
   var chatID = this.chatIDForGetMsg;
   if (chatID != null && chatID != "") {
     this.chatIDForGetMsg = chatID;
@@ -20256,7 +20256,7 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     haxe.Log.trace("" + Std.string(e), {fileName:"HTTPConnectionHandler.hx", lineNumber:645, className:"com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler", methodName:"putMessage", customParams:["error"]});
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.sendMessage = function(message, successListener, errorListener) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.sendMessage");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.sendMessage = function(message, successListener, errorListener) {
   var msgContext = {msg:message, onSuccess:typeof successListener == "function" ? successListener : $noop, onError:typeof errorListener == "function" ? errorListener : $noop};
   if (com.inq.flash.client.data.MessageFields.TYPE_CHAT_COMMUNICATION == message.getMessageType()) {
     this.messageQueue.push(msgContext);
@@ -20270,29 +20270,29 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     this.putMessage(msgContext);
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putChatExitMsgComplete = function(event) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putChatExitMsgComplete");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.putChatExitMsgComplete = function(event) {
   this.disable();
   var message = new com.inq.flash.client.data.ChatExitMessage("");
   this.messageRouter.processMessage(message);
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.networkTimeoutHandler = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.networkTimeoutHandler");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.networkTimeoutHandler = function() {
   if (this.networkTimeoutEnabled) {
     haxe.Log.trace("INFO (networkTimeoutHandler) timeoutClosesChat() is called due to getmessage timed out. ", {fileName:"HTTPConnectionHandler.hx", lineNumber:524, className:"com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler", methodName:"networkTimeoutHandler"});
     this.applicationController.onNetworkTimeout();
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.disableNetworkTimeout = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.disableNetworkTimeout");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.disableNetworkTimeout = function() {
   this.networkTimeoutEnabled = false;
   if (this.networkTimeoutId != null) {
     window.clearTimeout(this.networkTimeoutId);
     this.networkTimeoutId = null;
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.handleUnauthorizedMessage = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.handleUnauthorizedMessage");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.handleUnauthorizedMessage = function() {
   haxe.Log.trace("status response 401", {fileName:"HTTPConnectionHandler.js", methodName:"handleUnauthorizedMessage"});
   this.applicationController.onLostConnection();
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.resetNetworkTimeout = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.resetNetworkTimeout");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.resetNetworkTimeout = function() {
   if (this.networkTimeoutEnabled) {
     if (this.networkTimeoutId != null) {
       window.clearTimeout(this.networkTimeoutId);
@@ -20300,12 +20300,12 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     this.networkTimeoutId = window.setTimeout($bind(this, this.networkTimeoutHandler), 12E4);
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setNetworkTimeout = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setNetworkTimeout");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setNetworkTimeout = function() {
   if (this.networkTimeoutEnabled && this.networkTimeoutId == null) {
     this.networkTimeoutId = window.setTimeout($bind(this, this.networkTimeoutHandler), 12E4);
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.listenForMessages = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.listenForMessages");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.listenForMessages = function() {
   if (!this.forceDisconnected) {
     var urlGetMsg = this.generateGetMessageURL(this.msgCount, "lm");
     this.setNetworkTimeout();
@@ -20313,14 +20313,14 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     this.pendingConnectionEstablished();
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isAutomaton = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isAutomaton");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isAutomaton = function() {
   var b = com.inq.flash.client.control.FlashVars.getValue("automatonId");
   return b != null;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setChatID = function(chatID) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setChatID");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setChatID = function(chatID) {
   this.chatIDForGetMsg = chatID;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.connectionComplete = function(event) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.connectionComplete");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.connectionComplete = function(event) {
   if (event == null) {
     if (!this.isConnected() && !this.forceDisconnected) {
       this.connected = true;
@@ -20329,14 +20329,14 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     }
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.establishConnectionRequest = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.establishConnectionRequest");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.establishConnectionRequest = function() {
   if (!this.isConnected() && !this.forceDisconnected) {
     this.connected = true;
     this.framework.connectionSuccesful(this);
     this.applicationConnectionEventHandler.connectionSuccessful();
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.connect = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.connect");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.connect = function() {
   this.establishConnectionRequest();
   this.iMsgRereadLmt = com.inq.flash.client.control.PersistenceManager.GetValue("msgcnt", 0);
   if (com.inq.flash.client.control.FlashVars.getPersistentFrame()) {
@@ -20349,7 +20349,7 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     this.getMessages();
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setSelectedHost = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setSelectedHost");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setSelectedHost = function() {
   var protocol = this.useClientProtocol ? window.location.protocol : "https:";
   if (this.chatRouterHost.toLowerCase().indexOf("http") != 0) {
     this.selectedHost = protocol + "//" + this.chatRouterHost;
@@ -20357,10 +20357,10 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     this.selectedHost = this.chatRouterHost.replace("http:", protocol);
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getSelectedHost = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getSelectedHost");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getSelectedHost = function() {
   return this.selectedHost;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.disconnect = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.disconnect");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.disconnect = function() {
   if (this.forceDisconnected) {
     return;
   }
@@ -20376,36 +20376,36 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
   var endChatRequest = new com.inq.net.URLRequest(endChatURL);
   putMsgLoader.load(endChatRequest);
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMessagingFramework = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMessagingFramework");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMessagingFramework = function() {
   return this.framework;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setMessagingFramework = function(framework) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setMessagingFramework");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setMessagingFramework = function(framework) {
   this.framework = framework;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setMessageRouter = function(messageRouter) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setMessageRouter");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setMessageRouter = function(messageRouter) {
   this.messageRouter = messageRouter;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isConnected = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isConnected");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isConnected = function() {
   return this.connected;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setApplicationConnectionEventHandler = function(applicationConnectionEventHandler) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setApplicationConnectionEventHandler");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setApplicationConnectionEventHandler = function(applicationConnectionEventHandler) {
   this.applicationConnectionEventHandler = applicationConnectionEventHandler;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setHost = function(host) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setHost");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setHost = function(host) {
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setParam = function(name, valu) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setParam");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.setParam = function(name, valu) {
   this[name] = valu;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMessages = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMessages");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getMessages = function() {
   if (!this.forceDisconnected) {
     var urlGetMsg = this.generateGetMessageURL(this.iMsgRereadCnt, "gm");
     this.getMsgPreLoader.load(new com.inq.net.URLRequest(urlGetMsg));
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getParams = function(keyName) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getParams");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.getParams = function(keyName) {
   return this.params[keyName];
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.acknowledgePersistentActive = function(chatID, protoDomain, clientProtoDomain, needNewOpener, messageCount) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.acknowledgePersistentActive");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.acknowledgePersistentActive = function(chatID, protoDomain, clientProtoDomain, needNewOpener, messageCount) {
   var newLoc = "";
   var putMsgURL = this.getSelectedHost() + "/chatrouter/chat/ackPersistentActive.js?engagementID=" + this.chatIDForGetMsg + "&op=" + Std.string(needNewOpener) + "&pd=" + protoDomain + "&r=" + Math.round(123456789 * Math.random());
   if (protoDomain != clientProtoDomain) {
@@ -20430,7 +20430,7 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     }
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.sendChatHTML = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.sendChatHTML");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.sendChatHTML = function() {
   var chatHTML = StringTools.urlEncode(document.getElementById("me").innerHTML);
   var sendHtmlURL = this.getSelectedHost() + "/chatrouter/chat/sendHTML.js?engagementID=" + this.chatIDForGetMsg + "&r=" + this.rand() + "&h=";
   var limit = 2E3 - sendHtmlURL.length;
@@ -20448,10 +20448,10 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     chatHTML = HxOverrides.substr(chatHTML, limit + 1, null);
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.rand = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.rand");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.rand = function() {
   return Math.round(123456789 * Math.random());
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.acknowledgeChatActive = function(chatID) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.acknowledgeChatActive");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.acknowledgeChatActive = function(chatID) {
   var putMsgURL = this.getSelectedHost() + "/chatrouter/chat/ackChatActive" + "?engagementID=" + this.chatIDForGetMsg + "&rand=" + Math.random();
   var putMsgRequest = new com.inq.net.URLRequest(putMsgURL);
   try {
@@ -20465,25 +20465,25 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     }
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.enable = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.enable");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.enable = function() {
   this.forceDisconnected = false;
   this.listenForMessages();
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.disable = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.disable");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.disable = function() {
   this.abortGetMessage();
   this.disableNetworkTimeout();
   this.connected = false;
   this.forceDisconnected = true;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isSendMessageFail = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isSendMessageFail");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.isSendMessageFail = function() {
   return this.sendMessageFail;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.checkCaching = function(loader) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.checkCaching");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.checkCaching = function(loader) {
   if (typeof loader.data == "object") {
     this.cachingEnabled = loader.responseHeaderCacheControl.indexOf("no-cache") < 0;
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.generateGetMessageURL = function(cnt, source) {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.generateGetMessageURL");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.generateGetMessageURL = function(cnt, source) {
   var cacheBuster = "";
   if (!this.cachingEnabled) {
     cacheBuster = "&im=" + source + "&cacheBuster=true";
@@ -20495,7 +20495,7 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
   com.inq.flash.client.control.FlashVars.getWindowId() + cacheBuster;
   return url;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.ciPrepareUrlForBeacon = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.ciPrepareUrlForBeacon");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.ciPrepareUrlForBeacon = function() {
   var connection = Application.application.applicationController.getMessagingFramework().getConnection();
   if (connection) {
     return connection.prepareUrlForBeacon.call(connection);
@@ -20503,7 +20503,7 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     return "";
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.prepareUrlForBeacon = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.prepareUrlForBeacon");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.prepareUrlForBeacon = function() {
   if (this.isConnected() && !this.forceDisconnected) {
     if (!this.isIE) {
       this.disable();
@@ -20515,10 +20515,10 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
     return url;
   }
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype._getResponseTimestamp = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype._getResponseTimestamp");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype._getResponseTimestamp = function() {
   return this._responseTimestamp;
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.successfulResponseHandler = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.successfulResponseHandler");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.successfulResponseHandler = function() {
   if (this.sendMessageFail) {
     this.sendMessageFail = false;
     Application.application.notificationController.showConnectionRestoredMessage();
@@ -20526,16 +20526,16 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.protot
   this._responseTimestamp = Date.now();
   this.clearSuccessfulPendingConnectionTimer();
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.failedResponseHandler = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.failedResponseHandler");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.failedResponseHandler = function() {
   this.sendMessageFail = true;
   Application.application.notificationController.showConnectionIssuesMessage();
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.pendingConnectionEstablished = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.pendingConnectionEstablished");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.pendingConnectionEstablished = function() {
   this.clearSuccessfulPendingConnectionTimer();
   var delay = 2 * com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.RETRY_DELAY;
   this._timerSuccessfulPendingConnection = setTimeout(this.successfulResponseHandler.bind(this), delay);
 };
-com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.clearSuccessfulPendingConnectionTimer = function() {  console.warn("com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.clearSuccessfulPendingConnectionTimer");
+com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.prototype.clearSuccessfulPendingConnectionTimer = function() {
   if (this._timerSuccessfulPendingConnection) {
     clearTimeout(this._timerSuccessfulPendingConnection);
     this._timerSuccessfulPendingConnection = null;
@@ -20578,22 +20578,22 @@ com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.GET_MS
 if (!com.inq.flash.messagingframework.util) {
   com.inq.flash.messagingframework.util = {};
 }
-;com.inq.flash.messagingframework.util.XTrace = function() {  console.warn("com.inq.flash.messagingframework.util.XTrace");
+;com.inq.flash.messagingframework.util.XTrace = function() {
 };
 $hxClasses["com.inq.flash.messagingframework.util.XTrace"] = com.inq.flash.messagingframework.util.XTrace;
 com.inq.flash.messagingframework.util.XTrace.__name__ = ["com", "inq", "flash", "messagingframework", "util", "XTrace"];
-com.inq.flash.messagingframework.util.XTrace.redirection = function() {  console.warn("com.inq.flash.messagingframework.util.XTrace.redirection");
+com.inq.flash.messagingframework.util.XTrace.redirection = function() {
   haxe.Log.trace = com.inq.flash.messagingframework.util.XTrace.sysTrace;
   return true;
 };
-com.inq.flash.messagingframework.util.XTrace.setRedirection = function() {  console.warn("com.inq.flash.messagingframework.util.XTrace.setRedirection");
+com.inq.flash.messagingframework.util.XTrace.setRedirection = function() {
   haxe.Log.trace = com.inq.flash.messagingframework.util.XTrace.sysTrace;
   haxe.Log.trace("", {fileName:"XTrace.hx", lineNumber:34, className:"com.inq.flash.messagingframework.util.XTrace", methodName:"setRedirection"});
 };
-com.inq.flash.messagingframework.util.XTrace.sysTrace = function(v, inf) {  console.warn("com.inq.flash.messagingframework.util.XTrace.sysTrace");
+com.inq.flash.messagingframework.util.XTrace.sysTrace = function(v, inf) {
   var txt = "[" + inf.fileName + ":" + inf.lineNumber + " " + inf.methodName + "] " + Std.string(v);
 };
-com.inq.flash.messagingframework.util.XTrace.StackTrace = function(err, hdr) {  console.warn("com.inq.flash.messagingframework.util.XTrace.StackTrace");
+com.inq.flash.messagingframework.util.XTrace.StackTrace = function(err, hdr) {
   if (hdr == null) {
     hdr = "WARNING:";
   }
@@ -20601,11 +20601,11 @@ com.inq.flash.messagingframework.util.XTrace.StackTrace = function(err, hdr) {  
   haxe.Log.trace(hdr + " " + st, {fileName:"XTrace.hx", lineNumber:133, className:"com.inq.flash.messagingframework.util.XTrace", methodName:"StackTrace"});
 };
 com.inq.flash.messagingframework.util.XTrace.prototype.__class__ = com.inq.flash.messagingframework.util.XTrace;
-com.inq.utils.Util = function() {  console.warn("com.inq.utils.Util");
+com.inq.utils.Util = function() {
 };
 $hxClasses["com.inq.utils.Util"] = com.inq.utils.Util;
 com.inq.utils.Util.__name__ = ["com", "inq", "utils", "Util"];
-com.inq.utils.Util.publish = function(path, object) {  console.warn("com.inq.utils.Util.publish");
+com.inq.utils.Util.publish = function(path, object) {
   var parts = path.split(".");
   var point = window;
   var lastItemIndex = parts.length - 1;
@@ -20623,7 +20623,7 @@ com.inq.utils.Util.publish = function(path, object) {  console.warn("com.inq.uti
     point = point[partName];
   }
 };
-com.inq.utils.Util.getConfig = function(attrib, def) {  console.warn("com.inq.utils.Util.getConfig");
+com.inq.utils.Util.getConfig = function(attrib, def) {
   var configMap = null;
   try {
     configMap = Application.application[com.inq.utils.Util.configArea];
@@ -20635,13 +20635,13 @@ com.inq.utils.Util.getConfig = function(attrib, def) {  console.warn("com.inq.ut
   }
   return def;
 };
-com.inq.utils.Util.getConfigAsBoolean = function(attributeName) {  console.warn("com.inq.utils.Util.getConfigAsBoolean");
+com.inq.utils.Util.getConfigAsBoolean = function(attributeName) {
   return !!com.inq.utils.Util.getConfig(attributeName);
 };
-com.inq.utils.Util.getIEMajorVer = function(compatibility) {  console.warn("com.inq.utils.Util.getIEMajorVer");
+com.inq.utils.Util.getIEMajorVer = function(compatibility) {
   return com.inq.flash.client.control.FlashPeer.getBrowserMajorVer(compatibility);
 };
-com.inq.utils.Util.getHostFromUrl = function(url) {  console.warn("com.inq.utils.Util.getHostFromUrl");
+com.inq.utils.Util.getHostFromUrl = function(url) {
   return url.indexOf("/") > -1 ? url.split("/", 3)[2] : url;
 };
 com.inq.utils.Util.prototype.__class__ = com.inq.utils.Util;
@@ -20649,7 +20649,7 @@ com.inq.utils.Util.isIE = window.navigator.appName == "Microsoft Internet Explor
 com.inq.utils.Util.isIEQuirks = com.inq.utils.Util.isIE && window.top.document.compatMode !== "CSS1Compat";
 com.inq.utils.Util.configArea = "skinConfig";
 com.inq.utils.Util.xformsCloseEventFlag = "sendEventChatCloseToAutomatons";
-com.inq.net.URLLoader = function(customerID, timeout) {  console.warn("com.inq.net.URLLoader");
+com.inq.net.URLLoader = function(customerID, timeout) {
   com.inq.events.EventDispatcher.call(this);
   this.index = 0;
   this.storageKey = "";
@@ -20661,7 +20661,7 @@ com.inq.net.URLLoader = function(customerID, timeout) {  console.warn("com.inq.n
   this.customerIDAsFirstParamExpression = customerID ? "?" + com.inq.flash.messagingframework.connectionhandling.HTTPConnectionHandler.CUSTOMER_ID_PARAM + customerID : "";
 };
 $hxClasses.extend(com.inq.events.EventDispatcher, com.inq.net.URLLoader, "com.inq.net.URLLoader");
-com.inq.net.URLLoader.getContext = function(UrlIndex) {  console.warn("com.inq.net.URLLoader.getContext");
+com.inq.net.URLLoader.getContext = function(UrlIndex) {
   var idxContext = com.inq.net.URLLoader.indexOfContext(UrlIndex);
   if (idxContext != -1) {
     return com.inq.net.URLLoader.loadingArray.splice(idxContext, 1)[0].Context;
@@ -20669,7 +20669,7 @@ com.inq.net.URLLoader.getContext = function(UrlIndex) {  console.warn("com.inq.n
     return null;
   }
 };
-com.inq.net.URLLoader._httpRequestHandler = function(id, data, status, responseHeaderCacheControl) {  console.warn("com.inq.net.URLLoader._httpRequestHandler");
+com.inq.net.URLLoader._httpRequestHandler = function(id, data, status, responseHeaderCacheControl) {
   var instance = com.inq.net.URLLoader.getContext(id);
   if (null == instance) {
     return;
@@ -20691,7 +20691,7 @@ com.inq.net.URLLoader._httpRequestHandler = function(id, data, status, responseH
     }
   }
 };
-com.inq.net.URLLoader.loadComplete = function(context) {  console.warn("com.inq.net.URLLoader.loadComplete");
+com.inq.net.URLLoader.loadComplete = function(context) {
   if (context) {
     if (context.eval) {
       eval(context.data);
@@ -20700,15 +20700,15 @@ com.inq.net.URLLoader.loadComplete = function(context) {  console.warn("com.inq.
     }
   }
 };
-com.inq.net.URLLoader.prototype.cancelLoad = function() {  console.warn("com.inq.net.URLLoader.prototype.cancelLoad");
+com.inq.net.URLLoader.prototype.cancelLoad = function() {
   if (com.inq.net.URLLoader.lastGetMsg) {
     com.inq.flash.client.control.FlashPeer.postRequestToIframeProxy(com.inq.net.URLLoader.lastGetMsg.url, ["ABORT", com.inq.net.URLLoader.lastGetMsg.id]);
   }
 };
-com.inq.net.URLLoader.prototype.close = function() {  console.warn("com.inq.net.URLLoader.prototype.close");
+com.inq.net.URLLoader.prototype.close = function() {
   com.inq.net.URLLoader.getContext(this.key);
 };
-com.inq.net.URLLoader.prototype.loadByPosting = function(reqUrl, id, sendPost) {  console.warn("com.inq.net.URLLoader.prototype.loadByPosting");
+com.inq.net.URLLoader.prototype.loadByPosting = function(reqUrl, id, sendPost) {
   com.inq.net.URLLoader._hostedFile = window.location.protocol + "//" + (window.location.host + window.location.pathname);
   var parts = reqUrl.split("?");
   var dest = parts[0];
@@ -20736,14 +20736,14 @@ com.inq.net.URLLoader.prototype.loadByPosting = function(reqUrl, id, sendPost) {
   context["callbackFun"] = com.inq.net.URLLoader.loadComplete;
   com.inq.flash.client.control.FlashPeer.postRequestToIframeProxy(destURL, ["POSTCHAT", id, "", com.inq.net.URLLoader._hostedFile, destURL, data, this.timeout], id, context);
 };
-com.inq.net.URLLoader.prototype.load = function(request, sendKey, sendPost) {  console.warn("com.inq.net.URLLoader.prototype.load");
+com.inq.net.URLLoader.prototype.load = function(request, sendKey, sendPost) {
   this.data = "";
   this.index = ++com.inq.net.URLLoader.seq;
   this.key = (sendKey ? sendKey : this.index) + "";
   this.registerContext(this.key);
   this.loadByPosting(request.url, this.key, sendPost);
 };
-com.inq.net.URLLoader.prototype.fireEvent = function(eventName) {  console.warn("com.inq.net.URLLoader.prototype.fireEvent");
+com.inq.net.URLLoader.prototype.fireEvent = function(eventName) {
   var ev = new com.inq.events.Event(eventName);
   ev.currentTarget = this;
   ev.target = this;
@@ -20773,12 +20773,12 @@ com.inq.net.URLLoader.prototype.fireEvent = function(eventName) {  console.warn(
   }
   return false;
 };
-com.inq.net.URLLoader.prototype.registerContext = function(Url) {  console.warn("com.inq.net.URLLoader.prototype.registerContext");
+com.inq.net.URLLoader.prototype.registerContext = function(Url) {
   if (com.inq.net.URLLoader.indexOfContext(Url) == -1) {
     com.inq.net.URLLoader.loadingArray.push({UrlIndex:Url, Context:this});
   }
 };
-com.inq.net.URLLoader.indexOfContext = function(key) {  console.warn("com.inq.net.URLLoader.indexOfContext");
+com.inq.net.URLLoader.indexOfContext = function(key) {
   for (var i = 0;i < com.inq.net.URLLoader.loadingArray.length;i++) {
     if (key == com.inq.net.URLLoader.loadingArray[i].UrlIndex) {
       return i;
@@ -20794,7 +20794,7 @@ com.inq.net.URLLoader.seq = 0;
 com.inq.net.URLLoader.lastGetMsg = null;
 com.inq.net.URLLoader._hostedFile = "";
 com.inq.net.URLLoader.isIE7 = window.navigator.appVersion.indexOf("MSIE 7.") != -1;
-com.inq.net.URLRequest = function(url) {  console.warn("com.inq.net.URLRequest");
+com.inq.net.URLRequest = function(url) {
   this.url = url;
 };
 $hxClasses["com.inq.net.URLRequest"] = com.inq.net.URLRequest;
@@ -20804,7 +20804,7 @@ com.inq.net.URLRequest.prototype.method = null;
 com.inq.net.URLRequest.prototype.data = null;
 com.inq.net.URLRequest.prototype.contentType = null;
 com.inq.net.URLRequest.prototype.__class__ = com.inq.net.URLRequest;
-com.inq.stage.IDragResize = function() {  console.warn("com.inq.stage.IDragResize");
+com.inq.stage.IDragResize = function() {
 };
 $hxClasses["com.inq.stage.IDragResize"] = com.inq.stage.IDragResize;
 com.inq.stage.IDragResize.__name__ = ["com", "inq", "stage", "IDragResize"];
@@ -20815,7 +20815,7 @@ com.inq.stage.IDragResize.prototype.setLeft = null;
 com.inq.stage.IDragResize.prototype.getDefaultMax = null;
 com.inq.stage.IDragResize.prototype.getDefaultMin = null;
 com.inq.stage.IDragResize.prototype.__class__ = com.inq.stage.IDragResize;
-com.inq.stage.DragResize = function() {  console.warn("com.inq.stage.DragResize");
+com.inq.stage.DragResize = function() {
   this.className = "DragResize";
   this.styleSaved = "";
   this.cursor = "default";
@@ -20825,16 +20825,16 @@ com.inq.stage.DragResize = function() {  console.warn("com.inq.stage.DragResize"
 $hxClasses["com.inq.stage.DragResize"] = com.inq.stage.DragResize;
 com.inq.stage.DragResize.__name__ = ["com", "inq", "stage", "DragResize"];
 com.inq.stage.DragResize.o = null;
-com.inq.stage.DragResize["typeof"] = function(v) {  console.warn("com.inq.stage.DragResize[\"typeof\"]");
+com.inq.stage.DragResize["typeof"] = function(v) {
   return typeof v;
 };
-com.inq.stage.DragResize.WhenDone = function() {  console.warn("com.inq.stage.DragResize.WhenDone");
+com.inq.stage.DragResize.WhenDone = function() {
   if (com.inq.stage.DragResize.instance != null) {
     com.inq.stage.DragResize.instance.whenDone();
   }
   com.inq.stage.DragResize.instance = null;
 };
-com.inq.stage.DragResize.stopEvent = function(e) {  console.warn("com.inq.stage.DragResize.stopEvent");
+com.inq.stage.DragResize.stopEvent = function(e) {
   var ev = !!e ? e : Application.application.getPanelWindow().event;
   if (ev["preventDefault"] != null) {
     ev.preventDefault();
@@ -20844,7 +20844,7 @@ com.inq.stage.DragResize.stopEvent = function(e) {  console.warn("com.inq.stage.
   }
   return false;
 };
-com.inq.stage.DragResize.prototype._removeEventListener = function(object, eventName, func) {  console.warn("com.inq.stage.DragResize.prototype._removeEventListener");
+com.inq.stage.DragResize.prototype._removeEventListener = function(object, eventName, func) {
   if (null != window["removeEventListener"]) {
     object.removeEventListener(eventName, func, false);
   } else {
@@ -20855,7 +20855,7 @@ com.inq.stage.DragResize.prototype._removeEventListener = function(object, event
     }
   }
 };
-com.inq.stage.DragResize.prototype._attachEventListener = function(object, eventName, func) {  console.warn("com.inq.stage.DragResize.prototype._attachEventListener");
+com.inq.stage.DragResize.prototype._attachEventListener = function(object, eventName, func) {
   if (null != window["addEventListener"]) {
     object.addEventListener(eventName, func, false);
   } else {
@@ -20866,7 +20866,7 @@ com.inq.stage.DragResize.prototype._attachEventListener = function(object, event
     }
   }
 };
-com.inq.stage.DragResize.prototype.bindClosures = function() {  console.warn("com.inq.stage.DragResize.prototype.bindClosures");
+com.inq.stage.DragResize.prototype.bindClosures = function() {
   this.uponTouchStartClosure = $bind(this, this.uponTouchStart);
   this.uponTouchCancelClosure = $bind(this, this.uponTouchCancel);
   this.uponTouchEndClosure = $bind(this, this.uponTouchEnd);
@@ -20876,7 +20876,7 @@ com.inq.stage.DragResize.prototype.bindClosures = function() {  console.warn("co
   this.uponMouseDragClosure = $bind(this, this.uponDrag);
   this.uponMouseDropClosure = $bind(this, this.uponDrop);
 };
-com.inq.stage.DragResize.prototype.init = function(o, oRoot) {  console.warn("com.inq.stage.DragResize.prototype.init");
+com.inq.stage.DragResize.prototype.init = function(o, oRoot) {
   if (window.parent.name == "_inqPersistentChat") {
     return;
   }
@@ -20905,7 +20905,7 @@ com.inq.stage.DragResize.prototype.init = function(o, oRoot) {  console.warn("co
     }
   }
 };
-com.inq.stage.DragResize.prototype.fixDragImage = function(element) {  console.warn("com.inq.stage.DragResize.prototype.fixDragImage");
+com.inq.stage.DragResize.prototype.fixDragImage = function(element) {
   var par;
   var _g1 = 0;
   var _g;
@@ -20976,7 +20976,7 @@ com.inq.stage.DragResize.prototype.fixDragImage = function(element) {  console.w
   }
   return element;
 };
-com.inq.stage.DragResize.prototype.isLeftClick = function(e) {  console.warn("com.inq.stage.DragResize.prototype.isLeftClick");
+com.inq.stage.DragResize.prototype.isLeftClick = function(e) {
   var ev = !!e ? e : Application.application.getPanelWindow().event;
   var mouseButtonState = 1;
   if (window.navigator.appName == "Netscape") {
@@ -20989,49 +20989,49 @@ com.inq.stage.DragResize.prototype.isLeftClick = function(e) {  console.warn("co
   }
   return mouseButtonState == 1;
 };
-com.inq.stage.DragResize.prototype.fireDone = function() {  console.warn("com.inq.stage.DragResize.prototype.fireDone");
+com.inq.stage.DragResize.prototype.fireDone = function() {
   this.whenDone();
 };
-com.inq.stage.DragResize.prototype.fireDoneState = function() {  console.warn("com.inq.stage.DragResize.prototype.fireDoneState");
+com.inq.stage.DragResize.prototype.fireDoneState = function() {
   com.inq.stage.DragResize.instance = this;
   window.setTimeout(com.inq.stage.DragResize.WhenDone, 1);
 };
-com.inq.stage.DragResize.prototype.removeTouchEvents = function() {  console.warn("com.inq.stage.DragResize.prototype.removeTouchEvents");
+com.inq.stage.DragResize.prototype.removeTouchEvents = function() {
   this._attachEventListener(this.dragImage, "mousedown", this.uponMouseDragStartClosure);
   this._removeEventListener(com.inq.stage.DragResize.doc, "touchcancel", this.uponTouchCancelClosure);
   this._removeEventListener(com.inq.stage.DragResize.doc, "touchend", this.uponTouchEndClosure);
   this._removeEventListener(com.inq.stage.DragResize.doc, "touchmove", this.uponTouchDragClosure);
 };
-com.inq.stage.DragResize.prototype.removeMouseEvents = function() {  console.warn("com.inq.stage.DragResize.prototype.removeMouseEvents");
+com.inq.stage.DragResize.prototype.removeMouseEvents = function() {
   this._attachEventListener(this.dragImage, "touchstart", this.uponTouchStartClosure);
   this._removeEventListener(com.inq.stage.DragResize.doc, "mouseout", this.uponMouseOutClosure);
   this._removeEventListener(com.inq.stage.DragResize.doc, "mousemove", this.uponMouseDragClosure);
   this._removeEventListener(com.inq.stage.DragResize.doc, "mouseup", this.uponMouseDropClosure);
 };
-com.inq.stage.DragResize.prototype.addTouchEvents = function() {  console.warn("com.inq.stage.DragResize.prototype.addTouchEvents");
+com.inq.stage.DragResize.prototype.addTouchEvents = function() {
   this._removeEventListener(this.dragImage, "mousedown", this.uponMouseDragStartClosure);
   this._attachEventListener(com.inq.stage.DragResize.doc, "touchcancel", this.uponTouchCancelClosure);
   this._attachEventListener(com.inq.stage.DragResize.doc, "touchend", this.uponTouchEndClosure);
   this._attachEventListener(com.inq.stage.DragResize.doc, "touchmove", this.uponTouchDragClosure);
 };
-com.inq.stage.DragResize.prototype.addMouseEvents = function() {  console.warn("com.inq.stage.DragResize.prototype.addMouseEvents");
+com.inq.stage.DragResize.prototype.addMouseEvents = function() {
   this._removeEventListener(this.obj, "touchstart", this.uponTouchStartClosure);
   this._attachEventListener(com.inq.stage.DragResize.doc, "mouseout", this.uponMouseOutClosure);
   this._attachEventListener(com.inq.stage.DragResize.doc, "mousemove", this.uponMouseDragClosure);
   this._attachEventListener(com.inq.stage.DragResize.doc, "mouseup", this.uponMouseDropClosure);
 };
-com.inq.stage.DragResize.prototype.removeEvents = function() {  console.warn("com.inq.stage.DragResize.prototype.removeEvents");
+com.inq.stage.DragResize.prototype.removeEvents = function() {
   this.removeMouseEvents();
   this.fireDoneState();
 };
-com.inq.stage.DragResize.prototype.uponTouchCancel = function(e) {  console.warn("com.inq.stage.DragResize.prototype.uponTouchCancel");
+com.inq.stage.DragResize.prototype.uponTouchCancel = function(e) {
   var ev = !!e ? e : Application.application.getPanelWindow().event;
   if (ev["preventDefault"] != null) {
     ev.preventDefault();
   }
   return false;
 };
-com.inq.stage.DragResize.prototype.uponTouchEnd = function(e) {  console.warn("com.inq.stage.DragResize.prototype.uponTouchEnd");
+com.inq.stage.DragResize.prototype.uponTouchEnd = function(e) {
   try {
     var ev = !!e ? e : Application.application.getPanelWindow().event;
     if (ev["preventDefault"] != null) {
@@ -21051,7 +21051,7 @@ com.inq.stage.DragResize.prototype.uponTouchEnd = function(e) {  console.warn("c
   }
   return false;
 };
-com.inq.stage.DragResize.prototype.getTouchByIdentifer = function(ev) {  console.warn("com.inq.stage.DragResize.prototype.getTouchByIdentifer");
+com.inq.stage.DragResize.prototype.getTouchByIdentifer = function(ev) {
   try {
     var touchList = ev.changedTouches;
     if (touchList == null) {
@@ -21078,12 +21078,12 @@ com.inq.stage.DragResize.prototype.getTouchByIdentifer = function(ev) {  console
   }
   return null;
 };
-com.inq.stage.DragResize.prototype.done = function() {  console.warn("com.inq.stage.DragResize.prototype.done");
+com.inq.stage.DragResize.prototype.done = function() {
   this.touchIdentifier = com.inq.stage.DragResize.TOUCH_IDENTIFER_UNUSED;
   this.restoreStyle();
   window.setTimeout($bind(this, this.whenDone), 1);
 };
-com.inq.stage.DragResize.prototype.uponDrop = function(e) {  console.warn("com.inq.stage.DragResize.prototype.uponDrop");
+com.inq.stage.DragResize.prototype.uponDrop = function(e) {
   var ev = !!e ? e : Application.application.getPanelWindow().event;
   if (ev["preventDefault"] != null) {
     ev.preventDefault();
@@ -21093,7 +21093,7 @@ com.inq.stage.DragResize.prototype.uponDrop = function(e) {  console.warn("com.i
   this.done();
   return this.reposition(pCur);
 };
-com.inq.stage.DragResize.prototype.uponMouseOut = function(e) {  console.warn("com.inq.stage.DragResize.prototype.uponMouseOut");
+com.inq.stage.DragResize.prototype.uponMouseOut = function(e) {
   var ev = !!e ? e : Application.application.getPanelWindow().event;
   if (ev["preventDefault"] != null) {
     ev.preventDefault();
@@ -21126,10 +21126,10 @@ com.inq.stage.DragResize.prototype.uponMouseOut = function(e) {  console.warn("c
   }
   return this.uponDrag(ev);
 };
-com.inq.stage.DragResize.prototype.getScreenMax = function() {  console.warn("com.inq.stage.DragResize.prototype.getScreenMax");
+com.inq.stage.DragResize.prototype.getScreenMax = function() {
   return {X:com.inq.flash.client.chatskins.ScrollMonitor.getScrollLeft() + com.inq.flash.client.chatskins.ScrollMonitor.getScrollWidth(), Y:com.inq.flash.client.chatskins.ScrollMonitor.getScrollTop() + com.inq.flash.client.chatskins.ScrollMonitor.getScrollHeight()};
 };
-com.inq.stage.DragResize.prototype.repositionTouch = function(pCur) {  console.warn("com.inq.stage.DragResize.prototype.repositionTouch");
+com.inq.stage.DragResize.prototype.repositionTouch = function(pCur) {
   try {
     if (this.pLast != null && pCur.X == this.pLast.X && pCur.Y == this.pLast.Y) {
       return false;
@@ -21167,7 +21167,7 @@ com.inq.stage.DragResize.prototype.repositionTouch = function(pCur) {  console.w
   }
   return false;
 };
-com.inq.stage.DragResize.prototype.reposition = function(pCur) {  console.warn("com.inq.stage.DragResize.prototype.reposition");
+com.inq.stage.DragResize.prototype.reposition = function(pCur) {
   var top;
   var left;
   left = pCur.X - this.deltaX;
@@ -21198,7 +21198,7 @@ com.inq.stage.DragResize.prototype.reposition = function(pCur) {  console.warn("
   this.pLast = pCur;
   return false;
 };
-com.inq.stage.DragResize.prototype.uponTouchDrag = function(e) {  console.warn("com.inq.stage.DragResize.prototype.uponTouchDrag");
+com.inq.stage.DragResize.prototype.uponTouchDrag = function(e) {
   var ev = !!e ? e : Application.application.getPanelWindow().event;
   if (ev["preventDefault"] != null) {
     ev.preventDefault();
@@ -21215,7 +21215,7 @@ com.inq.stage.DragResize.prototype.uponTouchDrag = function(e) {  console.warn("
   }
   return false;
 };
-com.inq.stage.DragResize.prototype.uponDrag = function(e) {  console.warn("com.inq.stage.DragResize.prototype.uponDrag");
+com.inq.stage.DragResize.prototype.uponDrag = function(e) {
   var ev = !!e ? e : Application.application.getPanelWindow().event;
   if (!!this.obj.dragging) {
     return false;
@@ -21229,7 +21229,7 @@ com.inq.stage.DragResize.prototype.uponDrag = function(e) {  console.warn("com.i
   this.obj["dragging"] = false;
   return false;
 };
-com.inq.stage.DragResize.prototype.uponDragOverFromStage = function(e) {  console.warn("com.inq.stage.DragResize.prototype.uponDragOverFromStage");
+com.inq.stage.DragResize.prototype.uponDragOverFromStage = function(e) {
   var ev = !!e ? e : Application.application.getPanelWindow().event;
   if (ev["preventDefault"] != null) {
     ev.preventDefault();
@@ -21238,7 +21238,7 @@ com.inq.stage.DragResize.prototype.uponDragOverFromStage = function(e) {  consol
   this.reposition(pCur);
   return false;
 };
-com.inq.stage.DragResize.prototype.uponDragEndFromStage = function(e) {  console.warn("com.inq.stage.DragResize.prototype.uponDragEndFromStage");
+com.inq.stage.DragResize.prototype.uponDragEndFromStage = function(e) {
   var ev = !!e ? e : Application.application.getPanelWindow().event;
   if (ev["preventDefault"] != null) {
     ev.preventDefault();
@@ -21250,7 +21250,7 @@ com.inq.stage.DragResize.prototype.uponDragEndFromStage = function(e) {  console
   this.fireDoneState();
   return false;
 };
-com.inq.stage.DragResize.prototype.uponTouchStart = function(e) {  console.warn("com.inq.stage.DragResize.prototype.uponTouchStart");
+com.inq.stage.DragResize.prototype.uponTouchStart = function(e) {
   var ev = !!e ? e : Application.application.getPanelWindow().event;
   if (ev["preventDefault"] != null) {
     ev.preventDefault();
@@ -21274,7 +21274,7 @@ com.inq.stage.DragResize.prototype.uponTouchStart = function(e) {  console.warn(
   this.pLast = {X:this.touch.pageX - this.clickOffsetX, Y:this.touch.pageY - this.clickOffsetY};
   return false;
 };
-com.inq.stage.DragResize.prototype.uponDragStart = function(e) {  console.warn("com.inq.stage.DragResize.prototype.uponDragStart");
+com.inq.stage.DragResize.prototype.uponDragStart = function(e) {
   var ev = !!e ? e : Application.application.getPanelWindow().event;
   if (ev["preventDefault"] != null) {
     ev.preventDefault();
@@ -21300,23 +21300,23 @@ com.inq.stage.DragResize.prototype.uponDragStart = function(e) {  console.warn("
   this.addMouseEvents();
   return false;
 };
-com.inq.stage.DragResize.prototype.setDragBorder = function() {  console.warn("com.inq.stage.DragResize.prototype.setDragBorder");
+com.inq.stage.DragResize.prototype.setDragBorder = function() {
 };
-com.inq.stage.DragResize.prototype.getDefaultMax = function() {  console.warn("com.inq.stage.DragResize.prototype.getDefaultMax");
+com.inq.stage.DragResize.prototype.getDefaultMax = function() {
   return {X:1E4, Y:1E4};
 };
-com.inq.stage.DragResize.prototype.getDefaultMin = function() {  console.warn("com.inq.stage.DragResize.prototype.getDefaultMin");
+com.inq.stage.DragResize.prototype.getDefaultMin = function() {
   return {X:0, Y:0};
 };
-com.inq.stage.DragResize.prototype.setLeft = function(top) {  console.warn("com.inq.stage.DragResize.prototype.setLeft");
+com.inq.stage.DragResize.prototype.setLeft = function(top) {
   window.alert("setLeft override failed");
 };
-com.inq.stage.DragResize.prototype.setTop = function(top) {  console.warn("com.inq.stage.DragResize.prototype.setTop");
+com.inq.stage.DragResize.prototype.setTop = function(top) {
   window.alert("setTop override failed");
 };
-com.inq.stage.DragResize.prototype.whenDone = function() {  console.warn("com.inq.stage.DragResize.prototype.whenDone");
+com.inq.stage.DragResize.prototype.whenDone = function() {
 };
-com.inq.stage.DragResize.prototype.getAbsolutePosition = function(e) {  console.warn("com.inq.stage.DragResize.prototype.getAbsolutePosition");
+com.inq.stage.DragResize.prototype.getAbsolutePosition = function(e) {
   var loc = this.getPosition(e);
   var p = window.frameElement;
   while (p != null) {
@@ -21329,7 +21329,7 @@ com.inq.stage.DragResize.prototype.getAbsolutePosition = function(e) {  console.
   }
   return loc;
 };
-com.inq.stage.DragResize.prototype.getTarget = function(e) {  console.warn("com.inq.stage.DragResize.prototype.getTarget");
+com.inq.stage.DragResize.prototype.getTarget = function(e) {
   var t = null;
   if (!e) {
     e = Application.application.getPanelWindow().event;
@@ -21346,7 +21346,7 @@ com.inq.stage.DragResize.prototype.getTarget = function(e) {  console.warn("com.
   }
   return t;
 };
-com.inq.stage.DragResize.prototype.isSupported = function(eventType) {  console.warn("com.inq.stage.DragResize.prototype.isSupported");
+com.inq.stage.DragResize.prototype.isSupported = function(eventType) {
   var el = window.document.createElement("img");
   el.setAttribute("on" + eventType, "return true;");
   var fun = el["on" + eventType];
@@ -21357,19 +21357,19 @@ com.inq.stage.DragResize.prototype.isSupported = function(eventType) {  console.
     return "string" == type;
   }
 };
-com.inq.stage.DragResize.prototype.restoreStyle = function() {  console.warn("com.inq.stage.DragResize.prototype.restoreStyle");
+com.inq.stage.DragResize.prototype.restoreStyle = function() {
   this.obj.style.cssText = this.styleSaved;
 };
-com.inq.stage.DragResize.prototype.saveStyle = function() {  console.warn("com.inq.stage.DragResize.prototype.saveStyle");
+com.inq.stage.DragResize.prototype.saveStyle = function() {
   this.styleSaved = this.obj.style.cssText;
 };
-com.inq.stage.DragResize.prototype.getPositionIE = function(e) {  console.warn("com.inq.stage.DragResize.prototype.getPositionIE");
+com.inq.stage.DragResize.prototype.getPositionIE = function(e) {
   return {X:window.parent.event.clientX, Y:window.parent.event.clientY};
 };
-com.inq.stage.DragResize.prototype.getPositionGecko = function(e) {  console.warn("com.inq.stage.DragResize.prototype.getPositionGecko");
+com.inq.stage.DragResize.prototype.getPositionGecko = function(e) {
   return {X:e.clientX, Y:e.clientY};
 };
-com.inq.stage.DragResize.prototype.getPosition = function(e) {  console.warn("com.inq.stage.DragResize.prototype.getPosition");
+com.inq.stage.DragResize.prototype.getPosition = function(e) {
   return {X:e.clientX, Y:e.clientY};
 };
 com.inq.stage.DragResize.prototype.uponMouseDropClosure = null;
@@ -21411,7 +21411,7 @@ com.inq.stage.DragResize.INSTANCE_LABEL = "instDragResize";
 com.inq.stage.DragResize.doc = window.parent.document;
 com.inq.stage.DragResize.instance = null;
 com.inq.stage.DragResize.DEFAULT_BORDER_COLOR = "SlateGray";
-com.inq.stage.Immovable = function() {  console.warn("com.inq.stage.Immovable");
+com.inq.stage.Immovable = function() {
   com.inq.stage.DragResize.call(this);
   this.className = "Immovable";
   this.cursor = "";
@@ -21422,45 +21422,45 @@ com.inq.stage.Immovable.__super__ = com.inq.stage.DragResize;
 for (var k in com.inq.stage.DragResize.prototype) {
   com.inq.stage.Immovable.prototype[k] = com.inq.stage.DragResize.prototype[k];
 }
-com.inq.stage.Immovable.MakeImmovable = function() {  console.warn("com.inq.stage.Immovable.MakeImmovable");
+com.inq.stage.Immovable.MakeImmovable = function() {
   var instance = new com.inq.stage.Immovable;
   var cntr = window.parent.document.getElementById("inqChatStage");
   var dragHandleElem = window.parent.document.getElementById("inqTitleBar");
   instance.init(dragHandleElem, cntr);
   return instance;
 };
-com.inq.stage.Immovable.immobilize = function(node) {  console.warn("com.inq.stage.Immovable.immobilize");
+com.inq.stage.Immovable.immobilize = function(node) {
   com.inq.utils.Capabilities.BindListener(node, "touchmove", com.inq.stage.DragResize.stopEvent);
 };
-com.inq.stage.Immovable.prototype.whenDone = function() {  console.warn("com.inq.stage.Immovable.prototype.whenDone");
+com.inq.stage.Immovable.prototype.whenDone = function() {
 };
-com.inq.stage.Immovable.prototype.uponDragStart = function(e) {  console.warn("com.inq.stage.Immovable.prototype.uponDragStart");
+com.inq.stage.Immovable.prototype.uponDragStart = function(e) {
   return com.inq.stage.DragResize.stopEvent(e);
 };
-com.inq.stage.Immovable.prototype.uponTouchEnd = function(e) {  console.warn("com.inq.stage.Immovable.prototype.uponTouchEnd");
+com.inq.stage.Immovable.prototype.uponTouchEnd = function(e) {
   return com.inq.stage.DragResize.stopEvent(e);
 };
-com.inq.stage.Immovable.prototype.uponDrop = function(e) {  console.warn("com.inq.stage.Immovable.prototype.uponDrop");
+com.inq.stage.Immovable.prototype.uponDrop = function(e) {
   return com.inq.stage.DragResize.stopEvent(e);
 };
-com.inq.stage.Immovable.prototype.uponMouseOut = function(e) {  console.warn("com.inq.stage.Immovable.prototype.uponMouseOut");
+com.inq.stage.Immovable.prototype.uponMouseOut = function(e) {
   return com.inq.stage.DragResize.stopEvent(e);
 };
-com.inq.stage.Immovable.prototype.uponTouchCancel = function(e) {  console.warn("com.inq.stage.Immovable.prototype.uponTouchCancel");
+com.inq.stage.Immovable.prototype.uponTouchCancel = function(e) {
   return com.inq.stage.DragResize.stopEvent(e);
 };
-com.inq.stage.Immovable.prototype.uponTouchDrag = function(e) {  console.warn("com.inq.stage.Immovable.prototype.uponTouchDrag");
+com.inq.stage.Immovable.prototype.uponTouchDrag = function(e) {
   return com.inq.stage.DragResize.stopEvent(e);
 };
-com.inq.stage.Immovable.prototype.uponDrag = function(e) {  console.warn("com.inq.stage.Immovable.prototype.uponDrag");
+com.inq.stage.Immovable.prototype.uponDrag = function(e) {
   return com.inq.stage.DragResize.stopEvent(e);
 };
-com.inq.stage.Immovable.prototype.uponTouchStart = function(e) {  console.warn("com.inq.stage.Immovable.prototype.uponTouchStart");
+com.inq.stage.Immovable.prototype.uponTouchStart = function(e) {
   return com.inq.stage.DragResize.stopEvent(e);
 };
 com.inq.stage.Immovable.prototype.__class__ = com.inq.stage.Immovable;
 com.inq.stage.Immovable.__interfaces__ = [com.inq.stage.IDragResize];
-com.inq.stage.Move = function() {  console.warn("com.inq.stage.Move");
+com.inq.stage.Move = function() {
   com.inq.stage.DragResize.call(this);
   this.className = "Move";
   this.cursor = "move";
@@ -21471,7 +21471,7 @@ com.inq.stage.Move.__super__ = com.inq.stage.DragResize;
 for (var k in com.inq.stage.DragResize.prototype) {
   com.inq.stage.Move.prototype[k] = com.inq.stage.DragResize.prototype[k];
 }
-com.inq.stage.Move.setDragable = function() {  console.warn("com.inq.stage.Move.setDragable");
+com.inq.stage.Move.setDragable = function() {
   if (window.parent.name == "_inqPersistentChat" || com.inq.flash.client.control.FlashPeer.isEmbeddedThemeValid()) {
     return;
   }
@@ -21480,14 +21480,14 @@ com.inq.stage.Move.setDragable = function() {  console.warn("com.inq.stage.Move.
   var dragHandleElem = window.parent.document.getElementById("inqTitleBar");
   instance.init(dragHandleElem, cntr);
 };
-com.inq.stage.Move.prototype.setTop = function(top) {  console.warn("com.inq.stage.Move.prototype.setTop");
+com.inq.stage.Move.prototype.setTop = function(top) {
   var o = this.obj;
   o.style.top = top + "px";
 };
-com.inq.stage.Move.prototype.setLeft = function(left) {  console.warn("com.inq.stage.Move.prototype.setLeft");
+com.inq.stage.Move.prototype.setLeft = function(left) {
   this.obj.style.left = left + "px";
 };
-com.inq.stage.Move.prototype.setDragBorder = function() {  console.warn("com.inq.stage.Move.prototype.setDragBorder");
+com.inq.stage.Move.prototype.setDragBorder = function() {
   var rootHeight = Std.parseInt(this.root.style.height);
   var rootWidth = Std.parseInt(this.root.style.width);
   var borderWidth = 7;
@@ -21498,7 +21498,7 @@ com.inq.stage.Move.prototype.setDragBorder = function() {  console.warn("com.inq
   this.obj.style.height = rootHeight - borderWidth + "px";
   this.obj.style.width = rootWidth - borderWidth + "px";
 };
-com.inq.stage.Move.prototype.whenDone = function() {  console.warn("com.inq.stage.Move.prototype.whenDone");
+com.inq.stage.Move.prototype.whenDone = function() {
   this.root.style.left = Std.string(this.pDraggerNow.X) + "px";
   this.root.style.top = Std.string(this.pDraggerNow.Y) + "px";
   var position = {X:this.pDraggerNow.X, Y:this.pDraggerNow.Y};
@@ -21507,17 +21507,17 @@ com.inq.stage.Move.prototype.whenDone = function() {  console.warn("com.inq.stag
   Application.initialXPos = position.X - vp.x;
   Application.initialYPos = position.Y - vp.y;
 };
-com.inq.stage.Move.prototype.getDefaultMax = function() {  console.warn("com.inq.stage.Move.prototype.getDefaultMax");
+com.inq.stage.Move.prototype.getDefaultMax = function() {
   var width = Std.parseInt(this.root.style.width);
   var height = Std.parseInt(this.root.style.height);
   return {X:com.inq.flash.client.chatskins.ScrollMonitor.getScrollLeft() + com.inq.flash.client.chatskins.ScrollMonitor.getScrollWidth() - width, Y:com.inq.flash.client.chatskins.ScrollMonitor.getScrollTop() + com.inq.flash.client.chatskins.ScrollMonitor.getScrollHeight() - height};
 };
-com.inq.stage.Move.prototype.getDefaultMin = function() {  console.warn("com.inq.stage.Move.prototype.getDefaultMin");
+com.inq.stage.Move.prototype.getDefaultMin = function() {
   return {X:com.inq.flash.client.chatskins.ScrollMonitor.getScrollLeft(), Y:com.inq.flash.client.chatskins.ScrollMonitor.getScrollTop()};
 };
 com.inq.stage.Move.prototype.__class__ = com.inq.stage.Move;
 com.inq.stage.Move.__interfaces__ = [com.inq.stage.IDragResize];
-com.inq.stage.Resize = function() {  console.warn("com.inq.stage.Resize");
+com.inq.stage.Resize = function() {
   com.inq.stage.DragResize.call(this);
   this.className = "Resize";
   this.cursor = "se-resize";
@@ -21528,7 +21528,7 @@ com.inq.stage.Resize.__super__ = com.inq.stage.DragResize;
 for (var k in com.inq.stage.DragResize.prototype) {
   com.inq.stage.Resize.prototype[k] = com.inq.stage.DragResize.prototype[k];
 }
-com.inq.stage.Resize.setResizable = function() {  console.warn("com.inq.stage.Resize.setResizable");
+com.inq.stage.Resize.setResizable = function() {
   if (window.parent.name == "_inqPersistentChat" || com.inq.flash.client.control.FlashPeer.isEmbeddedThemeValid()) {
     return;
   }
@@ -21548,11 +21548,11 @@ com.inq.stage.Resize.setResizable = function() {  console.warn("com.inq.stage.Re
   }
   instance.init(dragHandleElem, cntr);
 };
-com.inq.stage.Resize.prototype.whenDone = function() {  console.warn("com.inq.stage.Resize.prototype.whenDone");
+com.inq.stage.Resize.prototype.whenDone = function() {
   this.titlebar.style.cssText = this.titlebarStyle;
   Application.ResizeStage(this.newWidth, this.newHeight);
 };
-com.inq.stage.Resize.prototype.setDragBorder = function() {  console.warn("com.inq.stage.Resize.prototype.setDragBorder");
+com.inq.stage.Resize.prototype.setDragBorder = function() {
   this.stageLeft = this.root.style.left;
   this.stageTop = this.root.style.top;
   var height = Std.parseInt(this.root.style.height);
@@ -21572,25 +21572,25 @@ com.inq.stage.Resize.prototype.setDragBorder = function() {  console.warn("com.i
   this.titlebar.style.height = height - borderWidth + "px";
   this.titlebar.style.width = width - borderWidth + "px";
 };
-com.inq.stage.Resize.prototype.setTop = function(top) {  console.warn("com.inq.stage.Resize.prototype.setTop");
+com.inq.stage.Resize.prototype.setTop = function(top) {
   this.newHeight = top - this.pStart.Y + this.draggerHeight;
   this.titlebar.style.height = this.newHeight + "px";
   this.obj.style.top = top + "px";
 };
-com.inq.stage.Resize.prototype.setLeft = function(left) {  console.warn("com.inq.stage.Resize.prototype.setLeft");
+com.inq.stage.Resize.prototype.setLeft = function(left) {
   this.newWidth = left - this.pStart.X + this.draggerWidth;
   this.titlebar.style.width = this.newWidth + "px";
   this.obj.style.left = left + "px";
 };
-com.inq.stage.Resize.prototype.getDefaultMax = function() {  console.warn("com.inq.stage.Resize.prototype.getDefaultMax");
+com.inq.stage.Resize.prototype.getDefaultMax = function() {
   var width = Std.parseInt(this.obj.style.width);
   var height = Std.parseInt(this.obj.style.height);
   return {X:com.inq.flash.client.chatskins.ScrollMonitor.getScrollLeft() + com.inq.flash.client.chatskins.ScrollMonitor.getScrollWidth() - width, Y:com.inq.flash.client.chatskins.ScrollMonitor.getScrollTop() + com.inq.flash.client.chatskins.ScrollMonitor.getScrollHeight() - height};
 };
-com.inq.stage.Resize.prototype.getDefaultMin = function() {  console.warn("com.inq.stage.Resize.prototype.getDefaultMin");
+com.inq.stage.Resize.prototype.getDefaultMin = function() {
   return {X:this.pStart.X + Application.getMinWidth(), Y:this.pStart.Y + Application.getMinHeight()};
 };
-com.inq.stage.Resize.prototype.uponDrop = function(e) {  console.warn("com.inq.stage.Resize.prototype.uponDrop");
+com.inq.stage.Resize.prototype.uponDrop = function(e) {
   this.titlebar.style.cssText = this.titlebarStyle;
   return com.inq.stage.DragResize.prototype.uponDrop.call(this, e);
 };
@@ -21602,30 +21602,30 @@ com.inq.stage.Resize.prototype.stageLeft = null;
 com.inq.stage.Resize.prototype.stageTop = null;
 com.inq.stage.Resize.prototype.__class__ = com.inq.stage.Resize;
 com.inq.stage.Resize.__interfaces__ = [com.inq.stage.IDragResize];
-com.inq.stage.ViewportMgr = function() {  console.warn("com.inq.stage.ViewportMgr");
+com.inq.stage.ViewportMgr = function() {
 };
 $hxClasses.registerClass(com.inq.stage.ViewportMgr, "com.inq.stage.ViewportMgr");
 com.inq.stage.ViewportMgr.VIEWPORT_ID = "tcChat_viewport";
 com.inq.stage.ViewportMgr.impl = null;
-com.inq.stage.ViewportMgr.init = function() {  console.warn("com.inq.stage.ViewportMgr.init");
+com.inq.stage.ViewportMgr.init = function() {
   if (com.inq.stage.ViewportMgr.impl == null) {
     com.inq.stage.ViewportMgr.impl = com.inq.stage.ViewportMgr.getImplementation();
   }
 };
-com.inq.stage.ViewportMgr.close = function() {  console.warn("com.inq.stage.ViewportMgr.close");
+com.inq.stage.ViewportMgr.close = function() {
   if (com.inq.stage.ViewportMgr.impl != null) {
     com.inq.stage.ViewportMgr.hide();
   }
   com.inq.stage.ViewportMgr.impl = null;
 };
-com.inq.stage.ViewportMgr.visible = function(_vis) {  console.warn("com.inq.stage.ViewportMgr.visible");
+com.inq.stage.ViewportMgr.visible = function(_vis) {
   if (_vis) {
     com.inq.stage.ViewportMgr.show();
   } else {
     com.inq.stage.ViewportMgr.hide();
   }
 };
-com.inq.stage.ViewportMgr.show = function() {  console.warn("com.inq.stage.ViewportMgr.show");
+com.inq.stage.ViewportMgr.show = function() {
   if (com.inq.flash.client.control.MinimizeManager.isMinimized()) {
     return;
   }
@@ -21637,23 +21637,23 @@ com.inq.stage.ViewportMgr.show = function() {  console.warn("com.inq.stage.Viewp
     com.inq.utils.Timer.delay($bind(com.inq.stage.ViewportMgr.impl, com.inq.stage.ViewportMgr.impl.resizeChat), 50);
   }
 };
-com.inq.stage.ViewportMgr.hide = function() {  console.warn("com.inq.stage.ViewportMgr.hide");
+com.inq.stage.ViewportMgr.hide = function() {
   if (com.inq.stage.ViewportMgr.impl == null) {
     com.inq.stage.ViewportMgr.init();
   }
   com.inq.stage.ViewportMgr.impl && com.inq.stage.ViewportMgr.impl.hide();
 };
-com.inq.stage.ViewportMgr.uponResize = function() {  console.warn("com.inq.stage.ViewportMgr.uponResize");
+com.inq.stage.ViewportMgr.uponResize = function() {
   if (com.inq.stage.ViewportMgr.impl == null) {
     com.inq.stage.ViewportMgr.init();
   }
   com.inq.stage.ViewportMgr.impl && com.inq.stage.ViewportMgr.impl.uponResize();
 };
-com.inq.stage.ViewportMgr.getChatZoomLevel = function() {  console.warn("com.inq.stage.ViewportMgr.getChatZoomLevel");
+com.inq.stage.ViewportMgr.getChatZoomLevel = function() {
   com.inq.stage.ViewportMgr.init();
   return com.inq.stage.ViewportMgr.impl.getChatZoomLevel();
 };
-com.inq.stage.ViewportMgr.getImplementation = function() {  console.warn("com.inq.stage.ViewportMgr.getImplementation");
+com.inq.stage.ViewportMgr.getImplementation = function() {
   if (com.inq.utils.Capabilities.isPhone()) {
     if (com.inq.utils.Capabilities.isWindowsPhone()) {
       return new com.inq.stage.ViewportMgrImplPhoneWindows;
@@ -21676,30 +21676,30 @@ com.inq.stage.ViewportMgr.getImplementation = function() {  console.warn("com.in
   }
 };
 com.inq.stage.ViewportMgr.prototype.__class__ = com.inq.stage.ViewportMgr;
-com.inq.stage.ViewportMgrImplBase = function() {  console.warn("com.inq.stage.ViewportMgrImplBase");
+com.inq.stage.ViewportMgrImplBase = function() {
   this.isShown = false;
 };
 $hxClasses.registerClass(com.inq.stage.ViewportMgrImplBase, "com.inq.stage.ViewportMgrImplBase");
 com.inq.stage.ViewportMgrImplBase.prototype.isShown = false;
-com.inq.stage.ViewportMgrImplBase.prototype.hide = function() {  console.warn("com.inq.stage.ViewportMgrImplBase.prototype.hide");
+com.inq.stage.ViewportMgrImplBase.prototype.hide = function() {
   if (!this.isShown) {
     return;
   }
   this.isShown = false;
 };
-com.inq.stage.ViewportMgrImplBase.prototype.show = function() {  console.warn("com.inq.stage.ViewportMgrImplBase.prototype.show");
+com.inq.stage.ViewportMgrImplBase.prototype.show = function() {
   if (this.isShown) {
     return;
   }
   this.isShown = true;
 };
-com.inq.stage.ViewportMgrImplBase.prototype.uponResize = function() {  console.warn("com.inq.stage.ViewportMgrImplBase.prototype.uponResize");
+com.inq.stage.ViewportMgrImplBase.prototype.uponResize = function() {
 };
-com.inq.stage.ViewportMgrImplBase.prototype.getChatZoomLevel = function() {  console.warn("com.inq.stage.ViewportMgrImplBase.prototype.getChatZoomLevel");
+com.inq.stage.ViewportMgrImplBase.prototype.getChatZoomLevel = function() {
   return window.top.innerWidth / window.top.document.documentElement.offsetWidth;
 };
 com.inq.stage.ViewportMgrImplBase.prototype.__class__ = com.inq.stage.ViewportMgrImplBase;
-com.inq.stage.ViewportMgrImplMobile = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile");
+com.inq.stage.ViewportMgrImplMobile = function() {
   com.inq.stage.ViewportMgrImplBase.call(this);
   this.clientWindow = window.parent;
   this.clientDocument = this.clientWindow.document;
@@ -21737,7 +21737,7 @@ com.inq.stage.ViewportMgrImplMobile = function() {  console.warn("com.inq.stage.
   }
 };
 $hxClasses.extend(com.inq.stage.ViewportMgrImplBase, com.inq.stage.ViewportMgrImplMobile, "com.inq.stage.ViewportMgrImplMobile");
-com.inq.stage.ViewportMgrImplMobile.prototype.createViewportElement = function(content) {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.createViewportElement");
+com.inq.stage.ViewportMgrImplMobile.prototype.createViewportElement = function(content) {
   if (this.chatViewportElement != null) {
     return;
   }
@@ -21757,7 +21757,7 @@ com.inq.stage.ViewportMgrImplMobile.prototype.createViewportElement = function(c
     this.headHtml.appendChild(this.chatViewportElement);
   }
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.modifyViewport = function(content) {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.modifyViewport");
+com.inq.stage.ViewportMgrImplMobile.prototype.modifyViewport = function(content) {
   if (this.chatViewportElement != null) {
     this.chatViewportElement.name = "viewport";
     this.chatViewportElement.content = content;
@@ -21769,7 +21769,7 @@ com.inq.stage.ViewportMgrImplMobile.prototype.modifyViewport = function(content)
     }
   }
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.RestoreViewport = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.RestoreViewport");
+com.inq.stage.ViewportMgrImplMobile.prototype.RestoreViewport = function() {
   try {
     var zoomLevel = 1;
     try {
@@ -21791,7 +21791,7 @@ com.inq.stage.ViewportMgrImplMobile.prototype.RestoreViewport = function() {  co
     haxe.Log.trace("RestoreViewport ERROR: " + er);
   }
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.getViewportElement = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.getViewportElement");
+com.inq.stage.ViewportMgrImplMobile.prototype.getViewportElement = function() {
   this.clientViewportElement = null;
   var viewports = this.clientDocument.getElementsByName("viewport");
   if (viewports != null && viewports.length > 0) {
@@ -21810,21 +21810,21 @@ com.inq.stage.ViewportMgrImplMobile.prototype.getViewportElement = function() { 
     }
   }
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.getDeviceWidth = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.getDeviceWidth");
+com.inq.stage.ViewportMgrImplMobile.prototype.getDeviceWidth = function() {
   return this.clientWindow.innerWidth;
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.getInitialWidth = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.getInitialWidth");
+com.inq.stage.ViewportMgrImplMobile.prototype.getInitialWidth = function() {
   return this.clientWindow.innerWidth;
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.fixPositioning = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.fixPositioning");
+com.inq.stage.ViewportMgrImplMobile.prototype.fixPositioning = function() {
   com.inq.flash.client.chatskins.ScrollMonitor.ScrollToNearTop();
   Application.application.setStyle("zoom", "" + Application.initialZoom);
   this.resizeToViewport();
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.resizeToViewport = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.resizeToViewport");
+com.inq.stage.ViewportMgrImplMobile.prototype.resizeToViewport = function() {
   com.inq.flash.client.chatskins.ChatTextFocusMonitor.resizeToViewport("ViewportMgr: fixPositioning");
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.hide = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.hide");
+com.inq.stage.ViewportMgrImplMobile.prototype.hide = function() {
   if (this.isShown === true) {
     try {
       com.inq.utils.Capabilities.UnbindListener(this.clientDocument, "touchmove", this.touchListener);
@@ -21845,14 +21845,14 @@ com.inq.stage.ViewportMgrImplMobile.prototype.hide = function() {  console.warn(
     }
   }
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.calcPhoneWidth = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.calcPhoneWidth");
+com.inq.stage.ViewportMgrImplMobile.prototype.calcPhoneWidth = function() {
   if (this.phoneWidth == 0) {
     this.modifyViewport("width=device-width");
     this.phoneWidth = window.top.document.documentElement.offsetWidth;
     this.adjustViewport();
   }
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.show = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.show");
+com.inq.stage.ViewportMgrImplMobile.prototype.show = function() {
   if (this.isShown == false) {
     try {
       this.clientLeftOffset = this.clientWindow.pageXOffset;
@@ -21877,12 +21877,12 @@ com.inq.stage.ViewportMgrImplMobile.prototype.show = function() {  console.warn(
     }
   }
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.resizeChat = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.resizeChat");
+com.inq.stage.ViewportMgrImplMobile.prototype.resizeChat = function() {
   this.hide();
   this.phoneWidth = 0;
   this.show();
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.adjustViewport = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.adjustViewport");
+com.inq.stage.ViewportMgrImplMobile.prototype.adjustViewport = function() {
   var zoomLevel = 1;
   try {
     zoomLevel = this.phoneWidth / this.restoreWidth;
@@ -21895,14 +21895,14 @@ com.inq.stage.ViewportMgrImplMobile.prototype.adjustViewport = function() {  con
     this.modifyViewport("width=" + this.restoreWidth + ", minimum-scale=0.25, maximum-scale=5, user-scalable=yes");
   }
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.fixedWidthViewport = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.fixedWidthViewport");
+com.inq.stage.ViewportMgrImplMobile.prototype.fixedWidthViewport = function() {
   if ((com.inq.utils.Capabilities.isSafariVersion9() || com.inq.utils.Capabilities.isSafariVersion10() || com.inq.utils.Capabilities.isSafariVersion11()) && com.inq.utils.Capabilities.isPhone()) {
     this.modifyViewport(com.inq.stage.ViewportMgrImplMobile.FIXED_CONTENT_IOS);
   } else {
     this.modifyViewport(com.inq.stage.ViewportMgrImplMobile.FIXED_CONTENT);
   }
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.uponTouch = function(event) {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.uponTouch");
+com.inq.stage.ViewportMgrImplMobile.prototype.uponTouch = function(event) {
   if (com.inq.utils.Capabilities.isPhone()) {
     if (!com.inq.stage.ViewportMgr.impl || com.inq.stage.ViewportMgr.impl.zoomedScreenMsgIsVisible !== true) {
       event.preventDefault();
@@ -21913,7 +21913,7 @@ com.inq.stage.ViewportMgrImplMobile.prototype.uponTouch = function(event) {  con
     }
   }
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.uponOrientationChange = function(event) {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.uponOrientationChange");
+com.inq.stage.ViewportMgrImplMobile.prototype.uponOrientationChange = function(event) {
   if (com.inq.ui.Stage.getInstance().getVisible()) {
     com.inq.utils.Timer.delay($bind(this, this.resizeChat), 50);
     var xframes = Application.application.getXFrameItems();
@@ -21922,7 +21922,7 @@ com.inq.stage.ViewportMgrImplMobile.prototype.uponOrientationChange = function(e
     }
   }
 };
-com.inq.stage.ViewportMgrImplMobile.prototype.toggleZoomedScreenMsg = function() {  console.warn("com.inq.stage.ViewportMgrImplMobile.prototype.toggleZoomedScreenMsg");
+com.inq.stage.ViewportMgrImplMobile.prototype.toggleZoomedScreenMsg = function() {
   if (com.inq.stage.ViewportMgr.impl == null) {
     com.inq.stage.ViewportMgr.init();
   }
@@ -21968,11 +21968,11 @@ com.inq.stage.ViewportMgrImplMobile.DEFAULT_CONTENT = "width=device-width, minim
 com.inq.stage.ViewportMgrImplMobile.FIXED_CONTENT = "width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes";
 com.inq.stage.ViewportMgrImplMobile.FIXED_CONTENT_IOS = "width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no";
 com.inq.stage.ViewportMgrImplMobile.prototype.__class__ = com.inq.stage.ViewportMgrImplMobile;
-com.inq.stage.ViewportMgrImplPhone = function() {  console.warn("com.inq.stage.ViewportMgrImplPhone");
+com.inq.stage.ViewportMgrImplPhone = function() {
   com.inq.stage.ViewportMgrImplMobile.call(this);
 };
 $hxClasses.extend(com.inq.stage.ViewportMgrImplMobile, com.inq.stage.ViewportMgrImplPhone, "com.inq.stage.ViewportMgrImplPhone");
-com.inq.stage.ViewportMgrImplPhone.prototype.fixPositioning = function() {  console.warn("com.inq.stage.ViewportMgrImplPhone.prototype.fixPositioning");
+com.inq.stage.ViewportMgrImplPhone.prototype.fixPositioning = function() {
   com.inq.stage.ViewportMgrImplMobile.prototype.fixPositioning.call(this);
   if (this.clientDocument.documentElement.offsetHeight < window.top.innerHeight) {
     this.clientDocument.body.style.minHeight = this.clientWindow.document.documentElement.offsetHeight + window.top.innerHeight + "px";
@@ -21987,14 +21987,14 @@ com.inq.stage.ViewportMgrImplPhone.prototype.fixPositioning = function() {  cons
   }
 };
 com.inq.stage.ViewportMgrImplPhone.prototype.__class__ = com.inq.stage.ViewportMgrImplPhone;
-com.inq.stage.ViewportMgrImplPhoneAndroid = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneAndroid");
+com.inq.stage.ViewportMgrImplPhoneAndroid = function() {
   com.inq.stage.ViewportMgrImplPhone.call(this);
 };
 $hxClasses.extend(com.inq.stage.ViewportMgrImplPhone, com.inq.stage.ViewportMgrImplPhoneAndroid, "com.inq.stage.ViewportMgrImplPhoneAndroid");
 com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.uponResizeId = 0;
 com.inq.stage.ViewportMgrImplPhoneAndroid.FIXED_CONTENT = "width=device-width, initial-scale=1.0, maximum-scale=1.0";
 com.inq.stage.ViewportMgrImplPhoneAndroid.chatWindowZoomLevel = 1;
-com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.calcPhoneWidth = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.calcPhoneWidth");
+com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.calcPhoneWidth = function() {
   if (this.phoneWidth == 0) {
     this.modifyViewport("width=device-width");
     var stage = com.inq.ui.Stage.getInstance();
@@ -22003,27 +22003,27 @@ com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.calcPhoneWidth = function() 
     this.phoneWidth = stageElement.offsetWidth;
   }
 };
-com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.fixedWidthViewport = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.fixedWidthViewport");
+com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.fixedWidthViewport = function() {
   this.modifyViewport("width=device-width, user-scalable=no");
   try {
     top.document.getElementById("inqDivResizeCorner").style.display = "";
   } catch (ex) {
   }
 };
-com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.uponResizeAction = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.uponResizeAction");
+com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.uponResizeAction = function() {
   this.uponResizeId = 0;
   if (com.inq.ui.Stage.getInstance().getVisible()) {
     Application.SetArea(com.inq.utils.Capabilities.getViewport());
     com.inq.flash.client.chatskins.SkinControl.cw.scrollToEnd();
   }
 };
-com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.uponResize = function(event) {  console.warn("com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.uponResize");
+com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.uponResize = function(event) {
   if (this.uponResizeId != 0) {
     window.clearTimeout(this.uponResizeId);
   }
   this.uponResizeId = com.inq.utils.Capabilities.waitFor(com.inq.utils.Capabilities.viewportStopsMoving(300), 100, this.uponResizeAction);
 };
-com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.resizeToViewport = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.resizeToViewport");
+com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.resizeToViewport = function() {
   com.inq.flash.client.chatskins.ScrollMonitor.unbindAll();
   if (com.inq.stage.ViewportMgrImplPhoneAndroid.chatWindowZoomLevel != Application.initialZoom) {
     Application.initialZoom = com.inq.stage.ViewportMgrImplPhoneAndroid.chatWindowZoomLevel;
@@ -22037,27 +22037,27 @@ com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.resizeToViewport = function(
   }
   com.inq.flash.client.chatskins.ScrollMonitor.bindAll();
 };
-com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.getChatWindowZoomLevel = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.getChatWindowZoomLevel");
+com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.getChatWindowZoomLevel = function() {
   return com.inq.stage.ViewportMgrImplPhoneAndroid.chatWindowZoomLevel;
 };
-com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.RestoreViewport = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.RestoreViewport");
+com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.RestoreViewport = function() {
   com.inq.stage.ViewportMgrImplPhone.prototype.RestoreViewport.call(this);
   try {
     top.document.getElementById("inqDivResizeCorner").style.display = "none";
   } catch (ex) {
   }
 };
-com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.fixPositioning = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.fixPositioning");
+com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.fixPositioning = function() {
   com.inq.stage.ViewportMgrImplMobile.prototype.fixPositioning.call(this);
   if (this.clientWindow.pageYOffset == 0) {
     this.clientWindow.scrollTo(this.clientWindow.pageXOffset, 1);
   }
 };
-com.inq.stage.ViewportMgrImplPhoneAndroid_2 = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneAndroid_2");
+com.inq.stage.ViewportMgrImplPhoneAndroid_2 = function() {
   com.inq.stage.ViewportMgrImplPhoneAndroid.call(this);
 };
 $hxClasses.extend(com.inq.stage.ViewportMgrImplPhoneAndroid, com.inq.stage.ViewportMgrImplPhoneAndroid_2, "com.inq.stage.ViewportMgrImplPhoneAndroid_2");
-com.inq.stage.ViewportMgrImplPhoneAndroid_2.prototype.getInitialWidth = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneAndroid_2.prototype.getInitialWidth");
+com.inq.stage.ViewportMgrImplPhoneAndroid_2.prototype.getInitialWidth = function() {
   this.createViewportElement("");
   var iw = this.clientWindow.document.body.clientWidth;
   var innerWidth = this.clientWindow.innerWidth;
@@ -22071,11 +22071,11 @@ com.inq.stage.ViewportMgrImplPhoneAndroid_2.prototype.getInitialWidth = function
   return iw;
 };
 com.inq.stage.ViewportMgrImplPhoneAndroid_2.prototype.__class__ = com.inq.stage.ViewportMgrImplPhoneAndroid_2;
-com.inq.stage.ViewportMgrImplPhoneWindows = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneWindows");
+com.inq.stage.ViewportMgrImplPhoneWindows = function() {
   com.inq.stage.ViewportMgrImplPhoneAndroid.call(this);
 };
 $hxClasses.extend(com.inq.stage.ViewportMgrImplPhoneAndroid, com.inq.stage.ViewportMgrImplPhoneWindows, "com.inq.stage.ViewportMgrImplPhoneWindows");
-com.inq.stage.ViewportMgrImplPhoneWindows.prototype.addCssChatAction = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneWindows.prototype.addCssChatAction");
+com.inq.stage.ViewportMgrImplPhoneWindows.prototype.addCssChatAction = function() {
   try {
     var head = document.getElementsByTagName("head")[0];
     var metaTagEdge = document.createElement("Meta");
@@ -22097,7 +22097,7 @@ com.inq.stage.ViewportMgrImplPhoneWindows.prototype.addCssChatAction = function(
     alert("Error in function addCssChatAction: " + er);
   }
 };
-com.inq.stage.ViewportMgrImplPhoneWindows.prototype.removeCssChatAction = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneWindows.prototype.removeCssChatAction");
+com.inq.stage.ViewportMgrImplPhoneWindows.prototype.removeCssChatAction = function() {
   var cssAdjustChatAction = document.getElementById("tcAjustChatAction");
   if (cssAdjustChatAction != null) {
     cssAdjustChatAction.parentNode.removeChild(cssAdjustChatAction);
@@ -22108,21 +22108,21 @@ com.inq.stage.ViewportMgrImplPhoneWindows.prototype.removeCssChatAction = functi
   }
   window.top.document.body.style["-ms-touch-action"] = "";
 };
-com.inq.stage.ViewportMgrImplPhoneWindows.prototype.show = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneWindows.prototype.show");
+com.inq.stage.ViewportMgrImplPhoneWindows.prototype.show = function() {
   com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.show.call(this);
   this.addCssChatAction();
 };
-com.inq.stage.ViewportMgrImplPhoneWindows.prototype.hide = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneWindows.prototype.hide");
+com.inq.stage.ViewportMgrImplPhoneWindows.prototype.hide = function() {
   com.inq.stage.ViewportMgrImplPhoneAndroid.prototype.hide.call(this);
   this.removeCssChatAction();
 };
-com.inq.stage.ViewportMgrImplPhoneWindows.prototype.fixPositioning = function() {  console.warn("com.inq.stage.ViewportMgrImplPhoneWindows.prototype.fixPositioning");
+com.inq.stage.ViewportMgrImplPhoneWindows.prototype.fixPositioning = function() {
   com.inq.stage.ViewportMgrImplMobile.prototype.fixPositioning.call(this);
   if (this.clientWindow.pageYOffset == 0) {
     this.clientWindow.scrollTo(this.clientWindow.pageXOffset, 1);
   }
 };
-com.inq.stage.ViewportMgrImplTablet = function() {  console.warn("com.inq.stage.ViewportMgrImplTablet");
+com.inq.stage.ViewportMgrImplTablet = function() {
   com.inq.stage.ViewportMgrImplMobile.call(this);
   if (this.clientViewportElement == null) {
     this.createViewportElement("");
@@ -22130,18 +22130,18 @@ com.inq.stage.ViewportMgrImplTablet = function() {  console.warn("com.inq.stage.
   }
 };
 $hxClasses.extend(com.inq.stage.ViewportMgrImplMobile, com.inq.stage.ViewportMgrImplTablet, "com.inq.stage.ViewportMgrImplTablet");
-com.inq.stage.ViewportMgrImplTablet.prototype.hide = function() {  console.warn("com.inq.stage.ViewportMgrImplTablet.prototype.hide");
+com.inq.stage.ViewportMgrImplTablet.prototype.hide = function() {
   if (this.isShown === true) {
     this.isShown = false;
   }
 };
-com.inq.stage.ViewportMgrImplTablet.prototype.show = function() {  console.warn("com.inq.stage.ViewportMgrImplTablet.prototype.show");
+com.inq.stage.ViewportMgrImplTablet.prototype.show = function() {
   if (this.isShown !== true) {
     this.isShown = true;
   }
 };
 com.inq.stage.ViewportMgrImplTablet.prototype.__class__ = com.inq.stage.ViewportMgrImplTablet;
-com.inq.ui.AbstractTextInput = function(_id) {  console.warn("com.inq.ui.AbstractTextInput");
+com.inq.ui.AbstractTextInput = function(_id) {
   com.inq.ui.Container.call(this, _id);
   this.maxChars = 0;
   if ("" == window.document.body.style.fontFamily) {
@@ -22158,10 +22158,10 @@ com.inq.ui.AbstractTextInput = function(_id) {  console.warn("com.inq.ui.Abstrac
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.AbstractTextInput, "com.inq.ui.AbstractTextInput");
 com.inq.ui.AbstractTextInput._isWindowsChromeWindowsMac = /(Windows|Linux|Macintosh).*AppleWebKit?.*Chrome/i.test(navigator.userAgent);
-com.inq.ui.AbstractTextInput.prototype.usePlaceholder = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype.usePlaceholder");
+com.inq.ui.AbstractTextInput.prototype.usePlaceholder = function() {
   return com.inq.utils.Capabilities.isIe10Phone();
 };
-com.inq.ui.AbstractTextInput.isViewable = function(input) {  console.warn("com.inq.ui.AbstractTextInput.isViewable");
+com.inq.ui.AbstractTextInput.isViewable = function(input) {
   var p = input;
   while (p != null) {
     try {
@@ -22174,7 +22174,7 @@ com.inq.ui.AbstractTextInput.isViewable = function(input) {  console.warn("com.i
   }
   return true;
 };
-com.inq.ui.AbstractTextInput.prototype.getCursorPosition = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype.getCursorPosition");
+com.inq.ui.AbstractTextInput.prototype.getCursorPosition = function() {
   if (this._input["createTextRange"] != null && (this.document["selection"] != null && this.document.selection["createRange"])) {
     var selectionRng = this.document.selection.createRange().duplicate();
     selectionRng.moveEnd("character", StringTools.trim(this._getInput()).length);
@@ -22186,7 +22186,7 @@ com.inq.ui.AbstractTextInput.prototype.getCursorPosition = function() {  console
     return this._input["selectionStart"];
   }
 };
-com.inq.ui.AbstractTextInput.prototype._enable = function(val) {  console.warn("com.inq.ui.AbstractTextInput.prototype._enable");
+com.inq.ui.AbstractTextInput.prototype._enable = function(val) {
   if (this._div.childNodes && this._div.childNodes.length > 0) {
     var _g1 = 0, _g = this._div.childNodes.length;
     while (_g1 < _g) {
@@ -22198,7 +22198,7 @@ com.inq.ui.AbstractTextInput.prototype._enable = function(val) {  console.warn("
     }
   }
 };
-com.inq.ui.AbstractTextInput.prototype._isDisable = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype._isDisable");
+com.inq.ui.AbstractTextInput.prototype._isDisable = function() {
   var isDisabled = true;
   if (this._div.childNodes && this._div.childNodes.length > 0) {
     var _g1 = 0, _g = this._div.childNodes.length;
@@ -22212,9 +22212,9 @@ com.inq.ui.AbstractTextInput.prototype._isDisable = function() {  console.warn("
   }
   return isDisabled;
 };
-com.inq.ui.AbstractTextInput.prototype.select = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype.select");
+com.inq.ui.AbstractTextInput.prototype.select = function() {
 };
-com.inq.ui.AbstractTextInput.prototype._setInput = function(val, previousVal) {  console.warn("com.inq.ui.AbstractTextInput.prototype._setInput");
+com.inq.ui.AbstractTextInput.prototype._setInput = function(val, previousVal) {
   if (com.inq.utils.Capabilities.isWindowsPhone()) {
     if (this.pendingTimer) {
       this.pendingValue = val;
@@ -22239,10 +22239,10 @@ com.inq.ui.AbstractTextInput.prototype._setInput = function(val, previousVal) { 
     }
   }
 };
-com.inq.ui.AbstractTextInput.prototype.clear = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype.clear");
+com.inq.ui.AbstractTextInput.prototype.clear = function() {
   this._setInput("", "");
 };
-com.inq.ui.AbstractTextInput.prototype._getInput = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype._getInput");
+com.inq.ui.AbstractTextInput.prototype._getInput = function() {
   if (com.inq.utils.Capabilities.isWindowsPhone()) {
     if (this.pendingTimer) {
       return this.pendingValue;
@@ -22250,7 +22250,7 @@ com.inq.ui.AbstractTextInput.prototype._getInput = function() {  console.warn("c
   }
   return this._input.value;
 };
-com.inq.ui.AbstractTextInput.prototype.setFocus = function(force) {  console.warn("com.inq.ui.AbstractTextInput.prototype.setFocus");
+com.inq.ui.AbstractTextInput.prototype.setFocus = function(force) {
   if (com.inq.utils.Capabilities.isIphone() && !force) {
     return;
   } else {
@@ -22315,13 +22315,13 @@ com.inq.ui.AbstractTextInput.prototype.setFocus = function(force) {  console.war
     }
   }
 };
-com.inq.ui.AbstractTextInput.prototype.setID = function(val) {  console.warn("com.inq.ui.AbstractTextInput.prototype.setID");
+com.inq.ui.AbstractTextInput.prototype.setID = function(val) {
   com.inq.ui.Container.prototype.setID.call(this, val);
   if (this._input != null) {
     this._input.id = Std.string(this._div.id) + "_input";
   }
 };
-com.inq.ui.AbstractTextInput.prototype._onKey = function(ev, kev) {  console.warn("com.inq.ui.AbstractTextInput.prototype._onKey");
+com.inq.ui.AbstractTextInput.prototype._onKey = function(ev, kev) {
   var kbe = new com.inq.events.KeyboardEvent(kev);
   if (null != ev) {
     kbe.keyCode = ev.which;
@@ -22330,10 +22330,10 @@ com.inq.ui.AbstractTextInput.prototype._onKey = function(ev, kev) {  console.war
   }
   return this.dispatchEvent(kbe);
 };
-com.inq.ui.AbstractTextInput.prototype._onInput = function(ev) {  console.warn("com.inq.ui.AbstractTextInput.prototype._onInput");
+com.inq.ui.AbstractTextInput.prototype._onInput = function(ev) {
   this.dispatchEvent(ev);
 };
-com.inq.ui.AbstractTextInput.prototype._onKeyPress = function(evt) {  console.warn("com.inq.ui.AbstractTextInput.prototype._onKeyPress");
+com.inq.ui.AbstractTextInput.prototype._onKeyPress = function(evt) {
   var keyEvt = new com.inq.events.KeyboardEvent(com.inq.events.KeyboardEvent.KEY_PRESS);
   keyEvt.keyCode = null != evt ? evt.which : Application.application.getPanelWindow().event.keyCode;
   keyEvt.charCode = null != evt ? evt.which : Application.application.getPanelWindow().event.charCode;
@@ -22361,7 +22361,7 @@ com.inq.ui.AbstractTextInput.prototype._onKeyPress = function(evt) {  console.wa
   }
   return this.dispatchEvent(keyEvt);
 };
-com.inq.ui.AbstractTextInput.prototype.validateAndFormat = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype.validateAndFormat");
+com.inq.ui.AbstractTextInput.prototype.validateAndFormat = function() {
   var text = this._getInput();
   var validate = this.getStyle("validate");
   if (validate == null) {
@@ -22384,7 +22384,7 @@ com.inq.ui.AbstractTextInput.prototype.validateAndFormat = function() {  console
   }
   return true;
 };
-com.inq.ui.AbstractTextInput.prototype._isVisible = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype._isVisible");
+com.inq.ui.AbstractTextInput.prototype._isVisible = function() {
   var p = this._input;
   while (p) {
     if (p.style.display.toLowerCase() == "none") {
@@ -22397,7 +22397,7 @@ com.inq.ui.AbstractTextInput.prototype._isVisible = function() {  console.warn("
   }
   return true;
 };
-com.inq.ui.AbstractTextInput.prototype.applyFilter = function(text) {  console.warn("com.inq.ui.AbstractTextInput.prototype.applyFilter");
+com.inq.ui.AbstractTextInput.prototype.applyFilter = function(text) {
   var newText = "";
   var curChar;
   var sRestrict = this.getStyle("restrict");
@@ -22421,7 +22421,7 @@ com.inq.ui.AbstractTextInput.prototype.applyFilter = function(text) {  console.w
   }
   return newText;
 };
-com.inq.ui.AbstractTextInput.prototype._onFocus = function(ev, kev) {  console.warn("com.inq.ui.AbstractTextInput.prototype._onFocus");
+com.inq.ui.AbstractTextInput.prototype._onFocus = function(ev, kev) {
   var kbe = new com.inq.events.KeyboardEvent(kev);
   if (null != ev) {
     kbe.keyCode = ev.which;
@@ -22430,14 +22430,14 @@ com.inq.ui.AbstractTextInput.prototype._onFocus = function(ev, kev) {  console.w
   }
   return this.dispatchEvent(kbe);
 };
-com.inq.ui.AbstractTextInput.prototype._onKeyUp = function(ev) {  console.warn("com.inq.ui.AbstractTextInput.prototype._onKeyUp");
+com.inq.ui.AbstractTextInput.prototype._onKeyUp = function(ev) {
   try {
     return this._onKey(ev, com.inq.events.KeyboardEvent.KEY_UP);
   } catch (e) {
   }
   return true;
 };
-com.inq.ui.AbstractTextInput.prototype._getSelectedText = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype._getSelectedText");
+com.inq.ui.AbstractTextInput.prototype._getSelectedText = function() {
   if (this._input["selectionStart"] != null && this._input["selectionEnd"] != null) {
     return this._getInput().substring(this._input.selectionStart, this._input.selectionEnd);
   } else {
@@ -22454,7 +22454,7 @@ com.inq.ui.AbstractTextInput.prototype._getSelectedText = function() {  console.
   }
   return "";
 };
-com.inq.ui.AbstractTextInput.prototype._onKeyDown = function(evt) {  console.warn("com.inq.ui.AbstractTextInput.prototype._onKeyDown");
+com.inq.ui.AbstractTextInput.prototype._onKeyDown = function(evt) {
   if (!evt) {
     evt = Application.application.getPanelWindow().event;
   }
@@ -22467,7 +22467,7 @@ com.inq.ui.AbstractTextInput.prototype._onKeyDown = function(evt) {  console.war
   }
   return true;
 };
-com.inq.ui.AbstractTextInput.prototype._onFocusOut = function(ev) {  console.warn("com.inq.ui.AbstractTextInput.prototype._onFocusOut");
+com.inq.ui.AbstractTextInput.prototype._onFocusOut = function(ev) {
   try {
     if (!this.validateAndFormat()) {
       return false;
@@ -22477,10 +22477,10 @@ com.inq.ui.AbstractTextInput.prototype._onFocusOut = function(ev) {  console.war
   }
   return true;
 };
-com.inq.ui.AbstractTextInput.prototype._onChange = function(ev) {  console.warn("com.inq.ui.AbstractTextInput.prototype._onChange");
+com.inq.ui.AbstractTextInput.prototype._onChange = function(ev) {
   return this.validateAndFormat();
 };
-com.inq.ui.AbstractTextInput.prototype._onFocusIn = function(ev) {  console.warn("com.inq.ui.AbstractTextInput.prototype._onFocusIn");
+com.inq.ui.AbstractTextInput.prototype._onFocusIn = function(ev) {
   try {
     var ret = this._onFocus(ev, com.inq.events.FocusEvent.FOCUS_IN);
     return ret;
@@ -22488,12 +22488,12 @@ com.inq.ui.AbstractTextInput.prototype._onFocusIn = function(ev) {  console.warn
   }
   return true;
 };
-com.inq.ui.AbstractTextInput.prototype.blur = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype.blur");
+com.inq.ui.AbstractTextInput.prototype.blur = function() {
   if (this._input) {
     this._input.blur();
   }
 };
-com.inq.ui.AbstractTextInput.prototype._doClick = function(ev) {  console.warn("com.inq.ui.AbstractTextInput.prototype._doClick");
+com.inq.ui.AbstractTextInput.prototype._doClick = function(ev) {
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.isTouched = true;
   this.setFocus();
   try {
@@ -22504,7 +22504,7 @@ com.inq.ui.AbstractTextInput.prototype._doClick = function(ev) {  console.warn("
   }
   return true;
 };
-com.inq.ui.AbstractTextInput.prototype.setupInput = function(input) {  console.warn("com.inq.ui.AbstractTextInput.prototype.setupInput");
+com.inq.ui.AbstractTextInput.prototype.setupInput = function(input) {
   this._input = input;
   this._input.container = this;
   this.clear();
@@ -22517,21 +22517,21 @@ com.inq.ui.AbstractTextInput.prototype.setupInput = function(input) {  console.w
   this._input.onchange = $bind(this, this._onChange);
   this._div.onclick = $bind(this, this._doClick);
 };
-com.inq.ui.AbstractTextInput.prototype.setIntroduction = function(introduction) {  console.warn("com.inq.ui.AbstractTextInput.prototype.setIntroduction");
+com.inq.ui.AbstractTextInput.prototype.setIntroduction = function(introduction) {
   var intro = introduction || com.inq.flash.client.chatskins.SkinControl.getIntroduction();
   if (!this._placeholder && intro != null) {
     this._placeholder = new com.inq.ui.Placeholder(this._input, intro);
   }
 };
-com.inq.ui.AbstractTextInput.prototype.clearPlaceholder = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype.clearPlaceholder");
+com.inq.ui.AbstractTextInput.prototype.clearPlaceholder = function() {
   if (this._placeholder) {
     this._placeholder.clear();
   }
 };
-com.inq.ui.AbstractTextInput.prototype.cleanUp = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype.cleanUp");
+com.inq.ui.AbstractTextInput.prototype.cleanUp = function() {
   this._placeholder = null;
 };
-com.inq.ui.AbstractTextInput.prototype.getInput = function() {  console.warn("com.inq.ui.AbstractTextInput.prototype.getInput");
+com.inq.ui.AbstractTextInput.prototype.getInput = function() {
   return this._input;
 };
 com.inq.ui.AbstractTextInput.prototype.disabled = null;
@@ -22542,26 +22542,26 @@ com.inq.ui.AbstractTextInput.prototype._placeholder = null;
 com.inq.ui.AbstractTextInput.prototype._input = null;
 com.inq.ui.AbstractTextInput.prototype.pendingValue = null;
 com.inq.ui.AbstractTextInput.prototype.pendingTimer = null;
-com.inq.ui.ArrayCollection = function() {  console.warn("com.inq.ui.ArrayCollection");
+com.inq.ui.ArrayCollection = function() {
   this._collection = new Array;
 };
 $hxClasses.registerClass(com.inq.ui.ArrayCollection, "com.inq.ui.ArrayCollection");
-com.inq.ui.ArrayCollection.prototype.getItemAt = function(indx) {  console.warn("com.inq.ui.ArrayCollection.prototype.getItemAt");
+com.inq.ui.ArrayCollection.prototype.getItemAt = function(indx) {
   if (indx < this._collection.length) {
     return this._collection[indx];
   }
   return null;
 };
-com.inq.ui.ArrayCollection.prototype.getLength = function() {  console.warn("com.inq.ui.ArrayCollection.prototype.getLength");
+com.inq.ui.ArrayCollection.prototype.getLength = function() {
   return this._collection.length;
 };
-com.inq.ui.ArrayCollection.prototype.addItem = function(itm) {  console.warn("com.inq.ui.ArrayCollection.prototype.addItem");
+com.inq.ui.ArrayCollection.prototype.addItem = function(itm) {
   this._collection[this._collection.length] = itm;
 };
 com.inq.ui.ArrayCollection.prototype.length = null;
 com.inq.ui.ArrayCollection.prototype._collection = null;
 com.inq.ui.ArrayCollection.prototype.__class__ = com.inq.ui.ArrayCollection;
-com.inq.ui.BalloonOverlaying = function(id, styleName, element, text, parent) {  console.warn("com.inq.ui.BalloonOverlaying");
+com.inq.ui.BalloonOverlaying = function(id, styleName, element, text, parent) {
   com.inq.ui.Container.call(this);
   this._element = element;
   this._parent = parent;
@@ -22577,22 +22577,22 @@ com.inq.ui.BalloonOverlaying = function(id, styleName, element, text, parent) { 
   this.render(this._parentContainer);
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.BalloonOverlaying, "com.inq.ui.BalloonOverlaying");
-com.inq.ui.BalloonOverlaying._doClick = function(e) {  console.warn("com.inq.ui.BalloonOverlaying._doClick");
+com.inq.ui.BalloonOverlaying._doClick = function(e) {
   var win = window;
   var ob = null != e ? e.target : win.event.srcElement;
   var c = ob.container;
   c.doClick();
 };
-com.inq.ui.BalloonOverlaying.prototype.applyStyle = function() {  console.warn("com.inq.ui.BalloonOverlaying.prototype.applyStyle");
+com.inq.ui.BalloonOverlaying.prototype.applyStyle = function() {
   this.buildStyle();
 };
-com.inq.ui.BalloonOverlaying.prototype.setID = function(val) {  console.warn("com.inq.ui.BalloonOverlaying.prototype.setID");
+com.inq.ui.BalloonOverlaying.prototype.setID = function(val) {
   com.inq.ui.Container.prototype.setID.call(this, val);
   if (this._img != null) {
     this._img.id = val + "_img";
   }
 };
-com.inq.ui.BalloonOverlaying.prototype.setHandCursor = function(val) {  console.warn("com.inq.ui.BalloonOverlaying.prototype.setHandCursor");
+com.inq.ui.BalloonOverlaying.prototype.setHandCursor = function(val) {
   var value = val;
   switch(value.toLowerCase()) {
     case "true":
@@ -22606,7 +22606,7 @@ com.inq.ui.BalloonOverlaying.prototype.setHandCursor = function(val) {  console.
   }
   this.useHandCursor = this._useHandCursor ? "true" : "false";
 };
-com.inq.ui.BalloonOverlaying.prototype.destroy = function() {  console.warn("com.inq.ui.BalloonOverlaying.prototype.destroy");
+com.inq.ui.BalloonOverlaying.prototype.destroy = function() {
   if (this._div.parentNode != null) {
     try {
       this._div.parentNode.removeChild(this._div);
@@ -22619,16 +22619,16 @@ com.inq.ui.BalloonOverlaying.prototype.destroy = function() {  console.warn("com
   }
   return this._element;
 };
-com.inq.ui.BalloonOverlaying.prototype.buildStyle = function() {  console.warn("com.inq.ui.BalloonOverlaying.prototype.buildStyle");
+com.inq.ui.BalloonOverlaying.prototype.buildStyle = function() {
   this.render(this._parentContainer);
 };
-com.inq.ui.BalloonOverlaying.prototype.doClick = function() {  console.warn("com.inq.ui.BalloonOverlaying.prototype.doClick");
+com.inq.ui.BalloonOverlaying.prototype.doClick = function() {
   var ev = new com.inq.events.MouseEvent(com.inq.events.MouseEvent.CLICK);
   ev.target = this;
   ev.currentTarget = this;
   this.dispatchEvent(ev);
 };
-com.inq.ui.BalloonOverlaying.prototype._fixSizesAndPositions = function() {  console.warn("com.inq.ui.BalloonOverlaying.prototype._fixSizesAndPositions");
+com.inq.ui.BalloonOverlaying.prototype._fixSizesAndPositions = function() {
   var els = this._div.getElementsByTagName("*");
   var blnTable = this._div.getElementsByTagName("TABLE")[0];
   var blnSpanText = null;
@@ -22797,7 +22797,7 @@ com.inq.ui.BalloonOverlaying.prototype._fixSizesAndPositions = function() {  con
     }
   }
 };
-com.inq.ui.BalloonOverlaying.prototype.render = function(_parent) {  console.warn("com.inq.ui.BalloonOverlaying.prototype.render");
+com.inq.ui.BalloonOverlaying.prototype.render = function(_parent) {
   var elementLeft = 0;
   var elementTop = 0;
   if (_parent == null) {
@@ -22877,7 +22877,7 @@ com.inq.ui.BalloonOverlaying.prototype.render = function(_parent) {  console.war
   this._div.style.left = trueLeft + "px";
   this._div.style.top = trueTop + "px";
 };
-com.inq.ui.BalloonOverlaying.prototype.fixIERendering = function(div, color) {  console.warn("com.inq.ui.BalloonOverlaying.prototype.fixIERendering");
+com.inq.ui.BalloonOverlaying.prototype.fixIERendering = function(div, color) {
   var h = div.childNodes[1].clientHeight;
   var w = div.childNodes[1].clientWidth;
   div.style.height = h + 13 + "px";
@@ -22919,7 +22919,7 @@ com.inq.ui.BalloonOverlaying.HOT_OFFSET_X = 0;
 com.inq.ui.BalloonOverlaying.HOT_OFFSET_Y = 0;
 com.inq.ui.BalloonOverlaying.CLASS_STYLE = 'z-index:102;font-family:"Comic Sans MS";font-size:10pt;background-color:red; color:yellow;';
 com.inq.ui.BalloonOverlaying.bIE6 = window.navigator.appName == "Microsoft Internet Explorer" && (window.navigator.appVersion.indexOf("MSIE 6.0") >= 0 || window.navigator.appVersion.indexOf("MSIE 5.") >= 0);
-com.inq.ui.Button = function(_id, sources, text) {  console.warn("com.inq.ui.Button");
+com.inq.ui.Button = function(_id, sources, text) {
   com.inq.ui.Container.call(this, _id);
   this._useHandCursor = false;
   this._text = text || "";
@@ -22986,14 +22986,14 @@ com.inq.ui.Button = function(_id, sources, text) {  console.warn("com.inq.ui.But
   }
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.Button, "com.inq.ui.Button");
-com.inq.ui.Button.prototype.softClick = function() {  console.warn("com.inq.ui.Button.prototype.softClick");
+com.inq.ui.Button.prototype.softClick = function() {
   var doc = this._div.ownerDocument;
   var win = doc.defaultView;
   var evnt = doc.createEvent("MouseEvents");
   evnt.initMouseEvent("click", true, true, win, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
   this._img.dispatchEvent(evnt);
 };
-com.inq.ui.Button.prototype.applyStyle = function() {  console.warn("com.inq.ui.Button.prototype.applyStyle");
+com.inq.ui.Button.prototype.applyStyle = function() {
   com.inq.ui.Container.prototype.applyStyle.call(this);
   var fontstyles;
   if (this.styles.label != null) {
@@ -23026,16 +23026,16 @@ com.inq.ui.Button.prototype.applyStyle = function() {  console.warn("com.inq.ui.
     _styl.display = "none";
   }
 };
-com.inq.ui.Button.prototype.initAttribute = function(name, value) {  console.warn("com.inq.ui.Button.prototype.initAttribute");
+com.inq.ui.Button.prototype.initAttribute = function(name, value) {
   if (com.inq.utils.Capabilities.isAndroid()) {
     name = "alt" == name ? "title" : name;
   }
   com.inq.ui.Button.__super__.prototype.initAttribute.call(this, name, value);
 };
-com.inq.ui.Button.prototype.setUpSkin = function(val) {  console.warn("com.inq.ui.Button.prototype.setUpSkin");
+com.inq.ui.Button.prototype.setUpSkin = function(val) {
   this.loadImage("upSkin", val, "width:100%;height:100%");
 };
-com.inq.ui.Button.prototype.loadImage = function(styleName, val, elementStyle) {  console.warn("com.inq.ui.Button.prototype.loadImage");
+com.inq.ui.Button.prototype.loadImage = function(styleName, val, elementStyle) {
   if (this._div != null) {
     if (val == null || val == "") {
       return;
@@ -23060,7 +23060,7 @@ com.inq.ui.Button.prototype.loadImage = function(styleName, val, elementStyle) {
     this._backgroundImage.setAttribute("tabindex", "-1");
   }
 };
-com.inq.ui.Button.prototype.onLoadImage = function(element) {  console.warn("com.inq.ui.Button.prototype.onLoadImage");
+com.inq.ui.Button.prototype.onLoadImage = function(element) {
   try {
     var imageElement = element;
     var div = this._div;
@@ -23090,7 +23090,7 @@ com.inq.ui.Button.prototype.onLoadImage = function(element) {  console.warn("com
     }
   }
 };
-com.inq.ui.Button.prototype.setID = function(val) {  console.warn("com.inq.ui.Button.prototype.setID");
+com.inq.ui.Button.prototype.setID = function(val) {
   com.inq.ui.Container.prototype.setID.call(this, val);
   if (this._skin != null) {
     this._skin.id = Std.string(this._div.id) + "_skin";
@@ -23105,7 +23105,7 @@ com.inq.ui.Button.prototype.setID = function(val) {  console.warn("com.inq.ui.Bu
     this._table.id = Std.string(this._div.id) + "_table";
   }
 };
-com.inq.ui.Button.prototype.setHandCursor = function(val) {  console.warn("com.inq.ui.Button.prototype.setHandCursor");
+com.inq.ui.Button.prototype.setHandCursor = function(val) {
   var value = val;
   switch(value.toLowerCase()) {
     case "true":
@@ -23119,7 +23119,7 @@ com.inq.ui.Button.prototype.setHandCursor = function(val) {  console.warn("com.i
   }
   this.useHandCursor = this._useHandCursor ? "true" : "false";
 };
-com.inq.ui.Button.prototype.setLabel = function(val) {  console.warn("com.inq.ui.Button.prototype.setLabel");
+com.inq.ui.Button.prototype.setLabel = function(val) {
   this.styles.label = val;
   this._span.innerHTML = val;
   this._span.setAttribute("aria-hidden", "true");
@@ -23147,7 +23147,7 @@ com.inq.ui.Button.prototype.setLabel = function(val) {  console.warn("com.inq.ui
     }
   }
 };
-com.inq.ui.Button.prototype.applyAttributeMap = function() {  console.warn("com.inq.ui.Button.prototype.applyAttributeMap");
+com.inq.ui.Button.prototype.applyAttributeMap = function() {
   for (var aKey in this.attributeMap) {
     if (this.attributeMap.hasOwnProperty(aKey)) {
       switch(aKey) {
@@ -23166,7 +23166,7 @@ com.inq.ui.Button.prototype.applyAttributeMap = function() {  console.warn("com.
     }
   }
 };
-com.inq.ui.Button.prototype.setAttribute = function(key, value) {  console.warn("com.inq.ui.Button.prototype.setAttribute");
+com.inq.ui.Button.prototype.setAttribute = function(key, value) {
   switch(key) {
     case "aria-live":
     ;
@@ -23181,10 +23181,10 @@ com.inq.ui.Button.prototype.setAttribute = function(key, value) {  console.warn(
       this.getPrimaryObject().setAttribute(key, value);
   }
 };
-com.inq.ui.Button.prototype.getPrimaryObject = function() {  console.warn("com.inq.ui.Button.prototype.getPrimaryObject");
+com.inq.ui.Button.prototype.getPrimaryObject = function() {
   return this._img;
 };
-com.inq.ui.Button.prototype.buildStyle = function() {  console.warn("com.inq.ui.Button.prototype.buildStyle");
+com.inq.ui.Button.prototype.buildStyle = function() {
   com.inq.ui.Container.prototype.buildStyle.call(this);
   var cursor = this.getStyle("useHandCursor") == "true" ? "pointer" : "default";
   this._style += "cursor: " + cursor + ";";
@@ -23192,7 +23192,7 @@ com.inq.ui.Button.prototype.buildStyle = function() {  console.warn("com.inq.ui.
   this._table.style["cursor"] = cursor;
   this._img.style["cursor"] = cursor;
 };
-com.inq.ui.Button.prototype.doMouseOut = function() {  console.warn("com.inq.ui.Button.prototype.doMouseOut");
+com.inq.ui.Button.prototype.doMouseOut = function() {
   var curskin = this._skin.src;
   if (this.upSkin != null && curskin != this.upSkin) {
     this._skin.src = this.upSkin;
@@ -23200,7 +23200,7 @@ com.inq.ui.Button.prototype.doMouseOut = function() {  console.warn("com.inq.ui.
     this._skin.style.width = this._div.style.width;
   }
 };
-com.inq.ui.Button.prototype.doMouseOver = function() {  console.warn("com.inq.ui.Button.prototype.doMouseOver");
+com.inq.ui.Button.prototype.doMouseOver = function() {
   var curskin = this._skin.src;
   if (this.overSkin != null && curskin != this.overSkin) {
     this._skin.src = this.overSkin;
@@ -23208,7 +23208,7 @@ com.inq.ui.Button.prototype.doMouseOver = function() {  console.warn("com.inq.ui
     this._skin.style.width = this._div.style.width;
   }
 };
-com.inq.ui.Button.prototype.iPhoneHandleButtonPress = function(e) {  console.warn("com.inq.ui.Button.prototype.iPhoneHandleButtonPress");
+com.inq.ui.Button.prototype.iPhoneHandleButtonPress = function(e) {
   try {
     if (this.hasEventListener(com.inq.events.MouseEvent.CLICK)) {
       if (e && e.stopPropagation) {
@@ -23229,15 +23229,15 @@ com.inq.ui.Button.prototype.iPhoneHandleButtonPress = function(e) {  console.war
     return true;
   }
 };
-com.inq.ui.Button.prototype.doClick = function(evt) {  console.warn("com.inq.ui.Button.prototype.doClick");
+com.inq.ui.Button.prototype.doClick = function(evt) {
   var ev = new com.inq.events.MouseEvent(com.inq.events.MouseEvent.CLICK, evt);
   this.dispatchEvent(ev);
 };
-com.inq.ui.Button.prototype.setOnClick = function(whenClicked) {  console.warn("com.inq.ui.Button.prototype.setOnClick");
+com.inq.ui.Button.prototype.setOnClick = function(whenClicked) {
   this._img.onclick = whenClicked;
   this._table.onclick = whenClicked;
 };
-com.inq.ui.Button.prototype.getHtmlLabelObject = function() {  console.warn("com.inq.ui.Button.prototype.getHtmlLabelObject");
+com.inq.ui.Button.prototype.getHtmlLabelObject = function() {
   var labelObjet = null;
   if (typeof this._img != "undefined") {
     labelObjet = this._img;
@@ -23248,12 +23248,12 @@ com.inq.ui.Button.prototype.getHtmlLabelObject = function() {  console.warn("com
   }
   return labelObjet;
 };
-com.inq.ui.Button.prototype.setImageFocus = function() {  console.warn("com.inq.ui.Button.prototype.setImageFocus");
+com.inq.ui.Button.prototype.setImageFocus = function() {
   if (this._img) {
     this._img.focus();
   }
 };
-com.inq.ui.Button.prototype.whenLoaded = function() {  console.warn("com.inq.ui.Button.prototype.whenLoaded");
+com.inq.ui.Button.prototype.whenLoaded = function() {
   com.inq.ui.Container.prototype.whenLoaded.call(this);
   var _cap = com.inq.utils.Capabilities;
   if (this.styles.id === "btnSend" && _cap.isMobile() && (_cap.isSafari() || _cap.isIOSWebView() || _cap.isAndroid() && !_cap.isTablet())) {
@@ -23268,12 +23268,12 @@ com.inq.ui.Button.prototype.whenLoaded = function() {  console.warn("com.inq.ui.
     window.parent.EventManager.calculateButtonContainer(this.styles.id);
   }
 };
-com.inq.ui.Button.prototype.enable = function() {  console.warn("com.inq.ui.Button.prototype.enable");
+com.inq.ui.Button.prototype.enable = function() {
   this.setVisible(true);
   this._img.removeAttribute("aria-hidden");
   this._img.tabIndex = this._tabIndex;
 };
-com.inq.ui.Button.prototype.disable = function() {  console.warn("com.inq.ui.Button.prototype.disable");
+com.inq.ui.Button.prototype.disable = function() {
   this.setVisible(false);
   this._img.setAttribute("aria-hidden", true);
   if (this._img.tabIndex != -1) {
@@ -23291,14 +23291,14 @@ com.inq.ui.Button.prototype.useHandCursor = null;
 com.inq.ui.Button.prototype.overSkin = null;
 com.inq.ui.Button.prototype.upSkin = null;
 com.inq.ui.Button.prototype.__class__ = com.inq.ui.Button;
-com.inq.ui.Canvas = function(_id) {  console.warn("com.inq.ui.Canvas");
+com.inq.ui.Canvas = function(_id) {
   com.inq.ui.Container.call(this, _id);
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.Canvas, "com.inq.ui.Canvas");
-com.inq.ui.Canvas.prototype.resize = function() {  console.warn("com.inq.ui.Canvas.prototype.resize");
+com.inq.ui.Canvas.prototype.resize = function() {
   com.inq.ui.Container.prototype.resize.call(this);
 };
-com.inq.ui.Canvas.prototype.applySkinAttribute = function() {  console.warn("com.inq.ui.Canvas.prototype.applySkinAttribute");
+com.inq.ui.Canvas.prototype.applySkinAttribute = function() {
   var accesskey = this.getStyle("accesskey");
   if (null != accesskey) {
     this._div.setAttribute("accesskey", accesskey);
@@ -23311,30 +23311,30 @@ com.inq.ui.Canvas.prototype.applySkinAttribute = function() {  console.warn("com
     this.scroller = new com.inq.ui.NativeScroller(this._div);
   }
 };
-com.inq.ui.Canvas.prototype.applyStyle = function() {  console.warn("com.inq.ui.Canvas.prototype.applyStyle");
+com.inq.ui.Canvas.prototype.applyStyle = function() {
   com.inq.ui.Container.prototype.applyStyle.call(this);
   if (this.scroller) {
     this.scroller.applyOverflowStyle();
   }
 };
-com.inq.ui.Canvas.prototype.removeAttribute = function(attr) {  console.warn("com.inq.ui.Canvas.prototype.removeAttribute");
+com.inq.ui.Canvas.prototype.removeAttribute = function(attr) {
   if (this._div) {
     this._div.removeAttribute(attr);
   }
 };
-com.inq.ui.Canvas.prototype.cleanUp = function() {  console.warn("com.inq.ui.Canvas.prototype.cleanUp");
+com.inq.ui.Canvas.prototype.cleanUp = function() {
   if (this.scroller) {
     this.scroller.cleanUp();
   }
 };
 com.inq.ui.Canvas.prototype.__class__ = com.inq.ui.Canvas;
-com.inq.ui.ClientBody = function() {  console.warn("com.inq.ui.ClientBody");
+com.inq.ui.ClientBody = function() {
   var doc = window.parent.document;
   var body = doc.body;
   com.inq.ui.Container.call(this, body, null, doc);
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.ClientBody, "com.inq.ui.ClientBody");
-com.inq.ui.ClientBody.closeAll = function() {  console.warn("com.inq.ui.ClientBody.closeAll");
+com.inq.ui.ClientBody.closeAll = function() {
   var keyz = Reflect.fields(com.inq.ui.ClientBody._collection);
   var _g1 = 0, _g = keyz.length;
   while (_g1 < _g) {
@@ -23347,7 +23347,7 @@ com.inq.ui.ClientBody.closeAll = function() {  console.warn("com.inq.ui.ClientBo
     }
   }
 };
-com.inq.ui.ClientBody.registerElement = function(element) {  console.warn("com.inq.ui.ClientBody.registerElement");
+com.inq.ui.ClientBody.registerElement = function(element) {
   var id = element.getID();
   if (id == null) {
     id = "inq_" + Math.round(Math.random() * 3141593);
@@ -23357,21 +23357,21 @@ com.inq.ui.ClientBody.registerElement = function(element) {  console.warn("com.i
     com.inq.ui.ClientBody._collection[id] = element;
   }
 };
-com.inq.ui.ClientBody.getElement = function(id) {  console.warn("com.inq.ui.ClientBody.getElement");
+com.inq.ui.ClientBody.getElement = function(id) {
   return com.inq.ui.ClientBody._collection[id];
 };
-com.inq.ui.ClientBody.prototype.resize = function() {  console.warn("com.inq.ui.ClientBody.prototype.resize");
+com.inq.ui.ClientBody.prototype.resize = function() {
 };
-com.inq.ui.ClientBody.prototype.cleanUp = function() {  console.warn("com.inq.ui.ClientBody.prototype.cleanUp");
+com.inq.ui.ClientBody.prototype.cleanUp = function() {
   com.inq.ui.ClientBody._collection = new com.inq.utils.Dictionary;
 };
 com.inq.ui.ClientBody.prototype.__class__ = com.inq.ui.ClientBody;
 com.inq.ui.ClientBody._collection = new com.inq.utils.Dictionary;
-com.inq.ui.CommandParser = function() {  console.warn("com.inq.ui.CommandParser");
+com.inq.ui.CommandParser = function() {
   com.inq.ui.Container.call(this);
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.CommandParser, "com.inq.ui.CommandParser");
-com.inq.ui.CommandParser.evaluateSymbolicReference = function(value) {  console.warn("com.inq.ui.CommandParser.evaluateSymbolicReference");
+com.inq.ui.CommandParser.evaluateSymbolicReference = function(value) {
   var a = value.split(".");
   var nameContainer = a.shift();
   var clientWindow = window.parent;
@@ -23448,7 +23448,7 @@ com.inq.ui.CommandParser.evaluateSymbolicReference = function(value) {  console.
   }
   return "0";
 };
-com.inq.ui.CommandParser.InitializeKeywordMap = function() {  console.warn("com.inq.ui.CommandParser.InitializeKeywordMap");
+com.inq.ui.CommandParser.InitializeKeywordMap = function() {
   var keywordMap = {};
   keywordMap["IF"] = "if(";
   keywordMap["THEN"] = "){";
@@ -23463,7 +23463,7 @@ com.inq.ui.CommandParser.InitializeKeywordMap = function() {  console.warn("com.
   keywordMap["NOT"] = "!";
   return keywordMap;
 };
-com.inq.ui.CommandParser.getNextToken = function(commandString, offset) {  console.warn("com.inq.ui.CommandParser.getNextToken");
+com.inq.ui.CommandParser.getNextToken = function(commandString, offset) {
   if (offset == null) {
     offset = 0;
   }
@@ -23553,14 +23553,14 @@ com.inq.ui.CommandParser.getNextToken = function(commandString, offset) {  conso
   var remainder = HxOverrides.substr(commandString, offset, null);
   return {token:token1, remainder:remainder, offset:offset};
 };
-com.inq.ui.CommandParser.showErrorLocation = function(logicString, offset) {  console.warn("com.inq.ui.CommandParser.showErrorLocation");
+com.inq.ui.CommandParser.showErrorLocation = function(logicString, offset) {
   var position = "";
   var regNotWhiteSpace = new EReg("\\S", "gm");
   position = regNotWhiteSpace.replace(logicString, " ");
   position = HxOverrides.substr(position, 0, offset) + "^";
   haxe.Log.trace("Error in logic string:\n" + logicString + "\n" + position, {fileName:"CommandParser.hx", lineNumber:231, className:"com.inq.ui.CommandParser", methodName:"showErrorLocation"});
 };
-com.inq.ui.CommandParser.executeLogic = function(logicString, test, container) {  console.warn("com.inq.ui.CommandParser.executeLogic");
+com.inq.ui.CommandParser.executeLogic = function(logicString, test, container) {
   if (test == null) {
     test = false;
   }
@@ -23609,7 +23609,7 @@ com.inq.ui.CommandParser.executeLogic = function(logicString, test, container) {
   }
   return true;
 };
-com.inq.ui.CommandParser.addListeners = function() {  console.warn("com.inq.ui.CommandParser.addListeners");
+com.inq.ui.CommandParser.addListeners = function() {
   var cntrKeys = Application.keySet();
   var cntr;
   var key;
@@ -23624,7 +23624,7 @@ com.inq.ui.CommandParser.addListeners = function() {  console.warn("com.inq.ui.C
 com.inq.ui.CommandParser.prototype.__class__ = com.inq.ui.CommandParser;
 com.inq.ui.CommandParser.WHITESPACE = " \t\r\n";
 com.inq.ui.CommandParser.KEYWORD_MAP = com.inq.ui.CommandParser.InitializeKeywordMap();
-com.inq.ui.CountdownTimer = function(textElement) {  console.warn("com.inq.ui.CountdownTimer");
+com.inq.ui.CountdownTimer = function(textElement) {
   this._time = 0;
   this._timerId = null;
   this._parent = textElement;
@@ -23632,31 +23632,31 @@ com.inq.ui.CountdownTimer = function(textElement) {  console.warn("com.inq.ui.Co
   this._listeners = [];
   this._parent.replaceTextOntoElement(com.inq.ui.CountdownTimer.TEMPLATE_MARKER, this._element);
 };
-com.inq.ui.CountdownTimer.prototype.show = function() {  console.warn("com.inq.ui.CountdownTimer.prototype.show");
+com.inq.ui.CountdownTimer.prototype.show = function() {
   this._element.style.display = "";
 };
-com.inq.ui.CountdownTimer.prototype.hide = function() {  console.warn("com.inq.ui.CountdownTimer.prototype.hide");
+com.inq.ui.CountdownTimer.prototype.hide = function() {
   this._element.style.display = "none";
 };
-com.inq.ui.CountdownTimer.prototype.getVisible = function() {  console.warn("com.inq.ui.CountdownTimer.prototype.getVisible");
+com.inq.ui.CountdownTimer.prototype.getVisible = function() {
   return this._element.offsetHeight != 0 && this._element.offsetWidth != 0;
 };
-com.inq.ui.CountdownTimer.prototype.getElement = function() {  console.warn("com.inq.ui.CountdownTimer.prototype.getElement");
+com.inq.ui.CountdownTimer.prototype.getElement = function() {
   return this._element;
 };
-com.inq.ui.CountdownTimer.prototype.setTime = function(endTime) {  console.warn("com.inq.ui.CountdownTimer.prototype.setTime");
+com.inq.ui.CountdownTimer.prototype.setTime = function(endTime) {
   var now = (new Date).getTime();
   var period = endTime - now;
   this.setPeriod(period);
 };
-com.inq.ui.CountdownTimer.prototype.setPeriod = function(period) {  console.warn("com.inq.ui.CountdownTimer.prototype.setPeriod");
+com.inq.ui.CountdownTimer.prototype.setPeriod = function(period) {
   if (period > 0) {
     this._time = Math.round(period / 1E3) * 1E3;
   } else {
     this._time = 0;
   }
 };
-com.inq.ui.CountdownTimer.prototype.start = function() {  console.warn("com.inq.ui.CountdownTimer.prototype.start");
+com.inq.ui.CountdownTimer.prototype.start = function() {
   this._timerId = setInterval(function() {
     this._time -= com.inq.ui.CountdownTimer.INTERVAL;
     if (this._time <= 0) {
@@ -23667,16 +23667,16 @@ com.inq.ui.CountdownTimer.prototype.start = function() {  console.warn("com.inq.
   }.bind(this), com.inq.ui.CountdownTimer.INTERVAL);
   this.updateValue(this.formattedValue(this._time), true);
 };
-com.inq.ui.CountdownTimer.prototype.stop = function() {  console.warn("com.inq.ui.CountdownTimer.prototype.stop");
+com.inq.ui.CountdownTimer.prototype.stop = function() {
   clearInterval(this._timerId);
   this._time = 0;
 };
-com.inq.ui.CountdownTimer.prototype.updateValue = function(value, forceUpdate) {  console.warn("com.inq.ui.CountdownTimer.prototype.updateValue");
+com.inq.ui.CountdownTimer.prototype.updateValue = function(value, forceUpdate) {
   if (this.getVisible() || forceUpdate) {
     this._element.innerHTML = value;
   }
 };
-com.inq.ui.CountdownTimer.prototype.formattedValue = function(time) {  console.warn("com.inq.ui.CountdownTimer.prototype.formattedValue");
+com.inq.ui.CountdownTimer.prototype.formattedValue = function(time) {
   time = Math.floor(time / 1E3);
   var mm = Math.floor(time / 60);
   var ss = time % 60;
@@ -23685,12 +23685,12 @@ com.inq.ui.CountdownTimer.prototype.formattedValue = function(time) {  console.w
   }
   return mm + ":" + ss;
 };
-com.inq.ui.CountdownTimer.prototype.addEndingListener = function(handler) {  console.warn("com.inq.ui.CountdownTimer.prototype.addEndingListener");
+com.inq.ui.CountdownTimer.prototype.addEndingListener = function(handler) {
   if (typeof handler == "function") {
     this._listeners.push(handler);
   }
 };
-com.inq.ui.CountdownTimer.prototype.removeEndingListener = function(handler) {  console.warn("com.inq.ui.CountdownTimer.prototype.removeEndingListener");
+com.inq.ui.CountdownTimer.prototype.removeEndingListener = function(handler) {
   if (typeof handler == "function") {
     for (var i = 0;i < this._listeners.length;i++) {
       if (this._listeners[i] == handler) {
@@ -23699,14 +23699,14 @@ com.inq.ui.CountdownTimer.prototype.removeEndingListener = function(handler) {  
     }
   }
 };
-com.inq.ui.CountdownTimer.prototype.timerEnded = function() {  console.warn("com.inq.ui.CountdownTimer.prototype.timerEnded");
+com.inq.ui.CountdownTimer.prototype.timerEnded = function() {
   for (var i = 0;i < this._listeners.length;i++) {
     this._listeners[i]();
   }
 };
 com.inq.ui.CountdownTimer.TEMPLATE_MARKER = "{{COUNTDOWN-TIMER}}";
 com.inq.ui.CountdownTimer.INTERVAL = 1E3;
-com.inq.ui.Html = function(tagName, _id, parentNode) {  console.warn("com.inq.ui.Html");
+com.inq.ui.Html = function(tagName, _id, parentNode) {
   var tag = "";
   if (com.inq.flash.client.control.FlashPeer.getIsBuilder()) {
     tag = tagName;
@@ -23724,14 +23724,14 @@ com.inq.ui.Html = function(tagName, _id, parentNode) {  console.warn("com.inq.ui
   com.inq.ui.ClientBody.registerElement(this);
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.Html, "com.inq.ui.Html");
-com.inq.ui.Html.prototype.buildStyle = function() {  console.warn("com.inq.ui.Html.prototype.buildStyle");
+com.inq.ui.Html.prototype.buildStyle = function() {
   if (this._div.id == com.inq.ui.Container.SC_TITLEBAR || this._div.id == com.inq.ui.Container.SC_RESIZE) {
     this.buildNewStyle();
   } else {
     this.buildClientElementStyle();
   }
 };
-com.inq.ui.Html.prototype.setVisible = function(val) {  console.warn("com.inq.ui.Html.prototype.setVisible");
+com.inq.ui.Html.prototype.setVisible = function(val) {
   try {
     var isVisible = !("false" == val || null == val || false == val);
     this._div.style.display = isVisible ? "" : "none";
@@ -23740,7 +23740,7 @@ com.inq.ui.Html.prototype.setVisible = function(val) {  console.warn("com.inq.ui
   } catch (e) {
   }
 };
-com.inq.ui.Html.prototype.setID = function(val) {  console.warn("com.inq.ui.Html.prototype.setID");
+com.inq.ui.Html.prototype.setID = function(val) {
   var alreadyPrepended = val.indexOf("tcChat_") == 0 || val.indexOf("inq") == 0;
   var safeID = "tcChat_" + val;
   if (!alreadyPrepended) {
@@ -23749,21 +23749,21 @@ com.inq.ui.Html.prototype.setID = function(val) {  console.warn("com.inq.ui.Html
   this.styles["id"] = val;
   com.inq.ui.ClientBody.registerElement(this);
 };
-com.inq.ui.Html.prototype.applyStyles = function() {  console.warn("com.inq.ui.Html.prototype.applyStyles");
+com.inq.ui.Html.prototype.applyStyles = function() {
   com.inq.ui.Container.prototype.applyStyle.call(this);
 };
-com.inq.ui.Html.prototype._getText = function() {  console.warn("com.inq.ui.Html.prototype._getText");
+com.inq.ui.Html.prototype._getText = function() {
   return this._div.innerHTML;
 };
-com.inq.ui.Html.prototype._setText = function(text) {  console.warn("com.inq.ui.Html.prototype._setText");
+com.inq.ui.Html.prototype._setText = function(text) {
   this._div.innerHTML = text;
   return text;
 };
-com.inq.ui.Html.prototype._setStyle = function(style) {  console.warn("com.inq.ui.Html.prototype._setStyle");
+com.inq.ui.Html.prototype._setStyle = function(style) {
   this._style = style;
   return this._style;
 };
-com.inq.ui.Html.prototype.removeFromBody = function() {  console.warn("com.inq.ui.Html.prototype.removeFromBody");
+com.inq.ui.Html.prototype.removeFromBody = function() {
   var p = this._div.parentNode;
   if (p != null) {
     p.removeChild(this._div);
@@ -23772,12 +23772,12 @@ com.inq.ui.Html.prototype.removeFromBody = function() {  console.warn("com.inq.u
 com.inq.ui.Html.prototype.text = null;
 com.inq.ui.Html.prototype.style = null;
 com.inq.ui.Html.prototype.__class__ = com.inq.ui.Html;
-com.inq.ui.Literal = function(_id) {  console.warn("com.inq.ui.Literal");
+com.inq.ui.Literal = function(_id) {
   com.inq.ui.Container.call(this, _id);
   this.styles = {};
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.Literal, "com.inq.ui.Literal ");
-com.inq.ui.Literal.prototype.buildStyle = function() {  console.warn("com.inq.ui.Literal.prototype.buildStyle");
+com.inq.ui.Literal.prototype.buildStyle = function() {
   var styleString = "";
   for (var prop in this.styles) {
     switch(prop) {
@@ -23811,12 +23811,12 @@ com.inq.ui.Literal.prototype.buildStyle = function() {  console.warn("com.inq.ui
   }
   this._style = styleString;
 };
-com.inq.ui.Literal.prototype.applyStyle = function() {  console.warn("com.inq.ui.Literal.prototype.applyStyle");
+com.inq.ui.Literal.prototype.applyStyle = function() {
   this.buildStyle();
   this._div.style.cssText = this._style;
 };
 com.inq.ui.Literal.prototype.__class__ = com.inq.ui.Literal;
-com.inq.ui.IFrame = function(_id) {  console.warn("com.inq.ui.IFrame");
+com.inq.ui.IFrame = function(_id) {
   com.inq.ui.Container.call(this, _id);
   this.initStyle("id", _id);
   this._div.innerHTML = '<IFRAME width="100%" height="100%" scrolling="NO" frameborder="0"></IFRAME>';
@@ -23824,14 +23824,14 @@ com.inq.ui.IFrame = function(_id) {  console.warn("com.inq.ui.IFrame");
   this.setScrolling("no");
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.IFrame, "com.inq.ui.IFrame");
-com.inq.ui.IFrame.prototype.setScrolling = function(val) {  console.warn("com.inq.ui.IFrame.prototype.setScrolling");
+com.inq.ui.IFrame.prototype.setScrolling = function(val) {
   if (this._div != null) {
     this.scrolling = val;
     this._iframe.scrolling = val;
     this._iframe.setAttribute("scrolling", val);
   }
 };
-com.inq.ui.IFrame.prototype.setSrc = function(val) {  console.warn("com.inq.ui.IFrame.prototype.setSrc");
+com.inq.ui.IFrame.prototype.setSrc = function(val) {
   if (this._div != null) {
     this.src = val;
     if (this.src == null || this.src == "") {
@@ -23840,7 +23840,7 @@ com.inq.ui.IFrame.prototype.setSrc = function(val) {  console.warn("com.inq.ui.I
     this._iframe.src = this.evaluateString(this.src);
   }
 };
-com.inq.ui.IFrame.prototype.setHandCursor = function(val) {  console.warn("com.inq.ui.IFrame.prototype.setHandCursor");
+com.inq.ui.IFrame.prototype.setHandCursor = function(val) {
   var value = val;
   switch(value.toLowerCase()) {
     case "true":
@@ -23854,13 +23854,13 @@ com.inq.ui.IFrame.prototype.setHandCursor = function(val) {  console.warn("com.i
   }
   this.useHandCursor = this._useHandCursor ? "true" : "false";
 };
-com.inq.ui.IFrame.prototype.resize = function() {  console.warn("com.inq.ui.IFrame.prototype.resize");
+com.inq.ui.IFrame.prototype.resize = function() {
   this.applyStyle();
 };
-com.inq.ui.IFrame.prototype.setLabel = function(val) {  console.warn("com.inq.ui.IFrame.prototype.setLabel");
+com.inq.ui.IFrame.prototype.setLabel = function(val) {
   this.label = val;
 };
-com.inq.ui.IFrame.prototype.buildStyle = function() {  console.warn("com.inq.ui.IFrame.prototype.buildStyle");
+com.inq.ui.IFrame.prototype.buildStyle = function() {
   com.inq.ui.Container.prototype.buildStyle.call(this);
   if (this._useHandCursor) {
     this._style += "cursor: pointer;";
@@ -23881,7 +23881,7 @@ com.inq.ui.IFrame.prototype._useHandCursor = null;
 com.inq.ui.IFrame.prototype.label = null;
 com.inq.ui.IFrame.prototype.useHandCursor = null;
 com.inq.ui.IFrame.prototype.__class__ = com.inq.ui.IFrame;
-com.inq.ui.Image = function(_id) {  console.warn("com.inq.ui.Image");
+com.inq.ui.Image = function(_id) {
   com.inq.ui.Container.call(this, _id);
   if (this._div != null) {
     this._div.alt = "";
@@ -23889,7 +23889,7 @@ com.inq.ui.Image = function(_id) {  console.warn("com.inq.ui.Image");
   }
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.Image, "com.inq.ui.Image");
-com.inq.ui.Image.prototype.setSrc = function(val) {  console.warn("com.inq.ui.Image.prototype.setSrc");
+com.inq.ui.Image.prototype.setSrc = function(val) {
   haxe.Log.trace("Image.setSrc: " + Std.string(val), {fileName:"Image.hx", lineNumber:19, className:"com.inq.ui.Image", methodName:"setSrc"});
   if (this._div != null) {
     this.src = val;
@@ -23906,11 +23906,11 @@ com.inq.ui.Image.prototype.setSrc = function(val) {  console.warn("com.inq.ui.Im
 };
 com.inq.ui.Image.prototype._img = null;
 com.inq.ui.Image.prototype.__class__ = com.inq.ui.Image;
-com.inq.ui.Keyboard = function() {  console.warn("com.inq.ui.Keyboard");
+com.inq.ui.Keyboard = function() {
 };
 $hxClasses.registerClass(com.inq.ui.Keyboard, "com.inq.ui.Keyboard");
 com.inq.ui.Keyboard.capsLock = null;
-com.inq.ui.Keyboard.isAccessible = function() {  console.warn("com.inq.ui.Keyboard.isAccessible");
+com.inq.ui.Keyboard.isAccessible = function() {
   return true;
 };
 com.inq.ui.Keyboard.numLock = null;
@@ -23965,7 +23965,7 @@ com.inq.ui.Keyboard.SHIFT = 16;
 com.inq.ui.Keyboard.SPACE = 32;
 com.inq.ui.Keyboard.TAB = 9;
 com.inq.ui.Keyboard.UP = 38;
-com.inq.ui.TextInput = function(_id) {  console.warn("com.inq.ui.TextInput");
+com.inq.ui.TextInput = function(_id) {
   com.inq.ui.AbstractTextInput.call(this, _id);
   this._div.innerHTML = '<textarea style="height:100%;width:100%"></textarea>';
   this._text = this._div.getElementsByTagName("TEXTAREA")[0];
@@ -23977,10 +23977,10 @@ com.inq.ui.TextInput = function(_id) {  console.warn("com.inq.ui.TextInput");
   this._previousValue = "";
 };
 $hxClasses.extend(com.inq.ui.AbstractTextInput, com.inq.ui.TextInput, "com.inq.ui.TextInput");
-com.inq.ui.TextInput.getContainer = function(element) {  console.warn("com.inq.ui.TextInput.getContainer");
+com.inq.ui.TextInput.getContainer = function(element) {
   return element["container"];
 };
-com.inq.ui.TextInput.prototype.buildStyle = function() {  console.warn("com.inq.ui.TextInput.prototype.buildStyle");
+com.inq.ui.TextInput.prototype.buildStyle = function() {
   if (com.inq.utils.Capabilities.isAndroid()) {
     this._input.setAttribute("autocomplete", "off");
   }
@@ -23996,7 +23996,7 @@ com.inq.ui.TextInput.prototype.buildStyle = function() {  console.warn("com.inq.
     this._text.title = textStyle;
   }
 };
-com.inq.ui.TextInput.prototype.applyAttributeMap = function() {  console.warn("com.inq.ui.TextInput.prototype.applyAttributeMap");
+com.inq.ui.TextInput.prototype.applyAttributeMap = function() {
   for (var aKey in this.attributeMap) {
     if (this.attributeMap.hasOwnProperty(aKey)) {
       switch(aKey) {
@@ -24011,17 +24011,17 @@ com.inq.ui.TextInput.prototype.applyAttributeMap = function() {  console.warn("c
     }
   }
 };
-com.inq.ui.TextInput.prototype.getPrimaryObject = function() {  console.warn("com.inq.ui.TextInput.prototype.getPrimaryObject");
+com.inq.ui.TextInput.prototype.getPrimaryObject = function() {
   return this._input;
 };
-com.inq.ui.TextInput.prototype.getOffsetTop = function() {  console.warn("com.inq.ui.TextInput.prototype.getOffsetTop");
+com.inq.ui.TextInput.prototype.getOffsetTop = function() {
   if (this._offsetTop != 0) {
     return this._offsetTop;
   }
   this._offsetTop = com.inq.flash.client.chatskins.ScrollMonitor.getOffsetTopToStage(this._input);
   return this._offsetTop;
 };
-com.inq.ui.TextInput.prototype.applyStyle = function() {  console.warn("com.inq.ui.TextInput.prototype.applyStyle");
+com.inq.ui.TextInput.prototype.applyStyle = function() {
   com.inq.ui.AbstractTextInput.prototype.applyStyle.call(this);
   var _cap = com.inq.utils.Capabilities;
   if (_cap.isPhone() && _cap.isAndroid("Android 4.0.4;")) {
@@ -24044,7 +24044,7 @@ com.inq.ui.TextInput.prototype.applyStyle = function() {  console.warn("com.inq.
     }
   }
 };
-com.inq.ui.TextInput.prototype.setText = function(val, previousVal) {  console.warn("com.inq.ui.TextInput.prototype.setText");
+com.inq.ui.TextInput.prototype.setText = function(val, previousVal) {
   if (this._text.value != val) {
     if (previousVal || previousVal == "") {
       this._previousValue = previousVal;
@@ -24054,10 +24054,10 @@ com.inq.ui.TextInput.prototype.setText = function(val, previousVal) {  console.w
     this._text.value = val;
   }
 };
-com.inq.ui.TextInput.prototype.getText = function() {  console.warn("com.inq.ui.TextInput.prototype.getText");
+com.inq.ui.TextInput.prototype.getText = function() {
   return this._text.value;
 };
-com.inq.ui.TextInput.prototype.getHtmlLabelObject = function() {  console.warn("com.inq.ui.TextInput.prototype.getHtmlLabelObject");
+com.inq.ui.TextInput.prototype.getHtmlLabelObject = function() {
   var labelObjet = null;
   if (typeof this._input != "undefined") {
     labelObjet = this._input;
@@ -24068,10 +24068,10 @@ com.inq.ui.TextInput.prototype.getHtmlLabelObject = function() {  console.warn("
   }
   return labelObjet;
 };
-com.inq.ui.TextInput.prototype.restorePreviousValue = function() {  console.warn("com.inq.ui.TextInput.prototype.restorePreviousValue");
+com.inq.ui.TextInput.prototype.restorePreviousValue = function() {
   this.setText(this._previousValue);
 };
-com.inq.ui.Label = function(text) {  console.warn("com.inq.ui.Label");
+com.inq.ui.Label = function(text) {
   com.inq.ui.TextInput.call(this);
   this._div.innerHTML = '<input type="text" style="height:100%;width:100%"></input>';
   this._input = this._div.getElementsByTagName("input")[0];
@@ -24082,28 +24082,28 @@ com.inq.ui.Label = function(text) {  console.warn("com.inq.ui.Label");
 };
 $hxClasses.extend(com.inq.ui.TextInput, com.inq.ui.Label, "com.inq.ui.Label");
 com.inq.ui.Label.prototype.__class__ = com.inq.ui.Label;
-com.inq.ui.LineInput = function(_id) {  console.warn("com.inq.ui.LineInput");
+com.inq.ui.LineInput = function(_id) {
   com.inq.ui.AbstractTextInput.call(this, _id);
   this._div.innerHTML = '<input type="text" style="height:100%;width:100%"></input>';
   this.setupInput(this._div.getElementsByTagName("input")[0]);
 };
 $hxClasses.extend(com.inq.ui.AbstractTextInput, com.inq.ui.LineInput, "com.inq.ui.LineInput");
-com.inq.ui.LineInput.prototype.buildStyle = function() {  console.warn("com.inq.ui.LineInput.prototype.buildStyle");
+com.inq.ui.LineInput.prototype.buildStyle = function() {
   com.inq.ui.AbstractTextInput.prototype.buildStyle.call(this);
   if (this.styles.value != null) {
     var ln = this._div.getElementsByTagName("INPUT")[0];
     ln.value = this.evaluateString(this.styles.value);
   }
 };
-com.inq.ui.LineInput.prototype.getText = function() {  console.warn("com.inq.ui.LineInput.prototype.getText");
+com.inq.ui.LineInput.prototype.getText = function() {
   return this._getInput();
 };
-com.inq.ui.Screen = function() {  console.warn("com.inq.ui.Screen");
+com.inq.ui.Screen = function() {
   com.inq.ui.Container.call(this);
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.Screen, "com.inq.ui.Screen");
 com.inq.ui.Screen.prototype.__class__ = com.inq.ui.Screen;
-com.inq.ui.Stage = function() {  console.warn("com.inq.ui.Stage");
+com.inq.ui.Stage = function() {
   com.inq.ui.Container.call(this, window.frameElement);
   if (com.inq.ui.Stage.stage == null) {
     com.inq.stage.ViewportMgr.init();
@@ -24117,25 +24117,25 @@ com.inq.ui.Stage.height = null;
 com.inq.ui.Stage.width = null;
 com.inq.ui.Stage.stageLeft = null;
 com.inq.ui.Stage.stageTop = null;
-com.inq.ui.Stage.getInstance = function() {  console.warn("com.inq.ui.Stage.getInstance");
+com.inq.ui.Stage.getInstance = function() {
   if (com.inq.ui.Stage.stage == null) {
     com.inq.ui.Stage.stage = new com.inq.ui.Stage;
   }
   return com.inq.ui.Stage.stage;
 };
-com.inq.ui.Stage.getterStageHeight = function() {  console.warn("com.inq.ui.Stage.getterStageHeight");
+com.inq.ui.Stage.getterStageHeight = function() {
   var stageHeight;
   var style = window.frameElement.style;
   stageHeight = style.height.indexOf("%") >= 0 ? window["innerHeight"] != null ? window.innerHeight : com.inq.ui.Stage.getOffsetHeight() : Std.parseInt(style.height);
   return stageHeight;
 };
-com.inq.ui.Stage.getterStageWidth = function() {  console.warn("com.inq.ui.Stage.getterStageWidth");
+com.inq.ui.Stage.getterStageWidth = function() {
   var stageWidth;
   var style = window.frameElement.style;
   stageWidth = style.width.indexOf("%") >= 0 ? window["innerWidth"] != null ? window.innerWidth : com.inq.ui.Stage.getOffsetWidth() : Std.parseInt(style.width);
   return stageWidth;
 };
-com.inq.ui.Stage.getOffsetHeight = function() {  console.warn("com.inq.ui.Stage.getOffsetHeight");
+com.inq.ui.Stage.getOffsetHeight = function() {
   var iOffsetHeight = 0;
   var iframeWin = window;
   var iframeDoc = iframeWin.document;
@@ -24149,13 +24149,13 @@ com.inq.ui.Stage.getOffsetHeight = function() {  console.warn("com.inq.ui.Stage.
   }
   return iOffsetHeight;
 };
-com.inq.ui.Stage.getStageLeft = function() {  console.warn("com.inq.ui.Stage.getStageLeft");
+com.inq.ui.Stage.getStageLeft = function() {
   return Std.parseInt(com.inq.ui.Stage.getStageElement().style.left);
 };
-com.inq.ui.Stage.getStageTop = function() {  console.warn("com.inq.ui.Stage.getStageTop");
+com.inq.ui.Stage.getStageTop = function() {
   return Std.parseInt(com.inq.ui.Stage.getStageElement().style.top);
 };
-com.inq.ui.Stage.getOffsetWidth = function() {  console.warn("com.inq.ui.Stage.getOffsetWidth");
+com.inq.ui.Stage.getOffsetWidth = function() {
   var iOffsetWidth = 0;
   var iframeWin = window;
   var iframeDoc = iframeWin.document;
@@ -24169,7 +24169,7 @@ com.inq.ui.Stage.getOffsetWidth = function() {  console.warn("com.inq.ui.Stage.g
   }
   return iOffsetWidth;
 };
-com.inq.ui.Stage.getStageElement = function() {  console.warn("com.inq.ui.Stage.getStageElement");
+com.inq.ui.Stage.getStageElement = function() {
   try {
     if (!com.inq.ui.Stage.stage) {
       return null;
@@ -24192,14 +24192,14 @@ com.inq.ui.Stage.getStageElement = function() {  console.warn("com.inq.ui.Stage.
   }
   return com.inq.ui.Stage.stage._div;
 };
-com.inq.ui.Stage.prototype.setObjectFocus = function(object) {  console.warn("com.inq.ui.Stage.prototype.setObjectFocus");
+com.inq.ui.Stage.prototype.setObjectFocus = function(object) {
   this.focus = object;
   object.setFocus();
 };
-com.inq.ui.Stage.prototype.getVisible = function(_visible) {  console.warn("com.inq.ui.Stage.prototype.getVisible");
+com.inq.ui.Stage.prototype.getVisible = function(_visible) {
   return this._div.style.display != "none";
 };
-com.inq.ui.Stage.prototype.setVisible = function(_visible) {  console.warn("com.inq.ui.Stage.prototype.setVisible");
+com.inq.ui.Stage.prototype.setVisible = function(_visible) {
   try {
     com.inq.ui.Stage.getStageElement();
     com.inq.stage.ViewportMgr.visible(_visible);
@@ -24217,14 +24217,14 @@ com.inq.ui.Stage.prototype.focus = null;
 com.inq.ui.Stage.prototype.__class__ = com.inq.ui.Stage;
 com.inq.ui.Stage._dragBar = window.parent.document.getElementById("inqTitleBar");
 com.inq.ui.Stage.stage = null;
-com.inq.ui.StyleSheet = function() {  console.warn("com.inq.ui.StyleSheet");
+com.inq.ui.StyleSheet = function() {
   this.styleNames = {};
 };
 $hxClasses.registerClass(com.inq.ui.StyleSheet, "com.inq.ui.StyleSheet");
-com.inq.ui.StyleSheet.prototype.transform = function(formatObject) {  console.warn("com.inq.ui.StyleSheet.prototype.transform");
+com.inq.ui.StyleSheet.prototype.transform = function(formatObject) {
   return null;
 };
-com.inq.ui.StyleSheet.prototype.setStyle = function(styleName, styleObject) {  console.warn("com.inq.ui.StyleSheet.prototype.setStyle");
+com.inq.ui.StyleSheet.prototype.setStyle = function(styleName, styleObject) {
   var s = "";
   if (!js.Boot.__instanceof(styleObject, String)) {
     var i;
@@ -24285,18 +24285,18 @@ com.inq.ui.StyleSheet.prototype.setStyle = function(styleName, styleObject) {  c
   }
   this.styleNames[styleName] = s;
 };
-com.inq.ui.StyleSheet.prototype.parseCSS = function(CSSText) {  console.warn("com.inq.ui.StyleSheet.prototype.parseCSS");
+com.inq.ui.StyleSheet.prototype.parseCSS = function(CSSText) {
 };
-com.inq.ui.StyleSheet.prototype.getStyle = function(styleName) {  console.warn("com.inq.ui.StyleSheet.prototype.getStyle");
+com.inq.ui.StyleSheet.prototype.getStyle = function(styleName) {
   var style = this.styleNames[styleName];
   return style;
 };
-com.inq.ui.StyleSheet.prototype.clear = function() {  console.warn("com.inq.ui.StyleSheet.prototype.clear");
+com.inq.ui.StyleSheet.prototype.clear = function() {
   this.styleNames = {};
 };
 com.inq.ui.StyleSheet.prototype.styleNames = null;
 com.inq.ui.StyleSheet.prototype.__class__ = com.inq.ui.StyleSheet;
-com.inq.ui.Text = function(text) {  console.warn("com.inq.ui.Text");
+com.inq.ui.Text = function(text) {
   com.inq.ui.TextInput.call(this);
   this._div.innerHTML = '<span style="height:100%;width:100%"></span>';
   this._text = this._div.getElementsByTagName("SPAN")[0];
@@ -24306,15 +24306,15 @@ com.inq.ui.Text = function(text) {  console.warn("com.inq.ui.Text");
   }
 };
 $hxClasses.extend(com.inq.ui.TextInput, com.inq.ui.Text, "com.inq.ui.Text");
-com.inq.ui.Text.prototype.setText = function(val) {  console.warn("com.inq.ui.Text.prototype.setText");
+com.inq.ui.Text.prototype.setText = function(val) {
   if (this._updatable) {
     this._text.innerHTML = val;
   }
 };
-com.inq.ui.Text.prototype.getText = function() {  console.warn("com.inq.ui.Text.prototype.getText");
+com.inq.ui.Text.prototype.getText = function() {
   return this.getStyle("text");
 };
-com.inq.ui.Text.prototype.replaceTextOntoElement = function(replacer, element) {  console.warn("com.inq.ui.Text.prototype.replaceTextOntoElement");
+com.inq.ui.Text.prototype.replaceTextOntoElement = function(replacer, element) {
   var text = this._text.childNodes[0].nodeValue;
   var index = text.indexOf(replacer);
   if (index != -1) {
@@ -24326,7 +24326,7 @@ com.inq.ui.Text.prototype.replaceTextOntoElement = function(replacer, element) {
     this._updatable = false;
   }
 };
-com.inq.ui.Text.prototype.applyStyle = function() {  console.warn("com.inq.ui.Text.prototype.applyStyle");
+com.inq.ui.Text.prototype.applyStyle = function() {
   com.inq.ui.Container.prototype.applyStyle.call(this);
   var id = this._div.id.toLowerCase();
   if (navigator.userAgent.indexOf("MSIE 7") >= 0 || id.indexOf("failedsend") >= 0 || id.indexOf("successsend") >= 0) {
@@ -24344,7 +24344,7 @@ com.inq.ui.Text.prototype.applyStyle = function() {  console.warn("com.inq.ui.Te
     }
   }
 };
-com.inq.ui.TextArea = function(_id) {  console.warn("com.inq.ui.TextArea");
+com.inq.ui.TextArea = function(_id) {
   com.inq.ui.Container.call(this, _id);
   this._div.innerHTML = '<div id="tc_chat_box' + _id + '"><span style="background-color:transparent;overflow: hidden; overflow-x: hidden; overflow-y: hidden;"></span></div>';
   this._span = this._div.getElementsByTagName("SPAN")[0];
@@ -24357,10 +24357,10 @@ com.inq.ui.TextArea = function(_id) {  console.warn("com.inq.ui.TextArea");
   this.keepIosScrolling();
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.TextArea, "com.inq.ui.TextArea");
-com.inq.ui.TextArea.useTransformScrolling = function() {  console.warn("com.inq.ui.TextArea.useTransformScrolling");
+com.inq.ui.TextArea.useTransformScrolling = function() {
   return com.inq.utils.Capabilities.isAndroid() || com.inq.utils.Capabilities.isWindowsPhone();
 };
-com.inq.ui.TextArea.clone = function(source, id) {  console.warn("com.inq.ui.TextArea.clone");
+com.inq.ui.TextArea.clone = function(source, id) {
   var ta = new com.inq.ui.TextArea;
   ta.setID(id);
   if (source._div != null) {
@@ -24382,33 +24382,33 @@ com.inq.ui.TextArea.clone = function(source, id) {  console.warn("com.inq.ui.Tex
   ta.keepIosScrolling();
   return ta;
 };
-com.inq.ui.TextArea.prototype._getStyleSheet = function() {  console.warn("com.inq.ui.TextArea.prototype._getStyleSheet");
+com.inq.ui.TextArea.prototype._getStyleSheet = function() {
   return this._styleSheet;
 };
-com.inq.ui.TextArea.prototype._setStyleSheet = function(val) {  console.warn("com.inq.ui.TextArea.prototype._setStyleSheet");
+com.inq.ui.TextArea.prototype._setStyleSheet = function(val) {
   return null;
 };
-com.inq.ui.TextArea.prototype._setHtmlText = function(val) {  console.warn("com.inq.ui.TextArea.prototype._setHtmlText");
+com.inq.ui.TextArea.prototype._setHtmlText = function(val) {
   this._span.innerHTML = val.split("\n").join("<br/>");
 };
-com.inq.ui.TextArea.prototype._getHtmlText = function() {  console.warn("com.inq.ui.TextArea.prototype._getHtmlText");
+com.inq.ui.TextArea.prototype._getHtmlText = function() {
   if (this._span == null) {
     return "";
   }
   return this._span.innerHTML;
 };
-com.inq.ui.TextArea.prototype.setID = function(val) {  console.warn("com.inq.ui.TextArea.prototype.setID");
+com.inq.ui.TextArea.prototype.setID = function(val) {
   com.inq.ui.Container.prototype.setID.call(this, val);
   if (this._span != null) {
     this._span.id = Std.string(this._div.id) + "_span";
   }
 };
-com.inq.ui.TextArea.prototype.getLocation = function(event) {  console.warn("com.inq.ui.TextArea.prototype.getLocation");
+com.inq.ui.TextArea.prototype.getLocation = function(event) {
   var t = event.touches ? event.touches[0] : event;
   var loc = new com.inq.utils.Point(t.screenX, t.screenY);
   return loc;
 };
-com.inq.ui.TextArea.prototype.forceRange = function(x, min, max) {  console.warn("com.inq.ui.TextArea.prototype.forceRange");
+com.inq.ui.TextArea.prototype.forceRange = function(x, min, max) {
   var r = x;
   if (r > max) {
     r = max;
@@ -24418,7 +24418,7 @@ com.inq.ui.TextArea.prototype.forceRange = function(x, min, max) {  console.warn
   }
   return r;
 };
-com.inq.ui.TextArea.prototype.getMaxScrollPosition = function() {  console.warn("com.inq.ui.TextArea.prototype.getMaxScrollPosition");
+com.inq.ui.TextArea.prototype.getMaxScrollPosition = function() {
   var table = this._ta.getElementsByTagName("table")[0];
   var taHeight = Math.max(table.offsetHeight, this._span.offsetHeight, this._ta.offsetHeight);
   var x = this._ta.offsetWidth - this._div.offsetWidth | 0;
@@ -24431,7 +24431,7 @@ com.inq.ui.TextArea.prototype.getMaxScrollPosition = function() {  console.warn(
   }
   return new com.inq.utils.Point(x, y);
 };
-com.inq.ui.TextArea.prototype.scrollToPosition = function(p) {  console.warn("com.inq.ui.TextArea.prototype.scrollToPosition");
+com.inq.ui.TextArea.prototype.scrollToPosition = function(p) {
   if (com.inq.ui.TextArea.useTransformScrolling()) {
     var max = this.getMaxScrollPosition();
     max.y = Math.max(this._scrollPosition.y, max.y);
@@ -24445,7 +24445,7 @@ com.inq.ui.TextArea.prototype.scrollToPosition = function(p) {  console.warn("co
     this._ta.scrollTop = p.y;
   }
 };
-com.inq.ui.TextArea.prototype.scrollToBottom = function() {  console.warn("com.inq.ui.TextArea.prototype.scrollToBottom");
+com.inq.ui.TextArea.prototype.scrollToBottom = function() {
   if (com.inq.ui.TextArea.useTransformScrolling()) {
     var m;
     if (com.inq.utils.Capabilities.isWindowsPhone()) {
@@ -24463,10 +24463,10 @@ com.inq.ui.TextArea.prototype.scrollToBottom = function() {  console.warn("com.i
     this.scrollToPosition(new com.inq.utils.Point(0, pos));
   }
 };
-com.inq.ui.TextArea.prototype.scrollToTop = function() {  console.warn("com.inq.ui.TextArea.prototype.scrollToTop");
+com.inq.ui.TextArea.prototype.scrollToTop = function() {
   this.scrollToPosition(new com.inq.utils.Point(0, 0));
 };
-com.inq.ui.TextArea.prototype.onTouchMove = function(event) {  console.warn("com.inq.ui.TextArea.prototype.onTouchMove");
+com.inq.ui.TextArea.prototype.onTouchMove = function(event) {
   var loc = this.getLocation(event);
   this._startPosition = this._startPosition || loc;
   this._scrollPosition = this._scrollPosition || new com.inq.utils.Point(0, 0);
@@ -24479,7 +24479,7 @@ com.inq.ui.TextArea.prototype.onTouchMove = function(event) {  console.warn("com
   this._startPosition = loc;
   event.preventDefault();
 };
-com.inq.ui.TextArea.prototype.onTouchStart = function(event) {  console.warn("com.inq.ui.TextArea.prototype.onTouchStart");
+com.inq.ui.TextArea.prototype.onTouchStart = function(event) {
   if (event.target.tagName == "A") {
     return;
   }
@@ -24490,7 +24490,7 @@ com.inq.ui.TextArea.prototype.onTouchStart = function(event) {  console.warn("co
     }
   }
 };
-com.inq.ui.TextArea.prototype.initTransformScrolling = function() {  console.warn("com.inq.ui.TextArea.prototype.initTransformScrolling");
+com.inq.ui.TextArea.prototype.initTransformScrolling = function() {
   if (com.inq.ui.TextArea.useTransformScrolling()) {
     this._scrollPosition = new com.inq.utils.Point(0, 0);
     this._startPosition = new com.inq.utils.Point(0, 0);
@@ -24503,14 +24503,14 @@ com.inq.ui.TextArea.prototype.initTransformScrolling = function() {  console.war
     this.applyStyle();
   }
 };
-com.inq.ui.TextArea.prototype.isVerticalMotion = function(event) {  console.warn("com.inq.ui.TextArea.prototype.isVerticalMotion");
+com.inq.ui.TextArea.prototype.isVerticalMotion = function(event) {
   var l = this.getLocation(event);
   var dx = Math.abs(l.x - this._startPosition.x);
   var dy = Math.abs(l.y - this._startPosition.y);
   var vert = 5 * dx < dy;
   return vert;
 };
-com.inq.ui.TextArea.prototype.preventPageScroll = function(event) {  console.warn("com.inq.ui.TextArea.prototype.preventPageScroll");
+com.inq.ui.TextArea.prototype.preventPageScroll = function(event) {
   try {
     var ep = this.getLocation(event);
     if (ep.y < this._startPosition.y) {
@@ -24528,10 +24528,10 @@ com.inq.ui.TextArea.prototype.preventPageScroll = function(event) {  console.war
   } catch (err) {
   }
 };
-com.inq.ui.TextArea.prototype.saveTouchStartPosition = function(event) {  console.warn("com.inq.ui.TextArea.prototype.saveTouchStartPosition");
+com.inq.ui.TextArea.prototype.saveTouchStartPosition = function(event) {
   this._startPosition = this.getLocation(event);
 };
-com.inq.ui.TextArea.prototype.keepIosScrolling = function() {  console.warn("com.inq.ui.TextArea.prototype.keepIosScrolling");
+com.inq.ui.TextArea.prototype.keepIosScrolling = function() {
   if (com.inq.utils.Capabilities.isIphone()) {
     this.saveTouchStartPosition = $bind(this, this.saveTouchStartPosition);
     com.inq.utils.Capabilities.BindListener(this._ta, "touchstart", this.saveTouchStartPosition);
@@ -24539,14 +24539,14 @@ com.inq.ui.TextArea.prototype.keepIosScrolling = function() {  console.warn("com
     com.inq.utils.Capabilities.BindListener(this._ta, "touchmove", this.preventPageScroll);
   }
 };
-com.inq.ui.TextArea.prototype.buildStyle = function() {  console.warn("com.inq.ui.TextArea.prototype.buildStyle");
+com.inq.ui.TextArea.prototype.buildStyle = function() {
   com.inq.ui.Container.prototype.buildStyle.call(this);
   var tabindex = this.getStyle("tabindex");
   if (null != tabindex) {
     this._div.setAttribute("tabindex", tabindex);
   }
 };
-com.inq.ui.TextArea.prototype.applyStyle = function(event) {  console.warn("com.inq.ui.TextArea.prototype.applyStyle");
+com.inq.ui.TextArea.prototype.applyStyle = function(event) {
   com.inq.ui.Container.prototype.applyStyle.call(this);
   var alt = this.styles["alt"];
   alt = !alt ? "" : alt;
@@ -24554,7 +24554,7 @@ com.inq.ui.TextArea.prototype.applyStyle = function(event) {  console.warn("com.
     this._backgroundImage.alt = alt;
   }
 };
-com.inq.ui.TextArea.prototype.cleanUp = function() {  console.warn("com.inq.ui.TextArea.prototype.cleanUp");
+com.inq.ui.TextArea.prototype.cleanUp = function() {
   com.inq.utils.Capabilities.UnbindListener(this._ta, "touchstart", this.onTouchStart);
   com.inq.utils.Capabilities.UnbindListener(this._ta, "touchmove", this.onTouchMove);
   com.inq.utils.Capabilities.UnbindListener(this._ta, "touchstart", this.saveTouchStartPosition);
@@ -24568,20 +24568,20 @@ com.inq.ui.TextArea.prototype._ta = null;
 com.inq.ui.TextArea.prototype._span = null;
 com.inq.ui.TextArea.prototype._textarea = null;
 com.inq.ui.TextArea.prototype._styleSheet = null;
-com.inq.ui.TextField = function() {  console.warn("com.inq.ui.TextField");
+com.inq.ui.TextField = function() {
 };
 $hxClasses.registerClass(com.inq.ui.TextField, "com.inq.ui.TextField");
 com.inq.ui.TextField.prototype.__class__ = com.inq.ui.TextField;
-com.inq.ui.FileInput = function(id) {  console.warn("com.inq.ui.FileInput");
+com.inq.ui.FileInput = function(id) {
   com.inq.ui.Container.call(this, id);
   this._div.innerHTML = "<input id='uploadInput' name='file' type='file' style=\"position:absolute;left:-9999px;\"/>";
   this.input = this._div.getElementsByTagName("input")[0];
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.FileInput, "com.inq.ui.FileInput");
-com.inq.ui.FileInput.prototype.buildStyle = function() {  console.warn("com.inq.ui.FileInput.prototype.buildStyle");
+com.inq.ui.FileInput.prototype.buildStyle = function() {
   com.inq.ui.Container.prototype.buildStyle.call(this);
 };
-com.inq.ui.FileInput.prototype.applyStyle = function() {  console.warn("com.inq.ui.FileInput.prototype.applyStyle");
+com.inq.ui.FileInput.prototype.applyStyle = function() {
   com.inq.ui.Container.prototype.applyStyle.call(this);
   var htmlLabel = this._htmlLabel;
   if (htmlLabel) {
@@ -24593,18 +24593,18 @@ com.inq.ui.FileInput.prototype.applyStyle = function() {  console.warn("com.inq.
   }
 };
 com.inq.ui.FileInput.prototype.input = null;
-com.inq.ui.VideoTag = function(id) {  console.warn("com.inq.ui.VideoTag");
+com.inq.ui.VideoTag = function(id) {
   com.inq.ui.Container.call(this, id);
   this._div.innerHTML = "<video id='videoInOut' autoplay width='100%' height='100%' style='position:absolute;' poster='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'></video>";
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.VideoTag, "com.inq.ui.VideoTag");
-com.inq.ui.VideoTag.prototype.buildStyle = function() {  console.warn("com.inq.ui.VideoTag.prototype.buildStyle");
+com.inq.ui.VideoTag.prototype.buildStyle = function() {
   com.inq.ui.Container.prototype.buildStyle.call(this);
 };
-com.inq.ui.VideoTag.prototype.applyStyle = function() {  console.warn("com.inq.ui.VideoTag.prototype.applyStyle");
+com.inq.ui.VideoTag.prototype.applyStyle = function() {
   com.inq.ui.Container.prototype.applyStyle.call(this);
 };
-com.inq.ui.XFrame = function(_id) {  console.warn("com.inq.ui.XFrame");
+com.inq.ui.XFrame = function(_id) {
   com.inq.ui.IFrame.call(this, _id);
   this.initStyle("id", _id);
   this.__src = null;
@@ -24621,10 +24621,10 @@ com.inq.ui.XFrame = function(_id) {  console.warn("com.inq.ui.XFrame");
   this.initFocusHandler();
 };
 $hxClasses.extend(com.inq.ui.IFrame, com.inq.ui.XFrame, "com.inq.ui.XFrame");
-com.inq.ui.XFrame.prototype.readPersistedURL = function(defaultVal) {  console.warn("com.inq.ui.XFrame.prototype.readPersistedURL");
+com.inq.ui.XFrame.prototype.readPersistedURL = function(defaultVal) {
   return com.inq.flash.client.control.PersistenceManager.GetValue(com.inq.ui.XFrame.PERSISTENT_URL_COOKIE_PREFIX + this.getID(), defaultVal);
 };
-com.inq.ui.XFrame.prototype.cloneXFrameData = function() {  console.warn("com.inq.ui.XFrame.prototype.cloneXFrameData");
+com.inq.ui.XFrame.prototype.cloneXFrameData = function() {
   var target = {};
   var keyz = Reflect.fields(this.__src);
   var _g1 = 0, _g = keyz.length;
@@ -24637,14 +24637,14 @@ com.inq.ui.XFrame.prototype.cloneXFrameData = function() {  console.warn("com.in
   }
   return target;
 };
-com.inq.ui.XFrame.prototype.persistURL = function() {  console.warn("com.inq.ui.XFrame.prototype.persistURL");
+com.inq.ui.XFrame.prototype.persistURL = function() {
   com.inq.flash.client.control.PersistenceManager.SetValue(com.inq.ui.XFrame.PERSISTENT_URL_COOKIE_PREFIX + this.getID(), this.cloneXFrameData());
 };
-com.inq.ui.XFrame.prototype.loadContent = function() {  console.warn("com.inq.ui.XFrame.prototype.loadContent");
+com.inq.ui.XFrame.prototype.loadContent = function() {
   com.inq.ui.IFrame.prototype.loadContent.call(this);
   this.setInnerHTML(this.__src);
 };
-com.inq.ui.XFrame.prototype.setInitOnLoad = function(val) {  console.warn("com.inq.ui.XFrame.prototype.setInitOnLoad");
+com.inq.ui.XFrame.prototype.setInitOnLoad = function(val) {
   if (this._div != null && val == "true") {
     if (this.__src == null) {
       this.__initOnLoad = true;
@@ -24653,10 +24653,10 @@ com.inq.ui.XFrame.prototype.setInitOnLoad = function(val) {  console.warn("com.i
     }
   }
 };
-com.inq.ui.XFrame.prototype.getInitOnLoad = function() {  console.warn("com.inq.ui.XFrame.prototype.getInitOnLoad");
+com.inq.ui.XFrame.prototype.getInitOnLoad = function() {
   return this.__initOnLoad;
 };
-com.inq.ui.XFrame.prototype.updateSrc = function(businessUnitID, initiator) {  console.warn("com.inq.ui.XFrame.prototype.updateSrc");
+com.inq.ui.XFrame.prototype.updateSrc = function(businessUnitID, initiator) {
   com.inq.ui.IFrame.prototype.updateSrc.call(this, businessUnitID, initiator);
   if (this.__src != null) {
     if (businessUnitID) {
@@ -24665,7 +24665,7 @@ com.inq.ui.XFrame.prototype.updateSrc = function(businessUnitID, initiator) {  c
     this.__src["initiator"] = initiator;
   }
 };
-com.inq.ui.XFrame.prototype.setSrcWithBusinessUnitID = function(urldata, businessUnitID) {  console.warn("com.inq.ui.XFrame.prototype.setSrcWithBusinessUnitID");
+com.inq.ui.XFrame.prototype.setSrcWithBusinessUnitID = function(urldata, businessUnitID) {
   if (this._div != null) {
     this.__src = urldata;
     if (this.__initOnLoad) {
@@ -24674,19 +24674,19 @@ com.inq.ui.XFrame.prototype.setSrcWithBusinessUnitID = function(urldata, busines
     }
   }
 };
-com.inq.ui.XFrame.prototype.setSrc = function(val) {  console.warn("com.inq.ui.XFrame.prototype.setSrc");
+com.inq.ui.XFrame.prototype.setSrc = function(val) {
   var urldata = com.inq.flash.client.control.FlashPeer.parseXFrameUrl(val);
   if (this.__src == null) {
     urldata = this.readPersistedURL(urldata);
   }
   return this.setSrcWithBusinessUnitID(urldata);
 };
-com.inq.ui.XFrame.prototype.getIJSF = function() {  console.warn("com.inq.ui.XFrame.prototype.getIJSF");
+com.inq.ui.XFrame.prototype.getIJSF = function() {
   var port = "" == window.location.port ? "" : ":" + window.location.port;
   var src = window.location.protocol + "//" + (window.location.host + port + window.location.pathname);
   return src;
 };
-com.inq.ui.XFrame.prototype.equal = function(o1, o2) {  console.warn("com.inq.ui.XFrame.prototype.equal");
+com.inq.ui.XFrame.prototype.equal = function(o1, o2) {
   if (o1 == null) {
     return o2 == null;
   }
@@ -24703,25 +24703,25 @@ com.inq.ui.XFrame.prototype.equal = function(o1, o2) {  console.warn("com.inq.ui
   }
   return true;
 };
-com.inq.ui.XFrame.prototype.setInnerHTML = function(source, businessUnitID, initOnLoad) {  console.warn("com.inq.ui.XFrame.prototype.setInnerHTML");
+com.inq.ui.XFrame.prototype.setInnerHTML = function(source, businessUnitID, initOnLoad) {
   if (this.__oldSource == null || this.__oldSource.url != source.url || !this.equal(this.__oldSource["params"], this.__oldSource["params"])) {
     this.__oldSource = source;
     var parsedSource = this.evaluateString(source.url);
     this._iframe = com.inq.flash.client.control.FlashPeer.createXFrame(this._div, parsedSource, businessUnitID, this.scrolling, source["params"], source["initiator"], {type:"chat", id:this.getID()}, initOnLoad);
   }
 };
-com.inq.ui.XFrame.prototype.sendCustomEventToXForms = function(event, params) {  console.warn("com.inq.ui.XFrame.prototype.sendCustomEventToXForms");
+com.inq.ui.XFrame.prototype.sendCustomEventToXForms = function(event, params) {
   if (this._iframe && this._iframe.contentWindow.TCXForm) {
     return this._iframe.contentWindow.TCXForm.sendCustomEvent(event, params);
   } else {
     return false;
   }
 };
-com.inq.ui.XFrame.prototype.initFocusOnTouch = function() {  console.warn("com.inq.ui.XFrame.prototype.initFocusOnTouch");
+com.inq.ui.XFrame.prototype.initFocusOnTouch = function() {
   this.touchStart = $bind(this, this.setFocusOnTouch);
   com.inq.utils.Capabilities.BindListener(this._div, "touchstart", this.touchStart);
 };
-com.inq.ui.XFrame.prototype.setFocusOnTouch = function(event) {  console.warn("com.inq.ui.XFrame.prototype.setFocusOnTouch");
+com.inq.ui.XFrame.prototype.setFocusOnTouch = function(event) {
   if (event.target.nodeName.toUpperCase() == "INPUT") {
     com.inq.flash.client.chatskins.ChatTextFocusMonitorImplBase.isTouched = true;
     if (!event.target.onfocus) {
@@ -24731,7 +24731,7 @@ com.inq.ui.XFrame.prototype.setFocusOnTouch = function(event) {  console.warn("c
     }
   }
 };
-com.inq.ui.XFrame.prototype.resetScrolling = function() {  console.warn("com.inq.ui.XFrame.prototype.resetScrolling");
+com.inq.ui.XFrame.prototype.resetScrolling = function() {
   if (this.containerOrigTopPos == -1) {
     return;
   }
@@ -24740,7 +24740,7 @@ com.inq.ui.XFrame.prototype.resetScrolling = function() {  console.warn("com.inq
   this.containerHeight = 0;
   this.originalHeight = this._div.clientHeight;
 };
-com.inq.ui.XFrame.prototype.initTouchScrolling = function() {  console.warn("com.inq.ui.XFrame.prototype.initTouchScrolling");
+com.inq.ui.XFrame.prototype.initTouchScrolling = function() {
   this.touchStart = $bind(this, this.initTouchStart);
   com.inq.utils.Capabilities.BindListener(this._div, "touchstart", this.touchStart);
   this.touchMove = $bind(this, this.initTouchMove);
@@ -24748,11 +24748,11 @@ com.inq.ui.XFrame.prototype.initTouchScrolling = function() {  console.warn("com
   this.touchEnd = $bind(this, this.initTouchEnd);
   com.inq.utils.Capabilities.BindListener(this._div, "touchend", this.touchEnd);
 };
-com.inq.ui.XFrame.prototype.initFocusHandler = function() {  console.warn("com.inq.ui.XFrame.prototype.initFocusHandler");
+com.inq.ui.XFrame.prototype.initFocusHandler = function() {
   this.focusBindedHandler = $bind(this, this.focusHandler);
   com.inq.utils.Capabilities.BindListener(window, "focus", this.focusBindedHandler);
 };
-com.inq.ui.XFrame.prototype.focusHandler = function() {  console.warn("com.inq.ui.XFrame.prototype.focusHandler");
+com.inq.ui.XFrame.prototype.focusHandler = function() {
   var lt = com.inq.flash.client.control.PersistenceManager.GetValue("lf");
   var now = (new Date).getTime();
   var timeout = com.inq.flash.client.chatskins.SkinControl.getInitialTimeout() * com.inq.flash.client.chatskins.SkinControl.SEC;
@@ -24763,7 +24763,7 @@ com.inq.ui.XFrame.prototype.focusHandler = function() {  console.warn("com.inq.u
     com.inq.flash.client.control.PersistenceManager.SetValue("lf", now, true, true);
   }
 };
-com.inq.ui.XFrame.prototype.initTouchStart = function(event) {  console.warn("com.inq.ui.XFrame.prototype.initTouchStart");
+com.inq.ui.XFrame.prototype.initTouchStart = function(event) {
   var childEls, len, clientHeight;
   this.touchStartPos = (event.touches ? event.touches[0] : event).screenY;
   this.touchLastPos = this.touchStartPos;
@@ -24793,13 +24793,13 @@ com.inq.ui.XFrame.prototype.initTouchStart = function(event) {  console.warn("co
   }
   com.inq.flash.client.chatskins.ChatTextFocusMonitorImplIphoneSafari.forceFocus(event);
 };
-com.inq.ui.XFrame.prototype.initTouchMove = function(event) {  console.warn("com.inq.ui.XFrame.prototype.initTouchMove");
+com.inq.ui.XFrame.prototype.initTouchMove = function(event) {
   var t = event.touches ? event.touches[0] : event;
   this.touchLastPos = t.screenY;
   event.preventDefault();
   return false;
 };
-com.inq.ui.XFrame.prototype.initTouchEnd = function(event) {  console.warn("com.inq.ui.XFrame.prototype.initTouchEnd");
+com.inq.ui.XFrame.prototype.initTouchEnd = function(event) {
   var area = Application.GetArea(), bottomBoundry;
   if (Math.abs(this.touchLastPos - this.touchStartPos) > 50) {
     if (area && this.containerTopPos + this.containerHeight > area.h || this.containerTopPos < this.containerOrigTopPos && this.touchLastPos > this.touchStartPos) {
@@ -24811,7 +24811,7 @@ com.inq.ui.XFrame.prototype.initTouchEnd = function(event) {  console.warn("com.
     }
   }
 };
-com.inq.ui.XFrame.prototype.cleanUp = function() {  console.warn("com.inq.ui.XFrame.prototype.cleanUp");
+com.inq.ui.XFrame.prototype.cleanUp = function() {
   com.inq.utils.Capabilities.UnbindListener(this._div, "touchstart", this.touchStart);
   com.inq.utils.Capabilities.UnbindListener(this._div, "touchmove", this.touchMove);
   com.inq.utils.Capabilities.UnbindListener(this._div, "touchend", this.touchEnd);
@@ -24829,7 +24829,7 @@ com.inq.ui.XFrame.prototype.containerTopPos = 0;
 com.inq.ui.XFrame.prototype.containerOrigTopPos = -1;
 com.inq.ui.XFrame.prototype.containerHeight = 0;
 com.inq.ui.XFrame.prototype.originalHeight = 0;
-com.inq.ui.Placeholder = function(inputElement, intro) {  console.warn("com.inq.ui.Placeholder");
+com.inq.ui.Placeholder = function(inputElement, intro) {
   this._element = inputElement;
   this._value = "";
   if (com.inq.utils.Capabilities.isWindowsPhone() || !com.inq.utils.Util.isIE && "placeholder" in this._element) {
@@ -24840,29 +24840,29 @@ com.inq.ui.Placeholder = function(inputElement, intro) {  console.warn("com.inq.
   this.setValue(intro);
 };
 $hxClasses.extend(com.inq.ui.Placeholder, com.inq.ui.Placeholder, "com.inq.ui.Placeholder");
-com.inq.ui.Placeholder.prototype.toggle = function() {  console.warn("com.inq.ui.Placeholder.prototype.toggle");
+com.inq.ui.Placeholder.prototype.toggle = function() {
   if (this._customPlaceholder) {
     this._customPlaceholder.toggle();
   }
 };
-com.inq.ui.Placeholder.prototype.getValue = function() {  console.warn("com.inq.ui.Placeholder.prototype.getValue");
+com.inq.ui.Placeholder.prototype.getValue = function() {
   if (this._customPlaceholder) {
     return this._customPlaceholder.getValue();
   } else {
     return this._element.placeholder;
   }
 };
-com.inq.ui.Placeholder.prototype.setValue = function(value) {  console.warn("com.inq.ui.Placeholder.prototype.setValue");
+com.inq.ui.Placeholder.prototype.setValue = function(value) {
   if (this._customPlaceholder) {
     this._customPlaceholder.setValue(value);
   } else {
     this._element.placeholder = value;
   }
 };
-com.inq.ui.Placeholder.prototype.clear = function() {  console.warn("com.inq.ui.Placeholder.prototype.clear");
+com.inq.ui.Placeholder.prototype.clear = function() {
   this.setValue("");
 };
-com.inq.ui.CustomerNameInputField = function(messageId) {  console.warn("com.inq.ui.CustomerNameInputField");
+com.inq.ui.CustomerNameInputField = function(messageId) {
   this._initialized = false;
   this._closed = false;
   this._autofocus = false;
@@ -24880,7 +24880,7 @@ com.inq.ui.CustomerNameInputField = function(messageId) {  console.warn("com.inq
     }
   }
 };
-com.inq.ui.CustomerNameInputField.prototype.init = function() {  console.warn("com.inq.ui.CustomerNameInputField.prototype.init");
+com.inq.ui.CustomerNameInputField.prototype.init = function() {
   var isCustomerNameUpdated = com.inq.flash.client.control.FlashVars.isCustomerNameUpdated();
   if (!isCustomerNameUpdated && this._container && this._input && this._sendButton) {
     this._container.customerNameInput = this;
@@ -24901,7 +24901,7 @@ com.inq.ui.CustomerNameInputField.prototype.init = function() {  console.warn("c
     this._initialized = true;
   }
 };
-com.inq.ui.CustomerNameInputField.prototype.show = function() {  console.warn("com.inq.ui.CustomerNameInputField.prototype.show");
+com.inq.ui.CustomerNameInputField.prototype.show = function() {
   if (this._initialized && !this._closed) {
     if (!this._container.getVisible()) {
       this._container.setVisible(true);
@@ -24937,18 +24937,18 @@ com.inq.ui.CustomerNameInputField.prototype.show = function() {  console.warn("c
   }
   this._shown_first_time = true;
 };
-com.inq.ui.CustomerNameInputField.prototype.hide = function() {  console.warn("com.inq.ui.CustomerNameInputField.prototype.hide");
+com.inq.ui.CustomerNameInputField.prototype.hide = function() {
   if (this._initialized && !this._closed && this._container.getVisible()) {
     this._container.setVisible(false);
   }
 };
-com.inq.ui.CustomerNameInputField.prototype.submitOnEnter = function(ke) {  console.warn("com.inq.ui.CustomerNameInputField.prototype.submitOnEnter");
+com.inq.ui.CustomerNameInputField.prototype.submitOnEnter = function(ke) {
   if (ke && ke.keyCode == com.inq.ui.Keyboard.ENTER) {
     this.submit();
   }
   return true;
 };
-com.inq.ui.CustomerNameInputField.prototype.submit = function() {  console.warn("com.inq.ui.CustomerNameInputField.prototype.submit");
+com.inq.ui.CustomerNameInputField.prototype.submit = function() {
   var customerName = this._input.getText();
   if (customerName != "") {
     com.inq.flash.client.control.FlashVars.setCustomerName(customerName, true);
@@ -24962,7 +24962,7 @@ com.inq.ui.CustomerNameInputField.prototype.submit = function() {  console.warn(
     this._input._input.focus();
   }
 };
-com.inq.ui.CustomerNameInputField.prototype.cancel = function() {  console.warn("com.inq.ui.CustomerNameInputField.prototype.cancel");
+com.inq.ui.CustomerNameInputField.prototype.cancel = function() {
   this.hide();
   this._sendButton.removeEventListener(com.inq.events.MouseEvent.CLICK, this.submit);
   this._input.removeEventListener(com.inq.events.KeyboardEvent.KEY_UP, this.submitOnEnter);
@@ -24976,21 +24976,21 @@ com.inq.ui.CustomerNameInputField.prototype.cancel = function() {  console.warn(
   this._input = null;
   this._sendButton = null;
 };
-com.inq.ui.CustomerNameInputField.prototype.onBlur = function() {  console.warn("com.inq.ui.CustomerNameInputField.prototype.onBlur");
+com.inq.ui.CustomerNameInputField.prototype.onBlur = function() {
   if (!this._disableEventListener) {
     this._autofocus = false;
   }
 };
-com.inq.ui.CustomerNameInputField.prototype.disableEventListener = function() {  console.warn("com.inq.ui.CustomerNameInputField.prototype.disableEventListener");
+com.inq.ui.CustomerNameInputField.prototype.disableEventListener = function() {
   this._disableEventListener = true;
 };
-com.inq.ui.CustomerNameInputField.prototype.enableEventListener = function() {  console.warn("com.inq.ui.CustomerNameInputField.prototype.enableEventListener");
+com.inq.ui.CustomerNameInputField.prototype.enableEventListener = function() {
   this._disableEventListener = false;
 };
-com.inq.ui.CustomerNameInputField.isContainsInsertionMarker = function(message) {  console.warn("com.inq.ui.CustomerNameInputField.isContainsInsertionMarker");
+com.inq.ui.CustomerNameInputField.isContainsInsertionMarker = function(message) {
   return message.indexOf(com.inq.ui.CustomerNameInputField.INSERTION_MARKER) != -1;
 };
-com.inq.ui.CustomerNameInputField.removeInsertionMarker = function(message) {  console.warn("com.inq.ui.CustomerNameInputField.removeInsertionMarker");
+com.inq.ui.CustomerNameInputField.removeInsertionMarker = function(message) {
   var result = message.replace(com.inq.ui.CustomerNameInputField.INSERTION_MARKER, "");
   return result.length != 0 ? result : "\n";
 };
@@ -24998,7 +24998,7 @@ com.inq.ui.CustomerNameInputField.prototype.CONTAINER_ID = "customerNameInput";
 com.inq.ui.CustomerNameInputField.prototype.INPUT_FIELD_ID = "customerNameInputField";
 com.inq.ui.CustomerNameInputField.prototype.SEND_BUTTON_ID = "customerNameSendButton";
 com.inq.ui.CustomerNameInputField.INSERTION_MARKER = "{{CUSTOMER_NAME_INPUT}}";
-com.inq.ui.CustomPlaceholder = function(parent) {  console.warn("com.inq.ui.CustomPlaceholder");
+com.inq.ui.CustomPlaceholder = function(parent) {
   this._parent = parent;
   this._element = parent._element;
   this._value = "";
@@ -25006,27 +25006,27 @@ com.inq.ui.CustomPlaceholder = function(parent) {  console.warn("com.inq.ui.Cust
   this.initialize();
 };
 $hxClasses.extend(com.inq.ui.CustomPlaceholder, com.inq.ui.CustomPlaceholder, "com.inq.ui.CustomPlaceholder");
-com.inq.ui.CustomPlaceholder.prototype.show = function() {  console.warn("com.inq.ui.CustomPlaceholder.prototype.show");
+com.inq.ui.CustomPlaceholder.prototype.show = function() {
   this._placeholder.style.display = "block";
 };
-com.inq.ui.CustomPlaceholder.prototype.hide = function() {  console.warn("com.inq.ui.CustomPlaceholder.prototype.hide");
+com.inq.ui.CustomPlaceholder.prototype.hide = function() {
   this._placeholder.style.display = "none";
 };
-com.inq.ui.CustomPlaceholder.prototype.toggle = function() {  console.warn("com.inq.ui.CustomPlaceholder.prototype.toggle");
+com.inq.ui.CustomPlaceholder.prototype.toggle = function() {
   if (this._element.value == "") {
     this.show();
   } else {
     this.hide();
   }
 };
-com.inq.ui.CustomPlaceholder.prototype.getValue = function() {  console.warn("com.inq.ui.CustomPlaceholder.prototype.getValue");
+com.inq.ui.CustomPlaceholder.prototype.getValue = function() {
   return this._value;
 };
-com.inq.ui.CustomPlaceholder.prototype.setValue = function(value) {  console.warn("com.inq.ui.CustomPlaceholder.prototype.setValue");
+com.inq.ui.CustomPlaceholder.prototype.setValue = function(value) {
   this._value = value;
   this._placeholder.innerHTML = value;
 };
-com.inq.ui.CustomPlaceholder.prototype.initialize = function() {  console.warn("com.inq.ui.CustomPlaceholder.prototype.initialize");
+com.inq.ui.CustomPlaceholder.prototype.initialize = function() {
   this._placeholder = document.createElement("span");
   if (com.inq.flash.client.control.FlashPeer.getIsBuilder()) {
     haxe.Timer.delay(this.applyStyles.bind(this), 500);
@@ -25037,13 +25037,13 @@ com.inq.ui.CustomPlaceholder.prototype.initialize = function() {  console.warn("
   this.setupListeners();
   this.toggle();
 };
-com.inq.ui.CustomPlaceholder.prototype.applyStyles = function() {  console.warn("com.inq.ui.CustomPlaceholder.prototype.applyStyles");
+com.inq.ui.CustomPlaceholder.prototype.applyStyles = function() {
   this._placeholder.style.position = "absolute";
   this._placeholder.style.color = "#aaa";
   this._placeholder.style.fontSize = window.getComputedStyle && window.getComputedStyle(this._element).fontSize || this._element.currentStyle && this._element.currentStyle["fontSize"];
   this._placeholder.style.fontFamily = window.getComputedStyle && window.getComputedStyle(this._element).fontFamily || this._element.currentStyle && this._element.currentStyle["fontFamily"];
 };
-com.inq.ui.CustomPlaceholder.prototype.setupListeners = function() {  console.warn("com.inq.ui.CustomPlaceholder.prototype.setupListeners");
+com.inq.ui.CustomPlaceholder.prototype.setupListeners = function() {
   com.inq.utils.Capabilities.BindListener(this._element, "input", $bind(this, this.toggle));
   var ieVersion = com.inq.utils.Util.getIEMajorVer(true);
   if (0 < ieVersion && ieVersion <= 8) {
@@ -25058,7 +25058,7 @@ com.inq.ui.CustomPlaceholder.prototype.setupListeners = function() {  console.wa
     }
   }
 };
-com.inq.ui.CustomPlaceholder.prototype._onKeyup = function(ev) {  console.warn("com.inq.ui.CustomPlaceholder.prototype._onKeyup");
+com.inq.ui.CustomPlaceholder.prototype._onKeyup = function(ev) {
   if (!ev) {
     ev = Application.application.getPanelWindow().event;
   }
@@ -25066,30 +25066,30 @@ com.inq.ui.CustomPlaceholder.prototype._onKeyup = function(ev) {  console.warn("
     this.toggle();
   }
 };
-com.inq.ui.CustomPlaceholder.prototype._onCut = function(ev) {  console.warn("com.inq.ui.CustomPlaceholder.prototype._onCut");
+com.inq.ui.CustomPlaceholder.prototype._onCut = function(ev) {
   var _this = this;
   setTimeout(function() {
     _this.toggle();
   }, 0);
 };
-com.inq.ui.VideoPlayer = function(id) {  console.warn("com.inq.ui.VideoPlayer");
+com.inq.ui.VideoPlayer = function(id) {
   com.inq.ui.Container.call(this, id);
 };
 $hxClasses.extend(com.inq.ui.Container, com.inq.ui.VideoPlayer, "com.inq.ui.VideoPlayer");
-com.inq.ui.VideoPlayer.prototype.init = function() {  console.warn("com.inq.ui.VideoPlayer.prototype.init");
+com.inq.ui.VideoPlayer.prototype.init = function() {
   this.pInst = com.inq.flash.client.chatskins.VideoPlayerBase.init(this.getStyle("type"));
   com.inq.flash.client.chatskins.VideoPlayerBase.loadExternalScript(this.getStyle("src"), this);
 };
-com.inq.ui.VideoPlayer.prototype.applyStyle = function() {  console.warn("com.inq.ui.VideoPlayer.prototype.applyStyle");
+com.inq.ui.VideoPlayer.prototype.applyStyle = function() {
   com.inq.ui.Container.prototype.applyStyle.call(this);
   if (this.pInst === null) {
     this.init();
   }
 };
-com.inq.ui.VideoPlayer.prototype.loadedScript = function() {  console.warn("com.inq.ui.VideoPlayer.prototype.loadedScript");
+com.inq.ui.VideoPlayer.prototype.loadedScript = function() {
   this.pInst.setup(this);
 };
-com.inq.ui.VideoPlayer.prototype.play = function() {  console.warn("com.inq.ui.VideoPlayer.prototype.play");
+com.inq.ui.VideoPlayer.prototype.play = function() {
   var els = null, _pInst = this.pInst;
   if (com.inq.utils.Capabilities.isMobile()) {
     Application.application.getTextInput("txtInput").blur();
@@ -25105,34 +25105,34 @@ com.inq.ui.VideoPlayer.prototype.play = function() {  console.warn("com.inq.ui.V
     }
   }
 };
-com.inq.ui.VideoPlayer.prototype.pause = function() {  console.warn("com.inq.ui.VideoPlayer.prototype.pause");
+com.inq.ui.VideoPlayer.prototype.pause = function() {
   this.pInst.pause();
 };
-com.inq.ui.VideoPlayer.prototype.setupArgs = function(p) {  console.warn("com.inq.ui.VideoPlayer.prototype.setupArgs");
+com.inq.ui.VideoPlayer.prototype.setupArgs = function(p) {
   this.pInst.clear();
   this.pInst.setup(this, p);
 };
-com.inq.ui.VideoPlayer.prototype.cleanUp = function() {  console.warn("com.inq.ui.VideoPlayer.prototype.cleanUp");
+com.inq.ui.VideoPlayer.prototype.cleanUp = function() {
   this.pInst.clear();
 };
 com.inq.ui.VideoPlayer.prototype.pInst = null;
 com.inq.ui.VideoPlayer.prototype.closeEl = null;
-com.inq.ui.NativeScroller = function(el) {  console.warn("com.inq.ui.NativeScroller");
+com.inq.ui.NativeScroller = function(el) {
   this.el = el;
   this.eHandlers = [];
   this.initNativeScrolling();
 };
-com.inq.ui.NativeScroller.prototype.applyOverflowStyle = function() {  console.warn("com.inq.ui.NativeScroller.prototype.applyOverflowStyle");
+com.inq.ui.NativeScroller.prototype.applyOverflowStyle = function() {
   this.el.style.overflow = "scroll";
   this.el.style.webkitOverflowScrolling = "touch";
 };
-com.inq.ui.NativeScroller.prototype.initNativeScrolling = function() {  console.warn("com.inq.ui.NativeScroller.prototype.initNativeScrolling");
+com.inq.ui.NativeScroller.prototype.initNativeScrolling = function() {
   ["touchstart", "touchmove", "touchend"].forEach(function(action, index) {
     this.eHandlers[index] = $bind(this, this.allowScrolling);
     com.inq.utils.Capabilities.BindListener(this.el, action, this.eHandlers[index]);
   }, this);
 };
-com.inq.ui.NativeScroller.prototype.allowScrolling = function() {  console.warn("com.inq.ui.NativeScroller.prototype.allowScrolling");
+com.inq.ui.NativeScroller.prototype.allowScrolling = function() {
   function touchLocation(e) {
     return new com.inq.utils.Point(e.touches[0].clientX, e.touches[0].clientY);
   }
@@ -25163,16 +25163,16 @@ com.inq.ui.NativeScroller.prototype.allowScrolling = function() {  console.warn(
     }
   };
 }();
-com.inq.ui.NativeScroller.prototype.cleanUp = function() {  console.warn("com.inq.ui.NativeScroller.prototype.cleanUp");
+com.inq.ui.NativeScroller.prototype.cleanUp = function() {
   ["touchstart", "touchmove", "touchend"].forEach(function(action, index) {
     com.inq.utils.Capabilities.UnbindListener(this.el, action, this.eHandlers[index]);
   }, this);
 };
-com.inq.utils.EventDataUtils = function() {  console.warn("com.inq.utils.EventDataUtils");
+com.inq.utils.EventDataUtils = function() {
 };
 $hxClasses["com.inq.utils.EventDataUtils"] = com.inq.utils.EventDataUtils;
 com.inq.utils.EventDataUtils.__name__ = ["com", "inq", "utils", "EventDataUtils"];
-com.inq.utils.EventDataUtils.fromMessage = function(message) {  console.warn("com.inq.utils.EventDataUtils.fromMessage");
+com.inq.utils.EventDataUtils.fromMessage = function(message) {
   var eventData = new com.inq.utils.Dictionary;
   eventData["agtFirstName"] = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_EVENT_AGENT_FIRST_NAME);
   eventData["agtLastName"] = message.getProperty(com.inq.flash.client.data.MessageFields.KEY_EVENT_AGENT_LAST_NAME);
@@ -25193,7 +25193,7 @@ com.inq.utils.EventDataUtils.fromMessage = function(message) {  console.warn("co
   return eventData;
 };
 com.inq.utils.EventDataUtils.prototype.__class__ = com.inq.utils.EventDataUtils;
-com.inq.utils.StringUtil = function() {  console.warn("com.inq.utils.StringUtil");
+com.inq.utils.StringUtil = function() {
 };
 $hxClasses["com.inq.utils.StringUtil"] = com.inq.utils.StringUtil;
 com.inq.utils.StringUtil.__name__ = ["com", "inq", "utils", "StringUtil"];
@@ -25201,24 +25201,24 @@ com.inq.utils.StringUtil.__super__ = StringTools;
 for (var k in StringTools.prototype) {
   com.inq.utils.StringUtil.prototype[k] = StringTools.prototype[k];
 }
-com.inq.utils.StringUtil.trim = function(s) {  console.warn("com.inq.utils.StringUtil.trim");
+com.inq.utils.StringUtil.trim = function(s) {
   return StringTools.trim(s);
 };
-com.inq.utils.StringUtil.htmlDecode = function(s) {  console.warn("com.inq.utils.StringUtil.htmlDecode");
+com.inq.utils.StringUtil.htmlDecode = function(s) {
   var res = StringTools.htmlUnescape(s);
   return res;
 };
-com.inq.utils.StringUtil.htmlAttrEscape = function(s) {  console.warn("com.inq.utils.StringUtil.htmlAttrEscape");
+com.inq.utils.StringUtil.htmlAttrEscape = function(s) {
   return s.split("'").join("&#39;").split('"').join("&quot;");
 };
-com.inq.utils.StringUtil.escapeForJs = function(val) {  console.warn("com.inq.utils.StringUtil.escapeForJs");
+com.inq.utils.StringUtil.escapeForJs = function(val) {
   var value = val;
   value = com.inq.utils.StringUtil.escapeSpecialCharacters(value);
   value = value.split('"').join('\\"');
   value = value.split("'").join("\\'");
   return value;
 };
-com.inq.utils.StringUtil.escapeSpecialCharacters = function(val) {  console.warn("com.inq.utils.StringUtil.escapeSpecialCharacters");
+com.inq.utils.StringUtil.escapeSpecialCharacters = function(val) {
   var value = val;
   value = value.split("\\").join("\\\\");
   value = value.split("\n").join("\\n");
@@ -25226,13 +25226,13 @@ com.inq.utils.StringUtil.escapeSpecialCharacters = function(val) {  console.warn
   value = value.split("\t").join("\\t");
   return value;
 };
-com.inq.utils.StringUtil.toJsString = function(value) {  console.warn("com.inq.utils.StringUtil.toJsString");
+com.inq.utils.StringUtil.toJsString = function(value) {
   return "'" + com.inq.utils.StringUtil.escapeForJs(value) + "'";
 };
-com.inq.utils.StringUtil.toJsonString = function(value) {  console.warn("com.inq.utils.StringUtil.toJsonString");
+com.inq.utils.StringUtil.toJsonString = function(value) {
   return '"' + com.inq.utils.StringUtil.escapeForJs(value) + '"';
 };
-com.inq.utils.StringUtil.urlDecode = function(s) {  console.warn("com.inq.utils.StringUtil.urlDecode");
+com.inq.utils.StringUtil.urlDecode = function(s) {
   return StringTools.urlDecode(s);
 };
 com.inq.utils.StringUtil.prototype.__class__ = com.inq.utils.StringUtil;
@@ -25272,7 +25272,7 @@ haxe.Timer.prototype.stop = function() {
 };
 haxe.Timer.prototype.id = null;
 haxe.Timer.prototype.__class__ = haxe.Timer;
-com.inq.utils.Timer = function(time_ms) {  console.warn("com.inq.utils.Timer");
+com.inq.utils.Timer = function(time_ms) {
   haxe.Timer.call(this, time_ms);
 };
 $hxClasses["com.inq.utils.Timer"] = com.inq.utils.Timer;
@@ -25281,7 +25281,7 @@ com.inq.utils.Timer.__super__ = haxe.Timer;
 for (var k in haxe.Timer.prototype) {
   com.inq.utils.Timer.prototype[k] = haxe.Timer.prototype[k];
 }
-com.inq.utils.Timer.delay = function(f, time_ms) {  console.warn("com.inq.utils.Timer.delay");
+com.inq.utils.Timer.delay = function(f, time_ms) {
   var t = new com.inq.utils.Timer(time_ms);
   t.run = function() {
     t.stop();
@@ -25867,7 +25867,7 @@ haxe.io.Bytes.prototype.readString = function(pos, len) {
   }
   return s;
 };
-haxe.io.Bytes.prototype.compare = function(other) {  console.warn("compare");
+haxe.io.Bytes.prototype.compare = function(other) {
   var b1 = this.b;
   var b2 = other.b;
   var len = this.length < other.length ? this.length : other.length;
