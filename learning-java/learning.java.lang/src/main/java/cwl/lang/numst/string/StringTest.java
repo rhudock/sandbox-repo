@@ -10,7 +10,7 @@ public class StringTest {
     private static Logger logger = LoggerFactory.getLogger(StringTest.class);
 
     public static void stSwap(String a, String b) {
-
+        logger.info("test");
         System.out.println("a= " + a);
         System.out.println("b= " + b);
 
