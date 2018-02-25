@@ -1,6 +1,11 @@
 package lambdasinaction.chap3;
 
-import java.io.*;
+import com.google.common.io.Resources;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class ExecuteAround {
 
 	public static void main(String ...args) throws IOException{
@@ -19,16 +24,16 @@ public class ExecuteAround {
 
 	}
 
-    public static String processFileLimited() throws IOException {
-        try (BufferedReader br =
-                     new BufferedReader(new FileReader("lambdasinaction/chap3/data.txt"))) {
-            return br.readLine();
-        }
+	public static String processFileLimited() throws IOException {
+		try (BufferedReader br =
+					 new BufferedReader(new FileReader(Resources.getResource("lambdasinaction/chap3/data.txt").getFile()))) {
+			return br.readLine();
+		}
     }
 
 
 	public static String processFile(BufferedReaderProcessor p) throws IOException {
-		try(BufferedReader br = new BufferedReader(new FileReader("lambdasinaction/chap3/data.txt"))){
+		try(BufferedReader br = new BufferedReader(new FileReader(Resources.getResource("lambdasinaction/chap3/data.txt").getFile()))){
 			return p.process(br);
 		}
 
