@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <title>Document</title>
+ </head>
+ <body>
+  
+  <script type="text/javascript">
+
+	dialog_url = 'https://api-preprod-fidelity.touchcommerce.com/nuance-us-EnglishUS-WebBotRouter/jbotservice.asmx/TalkAgent';
+//	dialog_url = 'https://api.touchcommerce.com/nuance-us-EnglishUS-WebBotRouter/jbotservice.asmx/TalkAgent';
+	getPOSTBody = 'TalkAgentRequest={"TalkAgentRequest":%7B%22%40xmlns%22%3A%22http%3A%2F%2Fwww.virtuoz.com%22%2C%22%40SCI%22%3A%22%22%2C%22%40IID%22%3A%22%22%2C%22%40TimeStamp%22%3A%222018-02-27T21%3A14%3A34.797-07%3A00%22%2C%22UserText%22%3A%22hello%22%2C%22Channel%22%3A%22web%22%2C%22Debug%22%3A%7B%7D%2C%22uiID%22%3A2937597938460.132%2C%22ClientMetaData%22%3A%7B%7D%2C%22VisitorIsTyping%22%3Atrue%2C%22origin%22%3A%22http%3A%2F%2Flocalhost%3A8000%2F%22%2C%22NinaVars%22%3A%7B%22preprod%22%3Atrue%2C%22gray%22%3Afalse%2C%22invocationpoint%22%3A%22http%3A%2F%2Flocalhost%3A8000%2F%22%2C%22source%22%3A%22desktop%22%2C%22activeSite%22%3A%22MA%22%7D%7D}&rnd=1830098178528.158';
+
+
+    $.ajax({
+              method: "POST",
+              dataType: "json",
+              url: dialog_url,
+              data: getPOSTBody,
+              success: responseHandler,
+              error: errorHandler
+            });
+
+function responseHandler(data) {
+	alert(data);
+}
+
+function errorHandler(err) {
+	alert("ERROR" + err);
+}
+
+  </script>
+ </body>
+</html>

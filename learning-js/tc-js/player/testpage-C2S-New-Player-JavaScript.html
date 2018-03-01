@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Your Personalized Video</title>
+
+	<script src="https://play.sundaysky.com/main/sundaysky-player.grey.en-us.min.js"></script>
+
+</head>
+<body>
+
+
+	<div id="sskycontainer"></div>
+
+
+	<script type="text/javascript">
+		function createPlayer() {
+			sskySegments = ({
+				"userid":"30878519-80-7",
+				"page":"Your Personalized Video",
+				"source":"Virtual Chat Agent",
+				"BAN":"2kurbh2krb2kfb24kf",
+				"BillType":"ku23ur23kir23kf2n3kjn23fkj23nf"
+			})
+			var sskyplayer = document.createElement('sundaysky-video');
+			sskyplayer.setAttribute('id','sskyplayer');
+			sskyplayer.setAttribute('analytics-token','demo1');
+			sskyplayer.setAttribute('endpoint-url', 'https://demo1.web.sundaysky-sandbox.com/create_video_session');
+			sskyplayer.setAttribute('session-parameters', '{"BAN":"'+sskySegments.BAN+'","BillType":"'+sskySegments.BillType+'"}');
+			sskyplayer.setAttribute('pre-roll','https://play.sundaysky.com/resources/loading.gif');
+			sskyplayer.setAttribute('poster','https://demo.images.sundaysky.com/image.png?text=Drew');
+			sskyplayer.setAttribute('control-bar-lock','normal fullscreen');
+			sskyplayer.setAttribute('style','height:360px;width:640px;');
+			document.getElementById('sskycontainer').appendChild(sskyplayer);
+		}
+		createPlayer();
+	</script>
+
+	<!-- <a href="" onclick="createPlayer();return false;">Play Video</a> -->
+
+	<sundaysky-survey id='sskysurvey' player='sskyplayer' show-at='0.9' style="width:640px;height:400px;"></sundaysky-survey>
+
+</body>
+</html>
