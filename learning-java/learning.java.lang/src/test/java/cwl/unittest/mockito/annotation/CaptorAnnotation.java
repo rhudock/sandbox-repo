@@ -18,10 +18,11 @@ Source: http://www.baeldung.com/mockito-annotations
 ArgumentCaptor : https://static.javadoc.io/org.mockito/mockito-core/2.2.9/org/mockito/ArgumentCaptor.html
 Use it to capture argument values for further assertions.
 Mockito verifies argument values in natural java style: by using an equals() method. This is also the recommended way of matching arguments because it makes tests clean & simple. In some situations though, it is helpful to assert on certain arguments after the actual verification. For example:
+
+Advence example @see com.inq.api.plugins.onetomany.controller.OneToManyChatControllerTest
  */
 @RunWith(MockitoJUnitRunner.class)
 public class CaptorAnnotation {
-
 
     @Test
     public void whenNotUseCaptorAnnotation_thenCorrect() {

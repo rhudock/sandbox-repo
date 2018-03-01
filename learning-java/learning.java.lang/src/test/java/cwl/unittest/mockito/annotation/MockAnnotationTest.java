@@ -1,10 +1,11 @@
 package cwl.unittest.mockito.annotation;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
+import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -12,13 +13,18 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * http://www.baeldung.com/mockito-annotations
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class MockAnnotationTest {
 
-/*    @Before
+    @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-    }*/
+    }
+
+    // -----------------------
 
     @Test
     public void whenNotUseMockAnnotation_thenCorrect() {
@@ -32,7 +38,6 @@ public class MockAnnotationTest {
         assertEquals(100, mockList.size());
     }
 
-    // -----------------------
     @Mock
     List<String> mockedList;
 
