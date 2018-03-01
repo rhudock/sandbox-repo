@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Your Personalized Video</title>
+
+	<meta name="ssky:token" content="demo1" />
+	<meta name="ssky:userid" content="30878519-80-7" />
+	<meta name="ssky:page" content="Your Personalized Video" />
+	<meta name="ssky:source" content="Virtual Chat Agent" />
+
+	<script src="https://play.sundaysky.com/main/sundaysky-player.grey.en-us.min.js"></script>
+
+
+</head>
+<body>
+
+	<sundaysky-video 
+		id="sskyplayer" 
+		endpoint-url="https://demo1.web.sundaysky-sandbox.com/create_video_session" 
+		session-parameters='{"BAN":"2kurbh2krb2kfb24kf","BillType":"ku23ur23kir23kf2n3kjn23fkj23nf"}'
+		pre-roll="https://play.sundaysky.com/resources/loading.gif"
+		control-bar-lock="normal fullscreen"
+		poster="https://demo.images.sundaysky.com/image.png?text=Drew" >
+	</sundaysky-video>
+
+	<sundaysky-survey player='sskyplayer' show-at='0.9' style="width:640px;height:400px;" id="sskysurvey"></sundaysky-survey>
+
+
+</body>
+</html>
