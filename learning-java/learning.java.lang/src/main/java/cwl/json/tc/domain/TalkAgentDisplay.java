@@ -1,31 +1,50 @@
 package cwl.json.tc.domain;
 
-public class TalkAgentDisplay {
-    private TalkAgentText OutText;
-    private TalkAgentText AlternateOutText;
-    private TalkAgentText AlternateOutText2;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
-    public TalkAgentText getOutText() {
-        return OutText;
+public class TalkAgentDisplay {
+    private TalkAgentText outText;
+    private TalkAgentText alternateOutText;
+    private TalkAgentText alternateOutText2;
+
+    public TalkAgentDisplay() {
     }
 
+    @JsonCreator
+    public TalkAgentDisplay(@JsonProperty("OutText") TalkAgentText outText,
+                            @JsonProperty("AlternateOutText") TalkAgentText alternateOutText,
+                            @JsonProperty("AlternateOutText2") TalkAgentText alternateOutText2) {
+        this.outText = outText;
+        this.alternateOutText = alternateOutText;
+        this.alternateOutText2 = alternateOutText2;
+    }
+
+    public TalkAgentText getOutText() {
+        return outText;
+    }
+
+    @JsonSetter("OutText")
     public void setOutText(TalkAgentText outText) {
-        OutText = outText;
+        outText = outText;
     }
 
     public TalkAgentText getAlternateOutText() {
-        return AlternateOutText;
+        return alternateOutText;
     }
 
+    @JsonSetter("AlternateOutText")
     public void setAlternateOutText(TalkAgentText alternateOutText) {
-        AlternateOutText = alternateOutText;
+        alternateOutText = alternateOutText;
     }
 
     public TalkAgentText getAlternateOutText2() {
-        return AlternateOutText2;
+        return alternateOutText2;
     }
 
+    @JsonSetter("AlternateOutText2")
     public void setAlternateOutText2(TalkAgentText alternateOutText2) {
-        AlternateOutText2 = alternateOutText2;
+        alternateOutText2 = alternateOutText2;
     }
 }

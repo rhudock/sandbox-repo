@@ -34,6 +34,32 @@ public class TalkAgentDisplayTest {
     }
 
     @Test
+    public void jsonStrTest() throws Exception {
+        String json = "{\n" +
+                "            \"OutText\": {\n" +
+                "                \"#text\": \"Please tell me the type of latte you'd like: <ul><li><a href=\\\"#\\\" data-vtz-link-type=\\\"Dialog\\\" data-vtz-jump=\\\"877ac916-73fb-4d08-bca0-2b634493639f\\\">Targaryen Realness</a></li><li><a href=\\\"#\\\" data-vtz-link-type=\\\"Dialog\\\" data-vtz-jump=\\\"67cae494-c337-4c3b-83af-ecff42d6031b\\\">Three Eyed Raven</a></li><li><a href=\\\"#\\\" data-vtz-link-type=\\\"Dialog\\\" data-vtz-jump=\\\"428a288a-47bc-461a-90e1-c360fb331a32\\\">Lannister Gold</a></li></ul>\"\n" +
+                "            },\n" +
+                "            \"AlternateOutText\": {\n" +
+                "                \"#text\": \"Select the search engine you'd like to use:\"\n" +
+                "            },\n" +
+                "            \"AlternateOutText2\": {\n" +
+                "                \"#text\": \"Please tell me the type of latte you'd like: \"\n" +
+                "            }\n" +
+                "        }";
+
+        assertThat(from(json).getObject("OutText", TalkAgentText.class).getText().contains("Please"));
+
+
+        TalkAgentDisplay author = new ObjectMapper().readerFor(TalkAgentDisplay.class).readValue(json);
+
+
+        assertNotNull(author);
+
+
+        assertThat(author.getOutText().getText().contains("Please"));
+    }
+
+    @Test
     public void jsonTest() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -55,13 +81,13 @@ public class TalkAgentDisplayTest {
         TalkAgentDisplay talkAgentDisplay = new TalkAgentDisplay();
         JsonNode jsonNodeAlternateOutText = jsonNode.get("AlternateOutText");
         String jsonNodeAlternateOutTextStr = objectMapper.writeValueAsString(jsonNodeAlternateOutText);
-        TalkAgentText talkAgentText = TalkAgentText.buildTalkAgentText(jsonNodeAlternateOutTextStr);
+        TalkAgentText talkAgentText = TalkAgentText.buildTalkAgentTextWithDeserializer(jsonNodeAlternateOutTextStr);
 
         talkAgentDisplay.setAlternateOutText( talkAgentText );
 
-        talkAgentDisplay.setOutText( TalkAgentText.buildTalkAgentText(objectMapper.writeValueAsString(jsonNode.get("OutText"))) );
+        talkAgentDisplay.setOutText( TalkAgentText.buildTalkAgentTextWithDeserializer(objectMapper.writeValueAsString(jsonNode.get("OutText"))) );
 
-        talkAgentDisplay.setAlternateOutText2( TalkAgentText.buildTalkAgentText(objectMapper.writeValueAsString(jsonNode.get("AlternateOutText2"))) );
+        talkAgentDisplay.setAlternateOutText2( TalkAgentText.buildTalkAgentTextWithDeserializer(objectMapper.writeValueAsString(jsonNode.get("AlternateOutText2"))) );
 
         // act
         String result = new ObjectMapper().writeValueAsString(talkAgentDisplay);
