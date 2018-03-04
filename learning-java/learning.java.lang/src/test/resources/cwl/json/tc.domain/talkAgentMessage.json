@@ -1,0 +1,24 @@
+{
+  "TalkAgentResponse": {
+    "@ResponseCode": "Found",
+    "@Version": "6",
+    "@TimeStamp": "2018-03-03T22:54:19.1086528Z",
+    "TimeOut": 300,
+    "@SCI": "@b244413d-424a-503b-b1d4-c78611066ac8@61fc4484-760e-4b10-a12a-1af789dd402a",
+    "contact": false,
+    "@IID": "e792134a-9e9a-4e72-90b0-14c551cbca72",
+    "isLeafNode": true,
+    "Display": {
+      "OutText": {
+        "#text": "Good afternoon!  Please ask me your questions about Fidelity Investments."
+      },
+      "AlternateOutText": {
+        "#text": "Good afternoon!  Please ask me your questions about Fidelity Investments."
+      },
+      "AlternateOutText2": {
+        "#text": "Good afternoon!  Please ask me your questions about Fidelity Investments."
+      }
+    },
+    "business_answer": false
+  }
+}
