@@ -21,7 +21,10 @@ app.on('ready', function () {
     }
   })
 
-  mainWindow.loadURL(`file://${__dirname}/app/index-nav.html`)
+  mainWindow.loadURL(`file://${__dirname}/app/index-datatable.html`);
+
+    // Open the DevTools.
+    mainWindow.webContents.openDevTools()
 
   // Enable keyboard shortcuts for Developer Tools on various platforms.
   let platform = os.platform()
