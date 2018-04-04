@@ -35,3 +35,5 @@ Quick Code Tour
 
 
 https://github.com/patrickmoffitt/bootstrap-example
+
+https://www.highcharts.com/demo
