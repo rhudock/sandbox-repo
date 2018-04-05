@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 /**
  *   simple login example from Oracle
  *   To run this in eclipse,
@@ -19,7 +21,8 @@ import javafx.stage.Stage;
  */
 public class FXMLExample extends Application {
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("fxml_example.fxml"));
+//		URL url  = this.getClass().getResource( "/Users/dlee/code/sandbox-repo/learning-java/fx/src/main/java/ex/fxml/builder/fxml_example.fxml" );
+		Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/fxml_example.fxml")));
 
 		Scene scene = new Scene(root, 600, 575);
 
