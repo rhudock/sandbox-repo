@@ -1,6 +1,6 @@
 package learning.java.ch11collection.util;
 
-import java.util.logging.*;
+import java.util.logging.Logger;
 
 public class LogTest {
     public static void main(String argv[]) {
@@ -12,7 +12,7 @@ public class LogTest {
         logger.config("Server configuration: standalone, JVM version 1.4");
         logger.fine("Loading graphing package.");
         logger.finer("Doing pie chart");
-        logger.finest("Starting bubble sort: value ="+42);
+        logger.finest("Starting bubble sort: value =" + 42);
     }
 }
 

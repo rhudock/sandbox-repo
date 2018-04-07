@@ -15,6 +15,7 @@ public class BytesComparator implements Comparator<byte[]>, Serializable {
     private BytesComparator() {
     }
 
+    @Override
     public int compare(byte[] o1, byte[] o2) {
         if (o1 == o2) {
             return 0;
