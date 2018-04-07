@@ -1,4 +1,4 @@
-package cwl.json.tc.domain;
+package tc.api.plugin.mil.abc.json.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import cwl.json.tc.serializer.TalkAgentTextDeserializer;
+import tc.api.plugin.mil.abc.json.serializer.TalkAgentTextDeserializer;
 
 import java.io.IOException;
 

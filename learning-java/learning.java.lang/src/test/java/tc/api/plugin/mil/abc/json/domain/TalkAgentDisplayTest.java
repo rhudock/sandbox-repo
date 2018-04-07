@@ -1,16 +1,16 @@
-package cwl.json.tc.domain;
+package tc.api.plugin.mil.abc.json.domain;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import cwl.json.tc.serializer.TalkAgentTextDeserializer;
 import org.json.JSONObject;
 import org.junit.Test;
+import tc.api.plugin.mil.abc.json.serializer.TalkAgentTextDeserializer;
 
 import static io.restassured.path.json.JsonPath.from;
-import static org.junit.Assert.assertNotNull;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
 
 public class TalkAgentDisplayTest {
 
@@ -83,11 +83,11 @@ public class TalkAgentDisplayTest {
         String jsonNodeAlternateOutTextStr = objectMapper.writeValueAsString(jsonNodeAlternateOutText);
         TalkAgentText talkAgentText = TalkAgentText.buildTalkAgentTextWithDeserializer(jsonNodeAlternateOutTextStr);
 
-        talkAgentDisplay.setAlternateOutText( talkAgentText );
+        talkAgentDisplay.setAlternateOutText(talkAgentText);
 
-        talkAgentDisplay.setOutText( TalkAgentText.buildTalkAgentTextWithDeserializer(objectMapper.writeValueAsString(jsonNode.get("OutText"))) );
+        talkAgentDisplay.setOutText(TalkAgentText.buildTalkAgentTextWithDeserializer(objectMapper.writeValueAsString(jsonNode.get("OutText"))));
 
-        talkAgentDisplay.setAlternateOutText2( TalkAgentText.buildTalkAgentTextWithDeserializer(objectMapper.writeValueAsString(jsonNode.get("AlternateOutText2"))) );
+        talkAgentDisplay.setAlternateOutText2(TalkAgentText.buildTalkAgentTextWithDeserializer(objectMapper.writeValueAsString(jsonNode.get("AlternateOutText2"))));
 
         // act
         String result = new ObjectMapper().writeValueAsString(talkAgentDisplay);

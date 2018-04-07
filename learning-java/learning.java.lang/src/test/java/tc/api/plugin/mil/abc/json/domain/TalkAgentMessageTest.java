@@ -1,4 +1,4 @@
-package cwl.json.tc.domain;
+package tc.api.plugin.mil.abc.json.domain;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;

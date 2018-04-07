@@ -1,11 +1,10 @@
-package cwl.json.tc.domain;
+package tc.api.plugin.mil.abc.json.domain;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import cwl.json.tc.serializer.TalkAgentTextDeserializer;
 import org.junit.Test;
-
+import tc.api.plugin.mil.abc.json.serializer.TalkAgentTextDeserializer;
 
 import static org.junit.Assert.assertNotNull;
 
