@@ -1,6 +1,6 @@
 package cwl.security.nina;
 
-import cwl.lang.numst.string.util.StringUtils;
+import tc.util.StringUtils;
 import org.bouncycastle.util.encoders.Base64;
 import org.json.JSONObject;
 import org.junit.Test;

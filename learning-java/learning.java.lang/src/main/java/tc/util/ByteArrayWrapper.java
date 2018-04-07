@@ -1,4 +1,4 @@
-package cwl.lang.numst.string.util;
+package tc.util;
 
 import java.util.Arrays;
 

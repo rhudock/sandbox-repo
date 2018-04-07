@@ -1,4 +1,4 @@
-package cwl.lang.numst.string.util;
+package tc.util;
 
 import org.apache.commons.lang3.text.translate.AggregateTranslator;
 import org.apache.commons.lang3.text.translate.CharSequenceTranslator;

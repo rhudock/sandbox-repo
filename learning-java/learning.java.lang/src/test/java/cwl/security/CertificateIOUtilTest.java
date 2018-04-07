@@ -1,6 +1,6 @@
 package cwl.security;
 
-import cwl.lang.numst.string.util.StringUtils;
+import tc.util.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

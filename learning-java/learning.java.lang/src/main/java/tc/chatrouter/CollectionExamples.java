@@ -1,7 +1,7 @@
 package tc.chatrouter;
 
 import com.google.common.collect.ImmutableSortedSet;
-import cwl.lang.numst.string.util.BytesComparator;
+import tc.util.BytesComparator;
 
 import java.util.Set;
 

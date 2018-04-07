@@ -1,13 +1,13 @@
 package cwl.lang.numst.string;
 
-import cwl.lang.numst.string.util.RegexUtils;
+import tc.util.RegexUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.regex.Pattern;
 
-import static cwl.lang.numst.string.util.StringUtils.byteArrayToString;
-import static cwl.lang.numst.string.util.StringUtils.stringToByteArray;
+import static tc.util.StringUtils.byteArrayToString;
+import static tc.util.StringUtils.stringToByteArray;
 
 public class DTBuiltinUtils {
 

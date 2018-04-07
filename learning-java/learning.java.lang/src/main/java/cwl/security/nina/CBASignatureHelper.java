@@ -3,7 +3,7 @@ package cwl.security.nina;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.io.Resources;
-import cwl.lang.numst.string.util.StringUtils;
+import tc.util.StringUtils;
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.DigestInfo;
 import org.bouncycastle.operator.DefaultDigestAlgorithmIdentifierFinder;

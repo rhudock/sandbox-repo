@@ -1,6 +1,7 @@
 package cwl.lang.numst.string.util;
 
 import org.junit.Test;
+import tc.util.RegexUtils;
 
 import java.util.regex.Pattern;
 

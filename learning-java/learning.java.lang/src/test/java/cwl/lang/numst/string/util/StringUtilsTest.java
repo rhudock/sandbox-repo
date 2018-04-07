@@ -3,6 +3,7 @@ package cwl.lang.numst.string.util;
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Assert;
 import org.junit.Test;
+import tc.util.StringUtils;
 
 import java.io.CharArrayWriter;
 import java.io.UnsupportedEncodingException;
@@ -12,12 +13,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 
-import static cwl.lang.numst.string.util.StringUtils.abbreviateAround;
-import static cwl.lang.numst.string.util.StringUtils.appendQuoted;
-import static cwl.lang.numst.string.util.StringUtils.byteArrayToString;
-import static cwl.lang.numst.string.util.StringUtils.completeEncodeStringForMap;
-import static cwl.lang.numst.string.util.StringUtils.logstr;
-import static cwl.lang.numst.string.util.StringUtils.stringToByteArray;
+import static tc.util.StringUtils.abbreviateAround;
+import static tc.util.StringUtils.appendQuoted;
+import static tc.util.StringUtils.byteArrayToString;
+import static tc.util.StringUtils.completeEncodeStringForMap;
+import static tc.util.StringUtils.logstr;
+import static tc.util.StringUtils.stringToByteArray;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
 

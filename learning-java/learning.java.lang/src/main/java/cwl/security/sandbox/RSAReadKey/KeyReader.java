@@ -1,8 +1,7 @@
 package cwl.security.sandbox.RSAReadKey;
 
 
-import cwl.lang.numst.string.util.StringUtils;
-import org.bouncycastle.asn1.ASN1Sequence;
+import tc.util.StringUtils;
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.DigestInfo;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -11,25 +10,20 @@ import org.bouncycastle.operator.DigestAlgorithmIdentifierFinder;
 import org.bouncycastle.util.encoders.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.misc.BASE64Decoder;
 
 import javax.crypto.Cipher;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.math.BigInteger;
 import java.security.KeyFactory;
 import java.security.MessageDigest;
-import java.security.PrivateKey;
 import java.security.Provider;
 import java.security.Security;
 import java.security.Signature;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.Enumeration;
 
 /**
  * https://community.oracle.com/thread/1528259

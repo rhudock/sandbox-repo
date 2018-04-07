@@ -1,4 +1,4 @@
-package cwl.lang.numst.string.util;
+package tc.util;
 
 
 import com.google.common.base.Joiner;
@@ -32,8 +32,8 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import static cwl.lang.numst.string.util.EscapeUtils.escapeControlCharsAndNonAscii;
-import static cwl.lang.numst.string.util.EscapeUtils.isQuotationMark;
+import static tc.util.EscapeUtils.escapeControlCharsAndNonAscii;
+import static tc.util.EscapeUtils.isQuotationMark;
 
 public final class StringUtils {
 
