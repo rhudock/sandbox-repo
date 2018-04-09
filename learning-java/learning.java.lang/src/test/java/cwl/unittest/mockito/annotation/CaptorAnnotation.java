@@ -43,9 +43,9 @@ public class CaptorAnnotation {
 
     @Test
     public void whenUseCaptorAnnotation_thenTheSam() {
-        mockedList.add("one");
+        mockedList.add("one2");
         Mockito.verify(mockedList).add(argCaptor.capture());
 
-        assertEquals("one", argCaptor.getValue());
+        assertEquals("one2", argCaptor.getValue());
     }
 }

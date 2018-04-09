@@ -1,4 +1,4 @@
-package cwl.unittest.assertthat;
+package cwl.unittest.assertj;
 
 import org.junit.Test;
 
