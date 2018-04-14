@@ -7,6 +7,7 @@ const {ipcMain} = require('electron')
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
+//const opts = JSON.parse(process.argv[2]);
 function createWindow () {
     // Create the browser window.
     win = new BrowserWindow({width: 800, height: 600})
@@ -20,6 +21,26 @@ function createWindow () {
 
     // Open the DevTools.
     win.webContents.openDevTools()
+
+
+    const chart = require('electron-chartjs')
+    chart({
+        type: 'bar',
+        data: {
+            labels: ['a', 'b', 'c', 'd'],
+            datasets: [{
+                label: 'red bars',
+                backgroundColor: '#ab1020',
+                data: [0, 3, 4, 1],
+            }],
+        }
+    })
+
+
+    // workaround cause I didn't find appropriate event :(
+    // setTimeout(() => {
+    //     win.webContents.send('create chart', opts)
+    // }, 500)
 
     // Emitted when the window is closed.
     win.on('closed', () => {

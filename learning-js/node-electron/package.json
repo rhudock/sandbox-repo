@@ -13,6 +13,9 @@
     "electron": "^1.8.4"
   },
   "dependencies": {
-    "jquery": "^3.3.1"
+    "chart.js": "^2.7.2",
+    "electron-chartjs": "^1.0.0",
+    "jquery": "^3.3.1",
+    "react-chartjs-2": "^2.7.0"
   }
 }
