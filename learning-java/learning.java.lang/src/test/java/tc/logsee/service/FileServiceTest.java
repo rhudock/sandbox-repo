@@ -2,13 +2,17 @@ package tc.logsee.service;
 
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FileServiceTest {
     @Test
     public void readFile() throws Exception {
-        FileService.readFile("D:\\code\\sandbox\\learning-java\\learning.java.lang\\src\\main\\resources\\file\\jvm-example.log");
+        FileService.readFile("file/jvm-example.log");
     }
 
     /**
@@ -23,21 +27,26 @@ public class FileServiceTest {
 
         Matcher matcher = LOG_PATTERN.matcher(testLog);
         boolean find = false;
+        LocalDateTime ldt;
 
-        while (matcher.find()) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss,SSS");
+
+        if (matcher.find()) {
             System.out.println("Start index: " + matcher.start());
             System.out.println("End index: " + matcher.end() + " ");
             System.out.println("Match:" + matcher.group());
             System.out.println("Time:" + matcher.group(1));
+            ldt = LocalDateTime.parse(matcher.group(1), formatter);
+            assertThat(ldt.getYear()).isEqualTo(2018);
             System.out.println("Level:" + matcher.group(2));
             System.out.println("Class:" + matcher.group(3));
             System.out.println("Log:" + matcher.group(4));
+        } else {
+            System.out.println("Not found");
         }
 
         System.out.print("End ---- ");
-
     }
-
 
 }
 

@@ -1,28 +1,29 @@
 package tc.logsee.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.regex.Pattern;
+import tc.logsee.model.LogLine;
+
+import java.net.URI;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class FileService {
 
-    public static final Pattern LOG_PATTERN = Pattern.compile("(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2},\\d{3}) (\\w*) \\[([^\\]]*)\\] - <(.*)>");
+    static LogLineService logLineService = new LogLineServiceCommonImple();
 
     public static void readFile(String fileName) {
 
-        File file = new File(fileName);
+        try {
+            URI uri = FileService.class.getResource(fileName).toURI();
+            List<String> lines = Files.readAllLines(Paths.get(uri),
+                    Charset.defaultCharset());
 
-        try (FileInputStream fis = new FileInputStream(file)) {
-            System.out.println("Total file size to read (in bytes) : "+ fis.available());
-
-            int content;
-            while ((content = fis.read()) != -1) {
-                // convert to char and display it
-                System.out.print((char) content);
+            for (String line : lines) {
+                LogLine logLine = logLineService.buildLogLine(line);
+                System.out.println(logLine);
             }
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
