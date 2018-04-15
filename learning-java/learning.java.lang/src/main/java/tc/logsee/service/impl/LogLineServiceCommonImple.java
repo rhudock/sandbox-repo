@@ -1,6 +1,7 @@
-package tc.logsee.service;
+package tc.logsee.service.impl;
 
 import tc.logsee.model.LogLine;
+import tc.logsee.service.LogLineService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

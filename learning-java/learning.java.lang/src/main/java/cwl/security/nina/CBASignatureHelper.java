@@ -1,9 +1,5 @@
 package cwl.security.nina;
 
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Preconditions;
-import com.google.common.io.Resources;
-import tc.util.StringUtils;
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.DigestInfo;
 import org.bouncycastle.operator.DefaultDigestAlgorithmIdentifierFinder;
@@ -17,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileReader;
-import java.net.URL;
 import java.security.KeyFactory;
 import java.security.MessageDigest;
 import java.security.PrivateKey;
@@ -134,7 +129,7 @@ public class CBASignatureHelper {
     }
 
     public static void main(String[] args) {
-        Preconditions.checkArgument(args != null);
+/*        Preconditions.checkArgument(args != null);
 
         String resourceName = "Certificates/Nuance/Private/private_key.pem";
         ClassLoader loader =
@@ -160,7 +155,7 @@ public class CBASignatureHelper {
                 "}\n" +
                 "}";
 
-        logger.info(StringUtils.byteArrayToString(getSignature(payload, privateKeyFilePath)));
+        logger.info(StringUtils.byteArrayToString(getSignature(payload, privateKeyFilePath)));*/
     }
 
     /**

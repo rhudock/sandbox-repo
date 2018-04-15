@@ -1,7 +1,11 @@
 package tc.logsee.service;
 
+import com.google.common.io.Resources;
 import org.junit.Test;
+import tc.logsee.service.impl.FileService;
 
+import java.io.File;
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -12,12 +16,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FileServiceTest {
     @Test
     public void readFile() throws Exception {
-        FileService.readFile("file/jvm-example.log");
+
+        File file = new File("/Users/dlee/code/sandbox-repo/learning-java/learning.java.lang/target/test-classes/file/jvm-example.log.sample");
+
+        URI uri = Resources.getResource("file/jvm-example.log.sample").toURI();
+
+
+
+        FileService.readFile(uri);
     }
 
     /**
      * http://www.vogella.com/tutorials/JavaRegularExpressions/article.html
      * @throws Exception
+     * file/jvm-example.log.sample
      */
     @Test
     public void logPatternTest() throws Exception {

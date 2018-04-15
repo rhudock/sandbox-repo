@@ -1,13 +1,9 @@
 //file: FindResources.java
 package learning.java.ch12io;
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Preconditions;
 import com.google.common.io.Resources;
 
-import java.net.URL;
 import java.io.IOException;
-
-import static com.google.common.base.Preconditions.checkArgument;
+import java.net.URL;
 
 public class FindResources {
   public static void main( String [] args ) throws IOException {
@@ -16,19 +12,15 @@ public class FindResources {
     URL url = FindResources.class.getResource("/mypackage/foo.txt");
     // relative to the class location
     url = FindResources.class.getResource("Certificates/Nuance/Private/private_key.pem");
+    System.out.println(url.getPath());
 
-    url = getResource("Certificates/Nuance/Private/private_key.pem");
+    url = Resources.getResource("Certificates/Nuance/Private/private_key.pem");
+    System.out.println(url.getPath());
     // another relative document
     url = FindResources.class.getResource("docs/bar.txt");
+    System.out.println(url.getPath());
   }
 
 
-  public static URL getResource(String resourceName) {
-    ClassLoader loader =
-            MoreObjects.firstNonNull(
-                    Thread.currentThread().getContextClassLoader(), Resources.class.getClassLoader());
-    URL url = loader.getResource(resourceName);
-//    checkArgument(url != null, "resource %s not found.", resourceName);
-    return url;
-  }
+
 }

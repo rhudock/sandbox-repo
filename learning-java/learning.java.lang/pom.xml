@@ -14,7 +14,7 @@
 		<jackson.version>2.9.4</jackson.version>
 
 		<!-- util -->
-		<guava.version>19.0</guava.version>
+		<guava.version>23.6-jre</guava.version>
 		<commons-lang3.version>3.5</commons-lang3.version>
 		<commons-io.version>2.5</commons-io.version>
 		<joda-time.version>2.9.6</joda-time.version>
@@ -131,11 +131,11 @@
             <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.google.collections</groupId>
-            <artifactId>google-collections</artifactId>
-            <version>1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.google.collections</groupId>-->
+            <!--<artifactId>google-collections</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
 		<!--<dependency>-->
 			<!--<groupId>com.google.guava</groupId>-->
 			<!--<artifactId>guava-collections</artifactId>-->
@@ -153,6 +153,12 @@
 			<artifactId>guava</artifactId>
 			<version>21.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.8</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>

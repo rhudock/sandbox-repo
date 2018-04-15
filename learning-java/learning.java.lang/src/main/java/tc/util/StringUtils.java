@@ -734,14 +734,14 @@ public final class StringUtils {
         if (StringUtils.isEmptyOrNull(value)) {
             return null;
         }
-        return new HashSet<>(COMMA_SPLITTER.splitToList(value));
+        return null ; // new HashSet<>(COMMA_SPLITTER.splitToList(value));
     }
 
     public static List<String> splitToList(String value) {
         if (StringUtils.isEmptyOrNull(value)) {
             return null;
         }
-        return COMMA_SPLITTER.splitToList(value);
+        return null; // COMMA_SPLITTER.splitToList(value);
     }
 
     public static String join(Collection<String> values) {
