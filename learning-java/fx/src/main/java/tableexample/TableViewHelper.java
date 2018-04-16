@@ -14,13 +14,6 @@ public class TableViewHelper
 	// Returns an observable list of persons
 	public static ObservableList<Person> getPersonList()
 	{
-		Person p1 = new Person(1,"Mark","Pearson","First Avenue 2","1200","Los Angeles","USA");
-		Person p2 = new Person(2,"Tom","Hoover","Kings Cross 3","2350","Denver","USA");
-		Person p3 = new Person(3,"David","Mason","Bond Street 5","1100","Manchester","Great Britain");
-		Person p4 = new Person(4,"Mary","Miller","Baker Street 86","1200","London","Great Britain");
-		Person p5 = new Person(5,"Martha","Lancester","Main Street 375","9923","Sidney","Australia");
-		Person p6 = new Person(6,"Henry","Forsyth","Main Street 3","37472","Toronto","Canada");
-
 		List<String> nameList = Arrays.asList("Mark", "Tom", "David", "Mary", "Martha", "Henry");
 		List<String> lastNameList = Arrays.asList("Pearson", "Hoover", "Mason", "Miller", "Lancester", "Forsyth");
 		List<String> streetList = Arrays.asList("First Avenue 2", "Kings Cross 3", "Bond Street 5", "Baker Street 86", "Main Street 375", "Main Street 3");

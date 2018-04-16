@@ -37,6 +37,21 @@ public class TableViewHelper
         return persons;
     }
 
+    // Returns an observable list of persons
+    public static ObservableList<LogLine> getLogLineList(File selectedFile)
+    {
+
+        URI uri = selectedFile.toURI();
+
+        List<LogLine> logLineList = FileService.readLog(uri);
+
+        ObservableList<LogLine> logLines = FXCollections.<LogLine>observableArrayList();
+
+        logLines.setAll(logLineList);
+
+        return logLines;
+    }
+
     // Returns Person Id TableColumn
     public static TableColumn<LogLine, LocalDateTime> getTimeColumn()
     {

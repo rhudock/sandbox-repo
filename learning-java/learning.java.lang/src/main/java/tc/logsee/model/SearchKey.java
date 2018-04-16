@@ -9,5 +9,4 @@ public class SearchKey {
     private SearchKeyType searchKeyType;
     private String key;
     private String logFileName;
-
 }
