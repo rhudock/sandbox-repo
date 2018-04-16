@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.List;
 
 public class FileService {
@@ -34,6 +35,30 @@ public class FileService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<LogLine> readLog(URI uri) {
+
+        LogLine logLine, preLogLine = null;
+        List<LogLine> logLineList = new LinkedList<>();
+
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(uri),
+                    Charset.defaultCharset());
+
+            for (String line : lines) {
+                logLine = logLineService.buildLogLine(line);
+                if(null == logLine && null != preLogLine) {
+                    logLine = new LogLine(preLogLine.getTime(), "ERROR_LOG", preLogLine.getClazz(), line, line);
+                }
+                logLineList.add(logLine);
+                preLogLine = logLine;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return logLineList;
     }
 
     public static void readFile(String fileName) throws URISyntaxException {

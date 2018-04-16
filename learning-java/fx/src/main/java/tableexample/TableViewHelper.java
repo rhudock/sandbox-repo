@@ -5,6 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 public class TableViewHelper
 {
 	// Returns an observable list of persons
@@ -17,7 +21,42 @@ public class TableViewHelper
 		Person p5 = new Person(5,"Martha","Lancester","Main Street 375","9923","Sidney","Australia");
 		Person p6 = new Person(6,"Henry","Forsyth","Main Street 3","37472","Toronto","Canada");
 
-		return FXCollections.<Person>observableArrayList(p1, p2, p3, p4, p5, p6);
+		List<String> nameList = Arrays.asList("Mark", "Tom", "David", "Mary", "Martha", "Henry");
+		List<String> lastNameList = Arrays.asList("Pearson", "Hoover", "Mason", "Miller", "Lancester", "Forsyth");
+		List<String> streetList = Arrays.asList("First Avenue 2", "Kings Cross 3", "Bond Street 5", "Baker Street 86", "Main Street 375", "Main Street 3");
+		List<String> zipList = Arrays.asList("1200", "2350", "1100", "1200", "9923", "37472");
+		List<String> cityList = Arrays.asList("Los Angeles", "Denver", "Manchester", "London", "Sidney", "Toronto");
+		List<String> countryList = Arrays.asList("USA", "USA", "Great Britain", "Great Britain", "Australia", "Canada");
+
+		ObservableList<Person> persons = FXCollections.<Person>observableArrayList();
+
+		for(int i = 0; i < 1000; i ++) {
+			persons.add(new Person(i, nameList.get(getRandomNumberInRange(0, nameList.size() -1)),
+					lastNameList.get(getRandomNumberInRange(0, nameList.size() -1)),
+					streetList.get(getRandomNumberInRange(0, nameList.size() -1)),
+					zipList.get(getRandomNumberInRange(0, nameList.size() -1)),
+					cityList.get(getRandomNumberInRange(0, nameList.size() -1)),
+					countryList.get(getRandomNumberInRange(0, nameList.size() -1))
+					)
+			);
+		}
+
+return persons;
+
+//		return FXCollections.<Person>observableArrayList(p1, p2, p3, p4, p5, p6);
+	}
+
+	/**
+	 * https://www.mkyong.com/java/java-generate-random-integers-in-a-range/
+	 */
+	public static int getRandomNumberInRange(int min, int max) {
+
+		if (min >= max) {
+			throw new IllegalArgumentException("max must be greater than min");
+		}
+
+		Random r = new Random();
+		return r.nextInt((max - min) + 1) + min;
 	}
 
 	// Returns Person Id TableColumn
