@@ -1,0 +1,6 @@
+{
+  "dataCenters" : [],
+  "components" : [],
+  "clients" : [],
+  "logType" : ["access", "jvm"]
+}

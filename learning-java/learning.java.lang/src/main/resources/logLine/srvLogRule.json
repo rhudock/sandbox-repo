@@ -1,0 +1,14 @@
+{
+  "servers": [
+    {
+      "serverName": "test1",
+      "prefix": "test",
+      "clients": [
+        { "clientName": "BestBrands",
+          "clientId" : "12345"
+        }
+      ]
+    }
+  ],
+  "logTypes": []
+}

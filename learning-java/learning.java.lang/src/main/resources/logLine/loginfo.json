@@ -1,0 +1,15 @@
+{
+  "logInfoTypes": [
+    "conversationId",
+    "engagementId",
+    "customerId",
+    "customerPhoneNumber"
+  ],
+  "logInfoRegExpRules": [
+    {
+      "logInfoType": "engagementId",
+      "regExp": "engagementID \\[[-0-9]{19,20}\\]",
+      "classApply": ""
+    }
+  ]
+}
