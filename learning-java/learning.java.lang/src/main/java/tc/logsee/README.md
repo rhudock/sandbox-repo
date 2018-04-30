@@ -149,6 +149,14 @@ zgrep -5065608496762339946 /home/prod_logs/productionlogs/elvcr*/access.log.2014
 -- -5065608496762339946 case
 zgrep -5065608496762339946 /home/prod_logs/productionlogs/abvapi*/access-*.log.2016092*.gz >> ~/log/-5065608496762339946.log
 
+zgrep 10006092 /home/prod_logs/productionlogs/*api*/jvm-*.log.20180412*.gz
+
+
+zgrep PageMarker /home/prod_logs/productionlogs/lax1vapi*/jvm-*.log.20180412*.gz
+
+
+
+
 zgrep Paul /home/prod_logs/productionlogs/*api*/access-*.log.2018011**.gz >> ~/log/-5065608496762339946.log
 
 zgrep 'b5d62512-e736-11e7-a671-5153c620923d' /home/prod_logs/productionlogs/elvapi*/jvm-elv*.log.201802*.gz >> ~/log/bb2abc.log

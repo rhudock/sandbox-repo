@@ -14,10 +14,32 @@ import mx.utils.StringUtil;
  */
 public class Main extends Sprite
 {
+    private static const OM_PATTERN_CUSTOMER_ID:RegExp = /^\{-{0,1}\d+/;
+
     public function Main():void
     {
-        onJSONLoaderComplete();
+        testRegEx2();
+//        onJSONLoaderComplete();
 //        loadJSONData();
+    }
+
+    private function testRegEx():void
+    {
+        var OM_PATTERN_CUSTOMER_ID:RegExp = /^\{-{0,1}\d{18,20}/;
+        var textForTranscript:String = "{737282761954712982}:<!-- Data Pass -->\n" +
+                "Name: test";
+
+        var customerId:String = OM_PATTERN_CUSTOMER_ID.exec(textForTranscript);
+        trace("customerId:" + customerId);
+    }
+
+    private function testRegEx2():void
+    {
+        var textForTranscript:String = "{737282761954712982}:<!-- Data Pass -->\n" +
+                "Name: test";
+
+        var customerId:String = OM_PATTERN_CUSTOMER_ID.exec(textForTranscript);
+        trace("test 2 with static = customerId:" + customerId);
     }
 
     private function loadJSONData():void
