@@ -24,7 +24,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:spring/applicationContext.xml"})
 public class AsyncRestClientTest {
 
     private MockRestServiceServer mockServer;
@@ -82,7 +82,6 @@ public class AsyncRestClientTest {
         assertTrue(responseEntity.getBody().getSuccess().equals(true));
         assertTrue(responseEntity.getBody().getError().getType().equals("errorType"));
         assertTrue(responseEntity.getBody().getError().getDescription().equals("some message about the error"));
-
     }
 
 
