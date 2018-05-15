@@ -1,0 +1,79 @@
+
+<!-- saved from url=(0138)file:///Users/dlee/Library/Containers/com.apple.mail/Data/Library/Mail%20Downloads/9AF5828E-3A8E-4BBE-8DDF-2763F18AF585/USintlchatQA.html# -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>
+var loadScriptAsync = function(url, callback){
+    var elem = document.createElement("script");
+    elem.src = url;
+    document.body.appendChild(elem);
+    elem.addEventListener("load", callback);
+};
+var init = function(){
+	/* Creates a custom detail called First Name and sets the value to "Jane" */
+	liveagent.addCustomDetail("First Name", "Jane");
+
+	/* Creates a custom detail called Last Name and sets the value to "Doe"  //janedoe@apple.com*/
+	liveagent.addCustomDetail("Last Name", "Doe");
+
+	/* Creates a custom detail called Phone Number and sets the value to "555-1212" */
+	liveagent.addCustomDetail("Phone Number", "415-555-1212");
+	liveagent.addCustomDetail("Contact Email", "janedoe@apple.com");
+
+	/* Creates a custom detail called Case Subject and sets the value to "Best snowboard for
+	a beginner" and will perform a knowledge search when the chat is accepted for the agent */
+
+	liveagent.addCustomDetail("Case Subject", "Best snowboard for a beginner").doKnowledgeSearch();
+
+	/* Creates a custom detail called Case Status and sets the value to "New" */
+	liveagent.addCustomDetail("Case Status", "New");
+	liveagent.addCustomDetail("Case Origin", "Chat");
+
+	/* This does a non-exact search on cases by the value of the "Case Subject" custom detail.
+		If no results are found, it will create a case and set the case's subject and status
+		The case that's found or created will be associated to the chat and the case will open in
+		the Console for the agent when the chat is accepted */
+	liveagent.findOrCreate("Case").map("Subject","Case Subject",false,false,true).map("Status","Case Status",false,false,true).map("SuppliedName","First Name",false,false,true).map("SuppliedEmail","Contact Email",false,false,true).map("Origin","Case Origin",false,false,true).saveToTranscript("CaseId").showOnCreate();
+
+	/* This searches for a contact whose first and last name exactly match the values in the custom details for First and Last Name
+		If no results are found, it will create a new contact and set it's first name, last name, and phone number to the values in the custom details */
+	liveagent.findOrCreate("Contact").map("FirstName","First Name",false,false,true).map("LastName","Last Name",false,false,true).map("Phone","Phone Number",false,false,true).map("Email","Contact Email",true,true,true);
+
+	/* The contact that's found or created will be saved or associated to the chat transcript.
+	The contact will be opened for the agent in the Console and the case is linked to the contact record */
+	liveagent.findOrCreate("Contact").saveToTranscript("ContactId").showOnCreate().linkToEntity("Case","ContactId");
+	var transcript = "You: International customs↵UPS: <span id='automation_1522019860411'><div onclick='window.inqFrame.Application.sendVALinkClicked(event);'>For information on a package:<br><ul><li>Already in transit that is being exported from the U.S., or</li><li>Being imported from another country or territory into the U.S.,</li></ul>please contact one of our international customer care representatives at 1-800-782-7892. <br><br>Let me know if you have any other tracking questions.</div></span>↵You: Contact you↵UPS: <span id='automation_1522019864659'><div onclick='window.inqFrame.Application.sendVALinkClicked(event);'>Live Chat is available, would you like to chat with a UPS customer care representative now? <ul><li><a href='#' data-vtz-link-type='Dialog' data-vtz-jump='929e18fb-fa53-42e8-8b77-13e1cab04831'>Yes</a></li><li><a href='#' data-vtz-link-type='Dialog' data-vtz-jump='9c33de0c-c570-4e00-939c-556d117d3f7c'>No</a></li></ul></div></span>↵You: yes↵UPS: <span id='automation_1522019866537'><div onclick='window.inqFrame.Application.sendVALinkClicked(event);'>What is your first name?</div></span>↵You: n↵UPS: <span id='automation_1522019867695'><div onclick='window.inqFrame.Application.sendVALinkClicked(event);'>What is your last name?</div></span>↵You: b↵UPS: <span id='automation_1522019868578'><div onclick='window.inqFrame.Application.sendVALinkClicked(event);'>What is your email address?</div></span>↵You: n@n.com↵UPS: <span id='automation_1522019872400'><div onclick='window.inqFrame.Application.sendVALinkClicked(event);'>What is your phone number?</div></span>↵You: 564769↵";
+	liveagent.addCustomDetail("VA_Transcript__c", transcript, true);
+	liveagent.init('https://d.la3-c1cs-phx.salesforceliveagent.com/chat', '5723D0000004CBn', '00D3D000000D39S');
+    liveagent.enableLogging();
+};
+var addIFrameForNonInqChatToTcChat = function(){
+	var iFrame;
+      var tcChatSkin = document.getElementById("tcChat_Skin");
+      divsub = document.createElement("DIV");
+      divsub.id = "nonInqChatDiv";
+      divsub.style.cssText = "position:absolute;top:0px;left:0px;width:100%;height:100%;opacity:1;z-index:102;background:#000;";
+      iframe = "<IFRAME id='container' " + 'NAME="container" ' + 'width="100%" height="100%"' + "></IFRAME>";
+      divsub.innerHTML = iframe;
+      tcChatSkin.appendChild(divsub);
+};
+var startChat = function(){
+	addIFrameForNonInqChatToTcChat();
+	liveagent.startChatWithWindow('5733D0000004CM4', 'container');
+};
+</script>
+
+</head>
+
+<body onload="loadScriptAsync('https://c.la3-c1cs-phx.salesforceliveagent.com/content/g/js/41.0/deployment.js', init)">
+
+<div name="tcChat_Skin" id="tcChat_Skin">
+<a href="#" onclick="startChat()">test</a>
+</div>
+
+<a id="liveagent_button_online_5733D0000004CM4" href="javascript://Chat" style="" onclick="startChat()"> Online Chat Content </a><div id="liveagent_button_offline_5733D0000004CM4" style="display: none;"> Offline Chat Content </div><script type="text/javascript">
+if (!window._laq) { window._laq = []; }
+window._laq.push(function(){liveagent.showWhenOnline('5733D0000004CM4', document.getElementById('liveagent_button_online_5733D0000004CM4'));
+liveagent.showWhenOffline('5733D0000004CM4', document.getElementById('liveagent_button_offline_5733D0000004CM4'));
+});</script>
+<!--<script src="./USintlchatQA_files/deployment.js"></script>-->
+
+</body></html>
