@@ -1,5 +1,6 @@
 package cwl.json.model;
 
+
 public class Car {
     private String color;
     private String type;
