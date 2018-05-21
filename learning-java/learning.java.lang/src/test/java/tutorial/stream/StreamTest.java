@@ -1,4 +1,4 @@
-package tutorial;
+package tutorial.stream;
 
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * http://www.baeldung.com/java-8-streams
  */
-public class Java8Test {
+public class StreamTest {
     public Stream<String> streamOf(List<String> list) {
         return list == null || list.isEmpty() ? Stream.empty() : list.stream();
     }
