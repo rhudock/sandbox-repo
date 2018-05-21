@@ -1,5 +1,5 @@
 
-Business Delegate Pattern is used to decouple presentation tier and business tier. It is basically use to reduce communication or remote lookup functionality to business tier code in presentation tier code. In business tier we have following entities.
+Business Delegate Pattern is used **to decouple presentation tier and business tier. It is basically use to reduce communication or remote lookup functionality to business tier code in presentation tier code.** In business tier we have following entities.
 
 Client - Presentation tier code may be JSP, servlet or UI java code.
 
