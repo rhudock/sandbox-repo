@@ -14,15 +14,21 @@ import java.util.concurrent.ExecutionException;
 https://www.concretepage.com/spring-4/spring-4-asyncresttemplate-listenablefuture-example
  */
 public class ExchangeMethodExample {
+
+    private  static  String url = "http://google.com";
+    private  static  HttpMethod method = HttpMethod.GET;
+    private  static  Class<String> responseType = String.class;
+
     public static void main(String[] args) {
+
         AsyncRestTemplate asycTemp = new AsyncRestTemplate();
-        String url = "http://google.com";
-        HttpMethod method = HttpMethod.GET;
-        Class<String> responseType = String.class;
+
         //create request entity using HttpHeaders
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
+
         HttpEntity<String> requestEntity = new HttpEntity<String>("params", headers);
+
         ListenableFuture<ResponseEntity<String>> future = asycTemp.exchange(url, method, requestEntity, responseType);
         try {
             //waits for the result

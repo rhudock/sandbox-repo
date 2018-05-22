@@ -1,4 +1,4 @@
-package lambdasinaction.chap5;
+package lambdasinaction.chap5_stream;
 
 import java.util.*;
 import java.util.function.IntSupplier;

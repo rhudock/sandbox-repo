@@ -1,6 +1,4 @@
-package lambdasinaction.chap5;
-
-import lambdasinaction.chap5.*;
+package lambdasinaction.chap5_stream;
 
 import java.util.*;
 

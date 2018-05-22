@@ -1,4 +1,4 @@
-package lambdasinaction.chap5;
+package lambdasinaction.chap5_stream;
 public  class Trader{
 	
 	private String name;

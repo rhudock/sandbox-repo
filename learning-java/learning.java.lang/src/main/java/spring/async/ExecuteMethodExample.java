@@ -39,11 +39,11 @@ public class ExecuteMethodExample {
 
         ResponseExtractor<String> responseExtractor = new ResponseExtractor<String>() {
             @Override
-            public String extractData(ClientHttpResponse arg0)
-                    throws IOException {
+            public String extractData(ClientHttpResponse arg0) throws IOException {
                 return arg0.getStatusText();
             }
         };
+
         Map<String, String> urlVariable = new HashMap<String, String>();
         urlVariable.put("q", "Concretepage");
         ListenableFuture<String> future = asycTemp.execute(url, method, requestCallback, responseExtractor, urlVariable);
