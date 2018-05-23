@@ -1,0 +1,19 @@
+{
+  "TalkAgentResponse": {
+    "@SCI": "@9eb0560a-026a-48d6-7cb7-78245b00a37b@78dcf14f-a708-442a-88bf-531ff6c01ea1",
+    "@IID": "9078793870754411892",
+    "@TimeStamp": "2018-05-04T15:25:32.6024355Z",
+    "@ResponseCode": "Found",
+    "@Version": "6",
+    "Display": {
+      "OutText": {
+        "#text": "Good Morning!"
+      },
+      "AlternateOutText2": {
+        "#text": "Good Morning!"
+      }
+    },
+    "TimeOut": 300,
+    "confidenceScore": 0
+  }
+}
