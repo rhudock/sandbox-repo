@@ -9,6 +9,8 @@ LookUp Service - Lookup service object is responsible to get relative business i
 
 Business Service - Business Service interface. Concrete classes implement this business service to provide actual business implementation logic.
 
+JavaEE pattern
+
 Implementation
 We are going to create a Client, BusinessDelegate, BusinessService, LookUpService, JMSService and EJBService representing various entities of Business Delegate patterns.
 

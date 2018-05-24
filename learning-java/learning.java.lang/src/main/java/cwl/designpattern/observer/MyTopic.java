@@ -57,7 +57,4 @@ public class MyTopic implements Subject {
         this.changed=true;
         notifyObservers();
     }
-
-
-
 }
