@@ -1,3 +1,5 @@
+package spring.rest;
+
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring.rest.client.AsyncRestClient;
@@ -9,7 +11,7 @@ public class AppMain {
   public static void main(String[] args) {
 
     //Startup spring context
-    AbstractApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml", AppMain.class);
+    AbstractApplicationContext applicationContext = new ClassPathXmlApplicationContext("ApplicationContext.xml", AppMain.class);
 
     // add a shutdown hook for the spring context...
     applicationContext.registerShutdownHook();

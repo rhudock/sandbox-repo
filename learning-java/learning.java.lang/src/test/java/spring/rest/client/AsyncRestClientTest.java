@@ -1,4 +1,4 @@
-package cwl.spring.rest.client;
+package spring.rest.client;
 
 
 import org.junit.Before;
@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.client.AsyncRestTemplate;
-import spring.rest.client.AsyncRestClient;
 import spring.rest.client.response.Response;
 
 import java.util.concurrent.TimeUnit;
