@@ -46,7 +46,7 @@ public class CsrfShowcaseTests {
     }
 
     @Test
-    void getAccount() throws Exception {
+    public void getAccount() throws Exception {
         mvc.perform(get("/accounts/1")
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())

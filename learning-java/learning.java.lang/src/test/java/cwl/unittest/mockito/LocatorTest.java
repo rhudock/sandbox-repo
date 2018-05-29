@@ -1,5 +1,6 @@
 package cwl.unittest.mockito;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -9,7 +10,6 @@ import org.mockito.stubbing.Answer;
 
 import java.awt.*;
 
-import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -21,6 +21,11 @@ public class LocatorTest {
 
     @Mock
     private LocatorService locatorServiceMock;
+
+    @Before
+    public void setUp() throws Exception {
+        // MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void locateTest01() throws Exception {

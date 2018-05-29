@@ -13,6 +13,10 @@ import java.util.Properties;
 
 import static com.google.common.io.Resources.getResource;
 
+
+/**
+ * Resources.toString(Resources.getResource(resourceName), Charsets.UTF_8);
+ */
 public class CustomerDataReader {
 
     public static Map<String, String> readRequestParamData(String filePathString) throws IOException {
