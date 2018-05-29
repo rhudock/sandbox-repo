@@ -4,6 +4,7 @@ import org.apache.xml.security.encryption.XMLCipher;
 import org.apache.xml.security.utils.EncryptionConstants;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import javax.crypto.SecretKey;
 import javax.xml.parsers.DocumentBuilder;
@@ -77,6 +78,11 @@ public class XMLUtil {
                                            SecretKey secretKey, String algorithm) throws Exception {
         /* Get Document root element */
         Element rootElement = document.getDocumentElement();
+        Node aNode = rootElement.getFirstChild();
+        if(aNode.getNodeType() == Node.ELEMENT_NODE) {
+            rootElement = (Element) aNode;
+        }
+
         String algorithmURI = algorithm;
         XMLCipher xmlCipher = XMLCipher.getInstance(algorithmURI);
 
@@ -101,7 +107,9 @@ public class XMLUtil {
                                            SecretKey secretKey, String algorithm) throws Exception {
         Element encryptedDataElement = (Element) document
                 .getElementsByTagNameNS(EncryptionConstants.EncryptionSpecNS,
-                        EncryptionConstants._TAG_ENCRYPTEDDATA).item(0);
+                        "SAML:" + EncryptionConstants._TAG_ENCRYPTEDDATA).item(0);
+
+//        encryptedDataElement = (Element) document.getElementsByTagName(EncryptionConstants._TAG_ENCRYPTEDDATA).item(0);
 
         XMLCipher xmlCipher = XMLCipher.getInstance();
 
@@ -109,4 +117,7 @@ public class XMLUtil {
         xmlCipher.doFinal(document, encryptedDataElement);
         return document;
     }
+
+
+
 }
