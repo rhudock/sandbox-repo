@@ -30,6 +30,6 @@ public class RsaUtil {
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE, publicKey);
 
-        return cipher.doFinal(encrypted);
+        return cipher.doFinal(encrypted, 0, 256 );
     }
 }
