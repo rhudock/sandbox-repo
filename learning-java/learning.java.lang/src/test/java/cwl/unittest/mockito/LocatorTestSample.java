@@ -11,6 +11,7 @@ import java.awt.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 /**
@@ -28,15 +29,23 @@ public class LocatorTestSample {
 
     @Before
     public void setUp() {
-        when(locatorServiceMock.geoLocate(any(Point.class)))
-                .thenReturn(TEST_POINT);
+        when(locatorServiceMock.geoLocate(any(Point.class))).thenReturn(TEST_POINT);
+        when(locatorServiceMock.geoLocateStr(anyString())).thenCallRealMethod();
 
         locatorUnderTest = new Locator(locatorServiceMock);
+
+
     }
 
     @Test
     public void testLocateWithServiceResult() {
         assertEquals(TEST_POINT, locatorUnderTest.locate(1, 1));
+    }
+
+    @Test
+    public void testLocateService() {
+        assertEquals(TEST_POINT, locatorUnderTest.locate(1, 1));
+        assertEquals("test returned", locatorServiceMock.geoLocateStr("test"));
     }
 
     @Test

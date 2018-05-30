@@ -12,7 +12,7 @@
                            http://www.springframework.org/schema/util/spring-util.xsd">
 
 
-    <context:component-scan base-package="cwl.net.async" />
+    <context:component-scan base-package="spring.rest" />
 
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
@@ -36,15 +36,13 @@
         </property>
     </bean>
 
-
-
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
         <property name="ignoreResourceNotFound" value="true"/>
         <property name="locations">
             <list>
-                <value>classpath:/properties/config.properties</value>
+                <value>classpath:/spring/rest/properties/config.properties</value>
             </list>
         </property>
     </bean>
