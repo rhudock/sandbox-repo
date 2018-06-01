@@ -323,6 +323,12 @@
 			<version>2.2.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>io.apigee.opensaml</groupId>
+			<artifactId>opensaml</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+
     </dependencies>
 
 	<build>
