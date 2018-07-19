@@ -1,7 +1,5 @@
 package cwl.security.saml;
 
-import com.inq.util.StringUtils;
-import com.touchcommerce.db.model.XSLTTemplate;
 import org.apache.log4j.Logger;
 import org.opensaml.Configuration;
 import org.opensaml.saml2.core.Assertion;
@@ -33,17 +31,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 
 
 public class SAML2Helper {
-    private static final Logger LOG = Logger.getLogger(SAMLHandlerHelper.class);
+    private static final Logger LOG = Logger.getLogger(SAML2Helper.class);
 
     /**
      * Convert saml response to an XML object
@@ -111,7 +107,7 @@ public class SAML2Helper {
         return null;
     }
 
-    public static List<Assertion> getAssertionFromResponse(Response response, XSLTTemplate xsltTemplate) {
+   /* public static List<Assertion> getAssertionFromResponse(Response response, XSLTTemplate xsltTemplate) {
         List<Assertion> assertions = response.getAssertions();
 
         if (assertions.size() == 0
@@ -137,7 +133,7 @@ public class SAML2Helper {
         }
 
         return assertions;
-    }
+    }*/
 
     /**
      * Decrypt a EncryptedAssertion and return Assertion.

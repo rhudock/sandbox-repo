@@ -3,6 +3,8 @@ package cwl.lang.numst.string;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static java.lang.String.format;
+
 // import cwl.lang.inherit.MeInheritTest;
 
 public class StringTest {
@@ -30,6 +32,15 @@ public class StringTest {
         String temp = a.buf;
         a.buf = b.buf;
         b.buf = temp;
+
+        boolean typing = false;
+
+        System.out.println(format(
+                "engagementID=%s&typing=%s",
+                "Hello_",
+                typing ? "true" : "false"
+        ));
+
 
         System.out.println("a= " + a.buf);
         System.out.println("b= " + b.buf);

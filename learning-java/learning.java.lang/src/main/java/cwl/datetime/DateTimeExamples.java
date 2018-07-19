@@ -22,6 +22,8 @@ import java.util.Locale;
 
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 import static java.time.temporal.TemporalAdjusters.nextOrSame;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
  * From Lambdas in Action
@@ -162,4 +164,7 @@ public class DateTimeExamples {
         System.out.println(date.format(complexFormatter));
     }
 
+    public void setSweepPeriod(int sweepInSecs) {
+        long sweepPeriod = MILLISECONDS.convert(sweepInSecs, SECONDS);
+    }
 }
