@@ -84,7 +84,8 @@ public class RsaUtilTest {
         assertNotNull(pubKey);
         assertNotNull(privateKey);
 
-        String secretString = "agt@tc.com";
+        // IllegalBlockSizeException: Data must not be longer than 245 bytes
+        String secretString = "Enable encryption for agent id.";
 
         // encrypt the message
         byte[] encrypted = RsaUtil.encrypt(privateKey, secretString);
@@ -113,5 +114,26 @@ public class RsaUtilTest {
         assertEquals(secretString, new String(secret));
         // assertEquals(secretString.getBytes(), secret);
     }
+
+    /**
+     * How to encrypt/decrypt long input messages with RSA? [Openssl, C]
+
+     * @throws Exception
+     */
+    @Test
+    public void testGetStringKeyValue() throws Exception {
+        assertNotNull(pubKey);
+        assertNotNull(privateKey);
+
+        String publicKeyStr = RsaUtil.publicKeyToString(pubKey);
+        String privateKeyStr = RsaUtil.privateKeyToString(privateKey);
+
+        System.out.println("public  key  : " + publicKeyStr);
+        System.out.println("private key  : " + privateKeyStr);
+
+        assertNotNull(publicKeyStr);
+        // assertEquals(secretString.getBytes(), secret);
+    }
+
 
 }

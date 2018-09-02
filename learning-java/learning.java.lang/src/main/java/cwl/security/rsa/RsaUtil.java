@@ -22,8 +22,8 @@ import java.security.spec.X509EncodedKeySpec;
 public class RsaUtil {
 
     public static KeyPair buildKeyPair() throws NoSuchAlgorithmException {
-//        final int keySize = 2048;
-        final int keySize = 1024;
+        final int keySize = 2048;
+//        final int keySize = 1024;
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         keyPairGenerator.initialize(keySize);
         return keyPairGenerator.genKeyPair();
@@ -131,7 +131,7 @@ public class RsaUtil {
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE, publicKey);
 
-//        return cipher.doFinal(encrypted, 0, 256);
-        return cipher.doFinal(encrypted, 0, 128);
+        return cipher.doFinal(encrypted, 0, 256);
+//        return cipher.doFinal(encrypted, 0, 128);
     }
 }

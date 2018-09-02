@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd">
+
+    <!-- Properties of the JDBC connection. -->
+    <context:property-placeholder location="spring/jsondao/jdbc-test.properties" />
+
+    <!-- the dataSource bean is setted to JdbcDaoSupport object automatically. -->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
+
+    <!-- Initializing the database -->
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:spring/jsondao/db-schema.sql" />
+    </jdbc:initialize-database>
+
+    <bean id="example" class="cwl.db.jdbcdao.Example"
+          c:_0="example title" c:_1="This the example description" />
+
+    <bean id="exampleDao" class="cwl.db.jdbcdao.ExampleDaoImpl">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+</beans>
