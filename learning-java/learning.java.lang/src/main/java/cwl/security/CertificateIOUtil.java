@@ -1,8 +1,6 @@
 package cwl.security;
 
-
 import org.apache.commons.codec.binary.Base64;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Decoder;
@@ -15,12 +13,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.security.KeyFactory;
-import java.security.KeyPair;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
-import java.security.Security;
+import java.security.PublicKey;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 
 /**
@@ -29,10 +28,10 @@ import java.security.spec.PKCS8EncodedKeySpec;
 public class CertificateIOUtil {
     private static final Logger logger = LoggerFactory.getLogger(CertificateIOUtil.class);
 
-    private static final String descriptorFirst = "-----BEGIN CERTIFICATE-----";
-    private static final String BEGIN_PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----";
-    private static final String descriptorLast = "-----END CERTIFICATE-----";
-    private static final String END_PRIVATE_KEY = "-----END PRIVATE KEY-----";
+    private static final String CERTIFICATE_HEADER = "-----BEGIN CERTIFICATE-----";
+    private static final String CERTIFICATE_FOOTER = "-----END CERTIFICATE-----";
+    private static final String CERTIFICATE_PRIVATE_HEADER = "-----BEGIN PRIVATE KEY-----";
+    private static final String CERTIFICATE_PRIVATE_FOOTER = "-----END PRIVATE KEY-----";
 
     public static String readCertBase64(String fileName) throws IOException {
 
@@ -42,8 +41,8 @@ public class CertificateIOUtil {
         try (BufferedReader br = new BufferedReader(new FileReader(samlCertFile))) {
             StringBuilder buff = new StringBuilder();
             String lineIn = br.readLine();
-            if (null != lineIn && (lineIn.contentEquals(descriptorFirst) || lineIn.contentEquals(BEGIN_PRIVATE_KEY))) {
-                while ((lineIn = br.readLine()) != null && (!(lineIn.contentEquals(descriptorLast)) && !(lineIn.contentEquals(END_PRIVATE_KEY)))) {
+            if (null != lineIn && (lineIn.contentEquals(CERTIFICATE_HEADER) || lineIn.contentEquals(CERTIFICATE_PRIVATE_HEADER))) {
+                while ((lineIn = br.readLine()) != null && (!(lineIn.contentEquals(CERTIFICATE_FOOTER)) && !(lineIn.contentEquals(CERTIFICATE_PRIVATE_FOOTER)))) {
                     buff.append(lineIn);
                 }
             }
@@ -58,7 +57,7 @@ public class CertificateIOUtil {
         if (certString == null) return null;
 
         String certBase64;
-        if (certString.startsWith(descriptorFirst)) {
+        if (certString.startsWith(CERTIFICATE_HEADER)) {
             certBase64 = obtainCertBase64(certString);
         } else {
             certBase64 = certString;
@@ -104,16 +103,14 @@ public class CertificateIOUtil {
         try {
             StringReader fr = new StringReader(certAsString);
 
-            String descriptorFirst = "-----BEGIN CERTIFICATE-----";
-            String descriptorLast = "-----END CERTIFICATE-----";
             String base64Text = "";
             br = new BufferedReader(fr);
 
             String lineIn = "";
             lineIn = br.readLine();
-            if (lineIn.contentEquals(descriptorFirst)) {
+            if (lineIn.contentEquals(CERTIFICATE_HEADER)) {
                 while ((lineIn = br.readLine()) != null) {
-                    if (!(lineIn.contentEquals(descriptorLast))) {
+                    if (!(lineIn.contentEquals(CERTIFICATE_FOOTER))) {
                         base64Text += lineIn;
                     } else {
                         return base64Text;
@@ -135,5 +132,57 @@ public class CertificateIOUtil {
             }
         }
         return "";
+    }
+
+    /**
+     */
+    static PublicKey getPublicKey(String keyStr) throws CertificateException {
+        X509Certificate cert = getCertificate(keyStr);
+        if (null != cert) {
+            return cert.getPublicKey();
+        }
+        return null;
+    }
+
+    /**
+     */
+    static X509Certificate getCertificate(String keyStr) throws CertificateException {
+        if (null == keyStr) {
+            return null;
+        }
+
+        keyStr = keyStr.replace("\r", "");
+        keyStr = keyStr.replace("\n", "");
+        keyStr = keyStr.replace(CERTIFICATE_HEADER, "");
+        keyStr = keyStr.replace(CERTIFICATE_FOOTER, "");
+
+        byte[] certificateBytes = org.bouncycastle.util.encoders.Base64.decode(keyStr);
+
+        if (certificateBytes != null) {
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            return (X509Certificate) cf.generateCertificate(new ByteArrayInputStream(certificateBytes));
+        }
+        return null;
+    }
+
+    static PrivateKey getPrivateKey(String keyStr) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        if (null == keyStr) {
+            return null;
+        }
+
+        keyStr = keyStr.replace("\r", "");
+        keyStr = keyStr.replace("\n", "");
+        keyStr = keyStr.replace(CERTIFICATE_PRIVATE_HEADER, "");
+        keyStr = keyStr.replace(CERTIFICATE_PRIVATE_FOOTER, "");
+
+        byte[] certificateBytes = org.bouncycastle.util.encoders.Base64.decode(keyStr);
+        if (certificateBytes != null) {
+            // PKCS8 decode the encoded RSA private key
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(certificateBytes);
+
+            KeyFactory kf = KeyFactory.getInstance("RSA");
+            return kf.generatePrivate(keySpec);
+        }
+        return null;
     }
 }

@@ -85,6 +85,12 @@
 			<version>3.10.0.GA</version>
 		</dependency>
 
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.196</version>
+        </dependency>
+
 		<!-- Logging <dependency> <groupId>org.slf4j</groupId> <artifactId>com.springsource.slf4j.api</artifactId> 
 			<version>1.5.10</version> </dependency> <dependency> <groupId>org.slf4j</groupId> 
 			<artifactId>com.springsource.slf4j.log4j</artifactId> <version>1.5.10</version> 
@@ -317,6 +323,28 @@
             <version>1.5.7</version>
         </dependency>
 
+		<dependency>
+			<groupId>com.onelogin</groupId>
+			<artifactId>java-saml</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.apigee.opensaml</groupId>
+			<artifactId>opensaml</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>5.0.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.0.0.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
 	<build>
@@ -332,17 +360,17 @@
 		</plugins>
 	</build>
 
-	<repositories>
-		<repository>
-			<id>central</id>
-			<name>Maven Repository Switchboard</name>
-			<layout>default</layout>
-			<url>http://repo1.maven.org/maven2</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+	<!--<repositories>-->
+		<!--<repository>-->
+			<!--<id>central</id>-->
+			<!--<name>Maven Repository Switchboard</name>-->
+			<!--<layout>default</layout>-->
+			<!--<url>http://repo1.maven.org/maven2</url>-->
+			<!--<snapshots>-->
+				<!--<enabled>false</enabled>-->
+			<!--</snapshots>-->
+		<!--</repository>-->
+	<!--</repositories>-->
 
 	<pluginRepositories>
 		<pluginRepository>

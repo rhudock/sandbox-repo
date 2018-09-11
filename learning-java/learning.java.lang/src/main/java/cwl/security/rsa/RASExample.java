@@ -33,9 +33,13 @@ public class RASExample {
                 Security.addProvider(provider);
             }
 
-            String plainText = "This is a plain text!!";
 
-            // KeyPair
+            String plainText = "This is a plain text!!";
+            System.out.println("plainText: " + plainText);
+
+
+
+            //-- KeyPair
             KeyPairGenerator keyPairGenerator = null;
             if (null != provider)
                 keyPairGenerator = KeyPairGenerator.getInstance("RSA", provider);
@@ -45,7 +49,9 @@ public class RASExample {
 
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
-            // Signature
+
+
+            //-- Signature
             Signature signatureProvider = null;
             if (null != provider)
                 signatureProvider = Signature.getInstance("SHA256WithRSA", provider);
@@ -58,8 +64,6 @@ public class RASExample {
 
             System.out.println("Signature Output : ");
             System.out.println("\t" + new String(Base64.encode(signature)));
-
-
 
 
 
@@ -80,6 +84,8 @@ public class RASExample {
             DigestInfo digestInfo = new DigestInfo(hashingAlgorithmIdentifier, hash);
             byte[] hashToEncrypt = digestInfo.getEncoded();
 
+
+
             // Crypto
             // You could also use "RSA/ECB/PKCS1Padding" for both the BC and SUN Providers.
             Cipher encCipher = null;
@@ -89,10 +95,12 @@ public class RASExample {
                 encCipher = Cipher.getInstance("RSA");
             encCipher.init(Cipher.ENCRYPT_MODE, keyPair.getPrivate());
 
-            byte[] encrypted = encCipher.doFinal(hashToEncrypt);
-
+//            byte[] encrypted = encCipher.doFinal(hashToEncrypt);
+            byte[] encrypted = encCipher.doFinal(plainText.getBytes());
             System.out.println("Hash and Encryption Output : ");
             System.out.println("\t" + new String(Base64.encode(encrypted)));
+
+
         } catch (Throwable e) {
             e.printStackTrace();
         }

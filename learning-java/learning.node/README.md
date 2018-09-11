@@ -28,3 +28,13 @@ I need to check how to use istanbul.
 
 ### Links
 [es6 tutorial](https://www.tutorialspoint.com/es6/es6_tutorial.pdf)
+* Request in javascript
+[request](https://blog.garstasio.com/you-dont-need-jquery/ajax/)
+[request](https://stackoverflow.com/questions/12693947/how-to-send-json-instead-of-a-query-string-with-ajax)
+[json](https://stackoverflow.com/questions/39519246/make-xmlhttprequest-post-using-json)
+* iFrame
+[Mdn iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)
+
+* Security
+[X-Frame-Option](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)
+[X-XSS-Protection](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection)

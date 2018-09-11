@@ -1,11 +1,12 @@
 package cwl.learn.lang.string;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class StringTest {
 
@@ -27,6 +28,8 @@ public class StringTest {
 
 		String s1 = "Hello";
 		String s2 = s1;
+
+		assertFalse(s1.equals(null));
 
 		assertTrue (s1 == s2);
 		assertTrue (s1.equals(s2));
