@@ -5,6 +5,7 @@
   "author": "Dan Wahlin",
   "scripts": {
     "start": "lite-server",
+    "csptest": "csp",
     "example": "node index.js",
     "example2": "node index.js Hey world!",
     "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha",
