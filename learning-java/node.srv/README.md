@@ -3,8 +3,8 @@
 ### CIGUI Project
 cd node.srv
 npm start
-http://localhost:3000/cigui/index.html
-
+* [old home](http://localhost:3000/cigui/index.html)
+* [home](http://localhost/index.html)
 
 
 History.
