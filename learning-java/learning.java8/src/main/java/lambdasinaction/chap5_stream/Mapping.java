@@ -14,7 +14,9 @@ public class Mapping{
         List<String> dishNames = menu.stream()
                                      .map(Dish::getName)
                                      .collect(toList());
+        System.out.println("dishNames-----");
         System.out.println(dishNames);
+        System.out.println("dishNames-----End");
 
         // map
         List<String> words = Arrays.asList("Hello", "World");
