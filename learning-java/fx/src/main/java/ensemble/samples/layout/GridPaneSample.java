@@ -47,6 +47,9 @@ import javafx.scene.layout.*;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.io.IOException;
+import java.net.URL;
 // END REMOVE ME
 
 /**
@@ -62,7 +65,16 @@ import javafx.scene.shape.Rectangle;
  * @resource icon-48x48.png
  */
 public class GridPaneSample extends Sample {
-    private static final Image ICON_48 = new Image(GridPaneSample.class.getResourceAsStream("icon-48x48.png"));
+    static URL url = com.google.common.io.Resources.getResource("ensemble/images/icon-48x48.png");
+
+    private static Image ICON_48 = null;
+    static {
+        try {
+            ICON_48 = new Image(url.openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public GridPaneSample() {
       
         VBox vbox = new VBox();

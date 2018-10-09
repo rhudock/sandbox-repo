@@ -42,6 +42,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+import java.net.URL;
+
 /**
  * A sample that demonstrates a Gaussian blur effect on an image, with varying
  * degrees of blurriness.
@@ -51,7 +54,18 @@ import javafx.scene.text.Text;
  * @resource icon-48x48.png
  */
 public class GaussianBlurSample extends Sample {
-    private static final Image ICON_48 = new Image(GaussianBlurSample.class.getResourceAsStream("icon-48x48.png"));
+
+    static URL url = com.google.common.io.Resources.getResource("ensemble/images/icon-48x48.png");
+
+    private static Image ICON_48 = null;
+    static {
+        try {
+            ICON_48 = new Image(url.openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public GaussianBlurSample() {
         super(48,48);
         ImageView sample = new ImageView(ICON_48);

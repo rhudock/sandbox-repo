@@ -32,6 +32,7 @@
  */
 package ensemble.pages;
 
+import com.google.common.io.Resources;
 import ensemble.*;
 import ensemble.model.SampleInfo;
 import ensemble.sampleproject.SampleProjectBuilder;
@@ -338,7 +339,7 @@ public class SamplePage extends Page {
             ImageView imageView = new ImageView(new Image(url.toString()));
             return imageView;
         } else {
-            ImageView imageView = new ImageView(new Image(Ensemble2.class.getResource("images/icon-overlay.png").toString()));
+            ImageView imageView = new ImageView(new Image(Resources.getResource("ensemble/images/icon-overlay.png").toString()));
             imageView.setMouseTransparent(true);
             Rectangle overlayHighlight = new Rectangle(-8,-8,130,130);
             overlayHighlight.setFill(new LinearGradient(0,0.5,0,1,true, CycleMethod.NO_CYCLE, new Stop[]{ new Stop(0,Color.BLACK), new Stop(1,Color.web("#444444"))}));
@@ -410,10 +411,10 @@ public class SamplePage extends Page {
 
     private void loadCode() {
         // load syntax highlighter
-        if (shCoreJs == null) shCoreJs = Utils.loadFile(Ensemble2.class.getResource("syntaxhighlighter/shCore.js")) +";";
-        if (shBrushJScript == null) shBrushJScript = Utils.loadFile(Ensemble2.class.getResource("syntaxhighlighter/shBrushJava.js"));
+        if (shCoreJs == null) shCoreJs = Utils.loadFile(Resources.getResource("ensemble/syntaxhighlighter/shCore.js")) +";";
+        if (shBrushJScript == null) shBrushJScript = Utils.loadFile(Resources.getResource("ensemble/syntaxhighlighter/shBrushJava.js"));
         if (shCoreDefaultCss == null) shCoreDefaultCss =
-                Utils.loadFile(Ensemble2.class.getResource("syntaxhighlighter/shCoreDefault.css")).replaceAll("!important","");
+                Utils.loadFile(Resources.getResource("ensemble/syntaxhighlighter/shCoreDefault.css")).replaceAll("!important","");
         // load and convert source
         String source = SampleProjectBuilder.loadAndConvertSampleCode(sampleInfo.getSourceFileUrl());
         // store raw code

@@ -43,6 +43,9 @@ import javafx.scene.shape.Rectangle;
 // REMOVE ME
 import javafx.scene.Group;
 import javafx.scene.Node;
+
+import java.io.IOException;
+import java.net.URL;
 // END REMOVE ME
 
 /**
@@ -54,7 +57,16 @@ import javafx.scene.Node;
  * @resource icon-48x48.png
  */
 public class StackPaneSample extends Sample {
-    private static final Image ICON_48 = new Image(StackPaneSample.class.getResourceAsStream("icon-48x48.png"));
+    static URL url = com.google.common.io.Resources.getResource("ensemble/images/icon-48x48.png");
+
+    private static Image ICON_48 = null;
+    static {
+        try {
+            ICON_48 = new Image(url.openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public StackPaneSample() {
  
         StackPane stackPane = new StackPane();

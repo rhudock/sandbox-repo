@@ -1,8 +1,8 @@
 
-
-
-var parsedUrl = parseUrl("https://sensis.com.au");
-var pcDomainUrl = parseUrl("https://chat.senis.com.au");
+// var parsedUrl = parseUrl("https://sensis.com.au");
+// var pcDomainUrl = parseUrl("https://chat.senis.com.au");
+var parsedUrl = parseUrl("https://sensis.com");
+var pcDomainUrl = parseUrl("https://chat.senis.com");
 
 if ((
     ( pcDomainUrl.subDomainSupport === true || parsedUrl.subDomainSupport === true)
@@ -12,8 +12,10 @@ if ((
 ) {
     CookieMgr.xdPsHelper.hostFileURLUse = pcDomainUrl.href;
     result = true;
+    console.log("reqult is true");
+} else {
+    console.log("reqult is true");
 }
-
 
 function parseUrl (str) {
     var m = str.match(/^(https?):\/\/([^\/:]+)(:?(\d*))/);

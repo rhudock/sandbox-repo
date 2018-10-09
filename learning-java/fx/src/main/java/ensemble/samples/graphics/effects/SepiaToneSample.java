@@ -39,6 +39,9 @@ import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
+import java.net.URL;
+
 /**
  * A sample that demonstrates varying degrees of a sepia tone effect.
  *
@@ -47,7 +50,16 @@ import javafx.scene.image.ImageView;
  * @resource boat.jpg
  */
 public class SepiaToneSample extends Sample {
-    private static final Image BOAT = new Image(SepiaToneSample.class.getResourceAsStream("boat.jpg"));
+    static URL url = com.google.common.io.Resources.getResource("ensemble/images/boat.jpg");
+
+    private static Image BOAT = null;
+    static {
+        try {
+            BOAT = new Image(url.openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public SepiaToneSample() {
         ImageView sample = new ImageView(BOAT);
         final SepiaTone sepiaTone = new SepiaTone();

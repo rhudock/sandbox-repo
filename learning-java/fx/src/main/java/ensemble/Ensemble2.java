@@ -31,6 +31,7 @@
  */
 package ensemble;
 
+import com.google.common.io.Resources;
 import ensemble.config.ProxyDialog;
 import ensemble.controls.BreadcrumbBar;
 import ensemble.controls.SearchBox;
@@ -41,6 +42,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Stack;
 import javafx.animation.*;
 import javafx.application.Application;
@@ -162,7 +164,7 @@ public class Ensemble2 extends Application {
             //RT-13234
             scene.setCamera(new PerspectiveCamera());
         }
-        scene.getStylesheets().add(Ensemble2.class.getResource("ensemble2.css").toExternalForm());
+        scene.getStylesheets().add(Resources.getResource("ensemble/ensemble2.css").toExternalForm());
         // create modal dimmer, to dim screen when showing modal dialogs
         modalDimmer = new StackPane();
         modalDimmer.setId("ModalDimmer");
@@ -177,7 +179,14 @@ public class Ensemble2 extends Application {
         // create main toolbar
         toolBar = new ToolBar();
         toolBar.setId("mainToolBar");
-        ImageView logo = new ImageView(new Image(Ensemble2.class.getResourceAsStream("images/logo.png")));
+        URL url = com.google.common.io.Resources.getResource("ensemble/images/logo.png");
+
+        ImageView logo = null;
+        try {
+            logo = new ImageView(new Image(url.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         HBox.setMargin(logo, new Insets(0,0,0,5));
         toolBar.getItems().add(logo);
         Region spacer = new Region();

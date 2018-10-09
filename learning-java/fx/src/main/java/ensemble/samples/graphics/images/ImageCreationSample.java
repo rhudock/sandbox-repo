@@ -39,6 +39,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+import java.net.URL;
+
 /**
  * A sample that demonstrates the use of two different constructors in the Image
  * class.
@@ -49,7 +52,16 @@ import javafx.scene.layout.VBox;
  * @resource icon-48x48.png
  */
 public class ImageCreationSample extends Sample {
-    private static final Image ICON_48 = new Image(ImageCreationSample.class.getResourceAsStream("icon-48x48.png"));
+    static URL url = com.google.common.io.Resources.getResource("ensemble/images/icon-48x48.png");
+
+    private static Image ICON_48 = null;
+    static {
+        try {
+            ICON_48 = new Image(url.openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public ImageCreationSample() {
         // load and display a image resource from classpath
         ImageView sample1 = new ImageView(ICON_48);               

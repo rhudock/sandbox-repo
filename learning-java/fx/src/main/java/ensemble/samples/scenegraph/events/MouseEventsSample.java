@@ -31,6 +31,8 @@
  */
 package ensemble.samples.scenegraph.events;
 
+import com.google.common.io.Resources;
+import ensemble.util.ImageUtil;
 import javafx.event.EventHandler;
 import ensemble.Sample;
 import javafx.collections.FXCollections;
@@ -55,6 +57,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.RectangleBuilder;
+
+import java.io.IOException;
 
 /**
  * A sample that demonstrates various mouse and scroll events and their usage.
@@ -218,16 +222,16 @@ public class MouseEventsSample extends Sample {
     }
 
     // REMOVE ME
-    public static Node createIconContent() {
+    public static Node createIconContent() throws IOException {
        final ImageView sample = new ImageView(
-                new Image(MouseEventsSample.class.getResourceAsStream("oracle.gif")));
+                ImageUtil.getImage("ensemble/samples/scenegraph/events/oracle.gif"));
        final double iconInitPosX = 11.5;
        final double iconInitPosY = 46;
        sample.setTranslateX(iconInitPosX);
        sample.setTranslateY(iconInitPosY);
 
        final ImageView cursor = new ImageView(
-                new Image(MouseEventsSample.class.getResourceAsStream("cursor.png")));
+                ImageUtil.getImage("ensemble/samples/scenegraph/events/cursor.png"));
        final double cursorCorrX = 43;
        final double cursorCorrY = 12;
        cursor.setLayoutX(iconInitPosX + cursorCorrX);

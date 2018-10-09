@@ -43,6 +43,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+import java.net.URL;
+
 /**
  * A sample that demonstrates how a reflection effect is affected by various settings.
  *
@@ -51,7 +54,17 @@ import javafx.scene.text.Text;
  * @resource boat.jpg
  */
 public class ReflectionSample extends Sample {
-    private static final Image BOAT = new Image(ReflectionSample.class.getResourceAsStream("boat.jpg"));
+    static URL url = com.google.common.io.Resources.getResource("ensemble/images/boat.jpg");
+
+    private static Image BOAT = null;
+    static {
+        try {
+            BOAT = new Image(url.openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ReflectionSample() {
         super(100,200);
         ImageView sample = new ImageView(BOAT);

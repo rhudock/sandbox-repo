@@ -31,6 +31,8 @@
  */
 package ensemble.samples.graphics.images;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
 import ensemble.Ensemble2;
 import ensemble.Sample;
 import javafx.geometry.Rectangle2D;
@@ -41,6 +43,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * A sample that demonstrates how to resize images and use the Viewport property.
@@ -52,7 +55,15 @@ import java.io.FileNotFoundException;
  */
 public class ImagePropertiesSample extends Sample {
 
-    private static final String url = ImagePropertiesSample.class.getResource("sanfran.jpg").toString();
+    private static String url;
+
+    static {
+        try {
+            url = Resources.toString(Resources.getResource("ensemble/images/sanfran.jpg"), Charsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public ImagePropertiesSample() {
         //we can set image properties directly during creation
