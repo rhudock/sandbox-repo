@@ -1,14 +1,8 @@
-// SayHelloFXMLMain.java
 package com.lee.taekownv;
 
 import javafx.application.Application;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
-import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -18,11 +12,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class TaekwonVMainApp extends Application {
 	public static void main(String[] args) {
@@ -42,17 +34,10 @@ public class TaekwonVMainApp extends Application {
 
 	@Override
 	public void start(Stage stage) throws IOException {
-		stage.setTitle("Menu Sample");
+		stage.setTitle("Taekwon V");
+
 		Scene scene = new Scene(new VBox(), 650, 350);
 		scene.setFill(Color.OLDLACE);
-
-// http://docs.oracle.com/javafx/2/ui_controls/menu_controls.htm
-		MenuBar menuBar = new MenuBar();
-		Menu menuFile = new Menu("File");
-		Menu menuEdit = new Menu("Edit");
-		Menu menuView = new Menu("View");
-		menuBar.getMenus().addAll(menuFile, menuEdit, menuView);
-
 
 		// Construct a URL for the FXML document
 		String stringUrl = "fxml/taekwonvmain.fxml";
@@ -63,16 +48,26 @@ public class TaekwonVMainApp extends Application {
 		root = FXMLLoader.<VBox>load(fxmlUrl);
 		((VBox) scene.getRoot()).getChildren().addAll(root);
 		stage.setScene(scene);
-		stage.setTitle("Hello FXML");
-		stage.show();
 
+        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> {
+            System.out.println("Height: " + stage.getHeight() + " Width: " + stage.getWidth());
+            root.setPrefWidth(stage.getWidth());
+            if(null != currentNode) {
+              //  currentNode.setScaleX(stage.getWidth());
+            }
+        };
 
+        stage.widthProperty().addListener(stageSizeListener);
+        stage.heightProperty().addListener(stageSizeListener);
 
+        stage.show();
 	}
 
 	public VBox getRoot() {
 		return root;
 	}
+
+	private static Node currentNode;
 
 	public static void selectFxml(String fxmlId){
 		ObservableList<Node> children = instance.getRoot().getChildren();
@@ -83,6 +78,7 @@ public class TaekwonVMainApp extends Application {
 				for(Node node : gChildren) {
 					if(node.getId().equals(fxmlId)) {
 						node.setVisible(true);
+                        currentNode = node;
 					} else {
 						node.setVisible(false);
 					}
@@ -90,6 +86,5 @@ public class TaekwonVMainApp extends Application {
 			}
 		}
 	}
-
 
 }

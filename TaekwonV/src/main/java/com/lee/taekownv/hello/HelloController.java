@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public class HelloController
 {
-    private static final Logger log = LoggerFactory.getLogger(HelloController.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @FXML private TextField firstNameField;
     @FXML private TextField lastNameField;
@@ -35,10 +35,10 @@ public class HelloController
 
         if (builder.length() > 0) {
             String name = builder.toString();
-            log.debug("Saying hello to " + name);
+            logger.debug("Saying hello to " + name);
             messageLabel.setText("Hello " + name);
         } else {
-            log.debug("Neither first name nor last name was set, saying hello to anonymous person");
+            logger.debug("Neither first name nor last name was set, saying hello to anonymous person");
             messageLabel.setText("Hello mysterious person");
         }
     }

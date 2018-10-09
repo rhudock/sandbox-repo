@@ -1,13 +1,17 @@
 package com.lee.date;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 /**
- *
  * https://www.tutorialspoint.com/java8/java8_datetime_api.htm
  */
 public class CurrentTime {
-    public static void main(String args[]){
+    public static void main(String args[]) {
         CurrentTime java8tester = new CurrentTime();
         java8tester.testLocalDateTime();
         java8tester.testZonedDateTime();
@@ -22,9 +26,9 @@ public class CurrentTime {
         LocalTime time1 = currentTime.toLocalTime();
 
         return date1 + " " + time1;
-    };
+    }
 
-    public void testLocalDateTime(){
+    public void testLocalDateTime() {
 
         // Get the current date and time
 
@@ -41,7 +45,7 @@ public class CurrentTime {
         int day = currentTime.getDayOfMonth();
         int seconds = currentTime.getSecond();
 
-        System.out.println("Month: " + month +"day: " + day +"seconds: " + seconds);
+        System.out.println("Month: " + month + "day: " + day + "seconds: " + seconds);
 
         LocalDateTime date2 = currentTime.withDayOfMonth(10).withYear(2012);
         System.out.println("date2: " + date2);
@@ -59,7 +63,7 @@ public class CurrentTime {
         System.out.println("date5: " + date5);
     }
 
-    public void testZonedDateTime(){
+    public void testZonedDateTime() {
 
         // Get the current date and time
         ZonedDateTime date1 = ZonedDateTime.parse("2007-12-03T10:15:30+05:30[Asia/Karachi]");

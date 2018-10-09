@@ -1,21 +1,19 @@
 // SayHelloController.java
 package com.lee.taekownv;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.Collections;
 import java.util.ResourceBundle;
 
 /*
 http://stackoverflow.com/questions/15004365/javafx-2-2-fxinclude-how-to-access-parent-controller-from-child-controller
  */
 public class TakwonVMainController {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final String TC_LINK_VIEW = "tcLinkView";
 
     @FXML
     private MenuItem mMSimple;
@@ -42,7 +40,13 @@ public class TakwonVMainController {
     }
 
     @FXML
-    private void onMmSimpleAction() {
+    private void onHelloTkvAction() {
+        TaekwonVMainApp.selectFxml("helloTkv");
+        System.out.println("Simple Menu is clicked");
+    }
+
+    @FXML
+    private void onMenuTcTest() {
         TaekwonVMainApp.selectFxml("childSayHello");
         System.out.println("Simple Menu is clicked");
     }
@@ -51,5 +55,11 @@ public class TakwonVMainController {
     private void onMmChildAction() {
         TaekwonVMainApp.selectFxml("childChild");
         System.out.println("Child Menu is clicked");
+    }
+
+    @FXML
+    private void onMenuTcLinksClick() {
+        TaekwonVMainApp.selectFxml(TC_LINK_VIEW);
+        logger.info("Open {}", TC_LINK_VIEW);
     }
 }

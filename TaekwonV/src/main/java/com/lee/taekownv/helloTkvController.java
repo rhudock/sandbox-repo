@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class SayHelloController {
+public class helloTkvController {
     private Task copyWorker;
 
     // The refernce of msgLbl will be injected by the FXML loader
@@ -52,7 +52,7 @@ public class SayHelloController {
 
     // Add a public no-args construtcor explicitly just to
     // emphasize that it is needed for a controller
-    public SayHelloController() {
+    public helloTkvController() {
     }
 
     @FXML
@@ -60,7 +60,6 @@ public class SayHelloController {
         System.out.println("Initializing SayHelloController...");
         System.out.println("Location = " + location);
         System.out.println("Resources = " + resources);
-
 
         //
         timeProgressbar.setProgress(0);
