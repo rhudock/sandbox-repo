@@ -1,6 +1,7 @@
 // SayHelloController.java
 package com.lee.taekownv;
 
+import com.lee.TaekwonVMainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import org.slf4j.Logger;

@@ -17,6 +17,8 @@ import javafx.scene.control.Slider;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +26,8 @@ import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class helloTkvController {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private Task copyWorker;
 
     // The refernce of msgLbl will be injected by the FXML loader
@@ -69,8 +73,6 @@ public class helloTkvController {
 //        timeProgressbar.progressProperty().bind(copyWorker.progressProperty());
 
 //        new Thread(copyWorker).start();
-
-
 
         //
         TimerService service = new TimerService();
@@ -142,7 +144,6 @@ public class helloTkvController {
         }
     }
 
-
     /**
      *
      * http://stackoverflow.com/questions/27853735/simple-example-for-scheduledservice-in-javafx
@@ -172,7 +173,6 @@ public class helloTkvController {
             };
         }
     }
-
 
     /*
      * http://stackoverflow.com/questions/29854627/progressbar-doesnt-work-with-a-fxml-file-and-a-controller

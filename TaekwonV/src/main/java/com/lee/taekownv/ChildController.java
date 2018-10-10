@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +19,7 @@ import java.util.ResourceBundle;
 http://stackoverflow.com/questions/15004365/javafx-2-2-fxinclude-how-to-access-parent-controller-from-child-controller
  */
 public class ChildController {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @FXML
     private VBox childVBox;

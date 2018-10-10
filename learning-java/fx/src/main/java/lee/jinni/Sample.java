@@ -47,8 +47,8 @@ import java.util.List;
  * for simple graphics etc. If you need fixed size use the constructor with width and height arguments.
  */
 public class Sample extends Pane {
-    protected static final Image ICON_48 = new Image(Sample.class.getResourceAsStream("images/icon-48x48.png"));
-    protected static final Image BRIDGE = new Image(Sample.class.getResourceAsStream("images/sanfran.jpg"));
+    protected static final Image ICON_48 = new Image(Sample.class.getResourceAsStream("icon-48x48.png"));
+//    protected static final Image BRIDGE = new Image(Sample.class.getResourceAsStream("images/sanfran.jpg"));
 
     private Node controls = null;
     private boolean isFixedSize;

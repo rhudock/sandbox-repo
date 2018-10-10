@@ -9,6 +9,9 @@ package com.lee.finance;
  *
  ******************************************************************************/
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -60,6 +63,7 @@ import java.util.Locale;
  *  @author Kevin Wayne
  */
 public final class StdOut {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // force Unicode UTF-8 encoding; otherwise it's system dependent
     private static final String CHARSET_NAME = "UTF-8";

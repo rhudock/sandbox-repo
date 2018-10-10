@@ -9,6 +9,9 @@ package com.lee.finance;
  *
  ******************************************************************************/
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,6 +57,7 @@ import java.util.regex.Pattern;
  *  @author Kevin Wayne
  */
 public final class In {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     ///// begin: section (1 of 2) of code duplicated from In to StdIn.
 

@@ -1,6 +1,9 @@
 package com.lee.finance;
 // http://introcs.cs.princeton.edu/java/31datatype/StockQuote.java.html
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /******************************************************************************
  *  Compilation:  javac StockQuote.java
  *  Execution:    java StockQuote symbol
@@ -36,6 +39,7 @@ package com.lee.finance;
  ******************************************************************************/
 
 public class StockQuote {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Given symbol, get HTML
     private static String readHTML(String symbol) {

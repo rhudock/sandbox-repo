@@ -11,6 +11,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -18,6 +20,7 @@ import javafx.stage.Stage;
  * http://www.java2s.com/Code/Java/JavaFX/FullScreenVideoPlayer.htm
  */
 public class Vplayer extends Application {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public static void main(String[] args) {
         launch(args);
