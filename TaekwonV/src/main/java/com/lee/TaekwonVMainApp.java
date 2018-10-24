@@ -64,6 +64,7 @@ public class TaekwonVMainApp extends Application {
             // Menu button
             ((VBox) getRoot().getChildren().get(0)).setMinWidth(stage.getWidth());
 
+            // Main Window
             ((StackPane) getRoot().getChildren().get(1)).setMinWidth(stage.getWidth());
         };
 

@@ -54,7 +54,7 @@ public class TakwonVMainController {
 
     @FXML
     private void onMmChildAction() {
-        TaekwonVMainApp.selectFxml("childChild");
+        TaekwonVMainApp.selectFxml("child");
         System.out.println("Child Menu is clicked");
     }
 

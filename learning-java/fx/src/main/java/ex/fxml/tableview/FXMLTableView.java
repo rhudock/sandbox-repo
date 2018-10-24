@@ -42,7 +42,7 @@ public class FXMLTableView extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("FXML TableView Example");
-        primaryStage.setScene((Scene)FXMLLoader.load(getClass().getResource("fxml_tableview.fxml")));
+        primaryStage.setScene((Scene)FXMLLoader.load(getClass().getResource("./fxml_tableview.fxml")));
         primaryStage.show();
     }
  

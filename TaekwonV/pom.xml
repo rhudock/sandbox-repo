@@ -29,6 +29,8 @@
                     <mainClass>com.lee.TaekwonVMainApp</mainClass>
                     <css2bin>true</css2bin>
                     <updateExistingJar>true</updateExistingJar>
+                    <vendor>YourCompany</vendor>
+                    <mainClass>your.package.with.Launcher</mainClass>
                 </configuration>
             </plugin>
 
@@ -46,6 +48,7 @@
                     </archive>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -54,6 +57,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -75,9 +79,7 @@
         </plugins>
     </build>
 
-
     <dependencies>
-
         <!-- MigLayout -->
         <dependency>
             <groupId>com.miglayout</groupId>
@@ -125,7 +127,17 @@
             <version>4.9</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>24.0-jre</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.cwl</groupId>
+            <artifactId>attachment-builder</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <repositories>
