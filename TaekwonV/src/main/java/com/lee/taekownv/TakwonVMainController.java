@@ -20,7 +20,7 @@ public class TakwonVMainController {
     private MenuItem mMSimple;
 
     @FXML
-    private MenuItem mMClild;
+    private MenuItem mMBrowser;
 
     @FXML
     private ResourceBundle resources;
@@ -53,14 +53,20 @@ public class TakwonVMainController {
     }
 
     @FXML
-    private void onMmChildAction() {
-        TaekwonVMainApp.selectFxml("child");
-        System.out.println("Child Menu is clicked");
+    private void onMmBrowserAction() {
+        TaekwonVMainApp.selectFxml("browser");
+        System.out.println("browser Menu is clicked");
     }
 
     @FXML
     private void onMenuTcLinksClick() {
         TaekwonVMainApp.selectFxml(TC_LINK_VIEW);
         logger.info("Open {}", TC_LINK_VIEW);
+    }
+
+    @FXML
+    private void onMenuGMapFXClick() {
+        TaekwonVMainApp.selectFxml("gMapFXPane");
+        logger.info("Open {}", "gMapFXPane");
     }
 }

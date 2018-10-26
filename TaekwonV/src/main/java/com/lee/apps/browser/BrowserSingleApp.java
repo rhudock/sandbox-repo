@@ -1,4 +1,4 @@
-package com.lee.taekownv;
+package com.lee.apps.browser;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,10 +21,10 @@ import com.google.common.io.Resources;
  *   
  *    Run as java application.
  */
-public class DevApp extends Application {
+public class BrowserSingleApp extends Application {
 	public void start(Stage stage) throws Exception {
 
-		String stringUrl = "fxml/child.fxml";
+		String stringUrl = "fxml/apps/browser/browser.fxml";
 		URL fxmlUrl = this.getClass()
 				.getClassLoader()
 				.getResource(stringUrl);

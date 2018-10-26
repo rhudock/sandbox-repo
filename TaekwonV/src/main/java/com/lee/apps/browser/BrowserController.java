@@ -1,5 +1,5 @@
 // SayHelloController.java
-package com.lee.taekownv;
+package com.lee.apps.browser;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 /*
 http://stackoverflow.com/questions/15004365/javafx-2-2-fxinclude-how-to-access-parent-controller-from-child-controller
  */
-public class ChildController {
+public class BrowserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @FXML
@@ -56,7 +56,7 @@ public class ChildController {
 
     // Add a public no-args construtcor explicitly just to
     // emphasize that it is needed for a controller
-    public ChildController() {
+    public BrowserController() {
     }
 
     @FXML
@@ -78,7 +78,7 @@ public class ChildController {
 
         // Changes to the observableList WILL be reported.
         // This line will print out "Detected a change!"
-        cmbUrlsList.add("item one");
+        cmbUrlsList.add("https://www.google.com");
 
         // Changes to the underlying list will NOT be reported
         // Nothing will be printed as a result of the next line.
@@ -112,7 +112,8 @@ public class ChildController {
 
     @FXML
     private void openNewUrl() {
-
+        String url = txtNewUrl.getText();
+        webEngine.load(url);
     }
 
 

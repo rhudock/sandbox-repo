@@ -40,7 +40,7 @@ public class TaekwonVMainApp extends Application {
     public void start(Stage stage) throws IOException {
         stage.setTitle("Taekwon V");
 
-        Scene scene = new Scene(new VBox(), 650, 350);
+        Scene scene = new Scene(new VBox(), 650, 550);
         scene.setFill(Color.OLDLACE);
 
         // Construct a URL for the FXML document
@@ -70,6 +70,9 @@ public class TaekwonVMainApp extends Application {
 
         stage.widthProperty().addListener(stageSizeListener);
         stage.heightProperty().addListener(stageSizeListener);
+
+        // show default
+        TaekwonVMainApp.selectFxml("helloTkv");
 
         stage.show();
     }

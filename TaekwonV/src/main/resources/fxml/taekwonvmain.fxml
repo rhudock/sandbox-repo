@@ -26,15 +26,21 @@
                                 <MenuItem fx:id="mMSimple" mnemonicParsing="false" onAction="#onHelloTkvAction"
                                           text="Simple"/>
                             </items>
-                            <items>
-                                <MenuItem fx:id="mMClild" mnemonicParsing="false" onAction="#onMmChildAction"
-                                          text="Child"/>
-                            </items>
-                        </Menu>
+                            </Menu>
                         <Menu mnemonicParsing="false" text="TC-Tools">
                             <items>
                                 <MenuItem fx:id="menuTcLinks" mnemonicParsing="false" onAction="#onMenuTcLinksClick"
                                           text="menuTcLinks"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Apps">
+                            <items>
+                                <MenuItem fx:id="mMBrowser" mnemonicParsing="false" onAction="#onMmBrowserAction"
+                                          text="Browser"/>
+                            </items>
+                            <items>
+                                <MenuItem fx:id="menuGMapFX" mnemonicParsing="false" onAction="#onMenuGMapFXClick"
+                                          text="GMap-FX"/>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Help">
@@ -54,10 +60,13 @@
                 <fx:include fx:id="helloTWV" source="./hello_tkv.fxml"/>
             </children>
             <children>
-                <fx:include fx:id="childChild" source="./child.fxml"/>
+                <fx:include fx:id="childChild" source="/fxml/apps/browser/browser.fxml"/>
             </children>
             <children>
                 <fx:include fx:id="tcLinkView" source="./tc_views/tc_links.fxml"/>
+            </children>
+            <children>
+                <fx:include fx:id="gMapFx" source="/fxml/apps/map/Scene.fxml"/>
             </children>
         </StackPane>
     </children>

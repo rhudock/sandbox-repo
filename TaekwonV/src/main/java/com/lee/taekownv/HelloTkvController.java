@@ -25,7 +25,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class helloTkvController {
+public class HelloTkvController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private Task copyWorker;
@@ -56,7 +56,7 @@ public class helloTkvController {
 
     // Add a public no-args construtcor explicitly just to
     // emphasize that it is needed for a controller
-    public helloTkvController() {
+    public HelloTkvController() {
     }
 
     @FXML

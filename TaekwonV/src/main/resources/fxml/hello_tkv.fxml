@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="helloTkv" minHeight="-Infinity" minWidth="-Infinity" prefHeight="376.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lee.taekownv.helloTkvController">
+<BorderPane fx:id="helloTkv" minHeight="-Infinity" minWidth="-Infinity" prefHeight="376.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lee.taekownv.HelloTkvController">
     <top>
         <VBox maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
             <children>
