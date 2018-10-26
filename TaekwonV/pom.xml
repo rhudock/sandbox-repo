@@ -133,11 +133,20 @@
             <version>24.0-jre</version>
         </dependency>
 
+        <!-- In spring-boot repo -->
         <dependency>
             <groupId>com.cwl</groupId>
             <artifactId>attachment-builder</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!-- https://github.com/rterp/GMapsFX.git -->
+        <dependency>
+            <groupId>com.lynden</groupId>
+            <artifactId>GMapsFX</artifactId>
+            <version>2.12.2-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>
