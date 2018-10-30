@@ -36,7 +36,7 @@ public class AttachmentApp extends Application {
 
 		root.setVisible(true);
 
-		Scene scene = new Scene(root, 670, 275);
+		Scene scene = new Scene(root, 670, 600);
 
 		stage.setTitle("ABC Attachments");
 		stage.setScene(scene);

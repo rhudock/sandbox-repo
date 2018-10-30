@@ -17,6 +17,7 @@
     <top>
         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
+            <Button fx:id="btnHistoryBack" mnemonicParsing="false" onAction="#goHistoryBack" text="&lt;" />
                 <ImageView fitHeight="64.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@/images/background.jpg" />
@@ -37,7 +38,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField id="txtNewUrl" fx:id="txtNewUrl" prefHeight="27.0" prefWidth="441.0" />
+                        <TextField id="txtNewUrl" fx:id="txtANewUrl" prefHeight="27.0" prefWidth="441.0" />
                         <Button id="btnNewUrlGo" fx:id="btnNewUrlGo" mnemonicParsing="false" onAction="#openNewUrl" text="Button" />
                      </children>
                   </HBox>

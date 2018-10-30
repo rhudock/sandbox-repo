@@ -28,6 +28,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class HelloTkvController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    Stage stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+
     private Task copyWorker;
 
     // The refernce of msgLbl will be injected by the FXML loader

@@ -37,7 +37,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField id="txtNewUrl" fx:id="txtNewUrl" prefHeight="27.0" prefWidth="441.0" />
+                        <TextField id="txtNewUrl" fx:id="txtTmpNewUrl" prefHeight="27.0" prefWidth="441.0" />
                         <Button id="btnNewUrlGo" fx:id="btnNewUrlGo" mnemonicParsing="false" text="Button" />
                      </children>
                   </HBox>

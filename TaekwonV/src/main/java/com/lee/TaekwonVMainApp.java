@@ -62,10 +62,12 @@ public class TaekwonVMainApp extends Application {
             getRoot().setMinWidth(stage.getWidth());
 
             // Menu button
-            ((VBox) getRoot().getChildren().get(0)).setMinWidth(stage.getWidth());
+            VBox topMain = (VBox) getRoot().getChildren().get(0);
+            topMain.setMinWidth(stage.getWidth());
 
             // Main Window
             ((StackPane) getRoot().getChildren().get(1)).setMinWidth(stage.getWidth());
+            ((StackPane) getRoot().getChildren().get(1)).setMinHeight(stage.getHeight() - topMain.getHeight() - 20);
         };
 
         stage.widthProperty().addListener(stageSizeListener);

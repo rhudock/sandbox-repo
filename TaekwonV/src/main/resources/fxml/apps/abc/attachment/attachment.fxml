@@ -4,46 +4,98 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="child" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lee.apps.abc.attachment.AttachmentController">
+<BorderPane fx:id="child" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lee.apps.abc.attachment.AttachmentController">
     <top>
-        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="660.0" spacing="10" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+            <style>
+                -fx-padding: 5;
+                -fx-border-style: solid inside;
+                -fx-border-width: 2;
+                -fx-border-insets: 5;
+                -fx-border-radius: 5;
+                -fx-border-color: gray;
+            </style>
             <children>
-                <ImageView fx:id="imgAttachment" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../../images/background.jpg" />
-                    </image>
-                </ImageView>
-            <VBox prefHeight="150.0" prefWidth="514.0" spacing="4.0">
-               <children>
-                  <Label id="labelCmbUrl" fx:id="labelCmbUrl" lineSpacing="2.0" prefHeight="45.0" text="Select an image and upload to generate attachment json" textAlignment="CENTER" wrapText="true">
-                     <font>
+                <Label id="labelCmbUrl" fx:id="labelCmbUrl" alignment="CENTER" lineSpacing="2.0" prefHeight="20.0" prefWidth="636.0" text="ABC Attachment" textAlignment="CENTER" wrapText="true">
+                    <font>
                         <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Button id="btnSelectedUrlGo" fx:id="btnOpenImg" mnemonicParsing="false" onAction="#openImageFile" text="Open Image">
-                     <VBox.margin>
-                        <Insets top="4.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button id="btnNewUrlGo" fx:id="btnUploadImage" mnemonicParsing="false" onAction="#upLoadAttachment" text="Upload Image as Attachment">
-                     <VBox.margin>
-                        <Insets top="4.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets top="4.0" />
-               </padding>
-            </VBox>
+                    </font>
+                </Label>
+                <HBox prefHeight="300.0" prefWidth="200.0" spacing="5.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox prefHeight="150.0" spacing="4.0">
+                            <children>
+                                <Button id="btnSelectedUrlGo" fx:id="btnOpenImg" mnemonicParsing="false" onAction="#openImageFile" prefHeight="27.0" prefWidth="151.0" text="Open Image" VBox.vgrow="ALWAYS">
+                                    <VBox.margin>
+                                        <Insets top="4.0" />
+                                    </VBox.margin>
+                                </Button>
+                                <ImageView fx:id="imgAttachment" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../images/background.jpg" />
+                                    </image>
+                                </ImageView>
+
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER_RIGHT" prefHeight="274.0" prefWidth="481.0" spacing="4.0">
+                            <children>
+
+
+                                <GridPane hgap="2.0" prefHeight="150.0" vgap="2.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="107.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="401.0" minWidth="10.0" prefWidth="401.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="Source Id *" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                        <TextField fx:id="sourceId" promptText="sourceId" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                        <Label text="Site Id" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                        <TextField fx:id="siteId" promptText="siteId" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label text="CSP Id *" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                        <TextField fx:id="cspId" promptText="cspId" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <Label text="CSP Passphrase *" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                        <TextField fx:id="passPhrase" promptText="passPhrase" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets top="2.0" />
+                                    </VBox.margin>
+                                    <padding>
+                                        <Insets top="3.0" />
+                                    </padding>
+                                </GridPane>
+                                <Button id="btnNewUrlGo" fx:id="btnUploadImage" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#upLoadAttachment" text="Upload Image as Attachment" textAlignment="CENTER" wrapText="true">
+                                    <VBox.margin>
+                                        <Insets top="4.0" />
+                                    </VBox.margin>
+                                </Button>
+                            </children>
+                            <padding>
+                                <Insets top="4.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                </HBox>
             </children>
-        </HBox>
+        </VBox>
+
     </top>
     <center>
         <VBox minHeight="-Infinity" minWidth="-Infinity" spacing="10" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
@@ -55,9 +107,9 @@
                 -fx-border-radius: 5;
                 -fx-border-color: blue;
             </style>
-         <children>
-            <TextArea fx:id="txtAreaAttachmentJson" prefHeight="200.0" prefWidth="200.0" />
-         </children>
+            <children>
+                <TextArea fx:id="txtAreaAttachmentJson" prefHeight="309.0" prefWidth="626.0" />
+            </children>
         </VBox>
     </center>
     <padding>

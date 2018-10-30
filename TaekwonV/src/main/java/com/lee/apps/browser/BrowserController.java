@@ -1,6 +1,8 @@
 // SayHelloController.java
 package com.lee.apps.browser;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -21,9 +23,12 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import javafx.concurrent.Worker.State;
 /*
 http://stackoverflow.com/questions/15004365/javafx-2-2-fxinclude-how-to-access-parent-controller-from-child-controller
+
+Oracle WebView - https://blogs.oracle.com/java/javafx-webview-overview
+WebEngine - https://docs.oracle.com/javase/8/javafx/api/javafx/scene/web/WebEngine.html
  */
 public class BrowserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -41,13 +46,16 @@ public class BrowserController {
     private Button btnSelectedUrlGo;
 
     @FXML
+    private Button btnHistoryBack;
+
+    @FXML
+    private TextField txtANewUrl;
+
+    @FXML
     private Button btnNewUrlGo;
 
     @FXML
     private ResourceBundle resources;
-
-    @FXML
-    private TextField txtNewUrl;
 
     @FXML
     private WebView webView;
@@ -99,6 +107,17 @@ public class BrowserController {
 
             }
         });
+
+        webEngine.getLoadWorker().stateProperty().addListener(
+                new ChangeListener<State>() {
+                    public void changed(ObservableValue ov, State oldState, State newState) {
+                        if (newState == State.SUCCEEDED) {
+                            txtANewUrl.setText(webEngine.getLocation());
+                        }
+                    }
+                });
+        webEngine.load("http://javafx.com");
+
     }
 
     private WebEngine webEngine;
@@ -112,8 +131,13 @@ public class BrowserController {
 
     @FXML
     private void openNewUrl() {
-        String url = txtNewUrl.getText();
+        String url = txtANewUrl.getText();
         webEngine.load(url);
+    }
+
+    @FXML
+    private void goHistoryBack() {
+        webEngine.executeScript("history.back()");
     }
 
 
