@@ -1,5 +1,6 @@
 package com.lee.apps.browser;
 
+import com.google.common.io.Resources;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,8 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.net.URL;
-
-import com.google.common.io.Resources;
 
 /**
  *   simple login example from Oracle
