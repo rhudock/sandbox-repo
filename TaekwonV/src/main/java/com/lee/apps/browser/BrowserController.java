@@ -6,13 +6,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Worker.State;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.concurrent.Worker.State;
+
 /*
 http://stackoverflow.com/questions/15004365/javafx-2-2-fxinclude-how-to-access-parent-controller-from-child-controller
 
@@ -35,9 +35,6 @@ public class BrowserController {
 
     @FXML
     private VBox childVBox;
-
-    @FXML
-    private Label labelCmbUrl;
 
     @FXML
     private ComboBox cmbUrls;
@@ -70,8 +67,6 @@ public class BrowserController {
     @FXML
     private void initialize() {
         System.out.println("Initializing ChildController...");
-        labelCmbUrl.setLabelFor(cmbUrls);
-
 // Use Java Collections to create the List.
         List<String> list = new ArrayList<String>();
 

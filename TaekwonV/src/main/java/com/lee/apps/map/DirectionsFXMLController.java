@@ -45,7 +45,7 @@ public class DirectionsFXMLController implements Initializable, MapComponentInit
 
     @FXML
     private void toTextFieldAction(ActionEvent event) {
-        DirectionsRequest request = new DirectionsRequest(from.get(), to.get(), TravelModes.DRIVING, true);
+        DirectionsRequest request = new DirectionsRequest(from.get(), to.get(), TravelModes.DRIVING);
         directionsRenderer = new DirectionsRenderer(true, mapView.getMap(), directionsPane);
         directionsService.getRoute(request, this, directionsRenderer);
     }
@@ -61,7 +61,7 @@ public class DirectionsFXMLController implements Initializable, MapComponentInit
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        mapView.addMapInitializedListener(this);
+//        mapView.addMapInitializedListener(this);
         to.bindBidirectional(toTextField.textProperty());
         from.bindBidirectional(fromTextField.textProperty());
     }

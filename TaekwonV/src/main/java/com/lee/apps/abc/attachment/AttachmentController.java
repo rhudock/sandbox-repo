@@ -131,7 +131,7 @@ public class AttachmentController {
 
     @FXML
     private void upLoadAttachment() {
-        String json = abcAttachmentBuilder.buildAttachmentString(file.getPath(), 123);
+        String json = abcAttachmentBuilder.buildAttachmentString(file.getPath());
         if (json != null) {
             txtAreaAttachmentJson.setText(json);
         }
