@@ -69,6 +69,8 @@ public class BrowserController {
         System.out.println("Initializing ChildController...");
 // Use Java Collections to create the List.
         List<String> list = new ArrayList<String>();
+        list.add("https://www.youtube.com");
+        list.add("https://www.msnbc.com");
 
         // initiate cmb
         cmbUrlsList = FXCollections.observableList(list);

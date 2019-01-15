@@ -10,15 +10,15 @@ import javafx.stage.Stage;
 import java.net.URL;
 
 /**
- * simple login example from Oracle
- * To run this in eclipse,
- * # Open properties from right click on file,
- * # Select Run/Debug Settings
- * # Select FXMLExample, Click 'Edit' button.
- * # Select 'User Entries', then Click on 'Advanced...' button.
- * # On Advanced Options window, select 'Add Folders' and okay,
- * <p>
- * Run as java application.
+ *   simple login example from Oracle
+ *   To run this in eclipse,
+ *   # Open properties from right click on file, 
+ *   # Select Run/Debug Settings
+ *   # Select FXMLExample, Click 'Edit' button. 
+ *   # Select 'User Entries', then Click on 'Advanced...' button.
+ *   # On Advanced Options window, select 'Add Folders' and okay,
+ *   
+ *    Run as java application.
  */
 public class BrowserSingleApp extends Application {
     private static final String FXML_BROWSER = "fxml/apps/browser/browser.fxml";
