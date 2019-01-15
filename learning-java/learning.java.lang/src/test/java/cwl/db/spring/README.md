@@ -1,1 +1,0 @@
-https://www.logicbig.com/tutorials/spring-framework/spring-data-access-with-jdbc/jdbc-test-utils.html
