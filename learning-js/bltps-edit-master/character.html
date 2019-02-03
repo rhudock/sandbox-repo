@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Gibbed's Borderlands: The Pre-Sequel! Save Editor</title>
+    </head>
+    <body>
+        <h3>General</h3>
+        <div class="input-group">
+            <span class="input-group-addon">Class</span>
+            <select id="chrclass" class="form-control" disabled>
+                <option value="claptrap">Claptrap (Fragtrap)</option>
+                <option value="nisha">Nisha (Lawbringer)</option>
+                <option value="wilhelm">Wilhelm (Enforcer)</option>
+                <option value="athena">Athena (Gladiator)</option>
+                <option value="jack">Jack (Doppelganger)</option>
+                <option value="aurelia">Aurelia (Baroness)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Experience Level</span>
+            <input type="number" id="xp_level" class="form-control" value="1" min=1 max=70 disabled>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" disabled>Sync</button>
+            </span>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Experience Points</span>
+            <input type="number" id="xp_points" class="form-control" value="0" min=0 disabled>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" disabled>Sync</button>
+            </span>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Overpower Level</span>
+            <input type="number" id="op_level" class="form-control" value="0" min=0 disabled>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">General Skill Points</span>
+            <input type="number" id="skillpoints" class="form-control" value="0" min=0 disabled>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Specialist Skill Points</span>
+            <input type="number" id="spec_skillpoints" class="form-control" value="0" min=0 disabled>
+        </div>
+        <h3>Customization</h3>
+        <div class="input-group">
+            <span class="input-group-addon">Name</span>
+            <input type="text" id="chr_name" class="form-control" value="Claptrap" disabled>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Head</span>
+            <select id="chr_head" class="form-control" disabled>
+                <option>None</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Skin</span>
+            <select id="chr_skin" class="form-control" disabled>
+                <option>None</option>
+            </select>
+        </div>
+    </body>
+</html>

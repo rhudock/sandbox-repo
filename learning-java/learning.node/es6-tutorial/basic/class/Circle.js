@@ -25,4 +25,4 @@ class Circle extends Shape
 }
 
 var obj=new Circle(223, 2);
-obj.disp()
+obj.disp();

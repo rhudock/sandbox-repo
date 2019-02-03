@@ -4,7 +4,7 @@ const HelloWorld = require('./helloWorld');
 const Logger = require('./logger');
 const DefaultGreeting = 'Hello World';
 const Arg1 = 'Hello';
-const Arg2 = 'there!'
+const Arg2 = 'there!';
 
 describe('HelloWorld', () => {
 
