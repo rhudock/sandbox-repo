@@ -1,3 +1,4 @@
+### This Directory hosts only JavaFX
 
 2016-02-24 Import Learn JavaFX 8 samples.
 		com.jdojo package contains source code of it.
