@@ -1,2 +1,2 @@
 console.log("start hello");
-'hello'.startsWith('hell')
+'hello'.startsWith('hell');
