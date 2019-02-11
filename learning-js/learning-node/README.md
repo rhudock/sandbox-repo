@@ -12,13 +12,26 @@ A set of ECMAScript 6 examples as well as a Gulp file that converts them to ES5 
 1. Run `npm start` to launch the browser
 
 
+
 ### LOG
+- [log4js examples](https://github.com/log4js-node/log4js-example)
+
+### UnitTest
+- [Mocha](https://mochajs.org/)
+- [Mocha IntelliJ Help](https://www.jetbrains.com/help/idea/running-unit-tests-on-mocha.html)
+- Node.js: Cannot find module 'chai' (https://stackoverflow.com/questions/36838834/node-js-cannot-find-module-chai)
+
+### Automation gulp
+- [Gulp Tutorial](https://www.sitepoint.com/introduction-gulp-js/)
+- [gulp-for-beginners](https://css-tricks.com/gulp-for-beginners/)
+- [Grunt vs Gulp: Battle of the Build Tools](https://deliciousbrains.com/grunt-vs-gulp-battle-build-tools/)
+
+### MORE
+- [WebPack](https://webpack.js.org/guides/getting-started/)
+
+
+
 - Sunday, April 30, 2017: Init from https://github.com/DanWahlin/ES6Samples
-
-gulp
-https://www.sitepoint.com/introduction-gulp-js/
-https://css-tricks.com/gulp-for-beginners/
-
 - Monday, May 1, 2017: Add Unit Test https://oceanware.wordpress.com/2016/08/10/easy-tdd-setup-for-nodejs-es6-mocha-chai-istanbul/
 
 https://github.com/Oceanware/nodejs-es6-mocha
