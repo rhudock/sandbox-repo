@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    We are using Node.js <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+<div>
+  test
+  <script>
+      let request = require('request');
+
+      const urlBase = `https://www.yahoo.com`;
+      let headers = {
+      };
+
+      let options = {
+          url: urlBase,
+          method: 'GET',
+          headers: headers
+      };
+
+      console.log(`making request to ${urlBase}`);
+      request(options, function (error, response, body) {
+          if (error) {
+              console.log(error)
+          }
+
+          if (!error && response.statusCode == 200) {
+              // Print out the response body
+              console.log(`response code:${response.statusCode} body:${body}`);
+              // response code:200 body:{"hasActiveSession":false}
+              document.write('test info' + body);
+          }
+          else if (response.statusCode == 302) {
+              console.log(`response code:${response.statusCode} body:${body}`);
+              //agentConsole.getToken();
+          } else {
+              console.log(`response code:${response.statusCode} body:${body}`);
+          }
+      });
+
+
+  </script>
+</div>
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+    </script>
+  </body>
+</html>

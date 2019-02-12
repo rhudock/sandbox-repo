@@ -7,7 +7,9 @@
   "repository": "https://github.com/patrickmoffitt/bootstrap-example",
   "author": "Patrick K. Moffitt, CSM, M.A.",
   "license": "MIT",
-  "devDependencies": {},
+  "devDependencies": {
+    "electron": "^4.0.4"
+  },
   "scripts": {
     "start": "electron .",
     "start-mac": "/Applications/Electron.app/Contents/MacOS/Electron ."
