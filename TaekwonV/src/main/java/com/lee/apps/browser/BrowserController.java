@@ -123,6 +123,10 @@ public class BrowserController {
     @FXML
     private void openSelectedUrl() {
         String url = (String) cmbUrls.getValue();
+        if (url == null && cmbUrls.getItems().size() > 0){
+            cmbUrls.setValue(cmbUrls.getItems().get(0));
+            url = (String) cmbUrls.getValue();
+        }
         webEngine.load(url);
     }
 

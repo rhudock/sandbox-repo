@@ -32,7 +32,7 @@ public class BrowserSingleApp extends Application {
         Parent root = FXMLLoader.load(Resources.getResource(FXML_BROWSER));
         root.setVisible(true);
 
-        Scene scene = new Scene(root, 800, 450);
+        Scene scene = new Scene(root, 800, 600);
 
         stage.setTitle("FXML Welcome");
         stage.setScene(scene);

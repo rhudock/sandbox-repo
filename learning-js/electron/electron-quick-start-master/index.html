@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <script>
+        // You can also require other files to run in this process
+        require('./renderer.js')
+    </script>
   </head>
   <body>
     <h1>Hello World!</h1>
@@ -10,14 +14,25 @@
     We are using Node.js <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.
+
+    <input type="text" value="some text">
+    <p></p>
 <div>
   test
   <script>
+
+      $( "input" )
+          .keyup(function() {
+              var value = $( this ).val();
+              $( "p" ).text( value );
+          })
+          .keyup();
+
+  function requestyahoo() {
       let request = require('request');
 
       const urlBase = `https://www.yahoo.com`;
-      let headers = {
-      };
+      let headers = {};
 
       let options = {
           url: urlBase,
@@ -44,13 +59,10 @@
               console.log(`response code:${response.statusCode} body:${body}`);
           }
       });
-
+  }
 
   </script>
 </div>
-    <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
-    </script>
+
   </body>
 </html>
