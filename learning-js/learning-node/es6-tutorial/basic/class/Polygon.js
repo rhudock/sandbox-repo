@@ -29,9 +29,14 @@ var PolygonClazz = class PolygonClazz {
     }
 };
 
+/*
+without export
 var obj= new Polygon(10,12);
 obj.test();
 
-
 obj= new PolygonClazz(10,12);
 obj.test();
+ */
+
+module.exports.Polygon = Polygon;
+module.exports.PolygonClazz = PolygonClazz;
