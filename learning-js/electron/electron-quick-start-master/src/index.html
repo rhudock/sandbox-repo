@@ -15,51 +15,17 @@
     Chromium <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.
 
-    <input type="text" value="some text">
+    <textarea id="txtarea1" style="height: 300px;"></textarea>
+    <input id="text1" type="text" value="some text">
+    <button id="btn1">say</button>
     <p></p>
 <div>
   test
   <script>
 
-      $( "input" )
-          .keyup(function() {
-              var value = $( this ).val();
-              $( "p" ).text( value );
-          })
-          .keyup();
-
-  function requestyahoo() {
-      let request = require('request');
-
-      const urlBase = `https://www.yahoo.com`;
-      let headers = {};
-
-      let options = {
-          url: urlBase,
-          method: 'GET',
-          headers: headers
-      };
-
-      console.log(`making request to ${urlBase}`);
-      request(options, function (error, response, body) {
-          if (error) {
-              console.log(error)
-          }
-
-          if (!error && response.statusCode == 200) {
-              // Print out the response body
-              console.log(`response code:${response.statusCode} body:${body}`);
-              // response code:200 body:{"hasActiveSession":false}
-              document.write('test info' + body);
-          }
-          else if (response.statusCode == 302) {
-              console.log(`response code:${response.statusCode} body:${body}`);
-              //agentConsole.getToken();
-          } else {
-              console.log(`response code:${response.statusCode} body:${body}`);
-          }
-      });
-  }
+    $('#btn1').click(function() {
+        $('#text1').val("text has been changed.");
+    })
 
   </script>
 </div>
