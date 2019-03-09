@@ -18,3 +18,4 @@ node_modules/
 /learning-js/node-electron/test.json
 /learning-js/node-electron/test.xml
 /learning-js/tc-js/player/SundaySky Technical Integration Guide v8.5 - Batch.pdf
+package-lock.json

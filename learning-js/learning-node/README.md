@@ -1,4 +1,21 @@
 
+
+### Run Demo
+
+#### PreCondition
+```jshelllanguage
+127.0.0.1	dleedesk.com	www.dleedesk.com	tc.dleedesk.com
+127.0.0.1	mytest.dev.dleedesk.com
+127.0.0.1	www.tc.com	tc.com
+127.0.0.1	www.webui.com	webui.com
+```
+
+#### Background system
+##### npm lite-server 
+- [https://www.npmjs.com/package/lite-server](https://www.npmjs.com/package/lite-server)
+
+
+
 # ES6Samples From (https://github.com/DanWahlin/ES6Samples)
 ==========
 

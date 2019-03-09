@@ -1,15 +1,15 @@
-'use strict'
+'use strict';
 
-const electron = require('electron')
-const app = electron.app
-const globalShortcut = electron.globalShortcut
-const os = require('os')
-const path = require('path')
-const config = require(path.join(__dirname, 'package.json'))
-const BrowserWindow = electron.BrowserWindow
+const electron = require('electron');
+const app = electron.app;
+const globalShortcut = electron.globalShortcut;
+const os = require('os');
+const path = require('path');
+const config = require(path.join(__dirname, 'package.json'));
+const BrowserWindow = electron.BrowserWindow;
 
-app.setName(config.productName)
-var mainWindow = null
+app.setName(config.productName);
+var mainWindow = null;
 app.on('ready', function () {
   mainWindow = new BrowserWindow({
     backgroundColor: 'lightgray',
@@ -19,15 +19,15 @@ app.on('ready', function () {
       nodeIntegration: true,
       defaultEncoding: 'UTF-8'
     }
-  })
+  });
 
   mainWindow.loadURL(`file://${__dirname}/app/index-datatable.html`);
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools();
 
   // Enable keyboard shortcuts for Developer Tools on various platforms.
-  let platform = os.platform()
+  let platform = os.platform();
   if (platform === 'darwin') {
     globalShortcut.register('Command+Option+I', () => {
       mainWindow.webContents.openDevTools()
@@ -39,18 +39,18 @@ app.on('ready', function () {
   }
 
   mainWindow.once('ready-to-show', () => {
-    mainWindow.setMenu(null)
+    mainWindow.setMenu(null);
     mainWindow.show()
-  })
+  });
 
   mainWindow.onbeforeunload = (e) => {
     // Prevent Command-R from unloading the window contents.
     e.returnValue = false
-  }
+  };
 
   mainWindow.on('closed', function () {
     mainWindow = null
   })
-})
+});
 
-app.on('window-all-closed', () => { app.quit() })
+app.on('window-all-closed', () => { app.quit() });
