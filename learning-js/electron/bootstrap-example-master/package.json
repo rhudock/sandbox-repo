@@ -15,11 +15,14 @@
     "start-mac": "/Applications/Electron.app/Contents/MacOS/Electron ."
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-beta.3",
-    "datatables.net": "^1.10.16",
+    "bootstrap": "^4.3.1",
+    "chartjs": "^0.3.24",
+    "datatables.net": "^1.10.19",
     "datatables.net-dt": "^1.10.16",
-    "jquery": "^3.2.1",
-    "popper.js": "^1.12.9",
+    "jquery": "^3.3.1",
+    "libffi": "^3.2.11",
+    "peer": "^0.2.10",
+    "popper.js": "^1.14.7",
     "tether": "^1.4.0"
   },
   "standard": {

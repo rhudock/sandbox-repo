@@ -21,7 +21,8 @@ app.on('ready', function () {
     }
   });
 
-  mainWindow.loadURL(`file://${__dirname}/app/index-datatable.html`);
+  // mainWindow.loadURL(`file://${__dirname}/app/index-datatable.html`);
+  mainWindow.loadURL(`file://${__dirname}/app/index-chartjs.html`);
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
