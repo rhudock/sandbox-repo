@@ -1,4 +1,6 @@
-
+##### electron-packager
+- [https://fearby.com/article/create-first-hello-world-electron-app-osx/](https://fearby.com/article/create-first-hello-world-electron-app-osx/)
+- [https://github.com/electron-userland/electron-packager](https://github.com/electron-userland/electron-packager)
 
 A Demonstration of How to Use Bootstrap and jQuery to Build an Electron Application
 ------------------------------------------------------------------------
