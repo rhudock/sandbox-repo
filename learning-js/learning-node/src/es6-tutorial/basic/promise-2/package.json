@@ -1,0 +1,15 @@
+{
+  "name": "promise-2",
+  "version": "1.0.0",
+  "description": "Now, let us take a simple example of Promise.",
+  "main": "promise-2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^1.19.4"
+  }
+}

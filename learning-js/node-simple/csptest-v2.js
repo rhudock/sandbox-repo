@@ -1,4 +1,13 @@
-// content of index.js
+/**
+ *
+ *  http://www.dleetest.com:3000/
+ * npm run
+ *
+ *
+ *
+ *
+ *
+ */
 
 var http = require('http');
 var fs = require('fs');
@@ -10,7 +19,7 @@ http.createServer(function (req, res) {
             fs.readFile('index.html', function (err, data) {
                 res.writeHead(200, {
                     'Content-Type': 'text/html',
-                    'Content-Security-Policy': "frame-ancestors 'self' http://dleetest:3000",
+                    'Content-Security-Policy': "frame-ancestors 'self' http://dleetest.com:3000",
                     'X-Frame-Options': "DENY",
                     'location': 'myTest'
                 });
@@ -22,8 +31,8 @@ http.createServer(function (req, res) {
             fs.readFile('iframe-index.html', function (err, data) {
                 res.writeHead(200, {
                     'Content-Type': 'text/html',
-                    // 'X-Frame-Options': "SAMEORIGIN",
-                   'Content-Security-Policy': "frame-ancestors 'self' http://dleetest:3000",    // -- Working main page 'http://dleetest:3000/index.html'
+                    'X-Frame-Options': "ALLOW-FROM http://*.dleetest.com:3000",
+                   'Content-Security-Policy': "frame-ancestors 'self' http://dleetest.com:3000",    // -- Working main page 'http://dleetest:3000/index.html'
                    // 'Content-Security-Policy': "frame-ancestors 'self' http://*.dleetest:3000",    // -- NOT Working main page 'http://dleetest:3000/index.html'
                    // 'Content-Security-Policy': "frame-ancestors http://*.dleetest:3000",    // -- NOT Working main page 'http://dleetest:3000/index.html'
                     // 'Content-Security-Policy': "frame-ancestors http://localhost:3000 'self'",
@@ -39,7 +48,7 @@ http.createServer(function (req, res) {
                 res.writeHead(200, {
                     'Content-Type': 'text/html',
                     'X-Frame-Options': "SAMEORIGIN",
-                    'Content-Security-Policy': "frame-ancestors 'self' http://dleetest:3000",
+                    'Content-Security-Policy': "frame-ancestors 'self' http://*.dleetest.com:3000",
                     'location': 'myTest'
                 });
                 res.write(data);
@@ -50,13 +59,25 @@ http.createServer(function (req, res) {
             fs.readFile('iframe-index.html', function (err, data) {
                 res.writeHead(200, {
                     'Content-Type': 'text/html',
-                    // 'X-Frame-Options': "SAMEORIGIN",
-                    'Content-Security-Policy': "frame-ancestors 'self' http://dleetest",
+                    'X-Frame-Options': "DENY",
+                    'Content-Security-Policy': "frame-ancestors 'self' http://dleetest.com:3000",
                     'location': 'myTest'
                 });
                 res.write(data);
                 res.end();
             });
             break;
+		default:
+			fs.readFile('iframe-index.html', function (err, data) {
+				res.writeHead(200, {
+					'Content-Type': 'text/html',
+					// 'X-Frame-Options': "SAMEORIGIN",
+					// 'Content-Security-Policy': "frame-ancestors 'self' http://dleetest",
+					'location': 'myTest'
+				});
+				res.write(data);
+				res.end();
+			});
+			break;
     }
 }).listen(3000);

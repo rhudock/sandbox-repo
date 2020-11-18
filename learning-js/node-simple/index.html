@@ -10,7 +10,7 @@
 
 <p>In hosts file, create two domains pointing to localhost, then. <br> To test run csptest (csptest-v2.js) and open this <a href="http://dleemac:3000/index.html">csp test</a> </p>
 
-<iframe src="http://dleemac:3000/iframe-index.html">
+<iframe src="http://dleemac.com:3000/iframe-index.html">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -18,7 +18,7 @@
 The page below doesn't have correct frame-ancestors header and should have a security error
 </p>
 
-<iframe src="http://dleemac:3000/iframe-index-no-ancestor.html">
+<iframe src="http://dleemac.com:3000/iframe-index-no-ancestor.html">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -26,7 +26,7 @@ The page below doesn't have correct frame-ancestors header and should have a sec
 The page below has correct frame-ancestors header but also has X-Frame-Option:SAMEORIGIN. > As the result, it should have a security error
 </p>
 
-<iframe src="http://dleemac:3000/iframe-index-sameorigin.html">
+<iframe src="http://www.dleemac.com:3000/iframe-index-sameorigin.html">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
